@@ -21,9 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.tools.log.LogHelper;
 import com.feilong.tools.log.ProcessLogParamEntity;
 
@@ -35,12 +32,8 @@ import com.feilong.tools.log.ProcessLogParamEntity;
  *            the generic type
  * @since 4.0.6
  */
+@lombok.extern.slf4j.Slf4j
 public class DefaultPartitionPerHandler<T> implements PartitionPerHandler<T>{
-
-    /** The Constant log. */
-    private static final Logger                 LOGGER = LoggerFactory.getLogger(DefaultPartitionPerHandler.class);
-
-    //---------------------------------------------------------------
 
     /** 计数器. */
     private final AtomicInteger                 counter;
@@ -80,7 +73,7 @@ public class DefaultPartitionPerHandler<T> implements PartitionPerHandler<T>{
     @Override
     public void handle(List<T> perBatchList,PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap){
         if (isNullOrEmpty(perBatchList)){
-            LOGGER.warn("{} perBatchListIsNullOrEmpty!", getLogKey(partitionThreadEntity, paramsMap));
+            log.warn("{} perBatchListIsNullOrEmpty!", getLogKey(partitionThreadEntity, paramsMap));
             return;
         }
 
@@ -93,7 +86,7 @@ public class DefaultPartitionPerHandler<T> implements PartitionPerHandler<T>{
 
                 log(t, current, currentTimeMillis, partitionThreadEntity, paramsMap);
             }catch (Exception e){
-                LOGGER.error(getLogKey(partitionThreadEntity, paramsMap) + " " + t + " partitionThreadEntity:" + partitionThreadEntity, e);
+                log.error(getLogKey(partitionThreadEntity, paramsMap) + " " + t + " partitionThreadEntity:" + partitionThreadEntity, e);
             }
         }
 
@@ -105,14 +98,14 @@ public class DefaultPartitionPerHandler<T> implements PartitionPerHandler<T>{
      * 记录执行日志
      */
     private void log(T t,int current,long currentTimeMillis,PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap){
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             String processLog = LogHelper.getProcessLog(
                             new ProcessLogParamEntity(
                                             current,
                                             partitionThreadEntity.getTotalListCount(),
                                             currentTimeMillis,
                                             allTimeMillis));
-            LOGGER.info("{} currentElement:[{}] {}", getLogKey(partitionThreadEntity, paramsMap), t, processLog);
+            log.info("{} currentElement:[{}] {}", getLogKey(partitionThreadEntity, paramsMap), t, processLog);
         }
     }
 

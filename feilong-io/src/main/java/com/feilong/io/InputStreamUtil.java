@@ -26,9 +26,6 @@ import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
@@ -46,10 +43,8 @@ import com.feilong.lib.springframework.core.io.ResourceLoader;
  * @since 1.0.9
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@lombok.extern.slf4j.Slf4j
 public final class InputStreamUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(InputStreamUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private InputStreamUtil(){
@@ -86,7 +81,7 @@ public final class InputStreamUtil{
             return resource.getInputStream();
         }catch (FileNotFoundException e){
             //class path resource [Users/feilong/workspace/feilong/feilong/feilong-io/src/test/resources/readFileToString.txt] cannot be opened because it does not exist
-            LOGGER.warn(
+            log.warn(
                             "[{}] use DefaultResourceLoader not found,will convert to FileInputStream.Suggest you try use [file://] or [classpath:] to improve the parse speed",
                             location);
             return FileUtil.getFileInputStream(location);
@@ -133,7 +128,7 @@ public final class InputStreamUtil{
 
         Charset defaultCharset = Charset.defaultCharset();
         String charsetName = defaultCharset.name();
-        LOGGER.debug("will use defaultCharset:[{}]", charsetName);
+        log.debug("will use defaultCharset:[{}]", charsetName);
         return toString(inputStream, charsetName);
     }
 

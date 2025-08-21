@@ -151,7 +151,7 @@ public class ToBeanWithJsonToJavaConfigTest{
     //        classMap.put("userAddresseList", UserAddress.class);
     //
     //        User user = JsonUtil.toBean(USER_JSON_STRING, new JsonToJavaConfig(User.class, classMap));
-    //        LOGGER.debug(JsonUtil.format(user));
+    //        log.debug(JsonUtil.format(user));
     //    }
 
     //---------------------------------------------------------------

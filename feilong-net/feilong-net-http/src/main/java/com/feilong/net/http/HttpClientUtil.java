@@ -67,7 +67,7 @@ public final class HttpClientUtil{
      *     String urlString = "http://www.baidu.com";
      * 
      *     int responseStatusCode = HttpClientUtil.getResponseStatusCode(urlString);
-     *     LOGGER.debug("" + responseStatusCode);
+     *     log.debug("" + responseStatusCode);
      * }
      * 
      * </pre>
@@ -107,7 +107,7 @@ public final class HttpClientUtil{
      *     String urlString = "http://www.baidu.com";
      * 
      *     int responseStatusCode = HttpClientUtil.getResponseStatusCode(urlString);
-     *     LOGGER.debug("" + responseStatusCode);
+     *     log.debug("" + responseStatusCode);
      * }
      * 
      * </pre>
@@ -146,7 +146,7 @@ public final class HttpClientUtil{
      *     String urlString = "http://www.baidu.com";
      * 
      *     int responseStatusCode = HttpClientUtil.getResponseStatusCode(urlString);
-     *     LOGGER.debug("" + responseStatusCode);
+     *     log.debug("" + responseStatusCode);
      * }
      * 
      * </pre>
@@ -567,7 +567,7 @@ public final class HttpClientUtil{
      * public void testGetResponseBodyAsString(){
      *     String urlString = "http://www.baidu.com";
      * 
-     *     LOGGER.debug(HttpClientUtil.get(urlString));
+     *     log.debug(HttpClientUtil.get(urlString));
      * }
      * 
      * </pre>
@@ -620,7 +620,7 @@ public final class HttpClientUtil{
      * public void testGetResponseBodyAsString(){
      *     String urlString = "http://www.baidu.com";
      * 
-     *     LOGGER.debug(HttpClientUtil.get(urlString, "name", "test"));
+     *     log.debug(HttpClientUtil.get(urlString, "name", "test"));
      * }
      * 
      * </pre>
@@ -673,7 +673,7 @@ public final class HttpClientUtil{
      * public void testGetResponseBodyAsString(){
      *     String urlString = "http://www.baidu.com";
      * 
-     *     LOGGER.debug(HttpClientUtil.get(urlString, null));
+     *     log.debug(HttpClientUtil.get(urlString, null));
      * }
      * 
      * </pre>
@@ -750,7 +750,7 @@ public final class HttpClientUtil{
      * public void testGetResponseBodyAsString(){
      *     String urlString = "http://www.baidu.com";
      * 
-     *     LOGGER.debug(HttpClientUtil.put(urlString));
+     *     log.debug(HttpClientUtil.put(urlString));
      * }
      * 
      * </pre>
@@ -803,7 +803,7 @@ public final class HttpClientUtil{
      * public void testGetResponseBodyAsString(){
      *     String urlString = "http://www.baidu.com";
      * 
-     *     LOGGER.debug(HttpClientUtil.put(urlString, "name", "test"));
+     *     log.debug(HttpClientUtil.put(urlString, "name", "test"));
      * }
      * 
      * </pre>
@@ -894,7 +894,7 @@ public final class HttpClientUtil{
      * public void testGetResponseBodyAsString(){
      *     String urlString = "http://www.baidu.com";
      * 
-     *     LOGGER.debug(HttpClientUtil.post(urlString));
+     *     log.debug(HttpClientUtil.post(urlString));
      * }
      * 
      * </pre>
@@ -946,7 +946,7 @@ public final class HttpClientUtil{
      * public void testGetResponseBodyAsString(){
      *     String urlString = "http://www.baidu.com";
      * 
-     *     LOGGER.debug(HttpClientUtil.post(urlString, "name", "test"));
+     *     log.debug(HttpClientUtil.post(urlString, "name", "test"));
      * }
      * 
      * </pre>
@@ -999,7 +999,7 @@ public final class HttpClientUtil{
      * public void testGetResponseBodyAsString(){
      *     String urlString = "http://www.baidu.com";
      * 
-     *     LOGGER.debug(HttpClientUtil.post(urlString, null));
+     *     log.debug(HttpClientUtil.post(urlString, null));
      * }
      * 
      * </pre>
@@ -1193,7 +1193,7 @@ public final class HttpClientUtil{
      * public void testGetResponseBodyAsString(){
      *     String urlString = "http://www.baidu.com";
      * 
-     *     LOGGER.debug(HttpClientUtil.getResponseBodyAsString(urlString));
+     *     log.debug(HttpClientUtil.getResponseBodyAsString(urlString));
      * }
      * 
      * </pre>
@@ -1295,7 +1295,7 @@ public final class HttpClientUtil{
      * public void testGetResponseBodyAsString(){
      *     String urlString = "http://www.baidu.com";
      * 
-     *     LOGGER.debug(HttpClientUtil.getResponseBodyAsString(urlString));
+     *     log.debug(HttpClientUtil.getResponseBodyAsString(urlString));
      * }
      * 
      * </pre>

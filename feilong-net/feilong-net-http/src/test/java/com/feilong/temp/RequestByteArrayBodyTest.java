@@ -30,6 +30,7 @@ import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.RequestByteArrayBody;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class RequestByteArrayBodyTest extends AbstractTest{
 
     @Test
@@ -45,9 +46,9 @@ public class RequestByteArrayBodyTest extends AbstractTest{
             HttpRequest httpRequest = new HttpRequest(upLoadUrl, HttpMethodType.PUT);
             httpRequest.setRequestByteArrayBody(new RequestByteArrayBody(bytes, 0, 4269567, MimeType.PNG));
 
-            LOGGER.debug(JsonUtil.format(HttpClientUtil.getHttpResponse(httpRequest)));
+            log.debug(JsonUtil.format(HttpClientUtil.getHttpResponse(httpRequest)));
         }catch (Exception e){
-            LOGGER.error("", e);
+            log.error("", e);
         }
     }
 

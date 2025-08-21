@@ -16,9 +16,6 @@
  */
 package com.feilong.lib.beanutils.locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.TestBean;
 
 import junit.framework.Test;
@@ -30,10 +27,8 @@ import junit.framework.TestSuite;
  *
  * @version $Id$
  */
+@lombok.extern.slf4j.Slf4j
 public class LocaleBeanUtilsTestCase extends TestCase{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(LocaleBeanUtilsTestCase.class);
 
     /**
      * Construct a new instance of this test case.
@@ -82,7 +77,7 @@ public class LocaleBeanUtilsTestCase extends TestCase{
         try{
             LocaleBeanUtils.setProperty(bean, "nested.intProperty", "123", null);
         }catch (final Exception t){
-            LOGGER.error("", t);
+            log.error("", t);
             fail("Threw " + t);
         }
         assertEquals("Check Set Value", 123, bean.getNested().getIntProperty());
@@ -98,7 +93,7 @@ public class LocaleBeanUtilsTestCase extends TestCase{
         try{
             LocaleBeanUtils.setProperty(bean, "nested.intIndexed[1]", "123", null);
         }catch (final Throwable t){
-            LOGGER.error("", t);
+            log.error("", t);
             fail("Threw " + t);
         }
         assertEquals("Check Set Value", 123, bean.getNested().getIntIndexed(1));

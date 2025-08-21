@@ -32,14 +32,13 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.URIComponents;
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.StringUtils;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 处理{@link java.net.URI}(Uniform Resource Locator) {@link java.net.URL}(Uniform Resource Identifier) 等.
@@ -179,10 +178,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @see <a href="http://www.w3.org/DesignIssues/MatrixURIs.html">MatrixURIs</a>
  * @since 1.0.0
  */
+@Slf4j
 public final class URIUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(URIUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private URIUtil(){
@@ -313,7 +310,7 @@ public final class URIUtil{
      */
     public static String encodeUri(String uriString,String charsetType){
         Validate.notBlank(uriString, "uriString can't be null/empty!");
-        LOGGER.trace("input uriString:[{}],charsetType:{}", uriString, charsetType);
+        log.trace("input uriString:[{}],charsetType:{}", uriString, charsetType);
 
         if (!hasQueryString(uriString) || isNullOrEmpty(charsetType)){
             return uriString;// 不带参数 一般不需要处理
@@ -323,7 +320,7 @@ public final class URIUtil{
 
         Map<String, String[]> safeArrayValueMap = ParamUtil.toSafeArrayValueMap(getQueryString(uriString), charsetType);
         String encodeUrl = ParamUtil.addParameterArrayValueMap(uriString, safeArrayValueMap, charsetType);
-        LOGGER.trace("input uriString:[{}],charsetType:[{}],after url:[{}]", uriString, charsetType, encodeUrl);
+        log.trace("input uriString:[{}],charsetType:[{}],after url:[{}]", uriString, charsetType, encodeUrl);
         return encodeUrl;
     }
 

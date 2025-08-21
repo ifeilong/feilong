@@ -20,9 +20,6 @@ import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 数据 task.
  * 
@@ -36,15 +33,11 @@ import org.slf4j.LoggerFactory;
  *            the generic type
  * @since 2.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractDataListTask<T extends Data> implements Task<Void>{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDataListTask.class);
-
-    //---------------------------------------------------------------
-
     /** 需要被处理的数据查询器. */
-    private DataListQuery<T>    dataListQuery;
+    private DataListQuery<T> dataListQuery;
 
     //---------------------------------------------------------------
 
@@ -64,9 +57,9 @@ public abstract class AbstractDataListTask<T extends Data> implements Task<Void>
         if (isNullOrEmpty(dataList)){
 
             //如果没有,那么就简单的日志
-            if (LOGGER.isInfoEnabled()){
+            if (log.isInfoEnabled()){
                 String name = dataListQuery.getClass().getName();
-                LOGGER.info(
+                log.info(
                                 "[{}],use dataListQuery:[{}] query no data list,use time: [{}]",
                                 taskName,
                                 name,
@@ -80,12 +73,8 @@ public abstract class AbstractDataListTask<T extends Data> implements Task<Void>
         handle(dataList);
 
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
-                            "[{}],dataList size:[{}],useTime: [{}]",
-                            taskName,
-                            dataList.size(),
-                            formatDurationUseBeginTimeMillis(beginTimeMillis));
+        if (log.isInfoEnabled()){
+            log.info("[{}],dataList size:[{}],useTime: [{}]", taskName, dataList.size(), formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
         return null;
     }

@@ -27,6 +27,7 @@ import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class VelocityUtilTest extends AbstractTest{
 
     @Test
@@ -47,7 +48,7 @@ public class VelocityUtilTest extends AbstractTest{
 
         String templateInClassPath = "velocity/test.vm";
         String parseVMTemplate = TemplateUtil.parseTemplate(templateInClassPath, map);
-        LOGGER.debug(parseVMTemplate);
+        log.debug(parseVMTemplate);
     }
 
     @Test
@@ -56,7 +57,7 @@ public class VelocityUtilTest extends AbstractTest{
         String templateInClassPath = "velocity/test1.vm";
 
         String parseVMTemplate = TemplateUtil.parseTemplate(templateInClassPath, map);
-        LOGGER.debug(parseVMTemplate);
+        log.debug(parseVMTemplate);
     }
 
 }

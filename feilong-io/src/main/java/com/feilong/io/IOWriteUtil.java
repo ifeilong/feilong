@@ -33,9 +33,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.io.entity.FileWriteMode;
@@ -58,13 +55,11 @@ import com.feilong.io.entity.FileWriteMode;
  * @see com.feilong.lib.io.IOUtils
  * @since 1.0.6
  */
+@lombok.extern.slf4j.Slf4j
 public final class IOWriteUtil{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER                = LoggerFactory.getLogger(IOWriteUtil.class);
-
     /** 默认缓冲大小 10k <code>{@value}</code>. */
-    public static final int     DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtil.ONE_KB);
+    public static final int DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtil.ONE_KB);
 
     //---------------------------------------------------------------
 
@@ -190,12 +185,12 @@ public final class IOWriteUtil{
         //---------------------------------------------------------------
         write(inputStream, outputStream);
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             File file = new File(filePath);
             String size = FileUtil.getFileFormatSize(file);
             String pattern = "fileWriteMode:[{}],encode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}],time:[{}]";
             String useTime = formatDurationUseBeginTimeMillis(beginTimeMillis);
-            LOGGER.info(pattern, useFileWriteMode, useEncode, content.length(), size, file.getAbsolutePath(), useTime);
+            log.info(pattern, useFileWriteMode, useEncode, content.length(), size, file.getAbsolutePath(), useTime);
         }
     }
 
@@ -272,8 +267,8 @@ public final class IOWriteUtil{
         String filePath = path.toString();
         //---------------------------------------------------------------
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("directoryPath:[{}],fileName:[{}] ==> file final Path:[{}]", directoryPath, fileName, filePath);
+        if (log.isDebugEnabled()){
+            log.debug("directoryPath:[{}],fileName:[{}] ==> file final Path:[{}]", directoryPath, fileName, filePath);
         }
         //---------------------------------------------------------------
 
@@ -283,10 +278,10 @@ public final class IOWriteUtil{
         write(inputStream, outputStream);
 
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             File file = new File(filePath);
             String messagePattern = "fileSize:[{}],absolutePath:[{}],use time:[{}]";
-            LOGGER.info(
+            log.info(
                             messagePattern,
                             FileUtil.getFileFormatSize(file),
                             file.getAbsolutePath(),
@@ -437,9 +432,9 @@ public final class IOWriteUtil{
             }
 
             //---------------------------------------------------------------
-            if (LOGGER.isDebugEnabled()){
+            if (log.isDebugEnabled()){
                 String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],use time:[{}]";
-                LOGGER.debug(
+                log.debug(
                                 pattern,
                                 FileUtil.formatSize(sumSize),
                                 bufferLength,

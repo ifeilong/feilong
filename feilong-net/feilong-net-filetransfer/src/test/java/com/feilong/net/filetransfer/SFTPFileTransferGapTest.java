@@ -24,6 +24,7 @@ import com.feilong.json.JsonUtil;
 
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 @ContextConfiguration(value = { "classpath*:spring/spring-sftp-gap.xml" })
+@lombok.extern.slf4j.Slf4j
 public class SFTPFileTransferGapTest extends FileTransferTest{
 
     /** The file transfer. */
@@ -42,14 +43,14 @@ public class SFTPFileTransferGapTest extends FileTransferTest{
 
     @Override
     @Test
-    public void uploadDir() {
+    public void uploadDir(){
         String singleLocalFileFullPath = "E:\\test";
         fileTransfer.upload(remoteDirectory, singleLocalFileFullPath);
     }
 
     @Override
     @Test
-    public void uploadDirs() {
+    public void uploadDirs(){
         String[] batchLocalFileFullPaths = { "E:\\test", "E:\\1.txt", "E:\\test1" };
         fileTransfer.upload(remoteDirectory, batchLocalFileFullPaths);
     }
@@ -57,14 +58,14 @@ public class SFTPFileTransferGapTest extends FileTransferTest{
     //---------------------------------------------------------------
     @Override
     @Test
-    public void delete() {
+    public void delete(){
         String remoteAbsolutePath = "/home/appuser/test/pg_ctl.conf";
         fileTransfer.delete(remoteAbsolutePath);
     }
 
     @Override
     @Test
-    public void deleteDir() {
+    public void deleteDir(){
         String remoteAbsolutePath = "/home/feilongtest/out/test/2011-07-07";
         fileTransfer.delete(remoteAbsolutePath);
     }
@@ -78,13 +79,13 @@ public class SFTPFileTransferGapTest extends FileTransferTest{
 
     @Override
     @Test
-    public void deleteNotExist() {
+    public void deleteNotExist(){
         String remoteAbsolutePath = "/home/appuser/test/2011-07-051/";
         fileTransfer.delete(remoteAbsolutePath);
     }
 
     @Test
-    public void deleteNotExist1() {
+    public void deleteNotExist1(){
         String remoteAbsolutePath = "/";
         fileTransfer.delete(remoteAbsolutePath);
     }
@@ -93,44 +94,44 @@ public class SFTPFileTransferGapTest extends FileTransferTest{
 
     @Override
     @Test
-    public void testGetFileEntityMap() {
+    public void testGetFileEntityMap(){
         String remoteAbsolutePath = "/home/appuser/test/2013-12-04-1938";
         String[] fileNames = { "SportActivity.dat", "SubCategory.dat", "aaa" };
-        LOGGER.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath, fileNames)));
+        log.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath, fileNames)));
     }
 
     @Test
-    public void testGetFileEntityNotexist() {
+    public void testGetFileEntityNotexist(){
         String remoteAbsolutePath = "/home/appuser/test/2013-12-04-1938";
-        LOGGER.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
+        log.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
     }
 
     @Test
-    public void testGetFileEntityEMpty() {
+    public void testGetFileEntityEMpty(){
         String remoteAbsolutePath = "/upload/uat";
-        LOGGER.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
+        log.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
     }
 
     @Test
     public void testGetFileEntityEMpty1(){
         String remoteAbsolutePath = "/upload/test";
-        LOGGER.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
+        log.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
     }
 
     @Test
-    public void testGetFileEntityEMpty12() {
+    public void testGetFileEntityEMpty12(){
         String remoteAbsolutePath = "/upload/speedo";
-        LOGGER.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
+        log.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
     }
 
     @Test
     public void testGetFileEntityEMpty12222(){
         String remoteAbsolutePath = "/upload/test/HERSCHEL";
-        LOGGER.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
+        log.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
     }
 
     @Override
-    public void sendLocalFileToRemote_dir_chinese() {
+    public void sendLocalFileToRemote_dir_chinese(){
     }
 
 }

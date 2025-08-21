@@ -22,6 +22,7 @@ import org.junit.Test;
 import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatBeanCalendarTest extends AbstractTest{
 
     @Test
@@ -31,7 +32,7 @@ public class FormatBeanCalendarTest extends AbstractTest{
         beanWithCalendar.setName("jim");
         beanWithCalendar.setCalendar(Calendar.getInstance());
 
-        LOGGER.debug(JsonUtil.format(beanWithCalendar));
+        log.debug(JsonUtil.format(beanWithCalendar));
     }
 
     public class BeanWithCalendar{

@@ -30,9 +30,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
@@ -92,10 +89,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @since 3.0.0 change package name
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@lombok.extern.slf4j.Slf4j
 public final class JsonUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private JsonUtil(){
@@ -412,7 +407,7 @@ public final class JsonUtil{
      * user.setUserAddresses(toArray(userAddress1, userAddress2));
      * user.setUserAddresseList(toList(userAddress1, userAddress2));
      * 
-     * LOGGER.debug(JsonUtil.toString(USER));
+     * log.debug(JsonUtil.toString(USER));
      * 
      * </pre>
      * 
@@ -465,7 +460,7 @@ public final class JsonUtil{
      * user.setUserAddresses(toArray(userAddress1, userAddress2));
      * user.setUserAddresseList(toList(userAddress1, userAddress2));
      * 
-     * LOGGER.debug(JsonUtil.toString(USER, "name", "loves", "attrMap", "userInfo", "userAddresses"));
+     * log.debug(JsonUtil.toString(USER, "name", "loves", "attrMap", "userInfo", "userAddresses"));
      * 
      * </pre>
      * 
@@ -660,7 +655,7 @@ public final class JsonUtil{
      * user.setUserAddresses(toArray(userAddress1, userAddress2));
      * user.setUserAddresseList(toList(userAddress1, userAddress2));
      * 
-     * LOGGER.debug(JsonUtil.format(USER, "name", "loves", "attrMap", "userInfo", "userAddresses"));
+     * log.debug(JsonUtil.format(USER, "name", "loves", "attrMap", "userInfo", "userAddresses"));
      * 
      * </pre>
      * 
@@ -727,7 +722,7 @@ public final class JsonUtil{
      * user.setUserAddresses(toArray(userAddress1, userAddress2));
      * user.setUserAddresseList(toList(userAddress1, userAddress2));
      * 
-     * LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 0, 0));
+     * log.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 0, 0));
      * 
      * </pre>
      * 
@@ -775,7 +770,7 @@ public final class JsonUtil{
      * 
      * List{@code <User>} list = toList(user1, user2);
      * 
-     * LOGGER.debug(JsonUtil.formatWithIncludes(list, "name", "age"));
+     * log.debug(JsonUtil.formatWithIncludes(list, "name", "age"));
      * 
      * </pre>
      * 
@@ -821,7 +816,7 @@ public final class JsonUtil{
      * Predicate{@code <Integer>} predicate = new ComparatorPredicate{@code <Integer>}(10, ComparatorUtils.{@code <Integer>} naturalComparator(), Criterion.LESS);
      * 
      * List{@code <Integer>} result = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
-     * LOGGER.debug(JsonUtil.format(result, 0, 0));
+     * log.debug(JsonUtil.format(result, 0, 0));
      * 
      * </pre>
      * 
@@ -834,7 +829,7 @@ public final class JsonUtil{
      * <hr>
      * 
      * <pre class="code">
-     * LOGGER.debug(JsonUtil.format(result, 4, 4));// = LOGGER.debug(JsonUtil.format(result))
+     * log.debug(JsonUtil.format(result, 4, 4));// = log.debug(JsonUtil.format(result))
      * </pre>
      * 
      * <b>返回:</b>
@@ -883,7 +878,7 @@ public final class JsonUtil{
      * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
      * 
-     * LOGGER.debug(JsonUtil.format(user, javaToJsonConfig));
+     * log.debug(JsonUtil.format(user, javaToJsonConfig));
      * 
      * </pre>
      * 
@@ -960,7 +955,7 @@ public final class JsonUtil{
             return json.toString(indentFactor, indent);
         }catch (Exception e){
             String pattern = "obj:[{}],javaToJsonConfig:[{}],indentFactor:[{}],indent:[{}],[{}],returnNull";
-            LOGGER.error(pattern, obj, javaToJsonConfig, indentFactor, indent, e.getMessage(), e);
+            log.error(pattern, obj, javaToJsonConfig, indentFactor, indent, e.getMessage(), e);
             return null;
         }
     }
@@ -1023,7 +1018,7 @@ public final class JsonUtil{
      * String json = "[{'name':'get'},{'name':'set'}]";
      * Person[] persons = JsonUtil.toArray(json, new JsonToJavaConfig(Person.class));
      * 
-     * LOGGER.debug(JsonUtil.format(persons));
+     * log.debug(JsonUtil.format(persons));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1059,7 +1054,7 @@ public final class JsonUtil{
      * classMap.put("data", Person.class);
      * 
      * MyBean[] myBeans = JsonUtil.toArray(json, new JsonToJavaConfig(MyBean.class, classMap));
-     * LOGGER.debug(JsonUtil.format(myBeans));
+     * log.debug(JsonUtil.format(myBeans));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1155,7 +1150,7 @@ public final class JsonUtil{
      * String json = "[{'name':'get'},{'name':'set'}]";
      * List{@code <Person>} list = JsonUtil.toList(json, Person.class);
      * 
-     * LOGGER.info(JsonUtil.format(list));
+     * log.info(JsonUtil.format(list));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1238,7 +1233,7 @@ public final class JsonUtil{
      * classMap.put("data", Person.class);
      * 
      * List{@code <MyBean>} list = JsonUtil.toList(json, new JsonToJavaConfig(MyBean.class, classMap));
-     * LOGGER.debug(JsonUtil.format(list));
+     * log.debug(JsonUtil.format(list));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1316,7 +1311,7 @@ public final class JsonUtil{
      * <pre class="code">
      * String json = "{'brandCode':'UA'}";
      * Map{@code <String, Object>} map = JsonUtil.toMap(json);
-     * LOGGER.info(JsonUtil.format(map));
+     * log.info(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1329,7 +1324,7 @@ public final class JsonUtil{
      * 
      * <pre class="code">
      * Map{@code <String, Integer>} map = JsonUtil.toMap("{'brandCode':55555}");
-     * LOGGER.info(JsonUtil.format(map));
+     * log.info(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1353,7 +1348,7 @@ public final class JsonUtil{
      * 
      * <pre class="code">
      * Map{@code <String, Long>} map = JsonUtil.toMap("{'brandCode':55.555}");
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1407,7 +1402,7 @@ public final class JsonUtil{
      * String json = "{'data1':{'name':'get'},'data2':{'name':'set'}}";
      * Map{@code <String, Person>} map = JsonUtil.toMap(json, new JsonToJavaConfig(Person.class));
      * 
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1442,7 +1437,7 @@ public final class JsonUtil{
      * @since 3.3.4 如果 <code>json</code> 是null或者empty,返回 null
      */
     public static <T> Map<String, T> toMap(String json,JsonToJavaConfig jsonToJavaConfig){
-        LOGGER.trace("input json:[{}],jsonToJavaConfig:[{}]", json, jsonToJavaConfig);
+        log.trace("input json:[{}],jsonToJavaConfig:[{}]", json, jsonToJavaConfig);
         if (isNullOrEmpty(json)){
             return null;
         }
@@ -1458,7 +1453,7 @@ public final class JsonUtil{
             Set<String> keys = jsonObject.keys();
             for (String key : keys){
                 Object value = jsonObject.get(key);
-                LOGGER.trace("key:[{}],value:[{}],value type is:[{}]", key, value, value.getClass().getName());
+                log.trace("key:[{}],value:[{}],value type is:[{}]", key, value, value.getClass().getName());
 
                 map.put(key, transformerValue(value, jsonToJavaConfig));
             }
@@ -1496,7 +1491,7 @@ public final class JsonUtil{
      * 
      * <pre class="code">
      * String json = "{'name':'get','dateAttr':'2009-11-12'}";
-     * LOGGER.debug(JsonUtil.format(JsonUtil.toBean(json, Person.class)));
+     * log.debug(JsonUtil.format(JsonUtil.toBean(json, Person.class)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1575,7 +1570,7 @@ public final class JsonUtil{
      * jsonToJavaConfig.setClassMap(classMap);
      * 
      * MyBean myBean = JsonUtil.toBean(json, jsonToJavaConfig);
-     * LOGGER.debug(JsonUtil.format(myBean));
+     * log.debug(JsonUtil.format(myBean));
      * </pre>
      * 
      * <b>返回:</b>

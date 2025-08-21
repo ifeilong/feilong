@@ -25,9 +25,6 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
 import com.feilong.lib.beanutils.PropertyUtils;
@@ -38,10 +35,8 @@ import com.feilong.lib.beanutils.PropertyUtils;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.0
  */
+@lombok.extern.slf4j.Slf4j
 public final class PropertyValueObtainer{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropertyValueObtainer.class);
 
     /** Don't let anyone instantiate this class. */
     private PropertyValueObtainer(){
@@ -107,7 +102,7 @@ public final class PropertyValueObtainer{
      * @return the data use spring
      */
     private static <T> T getDataUseSpring(Object bean,String propertyName){
-        LOGGER.trace("will use spring beanutils to execute:[{}],propertyName:[{}]", bean, propertyName);
+        log.trace("will use spring beanutils to execute:[{}],propertyName:[{}]", bean, propertyName);
         try{
             PropertyDescriptor propertyDescriptor = PropertyDescriptorUtil.getSpringPropertyDescriptor(bean.getClass(), propertyName);
             return getValue(bean, propertyDescriptor);

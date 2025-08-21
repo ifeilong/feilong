@@ -19,9 +19,6 @@ import java.io.Serializable;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.servlet.http.SessionUtil;
 
 /**
@@ -30,12 +27,8 @@ import com.feilong.servlet.http.SessionUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.5
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractSessionKeyAccessor{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractSessionKeyAccessor.class);
-
-    //---------------------------------------------------------------
 
     /**
      * Save.
@@ -50,8 +43,8 @@ public abstract class AbstractSessionKeyAccessor{
     protected void commonSave(String key,Serializable serializable,HttpServletRequest request){
         SessionUtil.setAttribute(request, key, serializable);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("setAttribute to session,key is:[{}],value is:[{}]", key, format(serializable));
+        if (log.isDebugEnabled()){
+            log.debug("setAttribute to session,key is:[{}],value is:[{}]", key, format(serializable));
         }
     }
 
@@ -74,8 +67,8 @@ public abstract class AbstractSessionKeyAccessor{
     public <T extends Serializable> T get(String key,HttpServletRequest request){
         T t = SessionUtil.getAttribute(request, key);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("when key is :[{}],get from session t:[{}]", key, format(t));
+        if (log.isDebugEnabled()){
+            log.debug("when key is :[{}],get from session t:[{}]", key, format(t));
         }
 
         return t;
@@ -97,8 +90,8 @@ public abstract class AbstractSessionKeyAccessor{
     public void remove(String key,HttpServletRequest request){
         SessionUtil.removeAttribute(request, key);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("remove session attribute,key:[{}]", key);
+        if (log.isDebugEnabled()){
+            log.debug("remove session attribute,key:[{}]", key);
         }
     }
 

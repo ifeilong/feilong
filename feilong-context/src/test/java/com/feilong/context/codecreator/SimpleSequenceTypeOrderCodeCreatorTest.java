@@ -29,6 +29,7 @@ import com.feilong.test.AbstractTest;
 /**
  * The Class CodeCreatorTest.
  */
+@lombok.extern.slf4j.Slf4j
 public class SimpleSequenceTypeOrderCodeCreatorTest extends AbstractTest{
 
     /** The code creator. */
@@ -54,7 +55,7 @@ public class SimpleSequenceTypeOrderCodeCreatorTest extends AbstractTest{
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testCreate(){
-        LOGGER.debug(sequenceTypeOrderCodeCreator.create(1000, 11));
+        log.debug(sequenceTypeOrderCodeCreator.create(1000, 11));
     }
 
     @Test

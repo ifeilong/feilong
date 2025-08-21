@@ -30,9 +30,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 import com.feilong.lib.org.apache.http.util.Args;
@@ -43,15 +40,11 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 public class Wire{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(Wire.class);
-
-    //---------------------------------------------------------------
-
-    private final String        id;
+    private final String id;
 
     /**
      * @since 4.3

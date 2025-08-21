@@ -22,9 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.TimeInterval;
 import com.feilong.core.Validate;
 import com.feilong.core.lang.thread.DefaultPartitionPerHandler;
@@ -90,10 +87,8 @@ import com.feilong.core.lang.thread.PartitionThreadConfig;
  * @see java.util.concurrent.ThreadFactory
  * @since 1.10.3
  */
+@lombok.extern.slf4j.Slf4j
 public final class ThreadUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER              = LoggerFactory.getLogger(ThreadUtil.class);
 
     /**
      * 在多线程中 {@code Map<String, ?> paramsMap} 中设置值, 使用这个做key,将在所有多线程相关日志中开头追加你自定义的日志信息.
@@ -101,7 +96,7 @@ public final class ThreadUtil{
      * 
      * @since 4.0.6
      */
-    public static final String  LOG_KEY_NAME_IN_MAP = "com.feilong.core.lang.ThreadUtil.logKey";
+    public static final String LOG_KEY_NAME_IN_MAP = "com.feilong.core.lang.ThreadUtil.logKey";
 
     //---------------------------------------------------------------
 
@@ -284,7 +279,7 @@ public final class ThreadUtil{
         }catch (InterruptedException e){
             //if any thread has interrupted the current thread. 
             //The <i>interrupted status</i> of the current thread is cleared when this exception is thrown.
-            LOGGER.error("", e);
+            log.error("", e);
 
             //see sonar http://127.0.0.1:9000/coding_rules#rule_key=squid%3AS2142
 
@@ -340,8 +335,8 @@ public final class ThreadUtil{
         ThreadUtil.startAndJoin(threads);
 
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
+        if (log.isInfoEnabled()){
+            log.info(
                             "runnable:[{}],threadCount:[{}],total use time:{}",
                             runnable,
                             threadCount,
@@ -2326,19 +2321,19 @@ public final class ThreadUtil{
 
         for (Thread thread : threads){
             thread.start();// 使该线程开始执行；Java 虚拟机调用该线程的 run 方法。
-            LOGGER.debug("thread [{}] start", thread.getName());
+            log.debug("thread [{}] start", thread.getName());
         }
 
         //---------------------------------------------------------------
 
         try{
             for (Thread thread : threads){
-                LOGGER.debug("begin thread [{}] join", thread.getName());
+                log.debug("begin thread [{}] join", thread.getName());
                 thread.join(); //在一个线程中调用 otherThread.join(),将等待 otherThread 执行完后才继续本线程　　　
-                LOGGER.debug("end thread [{}] join", thread.getName());
+                log.debug("end thread [{}] join", thread.getName());
             }
         }catch (InterruptedException e){
-            LOGGER.error("", e);
+            log.error("", e);
             // clean up state...
             Thread.currentThread().interrupt();
         }

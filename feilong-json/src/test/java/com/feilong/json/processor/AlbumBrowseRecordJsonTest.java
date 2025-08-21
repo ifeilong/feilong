@@ -30,6 +30,7 @@ import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.AlbumBrowseRecord;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class AlbumBrowseRecordJsonTest extends AbstractTest{
 
     @Test
@@ -54,7 +55,7 @@ public class AlbumBrowseRecordJsonTest extends AbstractTest{
         //---------------------------------------------------------------
 
         String json = JsonUtil.toString(command, javaToJsonConfig);
-        LOGGER.debug(json);
+        log.debug(json);
 
         assertThat(
                         json, //

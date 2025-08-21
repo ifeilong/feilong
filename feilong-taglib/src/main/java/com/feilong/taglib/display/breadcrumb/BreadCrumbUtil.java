@@ -26,9 +26,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.net.URIUtil;
 import com.feilong.core.net.URLUtil;
@@ -67,10 +64,8 @@ import com.feilong.template.TemplateUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.2.2
  */
+@lombok.extern.slf4j.Slf4j
 public class BreadCrumbUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER            = LoggerFactory.getLogger(BreadCrumbUtil.class);
 
     /** The Constant VM_KEY_BREADCRUMB. */
     private static final String VM_KEY_BREADCRUMB = "breadCrumbVMParams";
@@ -103,8 +98,8 @@ public class BreadCrumbUtil{
 
         List<BreadCrumbEntity<Object>> breadCrumbEntityList = breadCrumbParams.getBreadCrumbEntityList();
         Validate.notEmpty(breadCrumbEntityList, "breadCrumbEntityList can't be null/empty!");
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("input breadCrumbParams info:[{}]", JsonUtil.toString(breadCrumbParams));
+        if (log.isDebugEnabled()){
+            log.debug("input breadCrumbParams info:[{}]", JsonUtil.toString(breadCrumbParams));
         }
 
         //---------------------------------------------------------------
@@ -129,7 +124,7 @@ public class BreadCrumbUtil{
         Map<String, Object> contextKeyValues = toMap(VM_KEY_BREADCRUMB, breadCrumbVMParams);
 
         String siteMapString = TemplateUtil.parseTemplate(breadCrumbParams.getVmPath(), contextKeyValues);
-        LOGGER.debug("siteMapString is:[{}]", siteMapString);
+        log.debug("siteMapString is:[{}]", siteMapString);
         return siteMapString;
     }
 
@@ -202,11 +197,8 @@ public class BreadCrumbUtil{
         //---------------------------------------------------------------
         BreadCrumbEntity<T> currentBreadCrumbEntity = getBreadCrumbEntityByPath(currentPath, breadCrumbEntityList);
         if (isNullOrEmpty(currentBreadCrumbEntity)){
-            if (LOGGER.isWarnEnabled()){
-                LOGGER.warn(
-                                "when currentPath:{},in breadCrumbEntityList:[{}],can't find",
-                                currentPath,
-                                JsonUtil.toString(breadCrumbParams));
+            if (log.isWarnEnabled()){
+                log.warn("when currentPath:{},in breadCrumbEntityList:[{}],can't find", currentPath, JsonUtil.toString(breadCrumbParams));
             }
 
             return emptyList();
@@ -258,7 +250,7 @@ public class BreadCrumbUtil{
                         breadCrumbEntityList,
                         allParentBreadCrumbEntityList);
 
-        LOGGER.info("before Collections.reverse,allParentBreadCrumbEntityList size:{}", allParentBreadCrumbEntityList.size());
+        log.info("before Collections.reverse,allParentBreadCrumbEntityList size:{}", allParentBreadCrumbEntityList.size());
         // 反转
         Collections.reverse(allParentBreadCrumbEntityList);
         return allParentBreadCrumbEntityList;
@@ -296,10 +288,7 @@ public class BreadCrumbUtil{
         for (BreadCrumbEntity<T> loopBreadCrumbEntity : siteMapEntities){
             // 当前的id和传入的breadCrumbEntity equals
             if (loopBreadCrumbEntity.getId().equals(parentId)){
-                LOGGER.debug(
-                                "loopBreadCrumbEntity.getId():{},breadCrumbEntity_in.getParentId():{}",
-                                loopBreadCrumbEntity.getId(),
-                                parentId);
+                log.debug("loopBreadCrumbEntity.getId():{},breadCrumbEntity_in.getParentId():{}", loopBreadCrumbEntity.getId(), parentId);
                 // 递归
                 constructParentBreadCrumbEntityList(loopBreadCrumbEntity, siteMapEntities, allParentBreadCrumbEntityList);
                 break;
@@ -327,7 +316,7 @@ public class BreadCrumbUtil{
                 return breadCrumbEntity;
             }
         }
-        LOGGER.warn("currentPath is :{},can't find match BreadCrumbEntity", currentPath);
+        log.warn("currentPath is :{},can't find match BreadCrumbEntity", currentPath);
         return null;
     }
 }

@@ -22,14 +22,9 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * <p>
  * An implementation of the <code>BeanIntrospector</code> interface which can
  * detect write methods for properties used in fluent API scenario.
- * </p>
  * <p>
  * A <em>fluent API</em> allows setting multiple properties using a single
  * statement by supporting so-called <em>method chaining</em>: Methods for
@@ -76,18 +71,14 @@ import org.slf4j.LoggerFactory;
  * @version $Id$
  * @since 1.9
  */
+@lombok.extern.slf4j.Slf4j
 public class FluentPropertyBeanIntrospector implements BeanIntrospector{
 
     /** The default prefix for write methods. */
-    public static final String  DEFAULT_WRITE_METHOD_PREFIX = "set";
-
-    /** The Constant log. */
-    private static final Logger LOGGER                      = LoggerFactory.getLogger(FluentPropertyBeanIntrospector.class);
-
-    //---------------------------------------------------------------
+    public static final String DEFAULT_WRITE_METHOD_PREFIX = "set";
 
     /** The prefix of write methods to search for. */
-    private final String        writeMethodPrefix;
+    private final String       writeMethodPrefix;
 
     /**
      *
@@ -148,8 +139,8 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector{
                         pd.setWriteMethod(m);
                     }
                 }catch (final IntrospectionException e){
-                    LOGGER.info("Error when creating PropertyDescriptor for " + m + "! Ignoring this property.");
-                    LOGGER.debug("Exception is:", e);
+                    log.info("Error when creating PropertyDescriptor for " + m + "! Ignoring this property.");
+                    log.debug("Exception is:", e);
                 }
             }
         }

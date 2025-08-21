@@ -31,9 +31,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.HttpException;
 import com.feilong.lib.org.apache.http.HttpHost;
 import com.feilong.lib.org.apache.http.HttpRequest;
@@ -69,14 +66,10 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.3
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
 @SuppressWarnings("deprecation")
 public class ProtocolExec implements ClientExecChain{
-
-    /** The Constant log. */
-    private static final Logger   log = LoggerFactory.getLogger(ProtocolExec.class);
-
-    //---------------------------------------------------------------
 
     private final ClientExecChain requestExecutor;
 

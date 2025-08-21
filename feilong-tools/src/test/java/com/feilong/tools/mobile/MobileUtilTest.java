@@ -27,6 +27,7 @@ import com.feilong.test.AbstractTest;
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
+@lombok.extern.slf4j.Slf4j
 public class MobileUtilTest extends AbstractTest{
 
     /** The mobile number. */
@@ -36,8 +37,8 @@ public class MobileUtilTest extends AbstractTest{
     public void testGetMobileNumberHided(){
         assertEquals("150****1318", MobileUtil.getMobileNumberHided(mobileNumber));
 
-        LOGGER.debug(StringUtils.abbreviateMiddle(mobileNumber, "***", 10));
-        //LOGGER.debug(MobileUtil.getMobileNumberHided(mobileNumber, 15));
+        log.debug(StringUtils.abbreviateMiddle(mobileNumber, "***", 10));
+        //log.debug(MobileUtil.getMobileNumberHided(mobileNumber, 15));
         // assertEquals(mobileNumber, FeiLongMobile.getMobileNumberHided(mobileNumber,4));
     }
 

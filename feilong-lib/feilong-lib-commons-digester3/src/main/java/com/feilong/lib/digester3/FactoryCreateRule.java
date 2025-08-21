@@ -24,32 +24,26 @@ import static java.lang.String.format;
 import java.util.Formatter;
 import java.util.Stack;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 /**
- * <p>
  * Rule implementation that uses an {@link ObjectCreationFactory} to create a new object which it pushes onto the object
  * stack. When the element is complete, the object will be popped.
- * </p>
  * <p>
  * This rule is intended in situations where the element's attributes are needed before the object can be created. A
  * common senario is for the ObjectCreationFactory implementation to use the attributes as parameters in a call to
  * either a factory method or to a non-empty constructor.
  */
+@lombok.extern.slf4j.Slf4j
 public class FactoryCreateRule extends Rule{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FactoryCreateRule.class);
 
     // ----------------------------------------------------------- Fields
 
     /** Should exceptions thrown by the factory be ignored? */
-    private final boolean       ignoreCreateExceptions;
+    private final boolean  ignoreCreateExceptions;
 
     /** Stock to manage */
-    private Stack<Boolean>      exceptionIgnoredStack;
+    private Stack<Boolean> exceptionIgnoredStack;
 
     // ----------------------------------------------------------- Constructors
 
@@ -248,8 +242,8 @@ public class FactoryCreateRule extends Rule{
             try{
                 Object instance = getFactory(attributes).createObject(attributes);
 
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug(
+                if (log.isDebugEnabled()){
+                    log.debug(
                                     format(
                                                     "[FactoryCreateRule]{%s} New %s",
                                                     getDigester().getMatch(),
@@ -260,14 +254,14 @@ public class FactoryCreateRule extends Rule{
 
             }catch (Exception e){
                 // log message and error
-                if (LOGGER.isInfoEnabled()){
-                    LOGGER.info(
+                if (log.isInfoEnabled()){
+                    log.info(
                                     format(
                                                     "[FactoryCreateRule]{%s} Create exception ignored: %s",
                                                     getDigester().getMatch(),
                                                     ((e.getMessage() == null) ? e.getClass().getName() : e.getMessage())));
-                    if (LOGGER.isDebugEnabled()){
-                        LOGGER.debug("[FactoryCreateRule] Ignored exception:", e);
+                    if (log.isDebugEnabled()){
+                        log.debug("[FactoryCreateRule] Ignored exception:", e);
                     }
                 }
                 exceptionIgnoredStack.push(Boolean.TRUE);
@@ -276,8 +270,8 @@ public class FactoryCreateRule extends Rule{
         }else{
             Object instance = getFactory(attributes).createObject(attributes);
 
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(
+            if (log.isDebugEnabled()){
+                log.debug(
                                 format(
                                                 "[FactoryCreateRule]{%s} New %s",
                                                 getDigester().getMatch(),
@@ -298,15 +292,15 @@ public class FactoryCreateRule extends Rule{
                         && exceptionIgnoredStack.pop().booleanValue()){
             // creation exception was ignored
             // nothing was put onto the stack
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace(format("[FactoryCreateRule]{%s} No creation so no push so no pop", getDigester().getMatch()));
+            if (log.isTraceEnabled()){
+                log.trace(format("[FactoryCreateRule]{%s} No creation so no push so no pop", getDigester().getMatch()));
             }
             return;
         }
 
         Object top = getDigester().pop();
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(format("[FactoryCreateRule]{%s} Pop %s", getDigester().getMatch(), top.getClass().getName()));
+        if (log.isDebugEnabled()){
+            log.debug(format("[FactoryCreateRule]{%s} Pop %s", getDigester().getMatch(), top.getClass().getName()));
         }
     }
 
@@ -353,8 +347,8 @@ public class FactoryCreateRule extends Rule{
                     realClassName = value;
                 }
             }
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(format("[FactoryCreateRule]{%s} New factory %s", getDigester().getMatch(), realClassName));
+            if (log.isDebugEnabled()){
+                log.debug(format("[FactoryCreateRule]{%s} New factory %s", getDigester().getMatch(), realClassName));
             }
             Class<?> clazz = getDigester().getClassLoader().loadClass(realClassName);
             creationFactory = (ObjectCreationFactory<?>) clazz.newInstance();

@@ -28,9 +28,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.lib.lang3.StringUtils;
 
@@ -73,10 +70,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.2.1
  */
+@lombok.extern.slf4j.Slf4j
 public final class URLUtil{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(URLUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private URLUtil(){
@@ -155,7 +150,7 @@ public final class URLUtil{
             return new URL(spec);
         }catch (Exception e){
             // no URL -> treat as file path
-            LOGGER.trace("[new URL(\"{}\")] exception,cause by :[{}],will try call [toFileURL(\"{}\")]", spec, e.getMessage(), spec);
+            log.trace("[new URL(\"{}\")] exception,cause by :[{}],will try call [toFileURL(\"{}\")]", spec, e.getMessage(), spec);
             return toFileURL(spec);
         }
     }

@@ -18,9 +18,6 @@ package com.feilong.taglib.display.sensitive;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
@@ -39,12 +36,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.1
  */
+@lombok.extern.slf4j.Slf4j
 public final class SensitiveUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SensitiveUtil.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private SensitiveUtil(){
@@ -113,8 +106,8 @@ public final class SensitiveUtil{
         Validate.notNull(sensitiveType, "sensitiveConfig.getSensitiveType() can't be null!");
 
         //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("value:[{}],sensitiveConfig:{}", value, JsonUtil.toString(sensitiveConfig));
+        if (log.isTraceEnabled()){
+            log.trace("value:[{}],sensitiveConfig:{}", value, JsonUtil.toString(sensitiveConfig));
         }
 
         //---------------------------------------------------------------
@@ -164,9 +157,9 @@ public final class SensitiveUtil{
      * @since 1.14.0
      */
     public static String parse(String value,char maskChar,int leftNoMaskLength,int rightNoMaskLength){
-        if (LOGGER.isTraceEnabled()){
+        if (log.isTraceEnabled()){
             String format = "will parse:[{}],maskChar:[{}],leftNoMaskLength:[{}],rightNoMaskLength:[{}]";
-            LOGGER.trace(format, value, maskChar, leftNoMaskLength, rightNoMaskLength);
+            log.trace(format, value, maskChar, leftNoMaskLength, rightNoMaskLength);
         }
 
         //---------------------------------------------------------------
@@ -176,9 +169,9 @@ public final class SensitiveUtil{
         sb.append(StringUtils.repeat(maskChar, value.length() - leftNoMaskLength - rightNoMaskLength));
         sb.append(StringUtils.right(value, rightNoMaskLength));
 
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             String format = "parse:[{}],maskChar:[{}],leftNoMaskLength:[{}],rightNoMaskLength:[{}],result:[{}]";
-            LOGGER.debug(format, value, maskChar, leftNoMaskLength, rightNoMaskLength, sb.toString());
+            log.debug(format, value, maskChar, leftNoMaskLength, rightNoMaskLength, sb.toString());
         }
 
         return sb.toString();

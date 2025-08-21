@@ -19,17 +19,13 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
 
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@lombok.extern.slf4j.Slf4j
 public class LogBuilder{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogBuilder.class);
 
     /** Don't let anyone instantiate this class. */
     private LogBuilder(){
@@ -41,7 +37,7 @@ public class LogBuilder{
     //---------------------------------------------------------------
 
     static void logEncrypt(String typeName,String original,String value,String algorithm,String keyString){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             Map<String, String> map = newLinkedHashMap();
             map.put("algorithm", algorithm);
             map.put("keyString", hided(keyString));
@@ -50,12 +46,12 @@ public class LogBuilder{
 
             map.put(typeName, value);
             map.put("valueLength", "" + value.length());
-            LOGGER.debug(JsonUtil.toString(map));
+            log.debug(JsonUtil.toString(map));
         }
     }
 
     static void logDecrypt(String typeName,String needDecryptValue,String original,String algorithm,String keyString){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             Map<String, String> map = newLinkedHashMap();
             map.put("algorithm", algorithm);
             map.put("keyString", hided(keyString));
@@ -63,7 +59,7 @@ public class LogBuilder{
             map.put(typeName, needDecryptValue);
             map.put("original", original);
 
-            LOGGER.debug(JsonUtil.toString(map));
+            log.debug(JsonUtil.toString(map));
         }
     }
 

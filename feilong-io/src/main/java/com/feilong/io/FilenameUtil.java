@@ -22,9 +22,6 @@ import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import java.io.File;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.io.FilenameUtils;
@@ -37,10 +34,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @see com.feilong.lib.io.FilenameUtils
  * @since 1.4.0
  */
+@lombok.extern.slf4j.Slf4j
 public final class FilenameUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger     LOGGER       = LoggerFactory.getLogger(FilenameUtil.class);
 
     /**
      * 文件名称由文件名和扩展名组成,两者由小黑点分隔,扩展名通常是用来表示文件的类 别.
@@ -59,16 +54,16 @@ public final class FilenameUtil{
      * @see <a href="http://support.microsoft.com/kb/177506/zh-cn">错误消息: 文件名是无效的或不能包含任何以下字符</a>
      * @since 1.0.7
      */
-    private static final String[][] MICROSOFT_PC = {                                           //
+    private static final String[][] MICROSOFT_PC = { //
                                                      //            { "\\", "" }, // \
                                                      //  { "/", "" }, // /
-                                                     { "\"", "" },                             // "
-                                                     { ":", "" },                              // :
-                                                     { "*", "" },                              // *
-                                                     { "?", "" },                              // ?
-                                                     { "<", "" },                              // <
-                                                     { ">", "" },                              // >
-                                                     { "|", "" },                              // |
+                                                     { "\"", "" }, // "
+                                                     { ":", "" }, // :
+                                                     { "*", "" }, // *
+                                                     { "?", "" }, // ?
+                                                     { "<", "" }, // <
+                                                     { ">", "" }, // >
+                                                     { "|", "" }, // |
     };
 
     /** Don't let anyone instantiate this class. */
@@ -98,7 +93,7 @@ public final class FilenameUtil{
             String oldChar = arrayElement[0];
             if (formatFileName.contains(oldChar)){
                 String newChar = arrayElement[1];
-                LOGGER.warn("formatFileName:[{}] contains oldChar:[{}],will replace newChar:[{}]", formatFileName, oldChar, newChar);
+                log.warn("formatFileName:[{}] contains oldChar:[{}],will replace newChar:[{}]", formatFileName, oldChar, newChar);
                 formatFileName = StringUtil.replace(formatFileName, oldChar, newChar);
             }
         }
@@ -348,7 +343,7 @@ public final class FilenameUtil{
 
         //递归
         String fileTopParentName = getFileTopParentName(parent);
-        LOGGER.debug("pathname:[{}],fileTopParentName:[{}]", pathname, fileTopParentName);
+        log.debug("pathname:[{}],fileTopParentName:[{}]", pathname, fileTopParentName);
         return fileTopParentName;
     }
 
@@ -374,7 +369,7 @@ public final class FilenameUtil{
         if (isNullOrEmpty(parent)){
             String patch = file.getPath();//E:/--->E:\
 
-            LOGGER.debug("parent isNullOrEmpty,return file patch:{}", patch);
+            log.debug("parent isNullOrEmpty,return file patch:{}", patch);
             return patch;
         }
 
@@ -382,7 +377,7 @@ public final class FilenameUtil{
         //递归
         String fileTopParentName = getFileTopParentName(parent);
 
-        LOGGER.debug("file.getAbsolutePath():[{}],fileTopParentName:[{}]", file.getAbsolutePath(), fileTopParentName);
+        log.debug("file.getAbsolutePath():[{}],fileTopParentName:[{}]", file.getAbsolutePath(), fileTopParentName);
         return fileTopParentName;
     }
 
@@ -402,7 +397,7 @@ public final class FilenameUtil{
      * <pre class="code">
      * String remoteDirectory = "/home/sftp-speedo/test/aa/bbb/ccc/ddd/201606160101/";
      * List{@code <String>} list = getParentPathList(remoteDirectory);
-     * LOGGER.debug(JsonUtil.format(list));
+     * log.debug(JsonUtil.format(list));
      * 
      * </pre>
      * 

@@ -25,8 +25,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelCell;
@@ -34,9 +32,8 @@ import com.feilong.excel.definition.ExcelCellConditionStyle;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.CellReferenceUtil;
 
+@lombok.extern.slf4j.Slf4j
 class ExcelCellConditionStyleInitializer{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelCellConditionStyleInitializer.class);
 
     /** Don't let anyone instantiate this class. */
     private ExcelCellConditionStyleInitializer(){
@@ -110,7 +107,7 @@ class ExcelCellConditionStyleInitializer{
                 String cellIndex2 = getCellRef(i, j);
                 styleMap.put(cellIndex2, cell.getCellStyle());
 
-                LOGGER.debug("Condition Style [{}]", cellIndex2);
+                log.debug("Condition Style [{}]", cellIndex2);
             }
         }
     }

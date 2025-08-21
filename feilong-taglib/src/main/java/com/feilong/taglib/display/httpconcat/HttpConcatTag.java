@@ -20,9 +20,6 @@ import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.taglib.AbstractEndWriteContentTag;
 import com.feilong.taglib.CacheTag;
@@ -56,22 +53,20 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.2
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep
 public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTag{
 
-    /** The Constant log. */
-    private static final Logger LOGGER            = LoggerFactory.getLogger(HttpConcatTag.class);
-
     /** The Constant serialVersionUID. */
-    private static final long   serialVersionUID  = -3447592871482978718L;
+    private static final long serialVersionUID  = -3447592871482978718L;
 
     //---------------------------------------------------------------
 
     /** 类型,是 css 还是 js. */
-    private String              type;
+    private String            type;
 
     /** 版本号. */
-    private String              version;
+    private String            version;
 
     /**
      * 根目录.
@@ -79,13 +74,13 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
      * 如果设置root为'/script' 会拼成http://staging.feilongstore.com.cn/script/??jquery/jquery-1.4.2.min.js?2013022801
      * </p>
      */
-    private String              root;
+    private String            root;
 
     /** 域名,如果没有设置,将自动使用 {@link HttpServletRequest#getContextPath()}. */
-    private String              domain;
+    private String            domain;
 
     /** 是否支持 http concat(如果设置这个参数,本次渲染将会覆盖全局变量). */
-    private Boolean             httpConcatSupport = null;
+    private Boolean           httpConcatSupport = null;
 
     //---------------------------------------------------------------
 
@@ -100,7 +95,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
 
         //-------------------bodyContentSrc validate---------------------------
         if (isNullOrEmpty(bodyContentSrc)){
-            LOGGER.warn("bodyContentSrc is null or empty, return empty");
+            log.warn("bodyContentSrc is null or empty, return empty");
             return EMPTY;
         }
 

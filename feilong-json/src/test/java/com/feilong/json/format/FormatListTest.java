@@ -22,17 +22,18 @@ import org.junit.Test;
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatListTest extends AbstractJsonTest{
 
     @Test
-    
+
     public void testVector(){
         Vector<Integer> vector = new Vector<>();
         vector.add(1);
         vector.add(2222);
         vector.add(3333);
         vector.add(55555);
-        LOGGER.debug("vector:{}", JsonUtil.format(vector));
-        LOGGER.debug("" + vector.get(0));
+        log.debug("vector:{}", JsonUtil.format(vector));
+        log.debug("" + vector.get(0));
     }
 }

@@ -16,27 +16,21 @@
 package com.feilong.tools.log4j2;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.5.1
  */
+@lombok.extern.slf4j.Slf4j
 public class LogPatternTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogPatternTest.class);
-
-    /**
-     * TestLogPatternTest.
-     */
     @Test
     public void testLogPatternTest(){
-        LOGGER.info("1111");
-        LOGGER.info("1111");
-        LOGGER.info("1111");
-        LOGGER.info("1111");
+        log.info("1111");
+        log.info("1111");
+        log.info("1111");
+        log.info("1111");
     }
 
 }

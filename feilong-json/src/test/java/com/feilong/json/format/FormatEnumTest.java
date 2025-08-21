@@ -21,10 +21,11 @@ import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.HttpMethodTestType;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatEnumTest extends AbstractTest{
 
     @Test
     public void formatEnum(){
-        LOGGER.debug(JsonUtil.format(HttpMethodTestType.GET));
+        log.debug(JsonUtil.format(HttpMethodTestType.GET));
     }
 }

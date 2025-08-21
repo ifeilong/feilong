@@ -20,9 +20,6 @@ import static com.feilong.net.http.HttpLogHelper.autoLog;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.client.utils.URIBuilder;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.HttpRequest;
@@ -37,10 +34,8 @@ import com.feilong.net.http.HttpRequest;
  *      </a>
  * @since 1.10.6
  */
+@lombok.extern.slf4j.Slf4j
 class URIBuilderBuilder{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(URIBuilderBuilder.class);
 
     /** Don't let anyone instantiate this class. */
     private URIBuilderBuilder(){
@@ -66,8 +61,8 @@ class URIBuilderBuilder{
             URIBuilder uriBuilder = new URIBuilder(uri);
 
             if (isNullOrEmpty(paramMap)){
-                if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace(autoLog(httpRequest, "paramMapIsNullOrEmpty,skip!"));
+                if (log.isTraceEnabled()){
+                    log.trace(autoLog(httpRequest, "paramMapIsNullOrEmpty,skip!"));
                 }
                 return uriBuilder;
             }

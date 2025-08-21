@@ -27,13 +27,14 @@ import com.feilong.test.AbstractTest;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.4.0
  */
+@lombok.extern.slf4j.Slf4j
 public class SerializableUtilTest extends AbstractTest{
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testSize(){
-        //       LOGGER.debug("Size of Object: " + ObjectUtil.size(new Object()));
-        LOGGER.debug("Size of Calendar: " + SerializableUtil.size(Calendar.getInstance()));
-        LOGGER.debug("Size of HashMap: " + SerializableUtil.size(new HashMap<String, String>()));
+        //       log.debug("Size of Object: " + ObjectUtil.size(new Object()));
+        log.debug("Size of Calendar: " + SerializableUtil.size(Calendar.getInstance()));
+        log.debug("Size of HashMap: " + SerializableUtil.size(new HashMap<String, String>()));
     }
 }

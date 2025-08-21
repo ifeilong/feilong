@@ -16,8 +16,6 @@
 package com.feilong.net.bot;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.net.bot.dingtalk.DefaultDingTalkBot;
 import com.feilong.net.bot.dingtalk.DingTalkBotBuilder;
@@ -27,12 +25,11 @@ import com.feilong.net.bot.dingtalk.DingTalkBotBuilder;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 4.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public class LogAndBotCombinationTest{
 
-    private static final Logger      LOGGER = LoggerFactory.getLogger(LogAndBotCombinationTest.class);
-
     /** The bot. */
-    private final DefaultDingTalkBot bot    = (DefaultDingTalkBot) DingTalkBotBuilder.newAsyncCatchExceptionDingTalkBot(
+    private final DefaultDingTalkBot bot = (DefaultDingTalkBot) DingTalkBotBuilder.newAsyncCatchExceptionDingTalkBot(
                     getKey(),
                     "SECd2325d14c67a3ec585568e00b49d749c7094a2a1579beb86369d88a5b161c981",
                     "test");
@@ -44,45 +41,45 @@ public class LogAndBotCombinationTest{
 
     @Test
     public void test(){
-        LogAndBotCombination.error(LOGGER, bot, "hello {} error", "jim");
+        LogAndBotCombination.error(log, bot, "hello {} error", "jim");
     }
 
     @Test
     public void testerror(){
-        LogAndBotCombination.error(LOGGER, bot, "hello {} errorLastExceptionException", "jim", new NullPointerException("test"));
+        LogAndBotCombination.error(log, bot, "hello {} errorLastExceptionException", "jim", new NullPointerException("test"));
     }
 
     //---------------------------------------------------------------
     @Test
     public void testWarn(){
-        LogAndBotCombination.warn(LOGGER, bot, "hello {} warn", "jim");
+        LogAndBotCombination.warn(log, bot, "hello {} warn", "jim");
     }
 
     @Test
     public void testWarn2(){
-        LogAndBotCombination.warn(LOGGER, bot, "hello {} warnLastExceptionException", "jim", new NullPointerException("test"));
+        LogAndBotCombination.warn(log, bot, "hello {} warnLastExceptionException", "jim", new NullPointerException("test"));
     }
 
     //---------------------------------------------------------------
     @Test
     public void testInfo(){
-        LogAndBotCombination.info(LOGGER, bot, "hello {} info", "jim");
+        LogAndBotCombination.info(log, bot, "hello {} info", "jim");
     }
 
     @Test
     public void testInfo2(){
-        LogAndBotCombination.info(LOGGER, bot, "hello {} infoLastExceptionException", "jim", new NullPointerException("test"));
+        LogAndBotCombination.info(log, bot, "hello {} infoLastExceptionException", "jim", new NullPointerException("test"));
     }
 
     //---------------------------------------------------------------
     @Test
     public void testDebug(){
-        LogAndBotCombination.debug(LOGGER, bot, "hello {} Debug", "jim");
+        LogAndBotCombination.debug(log, bot, "hello {} Debug", "jim");
     }
 
     @Test
     public void testDebug2(){
-        LogAndBotCombination.debug(LOGGER, bot, "hello {} DebugLastExceptionException", "jim", new NullPointerException("test"));
+        LogAndBotCombination.debug(log, bot, "hello {} DebugLastExceptionException", "jim", new NullPointerException("test"));
     }
 
     //---------------------------------------------------------------

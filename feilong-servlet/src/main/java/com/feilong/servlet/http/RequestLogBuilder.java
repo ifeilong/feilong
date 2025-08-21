@@ -359,7 +359,7 @@ class RequestLogBuilder implements Builder<Map<String, Object>>{
                 return null == session ? EMPTY : session.getId();
             }catch (IllegalStateException e){//Cannot create a session after the response has been committed 
                 String msg = Slf4jUtil.format("uri:[{}],paramMap:{}", request.getRequestURI(), request.getParameterMap());
-                LOGGER.error(msg, e);
+                log.error(msg, e);
                 return e.getMessage();
             }
     }

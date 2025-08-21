@@ -23,12 +23,13 @@ import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class MapTest extends AbstractTest{
 
     @Test
     public void test(){
         Map<String, Object> map = toMap("logisticsStatus", (Object) 10);
 
-        LOGGER.debug("" + SpelUtil.getValue("logisticsStatus", map));
+        log.debug("" + SpelUtil.getValue("logisticsStatus", map));
     }
 }

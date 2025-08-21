@@ -25,8 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.Validate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,13 +39,9 @@ import com.feilong.servlet.http.ResponseDownloadUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0 2012-3-18 下午11:32:05
  */
+@lombok.extern.slf4j.Slf4j
 @Controller
 public class DownloadController{
-
-    /** The Constant LOGGER. */
-    private static final Logger        LOGGER  = LoggerFactory.getLogger(DownloadController.class);
-
-    //---------------------------------------------------------------
 
     private final AtomicInteger        counter = new AtomicInteger(0);
 
@@ -69,9 +63,9 @@ public class DownloadController{
         ResponseDownloadUtil.download(filePath, request, response);
         int incrementAndGet = counter.incrementAndGet();
 
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             String pattern = "download times:[{}],requestFileCreator:[{}],useTime: [{}]";
-            LOGGER.info(
+            log.info(
                             pattern,
                             incrementAndGet,
                             requestFileCreator.getClass().getSimpleName(),

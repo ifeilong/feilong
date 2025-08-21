@@ -29,9 +29,6 @@ package com.feilong.lib.org.apache.http.client.protocol;
 
 import java.io.IOException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.HttpException;
 import com.feilong.lib.org.apache.http.HttpRequest;
 import com.feilong.lib.org.apache.http.HttpRequestInterceptor;
@@ -49,10 +46,9 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 public class RequestClientConnControl implements HttpRequestInterceptor{
-
-    private static final Logger log                  = LoggerFactory.getLogger(RequestClientConnControl.class);
 
     private static final String PROXY_CONN_DIRECTIVE = "Proxy-Connection";
 

@@ -2350,7 +2350,7 @@ public final class DateUtil{
      * <span style="color:green">// do some logic</span>
      * <span style="color:green">// balabala logic</span>
      * 
-     * LOGGER.info("use time: [{}]", DateUtil.formatDurationUseBeginTimeMillis(t1));
+     * log.info("use time: [{}]", DateUtil.formatDurationUseBeginTimeMillis(t1));
      * </pre>
      * 
      * </blockquote>
@@ -2397,7 +2397,7 @@ public final class DateUtil{
      * <span style="color:green">// do some logic</span>
      * <span style="color:green">// balabala logic</span>
      * 
-     * LOGGER.info("use time: [{}]", DateUtil.formatDuration(beginDate));
+     * log.info("use time: [{}]", DateUtil.formatDuration(beginDate));
      * </pre>
      * 
      * </blockquote>
@@ -2411,7 +2411,7 @@ public final class DateUtil{
      * 
      * <pre class="code">
      * Date date = toDate("2016-07-03 00:00:00", COMMON_DATE_AND_TIME);
-     * LOGGER.debug(DateUtil.formatDuration(date));
+     * log.debug(DateUtil.formatDuration(date));
      * </pre>
      * 
      * <b>返回:</b>
@@ -2467,7 +2467,7 @@ public final class DateUtil{
      * <span style="color:green">// do some logic</span>
      * <span style="color:green">// balabala logic</span>
      * 
-     * LOGGER.info("use time: [{}]", DateUtil.formatDuration(beginDate, now()));
+     * log.info("use time: [{}]", DateUtil.formatDuration(beginDate, now()));
      * 
      * </pre>
      * 

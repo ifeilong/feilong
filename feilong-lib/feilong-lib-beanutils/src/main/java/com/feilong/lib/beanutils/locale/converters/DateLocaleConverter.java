@@ -24,29 +24,21 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.ConversionException;
 import com.feilong.lib.beanutils.locale.BaseLocaleConverter;
 
 /**
- * <p>
  * Standard {@link com.feilong.lib.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
  * locale-sensitive String into a <code>java.util.Date</code> object,
  * optionally using a default value or throwing a
  * {@link com.feilong.lib.beanutils.ConversionException}
  * if a conversion error occurs.
- * </p>
  *
  * @version $Id$
  */
-
+@lombok.extern.slf4j.Slf4j
 public class DateLocaleConverter extends BaseLocaleConverter{
-
-    /** The Constant log. */
-    private static final Logger LOGGER                = LoggerFactory.getLogger(DateLocaleConverter.class);
 
     // ----------------------------------------------------- Instance Variables
 
@@ -355,7 +347,7 @@ public class DateLocaleConverter extends BaseLocaleConverter{
         try{
             convertedPattern = convertPattern(localizedPattern, localChars, DEFAULT_PATTERN_CHARS);
         }catch (final Exception ex){
-            LOGGER.debug("Converting pattern '" + localizedPattern + "' for " + locale, ex);
+            log.debug("Converting pattern '" + localizedPattern + "' for " + locale, ex);
         }
         return convertedPattern;
     }

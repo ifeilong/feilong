@@ -33,6 +33,7 @@ import com.feilong.csv.entity.CsvConfig;
 import com.feilong.test.AbstractTest;
 
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
+@lombok.extern.slf4j.Slf4j
 public class CsvArrayWriteTest extends AbstractTest{
 
     private final CsvWrite csvWrite = new DefaultCsvWrite();
@@ -41,7 +42,7 @@ public class CsvArrayWriteTest extends AbstractTest{
     public void testWrite(){
         String path = SystemUtil.USER_HOME + "/Downloads/feilong/${date}/feilongid_pix_demand.csv";
         path = path.replace("${date}", DateUtil.toString(addDay(now(), -1), COMMON_DATE));
-        LOGGER.debug(path);
+        log.debug(path);
 
         //---------------------------------------------------------------
 

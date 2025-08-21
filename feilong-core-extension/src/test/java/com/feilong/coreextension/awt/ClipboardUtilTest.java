@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class ClipboardUtilTest extends AbstractTest{
 
     @Test
@@ -38,7 +39,7 @@ public class ClipboardUtilTest extends AbstractTest{
         ClipboardUtil.setClipboardContent(sb.toString());
 
         String clipboardContent = ClipboardUtil.getClipboardContent();
-        LOGGER.debug(clipboardContent);
+        log.debug(clipboardContent);
 
         assertEquals(sb.toString(), clipboardContent);
     }

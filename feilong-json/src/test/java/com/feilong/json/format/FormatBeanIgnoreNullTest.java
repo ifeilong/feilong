@@ -30,6 +30,7 @@ import com.feilong.lib.json.JSONObjectBuilder;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatBeanIgnoreNullTest extends AbstractTest{
 
     private final BeanIntIgnoreNull beanIntIgnoreNull = new BeanIntIgnoreNull(16, null);
@@ -58,13 +59,13 @@ public class FormatBeanIgnoreNullTest extends AbstractTest{
     @Test
     public void test12MAP(){
         JSONObject jsonObject = JSONObjectBuilder.build(toMap("age", 16, "name", null), new JsonConfig());
-        LOGGER.debug(jsonObject.toString(0, 0));
+        log.debug(jsonObject.toString(0, 0));
     }
 
     @Test
     public void test12(){
         JSONObject jsonObject = JSONObjectBuilder.build(beanIntIgnoreNull, new JsonConfig());
-        LOGGER.debug(jsonObject.toString());
+        log.debug(jsonObject.toString());
     }
 
     @Test

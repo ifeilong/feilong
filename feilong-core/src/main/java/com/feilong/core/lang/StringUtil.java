@@ -481,7 +481,7 @@ public final class StringUtil{
      *             sb.append(",");
      *         }
      *     }
-     *     LOGGER.debug(sb.toString());
+     *     log.debug(sb.toString());
      * }
      * 
      * </pre>
@@ -537,7 +537,7 @@ public final class StringUtil{
      * valuesMap.put("yearMonth", DateUtil.toString(date, DatePattern.YEAR_AND_MONTH));
      * valuesMap.put("expressDeliveryType", "sf");
      * valuesMap.put("fileName", DateUtil.toString(date, DatePattern.TIMESTAMP));
-     * LOGGER.debug(StringUtil.replace(template, valuesMap));
+     * log.debug(StringUtil.replace(template, valuesMap));
      * </pre>
      * 
      * <b>返回:</b>
@@ -560,7 +560,7 @@ public final class StringUtil{
      * Map{@code <String, Object>} valuesMap = newHashMap();
      * valuesMap.put("today", DateUtil.toString(now(), COMMON_DATE));
      * valuesMap.put("user", new User(1L));
-     * LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
+     * log.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
      * </pre>
      * 
      * <b>返回:</b>
@@ -785,7 +785,7 @@ public final class StringUtil{
      * <pre class="code">
      * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
      * String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str);
-     * LOGGER.info(JsonUtil.format(tokenizeToStringArray));
+     * log.info(JsonUtil.format(tokenizeToStringArray));
      * </pre>
      * 
      * <b>返回:</b>
@@ -839,7 +839,7 @@ public final class StringUtil{
      * <pre class="code">
      * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
      * String[] set = StringUtil.tokenizeToSet(str);
-     * LOGGER.info(JsonUtil.format(set));
+     * log.info(JsonUtil.format(set));
      * </pre>
      * 
      * <b>返回:</b>
@@ -892,7 +892,7 @@ public final class StringUtil{
      * <pre class="code">
      * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
      * String[] list = StringUtil.tokenizeToList(str);
-     * LOGGER.info(JsonUtil.format(list));
+     * log.info(JsonUtil.format(list));
      * </pre>
      * 
      * <b>返回:</b>
@@ -946,7 +946,7 @@ public final class StringUtil{
      * <pre class="code">
      * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
      * Set<String> set = StringUtil.tokenizeToSet(str, String.class);
-     * LOGGER.info(JsonUtil.format(set));
+     * log.info(JsonUtil.format(set));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1011,7 +1011,7 @@ public final class StringUtil{
      * <pre class="code">
      * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
      * List<String> list = StringUtil.tokenizeToList(str, String.class);
-     * LOGGER.info(JsonUtil.format(list));
+     * log.info(JsonUtil.format(list));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1078,7 +1078,7 @@ public final class StringUtil{
      * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
      * String delimiters = ";, .";
      * String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
-     * LOGGER.info(JsonUtil.format(tokenizeToStringArray));
+     * log.info(JsonUtil.format(tokenizeToStringArray));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1878,8 +1878,8 @@ public final class StringUtil{
      * </p>
      * 
      * <ul>
-     * <li>LOGGER.debug("{}","feilong");</li>
-     * <li>LOGGER.info("{},{}","feilong","hello");</li>
+     * <li>log.debug("{}","feilong");</li>
+     * <li>log.info("{},{}","feilong","hello");</li>
      * </ul>
      * 
      * 这些写法非常简洁且有效,不易出错

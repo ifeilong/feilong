@@ -32,9 +32,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.TimeInterval;
 import com.feilong.core.Validate;
@@ -95,10 +92,8 @@ import com.feilong.io.entity.MimeType;
  * @see javax.servlet.http.HttpServletResponse
  * @since 1.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public final class ResponseUtil{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ResponseUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ResponseUtil(){
@@ -139,7 +134,7 @@ public final class ResponseUtil{
 
         //---------------------------------------------------------------
         try{
-            LOGGER.debug("response sendRedirect to:[{}]", url);
+            log.debug("response sendRedirect to:[{}]", url);
             response.sendRedirect(url);
         }catch (IOException e){
             throw new UncheckedIOException(e);
@@ -205,7 +200,7 @@ public final class ResponseUtil{
         Validate.notNull(errorMessage, "errorMessage can't be null!");
 
         try{
-            LOGGER.debug("will sendError,errorStatusCode:[{}],errorMessage:[{}]", errorStatusCode, errorMessage);
+            log.debug("will sendError,errorStatusCode:[{}],errorMessage:[{}]", errorStatusCode, errorMessage);
             response.sendError(errorStatusCode, errorMessage);
         }catch (IOException e){
             throw new UncheckedIOException(e);
@@ -449,7 +444,7 @@ public final class ResponseUtil{
     //---------------------------------------------------------------
 
     /**
-     * 获得 response info map for LOGGER.
+     * 获得 response info map for log.
      *
      * @param response
      *            the response

@@ -28,6 +28,7 @@ import org.junit.Test;
 import com.feilong.lib.lang3.tuple.Pair;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatterMapTest extends AbstractTest{
 
     @Test
@@ -45,7 +46,7 @@ public class FormatterMapTest extends AbstractTest{
                         Pair.of("Database URL", "jdbc:postgresql://127.0.0.1:5432/db_feilong_jira"),
                         Pair.of("Database JDBC config", "postgres72 jdbc:postgresql://127.0.0.1:5432/db_feilong_jira"));
 
-        LOGGER.debug(formatToSimpleTable(map));
+        log.debug(formatToSimpleTable(map));
     }
 
     //---------------------------------------------------------------

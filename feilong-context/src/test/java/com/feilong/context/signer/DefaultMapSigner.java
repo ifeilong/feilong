@@ -15,9 +15,6 @@
  */
 package com.feilong.context.signer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * // 合作方实现接口签名生成算法
  * // 有些接口需要合作方按照规范要求实现，比如专辑/声音上下架推送接口，这些接口的签名生成算法如下：
@@ -32,16 +29,10 @@ import org.slf4j.LoggerFactory;
  */
 public class DefaultMapSigner extends AbstractMapSigner{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMapSigner.class);
-
-    //---------------------------------------------------------------
-
     /**
      * @param mapSignConfig
      */
     public DefaultMapSigner(MapSignConfig mapSignConfig){
         super(mapSignConfig);
     }
-
-    //---------------------------------------------------------------
 }

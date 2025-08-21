@@ -17,9 +17,6 @@ package com.feilong.core.lang;
 
 import static com.feilong.core.lang.StringUtil.formatPattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.PropertyUtil;
@@ -32,10 +29,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @see com.feilong.lib.lang3.EnumUtils
  * @since 1.0.6
  */
+@lombok.extern.slf4j.Slf4j
 public final class EnumUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(EnumUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private EnumUtil(){
@@ -228,8 +223,8 @@ public final class EnumUtil{
         // 如果Class 对象不表示枚举类型,则返回枚举类的元素或 null.
         E[] enumConstants = enumClass.getEnumConstants();
 
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("enumClass:[{}],enumConstants:[{}]", enumClass.getCanonicalName(), enumConstants);
+        if (log.isTraceEnabled()){
+            log.trace("enumClass:[{}],enumConstants:[{}]", enumClass.getCanonicalName(), enumConstants);
         }
 
         //---------------------------------------------------------------
@@ -241,9 +236,9 @@ public final class EnumUtil{
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             String messagePattern = "[{}],propertyName:[{}],value:[{}],ignoreCase:[{}],constants not found";
-            LOGGER.debug(formatPattern(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
+            log.debug(formatPattern(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
         }
         return null;
     }

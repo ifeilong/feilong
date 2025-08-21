@@ -21,9 +21,6 @@ import static com.feilong.security.symmetric.LogBuilder.errorMessage;
 
 import java.security.Key;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
@@ -96,7 +93,7 @@ import com.feilong.security.symmetric.builder.TransformationBuilder;
  *      String keyString = "feilong";
  * 
  *      SymmetricEncryption symmetricEncryption = new SymmetricEncryption(SymmetricType.Blowfish, keyString);
- *      LOGGER.info(symmetricEncryption.encryptHex(original,UTF8));
+ *      log.info(symmetricEncryption.encryptHex(original,UTF8));
  *      
  *      输出:055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6
  * 
@@ -105,7 +102,7 @@ import com.feilong.security.symmetric.builder.TransformationBuilder;
  *      String hexString = "055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6";
  * 
  *      SymmetricEncryption symmetricEncryption = new SymmetricEncryption(SymmetricType.Blowfish, keyString);
- *      LOGGER.info(symmetricEncryption.decryptHex(hexString,UTF8));
+ *      log.info(symmetricEncryption.decryptHex(hexString,UTF8));
  * 
  *      输出:鑫哥爱feilong
  * }
@@ -129,36 +126,34 @@ import com.feilong.security.symmetric.builder.TransformationBuilder;
  * @see #encryptHex(String, String)
  * @see #decryptHex(String, String)
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class SymmetricEncryption{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SymmetricEncryption.class);
-
     /** The symmetric type. */
     //---------------------------------------------------------------
-    private SymmetricType       symmetricType;
+    private SymmetricType symmetricType;
 
     /**
      * The key string.
      */
 
-    private String              keyString;
+    private String        keyString;
 
     /**
      * 支持设置特殊的 {@link java.security.Key} , 默认使用 {@link com.feilong.security.symmetric.builder.DefaultKeyBuilder},.
      *
      * @since 3.0.0
      */
-    private KeyBuilder          keyBuilder;
+    private KeyBuilder    keyBuilder;
 
     //---------------------------------------------------------------
 
     /** The cipher mode. */
-    private CipherMode          cipherMode;
+    private CipherMode    cipherMode;
 
     /** The cipher padding. */
-    private CipherPadding       cipherPadding;
+    private CipherPadding cipherPadding;
 
     //---------------------------------------------------------------
 
@@ -532,7 +527,7 @@ public class SymmetricEncryption{
      */
     private String buildTransformation(){
         String transformation = TransformationBuilder.build(symmetricType.getAlgorithm(), cipherMode, cipherPadding);
-        LOGGER.debug("algorithm:[{}],keyString:[{}],transformation:[{}]", symmetricType.getAlgorithm(), keyString, transformation);
+        log.debug("algorithm:[{}],keyString:[{}],transformation:[{}]", symmetricType.getAlgorithm(), keyString, transformation);
         return transformation;
     }
 

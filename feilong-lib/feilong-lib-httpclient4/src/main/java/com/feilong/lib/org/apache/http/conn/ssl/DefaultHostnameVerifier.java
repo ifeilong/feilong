@@ -50,9 +50,6 @@ import javax.net.ssl.SSLPeerUnverifiedException;
 import javax.net.ssl.SSLSession;
 import javax.security.auth.x500.X500Principal;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 import com.feilong.lib.org.apache.http.conn.util.DnsUtils;
@@ -65,6 +62,7 @@ import com.feilong.lib.org.apache.http.conn.util.PublicSuffixMatcher;
  *
  * @since 4.4
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
 public final class DefaultHostnameVerifier implements HostnameVerifier{
 
@@ -79,8 +77,6 @@ public final class DefaultHostnameVerifier implements HostnameVerifier{
         }
 
     }
-
-    private static final Logger       log = LoggerFactory.getLogger(DefaultHostnameVerifier.class);
 
     private final PublicSuffixMatcher publicSuffixMatcher;
 

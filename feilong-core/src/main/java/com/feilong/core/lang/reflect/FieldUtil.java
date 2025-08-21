@@ -30,8 +30,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.commons.collections4.Predicate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
@@ -106,10 +104,8 @@ import com.feilong.lib.lang3.reflect.FieldUtils;
  * @see "org.springframework.util.ReflectionUtils"
  * @since 1.0.7
  */
+@lombok.extern.slf4j.Slf4j
 public final class FieldUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FieldUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private FieldUtil(){
@@ -127,7 +123,7 @@ public final class FieldUtil{
      * <blockquote>
      * <ol>
      * <li>是所有字段的值(<b>不是属性</b>)</li>
-     * <li>自动过滤私有并且静态的字段,比如 LOGGER serialVersionUID</li>
+     * <li>自动过滤私有并且静态的字段,比如 log serialVersionUID</li>
      * <li>返回的map 是 TreeMap,顺序是 field name 的顺序</li>
      * </ol>
      * </blockquote>
@@ -138,7 +134,7 @@ public final class FieldUtil{
      * 
      * <pre class="code">
      * User user = new User(12L);
-     * LOGGER.debug(JsonUtil.format(FieldUtil.getAllFieldNameAndValueMap(user, "date")));
+     * log.debug(JsonUtil.format(FieldUtil.getAllFieldNameAndValueMap(user, "date")));
      * </pre>
      * 
      * <b>返回:</b>
@@ -187,7 +183,7 @@ public final class FieldUtil{
      * <blockquote>
      * <ol>
      * <li>是字段(<b>不是属性</b>)</li>
-     * <li>自动过滤私有并且静态的字段,比如 LOGGER serialVersionUID</li>
+     * <li>自动过滤私有并且静态的字段,比如 log serialVersionUID</li>
      * </ol>
      * </blockquote>
      * 
@@ -221,7 +217,7 @@ public final class FieldUtil{
             boolean isStatic = Modifier.isStatic(modifiers);
 
             String pattern = "[{}.{}],modifiers:[{}]{}";
-            LOGGER.trace(pattern, klass.getSimpleName(), field.getName(), modifiers, isStatic ? " [isStatic]" : EMPTY);
+            log.trace(pattern, klass.getSimpleName(), field.getName(), modifiers, isStatic ? " [isStatic]" : EMPTY);
             return isStatic;
         };
         return selectRejected(fieldList, PredicateUtils.orPredicate(excludeFieldPredicate, staticPredicate));

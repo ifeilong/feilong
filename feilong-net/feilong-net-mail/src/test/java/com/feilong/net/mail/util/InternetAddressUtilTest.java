@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class InternetAddressUtilTest extends AbstractTest{
 
     @Test
@@ -35,8 +36,8 @@ public class InternetAddressUtilTest extends AbstractTest{
 
         InternetAddress[] internetAddresses = toArray(internetAddress, internetAddress1);
 
-        LOGGER.debug("\n{}", internetAddress.toUnicodeString());
-        LOGGER.debug("\n{}", InternetAddress.toString(internetAddresses, 0));
+        log.debug("\n{}", internetAddress.toUnicodeString());
+        log.debug("\n{}", InternetAddress.toString(internetAddresses, 0));
     }
 
 }

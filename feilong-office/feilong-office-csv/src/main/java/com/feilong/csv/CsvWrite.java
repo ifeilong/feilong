@@ -253,7 +253,7 @@ public interface CsvWrite{
      * public void testWrite(){
      *     String path = "/home/webuser/feilong_int/johnData/${date}/feilongid_pix_demand.csv";
      *     path = path.replace("${date}", DateUtil.toString(DateUtil.addDay(now(), -1), DatePattern.COMMON_DATE));
-     *     LOGGER.info(path);
+     *     log.info(path);
      * 
      *     String[] columnTitles = { "a", "b" };
      *     List{@code <Object[]>} list = new ArrayList{@code <>}();

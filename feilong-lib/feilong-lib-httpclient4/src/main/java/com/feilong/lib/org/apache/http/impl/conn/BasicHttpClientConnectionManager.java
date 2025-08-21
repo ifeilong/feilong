@@ -34,9 +34,6 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.HttpClientConnection;
 import com.feilong.lib.org.apache.http.HttpHost;
 import com.feilong.lib.org.apache.http.annotation.Contract;
@@ -80,14 +77,9 @@ import com.feilong.lib.org.apache.http.util.LangUtils;
  *
  * @since 4.3
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.SAFE_CONDITIONAL)
 public class BasicHttpClientConnectionManager implements HttpClientConnectionManager,Closeable{
-
-    /** The Constant log. */
-    private static final Logger                                                 log = LoggerFactory
-                    .getLogger(BasicHttpClientConnectionManager.class);
-
-    //---------------------------------------------------------------
 
     private final HttpClientConnectionOperator                                  connectionOperator;
 

@@ -21,8 +21,6 @@ package com.feilong.lib.digester3;
 
 import static java.lang.String.format;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 import com.feilong.lib.beanutils.MethodUtils;
@@ -33,38 +31,34 @@ import com.feilong.lib.beanutils.MethodUtils;
  *
  * @since 3.0
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractMethodRule extends Rule{
-
-    /** The Constant log. */
-    private static final Logger LOGGER        = LoggerFactory.getLogger(AbstractMethodRule.class);
-
-    //---------------------------------------------------------------
 
     /**
      * The method name to call on the parent object.
      */
-    protected String            methodName    = null;
+    protected String   methodName    = null;
 
     /**
      * The Java class name of the parameter type expected by the method.
      */
-    protected String            paramTypeName = null;
+    protected String   paramTypeName = null;
 
     /**
      * The Java class name of the parameter type expected by the method.
      */
-    protected Class<?>          paramType;
+    protected Class<?> paramType;
 
     /**
      * Should we use exact matching. Default is no.
      */
-    protected boolean           useExactMatch = false;
+    protected boolean  useExactMatch = false;
 
     /**
      * Should this rule be invoked when {@link #begin(String, String, Attributes)} (true)
      * or {@link #end(String, String)} (false) methods are invoked, false by default.
      */
-    protected boolean           fireOnBegin   = false;
+    protected boolean  fireOnBegin   = false;
 
     /**
      * Construct a "set next" rule with the specified method name. The method's argument type is assumed to be the class
@@ -202,9 +196,9 @@ public abstract class AbstractMethodRule extends Rule{
         // Identify the objects to be used
         Object child = getChild();
         Object parent = getParent();
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             if (parent == null){
-                LOGGER.debug(
+                log.debug(
                                 format(
                                                 "[%s]{%s} Call [NULL PARENT].%s(%s)",
                                                 getClass().getSimpleName(),
@@ -212,7 +206,7 @@ public abstract class AbstractMethodRule extends Rule{
                                                 methodName,
                                                 child));
             }else{
-                LOGGER.debug(
+                log.debug(
                                 format(
                                                 "[%s]{%s} Call %s.%s(%s)",
                                                 getClass().getSimpleName(),

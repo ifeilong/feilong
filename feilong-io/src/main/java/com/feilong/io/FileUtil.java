@@ -32,9 +32,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.io.entity.FileWriteMode;
@@ -75,12 +72,8 @@ import com.feilong.lib.lang3.tuple.Pair;
  * @since 1.0.0
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@lombok.extern.slf4j.Slf4j
 public final class FileUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger            LOGGER                = LoggerFactory.getLogger(FileUtil.class);
-
-    //---------------------------------------------------------------
 
     /**
      * The number of bytes in a kilobyte.
@@ -109,10 +102,10 @@ public final class FileUtil{
 
     /** 除数和单位的map,必须是有顺序的 从大到小. */
     private static final Map<Long, String> DIVISOR_AND_UNIT_MAP  = toMapUseEntrys(
-                    Pair.of(ONE_TB, "TB"),                                                                 //(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10 ( 2 的10次方)。 
-                    Pair.of(ONE_GB, "GB"),                                                                 //(Gigabyte,吉字节,又称“千兆”)=1024MB, 
-                    Pair.of(ONE_MB, "MB"),                                                                 //(Megabyte,兆字节,简称“兆”)=1024KB, 
-                    Pair.of(ONE_KB, "KB"));                                                                //(Kilobyte 千字节)=1024B
+                    Pair.of(ONE_TB, "TB"),                                                        //(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10 ( 2 的10次方)。 
+                    Pair.of(ONE_GB, "GB"),                                                        //(Gigabyte,吉字节,又称“千兆”)=1024MB, 
+                    Pair.of(ONE_MB, "MB"),                                                        //(Megabyte,兆字节,简称“兆”)=1024KB, 
+                    Pair.of(ONE_KB, "KB"));                                                       //(Kilobyte 千字节)=1024B
 
     //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */
@@ -373,10 +366,10 @@ public final class FileUtil{
         // ubuntu 已经 测试ok
         File[] listFiles = file.listFiles();
         int fileListLength = listFiles.length;
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("file :[{}] list length:[{}]", directory, fileListLength);
+        if (log.isDebugEnabled()){
+            log.debug("file :[{}] list length:[{}]", directory, fileListLength);
             for (File tempFile : listFiles){
-                LOGGER.debug("[{}] [{}]", tempFile.getName(), tempFile.isDirectory() ? DIRECTORY : FILE);
+                log.debug("[{}] [{}]", tempFile.getName(), tempFile.isDirectory() ? DIRECTORY : FILE);
             }
         }
         return 0 == fileListLength;
@@ -461,7 +454,7 @@ public final class FileUtil{
         boolean isExists = directoryFile.exists();
         //---------------do with 存在------------------------------------------------
         if (isExists){//存在
-            LOGGER.trace("directory:[{}] exists,don't need mkdirs,nothing to do~", directoryFile);
+            log.trace("directory:[{}] exists,don't need mkdirs,nothing to do~", directoryFile);
             return;
         }
         //----------------do with 不存在-----------------------------------------------
@@ -473,7 +466,7 @@ public final class FileUtil{
         Validate.isTrue(flag, "could't create directory:[%s]", absolutePath);
 
         //创建成功 记录下日志
-        LOGGER.debug("success mkdirs:[{}]~~", absolutePath);
+        log.debug("success mkdirs:[{}]~~", absolutePath);
     }
 
     //---------------------------------------------------------------
@@ -686,8 +679,8 @@ public final class FileUtil{
      * 
      * <pre class="code">
      * 
-     * LOGGER.info(FileUtil.formatSize(8981528));
-     * LOGGER.info(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
+     * log.info(FileUtil.formatSize(8981528));
+     * log.info(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
      * 
      * </pre>
      * 

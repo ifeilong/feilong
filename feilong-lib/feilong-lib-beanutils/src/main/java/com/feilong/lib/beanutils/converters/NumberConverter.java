@@ -26,9 +26,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.ConversionException;
 
 /**
@@ -85,16 +82,12 @@ import com.feilong.lib.beanutils.ConversionException;
  * @version $Id$
  * @since 1.8.0
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class NumberConverter extends AbstractConverter{
 
-    /** The Constant log. */
-    private static final Logger  LOGGER = LoggerFactory.getLogger(NumberConverter.class);
+    private static final Integer ZERO = new Integer(0);
 
-    //---------------------------------------------------------------
-
-    private static final Integer ZERO   = new Integer(0);
-
-    private static final Integer ONE    = new Integer(1);
+    private static final Integer ONE  = new Integer(1);
 
     private String               pattern;
 
@@ -225,14 +218,14 @@ public abstract class NumberConverter extends AbstractConverter{
             final NumberFormat format = getFormat();
             format.setGroupingUsed(false);
             result = format.format(value);
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("    Converted  to String using format '" + result + "'");
+            if (log.isDebugEnabled()){
+                log.debug("    Converted  to String using format '" + result + "'");
             }
 
         }else{
             result = value.toString();
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("    Converted  to String using toString() '" + result + "'");
+            if (log.isDebugEnabled()){
+                log.debug("    Converted  to String using toString() '" + result + "'");
             }
         }
         return result;
@@ -289,8 +282,8 @@ public abstract class NumberConverter extends AbstractConverter{
             final NumberFormat format = getFormat();
             number = parse(sourceType, targetType, stringValue, format);
         }else{
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("    No NumberFormat, using default conversion");
+            if (log.isDebugEnabled()){
+                log.debug("    No NumberFormat, using default conversion");
             }
             number = toNumber(sourceType, targetType, stringValue);
         }
@@ -408,8 +401,8 @@ public abstract class NumberConverter extends AbstractConverter{
         }
 
         final String msg = toString(getClass()) + " cannot handle conversion to '" + toString(targetType) + "'";
-        if (LOGGER.isWarnEnabled()){
-            LOGGER.warn("    " + msg);
+        if (log.isWarnEnabled()){
+            log.warn("    " + msg);
         }
         throw new ConversionException(msg);
 
@@ -483,8 +476,8 @@ public abstract class NumberConverter extends AbstractConverter{
 
         final String msg = toString(getClass()) + " cannot handle conversion from '" + toString(sourceType) + "' to '"
                         + toString(targetType) + "'";
-        if (LOGGER.isWarnEnabled()){
-            LOGGER.warn("    " + msg);
+        if (log.isWarnEnabled()){
+            log.warn("    " + msg);
         }
         throw new ConversionException(msg);
     }
@@ -523,26 +516,26 @@ public abstract class NumberConverter extends AbstractConverter{
         NumberFormat format = null;
         if (pattern != null){
             if (locale == null){
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("    Using pattern '" + pattern + "'");
+                if (log.isDebugEnabled()){
+                    log.debug("    Using pattern '" + pattern + "'");
                 }
                 format = new DecimalFormat(pattern);
             }else{
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("    Using pattern '" + pattern + "'" + " with Locale[" + locale + "]");
+                if (log.isDebugEnabled()){
+                    log.debug("    Using pattern '" + pattern + "'" + " with Locale[" + locale + "]");
                 }
                 final DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
                 format = new DecimalFormat(pattern, symbols);
             }
         }else{
             if (locale == null){
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("    Using default Locale format");
+                if (log.isDebugEnabled()){
+                    log.debug("    Using default Locale format");
                 }
                 format = NumberFormat.getInstance();
             }else{
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("    Using Locale[" + locale + "] format");
+                if (log.isDebugEnabled()){
+                    log.debug("    Using Locale[" + locale + "] format");
                 }
                 format = NumberFormat.getInstance(locale);
             }
@@ -580,8 +573,8 @@ public abstract class NumberConverter extends AbstractConverter{
             if (locale != null){
                 msg += " for locale=[" + locale + "]";
             }
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("    " + msg);
+            if (log.isDebugEnabled()){
+                log.debug("    " + msg);
             }
             throw new ConversionException(msg);
         }

@@ -152,7 +152,7 @@ public class Temp extends AbstractTest{
     //     * public void name1(){
     //     *     User user = new User(1L);
     //     * 
-    //     *     LOGGER.debug(XStreamUtil.toXML(user));
+    //     *     log.debug(XStreamUtil.toXML(user));
     //     * }
     //     * </pre>
     //     * 
@@ -182,7 +182,7 @@ public class Temp extends AbstractTest{
     //     *     map.put("total_fee", "125.00");
     //     *     map.put("call_back_url", "");
     //     *     map.put("notify_url", "");
-    //     *     LOGGER.debug(XStreamUtil.toXML(map, null));
+    //     *     log.debug(XStreamUtil.toXML(map, null));
     //     * }
     //     * </pre>
     //     * 
@@ -218,7 +218,7 @@ public class Temp extends AbstractTest{
     //     * <pre class="code">
     //     * 
     //     * public void name1(){
-    //     *     LOGGER.debug(XStreamUtil.toXML(toList(new User(1L))));
+    //     *     log.debug(XStreamUtil.toXML(toList(new User(1L))));
     //     * }
     //     * </pre>
     //     * 

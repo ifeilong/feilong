@@ -17,9 +17,6 @@ package com.feilong.context;
 
 import javax.annotation.PostConstruct;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.context.log.UseTimeLogable;
 import com.feilong.core.Validate;
 
@@ -40,18 +37,14 @@ import com.feilong.core.Validate;
  *            the generic type
  * @since 1.14.3
  */
+@lombok.extern.slf4j.Slf4j
 public class ConditionableTask<T> implements Task<T>,UseTimeLogable{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConditionableTask.class);
-
-    //---------------------------------------------------------------
-
     /** 执行条件. */
-    private Condition           condition;
+    private Condition condition;
 
     /** Task. */
-    private Task<T>             task;
+    private Task<T>   task;
 
     //---------------------------------------------------------------
 
@@ -72,7 +65,7 @@ public class ConditionableTask<T> implements Task<T>,UseTimeLogable{
     public T run(){
         //如果配置了 condition,但是 {@link condition#canRun()} 为 false ,那么不会执行 {@link Job}
         if (null != condition && !condition.canRun()){
-            LOGGER.info("condition:[{}] return can't run,return null.", condition.getClass().getName());
+            log.info("condition:[{}] return can't run,return null.", condition.getClass().getName());
             return null;
         }
 
@@ -80,14 +73,14 @@ public class ConditionableTask<T> implements Task<T>,UseTimeLogable{
         //如果没有配置 condition,那么无条件执行 {@link Job}
         String taskName = task.getClass().getName();
         if (null == condition){
-            LOGGER.debug("condition is null,will execute task:[{}].", taskName);
+            log.debug("condition is null,will execute task:[{}].", taskName);
         }else{
-            LOGGER.debug("condition:[{}] can run,will execute task:[{}].", condition.getClass().getName(), taskName);
+            log.debug("condition:[{}] can run,will execute task:[{}].", condition.getClass().getName(), taskName);
         }
 
         //---------------------------------------------------------------
         T result = task.run();
-        LOGGER.debug("task:[{}] run result:[{}]", taskName, result);
+        log.debug("task:[{}] run result:[{}]", taskName, result);
 
         return result;
     }

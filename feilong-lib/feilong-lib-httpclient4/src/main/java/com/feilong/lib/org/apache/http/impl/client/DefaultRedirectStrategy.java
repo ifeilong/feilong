@@ -31,9 +31,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HttpHost;
 import com.feilong.lib.org.apache.http.HttpRequest;
@@ -70,10 +67,9 @@ import com.feilong.lib.org.apache.http.util.Asserts;
  * @see LaxRedirectStrategy
  * @since 4.1
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 public class DefaultRedirectStrategy implements RedirectStrategy{
-
-    private static final Logger                 log                   = LoggerFactory.getLogger(DefaultRedirectStrategy.class);
 
     public static final int                     SC_PERMANENT_REDIRECT = 308;
 

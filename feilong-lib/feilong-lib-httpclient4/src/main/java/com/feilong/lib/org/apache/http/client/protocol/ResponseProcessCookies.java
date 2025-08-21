@@ -30,9 +30,6 @@ package com.feilong.lib.org.apache.http.client.protocol;
 import java.io.IOException;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HeaderIterator;
 import com.feilong.lib.org.apache.http.HttpException;
@@ -55,10 +52,9 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 public class ResponseProcessCookies implements HttpResponseInterceptor{
-
-    private static final Logger log = LoggerFactory.getLogger(ResponseProcessCookies.class);
 
     public ResponseProcessCookies(){
         super();

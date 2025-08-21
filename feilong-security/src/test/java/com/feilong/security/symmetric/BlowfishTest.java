@@ -30,6 +30,7 @@ import com.feilong.security.EncryptionException;
  * @version 1.0.7 2014年6月5日 下午3:55:06
  * @since 1.0.7
  */
+@lombok.extern.slf4j.Slf4j
 public class BlowfishTest extends AbstractSecurityTest{
 
     /** The Constant SYMMETRIC_TYPE. */
@@ -44,7 +45,7 @@ public class BlowfishTest extends AbstractSecurityTest{
     @Test
     public void blowfishEncryptHex(){
         String encryptHex = SYMMETRIC_ENCRYPTION.encryptHex(testString, UTF8);
-        LOGGER.debug("SymmetricType.Blowfish:{}", encryptHex);
+        log.debug("SymmetricType.Blowfish:{}", encryptHex);
         assertEquals("055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6", encryptHex);
         // 055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6
     }
@@ -61,7 +62,7 @@ public class BlowfishTest extends AbstractSecurityTest{
     public void blowfishDecryptHex(){
         String hexString = "055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6";
         String decryptHex = SYMMETRIC_ENCRYPTION.decryptHex(hexString, UTF8);
-        LOGGER.debug(decryptHex);
+        log.debug(decryptHex);
     }
 
     /**
@@ -76,6 +77,6 @@ public class BlowfishTest extends AbstractSecurityTest{
     public void encryptToHexString(){
         String original = testString;
         String base64 = SYMMETRIC_ENCRYPTION.encryptHex(original, UTF8);
-        LOGGER.debug(base64);
+        log.debug(base64);
     }
 }

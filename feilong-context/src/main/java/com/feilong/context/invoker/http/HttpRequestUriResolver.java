@@ -19,9 +19,6 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
@@ -34,10 +31,8 @@ import com.feilong.template.TemplateUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.9
  */
+@lombok.extern.slf4j.Slf4j
 class HttpRequestUriResolver{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpRequestUriResolver.class);
 
     /** Don't let anyone instantiate this class. */
     private HttpRequestUriResolver(){
@@ -83,8 +78,8 @@ class HttpRequestUriResolver{
 
         //---------------------------------------------------------------
         String result = parse(uri, request);
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("parseUri:[{}],request:[{}],result:[{}]", uri, JsonUtil.toString(request), result);
+        if (log.isDebugEnabled()){
+            log.debug("parseUri:[{}],request:[{}],result:[{}]", uri, JsonUtil.toString(request), result);
         }
         return result;
     }
@@ -148,8 +143,8 @@ class HttpRequestUriResolver{
 
         String result = TemplateUtil.parseString(uri, templateParams);
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("parseTemplateUri:[{}],useTemplateParams:[{}],result:[{}]", uri, JsonUtil.formatSimpleMap(templateParams), result);
+        if (log.isDebugEnabled()){
+            log.debug("parseTemplateUri:[{}],useTemplateParams:[{}],result:[{}]", uri, JsonUtil.formatSimpleMap(templateParams), result);
         }
         return result;
     }

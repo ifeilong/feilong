@@ -18,9 +18,6 @@ package com.feilong.core.lang.reflect;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
@@ -75,10 +72,8 @@ import com.feilong.core.lang.ClassUtil;
  * @since 1.0.8
  * @since jdk 1.5
  */
+@lombok.extern.slf4j.Slf4j
 public final class TypeUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(TypeUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private TypeUtil(){
@@ -244,8 +239,8 @@ public final class TypeUtil{
     private static Class<?>[] extractActualTypeArgumentClassArray(ParameterizedType parameterizedType){
         //com.feilong.core.lang.reflect.typeutil.BaseSolrRepositorySecondImpl<com.feilong.core.lang.reflect.typeutil.SkuItem, com.feilong.core.lang.reflect.typeutil.SkuItem3<java.lang.Long>>
         Validate.notNull(parameterizedType, "parameterizedType can't be null/empty!");
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("parameterizedType info:[{}]", parameterizedType);
+        if (log.isTraceEnabled()){
+            log.trace("parameterizedType info:[{}]", parameterizedType);
         }
 
         //---------------------------------------------------------------
@@ -253,8 +248,8 @@ public final class TypeUtil{
         Validate.notNull(actualTypeArguments, "actualTypeArguments can't be null/empty!");
 
         //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("actualTypeArguments:[{}]", ConvertUtil.toString(actualTypeArguments, ToStringConfig.DEFAULT_CONNECTOR));
+        if (log.isTraceEnabled()){
+            log.trace("actualTypeArguments:[{}]", ConvertUtil.toString(actualTypeArguments, ToStringConfig.DEFAULT_CONNECTOR));
         }
         return toClassArray(actualTypeArguments);
     }

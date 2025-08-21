@@ -35,8 +35,6 @@ import org.ietf.jgss.GSSException;
 import org.ietf.jgss.GSSManager;
 import org.ietf.jgss.GSSName;
 import org.ietf.jgss.Oid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.codec.binary.Base64;
 import com.feilong.lib.org.apache.http.Header;
@@ -58,28 +56,24 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
 /**
  * @since 4.2
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class GGSSchemeBase extends AuthSchemeBase{
 
     enum State{
         UNINITIATED, CHALLENGE_RECEIVED, TOKEN_GENERATED, FAILED,
     }
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(GGSSchemeBase.class);
+    private final Base64  base64codec;
 
-    //---------------------------------------------------------------
+    private final boolean stripPort;
 
-    private final Base64        base64codec;
-
-    private final boolean       stripPort;
-
-    private final boolean       useCanonicalHostname;
+    private final boolean useCanonicalHostname;
 
     /** Authentication process state */
-    private State               state;
+    private State         state;
 
     /** base64 decoded challenge **/
-    private byte[]              token;
+    private byte[]        token;
 
     GGSSchemeBase(final boolean stripPort, final boolean useCanonicalHostname){
         super();

@@ -26,6 +26,7 @@ import org.junit.Test;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 
+@lombok.extern.slf4j.Slf4j
 public class ToXmlMapIsPrintTest extends AbstractTest{
 
     @Test
@@ -62,7 +63,7 @@ public class ToXmlMapIsPrintTest extends AbstractTest{
 
         //  toXmlConfig.setHierarchicalStreamDriver(new DomJDriver());
 
-        LOGGER.debug(XmlUtil.toXML(map, toXmlConfig));
+        log.debug(XmlUtil.toXML(map, toXmlConfig));
     }
 
     @Test
@@ -105,6 +106,6 @@ public class ToXmlMapIsPrintTest extends AbstractTest{
         map.put("call_back_url", "");
         map.put("notify_url", toMap("name", "name"));
 
-        LOGGER.debug(XmlUtil.toXML(map, "xml"));
+        log.debug(XmlUtil.toXML(map, "xml"));
     }
 }

@@ -15,8 +15,6 @@
  */
 package com.feilong.namespace;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.parsing.BeanComponentDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -29,10 +27,8 @@ import org.springframework.beans.factory.xml.ParserContext;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public class RuntimeBeanReferenceBuilder{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(RuntimeBeanReferenceBuilder.class);
 
     /** Don't let anyone instantiate this class. */
     private RuntimeBeanReferenceBuilder(){
@@ -57,7 +53,7 @@ public class RuntimeBeanReferenceBuilder{
         String beanName = parserContext.getReaderContext().generateBeanName(beanDefinition);
 
         //---------------------------------------------------------------
-        LOGGER.debug("generateBeanName:[{}]", beanName);
+        log.debug("generateBeanName:[{}]", beanName);
         //---------------------------------------------------------------
         parserContext.registerBeanComponent(new BeanComponentDefinition(beanDefinition, beanName));
 

@@ -23,9 +23,6 @@ import static com.feilong.core.util.CollectionsUtil.getPropertyValueList;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.csv.entity.BeanCsvConfig;
@@ -152,10 +149,8 @@ import com.feilong.io.IOWriteUtil;
  * @since 1.0.0
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@lombok.extern.slf4j.Slf4j
 public class DefaultCsvWrite implements CsvWrite{
-
-    /** The Constant log. */
-    private static final Logger    LOGGER             = LoggerFactory.getLogger(DefaultCsvWrite.class);
 
     /** The Constant DEFAULT_CSV_CONFIG. */
     private static final CsvConfig DEFAULT_CSV_CONFIG = new CsvConfig();
@@ -233,7 +228,7 @@ public class DefaultCsvWrite implements CsvWrite{
         }
 
         //---------------------------------------------------------------
-        LOGGER.info("begin write file:[{}]", fileName);
+        log.info("begin write file:[{}]", fileName);
 
         String content = CsvContentBuilder.build(allLines, useCsvConfig);
         IOWriteUtil.writeStringToFile(fileName, content, useCsvConfig.getEncode());

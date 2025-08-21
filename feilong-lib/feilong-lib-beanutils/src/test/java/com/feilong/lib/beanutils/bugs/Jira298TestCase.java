@@ -18,9 +18,6 @@ package com.feilong.lib.beanutils.bugs;
 
 import java.lang.reflect.Method;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.MethodUtils;
 import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.beanutils.bugs.other.Jira298BeanFactory;
@@ -34,10 +31,8 @@ import junit.framework.TestSuite;
  * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-298">https://issues.apache.org/jira/browse/BEANUTILS-298</a>
  */
+@lombok.extern.slf4j.Slf4j
 public class Jira298TestCase extends TestCase{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Jira298TestCase.class);
 
     /**
      * Create a test case with the specified name.
@@ -97,7 +92,7 @@ public class Jira298TestCase extends TestCase{
         try{
             result = PropertyUtils.getProperty(bean, "name");
         }catch (final Throwable t){
-            LOGGER.error("Failed: " + t.getMessage(), t);
+            log.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
         assertEquals("BaseX name value", result);
@@ -112,7 +107,7 @@ public class Jira298TestCase extends TestCase{
         try{
             PropertyUtils.setProperty(bean, "name", "new name");
         }catch (final Throwable t){
-            LOGGER.error("Failed: " + t.getMessage(), t);
+            log.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
         assertEquals("new name", ((IX) bean).getName());
@@ -128,7 +123,7 @@ public class Jira298TestCase extends TestCase{
             final Method m2 = MethodUtils.getAccessibleMethod(bean.getClass(), "getName", new Class[0]);
             result = m2.invoke(bean);
         }catch (final Throwable t){
-            LOGGER.error("Failed: " + t.getMessage(), t);
+            log.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
         assertEquals("BaseX name value", result);

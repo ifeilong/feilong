@@ -10,6 +10,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.naming.NoNameCoder;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+@lombok.extern.slf4j.Slf4j
 public class XstreamTempTest extends AbstractTest{
 
     @Test
@@ -22,10 +23,10 @@ public class XstreamTempTest extends AbstractTest{
         requestTest.setReqTime("2013-09-22 00:00:00");
 
         String request = objectToXml(requestTest);
-        LOGGER.debug(request);
+        log.debug(request);
 
         Response responseTest = XmlUtil.toBean(request, Response.class);
-        LOGGER.debug("" + responseTest);
+        log.debug("" + responseTest);
     }
 
     /**

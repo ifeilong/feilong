@@ -48,8 +48,8 @@ public final class Slf4jUtil{
      * </p>
      * 
      * <ul>
-     * <li>LOGGER.debug("{}","feilong");</li>
-     * <li>LOGGER.info("{},{}","feilong","hello");</li>
+     * <li>log.debug("{}","feilong");</li>
+     * <li>log.info("{},{}","feilong","hello");</li>
      * </ul>
      * 
      * 这些写法非常简洁且有效,不易出错

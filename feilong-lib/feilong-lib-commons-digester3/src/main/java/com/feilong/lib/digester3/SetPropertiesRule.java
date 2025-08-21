@@ -24,28 +24,22 @@ import static java.lang.String.format;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 import com.feilong.lib.beanutils.BeanUtils;
 import com.feilong.lib.beanutils.PropertyUtils;
 
 /**
- * <p>
  * Rule implementation that sets properties on the object at the top of the stack, based on attributes with
  * corresponding names.
- * </p>
  * <p>
  * This rule supports custom mapping of attribute names to property names. The default mapping for particular attributes
  * can be overridden by using {@link #SetPropertiesRule(String[] attributeNames, String[] propertyNames)}. This allows
  * attributes to be mapped to properties with different names. Certain attributes can also be marked to be ignored.
  * </p>
  */
+@lombok.extern.slf4j.Slf4j
 public class SetPropertiesRule extends Rule{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SetPropertiesRule.class);
 
     // ----------------------------------------------------------- Constructors
 
@@ -167,8 +161,8 @@ public class SetPropertiesRule extends Rule{
                 attributeName = aliases.get(attributeName);
             }
 
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(
+            if (log.isDebugEnabled()){
+                log.debug(
                                 format(
                                                 "[SetPropertiesRule]{%s} Setting property '%s' to '%s'",
                                                 getDigester().getMatch(),
@@ -210,11 +204,11 @@ public class SetPropertiesRule extends Rule{
 
         // Populate the corresponding properties of the top object
         Object top = getDigester().peek();
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             if (top != null){
-                LOGGER.debug(format("[SetPropertiesRule]{%s} Set '%s' properties", getDigester().getMatch(), top.getClass().getName()));
+                log.debug(format("[SetPropertiesRule]{%s} Set '%s' properties", getDigester().getMatch(), top.getClass().getName()));
             }else{
-                LOGGER.debug(format("[SetPropertiesRule]{%s} Set NULL properties", getDigester().getMatch()));
+                log.debug(format("[SetPropertiesRule]{%s} Set NULL properties", getDigester().getMatch()));
             }
         }
         BeanUtils.populate(top, values);

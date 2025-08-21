@@ -17,9 +17,6 @@ package com.feilong.context;
 
 import javax.annotation.PostConstruct;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 
@@ -31,12 +28,8 @@ import com.feilong.core.bean.ConvertUtil;
  *            the value type
  * @since 2.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public class SimpleParamNameValueLoader<V> implements ValueLoader<V>{
-
-    /** The Constant log. */
-    private static final Logger       LOGGER             = LoggerFactory.getLogger(SimpleParamNameValueLoader.class);
-
-    //---------------------------------------------------------------
 
     /** 参数名字. */
     private String                    paramName;
@@ -94,13 +87,13 @@ public class SimpleParamNameValueLoader<V> implements ValueLoader<V>{
     private V doWithLoadValue(V value){
         String valueClassName = value.getClass().getName();
         if (null == targetTypeClass){
-            LOGGER.debug("when param:[{}],return value:[{}],type:[{}],no config targetTypeClass", paramName, value, valueClassName);
+            log.debug("when param:[{}],return value:[{}],type:[{}],no config targetTypeClass", paramName, value, valueClassName);
             return value;
         }
 
         //---------------------------------------------------------------
         V convertResult = ConvertUtil.convert(value, targetTypeClass);
-        LOGGER.debug(
+        log.debug(
                         "when param:[{}],load value:[{}],type:[{}],convert to:[{}],return:[{}]",
                         paramName,
                         value,
@@ -120,19 +113,19 @@ public class SimpleParamNameValueLoader<V> implements ValueLoader<V>{
      */
     private V doWithDefaultValue(){
         if (null == ifNullDefaultValue){
-            LOGGER.debug("when param:[{}],load value is null,return defaultValue null", paramName);
+            log.debug("when param:[{}],load value is null,return defaultValue null", paramName);
             return null;
         }
 
         //---------------------------------------------------------------
         if (null == targetTypeClass){
-            LOGGER.debug("when param:[{}],load value is null,return defaultValue:[{}]", paramName, ifNullDefaultValue);
+            log.debug("when param:[{}],load value is null,return defaultValue:[{}]", paramName, ifNullDefaultValue);
             return ifNullDefaultValue;
         }
 
         //---------------------------------------------------------------
         V convertResult = ConvertUtil.convert(ifNullDefaultValue, targetTypeClass);
-        LOGGER.debug(
+        log.debug(
                         "when param:[{}],load value is null,use targetTypeClass:[{}],return defaultValue:[{}]",
                         paramName,
                         targetTypeClass.getName(),

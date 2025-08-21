@@ -21,8 +21,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.util.CellReferenceUtil;
 
@@ -32,10 +30,8 @@ import com.feilong.excel.util.CellReferenceUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 class CellValueGetter{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CellValueGetter.class);
 
     /** Don't let anyone instantiate this class. */
     private CellValueGetter(){
@@ -63,8 +59,8 @@ class CellValueGetter{
         Object value = null;
         CellValue cellValue = formulaEvaluator.evaluate(cell);
         if (cellValue == null){
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("{}: null", getCellRef(cell.getRowIndex(), cell.getColumnIndex()));
+            if (log.isTraceEnabled()){
+                log.trace("{}: null", getCellRef(cell.getRowIndex(), cell.getColumnIndex()));
             }
             return null;
         }
@@ -92,8 +88,8 @@ class CellValueGetter{
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("{}: {}", CellReferenceUtil.getCellRef(cell.getRowIndex(), cell.getColumnIndex()), value);
+        if (log.isTraceEnabled()){
+            log.trace("{}: {}", CellReferenceUtil.getCellRef(cell.getRowIndex(), cell.getColumnIndex()), value);
         }
 
         return value;

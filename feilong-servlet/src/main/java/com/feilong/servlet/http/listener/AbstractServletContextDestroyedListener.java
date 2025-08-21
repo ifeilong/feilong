@@ -20,21 +20,14 @@ import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 只需要实现 {@link ServletContextListener#contextDestroyed} 方法的 {@link ServletContextListener}.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.3
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractServletContextDestroyedListener implements ServletContextListener{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractServletContextDestroyedListener.class);
-
-    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -65,8 +58,8 @@ public abstract class AbstractServletContextDestroyedListener implements Servlet
 
         destroyed(servletContextEvent);
 
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("[{}] destroyed use time: [{}]", getClass().getName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
+        if (log.isInfoEnabled()){
+            log.info("[{}] destroyed use time: [{}]", getClass().getName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 

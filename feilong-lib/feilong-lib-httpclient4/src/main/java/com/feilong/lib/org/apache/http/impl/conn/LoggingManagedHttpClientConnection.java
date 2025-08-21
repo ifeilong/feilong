@@ -34,9 +34,6 @@ import java.net.Socket;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HttpRequest;
 import com.feilong.lib.org.apache.http.HttpResponse;
@@ -45,12 +42,10 @@ import com.feilong.lib.org.apache.http.entity.ContentLengthStrategy;
 import com.feilong.lib.org.apache.http.io.HttpMessageParserFactory;
 import com.feilong.lib.org.apache.http.io.HttpMessageWriterFactory;
 
+@lombok.extern.slf4j.Slf4j
 class LoggingManagedHttpClientConnection extends DefaultManagedHttpClientConnection{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(LoggingManagedHttpClientConnection.class);
-
-    private final Wire          wire;
+    private final Wire wire;
 
     public LoggingManagedHttpClientConnection(final String id, final int bufferSize, final int fragmentSizeHint,
                     final CharsetDecoder charDecoder, final CharsetEncoder charEncoder, final MessageConstraints constraints,

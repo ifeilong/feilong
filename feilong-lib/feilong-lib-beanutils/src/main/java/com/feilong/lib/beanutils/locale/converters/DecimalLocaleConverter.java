@@ -22,29 +22,22 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.locale.BaseLocaleConverter;
 
 /**
- * <p>
  * Standard {@link com.feilong.lib.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
  * locale-sensitive String into a <code>java.lang.Number</code> object,
  * optionally using a default value or throwing a
  * {@link com.feilong.lib.beanutils.ConversionException}
  * if a conversion error occurs.
- * </p>
  *
  * @since 1.7
  * @version $Id$
  */
 
+@lombok.extern.slf4j.Slf4j
 public class DecimalLocaleConverter extends BaseLocaleConverter{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DecimalLocaleConverter.class);
 
     // ----------------------------------------------------- Instance Variables
 
@@ -277,7 +270,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter{
                 formatter.applyPattern(pattern);
             }
         }else{
-            LOGGER.debug("No pattern provided, using default.");
+            log.debug("No pattern provided, using default.");
         }
 
         return formatter.parse((String) value);

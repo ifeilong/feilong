@@ -15,9 +15,6 @@
  */
 package com.feilong.context.signer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
@@ -25,7 +22,6 @@ import org.slf4j.LoggerFactory;
  */
 public class SignUtilTest2{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SignUtilTest2.class);
     //
     //    /**
     //     * Generate uppercase MD 5 sign.
@@ -60,8 +56,8 @@ public class SignUtilTest2{
     //
     //        //---------------------------------------------------------------
     //        String upperCaseMD5Sign = MD5Util.encode(toBeSignString).toUpperCase();
-    //        if (LOGGER.isDebugEnabled()){
-    //            LOGGER.debug(DefaultMapSigner.signLog(counterAtomic, "md5结果: {}", upperCaseMD5Sign));
+    //        if (log.isDebugEnabled()){
+    //            log.debug(DefaultMapSigner.signLog(counterAtomic, "md5结果: {}", upperCaseMD5Sign));
     //        }
     //        return upperCaseMD5Sign;
     //    }

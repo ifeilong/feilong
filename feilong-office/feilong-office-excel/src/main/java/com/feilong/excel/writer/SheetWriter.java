@@ -29,18 +29,14 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.excel.ognl.OgnlStack;
 
+@lombok.extern.slf4j.Slf4j
 class SheetWriter{
-
-    /** The Constant log. */
-    private static final Logger LOGGER     = LoggerFactory.getLogger(SheetWriter.class);
 
     private static final String SHEET_NAME = "sheetName";
     //---------------------------------------------------------------
@@ -67,8 +63,8 @@ class SheetWriter{
             write(sheet, excelSheet, excelBlock, styleMap, mergedRegionsMap, ognlStack);
         }
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("writeSheet:[{}], use time: [{}]", excelSheet.getName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
+        if (log.isDebugEnabled()){
+            log.debug("writeSheet:[{}], use time: [{}]", excelSheet.getName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 
@@ -80,8 +76,8 @@ class SheetWriter{
                     Map<String, CellStyle> styleMap,
                     Map<ExcelBlock, List<CellRangeAddress>> mergedRegionsMap,
                     OgnlStack ognlStack){
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("excelBlock:{}", JsonUtil.toString(excelBlock));
+        if (log.isDebugEnabled()){
+            log.debug("excelBlock:{}", JsonUtil.toString(excelBlock));
         }
         //---------------------------------------------------------------
         long beginTimeMillis = System.currentTimeMillis();
@@ -98,9 +94,9 @@ class SheetWriter{
             BlockSimpleWriter.write(sheet, excelBlock, ognlStack, styleMap);
         }
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             String pattern = "write sheet block:[{}]-[{}], use time: [{}]";
-            LOGGER.debug(pattern, excelSheet.getName(), excelBlock.getDataName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.debug(pattern, excelSheet.getName(), excelBlock.getDataName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 
@@ -117,8 +113,8 @@ class SheetWriter{
             int lastColumn = cellRangeAddress.getLastColumn();
 
             //---------------------------------------------------------------
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("Merged Region:[{}-{}]", getCellRef(firstRow, firstColumn), getCellRef(lastRow, lastColumn));
+            if (log.isTraceEnabled()){
+                log.trace("Merged Region:[{}-{}]", getCellRef(firstRow, firstColumn), getCellRef(lastRow, lastColumn));
             }
 
             //---------------------------------------------------------------
@@ -147,7 +143,7 @@ class SheetWriter{
             Workbook workbook = sheet.getWorkbook();
             int sheetIndex = workbook.getSheetIndex(sheet);
 
-            LOGGER.debug("set workbook sheet:[{}] name:[{}]", sheetIndex, sheetName);
+            log.debug("set workbook sheet:[{}] name:[{}]", sheetIndex, sheetName);
             workbook.setSheetName(sheetIndex, sheetName);
         }
     }
@@ -158,7 +154,7 @@ class SheetWriter{
                         EMPTY);
         String sheetDisplayName = excelSheet.getDisplayName();
 
-        LOGGER.debug("excelSheet DisplayName:[{}],stack value:[{}]", sheetDisplayName, sheetNameStack);
+        log.debug("excelSheet DisplayName:[{}],stack value:[{}]", sheetDisplayName, sheetNameStack);
         return defaultIfNullOrEmpty(sheetNameStack, sheetDisplayName);
     }
 }

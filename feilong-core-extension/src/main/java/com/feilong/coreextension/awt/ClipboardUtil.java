@@ -25,19 +25,14 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Reader;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 操作剪切板 {@link java.awt.datatransfer.Clipboard}.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public final class ClipboardUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClipboardUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ClipboardUtil(){
@@ -65,7 +60,7 @@ public final class ClipboardUtil{
         ClipboardOwner clipboardOwner = null;
         clipboard.setContents(transferable, clipboardOwner);
 
-        LOGGER.debug("Clipboard setContents over,clipboardOwner[null]");
+        log.debug("Clipboard setContents over,clipboardOwner[null]");
     }
 
     //---------------------------------------------------------------

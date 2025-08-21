@@ -41,9 +41,6 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
@@ -201,11 +198,9 @@ import com.feilong.lib.collection4.MapUtils;
  * @see "com.google.common.collect.Maps"
  * @since 1.0.0
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class MapUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(MapUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private MapUtil(){
@@ -321,7 +316,7 @@ public final class MapUtil{
      *     Map{@code <String, String>} bookSectionUrlMap = parseBookSectionUrlMap(novel);
      * 
      *     if (isNullOrEmpty(bookSectionUrlMap)){
-     *         LOGGER.warn("bookSectionUrlMap is null/empty,Perhaps you read the latest chapter");
+     *         log.warn("bookSectionUrlMap is null/empty,Perhaps you read the latest chapter");
      *         return;
      *     }
      * 
@@ -362,7 +357,7 @@ public final class MapUtil{
      *     Map{@code <String, String>} bookSectionUrlMap = parseBookSectionUrlMap(novel);
      * 
      *     if (isNullOrEmpty(bookSectionUrlMap)){
-     *         LOGGER.warn("bookSectionUrlMap is null/empty,Perhaps you read the latest chapter");
+     *         log.warn("bookSectionUrlMap is null/empty,Perhaps you read the latest chapter");
      *         return;
      *     }
      * 
@@ -553,7 +548,7 @@ public final class MapUtil{
      * 
      * arrayValueMap.put("province", new String[] { "江苏省" });
      * arrayValueMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(arrayValueMap)));
+     * log.info(JsonUtil.format(ParamUtil.toSingleValueMap(arrayValueMap)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -579,7 +574,7 @@ public final class MapUtil{
      * 
      * arrayValueMap.put("province", new String[] { "浙江省", "江苏省" });
      * arrayValueMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(arrayValueMap)));
+     * log.info(JsonUtil.format(ParamUtil.toSingleValueMap(arrayValueMap)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -636,7 +631,7 @@ public final class MapUtil{
      * singleValueMap.put("province", "江苏省");
      * singleValueMap.put("city", "南通市");
      * 
-     * LOGGER.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap)));
+     * log.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -682,7 +677,7 @@ public final class MapUtil{
      * singleValueMap.put("province", "江苏省");
      * singleValueMap.put("city", "南通市");
      * 
-     * LOGGER.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap,String.class)));
+     * log.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap,String.class)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -880,7 +875,7 @@ public final class MapUtil{
      * MapUtil.putSumValue(map, "1000001", 5);
      * MapUtil.putSumValue(map, "1000002", 5);
      * MapUtil.putSumValue(map, "1000002", 5);
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * 
      * </pre>
      * 
@@ -963,7 +958,7 @@ public final class MapUtil{
      * MapUtil.putSumValue(map, "1000001", 5);
      * MapUtil.putSumValue(map, "1000002", 5);
      * MapUtil.putSumValue(map, "1000002", 5);
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * 
      * </pre>
      * 
@@ -1084,7 +1079,7 @@ public final class MapUtil{
      * MapUtil.putMultiValue(mutiMap, "name", "关羽");
      * MapUtil.putMultiValue(mutiMap, "age", "30");
      * 
-     * LOGGER.debug(JsonUtil.format(mutiMap));
+     * log.debug(JsonUtil.format(mutiMap));
      * 
      * </pre>
      * 
@@ -1183,7 +1178,7 @@ public final class MapUtil{
      * map.put("b", 3001);
      * map.put("c", 3001);
      * map.put("d", 3003);
-     * LOGGER.debug(JsonUtil.format(MapUtil.getSubMap(map, "a", "c")));
+     * log.debug(JsonUtil.format(MapUtil.getSubMap(map, "a", "c")));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1238,7 +1233,7 @@ public final class MapUtil{
      * map.put("b", 3001);
      * map.put("c", 3001);
      * map.put("d", 3003);
-     * LOGGER.debug(JsonUtil.format(MapUtil.getSubMap(map,toList("a", "c"))));
+     * log.debug(JsonUtil.format(MapUtil.getSubMap(map,toList("a", "c"))));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1280,7 +1275,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 returnMap.put(key, map.get(key));
             }else{
-                LOGGER.debug("mapDon'tContainsKey:[{}],butHasKeys:{}", key, map.keySet());
+                log.debug("mapDon'tContainsKey:[{}],butHasKeys:{}", key, map.keySet());
             }
         }
         return returnMap;
@@ -1312,7 +1307,7 @@ public final class MapUtil{
      * map.put("c", 3002);
      * map.put("g", -1005);
      * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.getSubMapExcludeKeys(map, "a", "g", "m")));
+     * log.debug(JsonUtil.format(MapUtil.getSubMapExcludeKeys(map, "a", "g", "m")));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1372,7 +1367,7 @@ public final class MapUtil{
      * map.put("c", 3002);
      * map.put("g", -1005);
      * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.getSubMapExcludeKeys(map, toList("a", "g", "m"))));
+     * log.debug(JsonUtil.format(MapUtil.getSubMapExcludeKeys(map, toList("a", "g", "m"))));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1458,7 +1453,7 @@ public final class MapUtil{
      * map.put("age", "18");
      * map.put("country", "china");
      * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.removeKeys(map, "country")));
+     * log.debug(JsonUtil.format(MapUtil.removeKeys(map, "country")));
      * 
      * </pre>
      * 
@@ -1502,7 +1497,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 map.remove(key);
             }else{
-                LOGGER.debug("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
+                log.debug("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
             }
         }
         return map;
@@ -1544,7 +1539,7 @@ public final class MapUtil{
      * map.put("age", "18");
      * map.put("country", "china");
      * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.removeKeys(map, toList("country"))));
+     * log.debug(JsonUtil.format(MapUtil.removeKeys(map, toList("country"))));
      * 
      * </pre>
      * 
@@ -1587,7 +1582,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 map.remove(key);
             }else{
-                LOGGER.debug("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
+                log.debug("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
             }
         }
         return map;
@@ -1613,7 +1608,7 @@ public final class MapUtil{
      * map.put("b", 3001);
      * map.put("c", 3001);
      * map.put("d", 3003);
-     * LOGGER.debug(JsonUtil.format(MapUtil.invertMap(map)));
+     * log.debug(JsonUtil.format(MapUtil.invertMap(map)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1764,7 +1759,7 @@ public final class MapUtil{
      * map.put(5L, new User(500L));
      * map.put(4L, new User(400L));
      * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id")));
+     * log.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id")));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1826,7 +1821,7 @@ public final class MapUtil{
      * map.put(4L, new User(400L));
      * 
      * Long[] includeKeys = { 5L, 4L };
-     * LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id")));
+     * log.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id")));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1900,7 +1895,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 returnMap.put(key, PropertyUtil.<V> getProperty(map.get(key), extractPropertyName));
             }else{
-                LOGGER.warn("map:[{}] don't contains key:[{}]", map.keySet(), key);
+                log.warn("map:[{}] don't contains key:[{}]", map.keySet(), key);
             }
         }
         return returnMap;

@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class HttpClientUtilUriSpaceTest extends AbstractTest{
 
     @Test
@@ -27,7 +28,7 @@ public class HttpClientUtilUriSpaceTest extends AbstractTest{
         String uri = "https://www.baidu.com/item/BA8 900";
         HttpClientUtil.get(uri);
 
-        LOGGER.info("get over");
+        log.info("get over");
     }
 
     @Test
@@ -39,6 +40,6 @@ public class HttpClientUtilUriSpaceTest extends AbstractTest{
         httpRequest.setLogTraceContext("feilong");
         HttpClientUtil.getHttpResponse(httpRequest);
 
-        LOGGER.info("get over");
+        log.info("get over");
     }
 }

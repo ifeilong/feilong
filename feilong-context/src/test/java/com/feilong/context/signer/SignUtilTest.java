@@ -15,17 +15,12 @@
  */
 package com.feilong.context.signer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 4.0.8
  */
 public class SignUtilTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SignUtilTest.class);
 
     //    Map<String, String>         map    = toMap("name", "feilong", "age", "18");
     //
@@ -35,22 +30,22 @@ public class SignUtilTest{
     //
     //    @Test
     //    public void test(){
-    //        LOGGER.info(SignUtilTest2.generateUppercaseMD5Sign(map));
+    //        log.info(SignUtilTest2.generateUppercaseMD5Sign(map));
     //    }
     //
     //    @Test
     //    public void test2(){
-    //        LOGGER.info(SignUtilTest2.generateUppercaseMD5Sign(map, "key", "88776655aa"));
+    //        log.info(SignUtilTest2.generateUppercaseMD5Sign(map, "key", "88776655aa"));
     //    }
     //
     //    @Test
     //    public void test23(){
-    //        LOGGER.info(SignUtilTest2.generateUppercaseMD5Sign(map, "", "88776655aa"));
+    //        log.info(SignUtilTest2.generateUppercaseMD5Sign(map, "", "88776655aa"));
     //    }
     //
     //    @Test
     //    public void test2322(){
-    //        LOGGER.info(SignUtilTest2.generateUppercaseMD5Sign(map, null, "88776655aa"));
+    //        log.info(SignUtilTest2.generateUppercaseMD5Sign(map, null, "88776655aa"));
     //    }
     //
     //    @Test(expected = NullPointerException.class)

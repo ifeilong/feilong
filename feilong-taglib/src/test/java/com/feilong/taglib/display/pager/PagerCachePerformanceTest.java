@@ -31,6 +31,7 @@ import com.feilong.test.AbstractTest;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.7
  */
+@lombok.extern.slf4j.Slf4j
 public class PagerCachePerformanceTest extends AbstractTest{
 
     /**
@@ -69,6 +70,6 @@ public class PagerCachePerformanceTest extends AbstractTest{
         // 快要计算的时,再清理一次
         System.gc();
         long end = Runtime.getRuntime().freeMemory();
-        LOGGER.debug("一个HashMap对象占内存:" + FileUtil.formatSize((end - start)));
+        log.debug("一个HashMap对象占内存:" + FileUtil.formatSize((end - start)));
     }
 }

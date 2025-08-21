@@ -24,8 +24,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 import com.feilong.core.Validate;
@@ -38,12 +36,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 class FeilongDocumentBuilder{
-
-    /** The Constant log. */
-    private static final Logger          LOGGER                  = LoggerFactory.getLogger(FeilongDocumentBuilder.class);
-
-    //---------------------------------------------------------------
 
     /** Static instance. */
     // the static instance works for all types
@@ -89,7 +83,7 @@ class FeilongDocumentBuilder{
                     return DEFAULT_DOCUMENTBUILDER.parse(inputStream);
                 }
                 //---------------------------------------------------------------
-                LOGGER.debug("will parse use uri:[{}] for document", xmlString);
+                log.debug("will parse use uri:[{}] for document", xmlString);
                 //uri style 注意这里是  xmlFileUriString
                 return DEFAULT_DOCUMENTBUILDER.parse(xmlString);
             }

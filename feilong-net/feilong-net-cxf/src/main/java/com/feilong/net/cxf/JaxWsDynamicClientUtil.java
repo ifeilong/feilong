@@ -24,8 +24,6 @@ import javax.net.ssl.HttpsURLConnection;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.endpoint.dynamic.DynamicClientFactory;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
@@ -58,10 +56,8 @@ import com.feilong.net.UriProcessor;
  *      unable to find valid certification path to requested target</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public class JaxWsDynamicClientUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JaxWsDynamicClientUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private JaxWsDynamicClientUtil(){
@@ -145,9 +141,9 @@ public class JaxWsDynamicClientUtil{
         //since 3.0.10
         wsdlUrl = UriProcessor.process(wsdlUrl, true);
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             Map<String, Object> traceMap = getTraceMapForLog(wsdlUrl, operationName, params);
-            LOGGER.info("will call webservice,input infos:{}", JsonUtil.toString(traceMap));
+            log.info("will call webservice,input infos:{}", JsonUtil.toString(traceMap));
         }
 
         //----------------------------------------------------------------------------
@@ -186,7 +182,7 @@ public class JaxWsDynamicClientUtil{
     //---------------------------------------------------------------
 
     /**
-     * 获得 map for LOGGER.
+     * 获得 map for log.
      *
      * @param wsdlUrl
      *            the wsdl url

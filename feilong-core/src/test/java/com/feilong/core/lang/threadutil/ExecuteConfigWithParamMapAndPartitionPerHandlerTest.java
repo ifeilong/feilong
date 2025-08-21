@@ -26,19 +26,13 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ThreadUtil;
 import com.feilong.core.lang.thread.PartitionPerHandler;
 import com.feilong.core.lang.threadutil.entity.EmptyPartitionPerHandler;
 
+@lombok.extern.slf4j.Slf4j
 public class ExecuteConfigWithParamMapAndPartitionPerHandlerTest extends AbstractExcuteTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExecuteConfigWithParamMapAndPartitionPerHandlerTest.class);
-
-    //---------------------------------------------------------------
 
     @Test
     public void testExecute(){
@@ -56,7 +50,7 @@ public class ExecuteConfigWithParamMapAndPartitionPerHandlerTest extends Abstrac
                             final AtomicInteger atomicInteger2 = (AtomicInteger) paramsMap.get("result");
                             for (Integer value : perBatchList){
 
-                                LOGGER.trace(
+                                log.trace(
                                                 "{},BatchNumber:[{}],CurrentListSize:[{}],EachSize:[{}],Name:[{}],TotalListCount:[{}]",
                                                 partitionThreadEntity.toString(),
                                                 partitionThreadEntity.getBatchNumber(),
@@ -92,7 +86,7 @@ public class ExecuteConfigWithParamMapAndPartitionPerHandlerTest extends Abstrac
             final AtomicInteger atomicInteger2 = (AtomicInteger) paramsMap.get("result");
             for (Integer value : perBatchList){
 
-                LOGGER.trace(
+                log.trace(
                                 "{},BatchNumber:[{}],CurrentListSize:[{}],EachSize:[{}],Name:[{}],TotalListCount:[{}]",
                                 partitionThreadEntity.toString(),
                                 partitionThreadEntity.getBatchNumber(),

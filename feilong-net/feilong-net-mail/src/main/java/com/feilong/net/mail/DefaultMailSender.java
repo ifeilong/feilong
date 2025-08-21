@@ -17,9 +17,6 @@ package com.feilong.net.mail;
 
 import javax.mail.Message;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.builder.MessageBuilder;
@@ -38,10 +35,8 @@ import com.feilong.net.mail.util.MessageSendUtil;
  * @see javax.mail.Transport#send(javax.mail.Message)
  * @since 1.1.1
  */
+@lombok.extern.slf4j.Slf4j
 public final class DefaultMailSender implements MailSender{
-
-    /** The Constant LOGGER. */
-    private static final Logger      LOGGER = LoggerFactory.getLogger(DefaultMailSender.class);
 
     private MailSendConnectionConfig mailSendConnectionConfig;
 
@@ -78,8 +73,8 @@ public final class DefaultMailSender implements MailSender{
 
         //---------------------------------------------------------------
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
+        if (log.isDebugEnabled()){
+            log.debug(
                             "mailSenderConfig:{},mailSendConnectionConfig:[{}]",
                             JsonUtil.toString(mailSendRequest),
                             JsonUtil.toString(mailSendConnectionConfig));

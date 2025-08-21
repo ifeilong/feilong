@@ -24,12 +24,13 @@ import com.feilong.test.AbstractTest;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
+@lombok.extern.slf4j.Slf4j
 public class TradeNoCreatorTest extends AbstractTest{
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void createTradeNo(){
-        LOGGER.debug(TradeNoCreator.createTradeNo(5545L, 88));
-        LOGGER.debug(TradeNoCreator.createTradeNo(5545L, 1));
+        log.debug(TradeNoCreator.createTradeNo(5545L, 88));
+        log.debug(TradeNoCreator.createTradeNo(5545L, 1));
     }
 }

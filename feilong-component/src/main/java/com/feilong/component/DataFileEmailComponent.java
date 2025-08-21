@@ -21,9 +21,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.context.Data;
 import com.feilong.context.DataListQuery;
 import com.feilong.context.FileReworker;
@@ -44,12 +41,8 @@ import com.feilong.net.mail.entity.MailSendRequest;
  *            the generic type
  * @since 2.1.0
  */
+@lombok.extern.slf4j.Slf4j
 public class DataFileEmailComponent<T extends Data> implements Task<Void>,UseTimeLogable,Component{
-
-    /** The Constant LOGGER. */
-    private static final Logger    LOGGER = LoggerFactory.getLogger(DataFileEmailComponent.class);
-
-    //---------------------------------------------------------------
 
     /** 专门用来查询数据的接口. */
     private DataListQuery<T>       dataListQuery;
@@ -92,11 +85,11 @@ public class DataFileEmailComponent<T extends Data> implements Task<Void>,UseTim
         //-------------1.数据--------------------------------------------------
         List<T> dataList = dataListQuery.query();
         if (isNullOrEmpty(dataList)){
-            LOGGER.info("dataList is null or empty ,nothing to do");
+            log.info("dataList is null or empty ,nothing to do");
             return null;
         }
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.toString(dataList));
+        if (log.isDebugEnabled()){
+            log.debug(JsonUtil.toString(dataList));
         }
         //--------------2.转成Excel/CVS-------------------------------------------------
         //文件生成

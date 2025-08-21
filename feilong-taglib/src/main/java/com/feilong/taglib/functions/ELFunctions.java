@@ -19,9 +19,6 @@ import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import java.util.Iterator;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.taglib.common.AbstractContainsSupport;
@@ -58,10 +55,8 @@ import com.feilong.taglib.common.AbstractContainsSupport;
  * @see <a href="http://stackoverflow.com/questions/9763619/does-el-support-overloaded-methods">does-el-support-overloaded-methods</a>
  * @since 1.4.0
  */
+@lombok.extern.slf4j.Slf4j
 public final class ELFunctions{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ELFunctions.class);
 
     /** Don't let anyone instantiate this class. */
     private ELFunctions(){
@@ -112,7 +107,7 @@ public final class ELFunctions{
         try{
             return JsonUtil.toString(obj);
         }catch (Exception e){
-            LOGGER.error("json format:" + obj.toString(), e);
+            log.error("json format:" + obj.toString(), e);
         }
         //此方法应用于jsp标签,如果抛出异常,可能页面不能持续渲染, 但是不能显示异常页面, 因此此处直接返回 ""
         return EMPTY;

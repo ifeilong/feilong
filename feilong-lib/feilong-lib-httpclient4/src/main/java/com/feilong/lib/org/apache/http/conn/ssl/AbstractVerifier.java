@@ -41,9 +41,6 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import javax.security.auth.x500.X500Principal;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.conn.util.InetAddressUtils;
 import com.feilong.lib.org.apache.http.util.Args;
 
@@ -56,26 +53,25 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @deprecated (4.4) use an implementation of {@link javax.net.ssl.HostnameVerifier} or
  *             {@link DefaultHostnameVerifier}.
  */
+@lombok.extern.slf4j.Slf4j
 @Deprecated
 public abstract class AbstractVerifier implements X509HostnameVerifier{
 
-    private static final Logger log              = LoggerFactory.getLogger(AbstractVerifier.class);
-
-    final static String[]       BAD_COUNTRY_2LDS = {
-                                                     "ac",
-                                                     "co",
-                                                     "com",
-                                                     "ed",
-                                                     "edu",
-                                                     "go",
-                                                     "gouv",
-                                                     "gov",
-                                                     "info",
-                                                     "lg",
-                                                     "ne",
-                                                     "net",
-                                                     "or",
-                                                     "org" };
+    final static String[] BAD_COUNTRY_2LDS = {
+                                               "ac",
+                                               "co",
+                                               "com",
+                                               "ed",
+                                               "edu",
+                                               "go",
+                                               "gouv",
+                                               "gov",
+                                               "info",
+                                               "lg",
+                                               "ne",
+                                               "net",
+                                               "or",
+                                               "org" };
 
     static{
         // Just in case developer forgot to manually sort the array.  :-)

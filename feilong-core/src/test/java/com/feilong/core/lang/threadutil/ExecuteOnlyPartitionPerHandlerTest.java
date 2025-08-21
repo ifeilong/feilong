@@ -24,18 +24,12 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ThreadUtil;
 import com.feilong.core.lang.threadutil.entity.EmptyPartitionPerHandler;
 
+@lombok.extern.slf4j.Slf4j
 public class ExecuteOnlyPartitionPerHandlerTest extends AbstractExcuteTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExecuteOnlyPartitionPerHandlerTest.class);
-
-    //---------------------------------------------------------------
 
     @Test
     public void testExecute(){
@@ -51,7 +45,7 @@ public class ExecuteOnlyPartitionPerHandlerTest extends AbstractExcuteTest{
                             final AtomicInteger atomicInteger2 = (AtomicInteger) paramsMap1.get("result");
                             for (Integer value : perBatchList){
 
-                                LOGGER.trace(
+                                log.trace(
                                                 "{},BatchNumber:[{}],CurrentListSize:[{}],EachSize:[{}],Name:[{}],TotalListCount:[{}]",
                                                 partitionThreadEntity.toString(),
                                                 partitionThreadEntity.getBatchNumber(),

@@ -17,9 +17,6 @@ package com.feilong.context.invoker;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.context.InputParamsValidateable;
 import com.feilong.context.converter.StringToBeanConverter;
 import com.feilong.json.JsonUtil;
@@ -51,13 +48,9 @@ import com.feilong.json.JsonUtil;
  * @see DefaultResponseCommandBuilder
  * @since 1.11.2
  */
+@lombok.extern.slf4j.Slf4j
 public class DefaultRequestResultInvoker<T extends ResponseCommand, R extends InvokerRequest, N extends InvokerResult>
                 implements RequestResultInvoker<R, N>,InputParamsValidateable{
-
-    /** The Constant log. */
-    private static final Logger               LOGGER = LoggerFactory.getLogger(DefaultRequestResultInvoker.class);
-
-    //---------------------------------------------------------------
 
     /** 请求参数自定义校验. */
     protected InvokerRequestValidator<R>      invokerRequestValidator;
@@ -119,8 +112,8 @@ public class DefaultRequestResultInvoker<T extends ResponseCommand, R extends In
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("NetpayRequest:[{}],invokerResponse:[{}]", JsonUtil.toString(request), invokerResponse);
+        if (log.isInfoEnabled()){
+            log.info("NetpayRequest:[{}],invokerResponse:[{}]", JsonUtil.toString(request), invokerResponse);
         }
 
         //---------------------------------------------------------------

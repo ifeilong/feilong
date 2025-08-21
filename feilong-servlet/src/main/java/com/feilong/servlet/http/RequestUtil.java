@@ -53,9 +53,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
@@ -258,12 +255,8 @@ import com.feilong.servlet.http.entity.RequestLogSwitch;
  * @see RequestLogSwitch
  * @since 1.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public final class RequestUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger   LOGGER                            = LoggerFactory.getLogger(RequestUtil.class);
-
-    //---------------------------------------------------------------
 
     /**
      * 存放到 request 作用域中的 requestbody 名字.
@@ -472,7 +465,7 @@ public final class RequestUtil{
      * 
      * <pre class="code">
      * Map{@code <String, Object>} requestInfoMapForLog = RequestUtil.getRequestInfoMapForLog(request);}
-     * LOGGER.debug("class:[{}],request info:{}", getClass().getSimpleName(), JsonUtil.format(requestInfoMapForLog);
+     * log.debug("class:[{}],request info:{}", getClass().getSimpleName(), JsonUtil.format(requestInfoMapForLog);
      * </pre>
      * 
      * 输出结果:
@@ -505,7 +498,7 @@ public final class RequestUtil{
      * 
      * <pre class="code">
      * Map{@code <String, Object>} requestInfoMapForLog = RequestUtil.getRequestInfoFullMapForLog(request);
-     * LOGGER.debug(JsonUtil.format(requestInfoMapForLog));
+     * log.debug(JsonUtil.format(requestInfoMapForLog));
      * </pre>
      * 
      * 输出结果:
@@ -611,7 +604,7 @@ public final class RequestUtil{
      * <pre class="code">
      * RequestLogSwitch requestLogSwitch = RequestLogSwitch.NORMAL;
      * Map{@code <String, Object>} requestInfoMapForLog = RequestUtil.getRequestInfoMapForLog(request, requestLogSwitch);
-     * LOGGER.debug("class:[{}],request info:{}", getClass().getSimpleName(), JsonUtil.format(requestInfoMapForLog);
+     * log.debug("class:[{}],request info:{}", getClass().getSimpleName(), JsonUtil.format(requestInfoMapForLog);
      * </pre>
      * 
      * 输出结果:
@@ -930,7 +923,7 @@ public final class RequestUtil{
         //since 2.0.1
         Validate.notNull(path, "path can't be null!");
 
-        LOGGER.debug("will forward to path:[{}]", path);
+        log.debug("will forward to path:[{}]", path);
 
         try{
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
@@ -977,7 +970,7 @@ public final class RequestUtil{
         //since 2.0.1
         Validate.notNull(path, "path can't be null!");
 
-        LOGGER.debug("will include to path:[{}]", path);
+        log.debug("will include to path:[{}]", path);
 
         try{
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
@@ -1074,8 +1067,8 @@ public final class RequestUtil{
      * @since 3.0.0
      */
     private static String getClientIp(Map<String, String> map){
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("ips:{}", JsonUtil.toString(map));
+        if (log.isTraceEnabled()){
+            log.trace("ips:{}", JsonUtil.toString(map));
         }
         //---------------------------------------------------------------
         for (Map.Entry<String, String> entry : map.entrySet()){
@@ -1451,8 +1444,8 @@ public final class RequestUtil{
         boolean contains = userAgent.toLowerCase().contains(s.toLowerCase());
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("userAgent:{},isContains[\"{}\"]:[{}]", userAgent, s, contains);
+        if (log.isDebugEnabled()){
+            log.debug("userAgent:{},isContains[\"{}\"]:[{}]", userAgent, s, contains);
         }
         //---------------------------------------------------------------
         return contains;
@@ -1648,7 +1641,7 @@ public final class RequestUtil{
             return ReaderUtil.toString(reader);
         }catch (Exception e){
             //throw new UncheckedIOException(e);
-            LOGGER.warn("parseBodyException", e);
+            log.warn("parseBodyException", e);
             return EMPTY;
         }
     }

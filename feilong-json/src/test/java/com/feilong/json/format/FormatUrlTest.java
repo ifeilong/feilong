@@ -27,12 +27,13 @@ import org.junit.Test;
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatUrlTest extends AbstractJsonTest{
 
     @Test
     public void testToURLs() throws MalformedURLException{
         URL urLs = new URL("file:///Users/feilong/.m2/settings.xml");
-        LOGGER.debug(JsonUtil.format(urLs));
+        log.debug(JsonUtil.format(urLs));
     }
 
     @Test

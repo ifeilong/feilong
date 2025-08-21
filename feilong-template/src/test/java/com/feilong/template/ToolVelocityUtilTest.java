@@ -38,6 +38,6 @@ public class ToolVelocityUtilTest extends AbstractTest{
     //        //String toolboxPath = ConfigurationUtils.GENERIC_DEFAULTS_PATH;
     //
     //        String parseVMTemplate = ToolVelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
-    //        LOGGER.debug(parseVMTemplate);
+    //        log.debug(parseVMTemplate);
     //    }
 }

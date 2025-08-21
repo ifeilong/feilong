@@ -32,9 +32,6 @@ import java.io.InterruptedIOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.ConnectionReuseStrategy;
 import com.feilong.lib.org.apache.http.HttpClientConnection;
 import com.feilong.lib.org.apache.http.HttpEntity;
@@ -85,14 +82,10 @@ import com.feilong.lib.org.apache.http.util.EntityUtils;
  *
  * @since 4.3
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("deprecation")
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
 public class MainClientExec implements ClientExecChain{
-
-    /** The Constant log. */
-    private static final Logger               log = LoggerFactory.getLogger(MainClientExec.class);
-
-    //---------------------------------------------------------------
 
     private final HttpRequestExecutor         requestExecutor;
 

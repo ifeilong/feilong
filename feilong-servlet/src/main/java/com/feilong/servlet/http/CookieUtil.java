@@ -29,9 +29,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.json.JsonUtil;
@@ -214,11 +211,9 @@ import com.feilong.servlet.http.entity.CookieEntity;
  * @see <a href="http://www.ietf.org/rfc/rfc2109.txt">HTTP State Management Mechanism (废弃 被rfc6265取代)</a>
  * @since 1.0.0
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class CookieUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CookieUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private CookieUtil(){
@@ -303,20 +298,20 @@ public final class CookieUtil{
     public static Cookie getCookie(HttpServletRequest request,String cookieName){
         Cookie[] cookies = request.getCookies();
         if (isNullOrEmpty(cookies)){
-            LOGGER.debug("when get cookieName:[{}],but request's cookies is null or empty!!", cookieName);
+            log.debug("when get cookieName:[{}],but request's cookies is null or empty!!", cookieName);
             return null;
         }
 
         //---------------------------------------------------------------
         for (Cookie cookie : cookies){
             if (cookie.getName().equals(cookieName)){
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("[getCookie],cookieName:[{}],cookie info:[{}]", cookieName, JsonUtil.toString(cookie));
+                if (log.isDebugEnabled()){
+                    log.debug("[getCookie],cookieName:[{}],cookie info:[{}]", cookieName, JsonUtil.toString(cookie));
                 }
                 return cookie;
             }
         }
-        LOGGER.debug("can't find the cookie:[{}]", cookieName);
+        log.debug("can't find the cookie:[{}]", cookieName);
         return null;
     }
 
@@ -386,7 +381,7 @@ public final class CookieUtil{
         cookieEntity.setMaxAge(0);// 设置为0为立即删除该Cookie
         addCookie(cookieEntity, response);
 
-        LOGGER.debug("[deleteCookie],cookieName:[{}]", cookieEntity.getName());
+        log.debug("[deleteCookie],cookieName:[{}]", cookieEntity.getName());
     }
 
     //-------------------------add--------------------------------------
@@ -465,8 +460,8 @@ public final class CookieUtil{
     public static void addCookie(CookieEntity cookieEntity,HttpServletResponse response){
         validateCookieEntity(cookieEntity);//校验
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("[addCookie],cookieName:[{}],cookieEntity info:[{}]", cookieEntity.getName(), JsonUtil.toString(cookieEntity));
+        if (log.isDebugEnabled()){
+            log.debug("[addCookie],cookieName:[{}],cookieEntity info:[{}]", cookieEntity.getName(), JsonUtil.toString(cookieEntity));
         }
         response.addCookie(toCookie(cookieEntity));
     }
@@ -504,13 +499,13 @@ public final class CookieUtil{
         Validate.notBlank(cookieEntity.getName(), "cookieName can't be null/empty!");
 
         //---------------------------------------------------------------
-        if (LOGGER.isWarnEnabled()){
+        if (log.isWarnEnabled()){
             String value = resolveWriteValue(cookieEntity);
 
             //如果长度超过4000,浏览器可能不支持
             if (isNotNullOrEmpty(value) && value.length() > 4000){
                 String pattern = "cookie value:{},length:{},more than [4000]!!!some browser may be not support!!!!!,cookieEntity info :{}";
-                LOGGER.warn(pattern, value, value.length(), JsonUtil.toString(cookieEntity));
+                log.warn(pattern, value, value.length(), JsonUtil.toString(cookieEntity));
             }
         }
     }

@@ -30,9 +30,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.HttpClientConnection;
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
@@ -43,14 +40,11 @@ import com.feilong.lib.org.apache.http.pool.PoolEntry;
 /**
  * @since 4.3
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.SAFE)
 class CPoolEntry extends PoolEntry<HttpRoute, ManagedHttpClientConnection>{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(CPoolEntry.class);
-
-    //---------------------------------------------------------------
-    private volatile boolean    routeComplete;
+    private volatile boolean routeComplete;
 
     public CPoolEntry(final String id, final HttpRoute route, final ManagedHttpClientConnection conn, final long timeToLive,
                     final TimeUnit timeUnit){

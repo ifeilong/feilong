@@ -160,7 +160,7 @@ public final class AggregateUtil{
      * 
      * List{@code <User>} list = toList(user1, user2);
      * Map{@code <String, BigDecimal>} map = AggregateUtil.avg(list, ConvertUtil.toArray("id", "age"), 2);
-     * LOGGER.info(JsonUtil.format(map));
+     * log.info(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -228,7 +228,7 @@ public final class AggregateUtil{
      * list.add(new User(5L));
      * list.add(new User(5L));
      * 
-     * LOGGER.info("" + AggregateUtil.sum(list, "id"));
+     * log.info("" + AggregateUtil.sum(list, "id"));
      * </pre>
      * 
      * <b>返回:</b> 12
@@ -389,7 +389,7 @@ public final class AggregateUtil{
      * user2.setAge(30);
      * 
      * Map{@code <String, BigDecimal>} map = AggregateUtil.sum(toList(user1, user2), "id", "age");
-     * LOGGER.info(JsonUtil.format(map));
+     * log.info(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -455,7 +455,7 @@ public final class AggregateUtil{
      *         return !"张飞".equals(user.getName());
      *     }
      * });
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * 
      * </pre>
      * 
@@ -693,7 +693,7 @@ public final class AggregateUtil{
      * list.add(new User("刘备"));
      * 
      * Map{@code <String, Integer>} map = AggregateUtil.groupCount(list, "name");
-     * LOGGER.info(JsonUtil.format(map));
+     * log.info(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -759,7 +759,7 @@ public final class AggregateUtil{
      *         return user.getAge() {@code >} 30;
      *     }
      * });
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * 
      * </pre>
      * 
@@ -840,7 +840,7 @@ public final class AggregateUtil{
      * 
      * Map{@code <String, Map<Object, Integer>>} map = AggregateUtil.groupCount(list, toArray("name", "age"));
      * 
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -917,7 +917,7 @@ public final class AggregateUtil{
      * Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
      * Map{@code <String, Map<Object, Integer>>} map = AggregateUtil.groupCount(list, toArray("name", "age"), comparatorPredicate);
      * 
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1017,7 +1017,7 @@ public final class AggregateUtil{
         Map{@code <String, Map<Object, Integer>>} map = AggregateUtil
                         .groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap);
     
-        LOGGER.debug(JsonUtil.format(map));
+        log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1111,7 +1111,7 @@ public final class AggregateUtil{
         Map{@code <String, Map<Object, Integer>>} map = AggregateUtil
                         .groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap, comparatorPredicate);
     
-        LOGGER.debug(JsonUtil.format(map));
+        log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>

@@ -27,6 +27,7 @@ import com.feilong.test.AbstractTest;
 /**
  * The Class VelocityUtilTest.
  */
+@lombok.extern.slf4j.Slf4j
 public class TestNull extends AbstractTest{
 
     String templateInClassPath = "velocity/test_null.vm";
@@ -37,7 +38,7 @@ public class TestNull extends AbstractTest{
         map.put("code", null);
 
         String parseVMTemplate = TemplateUtil.parseTemplate(templateInClassPath, map);
-        LOGGER.debug(parseVMTemplate);
+        log.debug(parseVMTemplate);
 
         assertTrue(parseVMTemplate.contains("jinxin"));
     }

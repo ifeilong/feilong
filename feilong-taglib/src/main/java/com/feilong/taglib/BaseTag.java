@@ -26,9 +26,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.TagSupport;
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.json.JsonUtil;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.servlet.http.entity.RequestLogSwitch;
@@ -77,15 +74,11 @@ import com.feilong.servlet.http.entity.RequestLogSwitch;
  * @see "javax.servlet.jsp.jstl.core.Config"
  * @since 1.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
 
     /** The Constant serialVersionUID. */
-    private static final long   serialVersionUID = -5494214419937813707L;
-
-    /** The Constant log. */
-    private static final Logger LOGGER           = LoggerFactory.getLogger(BaseTag.class);
-
-    //---------------------------------------------------------------
+    private static final long serialVersionUID = -5494214419937813707L;
 
     /**
      * 获得HttpServletRequest.
@@ -124,13 +117,13 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
      * @since 1.5.5
      */
     protected void logException(Exception e){
-        if (LOGGER.isErrorEnabled()){
+        if (log.isErrorEnabled()){
             RequestLogSwitch requestLogSwitch = RequestLogSwitch.NORMAL_WITH_IDENTITY_INCLUDE_FORWARD;
             Map<String, Object> map = RequestUtil.getRequestInfoMapForLog(getHttpServletRequest(), requestLogSwitch);
 
             //---------------------------------------------------------------
             String pattern = "tag:[{}],exception message:[{}],request info:{},but need render page,pls check!";
-            LOGGER.error(formatPattern(pattern, getClass().getSimpleName(), e.getMessage(), JsonUtil.toString(map)), e);
+            log.error(formatPattern(pattern, getClass().getSimpleName(), e.getMessage(), JsonUtil.toString(map)), e);
         }
     }
 
@@ -143,7 +136,7 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
      */
     @Override
     public void doCatch(Throwable t) throws Throwable{
-        LOGGER.error("[" + getClass().getSimpleName() + "]", t);
+        log.error("[" + getClass().getSimpleName() + "]", t);
     }
 
     //---------------------------------------------------------------

@@ -15,9 +15,6 @@
  */
 package com.feilong.core.bean;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.lang.ClassUtil;
 
 /**
@@ -26,12 +23,8 @@ import com.feilong.core.lang.ClassUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.0
  */
+@lombok.extern.slf4j.Slf4j
 class SpringBeanUtilsHelper{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SpringBeanUtilsHelper.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private SpringBeanUtilsHelper(){
@@ -51,10 +44,10 @@ class SpringBeanUtilsHelper{
         String className = "org.springframework.beans.BeanUtils";
         try{
             springBeanUtilsClass = ClassUtil.getClass(className);
-            LOGGER.trace("find and load:[{}]", className);
+            log.trace("find and load:[{}]", className);
         }catch (Exception e){
             //just want to use e.toString
-            LOGGER.warn("can't load:[{}],[{}],if you import spring, getPropertyValue will speed fast", className, e.getMessage());
+            log.warn("can't load:[{}],[{}],if you import spring, getPropertyValue will speed fast", className, e.getMessage());
         }
     }
 

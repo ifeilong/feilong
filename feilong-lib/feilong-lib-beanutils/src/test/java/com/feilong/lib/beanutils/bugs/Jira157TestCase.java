@@ -19,9 +19,6 @@ package com.feilong.lib.beanutils.bugs;
 import java.io.Serializable;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.BeanUtils;
 import com.feilong.lib.beanutils.BeanUtilsBean;
 
@@ -37,10 +34,8 @@ import junit.framework.TestSuite;
  * @see <a
  *      href="https://issues.apache.org/jira/browse/BEANUTILS-157">https://issues.apache.org/jira/browse/BEANUTILS-157<a/>
  */
+@lombok.extern.slf4j.Slf4j
 public class Jira157TestCase extends TestCase{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Jira157TestCase.class);
 
     /**
      * Create a test case with the specified name.
@@ -118,7 +113,7 @@ public class Jira157TestCase extends TestCase{
         try{
             result = BeanUtils.describe(bean);
         }catch (final Throwable t){
-            LOGGER.error("Describe Serializable: " + t.getMessage(), t);
+            log.error("Describe Serializable: " + t.getMessage(), t);
             fail("Describe Serializable Threw exception: " + t);
         }
         assertEquals("Check Size", 1, result.size());
@@ -148,7 +143,7 @@ public class Jira157TestCase extends TestCase{
         try{
             result = BeanUtils.describe(bean);
         }catch (final Throwable t){
-            LOGGER.error("Describe Interface: " + t.getMessage(), t);
+            log.error("Describe Interface: " + t.getMessage(), t);
             fail("Describe Interface Threw exception: " + t);
         }
         assertEquals("Check Size", 3, result.size());
@@ -171,7 +166,7 @@ public class Jira157TestCase extends TestCase{
         try{
             result = BeanUtils.describe(bean);
         }catch (final Throwable t){
-            LOGGER.error("Describe Bean: " + t.getMessage(), t);
+            log.error("Describe Bean: " + t.getMessage(), t);
             fail("Describe Bean Threw exception: " + t);
         }
         assertEquals("Check Size", 2, result.size());

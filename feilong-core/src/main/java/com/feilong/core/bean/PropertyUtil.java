@@ -24,9 +24,6 @@ import java.beans.PropertyDescriptor;
 import java.util.Collection;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.lib.beanutils.PropertyUtils;
@@ -57,10 +54,8 @@ import com.feilong.lib.lang3.ClassUtils;
  * @see com.feilong.core.bean.BeanUtil
  * @since 1.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public final class PropertyUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER                        = LoggerFactory.getLogger(PropertyUtil.class);
 
     /**
      * 传入的bean 是null 的消息提示.
@@ -134,7 +129,7 @@ public final class PropertyUtil{
      * 
      * User newUser = new User();
      * PropertyUtil.copyProperties(newUser, oldUser, "date", "money", "nickName");
-     * LOGGER.debug(JsonUtil.format(newUser));
+     * log.debug(JsonUtil.format(newUser));
      * </pre>
      * 
      * <b>返回:</b>
@@ -290,7 +285,7 @@ public final class PropertyUtil{
      * user.setId(5L);
      * user.setDate(now());
      * 
-     * LOGGER.debug(JsonUtil.format(PropertyUtil.describe(user));
+     * log.debug(JsonUtil.format(PropertyUtil.describe(user));
      * </pre>
      * 
      * <b>返回:</b>
@@ -315,7 +310,7 @@ public final class PropertyUtil{
      * user.setId(5L);
      * user.setDate(now());
      * 
-     * LOGGER.debug(JsonUtil.format(PropertyUtil.describe(user, "date", "id"));
+     * log.debug(JsonUtil.format(PropertyUtil.describe(user, "date", "id"));
      * </pre>
      * 
      * 返回的结果,按照指定参数名称顺序:
@@ -401,7 +396,7 @@ public final class PropertyUtil{
      * <pre class="code">
      * User newUser = new User();
      * PropertyUtil.setProperty(newUser, "name", "feilong");
-     * LOGGER.info(JsonUtil.format(newUser));
+     * log.info(JsonUtil.format(newUser));
      * </pre>
      * 
      * <b>返回:</b>
@@ -608,7 +603,7 @@ public final class PropertyUtil{
      * user.setDate(now());
      * user.getUserInfo().setAge(28);
      * 
-     * LOGGER.info(JsonUtil.format(PropertyUtil.findValueOfType(user, UserInfo.class)));
+     * log.info(JsonUtil.format(PropertyUtil.findValueOfType(user, UserInfo.class)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -646,7 +641,7 @@ public final class PropertyUtil{
 
         //---------------------------------------------------------------
         if (isDonotSupportFindType(obj)){
-            LOGGER.trace("obj:[{}] not support find toBeFindedClassType:[{}]", obj.getClass().getName(), toBeFindedClassType.getName());
+            log.trace("obj:[{}] not support find toBeFindedClassType:[{}]", obj.getClass().getName(), toBeFindedClassType.getName());
             return null;
         }
 

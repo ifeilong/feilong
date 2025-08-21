@@ -19,8 +19,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 抽象的将 字符串转成 bean 的转换器.
@@ -30,10 +29,8 @@ import org.slf4j.LoggerFactory;
  *            the generic type
  * @since 1.12.0
  */
+@Slf4j
 public abstract class AbstractStringToBeanConverter<T> implements StringToBeanConverter<T>{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractStringToBeanConverter.class);
 
     //---------------------------------------------------------------
     /*
@@ -69,9 +66,9 @@ public abstract class AbstractStringToBeanConverter<T> implements StringToBeanCo
      * @since 1.11.5
      */
     private void preHandlerLog(String value){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             try{
-                LOGGER.debug("inputString:[{}],afterFormat: {}", value, formatValue(value));
+                log.debug("inputString:[{}],afterFormat: {}", value, formatValue(value));
             }catch (Exception e){
                 String message = formatPattern("inputString:[{}] can't format,message:[{}]", value, e.getMessage());
                 throw new IllegalArgumentException(message, e);
@@ -123,9 +120,9 @@ public abstract class AbstractStringToBeanConverter<T> implements StringToBeanCo
      * @since 1.11.2
      */
     protected void postHandler(T t){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             String message = "after [{}] convert,return [{}],info :{}";
-            LOGGER.debug(message, this.getClass().getSimpleName(), t.getClass().getName(), formatToSimpleTable(t));
+            log.debug(message, this.getClass().getSimpleName(), t.getClass().getName(), formatToSimpleTable(t));
         }
     }
 

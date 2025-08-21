@@ -26,9 +26,6 @@ import java.io.UncheckedIOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.servlet.http.RequestUtil;
 
@@ -49,13 +46,11 @@ import com.feilong.servlet.http.RequestUtil;
  * @since 1.0.0
  */
 //默认修饰符号 限制访问
+@lombok.extern.slf4j.Slf4j
 abstract class AbstractWriteContentTag extends BaseTag{
 
-    /** The Constant log. */
-    private static final Logger LOGGER           = LoggerFactory.getLogger(AbstractWriteContentTag.class);
-
     /** The Constant serialVersionUID. */
-    private static final long   serialVersionUID = 8215127553271356734L;
+    private static final long serialVersionUID = 8215127553271356734L;
 
     //---------------------------------------------------------------
 
@@ -75,11 +70,11 @@ abstract class AbstractWriteContentTag extends BaseTag{
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             String buildExtraKeyInfoToLog = buildExtraKeyInfoToLog();
             String tagLog = isNullOrEmpty(buildExtraKeyInfoToLog) ? "" : "," + buildExtraKeyInfoToLog;
             String useTime = formatDurationUseBeginTimeMillis(beginTimeMillis);
-            LOGGER.debug("[{}],[{}]{},use time:[{}]", getClass().getSimpleName(), RequestUtil.getRequestURL(request), tagLog, useTime);
+            log.debug("[{}],[{}]{},use time:[{}]", getClass().getSimpleName(), RequestUtil.getRequestURL(request), tagLog, useTime);
         }
     }
 

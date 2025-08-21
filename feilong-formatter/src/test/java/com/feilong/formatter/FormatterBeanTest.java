@@ -26,6 +26,7 @@ import org.junit.Test;
 import com.feilong.store.member.User;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatterBeanTest extends AbstractTest{
 
     @Test
@@ -40,7 +41,7 @@ public class FormatterBeanTest extends AbstractTest{
         user.setName("xinge");
         user.setNickNames(toArray("jinxin", "feilong"));
 
-        LOGGER.debug(formatToSimpleTable(user));
+        log.debug(formatToSimpleTable(user));
 
     }
 

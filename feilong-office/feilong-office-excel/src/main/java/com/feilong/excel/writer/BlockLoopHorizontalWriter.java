@@ -26,16 +26,13 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.lib.excel.ognl.OgnlStack;
 
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 class BlockLoopHorizontalWriter{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(BlockLoopHorizontalWriter.class);
 
     /** Don't let anyone instantiate this class. */
     private BlockLoopHorizontalWriter(){
@@ -106,8 +103,8 @@ class BlockLoopHorizontalWriter{
             //shiftrow and prepare write new row
             int rowOffset = step * (endRow - startRow + 1);
             //---------------------------------------------------------------
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("startRow:[{}],endRow:[{}],step:[{}],rowOffset:[{}]", startRow, endRow, step, rowOffset);
+            if (log.isTraceEnabled()){
+                log.trace("startRow:[{}],endRow:[{}],step:[{}],rowOffset:[{}]", startRow, endRow, step, rowOffset);
             }
             //---------------------------------------------------------------
             int nextStartRow = startRow + rowOffset;
@@ -142,8 +139,8 @@ class BlockLoopHorizontalWriter{
             if (firstRow >= startRow && firstColumn >= startCol && lastRow <= endRow && lastColumn <= endCol){
                 sheet.removeMergedRegion(i);
 
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("Removed Merged Region:[{}-{}]", getCellRef(firstRow, firstColumn), getCellRef(lastRow, lastColumn));
+                if (log.isDebugEnabled()){
+                    log.debug("Removed Merged Region:[{}-{}]", getCellRef(firstRow, firstColumn), getCellRef(lastRow, lastColumn));
                 }
             }
         }

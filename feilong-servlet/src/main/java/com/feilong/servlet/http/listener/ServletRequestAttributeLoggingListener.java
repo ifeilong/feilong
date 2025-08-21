@@ -18,19 +18,14 @@ package com.feilong.servlet.http.listener;
 import javax.servlet.ServletRequestAttributeEvent;
 import javax.servlet.ServletRequestAttributeListener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * request 属性的创建, 替换,删除的监听器.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
+@lombok.extern.slf4j.Slf4j
 public class ServletRequestAttributeLoggingListener implements ServletRequestAttributeListener{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServletRequestAttributeLoggingListener.class);
 
     /*
      * (non-Javadoc)
@@ -39,8 +34,8 @@ public class ServletRequestAttributeLoggingListener implements ServletRequestAtt
      */
     @Override
     public void attributeAdded(ServletRequestAttributeEvent servletRequestAttributeEvent){
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace(
+        if (log.isTraceEnabled()){
+            log.trace(
                             "name:[{}],value:[{}] added to [servletRequest]",
                             servletRequestAttributeEvent.getName(),
                             servletRequestAttributeEvent.getValue());
@@ -56,8 +51,8 @@ public class ServletRequestAttributeLoggingListener implements ServletRequestAtt
      */
     @Override
     public void attributeRemoved(ServletRequestAttributeEvent servletRequestAttributeEvent){
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
+        if (log.isDebugEnabled()){
+            log.debug(
                             "name:[{}],value:[{}] removed from [servletRequest]",
                             servletRequestAttributeEvent.getName(),
                             servletRequestAttributeEvent.getValue());
@@ -73,8 +68,8 @@ public class ServletRequestAttributeLoggingListener implements ServletRequestAtt
      */
     @Override
     public void attributeReplaced(ServletRequestAttributeEvent servletRequestAttributeEvent){
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace(
+        if (log.isTraceEnabled()){
+            log.trace(
                             "name:[{}],value:[{}] replaced to [servletRequest]",
                             servletRequestAttributeEvent.getName(),
                             servletRequestAttributeEvent.getValue());

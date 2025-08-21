@@ -23,9 +23,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletContextAttributeListener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.servlet.ServletContextUtil;
@@ -84,12 +81,8 @@ import com.feilong.servlet.ServletContextUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
+@lombok.extern.slf4j.Slf4j
 public class ServletContextAttributeLoggingListener implements ServletContextAttributeListener{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServletContextAttributeLoggingListener.class);
-
-    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -98,7 +91,7 @@ public class ServletContextAttributeLoggingListener implements ServletContextAtt
      */
     @Override
     public void attributeAdded(ServletContextAttributeEvent servletContextAttributeEvent){
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             String name = servletContextAttributeEvent.getName();
 
             if (isNotNullOrEmpty(name) && ArrayUtils.contains(ServletContextUtil.IGNORE_KEYS, name)){
@@ -107,7 +100,7 @@ public class ServletContextAttributeLoggingListener implements ServletContextAtt
 
             //---------------------------------------------------------------
 
-            LOGGER.info(
+            log.info(
                             "name:[{}],value:[{}] added to [servletContext],now servletContext attribute:[{}] ",
                             name,
                             servletContextAttributeEvent.getValue(),
@@ -139,8 +132,8 @@ public class ServletContextAttributeLoggingListener implements ServletContextAtt
      */
     @Override
     public void attributeRemoved(ServletContextAttributeEvent servletContextAttributeEvent){
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
+        if (log.isInfoEnabled()){
+            log.info(
                             "name:[{}],value:[{}] removed from [servletContext],now servletContext attribute:[{}] ",
                             servletContextAttributeEvent.getName(),
                             servletContextAttributeEvent.getValue(),
@@ -158,8 +151,8 @@ public class ServletContextAttributeLoggingListener implements ServletContextAtt
      */
     @Override
     public void attributeReplaced(ServletContextAttributeEvent servletContextAttributeEvent){
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
+        if (log.isInfoEnabled()){
+            log.info(
                             "name:[{}],value:[{}] replaced to [servletContext],now servletContext attribute:[{}] ",
                             servletContextAttributeEvent.getName(),
                             servletContextAttributeEvent.getValue(),

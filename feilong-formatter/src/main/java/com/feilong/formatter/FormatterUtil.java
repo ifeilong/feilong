@@ -45,7 +45,7 @@ import com.feilong.lib.lang3.StringUtils;
  *                 new Address("china", "nantong", "wenshui wanrong.lu 222", "216002"),
  *                 new Address("china", "tianjing", "wenshui wanrong.lu 999", "216600"));
  * 
- * LOGGER.debug(JsonUtil.format(list));
+ * log.debug(JsonUtil.format(list));
  * </pre>
  * 
  * 结果:
@@ -99,7 +99,7 @@ import com.feilong.lib.lang3.StringUtils;
  *                 new Address("china", "nantong", "wenshui wanrong.lu 222", "216002"),
  *                 new Address("china", "tianjing", "wenshui wanrong.lu 999", "216600"));
  * 
- * LOGGER.debug(FormatterUtil.formatToSimpleTable(list));
+ * log.debug(FormatterUtil.formatToSimpleTable(list));
  * </pre>
  * 
  * 
@@ -176,7 +176,7 @@ public final class FormatterUtil{
      * User id2_age36 = new User(2L, 36);
      * List{@code <User>} list = toList(id12_age18, id2_age36, id2_age2, id2_age30, id1_age8);
      * 
-     * LOGGER.debug(formatToSimpleTable(list));
+     * log.debug(formatToSimpleTable(list));
      * 
      * </pre>
      * 
@@ -233,7 +233,7 @@ public final class FormatterUtil{
      * BeanFormatterConfig{@code <User>} beanFormatterConfig = new BeanFormatterConfig{@code <>}(User.class);
      * beanFormatterConfig.setIncludePropertyNames("id", "age");
      * beanFormatterConfig.setSorts("id", "age");
-     * LOGGER.debug(formatToSimpleTable(list, beanFormatterConfig));
+     * log.debug(formatToSimpleTable(list, beanFormatterConfig));
      * 
      * </pre>
      * 
@@ -301,7 +301,7 @@ public final class FormatterUtil{
      * <pre class="code">
      * 
      * Person person = new Person("feilong", now());
-     * LOGGER.debug(formatToSimpleTable(toList(person)));
+     * log.debug(formatToSimpleTable(toList(person)));
      * 
      * </pre>
      * 
@@ -322,7 +322,7 @@ public final class FormatterUtil{
      * 
      * <pre>
      * Person person = new Person("feilong", now());
-     * LOGGER.debug(formatToSimpleTable(toList(person), "name", "dateAttr"));
+     * log.debug(formatToSimpleTable(toList(person), "name", "dateAttr"));
      * </pre>
      * 
      * <b>返回:</b>
@@ -389,7 +389,7 @@ public final class FormatterUtil{
      *                 Pair.of("Database URL", "jdbc:postgresql://127.0.0.1:5432/db_feilong_jira"),
      *                 Pair.of("Database JDBC config", "postgres72 jdbc:postgresql://127.0.0.1:5432/db_feilong_jira"));
      * 
-     * LOGGER.debug(formatToSimpleTable(map));
+     * log.debug(formatToSimpleTable(map));
      * 
      * </pre>
      * 
@@ -451,7 +451,7 @@ public final class FormatterUtil{
      * user.setMoney(toBigDecimal(999));
      * user.setName("xinge");
      * user.setNickNames(toArray("jinxin", "feilong"));
-     * LOGGER.debug(formatToSimpleTable(user));
+     * log.debug(formatToSimpleTable(user));
      * 
      * </pre>
      * 

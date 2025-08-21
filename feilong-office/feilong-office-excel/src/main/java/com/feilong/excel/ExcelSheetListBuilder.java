@@ -20,8 +20,6 @@ import static com.feilong.lib.springframework.util.ResourceUtils.CLASSPATH_URL_P
 import java.io.IOException;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -38,12 +36,8 @@ import com.feilong.lib.digester3.xmlrules.FromXmlRulesModule;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.3
  */
+@lombok.extern.slf4j.Slf4j
 public class ExcelSheetListBuilder{
-
-    /** The Constant log. */
-    private static final Logger   LOGGER   = LoggerFactory.getLogger(ExcelSheetListBuilder.class);
-
-    //---------------------------------------------------------------
 
     private static final Digester DIGESTER = create(CLASSPATH_URL_PREFIX + "config/excel/definition-rule.xml");
 
@@ -62,7 +56,7 @@ public class ExcelSheetListBuilder{
     }
 
     public static Digester create(String location){
-        LOGGER.debug("will parse:[{}]", location);
+        log.debug("will parse:[{}]", location);
         try{
             Digester digester = DigesterLoader.newLoader(new FromXmlRulesModule(){
 

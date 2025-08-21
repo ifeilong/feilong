@@ -20,45 +20,37 @@ package com.feilong.lib.beanutils.locale;
 import java.text.ParseException;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.ConversionException;
 import com.feilong.lib.beanutils.ConvertUtils;
 
 /**
- * <p>
  * The base class for all standart type locale-sensitive converters.
  * It has {@link LocaleConverter} and {@link com.feilong.lib.beanutils.Converter} implementations,
  * that convert an incoming locale-sensitive Object into an object of correspond type,
  * optionally using a default value or throwing a {@link ConversionException}
  * if a conversion error occurs.
- * </p>
  *
  * @version $Id$
  */
-
+@lombok.extern.slf4j.Slf4j
 public abstract class BaseLocaleConverter implements LocaleConverter{
-
-    /** The Constant log. */
-    private static final Logger LOGGER       = LoggerFactory.getLogger(BaseLocaleConverter.class);
 
     // ----------------------------------------------------- Instance Variables
 
     /** The default value specified to our Constructor, if any. */
-    private Object              defaultValue = null;
+    private Object    defaultValue = null;
 
     /** Should we return the default value on conversion errors? */
-    protected boolean           useDefault   = false;
+    protected boolean useDefault   = false;
 
     /** The locale specified to our Constructor, by default - system locale. */
-    protected Locale            locale       = Locale.getDefault();
+    protected Locale  locale       = Locale.getDefault();
 
     /** The default pattern specified to our Constructor, if any. */
-    protected String            pattern      = null;
+    protected String  pattern      = null;
 
     /** The flag indicating whether the given pattern string is localized or not. */
-    protected boolean           locPattern   = false;
+    protected boolean locPattern   = false;
 
     // ----------------------------------------------------------- Constructors
 
@@ -261,7 +253,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter{
             }
             // symmetric beanutils function allows null
             // so do not: throw new ConversionException("No value specified");
-            LOGGER.debug("Null value specified for conversion, returing null");
+            log.debug("Null value specified for conversion, returing null");
             return null;
         }
 

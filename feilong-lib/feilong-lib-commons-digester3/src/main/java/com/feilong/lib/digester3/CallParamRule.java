@@ -23,14 +23,10 @@ import static java.lang.String.format;
 
 import java.util.Stack;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 /**
- * <p>
  * Rule implementation that saves a parameter for use by a surrounding <code>CallMethodRule<code>.
- * </p>
  * <p>
  * This parameter may be:
  * <ul>
@@ -41,10 +37,8 @@ import org.xml.sax.Attributes;
  * </ul>
  * </p>
  */
+@lombok.extern.slf4j.Slf4j
 public class CallParamRule extends Rule{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CallParamRule.class);
 
     // ----------------------------------------------------------- Constructors
 
@@ -160,8 +154,8 @@ public class CallParamRule extends Rule{
 
             param = getDigester().peek(stackIndex);
 
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(
+            if (log.isDebugEnabled()){
+                log.debug(
                                 format(
                                                 "[CallParamRule]{%s} Save from stack; from stack?%s; object=%s",
                                                 getDigester().getMatch(),

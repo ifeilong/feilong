@@ -17,9 +17,6 @@ package com.feilong.context.propertyeditors;
 
 import java.beans.PropertyEditorSupport;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.net.URIUtil;
 
@@ -43,13 +40,11 @@ import com.feilong.core.net.URIUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.3 move from feilong-spring-core
  */
+@lombok.extern.slf4j.Slf4j
 public class URLDecoderEditor extends PropertyEditorSupport{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(URLDecoderEditor.class);
-
     /** 编码. */
-    private final String        charsetType;
+    private final String charsetType;
 
     //---------------------------------------------------------------
 
@@ -73,7 +68,7 @@ public class URLDecoderEditor extends PropertyEditorSupport{
     @Override
     public void setAsText(String text){
         String newText = URIUtil.decode(text, charsetType);
-        LOGGER.debug("the old text:{},new text:{}", text, newText);
+        log.debug("the old text:{},new text:{}", text, newText);
         super.setValue(newText);
     }
 }

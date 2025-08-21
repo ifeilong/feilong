@@ -16,23 +16,15 @@
 package com.feilong.json.tostring;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.BeanWithSensitiveWordsCase;
 import com.feilong.json.entity.BeanWithSensitiveWordsCaseInput;
 
+@lombok.extern.slf4j.Slf4j
 public class ToStringBeanSensitiveWordsNoCaseTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ToStringBeanSensitiveWordsNoCaseTest.class);
-
-    //---------------------------------------------------------------
-    /**
-     * Name1.
-     */
     @Test
     public void test(){
         BeanWithSensitiveWordsCase beanWithSensitiveWordsCase = new BeanWithSensitiveWordsCase();
@@ -47,7 +39,7 @@ public class ToStringBeanSensitiveWordsNoCaseTest{
 
         //---------------------------------------------------------------
 
-        LOGGER.debug(result);
+        log.debug(result);
         //
         //        //---------------------------------------------------------------
         //

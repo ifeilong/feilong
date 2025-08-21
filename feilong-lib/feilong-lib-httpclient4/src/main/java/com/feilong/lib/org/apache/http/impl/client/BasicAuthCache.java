@@ -35,9 +35,6 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.HttpHost;
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
@@ -58,13 +55,9 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.1
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.SAFE)
 public class BasicAuthCache implements AuthCache{
-
-    /** The Constant log. */
-    private static final Logger         log = LoggerFactory.getLogger(BasicAuthCache.class);
-
-    //---------------------------------------------------------------
 
     private final Map<HttpHost, byte[]> map;
 

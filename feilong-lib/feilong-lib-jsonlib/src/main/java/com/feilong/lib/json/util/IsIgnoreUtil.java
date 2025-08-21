@@ -19,18 +19,14 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 是否忽略的工具类.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public class IsIgnoreUtil{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(IsIgnoreUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private IsIgnoreUtil(){
@@ -62,14 +58,14 @@ public class IsIgnoreUtil{
             readMethod = propertyDescriptor.getReadMethod();
         }catch (Exception e){
             // bug 2565295
-            LOGGER.info("Property '{}' of {} has no read method. SKIPPED", key, beanClass);
+            log.info("Property '{}' of {} has no read method. SKIPPED", key, beanClass);
             return true;
         }
 
         //---------------------------------------------------------------
         //如果 read方法是null ,也忽略
         if (readMethod == null){
-            LOGGER.trace("Property '{}' of {} has no read method. SKIPPED", key, beanClass);
+            log.trace("Property '{}' of {} has no read method. SKIPPED", key, beanClass);
             return true;
         }
         return false;

@@ -18,9 +18,6 @@ package com.feilong.xml;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * XML外部实体注入漏洞(XML External Entity Injection，简称XXE)，该安全问题是由XML组件默认没有禁用外部实体引用导致.
  * 
@@ -32,10 +29,8 @@ import org.slf4j.LoggerFactory;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.1
  */
+@lombok.extern.slf4j.Slf4j
 public final class XXEUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(XXEUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private XXEUtil(){
@@ -103,11 +98,11 @@ public final class XXEUtil{
             //            documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, ""); // compliant
         }catch (ParserConfigurationException e){
             // This should catch a failed setFeature feature
-            LOGGER.info(
+            log.info(
                             "ParserConfigurationException was thrown.The feature '[{}]' is probably not supported by your XML processor.",
                             feature);
         }catch (Exception e){
-            LOGGER.warn("", e);
+            log.warn("", e);
         }
         return documentBuilderFactory;
     }

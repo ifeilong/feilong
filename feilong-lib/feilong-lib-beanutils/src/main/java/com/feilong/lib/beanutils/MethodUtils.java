@@ -26,13 +26,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * <p>
  * Utility reflection methods focused on methods in general rather than properties in particular.
- * </p>
  *
  * <h3>Known Limitations</h3>
  * <h4>Accessing Public Methods In A Default Access Superclass</h4>
@@ -53,11 +48,9 @@ import org.slf4j.LoggerFactory;
  * @version $Id$
  * @deprecated may be can use com.feilong.lib.lang3.reflect.MethodUtils
  */
+@lombok.extern.slf4j.Slf4j
 @Deprecated
 public class MethodUtils{
-
-    /** The Constant log. */
-    private static final Logger                                   LOGGER                  = LoggerFactory.getLogger(MethodUtils.class);
 
     // --------------------------------------------------------- Private Methods
 
@@ -999,8 +992,8 @@ public class MethodUtils{
      * @return The accessible method
      */
     public static Method getMatchingAccessibleMethod(final Class<?> clazz,final String methodName,final Class<?>[] parameterTypes){
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("Matching name=" + methodName + " on " + clazz);
+        if (log.isTraceEnabled()){
+            log.trace("Matching name=" + methodName + " on " + clazz);
         }
         final MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, false);
 
@@ -1014,9 +1007,9 @@ public class MethodUtils{
             }
 
             method = clazz.getMethod(methodName, parameterTypes);
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("Found straight match: " + method);
-                LOGGER.trace("isPublic:" + Modifier.isPublic(method.getModifiers()));
+            if (log.isTraceEnabled()){
+                log.trace("Found straight match: " + method);
+                log.trace("isPublic:" + Modifier.isPublic(method.getModifiers()));
             }
 
             setMethodAccessible(method); // Default access superclass workaround
@@ -1035,9 +1028,9 @@ public class MethodUtils{
         for (Method method2 : methods){
             if (method2.getName().equals(methodName)){
                 // log some trace information
-                if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace("Found matching name:");
-                    LOGGER.trace(method2.toString());
+                if (log.isTraceEnabled()){
+                    log.trace("Found matching name:");
+                    log.trace(method2.toString());
                 }
 
                 // compare parameters
@@ -1046,13 +1039,13 @@ public class MethodUtils{
                 if (methodParamSize == paramSize){
                     boolean match = true;
                     for (int n = 0; n < methodParamSize; n++){
-                        if (LOGGER.isTraceEnabled()){
-                            LOGGER.trace("Param=" + parameterTypes[n].getName());
-                            LOGGER.trace("Method=" + methodsParams[n].getName());
+                        if (log.isTraceEnabled()){
+                            log.trace("Param=" + parameterTypes[n].getName());
+                            log.trace("Method=" + methodsParams[n].getName());
                         }
                         if (!isAssignmentCompatible(methodsParams[n], parameterTypes[n])){
-                            if (LOGGER.isTraceEnabled()){
-                                LOGGER.trace(methodsParams[n] + " is not assignable from " + parameterTypes[n]);
+                            if (log.isTraceEnabled()){
+                                log.trace(methodsParams[n] + " is not assignable from " + parameterTypes[n]);
                             }
                             match = false;
                             break;
@@ -1063,8 +1056,8 @@ public class MethodUtils{
                         // get accessible version of method
                         final Method method = getAccessibleMethod(clazz, method2);
                         if (method != null){
-                            if (LOGGER.isTraceEnabled()){
-                                LOGGER.trace(method + " accessible version of " + method2);
+                            if (log.isTraceEnabled()){
+                                log.trace(method + " accessible version of " + method2);
                             }
                             setMethodAccessible(method); // Default access superclass workaround
                             myCost = getTotalTransformationCost(parameterTypes, method.getParameterTypes());
@@ -1074,7 +1067,7 @@ public class MethodUtils{
                             }
                         }
 
-                        LOGGER.trace("Couldn't find accessible method.");
+                        log.trace("Couldn't find accessible method.");
                     }
                 }
             }
@@ -1083,7 +1076,7 @@ public class MethodUtils{
             cacheMethod(md, bestMatch);
         }else{
             // didn't find a match
-            LOGGER.trace("No match found.");
+            log.trace("No match found.");
         }
 
         return bestMatch;
@@ -1133,11 +1126,11 @@ public class MethodUtils{
                     vulnerableJVM = true;
                 }
                 if (vulnerableJVM){
-                    LOGGER.warn("Current Security Manager restricts use of workarounds for reflection bugs " + " in pre-1.4 JVMs.");
+                    log.warn("Current Security Manager restricts use of workarounds for reflection bugs " + " in pre-1.4 JVMs.");
                 }
                 loggedAccessibleWarning = true;
             }
-            LOGGER.debug("Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", se);
+            log.debug("Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", se);
         }
     }
 
@@ -1309,8 +1302,8 @@ public class MethodUtils{
         }else if (Character.class.equals(wrapperType)){
             return char.class;
         }else{
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("Not a known primitive wrapper class: " + wrapperType);
+            if (log.isDebugEnabled()){
+                log.debug("Not a known primitive wrapper class: " + wrapperType);
             }
             return null;
         }

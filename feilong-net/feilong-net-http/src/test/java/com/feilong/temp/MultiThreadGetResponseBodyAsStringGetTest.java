@@ -23,6 +23,7 @@ import com.feilong.core.lang.ThreadUtil;
 import com.feilong.net.http.HttpClientUtil;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class MultiThreadGetResponseBodyAsStringGetTest extends AbstractTest{
 
     @Test
@@ -33,7 +34,7 @@ public class MultiThreadGetResponseBodyAsStringGetTest extends AbstractTest{
             @Override
             public void run(){
                 String uri = "http://127.0.0.1:8084?name=jinxin&age=18";
-                LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
+                log.debug(HttpClientUtil.get(uri, toMap("country", "china")));
 
             }
         }, 20);

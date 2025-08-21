@@ -41,7 +41,7 @@ public class FormatWithIncludesTest extends AbstractJsonTest{
     @Test
     public void test(){
         String formatWithIncludes = JsonUtil.formatWithIncludes(list, "name", "age");
-        // LOGGER.debug(formatWithIncludes);
+        // log.debug(formatWithIncludes);
 
         assertThat(
                         formatWithIncludes,
@@ -63,7 +63,7 @@ public class FormatWithIncludesTest extends AbstractJsonTest{
 
         String formatWithIncludes = JsonUtil.format(list, javaToJsonConfig);
 
-        // LOGGER.debug(formatWithIncludes);
+        // log.debug(formatWithIncludes);
         assertThat(
                         formatWithIncludes,
                         allOf(
@@ -91,7 +91,7 @@ public class FormatWithIncludesTest extends AbstractJsonTest{
 
         String formatWithIncludes = JsonUtil.format(list, javaToJsonConfig);
 
-        //LOGGER.debug(formatWithIncludes);
+        //log.debug(formatWithIncludes);
         assertThat(
                         formatWithIncludes,
                         allOf(containsString("[\n" + "        {\"name\": \"feilong1\"},\n" + "        {\"age\": 240}\n" + "    ]")));
@@ -125,7 +125,7 @@ public class FormatWithIncludesTest extends AbstractJsonTest{
     @Test
     public void test1(){
         String formatWithIncludes = JsonUtil.formatWithIncludes(toList("2,5,8", "2,5,9"));
-        //LOGGER.debug(formatWithIncludes);
+        //log.debug(formatWithIncludes);
 
         assertThat(formatWithIncludes, allOf(containsString("\"2,5,8\""), containsString("\"2,5,9\"")));
     }
@@ -134,7 +134,7 @@ public class FormatWithIncludesTest extends AbstractJsonTest{
     public void testFormatWithIncludes(){
         Object[][] objects = { { "feilong shoe", "500", 1 }, { "feilong shoe2", "5000", 1 } };
         String formatWithIncludes = JsonUtil.formatWithIncludes(objects);
-        //LOGGER.debug(formatWithIncludes);
+        //log.debug(formatWithIncludes);
 
         assertThat(formatWithIncludes, allOf(containsString("\"feilong shoe\",")));
     }

@@ -22,18 +22,19 @@ import org.junit.Test;
 import com.feilong.security.AbstractSecurityTest;
 import com.feilong.security.oneway.Sm3Util;
 
+@lombok.extern.slf4j.Slf4j
 public class Sm3UtilTest extends AbstractSecurityTest{
 
     @Test
     public void encode11(){
         String json = "{\"name\":\"Marydon\",\"website\":\"http://www.cnblogs.com/Marydon20170307\"}";
-        LOGGER.debug(debugSecurityValue(Sm3Util.encode(json)));
+        log.debug(debugSecurityValue(Sm3Util.encode(json)));
     }
 
     @Test
     public void encode112(){
         String json = "你好";
-        LOGGER.debug(debugSecurityValue(Sm3Util.encode(json)));
+        log.debug(debugSecurityValue(Sm3Util.encode(json)));
     }
 
     @Test

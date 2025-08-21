@@ -31,9 +31,6 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.HttpException;
 import com.feilong.lib.org.apache.http.HttpHost;
 import com.feilong.lib.org.apache.http.HttpRequest;
@@ -65,11 +62,9 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.3
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.SAFE_CONDITIONAL)
 class InternalHttpClient extends CloseableHttpClient implements Configurable{
-
-    /** The Constant log. */
-    private static final Logger               log = LoggerFactory.getLogger(InternalHttpClient.class);
 
     private final ClientExecChain             execChain;
 

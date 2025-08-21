@@ -22,8 +22,6 @@ import static com.feilong.core.util.ResourceBundleUtil.toProperties;
 import java.util.Properties;
 
 import org.apache.velocity.app.VelocityEngine;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
@@ -34,10 +32,8 @@ import com.feilong.json.JsonUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.5
  */
+@lombok.extern.slf4j.Slf4j
 class VelocityEngineBuilder{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(VelocityEngineBuilder.class);
 
     /** Don't let anyone instantiate this class. */
     private VelocityEngineBuilder(){
@@ -68,8 +64,8 @@ class VelocityEngineBuilder{
         Validate.notEmpty(properties, message, configFileInClassPath);
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("will use [{}] init velocity, properties:{}", configFileInClassPath, JsonUtil.toString(toMap(properties)));
+        if (log.isDebugEnabled()){
+            log.debug("will use [{}] init velocity, properties:{}", configFileInClassPath, JsonUtil.toString(toMap(properties)));
         }
         //---------------------------------------------------------------
         // 单列模式 Velocity.init(properties); RuntimeSingleton.isInitialized()

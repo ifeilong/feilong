@@ -23,9 +23,6 @@ import static java.util.Collections.emptyList;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 
@@ -35,10 +32,8 @@ import com.feilong.core.lang.StringUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
+@lombok.extern.slf4j.Slf4j
 public final class ItemSrcListResolver{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ItemSrcListResolver.class);
 
     /** Don't let anyone instantiate this class. */
     private ItemSrcListResolver(){
@@ -82,8 +77,8 @@ public final class ItemSrcListResolver{
         }
         //---------------------------------------------------------------
         if (isNullOrEmpty(list)){
-            if (LOGGER.isWarnEnabled()){
-                LOGGER.warn(
+            if (log.isWarnEnabled()){
+                log.warn(
                                 "list isNullOrEmpty,need list to create links,now return emptyList(),blockContent info:[{}],domain:[{}]",
                                 blockContent,
                                 domain);
@@ -140,8 +135,8 @@ public final class ItemSrcListResolver{
         int noRepeatitemListSize = noRepeatItemList.size();
         int itemSrcListSize = itemSrcList.size();
 
-        if (noRepeatitemListSize != itemSrcListSize && LOGGER.isWarnEnabled()){
-            LOGGER.warn("noRepeatList.size:[{}]!= srcList.size:[{}],blockContent:{}", noRepeatitemListSize, itemSrcListSize, blockContent);
+        if (noRepeatitemListSize != itemSrcListSize && log.isWarnEnabled()){
+            log.warn("noRepeatList.size:[{}]!= srcList.size:[{}],blockContent:{}", noRepeatitemListSize, itemSrcListSize, blockContent);
         }
         return noRepeatItemList;
     }

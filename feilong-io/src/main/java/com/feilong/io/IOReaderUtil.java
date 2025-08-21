@@ -39,9 +39,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
@@ -57,12 +54,8 @@ import com.feilong.validator.ValidatorUtil;
  * @since 1.0.6
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@lombok.extern.slf4j.Slf4j
 public final class IOReaderUtil{
-
-    /** The Constant log. */
-    private static final Logger LOGGER               = LoggerFactory.getLogger(IOReaderUtil.class);
-
-    //---------------------------------------------------------------
 
     /** 默认编码. */
     private static final String DEFAULT_CHARSET_NAME = UTF8;
@@ -257,8 +250,8 @@ public final class IOReaderUtil{
     public static String readToString(File file,String charsetName){
         Validate.notNull(file, "file can't be null!");
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("will read file:[{}] to String,use charsetName:[{}]", file.getAbsolutePath(), charsetName);
+        if (log.isDebugEnabled()){
+            log.debug("will read file:[{}] to String,use charsetName:[{}]", file.getAbsolutePath(), charsetName);
         }
         //---------------------------------------------------------------
         try (FileInputStream fileInputStream = FileUtil.getFileInputStream(file)){
@@ -315,8 +308,8 @@ public final class IOReaderUtil{
         Validate.notNull(fileInputStream, "inputStream can't be null!");
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("start read fileInputStream:[{}] to String,use charsetName:[{}]", fileInputStream, charsetName);
+        if (log.isDebugEnabled()){
+            log.debug("start read fileInputStream:[{}] to String,use charsetName:[{}]", fileInputStream, charsetName);
         }
         //---------------------------------------------------------------
         long beginTimeMillis = System.currentTimeMillis();
@@ -342,8 +335,8 @@ public final class IOReaderUtil{
 
             //---------------------------------------------------------------
             String result = sb.toString();
-            if (LOGGER.isInfoEnabled()){
-                LOGGER.info(
+            if (log.isInfoEnabled()){
+                log.info(
                                 "end read fileInputStream:[{}],use time: [{}]",
                                 fileInputStream,
                                 formatDurationUseBeginTimeMillis(beginTimeMillis));
@@ -374,7 +367,7 @@ public final class IOReaderUtil{
      * <pre class="code">
      * String spec = "https://www.jd.com/robots.txt";
      * InputStream openStream = URLUtil.openStream(URLUtil.toURL(spec));
-     * LOGGER.debug(IOReaderUtil.readToString(openStream, UTF8));
+     * log.debug(IOReaderUtil.readToString(openStream, UTF8));
      * </pre>
      * 
      * <b>返回:</b>
@@ -411,14 +404,14 @@ public final class IOReaderUtil{
 
         long beginTimeMillis = System.currentTimeMillis();
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("start read inputStream:[{}] to String,use charsetName:[{}]", inputStream, charsetName);
+        if (log.isDebugEnabled()){
+            log.debug("start read inputStream:[{}] to String,use charsetName:[{}]", inputStream, charsetName);
         }
         //---------------------------------------------------------------
         try{
             String result = InputStreamUtil.toString(inputStream, defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
-            if (LOGGER.isInfoEnabled()){
-                LOGGER.info("end read inputStream:[{}],use time: [{}]", inputStream, formatDurationUseBeginTimeMillis(beginTimeMillis));
+            if (log.isInfoEnabled()){
+                log.info("end read inputStream:[{}],use time: [{}]", inputStream, formatDurationUseBeginTimeMillis(beginTimeMillis));
             }
             return result;
         }finally{
@@ -955,8 +948,8 @@ public final class IOReaderUtil{
 
         ReaderConfig useReaderConfig = defaultIfNull(readerConfig, ReaderConfig.DEFAULT);
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("startReadReader:[{}], readerConfig:[{}]", reader, JsonUtil.toString(useReaderConfig));
+        if (log.isDebugEnabled()){
+            log.debug("startReadReader:[{}], readerConfig:[{}]", reader, JsonUtil.toString(useReaderConfig));
         }
 
         //---------------------------------------------------------------
@@ -979,8 +972,8 @@ public final class IOReaderUtil{
             IOUtil.closeQuietly(reader);
         }
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
+        if (log.isInfoEnabled()){
+            log.info(
                             "endReadReader:[{}],readerConfig:[{}],use time: [{}]",
                             reader,
                             JsonUtil.toString(useReaderConfig),
@@ -1036,8 +1029,8 @@ public final class IOReaderUtil{
         Validate.notNull(lineNumberReaderResolver, "lineNumberReaderResolver can't be null!");
 
         //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("will resolverFile location:[{}],use lineNumberReaderResolver:[{}]", location, lineNumberReaderResolver);
+        if (log.isTraceEnabled()){
+            log.trace("will resolverFile location:[{}],use lineNumberReaderResolver:[{}]", location, lineNumberReaderResolver);
         }
         //---------------------------------------------------------------
         InputStream inputStream = getInputStream(location);
@@ -1063,8 +1056,8 @@ public final class IOReaderUtil{
         Validate.notNull(lineNumberReaderResolver, "lineNumberReaderResolver can't be null!");
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("will resolverFile file:[{}], lineNumberReaderResolver:[{}]", file.getAbsolutePath(), lineNumberReaderResolver);
+        if (log.isDebugEnabled()){
+            log.debug("will resolverFile file:[{}], lineNumberReaderResolver:[{}]", file.getAbsolutePath(), lineNumberReaderResolver);
         }
         //---------------------------------------------------------------
         try (Reader reader = new FileReader(file);){
@@ -1142,8 +1135,8 @@ public final class IOReaderUtil{
         Validate.notNull(lineNumberReaderResolver, "lineNumberReaderResolver can't be null!");
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("start resolverFile reader:[{}], lineNumberReaderResolver:[{}]", reader, lineNumberReaderResolver);
+        if (log.isDebugEnabled()){
+            log.debug("start resolverFile reader:[{}], lineNumberReaderResolver:[{}]", reader, lineNumberReaderResolver);
         }
 
         long beginTimeMillis = System.currentTimeMillis();
@@ -1163,9 +1156,9 @@ public final class IOReaderUtil{
             IOUtil.closeQuietly(reader);
         }
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             String format = "end resolverFile reader:[{}],lineNumberReaderResolver:[{}],use time: [{}]";
-            LOGGER.info(format, reader, lineNumberReaderResolver, formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.info(format, reader, lineNumberReaderResolver, formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 
@@ -1181,8 +1174,8 @@ public final class IOReaderUtil{
     private static InputStream getInputStream(String location){
         Validate.notBlank(location, "location can't be blank!");
         //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("will read location:[{}] to String", location);
+        if (log.isTraceEnabled()){
+            log.trace("will read location:[{}] to String", location);
         }
         //---------------------------------------------------------------
         return InputStreamUtil.getInputStream(location);

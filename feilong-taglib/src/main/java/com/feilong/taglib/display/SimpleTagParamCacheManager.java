@@ -20,9 +20,6 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.taglib.SimpleTagStringCacheManager;
 
 /**
@@ -35,11 +32,9 @@ import com.feilong.taglib.SimpleTagStringCacheManager;
  * @deprecated pls use {@link SimpleTagStringCacheManager}
  */
 //XXX 将来可能会有更好的做法
+@lombok.extern.slf4j.Slf4j
 @Deprecated
 public final class SimpleTagParamCacheManager{
-
-    /** The Constant LOGGER. */
-    private static final Logger                  LOGGER       = LoggerFactory.getLogger(SimpleTagParamCacheManager.class);
 
     /**
      * 设置缓存是否开启.
@@ -108,7 +103,7 @@ public final class SimpleTagParamCacheManager{
     @SuppressWarnings("unchecked")
     private static <V> V getContentFromCache(CacheParam cacheParam){
         if (!CACHE_ENABLE){
-            LOGGER.info("the cache status is disable!");
+            log.info("the cache status is disable!");
             return null;
         }
 
@@ -119,11 +114,11 @@ public final class SimpleTagParamCacheManager{
         String name = cacheParam.getClass().getSimpleName();
 
         if (CACHE.containsKey(cacheParam)){
-            LOGGER.debug("cacheSize:[{}],[{}](hashcode:[{}]),hit cache,get from cache", size, name, hashCode);
+            log.debug("cacheSize:[{}],[{}](hashcode:[{}]),hit cache,get from cache", size, name, hashCode);
             return (V) CACHE.get(cacheParam);
         }
 
-        LOGGER.debug("cacheSize:[{}],cache not contains [{}](hashcode:[{}]),will do parse", size, name, hashCode);
+        log.debug("cacheSize:[{}],cache not contains [{}](hashcode:[{}]),will do parse", size, name, hashCode);
         return null;
     }
 

@@ -24,9 +24,6 @@ import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.NumberFormat;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.NumberPattern;
 import com.feilong.core.Validate;
 
@@ -45,10 +42,8 @@ import com.feilong.core.Validate;
  * @see NumberPattern
  * @since 1.0.2
  */
+@lombok.extern.slf4j.Slf4j
 public final class NumberFormatUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(NumberFormatUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private NumberFormatUtil(){
@@ -133,9 +128,9 @@ public final class NumberFormatUtil{
 
         String result = decimalFormat.format(value);
 
-        if (LOGGER.isTraceEnabled()){
+        if (log.isTraceEnabled()){
             String message = "input:[{}],with:[{}]=[{}],localizedPattern:[{}]";
-            LOGGER.trace(message, value, numberPattern, result, decimalFormat.toLocalizedPattern());
+            log.trace(message, value, numberPattern, result, decimalFormat.toLocalizedPattern());
         }
         return result;
     }

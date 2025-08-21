@@ -58,7 +58,7 @@ import com.feilong.lib.lang3.StringUtils;
  *     crmAddpointCommand.setOpenId("feilong888888ky");
  *     crmAddpointCommand.setOrderCode("fl123456");
  * 
- *     LOGGER.debug(JsonUtil.format(crmAddpointCommand));
+ *     log.debug(JsonUtil.format(crmAddpointCommand));
  * }
  * 
  * </pre>
@@ -103,7 +103,7 @@ import com.feilong.lib.lang3.StringUtils;
  *     <span style=
 "color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
  * 
- *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
+ *     log.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
  * }
  * </pre>
  * 

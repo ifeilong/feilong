@@ -28,15 +28,16 @@ import com.feilong.test.AbstractTest;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.7
  */
+@lombok.extern.slf4j.Slf4j
 public class PagerParamsTest extends AbstractTest{
 
     @Test
     public void testHashCode(){
         PagerParams pagerParams1 = new PagerParams(0, "a");
 
-        LOGGER.debug("" + pagerParams1.hashCode());
+        log.debug("" + pagerParams1.hashCode());
         pagerParams1.setCharsetType(null);
-        LOGGER.debug("" + pagerParams1.hashCode());
+        log.debug("" + pagerParams1.hashCode());
     }
 
     @SuppressWarnings({ "cast" })

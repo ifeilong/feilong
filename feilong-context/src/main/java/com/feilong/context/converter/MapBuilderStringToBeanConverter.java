@@ -19,9 +19,6 @@ import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.context.converter.builder.AliasBeanBuilder;
 import com.feilong.context.converter.builder.BeanBuilder;
 import com.feilong.context.converter.builder.CommonBeanBuilder;
@@ -67,12 +64,8 @@ import com.feilong.json.JsonUtil;
  * @since 1.11.2 rename from AbstractParse
  * @since 1.11.3 rename
  */
+@lombok.extern.slf4j.Slf4j
 public class MapBuilderStringToBeanConverter<T> extends AbstractBeanClassStringToBeanConverter<T>{
-
-    /** The Constant LOGGER. */
-    private static final Logger    LOGGER = LoggerFactory.getLogger(MapBuilderStringToBeanConverter.class);
-
-    //---------------------------------------------------------------
 
     /** 名字和值的map 构造器. */
     private NameAndValueMapBuilder nameAndValueMapBuilder;
@@ -119,8 +112,8 @@ public class MapBuilderStringToBeanConverter<T> extends AbstractBeanClassStringT
         // 解析 xml,获得我们需要的 var name 和值.
         Map<String, String> nameAndValueMap = nameAndValueMapBuilder.build(inputString);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("will build [{}], use data:{}", beanClass.getName(), JsonUtil.toString(sortMapByKeyAsc(nameAndValueMap)));
+        if (log.isDebugEnabled()){
+            log.debug("will build [{}], use data:{}", beanClass.getName(), JsonUtil.toString(sortMapByKeyAsc(nameAndValueMap)));
         }
         //---------------------将nameAndValueMap转成对象.------------------------------------------
         return beanBuilder.build(nameAndValueMap, ConstructorUtil.newInstance(beanClass));

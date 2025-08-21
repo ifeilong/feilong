@@ -23,12 +23,13 @@ import org.junit.Test;
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatStringTest extends AbstractJsonTest{
 
     @Test
     public void formatArray2(){
         String json = "[{'name':'get'},{'name':'set'}]";
-        LOGGER.debug(JsonUtil.format(json));
+        log.debug(JsonUtil.format(json));
     }
 
     @Test

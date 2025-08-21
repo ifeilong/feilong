@@ -25,9 +25,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.BeanUtils;
 import com.feilong.lib.beanutils.FastHashMap;
 import com.feilong.lib.beanutils.locale.converters.BigDecimalLocaleConverter;
@@ -44,11 +41,9 @@ import com.feilong.lib.beanutils.locale.converters.SqlTimestampLocaleConverter;
 import com.feilong.lib.beanutils.locale.converters.StringLocaleConverter;
 
 /**
- * <p>
  * Utility methods for converting locale-sensitive String scalar values to objects of the
  * specified Class, String arrays to arrays of the specified Class and
  * object to locale-sensitive String scalar value.
- * </p>
  *
  * <p>
  * This class provides the implementations used by the static utility methods in
@@ -90,12 +85,8 @@ import com.feilong.lib.beanutils.locale.converters.StringLocaleConverter;
  * @since 1.7
  * @version $Id$
  */
+@lombok.extern.slf4j.Slf4j
 public class LocaleConvertUtilsBean{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(LocaleConvertUtilsBean.class);
-
-    //---------------------------------------------------------------
 
     /**
      * Gets singleton instance.
@@ -302,8 +293,8 @@ public class LocaleConvertUtilsBean{
      */
     public Object convert(final String value,final Class<?> clazz,final Locale locale,final String pattern){
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
+        if (log.isDebugEnabled()){
+            log.debug(
                             "Convert string " + value + " to class " + clazz.getName() + " using " + locale + " locale and " + pattern
                                             + " pattern");
         }
@@ -315,8 +306,8 @@ public class LocaleConvertUtilsBean{
             converter = lookup(String.class, locale);
             targetClass = String.class;
         }
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("  Using converter " + converter);
+        if (log.isTraceEnabled()){
+            log.trace("  Using converter " + converter);
         }
 
         return (converter.convert(targetClass, value, pattern));
@@ -386,8 +377,8 @@ public class LocaleConvertUtilsBean{
         if (clazz.isArray()){
             type = clazz.getComponentType();
         }
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
+        if (log.isDebugEnabled()){
+            log.debug(
                             "Convert String[" + values.length + "] to class " + type.getName() + "[] using " + locale + " locale and "
                                             + pattern + " pattern");
         }
@@ -471,8 +462,8 @@ public class LocaleConvertUtilsBean{
 
         final LocaleConverter converter = (LocaleConverter) lookup(locale).get(clazz);
 
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("LocaleConverter:" + converter);
+        if (log.isTraceEnabled()){
+            log.trace("LocaleConverter:" + converter);
         }
 
         return converter;

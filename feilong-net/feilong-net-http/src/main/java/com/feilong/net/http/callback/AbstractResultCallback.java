@@ -27,9 +27,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.StatusLine;
@@ -46,12 +43,9 @@ import com.feilong.net.http.builder.HttpResponseUtil;
  * @param <T>
  * @since 3.5.0
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractResultCallback<T> implements ResultCallback<T>{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractResultCallback.class);
-
-    //---------------------------------------------------------------
     protected com.feilong.net.http.HttpResponse buildHttpResponse(
                     HttpRequest httpRequest,
                     @SuppressWarnings("unused") HttpUriRequest httpUriRequest,
@@ -60,8 +54,8 @@ public abstract class AbstractResultCallback<T> implements ResultCallback<T>{
                     Date beginDate){
         com.feilong.net.http.HttpResponse resultResponse = build(beginDate, httpResponse);
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
+        if (log.isInfoEnabled()){
+            log.info(
                             autoLog(
                                             httpRequest,
                                             resultResponse,

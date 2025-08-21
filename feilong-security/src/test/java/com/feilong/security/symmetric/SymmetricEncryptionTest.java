@@ -26,15 +26,16 @@ import org.junit.Test;
 
 import com.feilong.security.AbstractSecurityTest;
 
+@lombok.extern.slf4j.Slf4j
 public class SymmetricEncryptionTest extends AbstractSecurityTest{
 
     @Test
     public void base64String(){
-        LOGGER.debug("SymmetricType.ARCFOUR:{}", new SymmetricEncryption(ARCFOUR, KEY).encryptBase64(testString, UTF8));
-        LOGGER.debug("SymmetricType.Blowfish:{}", new SymmetricEncryption(Blowfish, KEY).encryptBase64(testString, UTF8));
-        LOGGER.debug("SymmetricType.DES:{}", new SymmetricEncryption(DES, KEY).encryptBase64(testString, UTF8));
-        LOGGER.debug("SymmetricType.DESede:{}", new SymmetricEncryption(DESede, KEY).encryptBase64(testString, UTF8));
-        LOGGER.debug("SymmetricType.AES:{}", new SymmetricEncryption(AES, KEY).encryptBase64(testString, UTF8));
+        log.debug("SymmetricType.ARCFOUR:{}", new SymmetricEncryption(ARCFOUR, KEY).encryptBase64(testString, UTF8));
+        log.debug("SymmetricType.Blowfish:{}", new SymmetricEncryption(Blowfish, KEY).encryptBase64(testString, UTF8));
+        log.debug("SymmetricType.DES:{}", new SymmetricEncryption(DES, KEY).encryptBase64(testString, UTF8));
+        log.debug("SymmetricType.DESede:{}", new SymmetricEncryption(DESede, KEY).encryptBase64(testString, UTF8));
+        log.debug("SymmetricType.AES:{}", new SymmetricEncryption(AES, KEY).encryptBase64(testString, UTF8));
     }
 
 }

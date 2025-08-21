@@ -19,9 +19,6 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.excel.DataConvertorConfig;
 import com.feilong.excel.definition.ExcelCell;
@@ -34,12 +31,9 @@ import com.feilong.lib.ognl.OgnlRuntime;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 class PropertyTypeDetector{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropertyTypeDetector.class);
-
-    //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */
     private PropertyTypeDetector(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -86,7 +80,7 @@ class PropertyTypeDetector{
      */
     private static Class<?> detect(Object object,String dataName) throws Exception{
         if (object instanceof Map){
-            LOGGER.debug("detect for Map[{}] with Key {}.", object, dataName);
+            log.debug("detect for Map[{}] with Key {}.", object, dataName);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) object;
             int delim = dataName.indexOf('.');
@@ -97,7 +91,7 @@ class PropertyTypeDetector{
         }
 
         //---------------------------------------------------------------
-        LOGGER.trace("getPropertyType [{}] property {}.", object, dataName);
+        log.trace("getPropertyType [{}] property {}.", object, dataName);
         return getPropertyTypeWithClass(object.getClass(), dataName);
     }
 

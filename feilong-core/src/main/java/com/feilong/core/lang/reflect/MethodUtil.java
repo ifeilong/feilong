@@ -19,9 +19,6 @@ import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import java.lang.reflect.Method;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.lib.lang3.reflect.MethodUtils;
@@ -151,12 +148,8 @@ import com.feilong.lib.lang3.reflect.MethodUtils;
  * @see java.util.ServiceLoader jdk1.6 ServiceLoader
  * @since 1.0.7
  */
+@lombok.extern.slf4j.Slf4j
 public final class MethodUtil{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(MethodUtil.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private MethodUtil(){
@@ -210,8 +203,8 @@ public final class MethodUtil{
      * <pre class="code">
      * 
      * public void testInvokeMethod(){
-     *     LOGGER.debug("" + MethodUtil.invokeMethod(new OverloadMethod(), "age", 5));
-     *     LOGGER.debug("" + MethodUtil.invokeMethod(new OverloadMethod(), "age", Integer.parseInt("5")));
+     *     log.debug("" + MethodUtil.invokeMethod(new OverloadMethod(), "age", 5));
+     *     log.debug("" + MethodUtil.invokeMethod(new OverloadMethod(), "age", Integer.parseInt("5")));
      * }
      * </pre>
      * 
@@ -556,7 +549,7 @@ public final class MethodUtil{
         try{
             return (T) MethodUtils.invokeStaticMethod(klass, staticMethodName, args, parameterTypes);
         }catch (NoSuchMethodException e){
-            LOGGER.trace(
+            log.trace(
                             "from class:[{}],can't find [public static {}()] method,cause exception: [{}],will try to find [private static] method",
                             klass.getSimpleName(),
                             staticMethodName,
@@ -598,8 +591,8 @@ public final class MethodUtil{
 
             //---------------------------------------------------------------
 
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("bingo,from class:[{}],find name [{}] method", klass.getSimpleName(), staticMethodName);
+            if (log.isTraceEnabled()){
+                log.trace("bingo,from class:[{}],find name [{}] method", klass.getSimpleName(), staticMethodName);
             }
 
             //---------------------------------------------------------------

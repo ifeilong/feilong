@@ -27,20 +27,21 @@ import com.feilong.net.http.HttpMethodType;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class PostTest extends AbstractTest{
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084/post";
-        LOGGER.debug(HttpClientUtil.get(uri));
+        log.debug(HttpClientUtil.get(uri));
     }
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testGetResponseBodyAsStr22ing(){
         String uri = "http://test.mapemall.com/pay/redirect/doku";
-        LOGGER.debug(HttpClientUtil.get(uri));
+        log.debug(HttpClientUtil.get(uri));
     }
 
     @Test
@@ -50,7 +51,7 @@ public class PostTest extends AbstractTest{
 
         ConnectionConfig connectionConfig = new ConnectionConfig();
         connectionConfig.setTimeoutRetryCount(1);
-        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri, connectionConfig));
+        log.debug(HttpClientUtil.getResponseBodyAsString(uri, connectionConfig));
     }
 
     @Test
@@ -61,14 +62,14 @@ public class PostTest extends AbstractTest{
         ConnectionConfig connectionConfig = new ConnectionConfig();
         connectionConfig.setTimeoutRetryCount(0);
         //    connectionConfig.setTimeoutRetryCount(1);
-        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri, connectionConfig));
+        log.debug(HttpClientUtil.getResponseBodyAsString(uri, connectionConfig));
     }
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testGetResponseBodyAsString1(){
         String uri = "http://127.0.0.1:8084/post1";
-        LOGGER.debug(HttpClientUtil.post(uri, toMap("name", "金鑫", "age", "18")));
+        log.debug(HttpClientUtil.post(uri, toMap("name", "金鑫", "age", "18")));
     }
 
     @Test
@@ -81,7 +82,7 @@ public class PostTest extends AbstractTest{
         //               (其他参数略去......)
         //            }
         String uri = "http://test.mapemall.com/pay/redirect/doku";
-        LOGGER.debug(HttpClientUtil.post(uri, toMap("PAYMENTCHANNEL", "01")));
+        log.debug(HttpClientUtil.post(uri, toMap("PAYMENTCHANNEL", "01")));
     }
 
     @Test
@@ -95,6 +96,6 @@ public class PostTest extends AbstractTest{
         httpRequest.setRequestBody(JsonUtil.toString(toMap("name", "feilong")));
 
         String result = HttpClientUtil.getResponseBodyAsString(httpRequest);
-        LOGGER.debug(result);
+        log.debug(result);
     }
 }

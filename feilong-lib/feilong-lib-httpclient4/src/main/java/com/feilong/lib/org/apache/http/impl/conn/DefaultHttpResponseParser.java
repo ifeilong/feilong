@@ -29,9 +29,6 @@ package com.feilong.lib.org.apache.http.impl.conn;
 
 import java.io.IOException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.HttpException;
 import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.HttpResponseFactory;
@@ -52,9 +49,8 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  *
  * @since 4.2
  */
+@lombok.extern.slf4j.Slf4j
 public class DefaultHttpResponseParser extends AbstractMessageParser<HttpResponse>{
-
-    private static final Logger       log = LoggerFactory.getLogger(DefaultHttpResponseParser.class);
 
     private final HttpResponseFactory responseFactory;
 

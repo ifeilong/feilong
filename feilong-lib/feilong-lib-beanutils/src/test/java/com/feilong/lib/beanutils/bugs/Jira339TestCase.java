@@ -20,9 +20,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.BeanUtils;
 
 import junit.framework.Test;
@@ -33,10 +30,8 @@ import junit.framework.TestSuite;
  * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-339">https://issues.apache.org/jira/browse/BEANUTILS-339</a>
  */
+@lombok.extern.slf4j.Slf4j
 public class Jira339TestCase extends TestCase{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Jira339TestCase.class);
 
     /**
      * Create a test case with the specified name.
@@ -96,7 +91,7 @@ public class Jira339TestCase extends TestCase{
         try{
             BeanUtils.setProperty(bean, "comparator", null);
         }catch (final Throwable t){
-            LOGGER.error("Failed: " + t.getMessage(), t);
+            log.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
         assertNull("TestBean comparator should be null", bean.getComparator());
@@ -113,7 +108,7 @@ public class Jira339TestCase extends TestCase{
             properties.put("comparator", null);
             BeanUtils.populate(bean, properties);
         }catch (final Throwable t){
-            LOGGER.error("Failed: " + t.getMessage(), t);
+            log.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
         assertNull("TestBean comparator should be null", bean.getComparator());

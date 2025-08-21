@@ -24,9 +24,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.net.URLUtil;
 
@@ -77,10 +74,8 @@ import com.feilong.core.net.URLUtil;
  * @see "org.springframework.core.io.ClassPathResource#ClassPathResource(String, ClassLoader)"
  * @since 1.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public final class ClassLoaderUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClassLoaderUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ClassLoaderUtil(){
@@ -191,7 +186,7 @@ public final class ClassLoaderUtil{
         String usePath = startsWithSlash ? StringUtil.substring(resourceName, 1) : resourceName;
         URL result = classLoader.getResource(usePath);
 
-        LOGGER.trace("search resource:[\"{}\"] in [{}],result:[{}]", resourceName, classLoader, result);
+        log.trace("search resource:[\"{}\"] in [{}],result:[{}]", resourceName, classLoader, result);
         return result;
     }
 
@@ -260,15 +255,15 @@ public final class ClassLoaderUtil{
         for (ClassLoader classLoader : classLoaderList){
             URL url = getResource(classLoader, resourceName);
             if (null == url){
-                LOGGER.trace(getLogInfo(resourceName, classLoader, false));
+                log.trace(getLogInfo(resourceName, classLoader, false));
             }else{
-                if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace(getLogInfo(resourceName, classLoader, true));
+                if (log.isTraceEnabled()){
+                    log.trace(getLogInfo(resourceName, classLoader, true));
                 }
                 return url;
             }
         }
-        LOGGER.debug("not found:[{}] in all ClassLoader,return null", resourceName);
+        log.debug("not found:[{}] in all ClassLoader,return null", resourceName);
         return null;
     }
 
@@ -308,8 +303,8 @@ public final class ClassLoaderUtil{
      */
     private static ClassLoader getClassLoaderByCurrentThread(){
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("[Thread.currentThread()].getContextClassLoader:{}", formatClassLoader(classLoader));
+        if (log.isTraceEnabled()){
+            log.trace("[Thread.currentThread()].getContextClassLoader:{}", formatClassLoader(classLoader));
         }
         return classLoader;
     }
@@ -325,8 +320,8 @@ public final class ClassLoaderUtil{
     private static ClassLoader getClassLoaderByClass(Class<?> callingClass){
         Validate.notNull(callingClass, "callingClass can't be null!");
         ClassLoader classLoader = callingClass.getClassLoader();
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("[{}].getClassLoader():{}", callingClass.getSimpleName(), formatClassLoader(classLoader));
+        if (log.isTraceEnabled()){
+            log.trace("[{}].getClassLoader():{}", callingClass.getSimpleName(), formatClassLoader(classLoader));
         }
         return classLoader;
     }

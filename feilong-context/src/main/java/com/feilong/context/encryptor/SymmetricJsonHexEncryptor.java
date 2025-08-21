@@ -17,9 +17,6 @@ package com.feilong.context.encryptor;
 
 import static com.feilong.core.CharsetType.UTF8;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.CharsetType;
 import com.feilong.json.JsonUtil;
 import com.feilong.security.symmetric.SymmetricEncryption;
@@ -33,22 +30,19 @@ import com.feilong.security.symmetric.SymmetricType;
  *            the generic type
  * @since 1.12.0
  */
+@lombok.extern.slf4j.Slf4j
 public class SymmetricJsonHexEncryptor<T extends Encryptorable> implements Encryptor<T>{
 
-    /** The Constant log. */
-    private static final Logger LOGGER        = LoggerFactory.getLogger(SymmetricJsonHexEncryptor.class);
-
-    //---------------------------------------------------------------
     /** 对称加密的类型. */
-    private SymmetricType       symmetricType = SymmetricType.DESede;
+    private SymmetricType symmetricType = SymmetricType.DESede;
 
     /** key. */
-    private String              key           = SymmetricJsonHexEncryptor.class.getName();
+    private String        key           = SymmetricJsonHexEncryptor.class.getName();
 
     //---------------------------------------------------------------
 
     /** 编码格式,默认 {@link CharsetType#UTF8}. */
-    private String              charsetName   = UTF8;
+    private String        charsetName   = UTF8;
 
     //---------------------------------------------------------------
 
@@ -78,8 +72,8 @@ public class SymmetricJsonHexEncryptor<T extends Encryptorable> implements Encry
         String json = symmetricEncryption.decryptHex(encryptPayResultType, charsetName);
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("encryptPayResultType:[{}],json:[{}]", encryptPayResultType, json);
+        if (log.isDebugEnabled()){
+            log.debug("encryptPayResultType:[{}],json:[{}]", encryptPayResultType, json);
         }
         return JsonUtil.toBean(json, klass);
     }

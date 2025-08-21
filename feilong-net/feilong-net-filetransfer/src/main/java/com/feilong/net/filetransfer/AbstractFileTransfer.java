@@ -28,9 +28,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
 import com.feilong.core.util.MapUtil;
@@ -49,9 +46,8 @@ import com.feilong.json.JsonUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.5
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractFileTransfer implements FileTransfer{
-
-    private static final Logger LOGGER          = LoggerFactory.getLogger(AbstractFileTransfer.class);
 
     /**
      * 日志追踪上下文.
@@ -61,7 +57,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      * 
      * @since 4.1.1
      */
-    protected String            logTraceContext = "";
+    protected String logTraceContext = "";
 
     //---------------------------------------------------------------
     /*
@@ -85,7 +81,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
                 for (String remotePath : remotePaths){
                     isConnectSuccess = downloadDontClose(remotePath, localAbsoluteDirectoryPath);
                     if (!isConnectSuccess){
-                        LOGGER.warn(
+                        log.warn(
                                         log(
                                                         "downloadDontCloseFail remotePath:[{}] localAbsoluteDirectoryPath:[{}],break",
                                                         remotePath,
@@ -126,7 +122,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         }
 
         //---------------------------------------------------------------
-        LOGGER.debug(log("will put:[{}] to:[{}]", batchLocalFileFullPaths, remoteDirectory));
+        log.debug(log("will put:[{}] to:[{}]", batchLocalFileFullPaths, remoteDirectory));
 
         boolean isConnectSuccess = false;
         try{
@@ -139,7 +135,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
                 for (String singleLocalFileFullPath : batchLocalFileFullPaths){
                     isConnectSuccess = uploadDontClose(singleLocalFileFullPath, remoteDirectory);
                     if (!isConnectSuccess){
-                        LOGGER.warn(log("put:[{}] to:[{}] uploadDontCloseFail,break", singleLocalFileFullPath, remoteDirectory));
+                        log.warn(log("put:[{}] to:[{}] uploadDontCloseFail,break", singleLocalFileFullPath, remoteDirectory));
                         break;
                     }
                 }
@@ -167,12 +163,12 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      * @since 1.7.1
      */
     protected void checkOrMkdirs(String remoteDirectory){
-        LOGGER.info(log("begin checkOrMkdirs remoteDirectory:[{}]", remoteDirectory));
+        log.info(log("begin checkOrMkdirs remoteDirectory:[{}]", remoteDirectory));
 
         try{
             tryCd(remoteDirectory);
         }catch (Exception e){
-            LOGGER.warn(log("can't cd:[{}],cause by:[{}],will try [mkdirs]~~", remoteDirectory, e.getMessage()));
+            log.warn(log("can't cd:[{}],cause by:[{}],will try [mkdirs]~~", remoteDirectory, e.getMessage()));
             List<String> list = FilenameUtil.getParentPathList(remoteDirectory);
 
             Collections.reverse(list);//自顶而下
@@ -182,7 +178,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
                 try{
                     tryCd(folder);
                 }catch (Exception e1){
-                    LOGGER.info(log("can't cd:[{}],cause by:[{}],will try mkdir", folder, e1.getMessage()));
+                    log.info(log("can't cd:[{}],cause by:[{}],will try mkdir", folder, e1.getMessage()));
                     mkdir(folder);
                     cd(folder);
                 }
@@ -375,7 +371,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         for (String remotePath : remoteAbsolutePaths){
             boolean isDirectory = isDirectory(remotePath);
             if (isDirectory){
-                LOGGER.debug(log("remotePath :[{}] is [directory],will removeDirectory.....", remotePath));
+                log.debug(log("remotePath :[{}] is [directory],will removeDirectory.....", remotePath));
 
                 Map<String, FileInfoEntity> map = getLsFileMap(remotePath);
 
@@ -386,10 +382,10 @@ public abstract class AbstractFileTransfer implements FileTransfer{
                     deleteDontClose(joinPath(remotePath, key));
                 }
 
-                LOGGER.info(log("channelSftp rmdir,remotePath [{}]", remotePath));
+                log.info(log("channelSftp rmdir,remotePath [{}]", remotePath));
                 isSuccess = rmdir(remotePath);
             }else{
-                LOGGER.debug(log("remotePath:[{}] is [not directory],will rm....", remotePath));
+                log.debug(log("remotePath:[{}] is [not directory],will rm....", remotePath));
                 isSuccess = rm(remotePath);
 
                 logInfoOrError(isSuccess, "remove remotePath:[{}] [{}]", remotePath, toResultString(isSuccess));
@@ -420,7 +416,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         //---------------------------------------------------------------
         // 如果远程路径是文件夹
         if (isDirectory(remotePath)){
-            LOGGER.info(log("will create directory:[{}]", localAbsoluteDirectoryPath));
+            log.info(log("will create directory:[{}]", localAbsoluteDirectoryPath));
             FileUtil.createDirectory(localAbsoluteDirectoryPath);
 
             Map<String, FileInfoEntity> lsFileMap = getLsFileMap(remotePath);
@@ -434,7 +430,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
             long beginTimeMillis = System.currentTimeMillis();
 
             // 下载到本地的文件路径
-            LOGGER.debug(log("remotePath:[{}] will be download to [{}]", remotePath, filePath));
+            log.debug(log("remotePath:[{}] will be download to [{}]", remotePath, filePath));
             FileUtil.createDirectoryByFilePath(filePath);
             isSuccess = downRemoteSingleFile(remotePath, filePath);
 
@@ -496,11 +492,11 @@ public abstract class AbstractFileTransfer implements FileTransfer{
     protected void logInfoOrError(boolean isSuccess,String messagePattern,Object...args){
         String message = formatPattern(messagePattern, args);
         if (isSuccess){
-            if (LOGGER.isInfoEnabled()){
-                LOGGER.info(log(message));
+            if (log.isInfoEnabled()){
+                log.info(log(message));
             }
         }else{
-            LOGGER.error(log(message));
+            log.error(log(message));
         }
 
     }
@@ -525,18 +521,18 @@ public abstract class AbstractFileTransfer implements FileTransfer{
     private boolean uploadDontClose(String localFileFullPath,String remoteDirectory){
         File localFile = new File(localFileFullPath);
 
-        LOGGER.debug(log("localFile absolutePath:[{}],remoteDirectory:[{}]", localFile.getAbsolutePath(), remoteDirectory));
+        log.debug(log("localFile absolutePath:[{}],remoteDirectory:[{}]", localFile.getAbsolutePath(), remoteDirectory));
 
         // 转移到FTP服务器目录
         boolean isSuccess = cd(remoteDirectory);
         if (!isSuccess){
-            LOGGER.error(log("cd:[{}] error~~~~", remoteDirectory));
+            log.error(log("cd:[{}] error~~~~", remoteDirectory));
             return false;
         }
 
         //---------------------------------------------------------------
 
-        LOGGER.debug(log("cd:[{}] success~~~~", remoteDirectory));
+        log.debug(log("cd:[{}] success~~~~", remoteDirectory));
         String localFileName = localFile.getName();
 
         if (localFile.isFile()){ // 文件
@@ -562,7 +558,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      * @since 1.7.1
      */
     private boolean uploadFile(String localFileFullPath,String remoteDirectory,String localFileName){
-        LOGGER.debug(log("begin put:[{}] to remoteDirectory:[{}]", localFileName, remoteDirectory));
+        log.debug(log("begin put:[{}] to remoteDirectory:[{}]", localFileName, remoteDirectory));
 
         //use try-with-resources
         try (FileInputStream fileInputStream = FileUtil.getFileInputStream(localFileFullPath)){
@@ -633,8 +629,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(log(JsonUtil.toString(lsFileMap)));
+        if (log.isDebugEnabled()){
+            log.debug(log(JsonUtil.toString(lsFileMap)));
         }
         //---------------------------------------------------------------
 
@@ -663,14 +659,14 @@ public abstract class AbstractFileTransfer implements FileTransfer{
     private boolean isExistsSameNameAndTypeFile(File file,String fileName,FileInfoEntity fileInfoEntity){
         boolean isFile = file.isFile();
         String type = isFile ? "isFile" : "isDirectory";
-        LOGGER.debug(log("Input fileName:[{}],type:[{}]", fileName, type));
+        log.debug(log("Input fileName:[{}],type:[{}]", fileName, type));
 
         boolean isDirectoryFileInfoEntity = fileInfoEntity.getFileType() == DIRECTORY; // 远程是否是文件夹
         // 判断同类型
         boolean sameFile = isFile && !isDirectoryFileInfoEntity;
         boolean sameDirectory = file.isDirectory() && isDirectoryFileInfoEntity;
         if (sameFile || sameDirectory){
-            LOGGER.debug(log("hasSameNameAndTypeFile,filename:[{}],type:[{}]", type, fileName));
+            log.debug(log("hasSameNameAndTypeFile,filename:[{}],type:[{}]", type, fileName));
             return true;
         }
         return false;

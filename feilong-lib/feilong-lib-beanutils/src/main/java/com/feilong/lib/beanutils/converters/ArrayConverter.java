@@ -26,9 +26,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.ConversionException;
 import com.feilong.lib.beanutils.Converter;
 
@@ -129,24 +126,20 @@ import com.feilong.lib.beanutils.Converter;
  * @version $Id$
  * @since 1.8.0
  */
+@lombok.extern.slf4j.Slf4j
 public class ArrayConverter extends AbstractConverter{
 
-    /** The Constant log. */
-    private static final Logger LOGGER            = LoggerFactory.getLogger(ArrayConverter.class);
+    private final Class<?>  defaultType;
 
-    //---------------------------------------------------------------
+    private final Converter elementConverter;
 
-    private final Class<?>      defaultType;
+    private int             defaultSize;
 
-    private final Converter     elementConverter;
+    private char            delimiter         = ',';
 
-    private int                 defaultSize;
+    private char[]          allowedChars      = new char[] { '.', '-' };
 
-    private char                delimiter         = ',';
-
-    private char[]              allowedChars      = new char[] { '.', '-' };
-
-    private boolean             onlyFirstToString = true;
+    private boolean         onlyFirstToString = true;
 
     // ----------------------------------------------------------- Constructors
 
@@ -468,8 +461,8 @@ public class ArrayConverter extends AbstractConverter{
      *             is <code>null</code>
      */
     private List<String> parseElements(final Class<?> type,String value){
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("Parsing elements, delimiter=[" + delimiter + "], value=[" + value + "]");
+        if (log.isDebugEnabled()){
+            log.debug("Parsing elements, delimiter=[" + delimiter + "], value=[" + value + "]");
         }
 
         // Trim any matching '{' and '}' delimiters
@@ -511,8 +504,8 @@ public class ArrayConverter extends AbstractConverter{
             if (list == null){
                 list = Collections.emptyList();
             }
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(list.size() + " elements parsed");
+            if (log.isDebugEnabled()){
+                log.debug(list.size() + " elements parsed");
             }
 
             // Return the completed list

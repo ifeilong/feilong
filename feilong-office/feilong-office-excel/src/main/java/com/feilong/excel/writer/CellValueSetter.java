@@ -25,18 +25,13 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.util.Config;
 import com.feilong.lib.excel.ognl.OgnlStack;
 
+@lombok.extern.slf4j.Slf4j
 class CellValueSetter{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CellValueSetter.class);
-
-    //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */
     private CellValueSetter(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -89,7 +84,7 @@ class CellValueSetter{
             set(cell, value);
         }catch (Exception e){
             //do nothing now
-            LOGGER.error("", e);
+            log.error("", e);
         }
     }
 

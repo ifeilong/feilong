@@ -25,6 +25,7 @@ import org.junit.Test;
 import com.feilong.core.Validate;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class SimpleMultiSellerOrderCodeCreatorTest extends AbstractTest{
 
     /** The code creator. */
@@ -56,13 +57,13 @@ public class SimpleMultiSellerOrderCodeCreatorTest extends AbstractTest{
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void createOrderCode(){
-        LOGGER.debug(multiSellerOrderCodeCreator.create(35191L, 555L));
+        log.debug(multiSellerOrderCodeCreator.create(35191L, 555L));
     }
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void createOrderCode12(){
-        LOGGER.debug(multiSellerOrderCodeCreator.create(1161L, 5555555L));
+        log.debug(multiSellerOrderCodeCreator.create(1161L, 5555555L));
     }
 
     @Test
@@ -80,7 +81,7 @@ public class SimpleMultiSellerOrderCodeCreatorTest extends AbstractTest{
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void createReturnOrderCode(){
-        LOGGER.debug(multiSellerOrderCodeCreator.create(111121L, 5555555L));
+        log.debug(multiSellerOrderCodeCreator.create(111121L, 5555555L));
     }
 
 }

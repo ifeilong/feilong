@@ -23,8 +23,6 @@ import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.feilong.core.Validate;
@@ -45,9 +43,8 @@ import com.feilong.json.JsonUtil;
  * @since 1.12.0 rename
  * @since 3.0.0 move from feilong spring
  */
+@lombok.extern.slf4j.Slf4j
 public class DefaultMultipartFileResolver implements MultipartFileResolver{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMultipartFileResolver.class);
 
     /*
      * (non-Javadoc)
@@ -64,13 +61,13 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
 
         //---------------------------------------------------------------
         if (multipartFile.isEmpty()){
-            LOGGER.warn("multipartFile is empty,but you want to save to directoryName:[{}],fileName:[{}]", directoryName, fileName);
+            log.warn("multipartFile is empty,but you want to save to directoryName:[{}],fileName:[{}]", directoryName, fileName);
             return null;
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.toString(MultipartFileUtil.getMultipartFileInfoMapForLogMap(multipartFile)));
+        if (log.isDebugEnabled()){
+            log.debug(JsonUtil.toString(MultipartFileUtil.getMultipartFileInfoMapForLogMap(multipartFile)));
         }
 
         try (InputStream inputStream = multipartFile.getInputStream()){

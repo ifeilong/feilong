@@ -19,9 +19,6 @@ package com.feilong.lib.beanutils.converters;
 import java.lang.reflect.Array;
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.ConversionException;
 import com.feilong.lib.beanutils.ConvertUtils;
 import com.feilong.lib.beanutils.Converter;
@@ -55,12 +52,8 @@ import com.feilong.lib.beanutils.Converter;
  * @version $Id$
  * @since 1.8.0
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractConverter implements Converter{
-
-    /** The Constant log. */
-    private static final Logger LOGGER             = LoggerFactory.getLogger(AbstractConverter.class);
-
-    //---------------------------------------------------------------
 
     /** Debug logging message to indicate default value configuration */
     private static final String DEFAULT_CONFIG_MSG = "(N.B. Converters can be configured to use default values to avoid throwing exceptions)";
@@ -258,11 +251,11 @@ public abstract class AbstractConverter implements Converter{
      *             specified for this {@link Converter}.
      */
     protected <T> T handleError(final Class<T> type,final Object value,final Throwable cause){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             if (cause instanceof ConversionException){
-                LOGGER.debug("    Conversion threw ConversionException: " + cause.getMessage());
+                log.debug("    Conversion threw ConversionException: " + cause.getMessage());
             }else{
-                LOGGER.debug("    Conversion threw " + cause);
+                log.debug("    Conversion threw " + cause);
             }
         }
 
@@ -273,17 +266,17 @@ public abstract class AbstractConverter implements Converter{
         ConversionException cex = null;
         if (cause instanceof ConversionException){
             cex = (ConversionException) cause;
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("    Re-throwing ConversionException: " + cex.getMessage());
-                LOGGER.debug("    " + DEFAULT_CONFIG_MSG);
+            if (log.isDebugEnabled()){
+                log.debug("    Re-throwing ConversionException: " + cex.getMessage());
+                log.debug("    " + DEFAULT_CONFIG_MSG);
             }
         }else{
             final String msg = "Error converting from '" + toString(value.getClass()) + "' to '" + toString(type) + "' "
                             + cause.getMessage();
             cex = new ConversionException(msg, cause);
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("    Throwing ConversionException: " + msg);
-                LOGGER.debug("    " + DEFAULT_CONFIG_MSG);
+            if (log.isDebugEnabled()){
+                log.debug("    Throwing ConversionException: " + msg);
+                log.debug("    " + DEFAULT_CONFIG_MSG);
             }
         }
 
@@ -317,19 +310,17 @@ public abstract class AbstractConverter implements Converter{
                     throw new ConversionException("Default conversion to " + toString(type) + " failed.", t);
                 }
             }
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(
-                                "    Using default " + (value == null ? "" : toString(value.getClass()) + " ") + "value '" + defaultValue
-                                                + "'");
+            if (log.isDebugEnabled()){
+                log.debug("    Using default " + (value == null ? "" : toString(value.getClass()) + " ") + "value '" + defaultValue + "'");
             }
             // value is now either null or of the desired target type
             return type.cast(value);
         }
 
         final ConversionException cex = new ConversionException("No value specified for '" + toString(type) + "'");
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("    Throwing ConversionException: " + cex.getMessage());
-            LOGGER.debug("    " + DEFAULT_CONFIG_MSG);
+        if (log.isDebugEnabled()){
+            log.debug("    Throwing ConversionException: " + cex.getMessage());
+            log.debug("    " + DEFAULT_CONFIG_MSG);
         }
         throw cex;
 

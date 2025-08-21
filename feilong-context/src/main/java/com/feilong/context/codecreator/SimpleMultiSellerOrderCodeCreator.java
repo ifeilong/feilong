@@ -21,9 +21,6 @@ import static com.feilong.lib.lang3.StringUtils.defaultString;
 
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.RandomUtil;
@@ -39,10 +36,8 @@ import com.feilong.json.JsonUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.9
  */
+@lombok.extern.slf4j.Slf4j
 public class SimpleMultiSellerOrderCodeCreator implements MultiSellerOrderCodeCreator{
-
-    /** The Constant LOGGER. */
-    private static final Logger                     LOGGER = LoggerFactory.getLogger(SimpleMultiSellerOrderCodeCreator.class);
 
     /** The simple multi seller order code creator config. */
     private SimpleMultiSellerOrderCodeCreatorConfig simpleMultiSellerOrderCodeCreatorConfig;
@@ -112,8 +107,8 @@ public class SimpleMultiSellerOrderCodeCreator implements MultiSellerOrderCodeCr
 
         //---------------------------------------------------------------
         String result = sb.toString() + CodeCreatorHelper.debugLength(sb, simpleMultiSellerOrderCodeCreatorConfig.getIsDebug());
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace(
+        if (log.isTraceEnabled()){
+            log.trace(
                             "[{}]-->[{}],buyerId:[{}],sellerId:[{}],simpleMultiSellerOrderCodeCreatorConfig:[{}] ",
                             DateUtil.toString(specifiedDate, COMMON_DATE_AND_TIME_WITH_MILLISECOND),
                             result,

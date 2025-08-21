@@ -22,9 +22,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.ConversionException;
 
 /**
@@ -33,26 +30,22 @@ import com.feilong.lib.beanutils.ConversionException;
  * @version $Id$
  */
 
+@lombok.extern.slf4j.Slf4j
 public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateLocaleConverterTestCase.class);
+    protected String  localizedDatePattern;
 
-    //---------------------------------------------------------------
+    protected String  localizedDateValue;
 
-    protected String            localizedDatePattern;
+    protected String  localizedShortDateValue;
 
-    protected String            localizedDateValue;
+    protected String  defaultDatePattern;
 
-    protected String            localizedShortDateValue;
+    protected String  defaultDateValue;
 
-    protected String            defaultDatePattern;
+    protected String  defaultShortDateValue;
 
-    protected String            defaultDateValue;
-
-    protected String            defaultShortDateValue;
-
-    protected boolean           validLocalDateSymbols;
+    protected boolean validLocalDateSymbols;
 
     // ------------------------------------------------------------------------
 
@@ -71,14 +64,14 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase{
         super.setUp();
 
         final String version = System.getProperty("java.specification.version");
-        LOGGER.debug("JDK Version " + version);
+        log.debug("JDK Version " + version);
 
         try{
             final SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
             expectedValue = format.parse("20041001");
             defaultValue = format.parse("19670316");
         }catch (final Exception ex){
-            LOGGER.error("Error creating expected/default dates", ex);
+            log.error("Error creating expected/default dates", ex);
         }
 
         // Default Locale (Use US)
@@ -216,7 +209,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase{
 
         // Skip this test if no valid symbols for the locale
         if (!validLocalDateSymbols){
-            LOGGER.error("Invalid locale symbols *** skipping testConstructorMain() **");
+            log.error("Invalid locale symbols *** skipping testConstructorMain() **");
             return;
         }
 
@@ -314,7 +307,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase{
 
         // Skip this test if no valid symbols for the locale
         if (!validLocalDateSymbols){
-            LOGGER.error("Invalid locale symbols *** skipping testConstructor_5() **");
+            log.error("Invalid locale symbols *** skipping testConstructor_5() **");
             return;
         }
 
@@ -352,7 +345,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase{
 
         // Skip this test if no valid symbols for the locale
         if (!validLocalDateSymbols){
-            LOGGER.error("Invalid locale symbols *** skipping testConstructor_7() **");
+            log.error("Invalid locale symbols *** skipping testConstructor_7() **");
             return;
         }
 

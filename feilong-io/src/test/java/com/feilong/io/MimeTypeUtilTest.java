@@ -23,11 +23,12 @@ import org.junit.Test;
 import com.feilong.io.entity.MimeType;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class MimeTypeUtilTest extends AbstractTest{
 
     @Test
     public void test(){
-        LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.mkv"));
+        log.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.mkv"));
 
         assertEquals(MimeType.OXT.getMime(), getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.oxt"));
         assertEquals(MimeType.JPG.getMime(), getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.jpg"));

@@ -28,8 +28,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.beanutils.DynaBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
@@ -46,10 +44,8 @@ import com.feilong.lib.lang3.tuple.Triple;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public class JSONObjectToBeanUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JSONObjectToBeanUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private JSONObjectToBeanUtil(){
@@ -112,7 +108,7 @@ public class JSONObjectToBeanUtil{
             String key = triple.getMiddle();
             PropertyDescriptor propertyDescriptor = entry.getValue();
             if (propertyDescriptor.getWriteMethod() == null){
-                LOGGER.debug("{} property '{}' has no write method. SKIPPED.", rootClass.getCanonicalName(), key);
+                log.debug("{} property '{}' has no write method. SKIPPED.", rootClass.getCanonicalName(), key);
                 continue;
             }
 
@@ -235,7 +231,7 @@ public class JSONObjectToBeanUtil{
     private static void setNull(Object bean,Class<?> type,String key){
         if (type.isPrimitive()){
             // assume assigned default value
-            LOGGER.warn("Tried to assign null value to {}:{}", key, type.getName());
+            log.warn("Tried to assign null value to {}:{}", key, type.getName());
             setProperty(bean, key, JSONUtils.getMorpherRegistry().morph(type, null));
         }else{
             setProperty(bean, key, null);
@@ -307,7 +303,7 @@ public class JSONObjectToBeanUtil{
                 }else{
                     if (type.isPrimitive()){
                         // assume assigned default value
-                        LOGGER.warn("Tried to assign null value to {}:{}", key, type.getName());
+                        log.warn("Tried to assign null value to {}:{}", key, type.getName());
                         dynaBean.set(key, JSONUtils.getMorpherRegistry().morph(type, null));
                     }else{
                         dynaBean.set(key, null);

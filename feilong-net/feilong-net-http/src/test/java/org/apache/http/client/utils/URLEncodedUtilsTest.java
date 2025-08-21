@@ -32,6 +32,7 @@ import com.feilong.test.AbstractTest;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.6
  */
+@lombok.extern.slf4j.Slf4j
 public class URLEncodedUtilsTest extends AbstractTest{
 
     @Test
@@ -41,13 +42,13 @@ public class URLEncodedUtilsTest extends AbstractTest{
         list.add(new BasicNameValuePair("name1", "jinxin1"));
         list.add(new BasicNameValuePair("name2", "jinxin2"));
         list.add(new BasicNameValuePair("name", "jinxin"));
-        LOGGER.debug(URLEncodedUtils.format(list, UTF8));
+        log.debug(URLEncodedUtils.format(list, UTF8));
     }
 
     @Test
     public final void test1(){
         List<NameValuePair> list = newArrayList();
         list.add(new BasicNameValuePair("name", "%"));
-        LOGGER.debug(URLEncodedUtils.format(list, UTF8));
+        log.debug(URLEncodedUtils.format(list, UTF8));
     }
 }

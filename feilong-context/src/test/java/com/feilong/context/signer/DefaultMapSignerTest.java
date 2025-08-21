@@ -21,19 +21,16 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 4.0.8
  */
+@lombok.extern.slf4j.Slf4j
 public class DefaultMapSignerTest{
 
-    private static final Logger       LOGGER = LoggerFactory.getLogger(DefaultMapSignerTest.class);
-
-    private final Map<String, String> map    = toMap("name", "feilong", "age", "18");
+    private final Map<String, String> map = toMap("name", "feilong", "age", "18");
 
     {
         map.put("_address", "江苏省通州市十六组1510号");
@@ -44,7 +41,7 @@ public class DefaultMapSignerTest{
     @Test
     public void test(){
         MapSigner mapSigner = new DefaultMapSigner(new MapSignConfig());
-        LOGGER.info(mapSigner.sign(map));
+        log.info(mapSigner.sign(map));
     }
 
     @Test
@@ -54,7 +51,7 @@ public class DefaultMapSignerTest{
         MapSigner mapSigner = new DefaultMapSigner(mapSignConfig);
 
         map.put("sign", "b0fb3a15d87f9e917b26980ecaec3264");
-        LOGGER.info(mapSigner.sign(map));
+        log.info(mapSigner.sign(map));
     }
 
     @Test
@@ -62,7 +59,7 @@ public class DefaultMapSignerTest{
         MapSignConfig mapSignConfig = new MapSignConfig();
         mapSignConfig.setIsResultUpperCase(true);
         MapSigner mapSigner = new DefaultMapSigner(mapSignConfig);
-        LOGGER.info(mapSigner.sign(map));
+        log.info(mapSigner.sign(map));
     }
 
     @Test
@@ -71,20 +68,20 @@ public class DefaultMapSignerTest{
         mapSignConfig.setAppendSecretParamName("key");
         mapSignConfig.setAppendSecretParamValue("88776655aa");
         MapSigner mapSigner = new DefaultMapSigner(mapSignConfig);
-        LOGGER.info(mapSigner.sign(map));
+        log.info(mapSigner.sign(map));
     }
 
     @Test
     public void test23(){
         MapSignConfig mapSignConfig = new MapSignConfig("", "88776655aa");
         MapSigner mapSigner = new DefaultMapSigner(mapSignConfig);
-        LOGGER.info(mapSigner.sign(map));
+        log.info(mapSigner.sign(map));
     }
 
     @Test
     public void test2322(){
         MapSigner mapSigner = new DefaultMapSigner(new MapSignConfig(null, "88776655aa"));
-        LOGGER.info(mapSigner.sign(map));
+        log.info(mapSigner.sign(map));
     }
 
 }

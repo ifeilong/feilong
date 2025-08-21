@@ -24,6 +24,7 @@ import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
 import com.feilong.security.oneway.MD5Util;
 
+@lombok.extern.slf4j.Slf4j
 public class Md5EncodeTest extends AbstractSecurityTest{
 
     @Test
@@ -33,15 +34,12 @@ public class Md5EncodeTest extends AbstractSecurityTest{
 
     //---------------------------------------------------------------
 
-    /**
-     * Encode11.
-     */
     @Test
     public void encode11(){
-        LOGGER.debug(debugSecurityValue(DigestUtils.md2Hex("你好")));
-        LOGGER.debug(debugSecurityValue(DigestUtils.md5Hex("你好")));
-        LOGGER.debug(debugSecurityValue(MD5Util.encode("521000")));
-        LOGGER.debug(debugSecurityValue(MD5Util.encode("你好", UTF8)));
+        log.debug(debugSecurityValue(DigestUtils.md2Hex("你好")));
+        log.debug(debugSecurityValue(DigestUtils.md5Hex("你好")));
+        log.debug(debugSecurityValue(MD5Util.encode("521000")));
+        log.debug(debugSecurityValue(MD5Util.encode("你好", UTF8)));
     }
 
     /**

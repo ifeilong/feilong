@@ -29,9 +29,6 @@ package com.feilong.lib.org.apache.http.impl.execchain;
 
 import java.io.IOException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HttpException;
 import com.feilong.lib.org.apache.http.NoHttpResponseException;
@@ -58,13 +55,9 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.3
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
 public class RetryExec implements ClientExecChain{
-
-    /** The Constant log. */
-    private static final Logger           log = LoggerFactory.getLogger(RetryExec.class);
-
-    //---------------------------------------------------------------
 
     private final ClientExecChain         requestExecutor;
 

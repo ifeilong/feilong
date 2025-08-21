@@ -26,28 +26,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.locale.BaseLocaleConverter;
 
 /**
- * <p>
  * Standard {@link com.feilong.lib.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
  * locale-sensitive object into a <code>java.lang.String</code> object,
  * optionally using a default value or throwing a
  * {@link com.feilong.lib.beanutils.ConversionException}
  * if a conversion error occurs.
- * </p>
  *
  * @version $Id$
  */
-
+@lombok.extern.slf4j.Slf4j
 public class StringLocaleConverter extends BaseLocaleConverter{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(StringLocaleConverter.class);
 
     //---------------------------------------------------------------
     // ----------------------------------------------------- Instance Variables
@@ -309,7 +301,7 @@ public class StringLocaleConverter extends BaseLocaleConverter{
                 numberFormat.applyPattern(pattern);
             }
         }else{
-            LOGGER.debug("No pattern provided, using default.");
+            log.debug("No pattern provided, using default.");
         }
 
         return numberFormat;

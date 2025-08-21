@@ -49,7 +49,7 @@ public class HttpClientCodeTest extends AbstractTest{
 
                     //int incrementAndGet = atomicInteger.incrementAndGet();
 
-                    //LOGGER.info("" + incrementAndGet);
+                    //log.info("" + incrementAndGet);
                 }
             }
 

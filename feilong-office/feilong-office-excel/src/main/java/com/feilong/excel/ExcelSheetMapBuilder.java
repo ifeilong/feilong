@@ -24,19 +24,13 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.json.JsonUtil;
 
+@lombok.extern.slf4j.Slf4j
 class ExcelSheetMapBuilder{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelSheetMapBuilder.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private ExcelSheetMapBuilder(){
@@ -65,9 +59,9 @@ class ExcelSheetMapBuilder{
                     sheetDefinitionsMap.put(defaultIfNullOrEmpty(excelSheet.getName(), EMPTY), excelSheet);
                 }
                 //---------------------------------------------------------------
-                if (LOGGER.isDebugEnabled()){
+                if (log.isDebugEnabled()){
                     int size = size(excelSheetList);
-                    LOGGER.debug(
+                    log.debug(
                                     "parse [{}],sheetList size:[{}],use time: [{}]",
                                     sheetDefinitionPath,
                                     size,
@@ -79,9 +73,9 @@ class ExcelSheetMapBuilder{
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             String pattern = "parse sheetDefinitionLocations:[{}],sheetDefinitionsMap:[{}]";
-            LOGGER.debug(pattern, sheetDefinitionLocations, JsonUtil.toString(sheetDefinitionsMap));
+            log.debug(pattern, sheetDefinitionLocations, JsonUtil.toString(sheetDefinitionsMap));
         }
         //---------------------------------------------------------------
         return sheetDefinitionsMap;

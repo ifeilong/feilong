@@ -22,9 +22,6 @@ import static com.feilong.lib.lang3.ClassUtils.getSimpleName;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.lang.ThreadUtil;
 import com.feilong.core.util.MapUtil;
@@ -39,12 +36,9 @@ import com.feilong.core.util.MapUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.0
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractPartitionThreadExecutor implements PartitionThreadExecutor{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractPartitionThreadExecutor.class);
-
-    //---------------------------------------------------------------
     /**
      * Excute.
      *
@@ -104,8 +98,8 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
 
         //---------------------------------------------------------------
         String partitionRunnableBuilderName = getName(partitionRunnableBuilder);
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("{} begin [{}],listSize:[{}],inputEachSize:[{}]", logKey, partitionRunnableBuilderName, list.size(), eachSize);
+        if (log.isInfoEnabled()){
+            log.info("{} begin [{}],listSize:[{}],inputEachSize:[{}]", logKey, partitionRunnableBuilderName, list.size(), eachSize);
         }
 
         //---------------------------------------------------------------
@@ -114,13 +108,9 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
         actualExecute(list, eachSize, paramsMap, partitionRunnableBuilder);
 
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
 
-            LOGGER.info(
-                            "{} end [{}],useTime:[{}]",
-                            logKey,
-                            partitionRunnableBuilderName,
-                            formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.info("{} end [{}],useTime:[{}]", logKey, partitionRunnableBuilderName, formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 

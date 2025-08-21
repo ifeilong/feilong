@@ -26,6 +26,7 @@ import com.feilong.store.member.User;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 
+@lombok.extern.slf4j.Slf4j
 public class ToXmlWithConfigTest extends AbstractTest{
 
     @Test
@@ -50,7 +51,7 @@ public class ToXmlWithConfigTest extends AbstractTest{
         aliasMap.put("userList", List.class);
         aliasMap.put("user", User.class);
 
-        LOGGER.debug(XmlUtil.toXML(list, toXmlConfig));
+        log.debug(XmlUtil.toXML(list, toXmlConfig));
     }
 
     /**
@@ -72,7 +73,7 @@ public class ToXmlWithConfigTest extends AbstractTest{
         toXmlConfig.getAliasMap().put("user", User.class);
         toXmlConfig.getImplicitCollectionMap().put("userAddresseList", User.class);
 
-        LOGGER.debug(XmlUtil.toXML(user, toXmlConfig));
+        log.debug(XmlUtil.toXML(user, toXmlConfig));
     }
 
     @Test
@@ -90,6 +91,6 @@ public class ToXmlWithConfigTest extends AbstractTest{
         XStreamConfig toXmlConfig = new XStreamConfig();
         toXmlConfig.getAliasMap().put("xml", user.getClass());
 
-        LOGGER.debug(XmlUtil.toXML(user, toXmlConfig));
+        log.debug(XmlUtil.toXML(user, toXmlConfig));
     }
 }

@@ -29,17 +29,13 @@ import static org.junit.Assert.assertTrue;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.MapUtil;
 
+@lombok.extern.slf4j.Slf4j
+
 public class ExtractIntersectionKeyDifferentValueMapTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExtractIntersectionKeyDifferentValueMapTest.class);
-
-    //---------------------------------------------------------------
     /**
      * Test extract sub map 3.
      */
@@ -80,8 +76,8 @@ public class ExtractIntersectionKeyDifferentValueMapTest{
 
         //---------------------------------------------------------------
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(extractSubMap.toString());
+        if (log.isDebugEnabled()){
+            log.debug(extractSubMap.toString());
         }
 
         //---------------------------------------------------------------

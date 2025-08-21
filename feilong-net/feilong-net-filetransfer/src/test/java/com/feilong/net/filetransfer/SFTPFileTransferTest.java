@@ -27,6 +27,7 @@ import com.feilong.json.JsonUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
+@lombok.extern.slf4j.Slf4j
 public class SFTPFileTransferTest extends FileTransferTest{
 
     /** The file transfer. */
@@ -143,7 +144,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
     public void testGetFileEntityMap() throws Exception{
         String remoteAbsolutePath = "/home/appuser/test/2013-12-04-1938";
         String[] fileNames = { "SportActivity.dat", "SubCategory.dat", "aaa" };
-        LOGGER.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath, fileNames)));
+        log.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath, fileNames)));
     }
 
     /*
@@ -164,7 +165,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
     //        try{
     //            return channelSftp.pwd();
     //        }catch (SftpException e){
-    //            LOGGER.error("", e);
+    //            log.error("", e);
     //            throw new FileTransferException(e);
     //        }
     //    }

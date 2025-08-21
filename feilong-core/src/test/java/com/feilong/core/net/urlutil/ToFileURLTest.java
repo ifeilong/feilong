@@ -28,6 +28,7 @@ import com.feilong.test.AbstractTest;
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
+@lombok.extern.slf4j.Slf4j
 public class ToFileURLTest extends AbstractTest{
 
     // @Test(expected = InvocationTargetException.class)
@@ -39,6 +40,6 @@ public class ToFileURLTest extends AbstractTest{
         // string = "/a/b";
         URL invoke = MethodUtil.invokeStaticMethod(URLUtil.class, "toFileURL", string);
 
-        LOGGER.debug("" + invoke);//TODO:remove
+        log.debug("" + invoke);//TODO:remove
     }
 }

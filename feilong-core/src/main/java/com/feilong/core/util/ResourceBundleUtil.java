@@ -34,9 +34,6 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.ConvertUtil;
@@ -74,10 +71,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @see "org.springframework.core.io.support.LocalizedResourceHelper"
  * @since 1.4.0
  */
+@lombok.extern.slf4j.Slf4j
 public final class ResourceBundleUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ResourceBundleUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ResourceBundleUtil(){
@@ -132,7 +127,7 @@ public final class ResourceBundleUtil{
      *            Properties配置文件键名
      * @param arguments
      *            此处可以传递Object[]数组过来
-     * @return 如果配置文件中,key不存在,LOGGER.warn警告输出,并返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果配置文件中,key不存在,log.warn警告输出,并返回 {@link StringUtils#EMPTY}<br>
      * @throws NullPointerException
      *             如果 <code>resourceBundle</code> 或者 <code>key</code> 是null
      * @throws IllegalArgumentException
@@ -146,14 +141,14 @@ public final class ResourceBundleUtil{
         Validate.notBlank(key, "key can't be null/empty!");
 
         if (!resourceBundle.containsKey(key)){
-            LOGGER.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
+            log.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
             return EMPTY;
         }
 
         //---------------------------------------------------------------
         String value = resourceBundle.getString(key);
         if (isNullOrEmpty(value)){
-            LOGGER.trace("resourceBundle has key:[{}],but value is null/empty", key);
+            log.trace("resourceBundle has key:[{}],but value is null/empty", key);
         }
         return isNullOrEmpty(value) ? EMPTY : MessageFormatUtil.format(value, arguments);// 支持 arguments 为null,原样返回
     }
@@ -211,7 +206,7 @@ public final class ResourceBundleUtil{
      * 
      * <pre class="code">
      * Map{@code <String, String>} map = toMap("messages/memcached");
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -260,7 +255,7 @@ public final class ResourceBundleUtil{
                     map.putAll(littleMap);
                 }
             }catch (Exception e){
-                LOGGER.warn("baseName:[{}],message:[{}],ignore~", baseName, e.getMessage());
+                log.warn("baseName:[{}],message:[{}],ignore~", baseName, e.getMessage());
             }
         }
         return map;
@@ -315,7 +310,7 @@ public final class ResourceBundleUtil{
      * 
      * <pre class="code">
      * Map{@code <String, String>} map = toMap(getResourceBundle("messages/memcached"));
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -402,7 +397,7 @@ public final class ResourceBundleUtil{
      * 
      * <pre class="code">
      * Properties properties = ResourceBundleUtil.toProperties("messages.memcached");
-     * LOGGER.debug(JsonUtil.format(properties));
+     * log.debug(JsonUtil.format(properties));
      * </pre>
      * 
      * <b>返回:</b>
@@ -536,7 +531,7 @@ public final class ResourceBundleUtil{
      * 
      * <pre class="code">
      * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.toAliasBean("messages.memcached", DangaMemCachedConfig.class);
-     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * log.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
      * <b>返回:</b>
@@ -583,7 +578,7 @@ public final class ResourceBundleUtil{
      * ConvertUtils.register(arrayConverter, String[].class);
      * 
      * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.toAliasBean("messages.memcached", DangaMemCachedConfig.class);
-     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * log.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
      * <b>返回:</b>
@@ -680,7 +675,7 @@ public final class ResourceBundleUtil{
      * 
      * <pre class="code">
      * DangaMemCachedNoAliasConfig config = ResourceBundleUtil.toBean("messages/memcachedBean", DangaMemCachedNoAliasConfig.class);
-     * LOGGER.debug(JsonUtil.format(config));
+     * log.debug(JsonUtil.format(config));
      * </pre>
      * 
      * <b>返回:</b>
@@ -716,7 +711,7 @@ public final class ResourceBundleUtil{
      * 
      * DangaMemCachedNoAliasConfig dangaMemCachedConfig = ResourceBundleUtil
      *                 .toBean("messages/memcachedBean", DangaMemCachedNoAliasConfig.class);
-     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * log.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
      * <b>返回:</b>
@@ -810,7 +805,7 @@ public final class ResourceBundleUtil{
      * 
      * <pre class="code">
      * DangaMemCachedNoAliasConfig config = ResourceBundleUtil.toBean("messages/memcachedBean", DangaMemCachedNoAliasConfig.class);
-     * LOGGER.debug(JsonUtil.format(config));
+     * log.debug(JsonUtil.format(config));
      * </pre>
      * 
      * <b>返回:</b>
@@ -846,7 +841,7 @@ public final class ResourceBundleUtil{
      * 
      * DangaMemCachedNoAliasConfig dangaMemCachedConfig = ResourceBundleUtil
      *                 .toBean("messages/memcachedBean", DangaMemCachedNoAliasConfig.class);
-     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * log.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
      * <b>返回:</b>
@@ -903,7 +898,7 @@ public final class ResourceBundleUtil{
      * 
      * <pre class="code">
      * ResourceBundle resourceBundle = getResourceBundle("messages/feilong-core-test");
-     * LOGGER.debug(JsonUtil.format(toMap(resourceBundle)));
+     * log.debug(JsonUtil.format(toMap(resourceBundle)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -970,7 +965,7 @@ public final class ResourceBundleUtil{
      * ResourceBundle resourceBundle = getResourceBundle("messages/feilong-archetypes", Locale.ENGLISH);
      * Map{@code <String, String>} map = toMap(resourceBundle);
      * 
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1017,7 +1012,7 @@ public final class ResourceBundleUtil{
      * <pre class="code">
      * ResourceBundle resourceBundle = getResourceBundle(
      *                 FileUtil.getFileInputStream("E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"));
-     * LOGGER.debug(JsonUtil.format(toMap(resourceBundle)));
+     * log.debug(JsonUtil.format(toMap(resourceBundle)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1050,7 +1045,7 @@ public final class ResourceBundleUtil{
             try{
                 inputStream.close();
             }catch (IOException e){
-                LOGGER.error("", e);
+                log.error("", e);
             }
         }
     }

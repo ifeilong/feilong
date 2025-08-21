@@ -15,9 +15,6 @@
  */
 package com.feilong.lib.json;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.ezmorph.Morpher;
 import com.feilong.lib.ezmorph.MorpherRegistry;
 import com.feilong.lib.ezmorph.bean.BeanMorpher;
@@ -31,9 +28,8 @@ import com.feilong.lib.json.util.JSONUtils;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 class PropertyValueMorpher{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropertyValueMorpher.class);
 
     /** Don't let anyone instantiate this class. */
     private PropertyValueMorpher(){
@@ -62,7 +58,7 @@ class PropertyValueMorpher{
 
         Morpher morpher = morpherRegistry.getMorpherFor(targetType);
         if (IdentityObjectMorpher.INSTANCE.equals(morpher)){
-            LOGGER.warn(
+            log.warn(
                             "Can't transform property '{}' from {} into {}.Will register a default Morpher",
                             key,
                             type.getName(),

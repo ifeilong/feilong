@@ -25,6 +25,7 @@ import com.feilong.test.AbstractTest;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.1
  */
+@lombok.extern.slf4j.Slf4j
 public class HttpConcatGlobalConfigBuilderTest extends AbstractTest{
 
     @Test
@@ -32,7 +33,7 @@ public class HttpConcatGlobalConfigBuilderTest extends AbstractTest{
 
         for (int i = 0; i < 5; ++i){
             HttpConcatGlobalConfig a = HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
-            LOGGER.info("111");
+            log.info("111");
         }
     }
 }

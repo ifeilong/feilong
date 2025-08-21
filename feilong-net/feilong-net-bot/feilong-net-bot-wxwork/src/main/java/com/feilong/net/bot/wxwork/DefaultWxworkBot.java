@@ -18,9 +18,6 @@ package com.feilong.net.bot.wxwork;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.lang.StringUtil.formatPattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.bot.AbstractBot;
@@ -39,14 +36,11 @@ import com.feilong.net.bot.wxwork.message.news.WxworkNewsMessage;
  * @see <a href="https://open.work.weixin.qq.com/help2/pc/14931?person_id=1&is_tencent=">如何配置群机器人？</a>
  * @since 3.1.0 change packagename from com.feilong.net.bot.wxwork to com.feilong.net.bot.wxwork
  */
+@lombok.extern.slf4j.Slf4j
 public class DefaultWxworkBot extends AbstractBot implements WxworkBot{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultWxworkBot.class);
-
-    //---------------------------------------------------------------
     /** The key. */
-    private String              key;
+    private String key;
 
     //---------------------------------------------------------------
 
@@ -82,13 +76,13 @@ public class DefaultWxworkBot extends AbstractBot implements WxworkBot{
     @Override
     public WxworkResponse sendNewsMessage(Article...articles){
         if (!isAsync){
-            LOGGER.info("[SyncSendNewsMessage]articles:[{}]", JsonUtil.toString(articles));
+            log.info("[SyncSendNewsMessage]articles:[{}]", JsonUtil.toString(articles));
             return doSendWxNewsMessage(articles);
         }
 
         //异步
         new Thread(() -> {
-            LOGGER.info("[AsyncSendNewsMessage]articles:[{}]", JsonUtil.toString(articles));
+            log.info("[AsyncSendNewsMessage]articles:[{}]", JsonUtil.toString(articles));
             doSendWxNewsMessage(articles);
         }).start();
 
@@ -104,7 +98,7 @@ public class DefaultWxworkBot extends AbstractBot implements WxworkBot{
             if (!isCatchException || isThrowException){
                 throw e;
             }
-            LOGGER.error(formatPattern("articles:[{}],returnFalse", JsonUtil.toString(articles)), e);
+            log.error(formatPattern("articles:[{}],returnFalse", JsonUtil.toString(articles)), e);
             return null;
         }
     }

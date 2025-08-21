@@ -22,9 +22,6 @@ import java.util.Comparator;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
@@ -68,14 +65,12 @@ import com.feilong.lib.lang3.ObjectUtils;
  * @see <a href="http://www.it165.net/pro/html/201407/18366.html">Java中的TreeMap、Comparable、Comparator</a>
  * @since 1.2.0
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class PropertyComparator<T> implements Comparator<T>,Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long           serialVersionUID = -3159374167882773300L;
-
-    /** The Constant LOGGER. */
-    private static final Logger         LOGGER           = LoggerFactory.getLogger(PropertyComparator.class);
 
     //----------------------------------------------------------------------------------------------------------
 
@@ -189,7 +184,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     public PropertyComparator(String propertyName){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         this.propertyName = propertyName;
-        LOGGER.trace("propertyName:[{}]", propertyName);
+        log.trace("propertyName:[{}]", propertyName);
     }
 
     /**
@@ -215,7 +210,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         this.propertyName = propertyName;
         this.comparator = comparator;
-        LOGGER.trace("propertyName:[{}],comparator:[{}]", propertyName, comparator);
+        log.trace("propertyName:[{}],comparator:[{}]", propertyName, comparator);
     }
 
     /**
@@ -250,7 +245,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * 
      * <pre class="code">
      * Collections.sort(courseList, new PropertyComparator{@code <CourseEntity>}("totalNo"));
-     * LOGGER.debug(JsonUtil.format(courseList));
+     * log.debug(JsonUtil.format(courseList));
      * </pre>
      * 
      * 那么<b>返回:</b>
@@ -269,7 +264,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * 
      * <pre class="code">
      * Collections.sort(courseList, new PropertyComparator{@code <CourseEntity>}("totalNo", Integer.class));
-     * LOGGER.debug(JsonUtil.format(courseList));
+     * log.debug(JsonUtil.format(courseList));
      * </pre>
      * 
      * <b>返回:</b>
@@ -306,7 +301,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         this.propertyName = propertyName;
         this.propertyValueConvertToClass = propertyValueConvertToClass;
-        LOGGER.trace("propertyName:[{}],propertyValueConvertToClass:[{}]", propertyName, propertyValueConvertToClass);
+        log.trace("propertyName:[{}],propertyValueConvertToClass:[{}]", propertyName, propertyValueConvertToClass);
     }
 
     /**
@@ -341,7 +336,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * 
      * <pre class="code">
      * Collections.sort(courseList, new PropertyComparator{@code <CourseEntity>}("totalNo"));
-     * LOGGER.debug(JsonUtil.format(courseList));
+     * log.debug(JsonUtil.format(courseList));
      * </pre>
      * 
      * 那么<b>返回:</b>
@@ -360,7 +355,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * 
      * <pre class="code">
      * Collections.sort(courseList, new PropertyComparator{@code <CourseEntity>}("totalNo", Integer.class,ComparatorUtils.NATURAL_COMPARATOR));
-     * LOGGER.debug(JsonUtil.format(courseList));
+     * log.debug(JsonUtil.format(courseList));
      * </pre>
      * 
      * <b>返回:</b>
@@ -401,7 +396,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         this.propertyName = propertyName;
         this.propertyValueConvertToClass = propertyValueConvertToClass;
         this.comparator = comparator;
-        LOGGER.trace("propertyName:[{}]", propertyName);
+        log.trace("propertyName:[{}]", propertyName);
     }
 
     //----------------------------------------------------------------------------------------------------------
@@ -469,7 +464,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
 
         if (0 != compareTo){
             String pattern = "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],result:[{}]";
-            LOGGER.trace(pattern, propertyName, propertyValue1, propertyValue2, compareTo);
+            log.trace(pattern, propertyName, propertyValue1, propertyValue2, compareTo);
             return compareTo;
         }
         //比较值相等的情况

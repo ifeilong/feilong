@@ -22,9 +22,6 @@ import static com.feilong.security.symmetric.LogBuilder.hided;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.net.ParamUtil;
 import com.feilong.lib.codec.digest.HmacUtils;
@@ -36,12 +33,8 @@ import com.feilong.security.oneway.MD5Util;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 4.0.8
  */
+@lombok.extern.slf4j.Slf4j
 public class SaltMapSigner1{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SaltMapSigner1.class);
-
-    //---------------------------------------------------------------
 
     public static String generateSign(Map<String, String> map,String appSecret,String serverAuthenticateStaticKey){
         AtomicInteger counterAtomic = new AtomicInteger(0);
@@ -50,16 +43,16 @@ public class SaltMapSigner1{
         String naturalOrderingQueryString = ParamUtil.toNaturalOrderingQueryString(map);
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(signLog(counterAtomic, "参数排序结果: {}", naturalOrderingQueryString));
+        if (log.isDebugEnabled()){
+            log.debug(signLog(counterAtomic, "参数排序结果: {}", naturalOrderingQueryString));
         }
         //---------------------------------------------------------------
 
         try{
             //将上面的参数字符串进行Base64编码
             byte[] bytes = naturalOrderingQueryString.getBytes(UTF8);
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(signLog(counterAtomic, "排序字符串对应bytes结果: {}", bytes));
+            if (log.isDebugEnabled()){
+                log.debug(signLog(counterAtomic, "排序字符串对应bytes结果: {}", bytes));
             }
 
             // <groupId>commons-codec</groupId>
@@ -68,8 +61,8 @@ public class SaltMapSigner1{
 
             //byte[] encodeBase64 = org.apache.commons.codec.binary.Base64.encodeBase64(bytes);
             byte[] encodeBase64 = com.feilong.lib.codec.binary.Base64.encodeBase64(bytes);
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(
+            if (log.isDebugEnabled()){
+                log.debug(
                                 signLog(
                                                 counterAtomic,
                                                 "使用org.apache.commons.codec.binary.Base64.encodeBase64(bytes)将排序字符串对应bytes转Base64编码结果: {}",
@@ -77,8 +70,8 @@ public class SaltMapSigner1{
             }
 
             String base64EncodedStr = new String(encodeBase64);
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(signLog(counterAtomic, "Base64编码转字符串结果: {}", base64EncodedStr));
+            if (log.isDebugEnabled()){
+                log.debug(signLog(counterAtomic, "Base64编码转字符串结果: {}", base64EncodedStr));
             }
 
             //---------------------------------------------------------------
@@ -90,18 +83,18 @@ public class SaltMapSigner1{
             String sha1Key = appSecret + serverAuthenticateStaticKey;
             //byte[] hmacSha1 = org.apache.commons.codec.digest.HmacUtils.hmacSha1(sha1Key, base64EncodedStr);
             byte[] hmacSha1 = HmacUtils.hmacSha1(sha1Key, base64EncodedStr);
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(createLog(counterAtomic, appSecret, serverAuthenticateStaticKey, sha1Key, hmacSha1));
+            if (log.isDebugEnabled()){
+                log.debug(createLog(counterAtomic, appSecret, serverAuthenticateStaticKey, sha1Key, hmacSha1));
             }
 
             String encode = MD5Util.encode(hmacSha1);
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(signLog(counterAtomic, "md5 最终结果: {}", encode));
+            if (log.isDebugEnabled()){
+                log.debug(signLog(counterAtomic, "md5 最终结果: {}", encode));
             }
 
             return encode;
         }catch (Exception e){
-            LOGGER.error("", e);
+            log.error("", e);
             throw new DefaultRuntimeException(e);
         }
     }

@@ -29,6 +29,7 @@ import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 import com.feilong.store.member.User;
 
+@lombok.extern.slf4j.Slf4j
 public class ToStringBeanIgnoreNullWithIsIgnoreNullValueElementAndIfIgnoreNullValueElementIncludesTest extends AbstractJsonTest{
 
     @Test
@@ -43,7 +44,7 @@ public class ToStringBeanIgnoreNullWithIsIgnoreNullValueElementAndIfIgnoreNullVa
 
         String format = JsonUtil.toString(user, true, "nickNames", "money");
 
-        LOGGER.info(format);
+        log.info(format);
 
         assertThat(
                         format,

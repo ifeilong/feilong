@@ -25,18 +25,19 @@ import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.BeanWithDate;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatBeanDateTest extends AbstractTest{
 
     @Test
     public void test1(){
         BeanWithDate beanWithDate = new BeanWithDate("jim", toDate("2020-06-16 20:00:00", DatePattern.COMMON_DATE_AND_TIME));
-        LOGGER.debug(JsonUtil.format(beanWithDate));
+        log.debug(JsonUtil.format(beanWithDate));
     }
 
     @Test
     public void testArray(){
         BeanWithDate beanWithDate = new BeanWithDate("jim", toDate("2020-06-16 20:00:00", DatePattern.COMMON_DATE_AND_TIME));
-        LOGGER.debug(JsonUtil.format(toList(beanWithDate)));
+        log.debug(JsonUtil.format(toList(beanWithDate)));
     }
 
 }

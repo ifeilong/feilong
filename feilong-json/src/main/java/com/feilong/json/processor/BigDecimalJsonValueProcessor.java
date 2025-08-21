@@ -43,7 +43,7 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
  * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
  * javaToJsonConfig.setIncludes("name", "age", "money");
  * 
- * LOGGER.debug(JsonUtil.format(user, javaToJsonConfig));
+ * log.debug(JsonUtil.format(user, javaToJsonConfig));
  * </pre>
  * 
  * <b>返回:</b>
@@ -81,7 +81,7 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
  * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
  * javaToJsonConfig.setIncludes("name", "age", "money");
  * 
- * LOGGER.debug(JsonUtil.format(user, javaToJsonConfig));
+ * log.debug(JsonUtil.format(user, javaToJsonConfig));
  * </pre>
  * 
  * <b>返回:</b>

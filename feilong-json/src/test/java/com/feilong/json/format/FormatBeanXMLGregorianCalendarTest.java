@@ -36,6 +36,7 @@ import com.feilong.json.entity.BeanWithXMLGregorianCalendar;
  *             because module java.xml does not export com.sun.org.apache.xerces.internal.jaxp.datatype to unnamed module @0x37a71e93
  * 
  */
+@lombok.extern.slf4j.Slf4j
 @Deprecated
 public class FormatBeanXMLGregorianCalendarTest extends AbstractJsonTest{
 
@@ -64,7 +65,7 @@ public class FormatBeanXMLGregorianCalendarTest extends AbstractJsonTest{
     @Test
     public void test2(){
         String format = JsonUtil.format(xmlGregorianCalendar);
-        LOGGER.debug(format);
+        log.debug(format);
         //        assertThat(
         //                        format,
         //                        allOf(//

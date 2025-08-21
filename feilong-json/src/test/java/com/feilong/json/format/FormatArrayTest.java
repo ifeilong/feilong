@@ -23,11 +23,12 @@ import org.junit.Test;
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatArrayTest extends AbstractJsonTest{
 
     @Test
     public void test(){
 
-        LOGGER.debug(JsonUtil.format(toArray(toBigDecimal("99999999.00"))));
+        log.debug(JsonUtil.format(toArray(toBigDecimal("99999999.00"))));
     }
 }

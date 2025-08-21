@@ -21,13 +21,14 @@ import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.BeanInt;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatBeanIntTypeTest extends AbstractTest{
 
     @Test
     public void test1(){
         BeanInt beanInt = new BeanInt();
         //{"age": 0}
-        LOGGER.debug(JsonUtil.format(beanInt));
+        log.debug(JsonUtil.format(beanInt));
     }
 
     @Test
@@ -37,7 +38,7 @@ public class FormatBeanIntTypeTest extends AbstractTest{
         String format = JsonUtil.format(beanInt);
 
         BeanInt bean = JsonUtil.toBean(format, BeanInt.class);
-        LOGGER.debug("" + bean.getAge());
+        log.debug("" + bean.getAge());
     }
 
 }

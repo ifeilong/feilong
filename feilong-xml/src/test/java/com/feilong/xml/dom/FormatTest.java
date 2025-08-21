@@ -41,7 +41,7 @@ public class FormatTest extends AbstractTest{
                         + "        <TXN_CHNL_CD>DAX1</TXN_CHNL_CD>\r\n" + "        <TXN_CHNL_NM />\r\n" + "        <TXN_ETC1 />\r\n"
                         + "        <TXN_ETC2 />\r\n" + "        <TXN_ETC3 />\r\n" + "        <TXN_ETC4 />\r\n" + "        <TXN_ETC5 />\r\n"
                         + "    </INPOLIST>    \r\n" + "</RESULT>";
-        //LOGGER.debug(XmlUtil.format(xmlString));
+        //log.debug(XmlUtil.format(xmlString));
 
         //---------------------------------------------------------------
 

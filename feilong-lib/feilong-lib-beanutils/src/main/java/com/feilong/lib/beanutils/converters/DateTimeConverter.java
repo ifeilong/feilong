@@ -24,9 +24,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.ConversionException;
 
 /**
@@ -80,22 +77,18 @@ import com.feilong.lib.beanutils.ConversionException;
  * @version $Id$
  * @since 1.8.0
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class DateTimeConverter extends AbstractConverter{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateTimeConverter.class);
+    private String[] patterns;
 
-    //---------------------------------------------------------------
+    private String   displayPatterns;
 
-    private String[]            patterns;
+    private Locale   locale;
 
-    private String              displayPatterns;
+    private TimeZone timeZone;
 
-    private Locale              locale;
-
-    private TimeZone            timeZone;
-
-    private boolean             useLocaleFormat;
+    private boolean  useLocaleFormat;
 
     // ----------------------------------------------------------- Constructors
 
@@ -260,13 +253,13 @@ public abstract class DateTimeConverter extends AbstractConverter{
             }
             logFormat("Formatting", format);
             result = format.format(date);
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("    Converted  to String using format '" + result + "'");
+            if (log.isDebugEnabled()){
+                log.debug("    Converted  to String using format '" + result + "'");
             }
         }else{
             result = value.toString();
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("    Converted  to String using toString() '" + result + "'");
+            if (log.isDebugEnabled()){
+                log.debug("    Converted  to String using toString() '" + result + "'");
             }
         }
         return result;
@@ -431,8 +424,8 @@ public abstract class DateTimeConverter extends AbstractConverter{
         }
 
         final String msg = toString(getClass()) + " cannot handle conversion to '" + toString(type) + "'";
-        if (LOGGER.isWarnEnabled()){
-            LOGGER.warn("    " + msg);
+        if (log.isWarnEnabled()){
+            log.warn("    " + msg);
         }
         throw new ConversionException(msg);
     }
@@ -489,8 +482,8 @@ public abstract class DateTimeConverter extends AbstractConverter{
         }
 
         final String msg = toString(getClass()) + " does not support default String to '" + toString(type) + "' conversion.";
-        if (LOGGER.isWarnEnabled()){
-            LOGGER.warn(msg + "    (N.B. Re-configure Converter or use alternative implementation)");
+        if (log.isWarnEnabled()){
+            log.warn(msg + "    (N.B. Re-configure Converter or use alternative implementation)");
         }
         throw new ConversionException(msg);
     }
@@ -595,8 +588,8 @@ public abstract class DateTimeConverter extends AbstractConverter{
             if (format instanceof SimpleDateFormat){
                 msg += " using pattern '" + ((SimpleDateFormat) format).toPattern() + "'";
             }
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("    " + msg);
+            if (log.isDebugEnabled()){
+                log.debug("    " + msg);
             }
             throw new ConversionException(msg);
         }
@@ -643,7 +636,7 @@ public abstract class DateTimeConverter extends AbstractConverter{
      *            The Date format
      */
     private void logFormat(final String action,final DateFormat format){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             final StringBuilder buffer = new StringBuilder(45);
             buffer.append("    ");
             buffer.append(action);
@@ -666,7 +659,7 @@ public abstract class DateTimeConverter extends AbstractConverter{
                 buffer.append(timeZone);
                 buffer.append("]");
             }
-            LOGGER.debug(buffer.toString());
+            log.debug(buffer.toString());
         }
     }
 }

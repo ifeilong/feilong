@@ -28,11 +28,12 @@ import com.feilong.json.entity.StoreLocatorErrorProperty;
  * @see <a href="https://github.com/venusdrogon/feilong-json/issues/20">json format ,当字段名字叫 isO2O,但是get 方法叫 isO2O() 的时候会出现异常</a>
  * @since 1.12.0
  */
+@lombok.extern.slf4j.Slf4j
 public class FormatBeanErrorPropertyTest extends AbstractJsonTest{
 
     @Test
     public void test(){
         StoreLocatorErrorProperty storeLocator = new StoreLocatorErrorProperty();
-        LOGGER.debug(JsonUtil.format(storeLocator));
+        log.debug(JsonUtil.format(storeLocator));
     }
 }

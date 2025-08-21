@@ -30,9 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.util.CollectionsUtil;
@@ -49,12 +46,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.5
  */
+@lombok.extern.slf4j.Slf4j
 abstract class AbstractFormatter{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFormatter.class);
-
-    //---------------------------------------------------------------
 
     /**
      * 对java <code>bean</code>格式化.
@@ -172,8 +165,8 @@ abstract class AbstractFormatter{
                     BeanFormatterConfig beanFormatterConfig){
         //取到所有需要被提取的属性名 list
         List<String> propertyNameList = getPropertyValueList(formatterColumnEntityList, "propertyName");
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("propertyNameList:{}", JsonUtil.toString(propertyNameList));
+        if (log.isTraceEnabled()){
+            log.trace("propertyNameList:{}", JsonUtil.toString(propertyNameList));
         }
 
         //---------------------------------------------------------------

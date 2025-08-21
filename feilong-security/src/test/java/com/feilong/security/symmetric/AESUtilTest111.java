@@ -29,6 +29,7 @@ import com.feilong.security.AbstractSecurityTest;
  * @version 1.2.2 2015年7月19日 下午6:36:00
  * @since 1.2.2
  */
+@lombok.extern.slf4j.Slf4j
 public class AESUtilTest111 extends AbstractSecurityTest{
 
     /** The Constant SYMMETRIC_TYPE. */
@@ -60,17 +61,17 @@ public class AESUtilTest111 extends AbstractSecurityTest{
      * Test encrypt.
      */
     @Test
-    
+
     public void testEncrypt(){
         String SYMMETRIC_TYPE_KEY = "xhf6Z6I3JePpm8pgYa5m6w==";
         SymmetricEncryption symmetricEncryption1 = new SymmetricEncryption(SYMMETRIC_TYPE, SYMMETRIC_TYPE_KEY);
 
         String plainText = "Base64是一种基于64个可打印字符来表示二进制数据的表示方法.";
         String cipherText = symmetricEncryption1.encryptBase64(plainText, UTF8);
-        LOGGER.debug("Cipher:" + cipherText);
+        log.debug("Cipher:" + cipherText);
 
         String decipherText = symmetricEncryption1.decryptBase64(cipherText, UTF8);
-        LOGGER.debug("Decipher:" + decipherText);
+        log.debug("Decipher:" + decipherText);
         assert plainText.equals(decipherText) : "Encrypt is not correct";
     }
 

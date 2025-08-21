@@ -24,9 +24,6 @@ import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
@@ -41,9 +38,8 @@ import com.jcraft.jsch.Session;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.7.1
  */
+@lombok.extern.slf4j.Slf4j
 class SFTPUtil{
-
-    private static final Logger     LOGGER                    = LoggerFactory.getLogger(SFTPUtil.class);
 
     /**
      * 默认的 config.
@@ -51,7 +47,7 @@ class SFTPUtil{
      * @since 3.0.8
      */
     private static final Properties DEFAULT_CONFIG_PROPERTIES = toProperties(
-                    toMapUseEntrys(                                                                     //
+                    toMapUseEntrys( //
                                     //设置第一次登陆的时候提示，可选值：(ask | yes | no)  
                                     Pair.of("StrictHostKeyChecking", "no")));
 
@@ -88,8 +84,8 @@ class SFTPUtil{
         Validate.notBlank(hostName, "hostName can't be blank!");
         Validate.notBlank(userName, "userName can't be blank!");
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
+        if (log.isDebugEnabled()){
+            log.debug(
                             log(
                                             logTraceContext,
                                             "will use [sftpFileTransferConfig]:[{}] to create session",
@@ -108,8 +104,8 @@ class SFTPUtil{
         if (isNotNullOrEmpty(useConfig)){
             session.setConfig(useConfig);
         }
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(StringUtils.center(log(logTraceContext, "session connecting......"), 50, "------"));
+        if (log.isInfoEnabled()){
+            log.info(StringUtils.center(log(logTraceContext, "session connecting......"), 50, "------"));
         }
 
         //---------------------------------------------------------------

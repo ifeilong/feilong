@@ -26,15 +26,11 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.util.CellReferenceUtil;
 
+@lombok.extern.slf4j.Slf4j
 public class FormulaEvaluatorUtil{
-
-    /** The Constant log. */
-    private static final Logger  LOGGER               = LoggerFactory.getLogger(FormulaEvaluatorUtil.class);
 
     /** The Constant DYNAMIC_CELL_PATTREN. */
     private static final Pattern DYNAMIC_CELL_PATTREN = Pattern.compile("[A-Z][A-Z]?\\d+");
@@ -71,8 +67,8 @@ public class FormulaEvaluatorUtil{
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("reCalculate workbook use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+        if (log.isDebugEnabled()){
+            log.debug("reCalculate workbook use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
 
     }

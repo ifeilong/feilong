@@ -26,15 +26,16 @@ import com.feilong.test.AbstractTest;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public class ToStringUtilTest extends AbstractTest{
 
     @Test
     public void test(){
-        LOGGER.debug(ToStringUtil.toString(toMap("name", "feilong", "age", 18)));
+        log.debug(ToStringUtil.toString(toMap("name", "feilong", "age", 18)));
     }
 
     @Test
     public void test1(){
-        LOGGER.debug(ToStringUtil.toString(toMap("name", "feilong", "age", 18), 0, 0));
+        log.debug(ToStringUtil.toString(toMap("name", "feilong", "age", 18), 0, 0));
     }
 }

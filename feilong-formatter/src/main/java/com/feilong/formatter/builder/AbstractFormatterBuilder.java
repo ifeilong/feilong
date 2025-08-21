@@ -23,9 +23,6 @@ import static com.feilong.core.util.CollectionsUtil.select;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.formatter.entity.FormatterColumnEntity;
@@ -37,12 +34,8 @@ import com.feilong.json.JsonUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractFormatterBuilder implements FormatterBuilder{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFormatterBuilder.class);
-
-    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -79,16 +72,16 @@ public abstract class AbstractFormatterBuilder implements FormatterBuilder{
                         ? select(formatterColumnEntityList, "name", includePropertyNames)
                         : formatterColumnEntityList;
 
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("before sort:{}", JsonUtil.toString(useFormatterColumnEntityList));
+        if (log.isTraceEnabled()){
+            log.trace("before sort:{}", JsonUtil.toString(useFormatterColumnEntityList));
         }
 
         //---------------------------------------------------------------
         List<FormatterColumnEntity> result = FormatterColumnEntityListSorter
                         .sortFormatterColumnEntityList(useFormatterColumnEntityList, useBeanFormatterConfig);
 
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("after sort:{}", JsonUtil.toString(result));
+        if (log.isTraceEnabled()){
+            log.trace("after sort:{}", JsonUtil.toString(result));
         }
         return result;
     }
@@ -104,8 +97,8 @@ public abstract class AbstractFormatterBuilder implements FormatterBuilder{
      * @since 1.10.6
      */
     protected static Object[] buildLineData(Map<String, Object> propertyValueMap,BeanFormatterConfig beanFormatterConfig){
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("propertyValueMap:{}", JsonUtil.toString(propertyValueMap));
+        if (log.isTraceEnabled()){
+            log.trace("propertyValueMap:{}", JsonUtil.toString(propertyValueMap));
         }
 
         //---------------------------------------------------------------

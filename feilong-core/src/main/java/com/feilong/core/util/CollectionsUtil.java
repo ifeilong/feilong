@@ -42,8 +42,6 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
@@ -276,11 +274,9 @@ import com.feilong.lib.lang3.tuple.Pair;
  * 
  * @since jdk1.5
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class CollectionsUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CollectionsUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private CollectionsUtil(){
@@ -1147,7 +1143,7 @@ public final class CollectionsUtil{
      * list.add("feilong2");
      * list.add("feilong2");
      *
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
+     * log.info(JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
      * </pre>
      *
      * <b>返回:</b>
@@ -1159,7 +1155,7 @@ public final class CollectionsUtil{
      * 此时,原来的list不变:
      *
      * <pre class="code">
-     * LOGGER.info(JsonUtil.format(list));
+     * log.info(JsonUtil.format(list));
      * </pre>
      *
      * 输出 :
@@ -1204,7 +1200,7 @@ public final class CollectionsUtil{
      * list.add("feilong2");
      * list.add("feilong3");
      *
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
+     * log.info(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
      * </pre>
      *
      * <b>返回:</b>
@@ -1538,7 +1534,7 @@ public final class CollectionsUtil{
      *                 new User(5L));
      *
      * List{@code <Long>} resultList = CollectionsUtil.getPropertyValueList(list, "id");
-     * LOGGER.debug(JsonUtil.format(resultList));
+     * log.debug(JsonUtil.format(resultList));
      *
      * </pre>
      *
@@ -1725,7 +1721,7 @@ public final class CollectionsUtil{
      *                 new User(5L));
      * 
      * List{@code <Long>} resultList = CollectionsUtil.getPropertyValueList(list, User::getId);
-     * LOGGER.debug(JsonUtil.format(resultList));
+     * log.debug(JsonUtil.format(resultList));
      * 
      * </pre>
      * 
@@ -1796,7 +1792,7 @@ public final class CollectionsUtil{
      *                 new User(5L));
      * 
      * List{@code <String>} resultList = CollectionsUtil.getPropertyValueList(list, "id",String.class);
-     * LOGGER.debug(JsonUtil.format(resultList));
+     * log.debug(JsonUtil.format(resultList));
      * 
      * </pre>
      * 
@@ -1947,7 +1943,7 @@ public final class CollectionsUtil{
      * list.add(new User(5L));
      * list.add(new User(5L));
      *
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueSet(list, "id")));
+     * log.info(JsonUtil.format(CollectionsUtil.getPropertyValueSet(list, "id")));
      * </pre>
      *
      * <b>返回:</b>
@@ -2004,7 +2000,7 @@ public final class CollectionsUtil{
      * list.add(new User(5L));
      * list.add(new User(5L));
      * 
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueSet(list, "id",String.class)));
+     * log.info(JsonUtil.format(CollectionsUtil.getPropertyValueSet(list, "id",String.class)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -2098,7 +2094,7 @@ public final class CollectionsUtil{
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
      *
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueMap(list, "name", "age")));
+     * log.info(JsonUtil.format(CollectionsUtil.getPropertyValueMap(list, "name", "age")));
      * </pre>
      *
      * <b>返回:</b>
@@ -2122,7 +2118,7 @@ public final class CollectionsUtil{
      * list.add(new User("关羽", 24));
      * list.add(new User("张飞", 25));
      *
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueMap(list, "name", "age")));
+     * log.info(JsonUtil.format(CollectionsUtil.getPropertyValueMap(list, "name", "age")));
      * </pre>
      *
      * <b>返回:</b>
@@ -2192,7 +2188,7 @@ public final class CollectionsUtil{
      * list.add(new User("刘备", 25));
      * list.add(new User("关羽", 50));
      *
-     * LOGGER.info(CollectionsUtil.exist(list, "name", "关羽"));
+     * log.info(CollectionsUtil.exist(list, "name", "关羽"));
      * </pre>
      *
      * <b>返回:</b>
@@ -2276,7 +2272,7 @@ public final class CollectionsUtil{
      * list.add(new User("关羽", 50));
      *
      * Map{@code <String, ?>} map = toMap("name", "关羽", "age", 24);
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.exist(list, map)));
+     * log.info(JsonUtil.format(CollectionsUtil.exist(list, map)));
      * </pre>
      *
      * <b>返回:</b>
@@ -2330,7 +2326,7 @@ public final class CollectionsUtil{
      *
      * Predicate{@code <User>} predicate = BeanPredicateUtil.equalPredicate(map);
      *
-     * LOGGER.debug(JsonUtil.format(CollectionsUtil.exist(list, predicate)));
+     * log.debug(JsonUtil.format(CollectionsUtil.exist(list, predicate)));
      * </pre>
      *
      * <b>返回:</b>
@@ -2374,7 +2370,7 @@ public final class CollectionsUtil{
      * list.add(new User("刘备", 25));
      * list.add(new User("关羽", 50));
      *
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.find(list, "name", "关羽")));
+     * log.info(JsonUtil.format(CollectionsUtil.find(list, "name", "关羽")));
      * </pre>
      *
      * <b>返回:</b>
@@ -2435,7 +2431,7 @@ public final class CollectionsUtil{
      * list.add(new User("关羽", 50));
      *
      * Map{@code <String, ?>} map = toMap("name", "关羽", "age", 24);
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.find(list, map)));
+     * log.info(JsonUtil.format(CollectionsUtil.find(list, map)));
      * </pre>
      *
      * <b>返回:</b>
@@ -2502,7 +2498,7 @@ public final class CollectionsUtil{
      * Predicate{@code <User>} predicate = BeanPredicateUtil.equalPredicate(map);
      *
      * User user = CollectionsUtil.find(list, predicate);
-     * LOGGER.debug(JsonUtil.format(user));
+     * log.debug(JsonUtil.format(user));
      * </pre>
      *
      * <b>返回:</b>
@@ -2565,7 +2561,7 @@ public final class CollectionsUtil{
      * list.add(new User("刘备", 25));
      *
      * String[] array = { "刘备", "关羽" };
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, "name", array)));
+     * log.info(JsonUtil.format(CollectionsUtil.select(list, "name", array)));
      *
      * </pre>
      *
@@ -2636,7 +2632,7 @@ public final class CollectionsUtil{
      * List{@code <String>} propertyValueList = new ArrayList{@code <>}();
      * propertyValueList.add("张飞");
      * propertyValueList.add("刘备");
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, "name", propertyValueList)));
+     * log.info(JsonUtil.format(CollectionsUtil.select(list, "name", propertyValueList)));
      * </pre>
      *
      * <b>返回:</b>
@@ -2742,7 +2738,7 @@ public final class CollectionsUtil{
      * list.add(new User("关羽", 50));
      *
      * Map{@code <String, ?>} map = toMap("name", "关羽", "age", 24);
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, map)));
+     * log.info(JsonUtil.format(CollectionsUtil.select(list, map)));
      * </pre>
      *
      * <b>返回:</b>
@@ -2805,7 +2801,7 @@ public final class CollectionsUtil{
      * list.add(1L);
      * list.add(2L);
      * list.add(3L);
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate{@code <Long>}(1L))));
+     * log.info(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate{@code <Long>}(1L))));
      * </pre>
      *
      * <b>返回:</b>
@@ -2828,7 +2824,7 @@ public final class CollectionsUtil{
      * Predicate{@code <Integer>} predicate = new ComparatorPredicate{@code <Integer>}(10, comparator, Criterion.LESS);
      *
      * List{@code <Integer>} select = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
-     * LOGGER.debug(JsonUtil.format(select, 0, 0));
+     * log.debug(JsonUtil.format(select, 0, 0));
      * </pre>
      *
      * <b>返回:</b>
@@ -2882,7 +2878,7 @@ public final class CollectionsUtil{
      * list.add(new User("刘备", 25));
      *
      * List{@code <User>} selectRejected = CollectionsUtil.selectRejected(list, "name", "刘备", "张飞");
-     * LOGGER.info(JsonUtil.format(selectRejected));
+     * log.info(JsonUtil.format(selectRejected));
      *
      * </pre>
      *
@@ -2942,7 +2938,7 @@ public final class CollectionsUtil{
      * List{@code <String>} propertyValueList = new ArrayList{@code <>}();
      * propertyValueList.add("张飞");
      * propertyValueList.add("刘备");
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.selectRejected(list, "name", propertyValueList)));
+     * log.info(JsonUtil.format(CollectionsUtil.selectRejected(list, "name", propertyValueList)));
      *
      * </pre>
      *
@@ -3007,7 +3003,7 @@ public final class CollectionsUtil{
      * list.add(new User("关羽", 50));
      *
      * Map{@code <String, ?>} map = toMap("name", "关羽", "age", 24);
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.selectRejected(list, map)));
+     * log.info(JsonUtil.format(CollectionsUtil.selectRejected(list, map)));
      * </pre>
      *
      * <b>返回:</b>
@@ -3115,7 +3111,7 @@ public final class CollectionsUtil{
      *
      * Transformer{@code <String, Object>} nullTransformer = TransformerUtils.nullTransformer();
      * List{@code <Object>} collect = CollectionsUtil.collect(list, nullTransformer);
-     * LOGGER.info(JsonUtil.format(collect, 0, 0));
+     * log.info(JsonUtil.format(collect, 0, 0));
      *
      * </pre>
      *
@@ -3349,7 +3345,7 @@ public final class CollectionsUtil{
      *
      * Transformer{@code <String, Object>} nullTransformer = TransformerUtils.nullTransformer();
      * List{@code <Object>} collect = CollectionsUtil.collect(list.iterator(), nullTransformer);
-     * LOGGER.info(JsonUtil.format(collect, 0, 0));
+     * log.info(JsonUtil.format(collect, 0, 0));
      * </pre>
      *
      * <b>返回:</b>
@@ -3412,7 +3408,7 @@ public final class CollectionsUtil{
      *                 new User("刘备", 30));
      *
      * Map{@code <String, List<User>>} map = CollectionsUtil.group(list, "name");
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      *
      * <b>返回:</b>
@@ -3501,7 +3497,7 @@ public final class CollectionsUtil{
                 return user.getAge() {@code >} 20;
             }
         });
-        LOGGER.info(JsonUtil.format(map));
+        log.info(JsonUtil.format(map));
      * </pre>
      *
      * <b>返回:</b>
@@ -3627,7 +3623,7 @@ public final class CollectionsUtil{
      *     }
      * });
      *
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      *
      * </pre>
      *
@@ -3751,7 +3747,7 @@ public final class CollectionsUtil{
      *     }
      * });
      *
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      *
      * </pre>
      *
@@ -3858,7 +3854,7 @@ public final class CollectionsUtil{
      * list.add(new User("刘备", 30));
      *
      * Map{@code <String, User>} map = CollectionsUtil.groupOne(list, "name");
-     * LOGGER.info(JsonUtil.format(map));
+     * log.info(JsonUtil.format(map));
      * </pre>
      *
      * <b>返回:</b>
@@ -3905,8 +3901,8 @@ public final class CollectionsUtil{
             if (!map.containsKey(key)){
                 map.put(key, o);
             }else{
-                if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace("map:[{}] already has the key:[{}],ignore!", map.keySet(), key);
+                if (log.isTraceEnabled()){
+                    log.trace("map:[{}] already has the key:[{}],ignore!", map.keySet(), key);
                 }
             }
         }

@@ -34,9 +34,6 @@ import java.net.NoRouteToHostException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.HttpHost;
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
@@ -62,13 +59,11 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.4
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
 public class DefaultHttpClientConnectionOperator implements HttpClientConnectionOperator{
 
     static final String                           SOCKET_FACTORY_REGISTRY = "http.socket-factory-registry";
-
-    private static final Logger                   log                     = LoggerFactory
-                    .getLogger(DefaultHttpClientConnectionOperator.class);
 
     private final Lookup<ConnectionSocketFactory> socketFactoryRegistry;
 

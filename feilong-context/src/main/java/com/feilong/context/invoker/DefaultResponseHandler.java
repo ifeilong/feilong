@@ -17,9 +17,6 @@ package com.feilong.context.invoker;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.context.converter.StringToBeanConverter;
 import com.feilong.json.JsonUtil;
 
@@ -40,12 +37,8 @@ import com.feilong.json.JsonUtil;
  * @see DefaultRequestResultInvoker
  * @since 2.1.0
  */
+@lombok.extern.slf4j.Slf4j
 public class DefaultResponseHandler<R extends InvokerRequest> implements ResponseHandler<R>{
-
-    /** The Constant LOGGER. */
-    private static final Logger        LOGGER = LoggerFactory.getLogger(DefaultResponseHandler.class);
-
-    //---------------------------------------------------------------
 
     /** 响应结果字符串构造器. */
     protected ResponseStringBuilder<R> responseStringBuilder;
@@ -72,8 +65,8 @@ public class DefaultResponseHandler<R extends InvokerRequest> implements Respons
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("NetpayRequest:[{}],invokerResponse:[{}]", JsonUtil.toString(request), invokerResponseString);
+        if (log.isInfoEnabled()){
+            log.info("NetpayRequest:[{}],invokerResponse:[{}]", JsonUtil.toString(request), invokerResponseString);
         }
         responseStringHandler.handle(invokerResponseString, request);
     }

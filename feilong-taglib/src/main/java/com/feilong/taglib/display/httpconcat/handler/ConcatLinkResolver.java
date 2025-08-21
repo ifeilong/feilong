@@ -20,9 +20,6 @@ import static com.feilong.core.bean.ToStringConfig.IGNORE_NULL_OR_EMPTY_CONFIG;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
@@ -32,12 +29,8 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
+@lombok.extern.slf4j.Slf4j
 public final class ConcatLinkResolver{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConcatLinkResolver.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private ConcatLinkResolver(){
@@ -69,7 +62,7 @@ public final class ConcatLinkResolver{
         int itemSrcListSize = itemSrcList.size();
         if (itemSrcListSize == 1){
             String itemSrc = itemSrcList.get(0);
-            LOGGER.debug("itemSrcList:[{}], size==1,will generate primary [{}].", itemSrc, standardHttpConcatParam.getType());
+            log.debug("itemSrcList:[{}], size==1,will generate primary [{}].", itemSrc, standardHttpConcatParam.getType());
             return resolver(itemSrc, standardHttpConcatParam);
         }
 
@@ -133,7 +126,7 @@ public final class ConcatLinkResolver{
             sb.append("?");
             sb.append(version);
         }else{
-            LOGGER.warn("HttpConcatParam version isNullOrEmpty,suggest you should set version value,StringBuilder info:[{}]", sb);
+            log.warn("HttpConcatParam version isNullOrEmpty,suggest you should set version value,StringBuilder info:[{}]", sb);
         }
     }
 }

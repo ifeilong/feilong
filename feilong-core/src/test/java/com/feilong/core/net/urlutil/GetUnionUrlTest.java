@@ -29,20 +29,21 @@ import com.feilong.test.AbstractTest;
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
+@lombok.extern.slf4j.Slf4j
 public class GetUnionUrlTest extends AbstractTest{
 
     private final URL url = URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing/");
 
     @Test
     public void testGetUnionUrl1(){
-        LOGGER.debug(URLUtil.getUnionUrl(URLUtil.toURL("E:\\test"), "sanguo"));
+        log.debug(URLUtil.getUnionUrl(URLUtil.toURL("E:\\test"), "sanguo"));
     }
 
     //
 
     @Test
     public void testGetUnionUrl1222(){
-        LOGGER.debug(URLUtil.getUnionUrl(URLUtil.toURL("Ea:\\test"), "sanguo"));
+        log.debug(URLUtil.getUnionUrl(URLUtil.toURL("Ea:\\test"), "sanguo"));
     }
 
     /**

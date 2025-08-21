@@ -29,6 +29,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.7
  */
+@lombok.extern.slf4j.Slf4j
 public class HttpConcatUtilConcatTest extends BaseHttpConcatTest{
 
     @Test
@@ -40,7 +41,7 @@ public class HttpConcatUtilConcatTest extends BaseHttpConcatTest{
         httpConcatParam.setContent("<script type=\"text/javascript\" src=\"//img.mapemall.com/resources/js/plp.js\"></script>");
         httpConcatParam.setDomain("//img.mapemall.com");
 
-        LOGGER.debug(getWriteContent(httpConcatParam));
+        log.debug(getWriteContent(httpConcatParam));
     }
 
     @Test

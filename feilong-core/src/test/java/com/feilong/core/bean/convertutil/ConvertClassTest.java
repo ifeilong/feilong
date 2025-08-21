@@ -37,11 +37,11 @@ public class ConvertClassTest{
     //        LinkedList<Serializable> linkedList = new LinkedList<Serializable>();
     //        for (String string : tokenizeToStringArray){
     //            Serializable t = ConvertUtil.convert(string, Serializable.class);
-    //            LOGGER.debug(t.getClass().getCanonicalName());
+    //            log.debug(t.getClass().getCanonicalName());
     //            linkedList.add(t);
     //        }
     //        Serializable l = 6L;
-    //        LOGGER.debug("linkedList:{},contains:{},{}", linkedList, l, linkedList.contains(l));
+    //        log.debug("linkedList:{},contains:{},{}", linkedList, l, linkedList.contains(l));
     //    }
 
     /**

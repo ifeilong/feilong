@@ -23,6 +23,7 @@ import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
 import com.feilong.security.oneway.SHA512Util;
 
+@lombok.extern.slf4j.Slf4j
 public class SHA512UtilTest extends AbstractSecurityTest{
 
     @Test
@@ -32,7 +33,7 @@ public class SHA512UtilTest extends AbstractSecurityTest{
 
     @Test
     public void encode12(){
-        LOGGER.debug(debugSecurityValue(SHA512Util.encode("2284208963")));
+        log.debug(debugSecurityValue(SHA512Util.encode("2284208963")));
     }
 
     //---------------------------------------------------------------

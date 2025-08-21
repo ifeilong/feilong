@@ -26,8 +26,6 @@ import static java.util.Arrays.fill;
 
 import java.util.Formatter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -35,10 +33,8 @@ import com.feilong.lib.beanutils.ConvertUtils;
 import com.feilong.lib.beanutils.MethodUtils;
 
 /**
- * <p>
  * Rule implementation that calls a method on an object on the stack (normally the top/parent object), passing arguments
  * collected from subsequent <code>CallParamRule</code> rules or from the body of this element.
- * </p>
  * <p>
  * By using {@link #CallMethodRule(String methodName)} a method call can be made to a method which accepts no arguments.
  * </p>
@@ -86,10 +82,8 @@ import com.feilong.lib.beanutils.MethodUtils;
  * instances is not commonly required.
  * </p>
  */
+@lombok.extern.slf4j.Slf4j
 public class CallMethodRule extends Rule{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CallMethodRule.class);
 
     // ----------------------------------------------------------- Constructors
 
@@ -374,9 +368,9 @@ public class CallMethodRule extends Rule{
         if (paramCount > 0){
             parameters = getDigester().popParams();
 
-            if (LOGGER.isTraceEnabled()){
+            if (log.isTraceEnabled()){
                 for (int i = 0, size = parameters.length; i < size; i++){
-                    LOGGER.trace(format("[CallMethodRule]{%s} parameters[%s]=%s", getDigester().getMatch(), i, parameters[i]));
+                    log.trace(format("[CallMethodRule]{%s} parameters[%s]=%s", getDigester().getMatch(), i, parameters[i]));
                 }
             }
 
@@ -449,14 +443,14 @@ public class CallMethodRule extends Rule{
         }
 
         // Invoke the required method on the top object
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             Formatter formatter = new Formatter()
                             .format("[CallMethodRule]{%s} Call %s.%s(", getDigester().getMatch(), target.getClass().getName(), methodName);
             for (int i = 0; i < paramValues.length; i++){
                 formatter.format("%s%s/%s", (i > 0 ? ", " : ""), paramValues[i], paramTypes[i].getName());
             }
             formatter.format(")");
-            LOGGER.debug(formatter.toString());
+            log.debug(formatter.toString());
         }
 
         Object result = null;

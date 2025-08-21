@@ -22,9 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.SheetNamesUtil;
@@ -35,12 +32,8 @@ import com.feilong.excel.util.SheetNamesUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public class ExcelDefinitionBuilder{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelDefinitionBuilder.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private ExcelDefinitionBuilder(){
@@ -67,7 +60,7 @@ public class ExcelDefinitionBuilder{
 
         //如果sheetNames 没有配置, 且sheetDefinitions 只有1个
         if (SheetNamesUtil.isEmptyOrNullElement(sheetNames) && size(sheetDefinitionMap) == 1){
-            LOGGER.debug("sheetNames isEmptyOrNullElement,and sheetDefinitionMap is only 1,use ExcelSheet");
+            log.debug("sheetNames isEmptyOrNullElement,and sheetDefinitionMap is only 1,use ExcelSheet");
             excelSheets.addAll(sheetDefinitionMap.values());
         }else{
             for (String sheetName : sheetNames){

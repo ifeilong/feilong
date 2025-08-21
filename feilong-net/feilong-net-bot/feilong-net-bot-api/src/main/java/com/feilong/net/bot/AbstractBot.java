@@ -18,9 +18,6 @@ package com.feilong.net.bot;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.StringUtil.formatPattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.bot.message.MessageParams;
@@ -31,14 +28,11 @@ import com.feilong.net.bot.message.MessageParams;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.3.0
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractBot implements Bot{
 
-    /** The Constant log. */
-    private static final Logger LOGGER           = LoggerFactory.getLogger(AbstractBot.class);
-
-    //---------------------------------------------------------------
     /** 是否异步,默认false,表示是同步. */
-    protected boolean           isAsync          = false;
+    protected boolean isAsync          = false;
 
     /**
      * 是否捕获异常,默认false,表示不捕获异常.
@@ -46,7 +40,7 @@ public abstract class AbstractBot implements Bot{
      * @deprecated since 4.0.0 请使用 {@link #isThrowException} 如果两个值都设置以 {@link #isThrowException} 为准
      */
     @Deprecated
-    protected boolean           isCatchException = false;
+    protected boolean isCatchException = false;
 
     /**
      * 当出现异常, 是否抛出异常.
@@ -58,7 +52,7 @@ public abstract class AbstractBot implements Bot{
      * @since 4.0.0
      * 
      */
-    protected boolean           isThrowException = false;
+    protected boolean isThrowException = false;
 
     //---------------------------------------------------------------
 
@@ -86,13 +80,13 @@ public abstract class AbstractBot implements Bot{
                         content,
                         JsonUtil.toString(useMessageParams));
         if (!isAsync){
-            LOGGER.info(logPrefix);
+            log.info(logPrefix);
             return handleSendMessage(logPrefix, content, useMessageParams);
         }
         //---------------------------------------------------------------
         //异步
         new Thread(() -> {
-            LOGGER.info(logPrefix);
+            log.info(logPrefix);
             handleSendMessage(logPrefix, content, useMessageParams);
         }).start();
 
@@ -115,7 +109,7 @@ public abstract class AbstractBot implements Bot{
             }
 
             //只打印log 方便排查问题
-            LOGGER.error(formatPattern("[{}],returnFalse", logPrefix), e);
+            log.error(formatPattern("[{}],returnFalse", logPrefix), e);
             return false;
         }
     }

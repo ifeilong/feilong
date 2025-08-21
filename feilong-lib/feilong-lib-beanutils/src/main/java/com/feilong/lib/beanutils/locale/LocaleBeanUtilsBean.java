@@ -23,8 +23,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 
 import org.apache.commons.beanutils.DynaBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.beanutils.BeanUtilsBean;
 import com.feilong.lib.beanutils.ContextClassLoaderLocal;
@@ -37,34 +35,26 @@ import com.feilong.lib.beanutils.PropertyUtilsBean;
 import com.feilong.lib.beanutils.expression.Resolver;
 
 /**
- * <p>
  * Utility methods for populating JavaBeans properties
  * via reflection in a locale-dependent manner.
- * </p>
  *
  * @since 1.7
  * @version $Id$
  */
-
+@lombok.extern.slf4j.Slf4j
 public class LocaleBeanUtilsBean extends BeanUtilsBean{
-
-    /** The Constant log. */
-    private static final Logger                                       LOGGER                      = LoggerFactory
-                    .getLogger(LocaleBeanUtilsBean.class);
-
-    //---------------------------------------------------------------
 
     /**
      * Contains <code>LocaleBeanUtilsBean</code> instances indexed by context classloader.
      */
     private static final ContextClassLoaderLocal<LocaleBeanUtilsBean> LOCALE_BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal<LocaleBeanUtilsBean>(){
 
-                                                                                                      // Creates the default instance used when the context classloader is unavailable
-                                                                                                      @Override
-                                                                                                      protected LocaleBeanUtilsBean initialValue(){
-                                                                                                          return new LocaleBeanUtilsBean();
-                                                                                                      }
-                                                                                                  };
+        // Creates the default instance used when the context classloader is unavailable
+        @Override
+        protected LocaleBeanUtilsBean initialValue(){
+            return new LocaleBeanUtilsBean();
+        }
+    };
 
     /**
      * Gets singleton instance
@@ -677,7 +667,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean{
                     throws IllegalAccessException,InvocationTargetException{
 
         // Trace logging (if enabled)
-        if (LOGGER.isTraceEnabled()){
+        if (log.isTraceEnabled()){
             final StringBuilder sb = new StringBuilder("  setProperty(");
             sb.append(bean);
             sb.append(", ");
@@ -701,7 +691,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean{
                 sb.append(value.toString());
             }
             sb.append(')');
-            LOGGER.trace(sb.toString());
+            log.trace(sb.toString());
         }
 
         // Resolve any nested expression to get the actual target bean
@@ -715,9 +705,9 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean{
                 return; // Skip this property setter
             }
         }
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("    Target bean = " + target);
-            LOGGER.trace("    Target name = " + name);
+        if (log.isTraceEnabled()){
+            log.trace("    Target bean = " + target);
+            log.trace("    Target name = " + name);
         }
 
         // Declare local variables we will require
@@ -799,8 +789,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean{
      */
     protected Object convert(final Class<?> type,final int index,final Object value,final String pattern){
 
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("Converting value '" + value + "' to type:" + type);
+        if (log.isTraceEnabled()){
+            log.trace("Converting value '" + value + "' to type:" + type);
         }
 
         Object newValue = null;
@@ -950,9 +940,9 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean{
                 return null; // Skip this property setter
             }
         }
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("    Target bean = " + target);
-            LOGGER.trace("    Target name = " + name);
+        if (log.isTraceEnabled()){
+            log.trace("    Target bean = " + target);
+            log.trace("    Target name = " + name);
         }
 
         // Declare local variables we will require

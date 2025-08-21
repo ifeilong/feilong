@@ -33,6 +33,7 @@ import com.feilong.test.AbstractTest;
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
+@lombok.extern.slf4j.Slf4j
 public class BreadCrumbUtilTest extends AbstractTest{
 
     /** The site map entities. */
@@ -66,7 +67,7 @@ public class BreadCrumbUtilTest extends AbstractTest{
 
         sortList(list, new BreadCrumbEntityComparator());
 
-        LOGGER.debug(JsonUtil.format(list));
+        log.debug(JsonUtil.format(list));
     }
 
     /**
@@ -90,7 +91,7 @@ public class BreadCrumbUtilTest extends AbstractTest{
         //        breadCrumbParams.setCurrentPath("/test8.htm");
         //        breadCrumbParams.setVmPath(null);
 
-        LOGGER.debug(BreadCrumbUtil.getBreadCrumbContent(breadCrumbParams));
+        log.debug(BreadCrumbUtil.getBreadCrumbContent(breadCrumbParams));
     }
 
     /**
@@ -102,13 +103,13 @@ public class BreadCrumbUtilTest extends AbstractTest{
         //        String path = "/test8.htm";
         //        BreadCrumbTag siteMapTag = new BreadCrumbTag();
         //        List<BreadCrumbEntity<Number>> allParentSiteMapEntityList = siteMapTag.getAllParentSiteMapEntityList(path, siteMapEntities);
-        //        LOGGER.debug("show");
+        //        log.debug("show");
         //        if (null != allParentSiteMapEntityList){
         //            for (BreadCrumbEntity<Number> sme : allParentSiteMapEntityList){
-        //                LOGGER.debug(sme.getName());
+        //                log.debug(sme.getName());
         //            }
         //        }else{
-        //            LOGGER.debug("allParentSiteMapEntityList is null/empty");
+        //            log.debug("allParentSiteMapEntityList is null/empty");
         //        }
     }
 
@@ -121,8 +122,8 @@ public class BreadCrumbUtilTest extends AbstractTest{
         //        String path = "/test8.htm";
         //        BreadCrumbTag siteMapTag = new BreadCrumbTag();
         //        BreadCrumbEntity<Number> siteMapEntity = siteMapTag.getSiteMapEntityByPath(path, siteMapEntities);
-        //        LOGGER.debug(siteMapEntity.getParentId() + "");
-        //        LOGGER.debug(siteMapEntity.getName());
+        //        log.debug(siteMapEntity.getParentId() + "");
+        //        log.debug(siteMapEntity.getName());
     }
 
     /**
@@ -137,6 +138,6 @@ public class BreadCrumbUtilTest extends AbstractTest{
         //        contextKeyValues.put("siteMapEntityList", allParentSiteMapEntityList);
         //        contextKeyValues.put("connector", ">");
         //        String siteMapString = new VelocityUtil().parseTemplateWithClasspathResourceLoader("velocity/sitemap.vm", contextKeyValues);
-        //        LOGGER.debug(siteMapString);
+        //        log.debug(siteMapString);
     }
 }

@@ -26,10 +26,11 @@ import com.feilong.json.JsonUtil;
 import com.feilong.store.member.Address;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatterUtilTest extends AbstractTest{
 
     @Test
-    
+
     public final void test(){
         List<Address> list = toList(
                         new Address("china", "shanghai", "216000", "wenshui wanrong.lu 888"),
@@ -38,8 +39,8 @@ public class FormatterUtilTest extends AbstractTest{
                         new Address("china", "tianjing", "216600", "wenshui wanrong.lu 999"));
 
         //---------------------------------------------------------------
-        LOGGER.debug(JsonUtil.format(list));
+        log.debug(JsonUtil.format(list));
 
-        LOGGER.debug(formatToSimpleTable(list));
+        log.debug(formatToSimpleTable(list));
     }
 }

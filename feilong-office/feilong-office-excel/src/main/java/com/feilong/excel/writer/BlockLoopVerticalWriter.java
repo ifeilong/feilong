@@ -22,16 +22,13 @@ import java.util.Map;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.lib.excel.ognl.OgnlStack;
 
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 class BlockLoopVerticalWriter{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(BlockLoopVerticalWriter.class);
 
     /** Don't let anyone instantiate this class. */
     private BlockLoopVerticalWriter(){
@@ -71,7 +68,7 @@ class BlockLoopVerticalWriter{
             ognlStack.removeContext("preLine");
             ognlStack.removeContext("lineNum");
         }catch (Exception e){
-            LOGGER.error("", e);
+            log.error("", e);
         }
     }
 

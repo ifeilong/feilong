@@ -24,8 +24,6 @@ import static java.lang.String.format;
 import java.beans.PropertyDescriptor;
 
 import org.apache.commons.beanutils.DynaBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 import com.feilong.lib.beanutils.BeanUtils;
@@ -33,9 +31,7 @@ import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.beanutils.PropertyUtils;
 
 /**
- * <p>
  * Rule implements sets a bean property on the top object to the body text.
- * </p>
  * <p>
  * The property set:
  * </p>
@@ -48,10 +44,8 @@ import com.feilong.lib.beanutils.PropertyUtils;
  * automatically mapped to properties on the parent object.
  * </p>
  */
+@lombok.extern.slf4j.Slf4j
 public class BeanPropertySetterRule extends Rule{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(BeanPropertySetterRule.class);
 
     // ----------------------------------------------------------- Constructors
 
@@ -133,7 +127,7 @@ public class BeanPropertySetterRule extends Rule{
         if (propertyNameFromAttribute != null){
             propertyName = attributes.getValue(propertyNameFromAttribute);
 
-            LOGGER.warn(
+            log.warn(
                             format(
                                             "[BeanPropertySetterRule]{%s} Attribute '%s' not found in matching element '%s'",
                                             getDigester().getMatch(),
@@ -148,8 +142,8 @@ public class BeanPropertySetterRule extends Rule{
     @Override
     public void body(String namespace,String name,String text) throws Exception{
         // log some debugging information
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(format("[BeanPropertySetterRule]{%s} Called with text '%s'", getDigester().getMatch(), text));
+        if (log.isDebugEnabled()){
+            log.debug(format("[BeanPropertySetterRule]{%s} Called with text '%s'", getDigester().getMatch(), text));
         }
 
         bodyText = text.trim();
@@ -172,8 +166,8 @@ public class BeanPropertySetterRule extends Rule{
         Object top = getDigester().peek();
 
         // log some debugging information
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
+        if (log.isDebugEnabled()){
+            log.debug(
                             format(
                                             "[BeanPropertySetterRule]{%s} Set %s property %s with text %s",
                                             getDigester().getMatch(),

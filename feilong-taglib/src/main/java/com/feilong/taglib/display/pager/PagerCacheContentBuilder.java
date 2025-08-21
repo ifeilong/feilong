@@ -35,9 +35,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.net.ParamUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.tuple.Pair;
@@ -55,9 +52,8 @@ import com.feilong.template.TemplateUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.3
  */
+@lombok.extern.slf4j.Slf4j
 public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams, String>{
-
-    private static final Logger                                  LOGGER   = LoggerFactory.getLogger(PagerCacheContentBuilder.class);
 
     /** Static instance. */
     // the static instance works for all types
@@ -73,7 +69,7 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
     @Override
     public String build(PagerParams pagerParams){
         if (pagerParams.getDebugIsNotParseVM()){
-            LOGGER.debug("param [debugIsNotParseVM] is [true],return empty~");
+            log.debug("param [debugIsNotParseVM] is [true],return empty~");
             return EMPTY;
         }
 
@@ -85,8 +81,8 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
 
         String content = TemplateUtil.parseTemplate(pagerParams.getVmPath(), vmParamMap);
 
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("parse:[{}],use vmParamMap:{},content result:{}", pagerParams.getVmPath(), JsonUtil.toString(vmParamMap), content);
+        if (log.isTraceEnabled()){
+            log.trace("parse:[{}],use vmParamMap:{},content result:{}", pagerParams.getVmPath(), JsonUtil.toString(vmParamMap), content);
         }
         return content;
     }

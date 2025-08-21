@@ -31,8 +31,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.commons.beanutils.DynaBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.beanutils.expression.DefaultResolver;
 import com.feilong.lib.beanutils.expression.Resolver;
@@ -97,14 +95,10 @@ import com.feilong.lib.beanutils.expression.Resolver;
  * @see PropertyUtils
  * @since 1.7
  */
+@lombok.extern.slf4j.Slf4j
 public class PropertyUtilsBean{
 
-    /** The Constant log. */
-    private static final Logger LOGGER   = LoggerFactory.getLogger(PropertyUtilsBean.class);
-
-    //---------------------------------------------------------------
-
-    private Resolver            resolver = new DefaultResolver();
+    private Resolver resolver = new DefaultResolver();
 
     // --------------------------------------------------------- Class Methods
 
@@ -264,8 +258,8 @@ public class PropertyUtilsBean{
                             setSimpleProperty(dest, name, value);
                         }
                     }catch (final NoSuchMethodException e){
-                        if (LOGGER.isDebugEnabled()){
-                            LOGGER.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
+                        if (log.isDebugEnabled()){
+                            log.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
                         }
                     }
                 }
@@ -283,8 +277,8 @@ public class PropertyUtilsBean{
                             setSimpleProperty(dest, name, entry.getValue());
                         }
                     }catch (final NoSuchMethodException e){
-                        if (LOGGER.isDebugEnabled()){
-                            LOGGER.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
+                        if (log.isDebugEnabled()){
+                            log.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
                         }
                     }
                 }
@@ -302,8 +296,8 @@ public class PropertyUtilsBean{
                             setSimpleProperty(dest, name, value);
                         }
                     }catch (final NoSuchMethodException e){
-                        if (LOGGER.isDebugEnabled()){
-                            LOGGER.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
+                        if (log.isDebugEnabled()){
+                            log.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
                         }
                     }
                 }
@@ -1456,9 +1450,9 @@ public class PropertyUtilsBean{
                 subscript[0] = new Integer(index);
                 subscript[1] = value;
                 try{
-                    if (LOGGER.isTraceEnabled()){
+                    if (log.isTraceEnabled()){
                         final String valueClassName = value == null ? "<null>" : value.getClass().getName();
-                        LOGGER.trace(
+                        log.trace(
                                         "setSimpleProperty: Invoking method " + writeMethod + " with index=" + index + ", value=" + value
                                                         + " (class " + valueClassName + ")");
                     }
@@ -1610,9 +1604,9 @@ public class PropertyUtilsBean{
                 final Object[] params = new Object[2];
                 params[0] = key;
                 params[1] = value;
-                if (LOGGER.isTraceEnabled()){
+                if (log.isTraceEnabled()){
                     final String valueClassName = value == null ? "<null>" : value.getClass().getName();
-                    LOGGER.trace(
+                    log.trace(
                                     "setSimpleProperty: Invoking method " + mappedWriteMethod + " with key=" + key + ", value=" + value
                                                     + " (class " + valueClassName + ")");
                 }
@@ -1903,9 +1897,9 @@ public class PropertyUtilsBean{
         // Call the property setter method
         final Object[] values = new Object[1];
         values[0] = value;
-        if (LOGGER.isTraceEnabled()){
+        if (log.isTraceEnabled()){
             final String valueClassName = value == null ? "<null>" : value.getClass().getName();
-            LOGGER.trace("setSimpleProperty: Invoking method " + writeMethod + " with value " + value + " (class " + valueClassName + ")");
+            log.trace("setSimpleProperty: Invoking method " + writeMethod + " with value " + value + " (class " + valueClassName + ")");
         }
         invokeMethod(writeMethod, bean, values);
 
@@ -2027,7 +2021,7 @@ public class PropertyUtilsBean{
             try{
                 bi.introspect(ictx);
             }catch (final IntrospectionException iex){
-                LOGGER.error("Exception during introspection", iex);
+                log.error("Exception during introspection", iex);
             }
         }
 

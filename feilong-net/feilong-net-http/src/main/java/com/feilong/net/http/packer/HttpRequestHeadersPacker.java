@@ -21,9 +21,6 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.HttpHeaders;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.http.ConnectionConfig;
@@ -37,12 +34,8 @@ import com.feilong.security.Base64Util;
  * @since 1.10.6
  * @since 1.11.0 rename from HeadersPacker
  */
+@lombok.extern.slf4j.Slf4j
 public final class HttpRequestHeadersPacker{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpRequestHeadersPacker.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private HttpRequestHeadersPacker(){
@@ -85,7 +78,7 @@ public final class HttpRequestHeadersPacker{
      */
     private static void setHeaderMap(HttpUriRequest httpUriRequest,Map<String, String> headerMap){
         if (isNullOrEmpty(headerMap)){
-            LOGGER.trace("input [headerMap] is null or empty ,skip!");
+            log.trace("input [headerMap] is null or empty ,skip!");
             return;
         }
 
@@ -95,8 +88,8 @@ public final class HttpRequestHeadersPacker{
             String value = entry.getValue();
             httpUriRequest.setHeader(key, value);
             //
-            //            if (LOGGER.isTraceEnabled()){
-            //                LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
+            //            if (log.isTraceEnabled()){
+            //                log.trace("httpUriRequest.setHeader({}, {})", key, value);
             //            }
         }
     }

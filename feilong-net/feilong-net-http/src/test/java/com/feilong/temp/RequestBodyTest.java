@@ -25,6 +25,7 @@ import com.feilong.net.http.HttpMethodType;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class RequestBodyTest extends AbstractTest{
 
     @Test
@@ -53,6 +54,6 @@ public class RequestBodyTest extends AbstractTest{
         HttpRequest httpRequest = new HttpRequest(uri, toMap("country", "china"), HttpMethodType.POST);
 
         httpRequest.setRequestBody(JsonUtil.toString(httpRequest));
-        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(httpRequest));
+        log.debug(HttpClientUtil.getResponseBodyAsString(httpRequest));
     }
 }

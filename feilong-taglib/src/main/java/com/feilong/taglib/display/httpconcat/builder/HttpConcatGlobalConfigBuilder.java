@@ -21,9 +21,6 @@ import static com.feilong.core.util.ResourceBundleUtil.getValue;
 
 import java.util.ResourceBundle;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.json.JsonUtil;
@@ -37,12 +34,8 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
  * @since 1.5.0
  * @since 1.8.8 change class Access Modifiers
  */
+@lombok.extern.slf4j.Slf4j
 public final class HttpConcatGlobalConfigBuilder{
-
-    /** The Constant log. */
-    private static final Logger                LOGGER                    = LoggerFactory.getLogger(HttpConcatGlobalConfigBuilder.class);
-
-    //---------------------------------------------------------------
 
     /** 配置文件 <code>{@value}</code>. */
     //XXX support different environment
@@ -100,8 +93,8 @@ public final class HttpConcatGlobalConfigBuilder{
         //autoPartitionSize
         httpConcatGlobalConfig.setAutoPartitionSize(toInteger(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.autoPartitionSize")));
 
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("init http concat config:[{}]", JsonUtil.toString(httpConcatGlobalConfig));
+        if (log.isInfoEnabled()){
+            log.info("init http concat config:[{}]", JsonUtil.toString(httpConcatGlobalConfig));
         }
         return httpConcatGlobalConfig;
     }

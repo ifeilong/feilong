@@ -24,9 +24,6 @@ import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.ValidationMessage;
 import javax.servlet.jsp.tagext.VariableInfo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.taglib.BaseTEI;
@@ -37,10 +34,8 @@ import com.feilong.taglib.BaseTEI;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.3
  */
+@lombok.extern.slf4j.Slf4j
 public class PagerTagExtraInfo extends BaseTEI{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PagerTagExtraInfo.class);
 
     /*
      * (non-Javadoc)
@@ -73,9 +68,9 @@ public class PagerTagExtraInfo extends BaseTEI{
 
     // If isValid() returns false, a generic ValidationMessage[] is returned indicating isValid() returned false.
     public ValidationMessage[] validate(TagData tagData){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             Map<String, Object> map = getTagDataAttributeMap(tagData);
-            LOGGER.debug(JsonUtil.toString(map));
+            log.debug(JsonUtil.toString(map));
         }
         return super.validate(tagData);
     }

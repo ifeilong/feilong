@@ -17,9 +17,6 @@ package com.feilong.context.invoker;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.context.Rebuilder;
 import com.feilong.context.format.JsonStringFormatter;
 import com.feilong.context.format.StringFormatter;
@@ -34,12 +31,8 @@ import com.feilong.json.JsonUtil;
  *            the generic type
  * @since 1.11.3
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractResponseStringBuilder<T> implements ResponseStringBuilder<T>{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractResponseStringBuilder.class);
-
-    //---------------------------------------------------------------
 
     /**
      * 字符串格式化,用来简化 {@link StringFormatter} 配置.
@@ -50,10 +43,10 @@ public abstract class AbstractResponseStringBuilder<T> implements ResponseString
      * 
      * @since 2.1.0
      */
-    private String              format;
+    private String            format;
 
     /** 字符串格式化器. */
-    private StringFormatter     stringFormatter;
+    private StringFormatter   stringFormatter;
 
     //---------------------------------------------------------------
     /**
@@ -80,7 +73,7 @@ public abstract class AbstractResponseStringBuilder<T> implements ResponseString
      * 
      * @since 1.14.0
      */
-    private Rebuilder<String>   responseStringRebuilder;
+    private Rebuilder<String> responseStringRebuilder;
 
     //---------------------------------------------------------------
 
@@ -131,9 +124,9 @@ public abstract class AbstractResponseStringBuilder<T> implements ResponseString
      * @since 1.14.0 change private
      */
     private void logMessage(T request,String responseString){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             String response = formatResponse(responseString);
-            LOGGER.debug("request:[{}],responseString:[{}]", JsonUtil.toString(request), response);
+            log.debug("request:[{}],responseString:[{}]", JsonUtil.toString(request), response);
         }
     }
 
@@ -151,9 +144,9 @@ public abstract class AbstractResponseStringBuilder<T> implements ResponseString
      * @since 1.14.0
      */
     private void logMessage(T request,String responseString,Rebuilder<String> rebuilder,String rebuildResult){
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             String response = formatResponse(responseString);
-            LOGGER.info(
+            log.info(
                             "request:[{}],responseString:[{}],after use rebuilder:[{}],will return:[{}]",
                             JsonUtil.toString(request),
                             response,

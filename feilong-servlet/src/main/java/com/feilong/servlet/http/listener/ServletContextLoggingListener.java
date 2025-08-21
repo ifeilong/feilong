@@ -19,9 +19,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.json.JsonUtil;
 import com.feilong.servlet.ServletContextUtil;
 
@@ -83,10 +80,8 @@ import com.feilong.servlet.ServletContextUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
+@lombok.extern.slf4j.Slf4j
 public class ServletContextLoggingListener implements ServletContextListener{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServletContextLoggingListener.class);
 
     /*
      * (non-Javadoc)
@@ -95,10 +90,10 @@ public class ServletContextLoggingListener implements ServletContextListener{
      */
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent){
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             ServletContext servletContext = servletContextEvent.getServletContext();
 
-            LOGGER.info(
+            log.info(
                             "servletContext [Initialized],base info:[{}],[attribute] info:[{}],[initParameter] info:[{}]",
                             JsonUtil.toString(ServletContextUtil.getServletContextInfoMapForLog(servletContext)),
                             JsonUtil.formatSimpleMap(ServletContextUtil.getAttributeMap(servletContext)),
@@ -115,10 +110,10 @@ public class ServletContextLoggingListener implements ServletContextListener{
      */
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent){
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             ServletContext servletContext = servletContextEvent.getServletContext();
 
-            LOGGER.info(
+            log.info(
                             "servletContext [Destroyed] info:[{}] ",
                             JsonUtil.toString(ServletContextUtil.getServletContextInfoMapForLog(servletContext)));
         }

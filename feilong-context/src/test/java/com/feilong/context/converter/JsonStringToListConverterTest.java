@@ -24,6 +24,7 @@ import org.junit.Test;
 import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class JsonStringToListConverterTest extends AbstractTest{
 
     @Test
@@ -40,7 +41,7 @@ public class JsonStringToListConverterTest extends AbstractTest{
         List<ItemDto> convert = converter.convert(json);
 
         //---------------------------------------------------------------
-        LOGGER.info(JsonUtil.format(convert));
+        log.info(JsonUtil.format(convert));
         //        assertThat(convert, allOf(hasProperty("city", is("上海"))));
     }
 }

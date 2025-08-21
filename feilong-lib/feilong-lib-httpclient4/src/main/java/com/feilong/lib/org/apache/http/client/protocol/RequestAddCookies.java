@@ -34,9 +34,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HttpException;
 import com.feilong.lib.org.apache.http.HttpHost;
@@ -65,13 +62,9 @@ import com.feilong.lib.org.apache.http.util.TextUtils;
  *
  * @since 4.0
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 public class RequestAddCookies implements HttpRequestInterceptor{
-
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(RequestAddCookies.class);
-
-    //---------------------------------------------------------------
 
     public RequestAddCookies(){
         super();

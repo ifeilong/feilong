@@ -15,9 +15,6 @@
  */
 package com.feilong.taglib.display.httpconcat.handler;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.security.oneway.MD5Util;
 import com.feilong.security.oneway.SHA1Util;
 
@@ -27,10 +24,8 @@ import com.feilong.security.oneway.SHA1Util;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.1
  */
+@lombok.extern.slf4j.Slf4j
 public final class VersionEncodeUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(VersionEncodeUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private VersionEncodeUtil(){
@@ -62,7 +57,7 @@ public final class VersionEncodeUtil{
             return SHA1Util.encode(version + suffix);
         }
 
-        LOGGER.warn("versionEncode:[{}] ,not md5 and not sha1", versionEncode);
+        log.warn("versionEncode:[{}] ,not md5 and not sha1", versionEncode);
         return version;
     }
 }

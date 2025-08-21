@@ -25,8 +25,6 @@ import java.util.Map;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.excel.ExcelDefinition;
@@ -35,12 +33,8 @@ import com.feilong.excel.definition.ExcelSheet;
 /**
  * The Class StyleMapBuilder.
  */
+@lombok.extern.slf4j.Slf4j
 class StyleMapBuilder{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(StyleMapBuilder.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private StyleMapBuilder(){
@@ -65,7 +59,7 @@ class StyleMapBuilder{
     static Map<String, CellStyle> build(Workbook workbook,ExcelDefinition excelDefinition,List<ExcelSheet> excelSheetList){
         Integer styleSheetPosition = excelDefinition.getStyleSheetPosition();
         if (null == styleSheetPosition){
-            LOGGER.debug("ExcelDefinition styleSheetPosition is null, return empty styleMap");
+            log.debug("ExcelDefinition styleSheetPosition is null, return empty styleMap");
             return emptyMap();
         }
 
@@ -87,8 +81,8 @@ class StyleMapBuilder{
         //---------------------------------------------------------------
         workbook.removeSheetAt(styleSheetPosition);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
+        if (log.isDebugEnabled()){
+            log.debug(
                             "buildStyleMap use time: [{}],StyleMap size:[{}]",
                             formatDurationUseBeginTimeMillis(beginTimeMillis),
                             styleMap.size());

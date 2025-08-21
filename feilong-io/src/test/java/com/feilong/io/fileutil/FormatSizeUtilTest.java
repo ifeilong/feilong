@@ -24,6 +24,7 @@ import org.junit.Test;
 import com.feilong.io.FileUtil;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatSizeUtilTest extends AbstractTest{
 
     @Test
@@ -44,23 +45,23 @@ public class FormatSizeUtilTest extends AbstractTest{
         File file = new File(testFile);
 
         long fileSizes = FileUtil.getFileSize(file);
-        LOGGER.debug(fileSizes + "");
-        LOGGER.debug(FileUtil.formatSize(fileSizes) + "");
-        LOGGER.debug(FileUtil.formatSize(file.length()) + "");
-        LOGGER.debug("比如文件 {} 字节, 格式化大小 : {}", fileSizes, FileUtil.getFileFormatSize(file));
+        log.debug(fileSizes + "");
+        log.debug(FileUtil.formatSize(fileSizes) + "");
+        log.debug(FileUtil.formatSize(file.length()) + "");
+        log.debug("比如文件 {} 字节, 格式化大小 : {}", fileSizes, FileUtil.getFileFormatSize(file));
     }
 
     //---------------------------------------------------------------
 
     @Test
     public void formatFileSize(){
-        LOGGER.debug(FileUtil.formatSize(1134));
-        LOGGER.debug(FileUtil.formatSize(800000001));
-        LOGGER.debug(FileUtil.formatSize(8000003333001L));
-        LOGGER.debug(FileUtil.formatSize(800000333222223001L));
-        LOGGER.debug(FileUtil.formatSize(8000222200333223001L));
-        LOGGER.debug(FileUtil.formatSize(898152));
-        LOGGER.debug(FileUtil.formatSize(8981528));
-        //LOGGER.debug(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
+        log.debug(FileUtil.formatSize(1134));
+        log.debug(FileUtil.formatSize(800000001));
+        log.debug(FileUtil.formatSize(8000003333001L));
+        log.debug(FileUtil.formatSize(800000333222223001L));
+        log.debug(FileUtil.formatSize(8000222200333223001L));
+        log.debug(FileUtil.formatSize(898152));
+        log.debug(FileUtil.formatSize(8981528));
+        //log.debug(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
     }
 }

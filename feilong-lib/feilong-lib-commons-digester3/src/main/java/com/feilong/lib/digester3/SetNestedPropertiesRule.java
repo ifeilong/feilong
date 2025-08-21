@@ -29,8 +29,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.DynaBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 import com.feilong.lib.beanutils.BeanUtils;
@@ -38,10 +36,8 @@ import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.beanutils.PropertyUtils;
 
 /**
- * <p>
  * Rule implementation that sets properties on the object at the top of the stack, based on child elements with names
  * matching properties on that object.
- * </p>
  * <p>
  * Example input that can be processed by this rule:
  * </p>
@@ -99,10 +95,8 @@ import com.feilong.lib.beanutils.PropertyUtils;
  * 
  * @since 1.6
  */
+@lombok.extern.slf4j.Slf4j
 public class SetNestedPropertiesRule extends Rule{
-
-    /** The Constant log. */
-    private static final Logger           LOGGER                    = LoggerFactory.getLogger(SetNestedPropertiesRule.class);
 
     //---------------------------------------------------------------
 
@@ -408,7 +402,7 @@ public class SetNestedPropertiesRule extends Rule{
             // called after a SAXException, but other parsers (eg Aelfred)
             // do call endDocument. Here, we therefore need to return the
             // rules registered with the underlying Rules object.
-            LOGGER.debug("AnyChildRules.rules invoked.");
+            log.debug("AnyChildRules.rules invoked.");
             return decoratedRules.rules();
         }
 
@@ -443,10 +437,10 @@ public class SetNestedPropertiesRule extends Rule{
                 }
             }
 
-            boolean debug = LOGGER.isDebugEnabled();
+            boolean debug = log.isDebugEnabled();
 
             if (debug){
-                LOGGER.debug(
+                log.debug(
                                 "[SetNestedPropertiesRule]{" + getDigester().getMatch() + "} Setting property '" + propName + "' to '"
                                                 + text + "'");
             }
@@ -455,11 +449,11 @@ public class SetNestedPropertiesRule extends Rule{
             Object top = getDigester().peek();
             if (debug){
                 if (top != null){
-                    LOGGER.debug(
+                    log.debug(
                                     "[SetNestedPropertiesRule]{" + getDigester().getMatch() + "} Set " + top.getClass().getName()
                                                     + " properties");
                 }else{
-                    LOGGER.debug("[SetPropertiesRule]{" + getDigester().getMatch() + "} Set NULL properties");
+                    log.debug("[SetPropertiesRule]{" + getDigester().getMatch() + "} Set NULL properties");
                 }
             }
 
@@ -488,7 +482,7 @@ public class SetNestedPropertiesRule extends Rule{
             try{
                 BeanUtils.setProperty(top, propName, text);
             }catch (NullPointerException e){
-                LOGGER.error("NullPointerException: " + "top=" + top + ",propName=" + propName + ",value=" + text + "!");
+                log.error("NullPointerException: " + "top=" + top + ",propName=" + propName + ",value=" + text + "!");
                 throw e;
             }
         }

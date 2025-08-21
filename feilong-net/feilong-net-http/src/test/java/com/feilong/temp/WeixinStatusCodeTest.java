@@ -21,6 +21,7 @@ import com.feilong.json.JsonUtil;
 import com.feilong.net.http.HttpClientUtil;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class WeixinStatusCodeTest extends AbstractTest{
 
@@ -28,17 +29,17 @@ public class WeixinStatusCodeTest extends AbstractTest{
 
     @Test
     public void testGetResponseBodyAsString(){
-        LOGGER.debug(HttpClientUtil.get(uri));
+        log.debug(HttpClientUtil.get(uri));
     }
 
     @Test
     public void getResponseStatusCode(){
-        LOGGER.debug("" + HttpClientUtil.getResponseStatusCode(uri));
+        log.debug("" + HttpClientUtil.getResponseStatusCode(uri));
     }
 
     @Test
     public void getResponseStatusCode2(){
-        LOGGER.debug(JsonUtil.format(HttpClientUtil.getHttpResponse(uri)));
+        log.debug(JsonUtil.format(HttpClientUtil.getHttpResponse(uri)));
     }
 
 }

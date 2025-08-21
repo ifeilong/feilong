@@ -23,29 +23,30 @@ import com.feilong.net.http.HttpClientUtil;
 import com.feilong.test.AbstractTest;
 
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
+@lombok.extern.slf4j.Slf4j
 public class PutTestTemp extends AbstractTest{
 
     @Test
     public void testPut(){
         String uri = "http://127.0.0.1:8085";
-        LOGGER.debug(HttpClientUtil.put(uri));
+        log.debug(HttpClientUtil.put(uri));
     }
 
     @Test
     public void testPut1(){
         String uri = "http://127.0.0.1:8085?name=jinxin&age=18";
-        LOGGER.debug(HttpClientUtil.put(uri));
+        log.debug(HttpClientUtil.put(uri));
     }
 
     @Test
     public void testPut11(){
         String uri = "http://127.0.0.1:8085?name=jinxin&age=18";
-        LOGGER.debug(HttpClientUtil.put(uri, toMap("country", "china")));
+        log.debug(HttpClientUtil.put(uri, toMap("country", "china")));
     }
 
     @Test
     public void testPut121(){
         String uri = "http://127.0.0.1:8085";
-        LOGGER.debug(HttpClientUtil.put(uri, toMap("country", "china")));
+        log.debug(HttpClientUtil.put(uri, toMap("country", "china")));
     }
 }

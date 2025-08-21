@@ -90,7 +90,7 @@ import java.util.Map;
  * 
  *                 public void run(){
  *                     for (Integer integer : list){
- *                         LOGGER.debug("{}-{}", partitionThreadEntity.getBatchNumber(), integer);
+ *                         log.debug("{}-{}", partitionThreadEntity.getBatchNumber(), integer);
  *                     }
  *                 }
  *             };

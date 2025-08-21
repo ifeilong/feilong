@@ -454,7 +454,7 @@ public final class ConvertUtil{
      *         int pageNo = Integer.parseInt(pageNoString);
      *         return pageNo;
      *     }catch (Exception e){
-     *         LOGGER.error(e.getClass().getName(), e);
+     *         log.error(e.getClass().getName(), e);
      *     }
      *     return 1; <span style="color:green">// 不带这个参数或者转换异常返回1</span>
      * }
@@ -556,7 +556,7 @@ public final class ConvertUtil{
      *         int pageNo = Integer.parseInt(pageNoString);
      *         return pageNo;
      *     }catch (Exception e){
-     *         LOGGER.error(e.getClass().getName(), e);
+     *         log.error(e.getClass().getName(), e);
      *     }
      *     return 1; <span style="color:green">// 不带这个参数或者转换异常返回1</span>
      * }
@@ -702,7 +702,7 @@ public final class ConvertUtil{
      *         Long pageNo = Long.parseLong(pageNoString);
      *         return pageNo;
      *     }catch (Exception e){
-     *         LOGGER.error(e.getClass().getName(), e);
+     *         log.error(e.getClass().getName(), e);
      *     }
      *     return 1L; <span style="color:green">// 不带这个参数或者转换异常返回1</span>
      * }
@@ -1423,7 +1423,7 @@ public final class ConvertUtil{
      * <pre class="code">
      * List{@code <String>} list = toList("飞龙", "小金", "四金", "金金金金");
      * 
-     * LOGGER.debug(ConvertUtil.toString(list, System.lineSeparator()));
+     * log.debug(ConvertUtil.toString(list, System.lineSeparator()));
      * </pre>
      * 
      * <b>输出:</b>
@@ -1558,7 +1558,7 @@ public final class ConvertUtil{
      * List{@code <String>} list = toList("飞龙", "小金", "四金", "金金金金");
      * 
      * ToStringConfig toStringConfig = new ToStringConfig(System.lineSeparator());
-     * LOGGER.debug(ConvertUtil.toString(list, toStringConfig));
+     * log.debug(ConvertUtil.toString(list, toStringConfig));
      * </pre>
      * 
      * <b>输出:</b>
@@ -1833,7 +1833,7 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * LOGGER.debug(JsonUtil.format(ConvertUtil.toMap("张飞", "丈八蛇矛")));
+     * log.debug(JsonUtil.format(ConvertUtil.toMap("张飞", "丈八蛇矛")));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1987,7 +1987,7 @@ public final class ConvertUtil{
      * properties.setProperty("age", "18");
      * properties.setProperty("country", "china");
      * 
-     * LOGGER.debug(JsonUtil.format(toMap(properties)));
+     * log.debug(JsonUtil.format(toMap(properties)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -2055,7 +2055,7 @@ public final class ConvertUtil{
      * for (Map.Entry{@code <String, Integer>} entry : returnMap.entrySet()){
      *     String key = entry.getKey();
      *     Integer value = entry.getValue();
-     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     *     log.debug("key:[{}],value:[{}]", key, value);
      * }
      * 
      * </pre>
@@ -2084,7 +2084,7 @@ public final class ConvertUtil{
      *     String key = entry.getKey();
      *     Integer[] value = entry.getValue();
      * 
-     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     *     log.debug("key:[{}],value:[{}]", key, value);
      * }
      * 
      * </pre>
@@ -2165,7 +2165,7 @@ public final class ConvertUtil{
      * for (Map.Entry{@code <Integer, Integer>} entry : returnMap.entrySet()){
      *     Integer key = entry.getKey();
      *     Integer value = entry.getValue();
-     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     *     log.debug("key:[{}],value:[{}]", key, value);
      * }
      * 
      * </pre>
@@ -2194,7 +2194,7 @@ public final class ConvertUtil{
      *     Integer key = entry.getKey();
      *     Integer[] value = entry.getValue();
      * 
-     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     *     log.debug("key:[{}],value:[{}]", key, value);
      * }
      * 
      * </pre>
@@ -2303,7 +2303,7 @@ public final class ConvertUtil{
      * for (Map.Entry{@code <Integer, Integer>} entry : returnMap.entrySet()){
      *     Integer key = entry.getKey();
      *     Integer value = entry.getValue();
-     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     *     log.debug("key:[{}],value:[{}]", key, value);
      * }
      * 
      * </pre>
@@ -2335,7 +2335,7 @@ public final class ConvertUtil{
      *     Integer key = entry.getKey();
      *     Integer[] value = entry.getValue();
      * 
-     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     *     log.debug("key:[{}],value:[{}]", key, value);
      * }
      * 
      * </pre>
@@ -2436,7 +2436,7 @@ public final class ConvertUtil{
      *                 Pair.of("关羽", "青龙偃月刀"),
      *                 Pair.of("赵云", "龙胆枪"),
      *                 Pair.of("刘备", "双股剑")));
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -2463,7 +2463,7 @@ public final class ConvertUtil{
      *                                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
      *                                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
      *                                 new SimpleEntry{@code <>}("刘备", "双股剑")));
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -2529,7 +2529,7 @@ public final class ConvertUtil{
      *                 Pair.of("关羽", "青龙偃月刀"),
      *                 Pair.of("赵云", "龙胆枪"),
      *                 Pair.of("刘备", "双股剑"));
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -2557,7 +2557,7 @@ public final class ConvertUtil{
      *                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
      *                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
      *                 new SimpleEntry{@code <>}("刘备", "双股剑"));
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * 
      * </pre>
      * 
@@ -2664,7 +2664,7 @@ public final class ConvertUtil{
      * Map{@code <String, String>} map = toMap("name", "feilong");
      * Properties properties = ConvertUtil.toProperties(map);
      * 
-     * LOGGER.debug(JsonUtil.format(properties));
+     * log.debug(JsonUtil.format(properties));
      * </pre>
      * 
      * <b>返回:</b>
@@ -2733,7 +2733,7 @@ public final class ConvertUtil{
      * <pre class="code">
      * Set{@code <String>} set = new LinkedHashSet{@code <>}();
      * Collections.addAll(set, "a", "a", "b", "b");
-     * LOGGER.debug("{}", toList(set));
+     * log.debug("{}", toList(set));
      * </pre>
      * 
      * <b>返回:</b>
@@ -3071,7 +3071,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * String[] array = ConvertUtil.toArray(list, String.class);
-     * LOGGER.info(JsonUtil.format(array));
+     * log.info(JsonUtil.format(array));
      * </pre>
      * 
      * <b>返回:</b>
@@ -3267,7 +3267,7 @@ public final class ConvertUtil{
      *                URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing2/"),
      *                null };
      * 
-     * LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(urls)));
+     * log.debug(JsonUtil.format(ConvertUtil.toStrings(urls)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -3520,7 +3520,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * Integer[] int1 = { 2, null, 1, null };
-     * LOGGER.debug(ConvertUtil.toString(int1),String.class);        = 2
+     * log.debug(ConvertUtil.toString(int1),String.class);        = 2
      * </pre>
      * 
      * <p>

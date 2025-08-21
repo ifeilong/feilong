@@ -25,6 +25,7 @@ import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.BeanWithSensitiveWords;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatMapBeanSensitiveWordsTest extends AbstractTest{
 
     @Test
@@ -34,7 +35,7 @@ public class FormatMapBeanSensitiveWordsTest extends AbstractTest{
         Map<String, Object> map = newHashMap();
         map.put("beanWithSensitiveWords", beanWithSensitiveWords);
 
-        LOGGER.debug(JsonUtil.format(map));
+        log.debug(JsonUtil.format(map));
     }
 
 }

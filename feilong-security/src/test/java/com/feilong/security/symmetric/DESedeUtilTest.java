@@ -29,6 +29,7 @@ import com.feilong.security.EncryptionException;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0 Mar 21, 2011 4:55:43 PM
  */
+@lombok.extern.slf4j.Slf4j
 public class DESedeUtilTest extends AbstractSecurityTest{
 
     /** The Constant SYMMETRIC_TYPE. */
@@ -46,7 +47,7 @@ public class DESedeUtilTest extends AbstractSecurityTest{
     @Test
     public void decryptBase64(){
         String mingsString = SYMMETRIC_ENCRYPTION.decryptBase64("LdCGo0dplVASWwJrvlHqpw==", UTF8);
-        LOGGER.debug(mingsString);
+        log.debug(mingsString);
         assertEquals(testString, mingsString);
     }
 
@@ -60,7 +61,7 @@ public class DESedeUtilTest extends AbstractSecurityTest{
      */
     @Test
     public void encrypBase641(){
-        LOGGER.debug(SYMMETRIC_ENCRYPTION.encryptBase64("feilong", UTF8));
+        log.debug(SYMMETRIC_ENCRYPTION.encryptBase64("feilong", UTF8));
     }
 
     /**
@@ -77,7 +78,7 @@ public class DESedeUtilTest extends AbstractSecurityTest{
         //	assertEquals(expected, actual);
         // oKLAr5N7UK2VzL0kLwnKDA9BoaAU62rV
         //oKLAr5N7UK2VzL0kLwnKDPg/nQZBlrXn
-        LOGGER.debug(SYMMETRIC_ENCRYPTION.encryptBase64(testString, UTF8));
+        log.debug(SYMMETRIC_ENCRYPTION.encryptBase64(testString, UTF8));
     }
 
     /**
@@ -88,13 +89,13 @@ public class DESedeUtilTest extends AbstractSecurityTest{
         String keyString = "jinxin";
         String miString = SYMMETRIC_ENCRYPTION.encryptHex(testString, UTF8);
         // String miString = dESUtil.encryptToHexString(testString);
-        LOGGER.debug("encryptOriginalToHexString:{}", miString);
+        log.debug("encryptOriginalToHexString:{}", miString);
         String mingString = SYMMETRIC_ENCRYPTION.decryptHex(miString, UTF8);
-        LOGGER.debug(mingString);
+        log.debug(mingString);
 
         assertEquals(testString, mingString);
 
-        LOGGER.debug("055976934539FAAAD7F0EB5C83FE0D5D".length() + "");
+        log.debug("055976934539FAAAD7F0EB5C83FE0D5D".length() + "");
     }
 
     /**
@@ -105,8 +106,8 @@ public class DESedeUtilTest extends AbstractSecurityTest{
         String original = "F7468B69D12BB6CE76D6206419A6AC28";
         String keyString = "12345678901234561234567890123456";
         String encryptToHexString = SYMMETRIC_ENCRYPTION.encryptHex(original, UTF8);
-        LOGGER.debug(encryptToHexString.length() + "");
-        LOGGER.debug("BF81501C562D6FEA2FCB905D392D5851".length() + "");
+        log.debug(encryptToHexString.length() + "");
+        log.debug("BF81501C562D6FEA2FCB905D392D5851".length() + "");
         assertEquals("BF81501C562D6FEA2FCB905D392D5851", encryptToHexString);
     }
 

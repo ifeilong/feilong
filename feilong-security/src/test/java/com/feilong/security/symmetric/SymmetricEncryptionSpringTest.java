@@ -23,8 +23,6 @@ import java.security.Provider;
 import javax.crypto.KeyGenerator;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
@@ -37,13 +35,10 @@ import com.feilong.security.EncryptionException;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.7 2014-7-2 18:06:19
  */
+@lombok.extern.slf4j.Slf4j
 @ContextConfiguration(locations = { "classpath:feilong-security.xml" })
 public class SymmetricEncryptionSpringTest extends AbstractJUnit4SpringContextTests{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER     = LoggerFactory.getLogger(SymmetricEncryptionSpringTest.class);
-
-    //---------------------------------------------------------------
     /** The symmetric encryption. */
     @Autowired(required = false)
     private SymmetricEncryption symmetricEncryption;
@@ -58,7 +53,7 @@ public class SymmetricEncryptionSpringTest extends AbstractJUnit4SpringContextTe
     public void base64String(){
         String original = testString;
         String base64 = symmetricEncryption.encryptBase64(original, UTF8);
-        LOGGER.debug(base64);
+        log.debug(base64);
     }
 
     /**
@@ -67,10 +62,10 @@ public class SymmetricEncryptionSpringTest extends AbstractJUnit4SpringContextTe
     @Test
     public void decryptBase64String(){
         String hexString = "BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2";
-        // LOGGER.debug(blowfishUtil.encryptToHexString(original));
+        // log.debug(blowfishUtil.encryptToHexString(original));
         // String keyString = blowfishUtil.getKeyString();
-        // LOGGER.debug(keyString);
-        LOGGER.debug(symmetricEncryption.decryptBase64(hexString, UTF8));
+        // log.debug(keyString);
+        log.debug(symmetricEncryption.decryptBase64(hexString, UTF8));
         // 3B37B7F90CBBD4EFD5502F50F9B407E3
         // 3B37B7F90CBBD4EFD5502F50F9B407E3
         // /x3JicoLOTnZO+Zs3Ha5pg==
@@ -84,7 +79,7 @@ public class SymmetricEncryptionSpringTest extends AbstractJUnit4SpringContextTe
     public void encryptToHexString(){
         String original = testString;
         String base64 = symmetricEncryption.encryptHex(original, UTF8);
-        LOGGER.debug(base64);
+        log.debug(base64);
     }
 
     /**
@@ -98,7 +93,7 @@ public class SymmetricEncryptionSpringTest extends AbstractJUnit4SpringContextTe
     @Test
     public void decryptHexString(){
         String hexString = "055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6";
-        LOGGER.debug(symmetricEncryption.decryptHex(hexString, UTF8));
+        log.debug(symmetricEncryption.decryptHex(hexString, UTF8));
     }
 
     @Test
@@ -106,6 +101,6 @@ public class SymmetricEncryptionSpringTest extends AbstractJUnit4SpringContextTe
         KeyGenerator kg = KeyGenerator.getInstance("Blowfish");
         // kg.init(561);
         Provider provider = kg.getProvider();
-        LOGGER.debug(provider.getInfo());
+        log.debug(provider.getInfo());
     }
 }

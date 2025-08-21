@@ -20,11 +20,12 @@ import org.junit.Test;
 import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatNumberTest extends AbstractTest{
 
     @Test
     public void test(){
-        LOGGER.debug(JsonUtil.format(1L));
-        LOGGER.debug(JsonUtil.format(1));
+        log.debug(JsonUtil.format(1L));
+        log.debug(JsonUtil.format(1));
     }
 }

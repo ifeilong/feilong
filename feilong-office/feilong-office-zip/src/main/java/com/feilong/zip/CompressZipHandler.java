@@ -25,9 +25,6 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.zip.Deflater;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.io.FileUtil;
 import com.feilong.io.IOUtil;
 import com.feilong.lib.compress.archivers.zip.ZipArchiveEntry;
@@ -39,10 +36,8 @@ import com.feilong.lib.compress.archivers.zip.ZipArchiveOutputStream;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public class CompressZipHandler extends AbstractZipHandler{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CompressZipHandler.class);
 
     /**
      * Handle.
@@ -54,7 +49,6 @@ public class CompressZipHandler extends AbstractZipHandler{
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    //---------------------------------------------------------------
     @Override
     protected void handle(String tobeZipFilePath,String outputZipPath) throws IOException{
         //生成ZipOutputStream，会把压缩的内容全都通过这个输出流输出，最后写到压缩文件中去  
@@ -88,7 +82,7 @@ public class CompressZipHandler extends AbstractZipHandler{
      */
     private static void zip(ZipArchiveOutputStream zipArchiveOutputStream,File willFile,String dirName) throws IOException{
         String fileName = willFile.getName();
-        LOGGER.debug("will zip :[{}] to zip file", fileName);
+        log.debug("will zip :[{}] to zip file", fileName);
         //文件style
         if (willFile.isFile()){
             putArchiveEntry(zipArchiveOutputStream, dirName + fileName);

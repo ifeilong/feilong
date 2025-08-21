@@ -24,9 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.net.ParamUtil;
 import com.feilong.core.util.MapUtil;
@@ -45,9 +42,8 @@ import com.feilong.security.oneway.OnewayType;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 4.0.8
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractMapSigner implements MapSigner{
-
-    private static final Logger   LOGGER = LoggerFactory.getLogger(AbstractMapSigner.class);
 
     /**
      * 加密参数配置
@@ -110,8 +106,8 @@ public abstract class AbstractMapSigner implements MapSigner{
         //(1) 将除了sig以外的所有其他请求参数的原始值按照参数名的字典序排序
         //(2) 将排序后的参数键值对用&拼接，即拼接成key1=val1&key2=val2这样的形式
         String naturalOrderingQueryString = ParamUtil.toNaturalOrderingQueryString(tobeSignMap);
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(signLog(counter, "[参数排序],结果: {}", naturalOrderingQueryString));
+        if (log.isDebugEnabled()){
+            log.debug(signLog(counter, "[参数排序],结果: {}", naturalOrderingQueryString));
         }
 
         //---------------------------------------------------------------
@@ -123,13 +119,13 @@ public abstract class AbstractMapSigner implements MapSigner{
         //---------------------------------------------------------------
         String appendSecretParamValue = mapSignConfig.getAppendSecretParamValue();
         String toBeSignString = formatPattern("{}&{}={}", naturalOrderingQueryString, appendSecretParamName, appendSecretParamValue);
-        if (LOGGER.isDebugEnabled()){
-            String log = signLog(
+        if (log.isDebugEnabled()){
+            String log1 = signLog(
                             counter,
                             "待MD5字符串(追加{}参数): {}(安全参数值日志掩码处理)",
                             appendSecretParamName,
                             formatPattern("{}&{}={}", naturalOrderingQueryString, appendSecretParamName, hided(appendSecretParamValue)));
-            LOGGER.debug(log);
+            log.debug(log1);
         }
         return toBeSignString;
     }
@@ -147,8 +143,8 @@ public abstract class AbstractMapSigner implements MapSigner{
     protected String encodeString(String toBeSignString,AtomicInteger counter){
         OnewayType onewayType = mapSignConfig.getOnewayType();
         String encodeResult = OnewayEncryption.encode(onewayType, toBeSignString, UTF8);
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(signLog(counter, "{} 最终结果: {}", onewayType, encodeResult));
+        if (log.isDebugEnabled()){
+            log.debug(signLog(counter, "{} 最终结果: {}", onewayType, encodeResult));
         }
         return encodeResult;
     }
@@ -156,8 +152,8 @@ public abstract class AbstractMapSigner implements MapSigner{
     protected String encodeBytes(byte[] hmacSha1,AtomicInteger counter){
         OnewayType onewayType = mapSignConfig.getOnewayType();
         String encodeResult = OnewayEncryption.encode(onewayType, hmacSha1);
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(signLog(counter, "{} 最终结果: {}", onewayType, encodeResult));
+        if (log.isDebugEnabled()){
+            log.debug(signLog(counter, "{} 最终结果: {}", onewayType, encodeResult));
         }
         return encodeResult;
     }
@@ -182,8 +178,8 @@ public abstract class AbstractMapSigner implements MapSigner{
         }
         //---------------------------------------------------------------
         Map<String, String> resultMap = MapUtil.getSubMapExcludeKeys(map, noNeedSignParamNameList);
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(signLog(counter, "[处理待签名Map],inputMap:{},去掉不需要参与签名的参数:[{}],结果:[{}]", map, noNeedSignParamNameList, resultMap));
+        if (log.isDebugEnabled()){
+            log.debug(signLog(counter, "[处理待签名Map],inputMap:{},去掉不需要参与签名的参数:[{}],结果:[{}]", map, noNeedSignParamNameList, resultMap));
         }
         return resultMap;
     }

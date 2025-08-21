@@ -28,6 +28,7 @@ import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FileUtilTest extends AbstractTest{
 
     private final String fString = "/home/webuser/feilong_int/johnData/${date}/feilongid_pix_${typeName}.csv";
@@ -44,7 +45,7 @@ public class FileUtilTest extends AbstractTest{
         URL resource = ClassLoaderUtil.getResource("org.junit.Before");
         URI uri = URLUtil.toURI(resource);
         File esapiDirectory = new File(uri);
-        LOGGER.debug(esapiDirectory.getAbsolutePath());
+        log.debug(esapiDirectory.getAbsolutePath());
     }
 
     /**
@@ -60,7 +61,7 @@ public class FileUtilTest extends AbstractTest{
         File file = new File(localPath);
         File[] files = file.listFiles();
         for (int i = 0; i < files.length; i++){
-            LOGGER.debug(files[i].getCanonicalPath());
+            log.debug(files[i].getCanonicalPath());
         }
     }
 

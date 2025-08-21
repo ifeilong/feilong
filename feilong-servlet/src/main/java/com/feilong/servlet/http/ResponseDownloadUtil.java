@@ -28,9 +28,6 @@ import java.io.UncheckedIOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.net.URIUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.IOWriteUtil;
@@ -45,10 +42,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @see javax.servlet.http.HttpServletResponse
  * @since 1.5.1
  */
+@lombok.extern.slf4j.Slf4j
 public final class ResponseDownloadUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ResponseDownloadUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ResponseDownloadUtil(){
@@ -195,14 +190,14 @@ public final class ResponseDownloadUtil{
         long beginTimeMillis = System.currentTimeMillis();
 
         String length = null == contentLength ? null : FileUtil.formatSize(contentLength.longValue());
-        LOGGER.info("begin download~~,saveFileName:[{}],contentLength:[{}]", saveFileName, length);
+        log.info("begin download~~,saveFileName:[{}],contentLength:[{}]", saveFileName, length);
         try{
             OutputStream outputStream = response.getOutputStream();
             IOWriteUtil.write(inputStream, outputStream);
 
-            if (LOGGER.isInfoEnabled()){
+            if (log.isInfoEnabled()){
                 String pattern = "end download,saveFileName:[{}],contentLength:[{}],time use:[{}]";
-                LOGGER.info(pattern, saveFileName, length, formatDurationUseBeginTimeMillis(beginTimeMillis));
+                log.info(pattern, saveFileName, length, formatDurationUseBeginTimeMillis(beginTimeMillis));
             }
         }catch (IOException e){
             /*
@@ -217,9 +212,9 @@ public final class ResponseDownloadUtil{
             if (StringUtils.contains(exceptionName, "ClientAbortException")
                             || StringUtils.contains(e.getMessage(), "ClientAbortException")){
                 String pattern = "[ClientAbortException],maybe user use Thunder soft or abort client soft download,exceptionName:[{}],exception message:[{}] ,request User-Agent:[{}]";
-                LOGGER.warn(pattern, exceptionName, e.getMessage(), RequestUtil.getHeaderUserAgent(request));
+                log.warn(pattern, exceptionName, e.getMessage(), RequestUtil.getHeaderUserAgent(request));
             }else{
-                LOGGER.error("[download exception],exception name: " + exceptionName, e);
+                log.error("[download exception],exception name: " + exceptionName, e);
                 throw new UncheckedIOException(e);
             }
         }

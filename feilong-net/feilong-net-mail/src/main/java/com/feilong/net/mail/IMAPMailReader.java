@@ -27,9 +27,6 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.search.SearchTerm;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.entity.MailInfo;
 import com.feilong.net.mail.entity.MailReaderConfig;
@@ -43,12 +40,8 @@ import com.feilong.net.mail.util.MessageUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.9
  */
+@lombok.extern.slf4j.Slf4j
 public class IMAPMailReader implements MailReader{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER      = LoggerFactory.getLogger(IMAPMailReader.class);
-
-    //---------------------------------------------------------------
 
     /** imap or pop3. */
     private static final String PROTOCOL    = "imap";
@@ -78,8 +71,8 @@ public class IMAPMailReader implements MailReader{
      */
     @Override
     public List<MailInfo> read(MailReaderConfig mailReaderConfig,Integer newstIndex,SearchTerm searchTerm){
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("input mailReaderConfig:[{}],searchTerm:[{}]", JsonUtil.toString(mailReaderConfig), JsonUtil.toString(searchTerm));
+        if (log.isDebugEnabled()){
+            log.debug("input mailReaderConfig:[{}],searchTerm:[{}]", JsonUtil.toString(mailReaderConfig), JsonUtil.toString(searchTerm));
         }
 
         //---------------------------------------------------------------
@@ -165,8 +158,8 @@ public class IMAPMailReader implements MailReader{
         Folder folder = store.getFolder(FOLDER_NAME);
         folder.open(Folder.READ_ONLY);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("folder info :{}", JsonUtil.toString(FolderUtil.getMapForLog(folder)));
+        if (log.isDebugEnabled()){
+            log.debug("folder info :{}", JsonUtil.toString(FolderUtil.getMapForLog(folder)));
         }
         return folder;
     }

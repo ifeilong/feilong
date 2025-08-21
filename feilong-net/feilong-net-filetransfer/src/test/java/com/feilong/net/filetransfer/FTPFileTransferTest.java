@@ -34,6 +34,7 @@ import com.feilong.json.JsonUtil;
  */
 @ContextConfiguration(value = { "classpath*:spring/spring-ftp.xml" })
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
+@lombok.extern.slf4j.Slf4j
 public class FTPFileTransferTest extends FileTransferTest{
 
     /** The file transfer. */
@@ -150,6 +151,6 @@ public class FTPFileTransferTest extends FileTransferTest{
         String[] fileNames = { "SportActivity.dat", "SubCategory.dat", "aaa" };
         Map<String, FileInfoEntity> fileEntityMap = fileTransfer.getFileEntityMap(remotePath, fileNames);
 
-        LOGGER.debug("fileEntityMap:{}", JsonUtil.format(fileEntityMap));
+        log.debug("fileEntityMap:{}", JsonUtil.format(fileEntityMap));
     }
 }

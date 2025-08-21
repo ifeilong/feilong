@@ -26,9 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.StringUtils;
@@ -40,13 +37,9 @@ import com.feilong.lib.lang3.StringUtils;
  * @see <a href="https://en.wikipedia.org/wiki/Email_address">Email_address</a>
  * @since 1.0.1
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class EmailAddressUtil{
-
-    /** The Constant log. */
-    private static final Logger               LOGGER                    = LoggerFactory.getLogger(EmailAddressUtil.class);
-
-    //---------------------------------------------------------------
 
     /** The Constant AT. */
     private static final String               AT                        = "@";
@@ -94,7 +87,7 @@ public final class EmailAddressUtil{
      * 
      * <pre class="code">
      * EmailProvider emailProvider = EmailAddressUtil.getEmailProvider("feilong@163.com");
-     * LOGGER.debug(JsonUtil.format(emailProvider));
+     * log.debug(JsonUtil.format(emailProvider));
      * </pre>
      * 
      * <b>返回:</b>
@@ -184,11 +177,11 @@ public final class EmailAddressUtil{
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             //Caused by: java.lang.ClassCastException: java.util.concurrent.ConcurrentHashMap$Values cannot be cast to java.util.List
             //ConcurrentHashMap$Values  是自定义的类
             List<EmailProvider> iterable = sortListByPropertyNamesValue(toList(domainAndEmailProviderMap.values()), "domain");
-            LOGGER.debug("init [data] over,{}", formatToSimpleTable(iterable, "domain", "webSite", "name"));
+            log.debug("init [data] over,{}", formatToSimpleTable(iterable, "domain", "webSite", "name"));
         }
     }
 

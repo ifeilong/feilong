@@ -21,13 +21,12 @@ import static org.apache.commons.lang3.StringUtils.SPACE;
 
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.RandomUtil;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 默认的code 生成器.
@@ -35,13 +34,11 @@ import com.feilong.core.util.RandomUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
+@Slf4j
 public class SimpleSequenceTypeOrderCodeCreator implements SequenceTypeOrderCodeCreator{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER  = LoggerFactory.getLogger(SimpleSequenceTypeOrderCodeCreator.class);
-
     /** The is debug. */
-    private boolean             isDebug = false;
+    private boolean isDebug = false;
 
     //---------------------------------------------------------------
 
@@ -112,8 +109,8 @@ public class SimpleSequenceTypeOrderCodeCreator implements SequenceTypeOrderCode
 
         //FIXME 风险 服务器时间不同步
         //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("{}", sb.toString() + CodeCreatorHelper.debugLength(sb, isDebug));
+        if (log.isTraceEnabled()){
+            log.trace("{}", sb.toString() + CodeCreatorHelper.debugLength(sb, isDebug));
         }
         return sb.toString().replace(SPACE, EMPTY);
     }

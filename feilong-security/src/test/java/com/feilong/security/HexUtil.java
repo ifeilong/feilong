@@ -15,9 +15,6 @@
  */
 package com.feilong.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
 
@@ -30,11 +27,9 @@ import com.feilong.core.lang.StringUtil;
  * @since 1.4.0
  * @deprecated 不需要使用了
  */
+@lombok.extern.slf4j.Slf4j
 @Deprecated
 public class HexUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HexUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private HexUtil(){
@@ -59,7 +54,7 @@ public class HexUtil{
     @Deprecated
     public static String toHexStringUpperCase(String original,String charsetName){
         String hexStringUpperCase = ByteUtil.bytesToHexStringUpperCase(StringUtil.getBytes(original, charsetName));
-        LOGGER.debug("original:[{}],hexStringUpperCase:[{}]", original, hexStringUpperCase);
+        log.debug("original:[{}],hexStringUpperCase:[{}]", original, hexStringUpperCase);
         return hexStringUpperCase;
     }
 
@@ -78,7 +73,7 @@ public class HexUtil{
     public static String toOriginal(String hexStringUpperCase,String charsetName){
         byte[] hexBytesToBytes = ByteUtil.hexBytesToBytes(hexStringUpperCase.getBytes());
         String original = StringUtil.newString(hexBytesToBytes, charsetName);
-        LOGGER.debug("hexStringUpperCase:[{}],original:[{}]", hexStringUpperCase, original);
+        log.debug("hexStringUpperCase:[{}],original:[{}]", hexStringUpperCase, original);
         return original;
     }
 }

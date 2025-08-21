@@ -22,9 +22,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbConstants;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
@@ -119,14 +116,12 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
  * @see <a href="http://www.webdesignpractices.com/navigation/breadcrumb.html">Breadcrumb Navigation</a>
  * @since 1.2.2
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep
 public class BreadCrumbTag extends AbstractStartWriteContentTag{
 
     /** The Constant serialVersionUID. */
     private static final long              serialVersionUID = -8596553099620845748L;
-
-    /** The Constant LOGGER. */
-    private static final Logger            LOGGER           = LoggerFactory.getLogger(BreadCrumbTag.class);
 
     //---------------------------------------------------------------
     /** breadCrumbEntityList,用户所有可以访问的菜单url List,不要求已经排完序. */
@@ -155,7 +150,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
         List<BreadCrumbEntity<Object>> opBreadCrumbEntityList = constructBreadCrumbEntityList();
 
         if (isNullOrEmpty(opBreadCrumbEntityList)){
-            LOGGER.warn("breadCrumbEntityList is NullOrEmpty!!,return empty!!");
+            log.warn("breadCrumbEntityList is NullOrEmpty!!,return empty!!");
             return EMPTY;
         }
 

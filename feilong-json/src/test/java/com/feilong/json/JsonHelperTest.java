@@ -40,6 +40,7 @@ import com.feilong.lib.json.JsonConfig;
 import com.feilong.store.member.Person;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class JsonHelperTest extends AbstractTest{
 
     @Test
@@ -62,7 +63,7 @@ public class JsonHelperTest extends AbstractTest{
      */
     @Test
     public void toBeanNUll(){
-        LOGGER.debug(toJSON(null).toString(4, 4));
+        log.debug(toJSON(null).toString(4, 4));
     }
 
     /**
@@ -70,7 +71,7 @@ public class JsonHelperTest extends AbstractTest{
      */
     @Test
     public void toJSON(){
-        LOGGER.debug(toJSON(HttpMethodTestType.GET).toString(4, 4));
+        log.debug(toJSON(HttpMethodTestType.GET).toString(4, 4));
     }
 
     /**
@@ -90,7 +91,7 @@ public class JsonHelperTest extends AbstractTest{
         map.put("a", map1);
         map.put("aa", map1);
         map.put("aaa", map1);
-        LOGGER.debug(toJSON(map).toString(4, 4));
+        log.debug(toJSON(map).toString(4, 4));
     }
 
     /**
@@ -107,7 +108,7 @@ public class JsonHelperTest extends AbstractTest{
 
         myBean.setData(list);
         // print: {"data":[{"dateAttr":"2009-09-12 07:24:54","name":"get"}]}
-        LOGGER.debug("" + toJSON(myBean));
+        log.debug("" + toJSON(myBean));
     }
 
     /**
@@ -122,23 +123,23 @@ public class JsonHelperTest extends AbstractTest{
         list.add(ps);
 
         // print: [{"dateAttr":"2009-09-12 07:22:49","name":"get"}]
-        LOGGER.debug("" + toJSON(list));
+        log.debug("" + toJSON(list));
 
         Set<Person> set = toSet(ps);
 
         // print: [{"dateAttr":"2009-09-12 07:22:16","name":"get"}]
-        LOGGER.debug("" + toJSON(set));
+        log.debug("" + toJSON(set));
 
         Person[] personArr = new Person[1];
         personArr[0] = ps;
         // print: [{"dateAttr":"2009-09-12 07:23:54","name":"get"}]
-        LOGGER.debug("" + toJSON(personArr));
+        log.debug("" + toJSON(personArr));
 
         Map<String, Person> map = new LinkedHashMap<>();
         map.put("person1", ps);
 
         // print: {"person1":{"dateAttr":"2009-09-12 07:24:27","name":"get"}}
-        LOGGER.debug("" + toJSON(map));
+        log.debug("" + toJSON(map));
     }
 
     /**

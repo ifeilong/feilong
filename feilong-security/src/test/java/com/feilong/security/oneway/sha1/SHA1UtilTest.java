@@ -23,6 +23,7 @@ import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
 import com.feilong.security.oneway.SHA1Util;
 
+@lombok.extern.slf4j.Slf4j
 public class SHA1UtilTest extends AbstractSecurityTest{
 
     @Test
@@ -44,12 +45,12 @@ public class SHA1UtilTest extends AbstractSecurityTest{
 
     @Test
     public void encode12(){
-        LOGGER.debug(debugSecurityValue(SHA1Util.encode("2284208963")));
+        log.debug(debugSecurityValue(SHA1Util.encode("2284208963")));
     }
 
     @Test
     public void encode1(){
-        LOGGER.debug(debugSecurityValue(SHA1Util.encode("521000")));
+        log.debug(debugSecurityValue(SHA1Util.encode("521000")));
         String origin = "sdadadadadaadasasdasdadas" + "dasdadasdadadasdasdasdadasdasdadadadadasdadadadad"
                         + "aaadasdasdasdasdadadadadaadasasdasdadasdasda" + "dasdadadasdasdasdadas"
                         + "dasdadadadadasdadadadadaaadasdasdasdasasda" + "sdasdasdasdasdasdasdadasaddssadsaadsasdsdadadadadaa"
@@ -64,7 +65,7 @@ public class SHA1UtilTest extends AbstractSecurityTest{
                         + "sdasdasdasdasdasdasdasdadasaddssadsaadsasdasdasdasdasdasdasdasdadas"
                         + "addssadsaadasdasdasdasaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdadasdasdasdadasaddssadsaadasdasdasda"
                         + "sdasdasdadasaddssadsaad";
-        LOGGER.debug(debugSecurityValue(SHA1Util.encode(origin)));
+        log.debug(debugSecurityValue(SHA1Util.encode(origin)));
     }
 
 }

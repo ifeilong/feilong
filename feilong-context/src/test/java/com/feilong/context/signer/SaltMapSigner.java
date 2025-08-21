@@ -20,9 +20,6 @@ import static com.feilong.security.symmetric.LogBuilder.hided;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.codec.digest.HmacUtils;
 
@@ -38,12 +35,10 @@ import com.feilong.lib.codec.digest.HmacUtils;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 4.0.8
  */
+@lombok.extern.slf4j.Slf4j
 public class SaltMapSigner extends AbstractMapSigner{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SaltMapSigner.class);
-
-    //---------------------------------------------------------------
-    private final String        sha1Key;
+    private final String sha1Key;
 
     /**
      * @param mapSignConfig
@@ -60,8 +55,8 @@ public class SaltMapSigner extends AbstractMapSigner{
         //将上面的参数字符串进行Base64编码
         byte[] bytes = StringUtil.getBytes(toBeSignString, UTF8);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(signLog(counter, "排序字符串对应bytes结果: {}", bytes));
+        if (log.isDebugEnabled()){
+            log.debug(signLog(counter, "排序字符串对应bytes结果: {}", bytes));
         }
 
         // <groupId>commons-codec</groupId>
@@ -70,8 +65,8 @@ public class SaltMapSigner extends AbstractMapSigner{
 
         //byte[] encodeBase64 = org.apache.commons.codec.binary.Base64.encodeBase64(bytes);
         byte[] encodeBase64 = com.feilong.lib.codec.binary.Base64.encodeBase64(bytes);
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
+        if (log.isDebugEnabled()){
+            log.debug(
                             signLog(
                                             counter,
                                             "使用org.apache.commons.codec.binary.Base64.encodeBase64(bytes)将排序字符串对应bytes转Base64编码结果: {}",
@@ -79,8 +74,8 @@ public class SaltMapSigner extends AbstractMapSigner{
         }
 
         String base64EncodedStr = new String(encodeBase64);
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(signLog(counter, "Base64编码转字符串结果: {}", base64EncodedStr));
+        if (log.isDebugEnabled()){
+            log.debug(signLog(counter, "Base64编码转字符串结果: {}", base64EncodedStr));
         }
 
         //---------------------------------------------------------------
@@ -92,8 +87,8 @@ public class SaltMapSigner extends AbstractMapSigner{
         //        String sha1Key = appSecret + serverAuthenticateStaticKey;
         //byte[] hmacSha1 = org.apache.commons.codec.digest.HmacUtils.hmacSha1(sha1Key, base64EncodedStr);
         byte[] hmacSha1 = HmacUtils.hmacSha1(sha1Key, base64EncodedStr);
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
+        if (log.isDebugEnabled()){
+            log.debug(
                             signLog(
                                             counter,
                                             "使用org.apache.commons.codec.digest.HmacUtils.hmacSha1(sha1Key, base64EncodedStr) "//

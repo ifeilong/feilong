@@ -19,9 +19,6 @@ import static com.feilong.net.http.HttpLogHelper.autoLog;
 
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.StatusLine;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
@@ -34,12 +31,8 @@ import com.feilong.net.http.HttpRequest;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.1.0
  */
+@lombok.extern.slf4j.Slf4j
 public class StatusCodeResultCallback extends AbstractResultCallback<Integer>{
-
-    /** The Constant log. */
-    private static final Logger                  LOGGER   = LoggerFactory.getLogger(StatusCodeResultCallback.class);
-
-    //---------------------------------------------------------------
 
     /** Static instance. */
     // the static instance works for all types
@@ -58,8 +51,8 @@ public class StatusCodeResultCallback extends AbstractResultCallback<Integer>{
         int statusCode = statusLine.getStatusCode();
 
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(autoLog(httpRequest, useConnectionConfig, "statusCode:[{}]", httpResponse.getStatusLine()));
+        if (log.isInfoEnabled()){
+            log.info(autoLog(httpRequest, useConnectionConfig, "statusCode:[{}]", httpResponse.getStatusLine()));
         }
         return statusCode;
     }

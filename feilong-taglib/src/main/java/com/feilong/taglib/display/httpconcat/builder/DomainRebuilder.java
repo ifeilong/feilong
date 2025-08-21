@@ -21,21 +21,14 @@ import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConf
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * domain 再加工.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.1
  */
+@lombok.extern.slf4j.Slf4j
 public class DomainRebuilder{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DomainRebuilder.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private DomainRebuilder(){
@@ -65,12 +58,12 @@ public class DomainRebuilder{
         String globalDomain = GLOBAL_CONFIG.getDomain();
         if (isNullOrEmpty(globalDomain)){
             String contextPath = request.getContextPath();
-            LOGGER.debug("domain is null or empty, use request contextPath:[{}]", contextPath);
+            log.debug("domain is null or empty, use request contextPath:[{}]", contextPath);
             return contextPath;
         }
 
         //---------------------------------------------------------------
-        LOGGER.trace("domain is null or empty, use globalDomain:[{}]", globalDomain);
+        log.trace("domain is null or empty, use globalDomain:[{}]", globalDomain);
         return globalDomain;
     }
 }

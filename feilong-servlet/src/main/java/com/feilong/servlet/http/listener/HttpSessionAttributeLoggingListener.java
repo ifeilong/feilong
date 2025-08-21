@@ -19,9 +19,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.json.JsonUtil;
 import com.feilong.servlet.http.SessionUtil;
 
@@ -31,10 +28,8 @@ import com.feilong.servlet.http.SessionUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
+@lombok.extern.slf4j.Slf4j
 public class HttpSessionAttributeLoggingListener implements HttpSessionAttributeListener{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpSessionAttributeLoggingListener.class);
 
     /*
      * (non-Javadoc)
@@ -43,10 +38,10 @@ public class HttpSessionAttributeLoggingListener implements HttpSessionAttribute
      */
     @Override
     public void attributeAdded(HttpSessionBindingEvent httpSessionBindingEvent){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             HttpSession session = httpSessionBindingEvent.getSession();
 
-            LOGGER.debug(
+            log.debug(
                             "name:[{}],value:[{}] added to [session],now session info:[{}] ",
                             httpSessionBindingEvent.getName(),
                             httpSessionBindingEvent.getValue(),
@@ -64,11 +59,8 @@ public class HttpSessionAttributeLoggingListener implements HttpSessionAttribute
      */
     @Override
     public void attributeRemoved(HttpSessionBindingEvent httpSessionBindingEvent){
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
-                            "name:[{}],value:[{}] removed from [session]",
-                            httpSessionBindingEvent.getName(),
-                            httpSessionBindingEvent.getValue());
+        if (log.isDebugEnabled()){
+            log.debug("name:[{}],value:[{}] removed from [session]", httpSessionBindingEvent.getName(), httpSessionBindingEvent.getValue());
 
         }
     }
@@ -82,10 +74,10 @@ public class HttpSessionAttributeLoggingListener implements HttpSessionAttribute
      */
     @Override
     public void attributeReplaced(HttpSessionBindingEvent httpSessionBindingEvent){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             HttpSession session = httpSessionBindingEvent.getSession();
 
-            LOGGER.debug(
+            log.debug(
                             "name:[{}],value:[{}] replaced to [session],now session info:[{}] ",
                             httpSessionBindingEvent.getName(),
                             httpSessionBindingEvent.getValue(),

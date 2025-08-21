@@ -382,7 +382,7 @@ public final class SystemUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * LOGGER.debug(JsonUtil.format(SystemUtil.getPropertiesMap()));
+     * log.debug(JsonUtil.format(SystemUtil.getPropertiesMap()));
      * </pre>
      * 
      * <b>返回:</b>
@@ -454,7 +454,7 @@ public final class SystemUtil{
      * 
      * <pre class="code">
      * 
-     * LOGGER.debug(JsonUtil.format(SystemUtil.getEnvMap()));
+     * log.debug(JsonUtil.format(SystemUtil.getEnvMap()));
      * 
      * </pre>
      * 

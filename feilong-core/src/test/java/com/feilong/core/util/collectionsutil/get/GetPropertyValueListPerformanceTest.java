@@ -24,21 +24,16 @@ import static org.hamcrest.Matchers.contains;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.store.member.User;
 
 /**
  * The Class GetPropertyValueListTest.
  */
+@lombok.extern.slf4j.Slf4j
 public class GetPropertyValueListPerformanceTest{
 
-    /** The Constant log. */
-    private static final Logger     LOGGER = LoggerFactory.getLogger(GetPropertyValueListPerformanceTest.class);
-
-    //---------------------------------------------------------------
-    private static final List<User> list   = toList(                                                  //
+    private static final List<User> list = toList( //
                     new User(2L),
                     new User(5L),
                     new User(5L));
@@ -69,8 +64,8 @@ public class GetPropertyValueListPerformanceTest{
             assertThat(resultList, contains(2L, 5L, 5L, 7L, 8L));
 
         }
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("useTime: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+        if (log.isInfoEnabled()){
+            log.info("useTime: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
 
     }
@@ -96,8 +91,8 @@ public class GetPropertyValueListPerformanceTest{
             assertThat(resultList, contains(2L, 5L, 5L, 7L, 8L));
 
         }
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("useTime: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+        if (log.isInfoEnabled()){
+            log.info("useTime: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
 
     }

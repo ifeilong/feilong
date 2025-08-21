@@ -28,6 +28,7 @@ import org.junit.Test;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 
+@lombok.extern.slf4j.Slf4j
 public class ToXmlWithConfigMapTest extends AbstractTest{
 
     @Test
@@ -63,7 +64,7 @@ public class ToXmlWithConfigMapTest extends AbstractTest{
 
         //  toXmlConfig.setHierarchicalStreamDriver(new DomJDriver());
 
-        LOGGER.debug(XmlUtil.toXML(map, toXmlConfig));
+        log.debug(XmlUtil.toXML(map, toXmlConfig));
     }
 
     @Test

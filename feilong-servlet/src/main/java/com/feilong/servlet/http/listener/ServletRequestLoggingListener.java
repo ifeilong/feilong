@@ -20,9 +20,6 @@ import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.json.JsonUtil;
 import com.feilong.servlet.http.RequestUtil;
 
@@ -33,10 +30,8 @@ import com.feilong.servlet.http.RequestUtil;
  * @see "org.springframework.web.context.request.RequestContextListener"
  * @since 1.10.4
  */
+@lombok.extern.slf4j.Slf4j
 public class ServletRequestLoggingListener implements ServletRequestListener{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServletRequestLoggingListener.class);
 
     /*
      * (non-Javadoc)
@@ -45,10 +40,10 @@ public class ServletRequestLoggingListener implements ServletRequestListener{
      */
     @Override
     public void requestInitialized(ServletRequestEvent servletRequestEvent){
-        if (LOGGER.isTraceEnabled()){
+        if (log.isTraceEnabled()){
             ServletRequest servletRequest = servletRequestEvent.getServletRequest();
 
-            LOGGER.trace(
+            log.trace(
                             "servletRequest request [Initialized] info:[{}] ",
                             JsonUtil.toString(RequestUtil.getRequestInfoMapForLog((HttpServletRequest) servletRequest)));
         }
@@ -63,9 +58,9 @@ public class ServletRequestLoggingListener implements ServletRequestListener{
      */
     @Override
     public void requestDestroyed(ServletRequestEvent servletRequestEvent){
-        if (LOGGER.isTraceEnabled()){
+        if (log.isTraceEnabled()){
             ServletRequest servletRequest = servletRequestEvent.getServletRequest();
-            LOGGER.trace(
+            log.trace(
                             "servletRequest request [Destroyed] info:[{}] ",
                             JsonUtil.toString(RequestUtil.getRequestInfoMapForLog((HttpServletRequest) servletRequest)));
         }

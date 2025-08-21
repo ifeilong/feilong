@@ -21,12 +21,9 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+@lombok.extern.slf4j.Slf4j
 class BlockCopyer{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(BlockCopyer.class);
 
     /** Don't let anyone instantiate this class. */
     private BlockCopyer(){
@@ -50,8 +47,8 @@ class BlockCopyer{
                     List<CellRangeAddress> mergedRegions){
 
         //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace(
+        if (log.isTraceEnabled()){
+            log.trace(
                             "will copy block,startRow:[{}],startCol:[{}],endRow:[{}],endCol:[{}],rowOffset:[{}],colOffset:[{}]",
                             startRow,
                             startCol,
@@ -71,8 +68,8 @@ class BlockCopyer{
             //---------------------------------------------------------------
             int newRowIndex = row + rowOffset;
             Row newRow = buildNewRow(sheet, oldRow, newRowIndex);
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("copy row [{}] to [{}],Set new row height :{}", row, newRowIndex, newRow.getHeightInPoints());
+            if (log.isTraceEnabled()){
+                log.trace("copy row [{}] to [{}],Set new row height :{}", row, newRowIndex, newRow.getHeightInPoints());
             }
 
             //---------------------------------------------------------------

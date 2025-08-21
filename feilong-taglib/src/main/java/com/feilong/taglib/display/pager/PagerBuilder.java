@@ -19,9 +19,6 @@ import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
@@ -103,10 +100,8 @@ import com.feilong.taglib.display.pager.command.PagerVMParam;
  * @see PagerVMParam
  * @since 1.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public final class PagerBuilder{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PagerBuilder.class);
 
     /** Don't let anyone instantiate this class. */
     private PagerBuilder(){
@@ -160,13 +155,13 @@ public final class PagerBuilder{
         Validate.notNull(pagerParams, "pagerParams can't be null!");
 
         if (pagerParams.getTotalCount() <= 0){
-            LOGGER.debug("totalCount value is [{}] not > 0,will return empty", pagerParams.getTotalCount());
+            log.debug("totalCount value is [{}] not > 0,will return empty", pagerParams.getTotalCount());
             return EMPTY;// 如果总数不>0 则直接返回 empty,页面分页地方显示空白
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("input [pagerParams] info:{}", JsonUtil.toString(pagerParams));
+        if (log.isTraceEnabled()){
+            log.trace("input [pagerParams] info:{}", JsonUtil.toString(pagerParams));
         }
 
         return SimpleTagParamCacheManager.getContent(pagerParams, PagerCacheContentBuilder.INSTANCE);

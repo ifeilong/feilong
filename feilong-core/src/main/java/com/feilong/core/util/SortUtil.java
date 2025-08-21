@@ -296,7 +296,7 @@ public final class SortUtil{
      *                                     StoPropertyConstants.PRPT_ITEM_NORMAL_CODE,
      *                                     StoPropertyConstants.PRPT_ITEM_NOSALE));
      * }catch (Exception e){
-     *     LOGGER.error("itemType sort error:{},itemType:{}", e, JsonUtil.format(itemType));
+     *     log.error("itemType sort error:{},itemType:{}", e, JsonUtil.format(itemType));
      * }
      * 
      * </pre>
@@ -378,7 +378,7 @@ public final class SortUtil{
      *                                     StoPropertyConstants.PRPT_ITEM_NORMAL_CODE,
      *                                     StoPropertyConstants.PRPT_ITEM_NOSALE));
      * }catch (Exception e){
-     *     LOGGER.error("itemType sort error:{},itemType:{}", e, JsonUtil.format(itemType));
+     *     log.error("itemType sort error:{},itemType:{}", e, JsonUtil.format(itemType));
      * }
      * 
      * </pre>
@@ -448,7 +448,7 @@ public final class SortUtil{
      * list.add(new User(1L, 8));
      * 
      * SortUtil.sortList(list, new PropertyComparator{@code <User>}("id"));
-     * LOGGER.debug(JsonUtil.format(list));
+     * log.debug(JsonUtil.format(list));
      * </pre>
      * 
      * <b>返回:</b>
@@ -564,7 +564,7 @@ public final class SortUtil{
      * 
      * SortUtil.sortListByPropertyNamesValue(list, "id", "age");
      * 
-     * LOGGER.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
+     * log.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
      * </pre>
      * 
      * <b>返回:</b>
@@ -812,7 +812,7 @@ public final class SortUtil{
      * map.put(null, 1345);
      * map.put("b", 8);
      * 
-     * LOGGER.debug(JsonUtil.format(SortUtil.sortMapByKeyAsc(map)));
+     * log.debug(JsonUtil.format(SortUtil.sortMapByKeyAsc(map)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -868,7 +868,7 @@ public final class SortUtil{
      * map.put(null, 88);
      * map.put("b", 8);
      * 
-     * LOGGER.debug(JsonUtil.format(SortUtil.sortMapByKeyDesc(map)));
+     * log.debug(JsonUtil.format(SortUtil.sortMapByKeyDesc(map)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -931,7 +931,7 @@ public final class SortUtil{
      * //L-上市,S-暂停,DE-终止上市,UN-未上市
      * Map{@code <String, Integer>} sortByKeyAsc = sortMapByKeyFixOrder(map, "L", "UN", "DE", "S", "O");
      * 
-     * LOGGER.debug(JsonUtil.format(sortByKeyAsc));
+     * log.debug(JsonUtil.format(sortByKeyAsc));
      * </pre>
      * 
      * <b>返回:</b>
@@ -998,7 +998,7 @@ public final class SortUtil{
      * map.put("a", 123);
      * map.put("c", 345);
      * map.put("b", 8);
-     * LOGGER.debug(JsonUtil.format(SortUtil.sortMapByValueAsc(map)));
+     * log.debug(JsonUtil.format(SortUtil.sortMapByValueAsc(map)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1051,7 +1051,7 @@ public final class SortUtil{
      * map.put("c", 345);
      * map.put("b", 8);
      * 
-     * LOGGER.debug(JsonUtil.format(SortUtil.sortMapByValueDesc(map)));
+     * log.debug(JsonUtil.format(SortUtil.sortMapByValueDesc(map)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1113,7 +1113,7 @@ public final class SortUtil{
      * 如果我们只是使用 :
      * 
      * <pre class="code">
-     * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyAsc(map)));
+     * log.debug(JsonUtil.format(SortUtil.sortByKeyAsc(map)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1132,7 +1132,7 @@ public final class SortUtil{
      * PropertyComparator{@code <Entry<String, Integer>>} propertyComparator = new PropertyComparator{@code <Map.Entry<String, Integer>>}(
      *                 "key",
      *                 new RegexGroupNumberComparator("a(\\d*)"));
-     * LOGGER.debug(JsonUtil.format(SortUtil.sortMap(map, propertyComparator)));
+     * log.debug(JsonUtil.format(SortUtil.sortMap(map, propertyComparator)));
      * </pre>
      * 
      * <b>返回:</b>

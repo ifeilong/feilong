@@ -22,9 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.ognl.NullHandler;
 import com.feilong.lib.ognl.Ognl;
 import com.feilong.lib.ognl.OgnlRuntime;
@@ -32,20 +29,16 @@ import com.feilong.lib.ognl.OgnlRuntime;
 /**
  * The Class InstantiatingNullHandler.
  */
+@lombok.extern.slf4j.Slf4j
 public class InstantiatingNullHandler implements NullHandler{
 
-    /** The Constant log. */
-    private static final Logger LOGGER                   = LoggerFactory.getLogger(InstantiatingNullHandler.class);
-
-    //---------------------------------------------------------------
-
-    static final String         USING_LOXIA_NULL_HANDLER = "loxia.useingLoxiaNullHandler";
+    static final String        USING_LOXIA_NULL_HANDLER = "loxia.useingLoxiaNullHandler";
 
     /** The ignore list. */
-    private final List<String>  ignoreList               = new ArrayList<>();
+    private final List<String> ignoreList               = new ArrayList<>();
 
     /** The handler wrapper. */
-    private final NullHandler   handlerWrapper;
+    private final NullHandler  handlerWrapper;
 
     //---------------------------------------------------------------
 
@@ -62,7 +55,7 @@ public class InstantiatingNullHandler implements NullHandler{
         if (handlerWrapper != null && ((flag == null) || !flag)){
             return handlerWrapper.nullMethodResult(context, target, methodName, args);
         }
-        LOGGER.debug("Entering nullMethodResult ");
+        log.debug("Entering nullMethodResult ");
         return null;
     }
 
@@ -72,7 +65,7 @@ public class InstantiatingNullHandler implements NullHandler{
         if (handlerWrapper != null && ((flag == null) || !flag)){
             return handlerWrapper.nullPropertyValue(context, target, property);
         }
-        LOGGER.trace("Entering nullPropertyValue [target={}, property={}]", target, property);
+        log.trace("Entering nullPropertyValue [target={}, property={}]", target, property);
 
         //---------------------------------------------------------------
         if ((target == null) || property == null){
@@ -106,7 +99,7 @@ public class InstantiatingNullHandler implements NullHandler{
             Ognl.setValue(propName, context, target, param);
             return param;
         }catch (Exception e){
-            LOGGER.error("Could not create and/or set value back on to object", e);
+            log.error("Could not create and/or set value back on to object", e);
         }
         return null;
     }

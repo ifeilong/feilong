@@ -20,11 +20,12 @@ import org.junit.Test;
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 
+@lombok.extern.slf4j.Slf4j
 public class ToStringTest2 extends AbstractJsonTest{
 
     @Test
     public void test1(){
-        LOGGER.debug(JsonUtil.toString(USER, true));
+        log.debug(JsonUtil.toString(USER, true));
     }
 
 }

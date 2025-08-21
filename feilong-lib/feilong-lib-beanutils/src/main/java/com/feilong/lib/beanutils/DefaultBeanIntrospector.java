@@ -24,13 +24,8 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * <p>
  * The default {@link BeanIntrospector} implementation.
- * </p>
  * <p>
  * This class implements a default bean introspection algorithm based on the JDK
  * classes in the <code>java.beans</code> package. It discovers properties
@@ -46,12 +41,9 @@ import org.slf4j.LoggerFactory;
  * @version $Id$
  * @since 1.9
  */
+@lombok.extern.slf4j.Slf4j
 public class DefaultBeanIntrospector implements BeanIntrospector{
 
-    /** The Constant log. */
-    private static final Logger          LOGGER                 = LoggerFactory.getLogger(DefaultBeanIntrospector.class);
-
-    //---------------------------------------------------------------
     /** The singleton instance of this class. */
     public static final BeanIntrospector INSTANCE               = new DefaultBeanIntrospector();
 
@@ -83,7 +75,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector{
             beanInfo = Introspector.getBeanInfo(icontext.getTargetClass());
         }catch (final IntrospectionException e){
             // no descriptors are added to the context
-            LOGGER.error("Error when inspecting class " + icontext.getTargetClass(), e);
+            log.error("Error when inspecting class " + icontext.getTargetClass(), e);
             return;
         }
 
@@ -136,7 +128,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector{
                         try{
                             descriptor.setReadMethod(readMethod);
                         }catch (final Exception e){
-                            LOGGER.error("Error setting indexed property read method", e);
+                            log.error("Error setting indexed property read method", e);
                         }
                     }
                 }
@@ -159,7 +151,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector{
                         try{
                             descriptor.setWriteMethod(writeMethod);
                         }catch (final Exception e){
-                            LOGGER.error("Error setting indexed property write method", e);
+                            log.error("Error setting indexed property write method", e);
                         }
                     }
                 }

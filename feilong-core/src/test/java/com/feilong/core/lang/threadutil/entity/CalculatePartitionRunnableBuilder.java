@@ -19,9 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.lang.thread.PartitionRunnableBuilder;
 import com.feilong.core.lang.thread.PartitionThreadEntity;
 
@@ -30,12 +27,9 @@ import com.feilong.core.lang.thread.PartitionThreadEntity;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
+@lombok.extern.slf4j.Slf4j
 public class CalculatePartitionRunnableBuilder implements PartitionRunnableBuilder<Integer>{
 
-    /** The Constant log. */
-    private static final Logger                           LOGGER   = LoggerFactory.getLogger(CalculatePartitionRunnableBuilder.class);
-
-    /** Static instance. */
     // the static instance works for all types
     public static final CalculatePartitionRunnableBuilder INSTANCE = new CalculatePartitionRunnableBuilder();
 
@@ -56,7 +50,7 @@ public class CalculatePartitionRunnableBuilder implements PartitionRunnableBuild
             public void run(){
                 for (Integer value : perBatchList){
 
-                    LOGGER.trace(
+                    log.trace(
                                     "{},BatchNumber:[{}],CurrentListSize:[{}],EachSize:[{}],Name:[{}],TotalListCount:[{}]",
                                     partitionThreadEntity.toString(),
                                     partitionThreadEntity.getBatchNumber(),

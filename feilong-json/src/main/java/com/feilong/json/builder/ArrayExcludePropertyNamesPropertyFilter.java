@@ -55,7 +55,7 @@ import com.feilong.lib.json.util.PropertyFilter;
  *         try{
  *             propertySetStrategy.setProperty(bean, key, value);
  *         }catch (Exception e){
- *             LOGGER.warn(e.getMessage(), e);
+ *             log.warn(e.getMessage(), e);
  *         }
  *     }
  * }

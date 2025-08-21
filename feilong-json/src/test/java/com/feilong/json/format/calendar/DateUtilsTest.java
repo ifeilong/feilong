@@ -19,8 +19,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.JsonUtil;
 
@@ -29,28 +27,27 @@ import com.feilong.json.JsonUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 2.0.3
  */
+@lombok.extern.slf4j.Slf4j
 public class DateUtilsTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilsTest.class);
 
     @Test
     public void test(){
         List<Calendar> build = DateUtils.build("2022-06-26 12:00:00", "2022-06-26 12:59:59");
 
-        LOGGER.debug(JsonUtil.format(build));
+        log.debug(JsonUtil.format(build));
     }
 
     @Test
     public void test1(){
         Calendar beginDate = Calendar.getInstance();
 
-        LOGGER.debug(JsonUtil.format(beginDate));
+        log.debug(JsonUtil.format(beginDate));
 
     }
 
     @Test
     public void test12(){
-        LOGGER.debug(JsonUtil.format(1));
+        log.debug(JsonUtil.format(1));
 
     }
 }

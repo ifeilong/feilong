@@ -23,6 +23,7 @@ import org.junit.Test;
 import com.feilong.security.AbstractSecurityTest;
 import com.feilong.security.EncryptionException;
 
+@lombok.extern.slf4j.Slf4j
 public class RC2Test extends AbstractSecurityTest{
 
     private static final SymmetricType SYMMETRIC_TYPE       = SymmetricType.RC2;
@@ -35,7 +36,7 @@ public class RC2Test extends AbstractSecurityTest{
      */
     @Test
     public void encrypBase64(){
-        LOGGER.debug(SYMMETRIC_ENCRYPTION.encryptBase64("123456", UTF8));
+        log.debug(SYMMETRIC_ENCRYPTION.encryptBase64("123456", UTF8));
     }
 
     /**
@@ -63,7 +64,7 @@ public class RC2Test extends AbstractSecurityTest{
     @Test
     // @Ignore
     public void encryptHex222(){
-        LOGGER.debug(
+        log.debug(
                         new SymmetricEncryption(SymmetricType.DES, "jiyoutua", CipherMode.ECB, CipherPadding.NoPadding)
                                         .encryptHex("金总,好喜欢你哟", UTF8));
 

@@ -67,7 +67,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      *     //省略 setter getter
      * }
      * 
-     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null)));
+     * log.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null)));
      * 
      * </pre>
      * 
@@ -86,7 +86,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 
      * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * javaToJsonConfig.setIsIgnoreNullValueElement(true);
-     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null), javaToJsonConfig));
+     * log.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null), javaToJsonConfig));
      * 
      * </pre>
      * 
@@ -103,7 +103,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * javaToJsonConfig.setIsIgnoreNullValueElement(true);
      * 
-     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(null, null), javaToJsonConfig));
+     * log.debug(JsonUtil.format(new BeanIntIgnoreNull(null, null), javaToJsonConfig));
      * 
      * </pre>
      * 
@@ -154,7 +154,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
      * 
-     * LOGGER.info(JsonUtil.format(user, javaToJsonConfig));
+     * log.info(JsonUtil.format(user, javaToJsonConfig));
      * </pre>
      * 
      * 将会输出:
@@ -217,7 +217,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      *     crmAddpointCommand.setOpenId("feilong888888ky");
      *     crmAddpointCommand.setOrderCode("fl123456");
      * 
-     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand));
+     *     log.debug(JsonUtil.format(crmAddpointCommand));
      * }
      * 
      * </pre>
@@ -262,7 +262,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      *     <span style=
     "color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
      * 
-     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
+     *     log.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
      * }
      * </pre>
      * 
@@ -397,7 +397,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
      * 
-     * LOGGER.info(JsonUtil.format(user, javaToJsonConfig));
+     * log.info(JsonUtil.format(user, javaToJsonConfig));
      * </pre>
      * 
      * 将会输出:
@@ -442,7 +442,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
      * 
-     * LOGGER.info(JsonUtil.format(user, javaToJsonConfig));
+     * log.info(JsonUtil.format(user, javaToJsonConfig));
      * </pre>
      * 
      * 将会输出:
@@ -511,7 +511,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      *     crmAddpointCommand.setOpenId("feilong888888ky");
      *     crmAddpointCommand.setOrderCode("fl123456");
      * 
-     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand));
+     *     log.debug(JsonUtil.format(crmAddpointCommand));
      * }
      * 
      * </pre>
@@ -556,7 +556,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      *     <span style=
     "color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
      * 
-     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
+     *     log.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
      * }
      * </pre>
      * 
@@ -621,7 +621,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      *     crmAddpointCommand.setOpenId("feilong888888ky");
      *     crmAddpointCommand.setOrderCode("fl123456");
      * 
-     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand));
+     *     log.debug(JsonUtil.format(crmAddpointCommand));
      * }
      * 
      * </pre>
@@ -666,7 +666,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      *     <span style=
     "color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
      * 
-     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
+     *     log.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
      * }
      * </pre>
      * 
@@ -750,7 +750,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      *     //省略 setter getter
      * }
      * 
-     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null)));
+     * log.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null)));
      * 
      * </pre>
      * 
@@ -769,7 +769,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 
      * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * javaToJsonConfig.setIsIgnoreNullValueElement(true);
-     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null), javaToJsonConfig));
+     * log.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null), javaToJsonConfig));
      * 
      * </pre>
      * 
@@ -786,7 +786,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * javaToJsonConfig.setIsIgnoreNullValueElement(true);
      * 
-     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(null, null), javaToJsonConfig));
+     * log.debug(JsonUtil.format(new BeanIntIgnoreNull(null, null), javaToJsonConfig));
      * 
      * </pre>
      * 
@@ -825,7 +825,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      *     //省略 setter getter
      * }
      * 
-     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null)));
+     * log.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null)));
      * 
      * </pre>
      * 
@@ -844,7 +844,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 
      * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * javaToJsonConfig.setIsIgnoreNullValueElement(true);
-     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null), javaToJsonConfig));
+     * log.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null), javaToJsonConfig));
      * 
      * </pre>
      * 
@@ -861,7 +861,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * javaToJsonConfig.setIsIgnoreNullValueElement(true);
      * 
-     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(null, null), javaToJsonConfig));
+     * log.debug(JsonUtil.format(new BeanIntIgnoreNull(null, null), javaToJsonConfig));
      * 
      * </pre>
      * 

@@ -20,21 +20,15 @@ import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 只需要实现 {@link ServletContextListener#contextInitialized} 方法的 {@link ServletContextListener}.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.3
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractServletContextInitializedListener implements ServletContextListener{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractServletContextInitializedListener.class);
-
-    //---------------------------------------------------------------
     /**
      * Receives notification that the web application initialization process is starting.
      *
@@ -49,8 +43,8 @@ public abstract class AbstractServletContextInitializedListener implements Servl
 
         initialized(servletContextEvent);
 
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("[{}] initialized use time: [{}]", getClass().getName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
+        if (log.isInfoEnabled()){
+            log.info("[{}] initialized use time: [{}]", getClass().getName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 

@@ -37,9 +37,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
@@ -56,10 +53,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @see "org.apache.http.client.utils.URIBuilder"
  * @since 1.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public final class ParamUtil{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ParamUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ParamUtil(){
@@ -92,7 +87,7 @@ public final class ParamUtil{
      * String uri = "http://www.feilong.com:8888/esprit-frontend/search.htm?{@code keyword=%E6%81%A4&page=}";
      * String pageParamName = "label";
      * String prePageNo = "2-5-8-12";
-     * LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, UTF8));
+     * log.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, UTF8));
      * </pre>
      * 
      * <b>返回:</b>
@@ -150,7 +145,7 @@ public final class ParamUtil{
      * keyAndArrayMap.put("province", "江苏省");
      * keyAndArrayMap.put("city", "南通市");
      * 
-     * LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, UTF8));
+     * log.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
      * <b>返回:</b>
@@ -170,7 +165,7 @@ public final class ParamUtil{
      * keyAndArrayMap.put("province", "江苏省");
      * keyAndArrayMap.put("city", "南通市");
      * 
-     * LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, UTF8));
+     * log.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
      * <b>返回:</b>
@@ -224,7 +219,7 @@ public final class ParamUtil{
      * keyAndArrayMap.put("receiver", new String[] { "鑫哥", "feilong" });
      * keyAndArrayMap.put("province", new String[] { "江苏省" });
      * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
+     * log.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
      * <b>返回:</b>
@@ -244,7 +239,7 @@ public final class ParamUtil{
      * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <>}();
      * keyAndArrayMap.put("province", new String[] { "江苏省" });
      * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
+     * log.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
      * <b>返回:</b>
@@ -292,7 +287,7 @@ public final class ParamUtil{
      * 
      * <pre class="code">
      * String queryString = "{@code sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510}";
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, UTF8)));
+     * log.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, UTF8)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -340,7 +335,7 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=1&b=2&a=5}", UTF8)));
+     * log.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=1&b=2&a=5}", UTF8)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -357,7 +352,7 @@ public final class ParamUtil{
      * <hr>
      * 
      * <pre class="code">
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=&b=2&a}", UTF8)));
+     * log.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=&b=2&a}", UTF8)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -423,7 +418,7 @@ public final class ParamUtil{
      * map.put("_input_charset", "gbk");
      * map.put("totalActual", "210.00");
      * map.put("address", "江苏南通市通州区888组888号");
-     * LOGGER.debug(ParamUtil.toNaturalOrderingKeyJoinValue(map));
+     * log.debug(ParamUtil.toNaturalOrderingKeyJoinValue(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -470,7 +465,7 @@ public final class ParamUtil{
      * map.put(<span style="color:red">null</span>, "create_salesorder");
      * map.put("province", "江苏省");
      * 
-     * LOGGER.debug(ParamUtil.toNaturalOrderingKeyJoinValue(map));
+     * log.debug(ParamUtil.toNaturalOrderingKeyJoinValue(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -526,7 +521,7 @@ public final class ParamUtil{
      * map.put("_input_charset", "gbk");
      * map.put("totalActual", "210.00");
      * map.put("address", "江苏南通市通州区888组888号");
-     * LOGGER.debug(ParamUtil.toNaturalOrderingJoinValue(map));
+     * log.debug(ParamUtil.toNaturalOrderingJoinValue(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -571,7 +566,7 @@ public final class ParamUtil{
      * map.put("totalActual", <span style="color:red">null</span>);
      * map.put("province", "江苏省");
      * 
-     * LOGGER.debug(ParamUtil.toNaturalOrderingKeyJoinValue(map));
+     * log.debug(ParamUtil.toNaturalOrderingKeyJoinValue(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -621,7 +616,7 @@ public final class ParamUtil{
      * map.put("_input_charset", "gbk");
      * map.put("totalActual", "210.00");
      * map.put("address", "江苏南通市通州区888组888号");
-     * LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
+     * log.debug(ParamUtil.toNaturalOrderingQueryString(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -668,7 +663,7 @@ public final class ParamUtil{
      * map.put(<span style="color:red">null</span>, "create_salesorder");
      * map.put("province", "江苏省");
      * 
-     * LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
+     * log.debug(ParamUtil.toNaturalOrderingQueryString(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -717,7 +712,7 @@ public final class ParamUtil{
      * singleValueMap.put("province", "江苏省");
      * singleValueMap.put("city", "南通市");
      * 
-     * LOGGER.info(ParamUtil.joinSingleValueMap(singleValueMap));
+     * log.info(ParamUtil.joinSingleValueMap(singleValueMap));
      * </pre>
      * 
      * <b>返回:</b>
@@ -738,7 +733,7 @@ public final class ParamUtil{
      * map.put("b", null);
      * map.put("c", "jim");
      * 
-     * LOGGER.info(ParamUtil.toQueryStringUseSingleValueMap(map));
+     * log.info(ParamUtil.toQueryStringUseSingleValueMap(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -784,7 +779,7 @@ public final class ParamUtil{
      * 
      * keyAndArrayMap.put("province", new String[] { "江苏省", "浙江省" });
      * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
+     * log.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
      * </pre>
      * 
      * <b>返回:</b>
@@ -803,7 +798,7 @@ public final class ParamUtil{
      * 
      * keyAndArrayMap.put("province", new String[] { "江苏省", <span style="color:red">null</span> });
      * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
+     * log.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
      * </pre>
      * 
      * <b>返回:</b>
@@ -983,7 +978,7 @@ public final class ParamUtil{
             String key = entry.getKey();
             String[] paramValues = entry.getValue();
             if (isNullOrEmpty(paramValues)){
-                LOGGER.warn("the param key:[{}] value is null", key);
+                log.warn("the param key:[{}] value is null", key);
                 paramValues = EMPTY_STRING_ARRAY;//赋予 empty数组,为了下面的转换
             }
             safeArrayValueMap.put(decodeAndEncode(key, charsetType), toSafeValueArray(paramValues, charsetType));

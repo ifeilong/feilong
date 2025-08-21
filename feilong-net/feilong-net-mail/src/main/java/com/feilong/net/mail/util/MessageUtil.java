@@ -33,9 +33,6 @@ import javax.mail.Multipart;
 import javax.mail.Part;
 import javax.mail.internet.InternetAddress;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.lang.StringUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.net.mail.entity.MailInfo;
@@ -47,10 +44,8 @@ import com.feilong.net.mail.exception.MailException;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.9
  */
+@lombok.extern.slf4j.Slf4j
 public final class MessageUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(MessageUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private MessageUtil(){
@@ -72,7 +67,7 @@ public final class MessageUtil{
      */
     public static final List<MailInfo> toMailInfoList(Message[] messages) throws MessagingException{
         int messagesLength = messages.length;
-        LOGGER.info("messages length:[{}]", messagesLength);
+        log.info("messages length:[{}]", messagesLength);
         //---------------------------------------------------------------
         List<MailInfo> list = newArrayList();
         for (int i = 0; i < messagesLength; ++i){
@@ -80,7 +75,7 @@ public final class MessageUtil{
 
             String format = StringUtil.format("%0" + String.valueOf(messagesLength).length() + "d", i + 1);
             String pattern = "[{}/{}] start convert Message to MailInfo,from:[{}],contentType:[{}],subject:[{}]";
-            LOGGER.info(pattern, format, messagesLength, getFromAddress(message), message.getContentType(), message.getSubject());
+            log.info(pattern, format, messagesLength, getFromAddress(message), message.getContentType(), message.getSubject());
 
             list.add(toMailInfoList(message));
         }
@@ -143,7 +138,7 @@ public final class MessageUtil{
     //---------------------------------------------------------------
 
     /**
-     * 获得 map for LOGGER.
+     * 获得 map for log.
      *
      * @param message
      *            the message
@@ -228,10 +223,10 @@ public final class MessageUtil{
             }
             //用于包装一个E-mail消息
             else if (part.isMimeType(MimeType.MESSAGE_RFC822)){
-                LOGGER.debug("content mimeType:[{}],match with:--->[{}]", part.getContentType(), MimeType.MESSAGE_RFC822);
+                log.debug("content mimeType:[{}],match with:--->[{}]", part.getContentType(), MimeType.MESSAGE_RFC822);
                 return getContent((Part) part.getContent());
             }else{
-                LOGGER.debug("part getContentType:{}", part.getContentType());
+                log.debug("part getContentType:{}", part.getContentType());
                 return null;
             }
         }catch (Exception e){
@@ -260,7 +255,7 @@ public final class MessageUtil{
         Object content = part.getContent();
 
         String pattern = "content mimeType:[{}],match with:--->[{}],getContent value:[{}]";
-        LOGGER.debug(pattern, part.getContentType(), MimeType.TEXT_ALL, content);
+        log.debug(pattern, part.getContentType(), MimeType.TEXT_ALL, content);
 
         return (String) content;
     }
@@ -284,8 +279,8 @@ public final class MessageUtil{
         int count = multipart.getCount();
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("content mimeType:[{}],match with:--->[{}],count:[{}]", multipart.getContentType(), MimeType.MULTIPART_ALL, count);
+        if (log.isDebugEnabled()){
+            log.debug("content mimeType:[{}],match with:--->[{}],count:[{}]", multipart.getContentType(), MimeType.MULTIPART_ALL, count);
         }
         //---------------------------------------------------------------
         boolean alternativeFlag = part.isMimeType(MimeType.MULTIPART_ALTERNATIVE);

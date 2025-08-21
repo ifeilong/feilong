@@ -23,6 +23,7 @@ import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 import com.feilong.store.system.Menu;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatTest extends AbstractJsonTest{
 
     @Test
@@ -30,11 +31,11 @@ public class FormatTest extends AbstractJsonTest{
         Menu menu = new Menu(4L);
         menu.setChildren(toList(new Menu(5L)));
 
-        LOGGER.debug(JsonUtil.format(menu));
+        log.debug(JsonUtil.format(menu));
     }
 
     @Test
     public void testJsonString(){
-        LOGGER.debug("{}--->{}", USER_JSON_STRING, JsonUtil.format(USER_JSON_STRING));
+        log.debug("{}--->{}", USER_JSON_STRING, JsonUtil.format(USER_JSON_STRING));
     }
 }

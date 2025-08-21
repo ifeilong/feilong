@@ -27,14 +27,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.DynaBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * <p>
  * DynaBean which automatically adds properties to the <code>DynaClass</code>
  * and provides <i>Lazy List</i> and <i>Lazy Map</i> features.
- * </p>
  *
  * <p>
  * DynaBeans deal with three types of properties - <i>simple</i>, <i>indexed</i> and <i>mapped</i> and
@@ -140,17 +136,13 @@ import org.slf4j.LoggerFactory;
  * @version $Id$
  * @see LazyDynaClass
  */
+@lombok.extern.slf4j.Slf4j
 public class LazyDynaBean implements DynaBean,Serializable{
 
     /**
      * 
      */
     private static final long             serialVersionUID = -7852089312216890061L;
-
-    /** The Constant log. */
-    private static final Logger           LOGGER           = LoggerFactory.getLogger(LazyDynaBean.class);
-
-    //---------------------------------------------------------------
 
     /** BigInteger Zero */
     protected static final BigInteger     BigInteger_ZERO  = new BigInteger("0");
@@ -863,8 +855,8 @@ public class LazyDynaBean implements DynaBean,Serializable{
         try{
             return type.newInstance();
         }catch (final Exception ex){
-            if (LOGGER.isWarnEnabled()){
-                LOGGER.warn("Error instantiating DynaBean property of type '" + type.getName() + "' for '" + name + "' " + ex);
+            if (log.isWarnEnabled()){
+                log.warn("Error instantiating DynaBean property of type '" + type.getName() + "' for '" + name + "' " + ex);
             }
             return null;
         }
@@ -939,8 +931,8 @@ public class LazyDynaBean implements DynaBean,Serializable{
         try{
             return type.newInstance();
         }catch (final Exception ex){
-            if (LOGGER.isWarnEnabled()){
-                LOGGER.warn("Error instantiating property of type '" + type.getName() + "' for '" + name + "' " + ex);
+            if (log.isWarnEnabled()){
+                log.warn("Error instantiating property of type '" + type.getName() + "' for '" + name + "' " + ex);
             }
             return null;
         }

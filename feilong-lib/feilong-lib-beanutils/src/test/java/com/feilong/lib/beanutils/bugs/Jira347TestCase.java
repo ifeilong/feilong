@@ -91,7 +91,7 @@ public class Jira347TestCase extends TestCase{
      *
      * @return the string representation or null if mapped write method does not exist
      */
-    private String getMappedWriteMethod(final MappedPropertyDescriptor descriptor){
+    private static String getMappedWriteMethod(final MappedPropertyDescriptor descriptor){
         final Method m = descriptor.getMappedWriteMethod();
         return m == null ? null : m.toString();
     }
@@ -99,7 +99,7 @@ public class Jira347TestCase extends TestCase{
     /**
      * Try to force the garbage collector to run by filling up memory and calling System.gc().
      */
-    private void forceGarbageCollection() throws Exception{
+    private static void forceGarbageCollection() throws Exception{
         // Fill up memory
         final SoftReference<Object> ref = new SoftReference<Object>(new Object());
         int count = 0;

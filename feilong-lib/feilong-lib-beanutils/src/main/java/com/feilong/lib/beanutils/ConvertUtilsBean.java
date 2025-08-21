@@ -26,9 +26,6 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.converters.ArrayConverter;
 import com.feilong.lib.beanutils.converters.BigDecimalConverter;
 import com.feilong.lib.beanutils.converters.BigIntegerConverter;
@@ -52,14 +49,12 @@ import com.feilong.lib.beanutils.converters.StringConverter;
 import com.feilong.lib.beanutils.converters.URLConverter;
 
 /**
- * <p>
  * Utility methods for converting String scalar values to objects of the
  * specified Class, String arrays to arrays of the specified Class. The
  * actual {@link Converter} instance to be used can be registered for each
  * possible destination Class. Unless you override them, standard
  * {@link Converter} instances are provided for all of the following
  * destination Classes:
- * </p>
  * <ul>
  * <li>java.lang.BigDecimal (no default value)</li>
  * <li>java.lang.BigInteger (no default value)</li>
@@ -125,16 +120,12 @@ import com.feilong.lib.beanutils.converters.URLConverter;
  * @version $Id$
  * @since 1.7
  */
+@lombok.extern.slf4j.Slf4j
 public class ConvertUtilsBean{
 
-    /** The Constant log. */
-    private static final Logger    LOGGER = LoggerFactory.getLogger(ConvertUtilsBean.class);
+    private static final Integer   ZERO  = new Integer(0);
 
-    //---------------------------------------------------------------
-
-    private static final Integer   ZERO   = new Integer(0);
-
-    private static final Character SPACE  = new Character(' ');
+    private static final Character SPACE = new Character(' ');
 
     // ------------------------------------------------------- Class Methods
     /**
@@ -216,15 +207,15 @@ public class ConvertUtilsBean{
      */
     public Object convert(final String value,final Class<?> clazz){
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("Convert string '" + value + "' to class '" + clazz.getName() + "'");
+        if (log.isDebugEnabled()){
+            log.debug("Convert string '" + value + "' to class '" + clazz.getName() + "'");
         }
         Converter converter = lookup(clazz);
         if (converter == null){
             converter = lookup(String.class);
         }
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("  Using converter " + converter);
+        if (log.isTraceEnabled()){
+            log.trace("  Using converter " + converter);
         }
         return (converter.convert(clazz, value));
 
@@ -252,15 +243,15 @@ public class ConvertUtilsBean{
         if (clazz.isArray()){
             type = clazz.getComponentType();
         }
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("Convert String[" + values.length + "] to class '" + type.getName() + "[]'");
+        if (log.isDebugEnabled()){
+            log.debug("Convert String[" + values.length + "] to class '" + type.getName() + "[]'");
         }
         Converter converter = lookup(type);
         if (converter == null){
             converter = lookup(String.class);
         }
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("  Using converter " + converter);
+        if (log.isTraceEnabled()){
+            log.trace("  Using converter " + converter);
         }
         final Object array = Array.newInstance(type, values.length);
         for (int i = 0; i < values.length; i++){
@@ -288,19 +279,19 @@ public class ConvertUtilsBean{
 
         final Class<?> sourceType = value == null ? null : value.getClass();
 
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             if (value == null){
-                LOGGER.debug("Convert null value to type '" + targetType.getName() + "'");
+                log.debug("Convert null value to type '" + targetType.getName() + "'");
             }else{
-                LOGGER.debug("Convert type '" + sourceType.getName() + "' value '" + value + "' to type '" + targetType.getName() + "'");
+                log.debug("Convert type '" + sourceType.getName() + "' value '" + value + "' to type '" + targetType.getName() + "'");
             }
         }
 
         Object converted = value;
         Converter converter = lookup(sourceType, targetType);
         if (converter != null){
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("  Using converter " + converter);
+            if (log.isTraceEnabled()){
+                log.trace("  Using converter " + converter);
             }
             converted = converter.convert(targetType, value);
         }
@@ -311,8 +302,8 @@ public class ConvertUtilsBean{
             //       use the registered String Converter
             converter = lookup(String.class);
             if (converter != null){
-                if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace("  Using converter " + converter);
+                if (log.isTraceEnabled()){
+                    log.trace("  Using converter " + converter);
                 }
                 converted = converter.convert(String.class, converted);
             }

@@ -30,6 +30,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.naming.NoNameCoder;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+@lombok.extern.slf4j.Slf4j
 public class ToXmlTest extends AbstractTest{
 
     @Test
@@ -39,7 +40,7 @@ public class ToXmlTest extends AbstractTest{
         XStream xStream = new XStream(new DomDriver(UTF8, new NoNameCoder()));
         xStream.alias("user", User.class);
 
-        LOGGER.debug(xStream.toXML(user));
+        log.debug(xStream.toXML(user));
     }
 
     //---------------------------------------------------------------
@@ -55,7 +56,7 @@ public class ToXmlTest extends AbstractTest{
         //      </com.feilong.store.member.User>
 
         User user = new User(1L);
-        LOGGER.debug(XmlUtil.toXML(user, null));
+        log.debug(XmlUtil.toXML(user, null));
     }
 
     @Test
@@ -70,7 +71,7 @@ public class ToXmlTest extends AbstractTest{
         //        </com.feilong.store.member.User>
         //      </list>
 
-        LOGGER.debug(XmlUtil.toXML(toList(new User(1L)), null));
+        log.debug(XmlUtil.toXML(toList(new User(1L)), null));
     }
 
     @Test
@@ -100,7 +101,7 @@ public class ToXmlTest extends AbstractTest{
 
         map.put("call_back_url", "");
         map.put("notify_url", "");
-        LOGGER.debug(XmlUtil.toXML(map, (XStreamConfig) null));
+        log.debug(XmlUtil.toXML(map, (XStreamConfig) null));
     }
 
     @Test
@@ -110,7 +111,7 @@ public class ToXmlTest extends AbstractTest{
         XStreamConfig toXmlConfig = new XStreamConfig();
         toXmlConfig.getAliasMap().put("user", User.class);
 
-        LOGGER.debug(XmlUtil.toXML(user, toXmlConfig));
-        LOGGER.debug(XmlUtil.toXML(user, null));
+        log.debug(XmlUtil.toXML(user, toXmlConfig));
+        log.debug(XmlUtil.toXML(user, null));
     }
 }

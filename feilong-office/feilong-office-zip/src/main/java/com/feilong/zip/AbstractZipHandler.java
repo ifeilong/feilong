@@ -21,9 +21,6 @@ import static com.feilong.core.lang.StringUtil.formatPattern;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 
 /**
@@ -32,10 +29,8 @@ import com.feilong.core.Validate;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.1.0
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractZipHandler implements ZipHandler{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractZipHandler.class);
 
     /**
      * Zip.
@@ -57,8 +52,8 @@ public abstract class AbstractZipHandler implements ZipHandler{
 
         //---------------------------------------------------------------
         long beginTimeMillis = System.currentTimeMillis();
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("begin zip:[{}] to outputZipPath:[{}]", tobeZipFilePath, outputZipPath);
+        if (log.isInfoEnabled()){
+            log.info("begin zip:[{}] to outputZipPath:[{}]", tobeZipFilePath, outputZipPath);
         }
 
         //---------------------------------------------------------------
@@ -69,8 +64,8 @@ public abstract class AbstractZipHandler implements ZipHandler{
             throw new UncheckedIOException(message, e);
         }
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
+        if (log.isInfoEnabled()){
+            log.info(
                             "use time:[{}],end zip:[{}],outputZipPath:[{}]",
                             formatDurationUseBeginTimeMillis(beginTimeMillis),
                             tobeZipFilePath,

@@ -15,8 +15,6 @@
  */
 package com.feilong.net.filetransfer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 /**
@@ -24,8 +22,5 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
  */
 //@ContextConfiguration(value = { "classpath*:spring/spring-fileTransfer.xml" })
 public abstract class AbstractFileTransferTest extends AbstractJUnit4SpringContextTests{
-
-    /** The Constant log. */
-    protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractFileTransferTest.class);
 
 }

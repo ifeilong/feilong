@@ -17,9 +17,6 @@ package com.feilong.context.invoker;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.context.converter.StringToBeanConverter;
 import com.feilong.json.JsonUtil;
 
@@ -43,12 +40,9 @@ import com.feilong.json.JsonUtil;
  * @since 3.4.1
  * @since 4.1.0 remove T extends ResponseCommand
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractResponseCommandBuilder<R extends InvokerRequest, T> implements ResponseCommandBuilder<R, T>{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractResponseCommandBuilder.class);
-
-    //---------------------------------------------------------------
     /*
      * (non-Javadoc)
      * 
@@ -64,8 +58,8 @@ public abstract class AbstractResponseCommandBuilder<R extends InvokerRequest, T
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("requestDataInfo:[{}],responseString:[{}]", JsonUtil.toString(request), responseString);
+        if (log.isInfoEnabled()){
+            log.info("requestDataInfo:[{}],responseString:[{}]", JsonUtil.toString(request), responseString);
         }
 
         StringToBeanConverter<T> stringToBeanConverter = createStringToBeanConverter(responseString);

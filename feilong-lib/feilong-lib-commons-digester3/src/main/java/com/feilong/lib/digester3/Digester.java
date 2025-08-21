@@ -42,8 +42,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.validation.Schema;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.EntityResolver;
@@ -58,10 +56,8 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * <p>
  * A <strong>Digester</strong> processes an XML input stream by matching a series of element nesting patterns to execute
  * Rules that have been added prior to the start of parsing.
- * </p>
  * <p>
  * See the <a href="package-summary.html#package_description">Digester Developer Guide</a> for more information.
  * </p>
@@ -88,10 +84,8 @@ import org.xml.sax.helpers.DefaultHandler;
  * somewhat differently.
  * </p>
  */
+@lombok.extern.slf4j.Slf4j
 public class Digester extends DefaultHandler{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Digester.class);
 
     // --------------------------------------------------------- Constructors
 
@@ -458,7 +452,7 @@ public class Digester extends DefaultHandler{
         try{
             parser = getFactory().newSAXParser();
         }catch (Exception e){
-            LOGGER.error("Digester.getParser: ", e);
+            log.error("Digester.getParser: ", e);
             return (null);
         }
 
@@ -689,7 +683,7 @@ public class Digester extends DefaultHandler{
      */
     public Map<String, String> getCurrentNamespaces(){
         if (!namespaceAware){
-            LOGGER.warn("Digester is not namespace aware");
+            log.warn("Digester is not namespace aware");
         }
         Map<String, String> currentNamespaces = new HashMap<>();
         for (Map.Entry<String, Stack<String>> nsEntry : namespaces.entrySet()){
@@ -697,7 +691,7 @@ public class Digester extends DefaultHandler{
                 currentNamespaces.put(nsEntry.getKey(), nsEntry.getValue().peek());
             }catch (RuntimeException e){
                 // rethrow, after logging
-                LOGGER.error(e.getMessage(), e);
+                log.error(e.getMessage(), e);
                 throw e;
             }
         }
@@ -728,7 +722,7 @@ public class Digester extends DefaultHandler{
             return;
         }
 
-        LOGGER.trace("characters(" + new String(buffer, start, length) + ")");
+        log.trace("characters(" + new String(buffer, start, length) + ")");
 
         bodyText.append(buffer, start, length);
     }
@@ -738,11 +732,11 @@ public class Digester extends DefaultHandler{
      */
     @Override
     public void endDocument() throws SAXException{
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             if (getCount() > 1){
-                LOGGER.debug("endDocument():  " + getCount() + " elements left");
+                log.debug("endDocument():  " + getCount() + " elements left");
             }else{
-                LOGGER.debug("endDocument()");
+                log.debug("endDocument()");
             }
         }
 
@@ -751,10 +745,10 @@ public class Digester extends DefaultHandler{
             try{
                 rule.finish();
             }catch (Exception e){
-                LOGGER.error("Finish event threw exception", e);
+                log.error("Finish event threw exception", e);
                 throw createSAXException(e);
             }catch (Error e){
-                LOGGER.error("Finish event threw error", e);
+                log.error("Finish event threw error", e);
                 throw e;
             }
         }
@@ -774,7 +768,7 @@ public class Digester extends DefaultHandler{
             return;
         }
 
-        LOGGER.trace("endElement({},{},{}),match:[{}],bodyText:[{}]", namespaceURI, localName, qName, match, bodyText);
+        log.trace("endElement({},{},{}),match:[{}],bodyText:[{}]", namespaceURI, localName, qName, match, bodyText);
 
         // the actual element name is either in localName or qName, depending
         // on whether the parser is namespace aware
@@ -793,23 +787,23 @@ public class Digester extends DefaultHandler{
             }
             for (Rule rule : rules){
                 try{
-                    LOGGER.debug("  Fire body() for " + rule);
+                    log.debug("  Fire body() for " + rule);
                     rule.body(namespaceURI, name, bodyText);
                 }catch (Exception e){
-                    LOGGER.error("Body event threw exception", e);
+                    log.error("Body event threw exception", e);
                     throw createSAXException(e);
                 }catch (Error e){
-                    LOGGER.error("Body event threw error", e);
+                    log.error("Body event threw error", e);
                     throw e;
                 }
             }
         }else{
-            LOGGER.debug("  No rules found matching '" + match + "'.");
+            log.debug("  No rules found matching '" + match + "'.");
         }
 
         // Recover the body text from the surrounding element
         bodyText = bodyTexts.pop();
-        LOGGER.trace("  Popping body text '" + bodyText.toString() + "'");
+        log.trace("  Popping body text '" + bodyText.toString() + "'");
 
         // Fire "end" events for all relevant rules in reverse order
         if (rules != null){
@@ -817,13 +811,13 @@ public class Digester extends DefaultHandler{
                 int j = (rules.size() - i) - 1;
                 try{
                     Rule rule = rules.get(j);
-                    LOGGER.debug("  Fire end() for " + rule);
+                    log.debug("  Fire end() for " + rule);
                     rule.end(namespaceURI, name);
                 }catch (Exception e){
-                    LOGGER.error("End event threw exception", e);
+                    log.error("End event threw exception", e);
                     throw createSAXException(e);
                 }catch (Error e){
-                    LOGGER.error("End event threw error", e);
+                    log.error("End event threw error", e);
                     throw e;
                 }
             }
@@ -840,8 +834,8 @@ public class Digester extends DefaultHandler{
 
     @Override
     public void endPrefixMapping(String prefix) throws SAXException{
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("endPrefixMapping(" + prefix + ")");
+        if (log.isDebugEnabled()){
+            log.debug("endPrefixMapping(" + prefix + ")");
         }
 
         // Deregister this prefix mapping
@@ -861,7 +855,7 @@ public class Digester extends DefaultHandler{
 
     @Override
     public void ignorableWhitespace(char buffer[],int start,int len) throws SAXException{
-        LOGGER.debug("ignorableWhitespace({})", new String(buffer, start, len));
+        log.debug("ignorableWhitespace({})", new String(buffer, start, len));
         // No processing required
     }
 
@@ -873,14 +867,14 @@ public class Digester extends DefaultHandler{
             return;
         }
 
-        LOGGER.debug("processingInstruction('" + target + "','" + data + "')");
+        log.debug("processingInstruction('" + target + "','" + data + "')");
 
         // No processing is required
     }
 
     @Override
     public void setDocumentLocator(Locator locator){
-        LOGGER.debug("setDocumentLocator({})", locator);
+        log.debug("setDocumentLocator({})", locator);
 
         this.locator = locator;
     }
@@ -890,14 +884,14 @@ public class Digester extends DefaultHandler{
      */
     @Override
     public void skippedEntity(String name) throws SAXException{
-        LOGGER.debug("skippedEntity(" + name + ")");
+        log.debug("skippedEntity(" + name + ")");
 
         // No processing required
     }
 
     @Override
     public void startDocument() throws SAXException{
-        LOGGER.debug("startDocument()");
+        log.debug("startDocument()");
 
         // ensure that the digester is properly configured, as
         // the digester could be used as a SAX ContentHandler
@@ -913,11 +907,11 @@ public class Digester extends DefaultHandler{
             return;
         }
 
-        LOGGER.debug("startElement(" + namespaceURI + "," + localName + "," + qName + ")");
+        log.debug("startElement(" + namespaceURI + "," + localName + "," + qName + ")");
 
         // Save the body text accumulated for our surrounding element
         bodyTexts.push(bodyText);
-        LOGGER.trace("  Pushing body text '" + bodyText.toString() + "'");
+        log.trace("  Pushing body text '" + bodyText.toString() + "'");
         bodyText = new StringBuilder();
 
         // the actual element name is either in localName or qName, depending
@@ -934,7 +928,7 @@ public class Digester extends DefaultHandler{
         }
         sb.append(name);
         match = sb.toString();
-        LOGGER.debug("  New match='" + match + "'");
+        log.debug("  New match='" + match + "'");
 
         // Fire "begin" events for all relevant rules
         List<Rule> rules = getRules().match(namespaceURI, match, localName, list);
@@ -946,18 +940,18 @@ public class Digester extends DefaultHandler{
             }
             for (Rule rule : rules){
                 try{
-                    LOGGER.debug("  Fire begin() for " + rule);
+                    log.debug("  Fire begin() for " + rule);
                     rule.begin(namespaceURI, name, list);
                 }catch (Exception e){
-                    LOGGER.error("Begin event threw exception", e);
+                    log.error("Begin event threw exception", e);
                     throw createSAXException(e);
                 }catch (Error e){
-                    LOGGER.error("Begin event threw error", e);
+                    log.error("Begin event threw error", e);
                     throw e;
                 }
             }
         }else{
-            LOGGER.debug("  No rules found matching '" + match + "'.");
+            log.debug("  No rules found matching '" + match + "'.");
         }
     }
 
@@ -966,7 +960,7 @@ public class Digester extends DefaultHandler{
      */
     @Override
     public void startPrefixMapping(String prefix,String namespaceURI) throws SAXException{
-        LOGGER.debug("startPrefixMapping(" + prefix + "," + namespaceURI + ")");
+        log.debug("startPrefixMapping(" + prefix + "," + namespaceURI + ")");
 
         // Register this prefix mapping
         Stack<String> stack = namespaces.get(prefix);
@@ -984,7 +978,7 @@ public class Digester extends DefaultHandler{
      */
     @Override
     public void notationDecl(String name,String publicId,String systemId){
-        LOGGER.debug("notationDecl(" + name + "," + publicId + "," + systemId + ")");
+        log.debug("notationDecl(" + name + "," + publicId + "," + systemId + ")");
     }
 
     // ----------------------------------------------- EntityResolver Methods
@@ -994,7 +988,7 @@ public class Digester extends DefaultHandler{
      */
     @Override
     public InputSource resolveEntity(String publicId,String systemId) throws SAXException{
-        LOGGER.debug("resolveEntity('" + publicId + "', '" + systemId + "')");
+        log.debug("resolveEntity('" + publicId + "', '" + systemId + "')");
 
         if (publicId != null){
             this.publicId = publicId;
@@ -1014,15 +1008,15 @@ public class Digester extends DefaultHandler{
         if (entityURL == null){
             if (systemId == null){
                 // cannot resolve
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug(" Cannot resolve null entity, returning null InputSource");
+                if (log.isDebugEnabled()){
+                    log.debug(" Cannot resolve null entity, returning null InputSource");
                 }
                 return (null);
 
             }
             // try to resolve using system ID
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(" Trying to resolve using system ID '" + systemId + "'");
+            if (log.isDebugEnabled()){
+                log.debug(" Trying to resolve using system ID '" + systemId + "'");
             }
             try{
                 entityURL = new URL(systemId);
@@ -1032,7 +1026,7 @@ public class Digester extends DefaultHandler{
         }
 
         // Return an input source to our alternative URL
-        LOGGER.debug(" Resolving to alternate DTD '" + entityURL + "'");
+        log.debug(" Resolving to alternate DTD '" + entityURL + "'");
 
         try{
             return createInputSourceFromURL(entityURL);
@@ -1048,7 +1042,7 @@ public class Digester extends DefaultHandler{
      */
     @Override
     public void error(SAXParseException exception) throws SAXException{
-        LOGGER.error(
+        log.error(
                         "Parse Error at line " + exception.getLineNumber() + " column " + exception.getColumnNumber() + ": "
                                         + exception.getMessage(),
                         exception);
@@ -1062,7 +1056,7 @@ public class Digester extends DefaultHandler{
      */
     @Override
     public void fatalError(SAXParseException exception) throws SAXException{
-        LOGGER.error(
+        log.error(
                         "Parse Fatal Error at line " + exception.getLineNumber() + " column " + exception.getColumnNumber() + ": "
                                         + exception.getMessage(),
                         exception);
@@ -1077,7 +1071,7 @@ public class Digester extends DefaultHandler{
     @Override
     public void warning(SAXParseException exception) throws SAXException{
         if (errorHandler != null){
-            LOGGER.warn(
+            log.warn(
                             "Parse Warning Error at line " + exception.getLineNumber() + " column " + exception.getColumnNumber() + ": "
                                             + exception.getMessage(),
                             exception);
@@ -1117,10 +1111,10 @@ public class Digester extends DefaultHandler{
         try{
             getXMLReader().parse(input);
         }catch (IOException e){
-            LOGGER.error(format("An error occurred while reading stream from '%s', see nested exceptions", systemId), e);
+            log.error(format("An error occurred while reading stream from '%s', see nested exceptions", systemId), e);
             throw e;
         }catch (SAXException e){
-            LOGGER.error(format("An error occurred while parsing XML from '%s', see nested exceptions", systemId), e);
+            log.error(format("An error occurred while parsing XML from '%s', see nested exceptions", systemId), e);
             throw e;
         }
         cleanup();
@@ -1350,7 +1344,7 @@ public class Digester extends DefaultHandler{
         try{
             return this.<T> npeSafeCast(stack.peek());
         }catch (EmptyStackException e){
-            LOGGER.warn("Empty stack (returning null)");
+            log.warn("Empty stack (returning null)");
             return (null);
         }
     }
@@ -1368,13 +1362,13 @@ public class Digester extends DefaultHandler{
     public <T> T peek(int n){
         int index = (stack.size() - 1) - n;
         if (index < 0){
-            LOGGER.warn("Empty stack (returning null)");
+            log.warn("Empty stack (returning null)");
             return (null);
         }
         try{
             return this.<T> npeSafeCast(stack.get(index));
         }catch (EmptyStackException e){
-            LOGGER.warn("Empty stack (returning null)");
+            log.warn("Empty stack (returning null)");
             return (null);
         }
     }
@@ -1392,7 +1386,7 @@ public class Digester extends DefaultHandler{
             T popped = this.<T> npeSafeCast(stack.pop());
             return popped;
         }catch (EmptyStackException e){
-            LOGGER.warn("Empty stack (returning null)");
+            log.warn("Empty stack (returning null)");
             return (null);
         }
     }
@@ -1454,8 +1448,8 @@ public class Digester extends DefaultHandler{
         T result = null;
         Stack<Object> namedStack = stacksByName.get(stackName);
         if (namedStack == null){
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("Stack '" + stackName + "' is empty");
+            if (log.isDebugEnabled()){
+                log.debug("Stack '" + stackName + "' is empty");
             }
             throw new EmptyStackException();
         }
@@ -1545,8 +1539,8 @@ public class Digester extends DefaultHandler{
                 source.getByteStream().close();
             }catch (IOException e){
                 // Fall through so we get them all
-                if (LOGGER.isWarnEnabled()){
-                    LOGGER.warn(format("An error occurred while closing resource %s (%s)", source.getPublicId(), source.getSystemId()), e);
+                if (log.isWarnEnabled()){
+                    log.warn(format("An error occurred while closing resource %s (%s)", source.getPublicId(), source.getSystemId()), e);
                 }
             }
         }
@@ -1631,7 +1625,7 @@ public class Digester extends DefaultHandler{
         try{
             return (params.peek());
         }catch (EmptyStackException e){
-            LOGGER.warn("Empty stack (returning null)");
+            log.warn("Empty stack (returning null)");
             return (null);
         }
     }
@@ -1652,13 +1646,13 @@ public class Digester extends DefaultHandler{
     public Object[] peekParams(int n){
         int index = (params.size() - 1) - n;
         if (index < 0){
-            LOGGER.warn("Empty stack (returning null)");
+            log.warn("Empty stack (returning null)");
             return (null);
         }
         try{
             return (params.get(index));
         }catch (EmptyStackException e){
-            LOGGER.warn("Empty stack (returning null)");
+            log.warn("Empty stack (returning null)");
             return (null);
         }
     }
@@ -1676,12 +1670,12 @@ public class Digester extends DefaultHandler{
      */
     public Object[] popParams(){
         try{
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("Popping params");
+            if (log.isTraceEnabled()){
+                log.trace("Popping params");
             }
             return (params.pop());
         }catch (EmptyStackException e){
-            LOGGER.warn("Empty stack (returning null)");
+            log.warn("Empty stack (returning null)");
             return (null);
         }
     }
@@ -1698,8 +1692,8 @@ public class Digester extends DefaultHandler{
      *            The new object
      */
     public void pushParams(Object...object){
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("Pushing params");
+        if (log.isTraceEnabled()){
+            log.trace("Pushing params");
         }
         params.push(object);
     }
@@ -1727,7 +1721,7 @@ public class Digester extends DefaultHandler{
             }
             return new SAXParseException(error, locator);
         }
-        LOGGER.error("No Locator!");
+        log.error("No Locator!");
         if (e != null){
             return new SAXException(message, e);
         }

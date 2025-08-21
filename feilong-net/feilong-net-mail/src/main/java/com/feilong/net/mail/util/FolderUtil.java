@@ -41,7 +41,7 @@ public final class FolderUtil{
     //---------------------------------------------------------------
 
     /**
-     * 获得 map for LOGGER.
+     * 获得 map for log.
      *
      * @param folder
      *            the folder

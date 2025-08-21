@@ -28,6 +28,7 @@ import com.feilong.test.AbstractTest;
  * @version 1.4.0 2015年8月24日 上午10:51:27
  * @since 1.4.0
  */
+@lombok.extern.slf4j.Slf4j
 public class HexUtilTest extends AbstractTest{
 
     /** <code>{@value}</code>. */
@@ -35,8 +36,8 @@ public class HexUtilTest extends AbstractTest{
 
     @Test
     public void toHexStringUpperCase(){
-        LOGGER.debug(HexUtil.toHexStringUpperCase(TEXT, UTF8));
-        LOGGER.debug(Hex.encodeHexString(TEXT.getBytes()));
+        log.debug(HexUtil.toHexStringUpperCase(TEXT, UTF8));
+        log.debug(Hex.encodeHexString(TEXT.getBytes()));
     }
 
     /**
@@ -46,8 +47,8 @@ public class HexUtilTest extends AbstractTest{
     public void toOriginal(){
         String hexStringUpperCase = "5B7B22636F6465223A224B3034383031222C226964223A3730302C226E616D65223A22E697B6E5B09AE6ACBEE992A5E58C99E689A3227D2C7B22636F6465223A2231333433363143222C226964223A35362C226E616D65223A22E58AB2E985B7E688B7E5A496436875636B205461796C6F7220416C6C2053746172204261636B205A6970227D5D";
         byte[] hexBytesToBytes = ByteUtil.hexBytesToBytes(hexStringUpperCase.getBytes());
-        LOGGER.debug(new String(hexBytesToBytes));
-        LOGGER.debug(HexUtil.toOriginal(hexStringUpperCase, UTF8));
+        log.debug(new String(hexBytesToBytes));
+        log.debug(HexUtil.toOriginal(hexStringUpperCase, UTF8));
     }
 
 }

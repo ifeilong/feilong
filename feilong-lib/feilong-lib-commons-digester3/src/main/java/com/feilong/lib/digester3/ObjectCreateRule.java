@@ -2,20 +2,14 @@ package com.feilong.lib.digester3;
 
 import static java.lang.String.format;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 /**
  * Rule implementation that creates a new object and pushes it onto the object stack. When the element is complete, the
  * object will be popped
  */
+@lombok.extern.slf4j.Slf4j
 public class ObjectCreateRule extends Rule{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ObjectCreateRule.class);
-
-    //---------------------------------------------------------------
 
     /**
      * Construct an object create rule with the specified class and an optional attribute name containing an override.
@@ -67,20 +61,16 @@ public class ObjectCreateRule extends Rule{
                     realClassName = value;
                 }
             }
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(format("[ObjectCreateRule]{%s} New '%s'", getDigester().getMatch(), realClassName));
+            if (log.isDebugEnabled()){
+                log.debug(format("[ObjectCreateRule]{%s} New '%s'", getDigester().getMatch(), realClassName));
             }
 
             // Instantiate the new object and push it on the context stack
             clazz = getDigester().getClassLoader().loadClass(realClassName);
         }
         Object instance = null;
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
-                            format(
-                                            "[ObjectCreateRule]{%s} New '%s' using default empty constructor",
-                                            getDigester().getMatch(),
-                                            clazz.getName()));
+        if (log.isDebugEnabled()){
+            log.debug(format("[ObjectCreateRule]{%s} New '%s' using default empty constructor", getDigester().getMatch(), clazz.getName()));
         }
 
         instance = clazz.newInstance();
@@ -94,8 +84,8 @@ public class ObjectCreateRule extends Rule{
     public void end(String namespace,String name) throws Exception{
         Object top = getDigester().pop();
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(format("[ObjectCreateRule]{%s} Pop '%s'", getDigester().getMatch(), top.getClass().getName()));
+        if (log.isDebugEnabled()){
+            log.debug(format("[ObjectCreateRule]{%s} Pop '%s'", getDigester().getMatch(), top.getClass().getName()));
         }
     }
 

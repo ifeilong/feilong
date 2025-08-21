@@ -41,6 +41,6 @@ public abstract class BaseSolrRepositoryFirstImpl<T, PK extends Serializable> im
         Class<?>[] genericClassArray = TypeUtil.getGenericSuperclassParameterizedRawTypes(this.getClass());
         this.modelClass = (Class<T>) genericClassArray[0];
         //TypeUtils.getTypeArguments(this.getClass());
-        // LOGGER.debug(JsonUtil.format(ClassUtilTemp.getClassInfoMapForLog(modelClass)));
+        // log.debug(JsonUtil.format(ClassUtilTemp.getClassInfoMapForLog(modelClass)));
     }
 }

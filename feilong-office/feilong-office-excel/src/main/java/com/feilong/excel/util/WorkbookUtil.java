@@ -25,8 +25,6 @@ import java.io.UncheckedIOException;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
@@ -38,12 +36,9 @@ import com.feilong.io.IOUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public class WorkbookUtil{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(WorkbookUtil.class);
-
-    //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */
     private WorkbookUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -67,8 +62,8 @@ public class WorkbookUtil{
         long beginTimeMillis = System.currentTimeMillis();
         try{
             Workbook workbook = WorkbookFactory.create(inputStream);
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("create workbook from [{}],use time: [{}]", inputStream, formatDurationUseBeginTimeMillis(beginTimeMillis));
+            if (log.isDebugEnabled()){
+                log.debug("create workbook from [{}],use time: [{}]", inputStream, formatDurationUseBeginTimeMillis(beginTimeMillis));
             }
             return workbook;
         }catch (EncryptedDocumentException e){
@@ -99,8 +94,8 @@ public class WorkbookUtil{
         long beginTimeMillis = System.currentTimeMillis();
         try{
             workbook.write(outputStream);
-            if (LOGGER.isInfoEnabled()){
-                LOGGER.info("write workbook to outputStream use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+            if (log.isInfoEnabled()){
+                log.info("write workbook to outputStream use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);

@@ -20,12 +20,13 @@ import org.junit.Test;
 import com.feilong.core.net.URLUtil;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class ToURLTest extends AbstractTest{
 
     @Test
     public void testToURL(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
-        LOGGER.debug("" + URLUtil.toURL(spec));
+        log.debug("" + URLUtil.toURL(spec));
     }
 
     //---------------------------------------------------------------

@@ -27,8 +27,6 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.runtime.resource.loader.StringResourceLoader;
 import org.apache.velocity.runtime.resource.util.StringResourceRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
@@ -75,12 +73,8 @@ import com.feilong.json.JsonUtil;
  * @since 1.2.1
  */
 //默认访问修饰符
+@lombok.extern.slf4j.Slf4j
 abstract class AbstractTemplateUtil{
-
-    /** The Constant log. */
-    private static final Logger LOGGER                    = LoggerFactory.getLogger(AbstractTemplateUtil.class);
-
-    //---------------------------------------------------------------
 
     /** The Constant CLASSPATH_VELOCITY_ENGINE. */
     static final VelocityEngine CLASSPATH_VELOCITY_ENGINE = VelocityEngineBuilder.build("config.feilong-velocity-ClasspathResourceLoader");
@@ -236,8 +230,8 @@ abstract class AbstractTemplateUtil{
         }
         //---------------------------------------------------------------
         Map<String, Object> result = new LinkedHashMap<>(contextKeyValues);
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("will build [{}] use map:[{}]", Context.class.getName(), JsonUtil.formatSimpleMap(result));
+        if (log.isTraceEnabled()){
+            log.trace("will build [{}] use map:[{}]", Context.class.getName(), JsonUtil.formatSimpleMap(result));
         }
         return result;
     }

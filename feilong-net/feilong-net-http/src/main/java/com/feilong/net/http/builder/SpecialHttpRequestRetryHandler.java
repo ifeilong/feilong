@@ -21,9 +21,6 @@ import static com.feilong.core.lang.StringUtil.formatPattern;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.lib.org.apache.http.client.methods.HttpExecutionAware;
@@ -52,12 +49,9 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @see com.feilong.lib.org.apache.http.impl.client.StandardHttpRequestRetryHandler
  * @since 3.3.0
  */
+@lombok.extern.slf4j.Slf4j
 public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandler{
 
-    /** The Constant log. */
-    private static final Logger                         LOGGER            = LoggerFactory.getLogger(SpecialHttpRequestRetryHandler.class);
-
-    //---------------------------------------------------------------
     /** 一旦出现以下的异常就重试. */
     private static final Class<? extends IOException>[] RETRIABLE_CLASSES = toArray(
                     SocketTimeoutException.class,
@@ -122,21 +116,21 @@ public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandl
         String commonLogMessage = getCommonLogMessage(executionCount, retryCount, context, exceptionName, retriableClasses);
 
         if (executionCount > retryCount){
-            LOGGER.warn("retryRequestMoreCount{},executionCount > retryCount,returnFalse", commonLogMessage);
+            log.warn("retryRequestMoreCount{},executionCount > retryCount,returnFalse", commonLogMessage);
             // Do not retry if over max retry count
             return false;
         }
 
         //---------------------------------------------------------------
-        LOGGER.debug("retryRequestIn{}", commonLogMessage);
+        log.debug("retryRequestIn{}", commonLogMessage);
 
         //---------------------------------------------------------------
         if (ArrayUtils.contains(retriableClasses, exception.getClass())){
-            LOGGER.info("retryRequestContains{},returnTrueWillRetryRequest", commonLogMessage);
+            log.info("retryRequestContains{},returnTrueWillRetryRequest", commonLogMessage);
             return true;
         }
         if (ClassUtil.isInstanceAnyClass(exception, retriableClasses)){
-            LOGGER.info("retryRequestInstance{},returnTrueWillRetryRequest", commonLogMessage);
+            log.info("retryRequestInstance{},returnTrueWillRetryRequest", commonLogMessage);
             return true;
         }
 

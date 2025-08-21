@@ -23,9 +23,6 @@ import static com.feilong.core.util.CollectionsUtil.size;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 笛卡尔乘积.
  * 
@@ -41,10 +38,8 @@ import org.slf4j.LoggerFactory;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.7.2
  */
+@lombok.extern.slf4j.Slf4j
 public final class CartesianProductUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CartesianProductUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private CartesianProductUtil(){
@@ -69,7 +64,7 @@ public final class CartesianProductUtil{
      * Integer[] array3 = { 5 };
      * Integer[] array4 = { 4, 8 };
      * 
-     * LOGGER.debug(JsonUtil.format(cartesianProduct(v1, v2, v3, v4), 0, 4));
+     * log.debug(JsonUtil.format(cartesianProduct(v1, v2, v3, v4), 0, 4));
      * 
      * </pre>
      * 
@@ -115,7 +110,7 @@ public final class CartesianProductUtil{
      * <pre class="code">
      * 
      * List{@code <List<Integer>>} result = cartesianProduct(toList(1, 2, 3), toList(1, 2), toList(5), toList(4, 8));
-     * LOGGER.debug(JsonUtil.format(result, 0, 4));
+     * log.debug(JsonUtil.format(result, 0, 4));
      * 
      * </pre>
      * 
@@ -197,8 +192,8 @@ public final class CartesianProductUtil{
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(list.toString());
+        if (log.isDebugEnabled()){
+            log.debug(list.toString());
         }
         return list;
     }

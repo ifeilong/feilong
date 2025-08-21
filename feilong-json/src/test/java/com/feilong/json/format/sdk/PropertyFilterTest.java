@@ -6,15 +6,13 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.JsonUtil;
 
-public class PropertyFilterTest{
+@lombok.extern.slf4j.Slf4j
 
-    private static final Logger       LOGGER        = LoggerFactory.getLogger(PropertyFilterTest.class);
+public class PropertyFilterTest{
 
     private static final OrderDetails ORDER_DETAILS = build();
 
@@ -35,7 +33,7 @@ public class PropertyFilterTest{
             return false;
         });
         String format = JsonUtil.format(ORDER_DETAILS, javaToJsonConfig);
-        LOGGER.debug(format);
+        log.debug(format);
 
         assertThat(
                         format,

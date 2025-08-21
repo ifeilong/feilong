@@ -27,6 +27,7 @@ import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.BeanWithSensitiveWords;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class FormatIterableBeanSensitiveWordsTest extends AbstractTest{
 
     @Test
@@ -36,7 +37,7 @@ public class FormatIterableBeanSensitiveWordsTest extends AbstractTest{
         List<BeanWithSensitiveWords> list = newArrayList();
         list.add(beanWithSensitiveWords);
 
-        LOGGER.debug(JsonUtil.format(list));
+        log.debug(JsonUtil.format(list));
     }
 
     @Test
@@ -46,7 +47,7 @@ public class FormatIterableBeanSensitiveWordsTest extends AbstractTest{
         Set<BeanWithSensitiveWords> set = newHashSet();
         set.add(beanWithSensitiveWords);
 
-        LOGGER.debug(JsonUtil.format(set));
+        log.debug(JsonUtil.format(set));
     }
 
 }

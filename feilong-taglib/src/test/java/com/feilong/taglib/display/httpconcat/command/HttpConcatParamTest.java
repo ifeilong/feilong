@@ -25,6 +25,7 @@ import com.feilong.taglib.display.httpconcat.BaseHttpConcatTest;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.7
  */
+@lombok.extern.slf4j.Slf4j
 public class HttpConcatParamTest extends BaseHttpConcatTest{
 
     /** The domain. */
@@ -37,9 +38,9 @@ public class HttpConcatParamTest extends BaseHttpConcatTest{
     public void testHashCode(){
         HttpConcatParam t = new HttpConcatParam();
 
-        LOGGER.debug("" + t.hashCode());
+        log.debug("" + t.hashCode());
         t.setDomain(domain);
-        LOGGER.debug("" + t.hashCode());
+        log.debug("" + t.hashCode());
     }
 
 }

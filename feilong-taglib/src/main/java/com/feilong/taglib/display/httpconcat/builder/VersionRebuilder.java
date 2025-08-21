@@ -23,9 +23,6 @@ import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConf
 
 import javax.servlet.jsp.PageContext;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.date.DateUtil;
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.taglib.TagUtils;
@@ -35,10 +32,8 @@ import com.feilong.taglib.TagUtils;
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
+@lombok.extern.slf4j.Slf4j
 public class VersionRebuilder{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(VersionRebuilder.class);
 
     /** Don't let anyone instantiate this class. */
     private VersionRebuilder(){
@@ -81,7 +76,7 @@ public class VersionRebuilder{
             long time = DateUtil.getTime(now());
 
             String result = "" + time;
-            LOGGER.debug("versionAutoRefreshValue config:[{}],new value is:[{}]", versionAutoRefreshValue, result);
+            log.debug("versionAutoRefreshValue config:[{}],new value is:[{}]", versionAutoRefreshValue, result);
             return result;
         }
         return versionValue;
@@ -108,7 +103,7 @@ public class VersionRebuilder{
         //没有指定名字,直接返回
         String versionNameInScope = GLOBAL_CONFIG.getVersionNameInScope();
         if (isNullOrEmpty(versionNameInScope)){
-            LOGGER.debug("version is null or empty,and can't find versionNameInScope in GLOBAL_CONFIG,return empty!!");
+            log.debug("version is null or empty,and can't find versionNameInScope in GLOBAL_CONFIG,return empty!!");
             return EMPTY;
         }
 
@@ -119,14 +114,14 @@ public class VersionRebuilder{
         //---------------------------------------------------------------
         //如果找不到值, 那么返回 empty
         if (isNullOrEmpty(versionValue)){
-            LOGGER.warn(
+            log.warn(
                             "in GLOBAL_CONFIG,versionNameInScope:[{}] searchScope:[{}],but can't get value",
                             versionNameInScope,
                             versionSearchScope);
             return EMPTY;
         }
         //---------------------------------------------------------------
-        LOGGER.debug("in Scope:[{}] find name:[{}],versionValue:[{}]", versionSearchScope, versionNameInScope, versionValue);
+        log.debug("in Scope:[{}] find name:[{}],versionValue:[{}]", versionSearchScope, versionNameInScope, versionValue);
         return versionValue;
     }
 }

@@ -19,9 +19,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.json.JsonUtil;
 import com.feilong.servlet.http.SessionUtil;
 
@@ -32,10 +29,8 @@ import com.feilong.servlet.http.SessionUtil;
  * @see "org.springframework.web.util.HttpSessionMutexListener"
  * @since 1.10.4
  */
+@lombok.extern.slf4j.Slf4j
 public class HttpSessionLoggingListener implements HttpSessionListener{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpSessionLoggingListener.class);
 
     /*
      * (non-Javadoc)
@@ -44,9 +39,9 @@ public class HttpSessionLoggingListener implements HttpSessionListener{
      */
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             HttpSession session = httpSessionEvent.getSession();
-            LOGGER.debug(
+            log.debug(
                             "session [created],source:[{}],info:{}",
                             httpSessionEvent.getSource(),
                             JsonUtil.toString(SessionUtil.getSessionInfoMapForLog(session)));
@@ -62,9 +57,9 @@ public class HttpSessionLoggingListener implements HttpSessionListener{
      */
     @Override
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent){
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             HttpSession session = httpSessionEvent.getSession();
-            LOGGER.debug(
+            log.debug(
                             "session [destroyed],source:[{}],info:{}",
                             httpSessionEvent.getSource(),
                             JsonUtil.toString(SessionUtil.getSessionInfoMapForLog(session)));

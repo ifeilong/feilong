@@ -16,9 +16,6 @@
  */
 package com.feilong.lib.beanutils.bugs;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.beanutils.bugs.other.Jira18BeanFactory;
 
@@ -35,12 +32,10 @@ import junit.framework.TestSuite;
  * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-18">https://issues.apache.org/jira/browse/BEANUTILS-18</a>
  */
+@lombok.extern.slf4j.Slf4j
 public class Jira18TestCase extends TestCase{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Jira18TestCase.class);
-
-    private Object              bean;
+    private Object bean;
 
     /**
      * Create a test case with the specified name.
@@ -101,7 +96,7 @@ public class Jira18TestCase extends TestCase{
         try{
             result = PropertyUtils.isWriteable(bean, "simple");
         }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
+            log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
         assertFalse("PropertyUtils.isWriteable(bean, \"simple\") returned true", result);
@@ -116,7 +111,7 @@ public class Jira18TestCase extends TestCase{
         try{
             result = PropertyUtils.isWriteable(bean, "indexed");
         }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
+            log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
         assertFalse("PropertyUtils.isWriteable(bean, \"indexed\") returned true", result);
@@ -131,7 +126,7 @@ public class Jira18TestCase extends TestCase{
         try{
             result = PropertyUtils.isWriteable(bean, "mapped");
         }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
+            log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
         assertFalse("PropertyUtils.isWriteable(bean, \"mapped\") returned true", result);
@@ -149,7 +144,7 @@ public class Jira18TestCase extends TestCase{
         }catch (final NoSuchMethodException ex){
             threwNoSuchMethodException = true; // expected result
         }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
+            log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
         assertTrue("Expected NoSuchMethodException but returned '" + result + "'", threwNoSuchMethodException);
@@ -166,7 +161,7 @@ public class Jira18TestCase extends TestCase{
         }catch (final NoSuchMethodException ex){
             threwNoSuchMethodException = true; // expected result
         }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
+            log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
         assertTrue("Expected NoSuchMethodException", threwNoSuchMethodException);
@@ -184,7 +179,7 @@ public class Jira18TestCase extends TestCase{
         }catch (final NoSuchMethodException ex){
             threwNoSuchMethodException = true; // expected result
         }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
+            log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
         assertTrue("Expected NoSuchMethodException but returned '" + result + "'", threwNoSuchMethodException);
@@ -201,7 +196,7 @@ public class Jira18TestCase extends TestCase{
         }catch (final NoSuchMethodException ex){
             threwNoSuchMethodException = true; // expected result
         }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
+            log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
         assertTrue("Expected NoSuchMethodException", threwNoSuchMethodException);
@@ -219,7 +214,7 @@ public class Jira18TestCase extends TestCase{
         }catch (final NoSuchMethodException ex){
             threwNoSuchMethodException = true; // expected result
         }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
+            log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
         assertTrue("Expected NoSuchMethodException but returned '" + result + "'", threwNoSuchMethodException);
@@ -236,7 +231,7 @@ public class Jira18TestCase extends TestCase{
         }catch (final NoSuchMethodException ex){
             threwNoSuchMethodException = true; // expected result
         }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
+            log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
         assertTrue("Expected NoSuchMethodException", threwNoSuchMethodException);

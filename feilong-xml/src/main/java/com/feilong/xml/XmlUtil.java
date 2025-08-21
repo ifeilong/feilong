@@ -31,8 +31,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPathConstants;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -112,7 +110,7 @@ import com.thoughtworks.xstream.XStream;
  *     User user = new User(1L);
  *     XStreamConfig xStreamConfig = new XStreamConfig();
  *     xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
- *     LOGGER.info(XmlUtil.toXML(user, xStreamConfig));
+ *     log.info(XmlUtil.toXML(user, xStreamConfig));
  * </pre>
  * </code>
  * 
@@ -142,7 +140,7 @@ import com.thoughtworks.xstream.XStream;
  *     XStreamConfig xStreamConfig = new XStreamConfig();
  *     xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
  *     xStreamConfig.getImplicitCollectionMap().put(&quot;userAddresseList&quot;, User.class);
- *     LOGGER.info(XmlUtil.toXML(user, xStreamConfig));
+ *     log.info(XmlUtil.toXML(user, xStreamConfig));
  * </pre>
  * </code>
  * 
@@ -170,10 +168,8 @@ import com.thoughtworks.xstream.XStream;
  * @see "org.springframework.util.xml.DomUtils"
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 public class XmlUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(XmlUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private XmlUtil(){
@@ -243,8 +239,8 @@ public class XmlUtil{
         Document document = FeilongDocumentBuilder.buildDocument(xml);
         NodeList nodeList = XPathUtil.evaluate(document, xpathExpression, XPathConstants.NODESET);
         if (null == nodeList || 0 == nodeList.getLength()){
-            if (LOGGER.isInfoEnabled()){
-                LOGGER.info("use xpathExpression:[{}],from xml:[{}], can not find Node,return emptyMap", xpathExpression, format(document));
+            if (log.isInfoEnabled()){
+                log.info("use xpathExpression:[{}],from xml:[{}], can not find Node,return emptyMap", xpathExpression, format(document));
             }
             return emptyMap();
         }
@@ -257,8 +253,8 @@ public class XmlUtil{
             }
         }
         //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("nameAndValueMap:{}", formatToSimpleTable(map));
+        if (log.isTraceEnabled()){
+            log.trace("nameAndValueMap:{}", formatToSimpleTable(map));
         }
         return map;
     }
@@ -345,7 +341,7 @@ public class XmlUtil{
      * map.put("call_back_url", "");
      * map.put("notify_url", "");
      * 
-     * LOGGER.debug(XmlUtil.toXML(map, "xml"));
+     * log.debug(XmlUtil.toXML(map, "xml"));
      * </pre>
      * 
      * <b>返回:</b>
@@ -420,7 +416,7 @@ public class XmlUtil{
      * map.put("call_back_url", "");
      * map.put("notify_url", "");
      * 
-     * LOGGER.debug(XmlUtil.toXML(map, "xml",true));
+     * log.debug(XmlUtil.toXML(map, "xml",true));
      * </pre>
      * 
      * <b>返回:</b>
@@ -445,7 +441,7 @@ public class XmlUtil{
      * map.put("call_back_url", "");
      * map.put("notify_url", "");
      * 
-     * LOGGER.debug(XmlUtil.toXML(map, "xml",false));
+     * log.debug(XmlUtil.toXML(map, "xml",false));
      * </pre>
      * 
      * <b>返回:</b>
@@ -530,7 +526,7 @@ public class XmlUtil{
      *     User user = new User(1L);
      *     XStreamConfig xStreamConfig = new XStreamConfig();
      *     xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
-     *     LOGGER.info(XmlUtil.toXML(user, xStreamConfig));
+     *     log.info(XmlUtil.toXML(user, xStreamConfig));
      * </pre>
      * </code>
      * 
@@ -560,7 +556,7 @@ public class XmlUtil{
      *     XStreamConfig xStreamConfig = new XStreamConfig();
      *     xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
      *     xStreamConfig.getImplicitCollectionMap().put(&quot;userAddresseList&quot;, User.class);
-     *     LOGGER.info(XmlUtil.toXML(user, xStreamConfig));
+     *     log.info(XmlUtil.toXML(user, xStreamConfig));
      * </pre>
      * </code>
      * 
@@ -591,9 +587,9 @@ public class XmlUtil{
     public static String toXML(Object bean,XStreamConfig xStreamConfig){
         Validate.notNull(bean, "bean can't be null!");
 
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             String pattern = "class:[{}],bean:[{}],xStreamConfig:[{}]";
-            LOGGER.debug(pattern, bean.getClass().getSimpleName(), JsonUtil.toString(bean), JsonUtil.toString(xStreamConfig));
+            log.debug(pattern, bean.getClass().getSimpleName(), JsonUtil.toString(bean), JsonUtil.toString(xStreamConfig));
         }
         return XStreamUtil.toXML(bean, xStreamConfig);
     }
@@ -635,7 +631,7 @@ public class XmlUtil{
      *                 + "</xml>}";
      * 
      * Map{@code <String, String>} map = XmlUtil.fromXML(xml, "xml");
-     * LOGGER.debug(JsonUtil.format(map));
+     * log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -766,7 +762,7 @@ public class XmlUtil{
      *                     + "<result_code><![CDATA[SUCCESS]]></result_code>\r\n" + "</xml>";}
      * 
      * <span style="color:red">WechatCloseResponse map = XmlUtil.fromXML(xml, WechatCloseResponse.class);</span>
-     * LOGGER.debug("{}", JsonUtil.format(map));
+     * log.debug("{}", JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -826,8 +822,8 @@ public class XmlUtil{
      * @since 3.0.0 change name from fromXMl
      */
     public static <T> T toBean(String xml,XStreamConfig xStreamConfig){
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("input params info,xml:[{}],xStreamConfig:[{}]", xml, JsonUtil.toString(xStreamConfig));
+        if (log.isDebugEnabled()){
+            log.debug("input params info,xml:[{}],xStreamConfig:[{}]", xml, JsonUtil.toString(xStreamConfig));
         }
         //---------------------------------------------------------------
         if (isNullOrEmpty(xml)){

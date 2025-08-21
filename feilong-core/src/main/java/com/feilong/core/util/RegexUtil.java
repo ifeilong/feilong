@@ -23,9 +23,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 
 /**
@@ -39,10 +36,8 @@ import com.feilong.core.Validate;
  * @since 1.0.0
  * @since jdk1.4
  */
+@lombok.extern.slf4j.Slf4j
 public final class RegexUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger               LOGGER        = LoggerFactory.getLogger(RegexUtil.class);
 
     /**
      * Pattern cache提高速度.
@@ -136,7 +131,7 @@ public final class RegexUtil{
     public static Map<Integer, String> group(final String regexPattern,final CharSequence input){
         Matcher matcher = getMatcher(regexPattern, input);
         if (!matcher.matches()){
-            LOGGER.trace("[not matches] ,\n\tregexPattern:[{}] \n\tinput:[{}]", regexPattern, input);
+            log.trace("[not matches] ,\n\tregexPattern:[{}] \n\tinput:[{}]", regexPattern, input);
             return emptyMap();
         }
 
@@ -146,14 +141,14 @@ public final class RegexUtil{
         for (int i = 0; i <= groupCount; ++i){
             //匹配的索引
             String groupValue = matcher.group(i); //map.put(0, matcher.group());// 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
-            LOGGER.trace("matcher group[{}],start-end:[{}-{}],groupValue:[{}]", i, matcher.start(i), matcher.end(i), groupValue);
+            log.trace("matcher group[{}],start-end:[{}-{}],groupValue:[{}]", i, matcher.start(i), matcher.end(i), groupValue);
             map.put(i, groupValue);//groupValue
         }
 
         //---------------------------------------------------------------
 
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("regexPattern:[{}],input:[{}],groupMap:{}", regexPattern, input, map);
+        if (log.isTraceEnabled()){
+            log.trace("regexPattern:[{}],input:[{}],groupMap:{}", regexPattern, input, map);
         }
         return map;
     }

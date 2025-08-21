@@ -24,8 +24,6 @@ import static java.lang.String.format;
 import java.beans.PropertyDescriptor;
 
 import org.apache.commons.beanutils.DynaBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 import com.feilong.lib.beanutils.BeanUtils;
@@ -36,10 +34,8 @@ import com.feilong.lib.beanutils.PropertyUtils;
  * Rule implementation that sets an individual property on the object at the top of the stack, based on attributes with
  * specified names.
  */
+@lombok.extern.slf4j.Slf4j
 public class SetPropertyRule extends Rule{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SetPropertyRule.class);
 
     // ----------------------------------------------------------- Constructors
 
@@ -99,8 +95,8 @@ public class SetPropertyRule extends Rule{
         Object top = getDigester().peek();
 
         // Log some debugging information
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
+        if (log.isDebugEnabled()){
+            log.debug(
                             format(
                                             "[SetPropertiesRule]{%s} Set %s property %s to %s",
                                             getDigester().getMatch(),

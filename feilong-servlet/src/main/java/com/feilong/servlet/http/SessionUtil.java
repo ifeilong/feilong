@@ -35,9 +35,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.date.DateUtil;
 
@@ -91,11 +88,9 @@ import com.feilong.core.date.DateUtil;
  * @see "org.apache.catalina.core.ApplicationSessionCookieConfig#createSessionCookie(Context, String, boolean)"
  * @since 1.0.0
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class SessionUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SessionUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private SessionUtil(){
@@ -362,7 +357,7 @@ public final class SessionUtil{
         //---------------------------------------------------------------
 
         if (null == oldSession){// 是null 新建一个并直接返回
-            LOGGER.debug("oldSession is null,return a new session~~");
+            log.debug("oldSession is null,return a new session~~");
             return request.getSession();
         }
 
@@ -384,7 +379,7 @@ public final class SessionUtil{
         }
 
         //---------------------------------------------------------------
-        LOGGER.debug("old sessionId:[{}],invalidate it!new session:[{}],and put all attributes", oldSessionId, newSession.getId());
+        log.debug("old sessionId:[{}],invalidate it!new session:[{}],and put all attributes", oldSessionId, newSession.getId());
         return newSession;
     }
 

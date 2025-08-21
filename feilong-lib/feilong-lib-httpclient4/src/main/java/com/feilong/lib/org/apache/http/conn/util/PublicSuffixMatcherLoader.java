@@ -35,9 +35,6 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.Consts;
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
@@ -48,13 +45,9 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.4
  */
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.SAFE)
 public final class PublicSuffixMatcherLoader{
-
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(PublicSuffixMatcherLoader.class);
-
-    //---------------------------------------------------------------
 
     private static PublicSuffixMatcher load(final InputStream in) throws IOException{
         final List<PublicSuffixList> lists = new PublicSuffixListParser().parseByType(new InputStreamReader(in, Consts.UTF_8));

@@ -17,9 +17,6 @@ package com.feilong.component;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.context.FileReworker;
 import com.feilong.io.FilenameUtil;
 import com.feilong.spring.expression.SpelUtil;
@@ -32,17 +29,14 @@ import com.feilong.zip.ZipHandler;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.1.0
  */
+@lombok.extern.slf4j.Slf4j
 public class ZipFileReworker implements FileReworker{
 
-    /** The Constant log. */
-    private static final Logger LOGGER     = LoggerFactory.getLogger(ZipFileReworker.class);
-
-    //---------------------------------------------------------------
     /** The zip handler. */
-    private ZipHandler          zipHandler = new CompressZipHandler();
+    private ZipHandler zipHandler = new CompressZipHandler();
 
     /** The output zip path expression. */
-    private String              outputZipPathExpression;
+    private String     outputZipPathExpression;
 
     //---------------------------------------------------------------
 
@@ -92,7 +86,7 @@ public class ZipFileReworker implements FileReworker{
         String zipFilePath = build(filePath, outputZipPathExpression);
         //---------------------------------------------------------------
 
-        LOGGER.debug("filePath:[{}],outputZipPathExpression:[{}],zipFilePath:[{}]", filePath, outputZipPathExpression, zipFilePath);
+        log.debug("filePath:[{}],outputZipPathExpression:[{}],zipFilePath:[{}]", filePath, outputZipPathExpression, zipFilePath);
 
         //---------------------------------------------------------------
         zipHandler.zip(filePath, zipFilePath);

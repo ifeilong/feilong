@@ -24,9 +24,6 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.csv.entity.CsvColumnEntity;
@@ -37,9 +34,8 @@ import com.feilong.json.JsonUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.7
  */
+@lombok.extern.slf4j.Slf4j
 public class DataListBuilder{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(DataListBuilder.class);
 
     /** Don't let anyone instantiate this class. */
     private DataListBuilder(){
@@ -63,8 +59,8 @@ public class DataListBuilder{
      */
     public static <T> List<Object[]> build(Iterable<T> iterable,List<CsvColumnEntity> csvColumnEntityList){
         List<String> propertyNameList = getPropertyValueList(csvColumnEntityList, "propertyName");
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("propertyNameList:{}", JsonUtil.toString(propertyNameList));
+        if (log.isTraceEnabled()){
+            log.trace("propertyNameList:{}", JsonUtil.toString(propertyNameList));
         }
 
         //---------------------------------------------------------------
@@ -91,8 +87,8 @@ public class DataListBuilder{
         Map<String, Object> propertyValueMap = newLinkedHashMap();
         PropertyUtil.copyProperties(propertyValueMap, bean, ConvertUtil.toStrings(propertyNameList));
 
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("propertyValueMap:{}", JsonUtil.toString(propertyValueMap));
+        if (log.isTraceEnabled()){
+            log.trace("propertyValueMap:{}", JsonUtil.toString(propertyValueMap));
         }
 
         //---------------------------------------------------------------

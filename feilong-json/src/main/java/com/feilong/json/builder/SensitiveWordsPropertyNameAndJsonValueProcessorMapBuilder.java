@@ -31,9 +31,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.ClassUtil;
@@ -50,16 +47,11 @@ import com.feilong.lib.lang3.reflect.MethodUtils;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.5
  */
+@lombok.extern.slf4j.Slf4j
 public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
 
-    /** The Constant log. */
-    private static final Logger                                   LOGGER = LoggerFactory
-                    .getLogger(SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder.class);
-
-    //---------------------------------------------------------------
-
     /** The cache. */
-    private static Map<Class<?>, Map<String, JsonValueProcessor>> cache  = newHashMap();
+    private static Map<Class<?>, Map<String, JsonValueProcessor>> cache = newHashMap();
 
     //---------------------------------------------------------------
 
@@ -271,7 +263,7 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
 
             //since 1.12.2
             if (null == readMethod){
-                LOGGER.warn(
+                log.warn(
                                 "class:[{}],property:[{}],has no ReadMethod!!SKIPPED",
                                 klass.getCanonicalName(),
                                 propertyDescriptor.getDisplayName());

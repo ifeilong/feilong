@@ -26,12 +26,13 @@ import com.feilong.test.AbstractTest;
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
+@lombok.extern.slf4j.Slf4j
 public class PagerTest extends AbstractTest{
 
     @Test
     public void test(){
         Pager<User> pager = new Pager<>(2, 10, 10000);
         pager.setMaxShowPageNo(-2);
-        LOGGER.debug(JsonUtil.format(pager));
+        log.debug(JsonUtil.format(pager));
     }
 }

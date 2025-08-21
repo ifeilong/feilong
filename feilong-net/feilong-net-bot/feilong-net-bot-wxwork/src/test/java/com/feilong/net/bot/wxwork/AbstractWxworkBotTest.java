@@ -21,6 +21,7 @@ import com.feilong.json.JsonUtil;
 import com.feilong.net.bot.wxwork.message.WxworkResponse;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractWxworkBotTest extends AbstractTest{
 
     protected final WxworkBot wxworkBot = new DefaultWxworkBot(getKey());
@@ -33,7 +34,7 @@ public abstract class AbstractWxworkBotTest extends AbstractTest{
 
     @After
     public void after(){
-        LOGGER.debug(JsonUtil.format(wxworkResponse));
+        log.debug(JsonUtil.format(wxworkResponse));
     }
 
     //---------------------------------------------------------------

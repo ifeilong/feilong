@@ -173,7 +173,7 @@ public interface FileTransfer{
      * 
      * <pre class="code">
      * String remoteAbsolutePath = "/upload/test/HERSCHEL";
-     * LOGGER.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
+     * log.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
      * 
      * </pre>
      * 

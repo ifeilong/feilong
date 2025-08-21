@@ -37,9 +37,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Queue;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.FormattedHeader;
 import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HttpHost;
@@ -64,13 +61,9 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
 import com.feilong.lib.org.apache.http.util.Args;
 import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
 
+@lombok.extern.slf4j.Slf4j
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 abstract class AuthenticationStrategyImpl implements AuthenticationStrategy{
-
-    /** The Constant log. */
-    private static final Logger       log                     = LoggerFactory.getLogger(AuthenticationStrategyImpl.class);
-
-    //---------------------------------------------------------------
 
     private static final List<String> DEFAULT_SCHEME_PRIORITY = Collections.unmodifiableList(
                     Arrays.asList(

@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Workbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.excel.util.WorkbookUtil;
@@ -37,15 +35,11 @@ import com.feilong.io.InputStreamUtil;
  * 
  * @see ExcelManipulatorFactory
  */
+@lombok.extern.slf4j.Slf4j
 public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWriter{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultExcelWriter.class);
-
-    //---------------------------------------------------------------
-
     /** The buffered template. */
-    private byte[]              bufferedTemplate;
+    private byte[] bufferedTemplate;
 
     //---------------------------------------------------------------
 
@@ -190,7 +184,7 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
             }
             bufferedTemplate = bos.toByteArray();
         }catch (IOException e){
-            LOGGER.error("Init Write Template Error", e);
+            log.error("Init Write Template Error", e);
         }
     }
 

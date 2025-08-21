@@ -23,9 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.io.IOWriteUtil;
 
@@ -35,19 +32,9 @@ import com.feilong.io.IOWriteUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.4
  */
+@lombok.extern.slf4j.Slf4j
 public abstract class AbstractUnzipHandler implements UnzipHandler{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractUnzipHandler.class);
-
-    /**
-     * Unzip.
-     *
-     * @param unZipFilePath
-     *            the un zip file path
-     * @param outputDirectory
-     *            the output directory
-     */
     /*
      * (non-Javadoc)
      * 
@@ -60,8 +47,8 @@ public abstract class AbstractUnzipHandler implements UnzipHandler{
 
         //---------------------------------------------------------------
         long beginTimeMillis = System.currentTimeMillis();
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("begin unzip:[{}] to outputDirectory:[{}]", unZipFilePath, outputDirectory);
+        if (log.isInfoEnabled()){
+            log.info("begin unzip:[{}] to outputDirectory:[{}]", unZipFilePath, outputDirectory);
         }
 
         //---------------------------------------------------------------
@@ -74,8 +61,8 @@ public abstract class AbstractUnzipHandler implements UnzipHandler{
         }
 
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
+        if (log.isInfoEnabled()){
+            log.info(
                             "use time:[{}],end unzip:[{}],outputDirectory:[{}]",
                             formatDurationUseBeginTimeMillis(beginTimeMillis),
                             unZipFilePath,
@@ -114,8 +101,8 @@ public abstract class AbstractUnzipHandler implements UnzipHandler{
     protected static void write(String zipEntryName,InputStream inputStream,String outputDirectory){
         IOWriteUtil.write(inputStream, outputDirectory, zipEntryName);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("unzip [{}] to [{}]", zipEntryName, outputDirectory + File.separator + zipEntryName);
+        if (log.isDebugEnabled()){
+            log.debug("unzip [{}] to [{}]", zipEntryName, outputDirectory + File.separator + zipEntryName);
         }
     }
 

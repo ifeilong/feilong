@@ -28,8 +28,6 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.ExcelException;
 import com.feilong.excel.definition.ExcelBlock;
@@ -44,22 +42,18 @@ import com.feilong.lib.excel.ognl.OgnlStack;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 class BlockReader{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER                       = LoggerFactory.getLogger(BlockReader.class);
-
-    //---------------------------------------------------------------
-
     /** The Constant STATUS_SETTING_ERROR. */
-    private static final int    STATUS_SETTING_ERROR         = 2;
+    private static final int STATUS_SETTING_ERROR         = 2;
 
     /** The Constant STATUS_SYSTEM_ERROR. */
-    private static final int    STATUS_SYSTEM_ERROR          = 5;
+    private static final int STATUS_SYSTEM_ERROR          = 5;
 
     /** The Constant STATUS_DATA_COLLECTION_ERROR. */
-    private static final int    STATUS_DATA_COLLECTION_ERROR = 10;
+    private static final int STATUS_DATA_COLLECTION_ERROR = 10;
 
     //---------------------------------------------------------------
 
@@ -124,7 +118,7 @@ class BlockReader{
                 startRow += step;
             }
         }catch (Exception e){
-            LOGGER.error("", e);
+            log.error("", e);
             readStatus.setStatus(STATUS_SYSTEM_ERROR);
             readStatus.setMessage(e.getMessage());
         }
@@ -152,8 +146,8 @@ class BlockReader{
                                     PropertyTypeDetector.detect(result, cellDefinition));
 
                     //---------------------------------------------------------------
-                    if (LOGGER.isDebugEnabled()){
-                        LOGGER.debug("{}[Checked]:{}", getCellRef(startRow + rowOffSet, cellDefinition.getCol()), value);
+                    if (log.isDebugEnabled()){
+                        log.debug("{}[Checked]:{}", getCellRef(startRow + rowOffSet, cellDefinition.getCol()), value);
                     }
                     //---------------------------------------------------------------
                     result.put(cellDefinition.getDataName(), value);
@@ -185,8 +179,8 @@ class BlockReader{
                                 value,
                                 excelCell,
                                 PropertyTypeDetector.detect(result, excelCell));
-                if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace("{}[Checked]:{}", CellReferenceUtil.getCellRef(startRow + rowOffSet, col), value);
+                if (log.isTraceEnabled()){
+                    log.trace("{}[Checked]:{}", CellReferenceUtil.getCellRef(startRow + rowOffSet, col), value);
                 }
                 ognlStack.setValue(excelCell.getDataName(), value);
             }catch (ExcelException e){
@@ -230,8 +224,8 @@ class BlockReader{
                                 .convert(sheetNo, getCellRef(excelCell.getRow(), excelCell.getCol()), value, excelCell, propertyType);
 
                 //---------------------------------------------------------------
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("{}[Checked]:{}", CellReferenceUtil.getCellRef(excelCell.getRow(), excelCell.getCol()), value);
+                if (log.isDebugEnabled()){
+                    log.debug("{}[Checked]:{}", CellReferenceUtil.getCellRef(excelCell.getRow(), excelCell.getCol()), value);
                 }
                 //---------------------------------------------------------------
                 ognlStack.setValue(excelCell.getDataName(), value);
@@ -241,7 +235,7 @@ class BlockReader{
                 }
                 readStatus.addException(e);
             }catch (Exception e){
-                LOGGER.error("", e);
+                log.error("", e);
                 readStatus.setStatus(STATUS_SYSTEM_ERROR);
                 readStatus.setMessage(e.getMessage());
             }

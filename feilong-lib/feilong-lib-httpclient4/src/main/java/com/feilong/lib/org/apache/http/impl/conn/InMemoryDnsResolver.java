@@ -32,9 +32,6 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.conn.DnsResolver;
 import com.feilong.lib.org.apache.http.util.Args;
 
@@ -43,12 +40,8 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.2
  */
+@lombok.extern.slf4j.Slf4j
 public class InMemoryDnsResolver implements DnsResolver{
-
-    /** The Constant log. */
-    private static final Logger              log = LoggerFactory.getLogger(InMemoryDnsResolver.class);
-
-    //---------------------------------------------------------------
 
     /**
      * In-memory collection that will hold the associations between a host name

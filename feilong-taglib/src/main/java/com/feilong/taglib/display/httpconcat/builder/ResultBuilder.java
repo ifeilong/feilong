@@ -22,9 +22,6 @@ import static java.lang.System.lineSeparator;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.BooleanUtils;
@@ -38,10 +35,8 @@ import com.feilong.taglib.display.httpconcat.handler.ConcatLinkResolver;
  * @since 1.10.4
  * @since 1.11.1 rename
  */
+@lombok.extern.slf4j.Slf4j
 public class ResultBuilder{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ResultBuilder.class);
 
     /** Don't let anyone instantiate this class. */
     private ResultBuilder(){
@@ -70,8 +65,8 @@ public class ResultBuilder{
 
         //---------------------------------------------------------------
         boolean concatSupport = concatSupport(httpConcatParam);
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
+        if (log.isDebugEnabled()){
+            log.debug(
                             "after standard info:[{}],itemSrcList:[{}],concatSupport:[{}]",
                             JsonUtil.toString(standardHttpConcatParam),
                             JsonUtil.toString(itemSrcList),

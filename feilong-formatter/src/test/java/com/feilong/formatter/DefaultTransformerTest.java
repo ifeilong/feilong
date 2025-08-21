@@ -35,6 +35,7 @@ import com.feilong.test.AbstractTest;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.7
  */
+@lombok.extern.slf4j.Slf4j
 public class DefaultTransformerTest extends AbstractTest{
 
     @Test
@@ -53,7 +54,7 @@ public class DefaultTransformerTest extends AbstractTest{
         //
         );
 
-        LOGGER.debug(formatToSimpleTable(list));
+        log.debug(formatToSimpleTable(list));
 
     }
 }

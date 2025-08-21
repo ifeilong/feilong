@@ -16,9 +16,6 @@
  */
 package com.feilong.lib.beanutils.bugs;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.beanutils.PropertyUtils;
 
 import junit.framework.Test;
@@ -29,10 +26,8 @@ import junit.framework.TestSuite;
  * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-349">https://issues.apache.org/jira/browse/BEANUTILS-349</a>
  */
+@lombok.extern.slf4j.Slf4j
 public class Jira349TestCase extends TestCase{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Jira349TestCase.class);
 
     /**
      * Create a test case with the specified name.
@@ -92,12 +87,12 @@ public class Jira349TestCase extends TestCase{
         try{
             PropertyUtils.copyProperties(dest, origin);
         }catch (final NullPointerException e){
-            LOGGER.error("Failed", e);
+            log.error("Failed", e);
             fail("Threw NullPointerException");
         }catch (final IllegalArgumentException e){
-            LOGGER.warn("Expected Result", e);
+            log.warn("Expected Result", e);
         }catch (final Throwable t){
-            LOGGER.error("Failed", t);
+            log.error("Failed", t);
             fail("Threw exception: " + t);
         }
     }

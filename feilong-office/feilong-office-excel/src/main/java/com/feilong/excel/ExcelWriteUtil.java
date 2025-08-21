@@ -33,9 +33,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ClassUtil;
@@ -51,13 +48,9 @@ import com.feilong.json.JsonUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.0
  */
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class ExcelWriteUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelWriteUtil.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private ExcelWriteUtil(){
@@ -144,9 +137,9 @@ public class ExcelWriteUtil{
                         outputFileName,
                         buildDefaultOutputFileName(templateLocation, sheetNames, sheetDefinitions));
 
-        if (LOGGER.isDebugEnabled()){
+        if (log.isDebugEnabled()){
             Map<String, Object> map = build(templateLocation, sheetDefinitionLocation, sheetNames, beans, useOutputFileName);
-            LOGGER.debug("will write excel,params info:[{}]", JsonUtil.toString(map));
+            log.debug("will write excel,params info:[{}]", JsonUtil.toString(map));
         }
         //---------------------------------------------------------------
         OutputStream outputStream = FileUtil.getFileOutputStream(useOutputFileName);
@@ -156,7 +149,7 @@ public class ExcelWriteUtil{
         excelWriter.write(templateLocation, outputStream, beans);
 
         //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             Map<String, Object> map = buildMap(
                             templateLocation,
                             sheetDefinitionLocation,
@@ -164,7 +157,7 @@ public class ExcelWriteUtil{
                             beans,
                             useOutputFileName,
                             beginTimeMillis);
-            LOGGER.info("write [SUCCESS],params info:[{}]", JsonUtil.toString(map));
+            log.info("write [SUCCESS],params info:[{}]", JsonUtil.toString(map));
         }
 
         return useOutputFileName;

@@ -20,9 +20,6 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 标签缓存管理器.
  *
@@ -32,10 +29,8 @@ import org.slf4j.LoggerFactory;
  * @since 1.10.5
  */
 //XXX 将来可能会有更好的做法
+@lombok.extern.slf4j.Slf4j
 public final class SimpleTagStringCacheManager{
-
-    /** The Constant LOGGER. */
-    private static final Logger              LOGGER       = LoggerFactory.getLogger(SimpleTagStringCacheManager.class);
 
     /**
      * 设置缓存是否开启.
@@ -71,7 +66,7 @@ public final class SimpleTagStringCacheManager{
      */
     public static Object get(String key){
         if (!CACHE_ENABLE){
-            LOGGER.info("when to get key:[{}] data from cache, but cache's status is disable!", key);
+            log.info("when to get key:[{}] data from cache, but cache's status is disable!", key);
             return null;
         }
 
@@ -79,11 +74,11 @@ public final class SimpleTagStringCacheManager{
         int size = CACHE.size();
 
         if (CACHE.containsKey(key)){
-            LOGGER.debug("cacheSize:[{}],key:[{}],hit cache,get from cache", size, key);
+            log.debug("cacheSize:[{}],key:[{}],hit cache,get from cache", size, key);
             return CACHE.get(key);
         }
 
-        LOGGER.debug("cacheSize:[{}],not contains [{}],will do parse", size, key);
+        log.debug("cacheSize:[{}],not contains [{}],will do parse", size, key);
         return null;
     }
 

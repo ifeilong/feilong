@@ -27,9 +27,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.reader.ReadStatus;
@@ -42,10 +39,8 @@ import com.feilong.json.JsonUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.0
  */
+@lombok.extern.slf4j.Slf4j
 public class ExcelReaderUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelReaderUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ExcelReaderUtil(){
@@ -188,13 +183,13 @@ public class ExcelReaderUtil{
         Map<String, Object> beans = readData(excelReader, inputStream, sheetNo);
         //--------------------------------------------------------------- 
         List<T> list = loadData(beans, dataName);
-        if (LOGGER.isInfoEnabled()){
+        if (log.isInfoEnabled()){
             Map<String, Object> map = newLinkedHashMap();
             map.put("dataName", dataName);
             map.put("sheetNo", sheetNo);
             map.put("list size", size(list));
             map.put("use time", formatDurationUseBeginTimeMillis(beginTimeMillis));
-            LOGGER.info("use time: [{}]", JsonUtil.toString(map));
+            log.info("use time: [{}]", JsonUtil.toString(map));
         }
         return list;
     }

@@ -19,9 +19,6 @@ import static java.lang.System.lineSeparator;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.csv.entity.CsvConfig;
 
@@ -32,24 +29,20 @@ import com.feilong.csv.entity.CsvConfig;
  * @since 1.7.1
  * @since 1.10.7 rename
  */
+@lombok.extern.slf4j.Slf4j
 public class CsvContentBuilder{
 
-    /** The Constant log. */
-    private static final Logger LOGGER                  = LoggerFactory.getLogger(CsvContentBuilder.class);
-
-    //---------------------------------------------------------------
-
     /** 转义引号用的字符 ". */
-    private static final char   ESCAPE_CHARACTER        = '"';
+    private static final char ESCAPE_CHARACTER        = '"';
 
     /** 默认的引号字符 "引号. */
-    private static final char   DEFAULT_QUOTE_CHARACTER = '"';
+    private static final char DEFAULT_QUOTE_CHARACTER = '"';
 
     /**
      * \\u转义字符的意思是"\\u后面的1-4位16进制数表示的Unicode码对应的汉字",而Unicode 0000 代表的字符是 NUL,也就是空的意思,<br>
      * 如果把这个字符输出到控制台,显示为空格.
      */
-    private static final char   NO_QUOTE_CHARACTER      = '\u0000';
+    private static final char NO_QUOTE_CHARACTER      = '\u0000';
 
     //---------------------------------------------------------------
 
@@ -82,8 +75,8 @@ public class CsvContentBuilder{
 
         //---------------------------------------------------------------
 
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("{}{}", lineSeparator(), sb);
+        if (log.isTraceEnabled()){
+            log.trace("{}{}", lineSeparator(), sb);
         }
         return sb.toString();
     }

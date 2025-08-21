@@ -17,9 +17,6 @@ package com.feilong.net.http.builder;
 
 import static com.feilong.net.http.HttpLogHelper.autoLog;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.Validate;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.http.ConnectionConfig;
@@ -33,10 +30,8 @@ import com.feilong.net.http.packer.HttpRequestHeadersPacker;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
+@lombok.extern.slf4j.Slf4j
 public final class HttpUriRequestBuilder{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpUriRequestBuilder.class);
 
     /** Don't let anyone instantiate this class. */
     private HttpUriRequestBuilder(){
@@ -65,8 +60,8 @@ public final class HttpUriRequestBuilder{
         Validate.notBlank(uri, "uri can't be blank!");
 
         //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace(autoLog(httpRequest, connectionConfig, ""));
+        if (log.isTraceEnabled()){
+            log.trace(autoLog(httpRequest, connectionConfig, ""));
         }
         //---------------------------------------------------------------
         HttpUriRequest httpUriRequest = HttpUriRequestFactory.create(httpRequest, connectionConfig);

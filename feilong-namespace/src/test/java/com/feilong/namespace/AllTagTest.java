@@ -3,8 +3,6 @@ package com.feilong.namespace;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,33 +14,29 @@ import com.feilong.accessor.session.SessionKeyAccessor;
 import com.feilong.core.TimeInterval;
 import com.feilong.json.JsonUtil;
 
+@lombok.extern.slf4j.Slf4j
 @ContextConfiguration(locations = { "classpath*:applicationContext-alltag.xml" })
 public class AllTagTest extends AbstractJUnit4SpringContextTests{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AllTagTest.class);
-
-    //---------------------------------------------------------------
-
     @Autowired
     @Qualifier("cookieAccessor")
-    private CookieAccessor      cookieAccessor;
+    private CookieAccessor     cookieAccessor;
 
     //---------------------------------------------------------------
 
     @Autowired
     @Qualifier("sessionKeyAccessor")
-    private SessionKeyAccessor  sessionKeyAccessor;
+    private SessionKeyAccessor sessionKeyAccessor;
 
     @Autowired
     @Qualifier("sessionAccessor")
-    private SessionAccessor     sessionAccessor;
+    private SessionAccessor    sessionAccessor;
 
     //---------------------------------------------------------------
 
     @Test
     public void test(){
-        LOGGER.info(JsonUtil.format(cookieAccessor));
+        log.info(JsonUtil.format(cookieAccessor));
     }
 
     @Test

@@ -22,8 +22,6 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.apache.commons.beanutils.DynaBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.beanutils.DynaProperty;
@@ -44,12 +42,8 @@ import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
+@lombok.extern.slf4j.Slf4j
 public final class BeanMorpher implements ObjectMorpher{
-
-    /** The Constant log. */
-    private static final Logger   LOGGER = LoggerFactory.getLogger(BeanMorpher.class);
-
-    //---------------------------------------------------------------
 
     /** The bean class. */
     private final Class<?>        beanClass;
@@ -102,7 +96,7 @@ public final class BeanMorpher implements ObjectMorpher{
             for (PropertyDescriptor targetPropertyDescriptor : targetPropertyDescriptors){
                 String name = targetPropertyDescriptor.getName();
                 if (targetPropertyDescriptor.getWriteMethod() == null){
-                    LOGGER.info("Property '{}.{}' has no write method. SKIPPED.", beanClass.getName(), name);
+                    log.info("Property '{}.{}' has no write method. SKIPPED.", beanClass.getName(), name);
                     continue;
                 }
 
@@ -112,17 +106,17 @@ public final class BeanMorpher implements ObjectMorpher{
                     DynaBean dynaBean = (DynaBean) sourceBean;
                     DynaProperty dynaProperty = dynaBean.getDynaClass().getDynaProperty(name);
                     if (dynaProperty == null){
-                        LOGGER.warn("DynaProperty '{}' does not exist. SKIPPED.", name);
+                        log.warn("DynaProperty '{}' does not exist. SKIPPED.", name);
                         continue;
                     }
                     sourceType = dynaProperty.getType();
                 }else{
                     PropertyDescriptor sourcePropertyDescriptor = PropertyUtils.getPropertyDescriptor(sourceBean, name);
                     if (sourcePropertyDescriptor == null){
-                        LOGGER.warn("Property '{}.{}' does not exist. SKIPPED.", sourceBean.getClass().getName(), name);
+                        log.warn("Property '{}.{}' does not exist. SKIPPED.", sourceBean.getClass().getName(), name);
                         continue;
                     }else if (sourcePropertyDescriptor.getReadMethod() == null){
-                        LOGGER.warn("Property '{}.{}' has no read method. SKIPPED.", sourceBean.getClass().getName(), name);
+                        log.warn("Property '{}.{}' has no read method. SKIPPED.", sourceBean.getClass().getName(), name);
                         continue;
                     }
                     sourceType = sourcePropertyDescriptor.getPropertyType();

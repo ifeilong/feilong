@@ -28,9 +28,6 @@ import static java.lang.System.lineSeparator;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.formatter.builder.ColumnMaxWidthsBuilder;
 import com.feilong.lib.lang3.StringUtils;
@@ -56,7 +53,7 @@ import com.feilong.lib.lang3.StringUtils;
  *                 new Address("china", "nantong", "wenshui wanrong.lu 222", "216002"),
  *                 new Address("china", "tianjing", "wenshui wanrong.lu 999", "216600"));
  * 
- * LOGGER.debug(JsonUtil.format(list));
+ * log.debug(JsonUtil.format(list));
  * </pre>
  * 
  * 结果:
@@ -110,7 +107,7 @@ import com.feilong.lib.lang3.StringUtils;
  *                 new Address("china", "nantong", "wenshui wanrong.lu 222", "216002"),
  *                 new Address("china", "tianjing", "wenshui wanrong.lu 999", "216600"));
  * 
- * LOGGER.debug(formatToSimpleTable(list));
+ * log.debug(formatToSimpleTable(list));
  * </pre>
  * 
  * 
@@ -145,12 +142,8 @@ addr   city     country zipCode
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.5
  */
+@lombok.extern.slf4j.Slf4j
 public class SimpleTableFormatter extends AbstractFormatter{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleTableFormatter.class);
-
-    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -179,8 +172,8 @@ public class SimpleTableFormatter extends AbstractFormatter{
             sb.append(formatRowInfo(cells, colWidths)).append(lineSeparator());
         }
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("format use time:[{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+        if (log.isDebugEnabled()){
+            log.debug("format use time:[{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
         return lineSeparator() + sb.toString();
     }

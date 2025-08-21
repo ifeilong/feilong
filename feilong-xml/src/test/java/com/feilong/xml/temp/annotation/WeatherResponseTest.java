@@ -24,6 +24,7 @@ import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 
+@lombok.extern.slf4j.Slf4j
 public class WeatherResponseTest extends AbstractTest{
 
     @Test
@@ -31,7 +32,7 @@ public class WeatherResponseTest extends AbstractTest{
         String xml = SystemUtil.USER_HOME + "/workspace/feilong/feilong/feilong-xml/src/test/resources/weather-response.xml";
 
         Map<String, String> map = XmlUtil.getNodeNameAndStringValueMap(xml, "//string");
-        LOGGER.debug(JsonUtil.format(map));
+        log.debug(JsonUtil.format(map));
     }
 
 }

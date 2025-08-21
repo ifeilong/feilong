@@ -28,6 +28,7 @@ import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.store.order.OrderLine;
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class SimpleBeanFormattterTest extends AbstractTest{
 
@@ -106,8 +107,8 @@ public class SimpleBeanFormattterTest extends AbstractTest{
 
         long beginTimeMillis = System.currentTimeMillis();
 
-        LOGGER.debug(FormatterUtil.formatToSimpleTable(ITERABLE_DATA, beanFormatterConfig));
-        LOGGER.info("useTime: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+        log.debug(FormatterUtil.formatToSimpleTable(ITERABLE_DATA, beanFormatterConfig));
+        log.info("useTime: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
 
     }
 }

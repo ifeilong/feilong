@@ -77,7 +77,7 @@ import com.feilong.lib.lang3.reflect.FieldUtils;
  * 对于Simple类型,参数二直接是属性名即可
  * 
  * <pre class="code">
- * LOGGER.debug(BeanUtils.getProperty(company, "name"));
+ * log.debug(BeanUtils.getProperty(company, "name"));
  * </pre>
  * 
  * </dd>
@@ -87,14 +87,14 @@ import com.feilong.lib.lang3.reflect.FieldUtils;
  * 对于Map类型,则需要以"<span style="color:red">属性名(key值)</span>"的形式
  * 
  * <pre class="code">
- * LOGGER.debug(BeanUtils.getProperty(company, "address (A2)"));
+ * log.debug(BeanUtils.getProperty(company, "address (A2)"));
  * 
  * Map{@code <String,String>} am = newHashMap();
  * am.put("1", "234-222-1222211");
  * am.put("2", "021-086-1232323");
  * 
  * BeanUtils.setProperty(company, "telephone", am);
- * LOGGER.debug(BeanUtils.getProperty(company, "telephone (2)"));
+ * log.debug(BeanUtils.getProperty(company, "telephone (2)"));
  * </pre>
  * 
  * </dd>
@@ -104,9 +104,9 @@ import com.feilong.lib.lang3.reflect.FieldUtils;
  * 对于Indexed,则为"<span style="color:red">属性名[索引值]</span>",注意这里对于ArrayList和数组都可以用一样的方式进行操作.
  * 
  * <pre class="code">
- * LOGGER.debug(BeanUtils.getProperty(company, "otherInfo[2]"));
+ * log.debug(BeanUtils.getProperty(company, "otherInfo[2]"));
  * BeanUtils.setProperty(company, "product[1]", "NOTES SERVER");
- * LOGGER.debug(BeanUtils.getProperty(company, "product[1]"));
+ * log.debug(BeanUtils.getProperty(company, "product[1]"));
  * </pre>
  * 
  * </dd>
@@ -116,7 +116,7 @@ import com.feilong.lib.lang3.reflect.FieldUtils;
  * 当然这3种类也可以组合使用啦！
  * 
  * <pre class="code">
- * LOGGER.debug(BeanUtils.getProperty(company, "employee[1].name"));
+ * log.debug(BeanUtils.getProperty(company, "employee[1].name"));
  * </pre>
  * 
  * </dd>
@@ -478,7 +478,7 @@ public final class BeanUtil{
      * properties.put("id", 8L);
      * 
      * BeanUtil.populate(user, properties);
-     * LOGGER.info(JsonUtil.format(user));
+     * log.info(JsonUtil.format(user));
      * </pre>
      * 
      * <b>返回:</b>
@@ -579,7 +579,7 @@ public final class BeanUtil{
      * ResourceBundle resourceBundle = ResourceBundleUtil.getResourceBundle(FileUtil.getFileInputStream("mail.properties"));
      * BeanUtil.populate(mailSenderConfig, ResourceBundleUtil.toMap(resourceBundle));
      * 
-     * LOGGER.debug(JsonUtil.format(mailSenderConfig));
+     * log.debug(JsonUtil.format(mailSenderConfig));
      * </pre>
      * 
      * <b>返回:</b>
@@ -638,7 +638,7 @@ public final class BeanUtil{
      * 
      * BeanUtil.populate(mailSenderConfig, ResourceBundleUtil.toMap(resourceBundle));
      * 
-     * LOGGER.debug(JsonUtil.format(mailSenderConfig));
+     * log.debug(JsonUtil.format(mailSenderConfig));
      * </pre>
      * 
      * <b>返回:</b>
@@ -816,7 +816,7 @@ public final class BeanUtil{
      * 
      * DangaMemCachedConfig dangaMemCachedConfig = new DangaMemCachedConfig();
      * BeanUtil.populateAliasBean(dangaMemCachedConfig, readPropertiesToMap);
-     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * log.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
      * <b>返回:</b>
@@ -862,7 +862,7 @@ public final class BeanUtil{
      * <span style="color:blue">ConvertUtils.register(arrayConverter, String[].class);</span>
      * 
      * BeanUtil.populateAliasBean(dangaMemCachedConfig, readPropertiesToMap);
-     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * log.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
      * <b>返回:</b>
@@ -981,7 +981,7 @@ public final class BeanUtil{
      *                                 Pair.of("address", (Object) newHashMap()),
      *                                 Pair.of("firstName", (Object) "Fred"),
      *                                 Pair.of("lastName", (Object) "Flintstone")));
-     * LOGGER.debug(JsonUtil.format(newDynaBean));
+     * log.debug(JsonUtil.format(newDynaBean));
      * </pre>
      * 
      * <b>返回:</b>

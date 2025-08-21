@@ -21,9 +21,6 @@ import static com.feilong.core.util.MapUtil.newConcurrentHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.lib.org.apache.http.client.HttpClient;
 import com.feilong.lib.org.apache.http.client.config.RequestConfig;
@@ -44,18 +41,15 @@ import com.feilong.net.http.packer.SSLPacker;
  * @since 1.10.6
  * @since 1.11.0 change class Access Modifiers
  */
+@lombok.extern.slf4j.Slf4j
 public class HttpClientBuilder{
 
-    /** The Constant log. */
-    private static final Logger                      LOGGER = LoggerFactory.getLogger(HttpClientBuilder.class);
-
-    //---------------------------------------------------------------
     /**
      * 设置缓存.
      *
      * @since 2.1.0
      */
-    private static Map<ConnectionConfig, HttpClient> cache  = newConcurrentHashMap(10);
+    private static Map<ConnectionConfig, HttpClient> cache = newConcurrentHashMap(10);
 
     //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */
@@ -84,8 +78,8 @@ public class HttpClientBuilder{
         HttpClient httpClient = cache.get(useConnectionConfig);
         if (null != httpClient){
 
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(StringUtils.center("load HttpClient from cache,cache size:[" + cache.size() + "]", 80, "="));
+            if (log.isDebugEnabled()){
+                log.debug(StringUtils.center("load HttpClient from cache,cache size:[" + cache.size() + "]", 80, "="));
             }
             return httpClient;
         }
@@ -98,8 +92,8 @@ public class HttpClientBuilder{
                 httpClient = build(logTraceContext, useConnectionConfig, null);
                 cache.put(useConnectionConfig, httpClient);
 
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug(StringUtils.center("build new httpClient and set to cache,cache size:[" + cache.size() + "]", 100, "-"));
+                if (log.isDebugEnabled()){
+                    log.debug(StringUtils.center("build new httpClient and set to cache,cache size:[" + cache.size() + "]", 100, "-"));
                 }
             }
         }

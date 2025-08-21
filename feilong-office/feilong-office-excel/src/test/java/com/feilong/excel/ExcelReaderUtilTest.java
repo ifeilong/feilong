@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.excel.consultant.ConsultantCommand;
@@ -42,9 +40,8 @@ import com.feilong.json.JsonUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 4.2.1
  */
+@lombok.extern.slf4j.Slf4j
 public class ExcelReaderUtilTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelReaderUtilTest.class);
 
     @Test
     public void test(){
@@ -60,7 +57,7 @@ public class ExcelReaderUtilTest{
         map.put("I4", "publishMark");
 
         List<ConsultantCommand> read = read(CLASSPATH_URL_PREFIX + "consultant/read202507101214.xlsx", ConsultantCommand.class, map);
-        LOGGER.info("size:[{}] {}", size(read), JsonUtil.format(read));
+        log.info("size:[{}] {}", size(read), JsonUtil.format(read));
     }
 
     /**

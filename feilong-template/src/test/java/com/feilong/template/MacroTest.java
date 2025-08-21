@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
+@lombok.extern.slf4j.Slf4j
 public class MacroTest extends AbstractTest{
 
     String templateInClassPath = "velocity/test_macro.vm";
@@ -33,6 +34,6 @@ public class MacroTest extends AbstractTest{
 
         Map<String, Object> contextKeyValues = null;
         String parseVMTemplate = TemplateUtil.parseTemplate(templateInClassPath, contextKeyValues);
-        LOGGER.debug(parseVMTemplate);
+        log.debug(parseVMTemplate);
     }
 }

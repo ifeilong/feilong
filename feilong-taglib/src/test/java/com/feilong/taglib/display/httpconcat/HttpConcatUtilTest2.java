@@ -27,11 +27,12 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.7
  */
+@lombok.extern.slf4j.Slf4j
 public class HttpConcatUtilTest2 extends BaseHttpConcatTest{
 
     @Test
     public void testGetWriteContent(){
         HttpConcatParam httpConcatParam = super.getHttpConcatParam();
-        LOGGER.debug(getWriteContent(httpConcatParam));
+        log.debug(getWriteContent(httpConcatParam));
     }
 }

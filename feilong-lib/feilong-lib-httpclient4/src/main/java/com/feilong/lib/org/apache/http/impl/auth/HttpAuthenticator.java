@@ -32,9 +32,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Queue;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HttpException;
 import com.feilong.lib.org.apache.http.HttpHost;
@@ -55,9 +52,8 @@ import com.feilong.lib.org.apache.http.util.Asserts;
 /**
  * @since 4.3
  */
+@lombok.extern.slf4j.Slf4j
 public class HttpAuthenticator{
-
-    private static final Logger log = LoggerFactory.getLogger(HttpAuthenticator.class);
 
     public HttpAuthenticator(){
         super();

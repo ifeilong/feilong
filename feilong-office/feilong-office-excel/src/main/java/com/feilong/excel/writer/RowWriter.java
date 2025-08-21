@@ -28,20 +28,15 @@ import java.util.Map;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelCell;
 import com.feilong.excel.definition.ExcelCellConditionStyle;
 import com.feilong.lib.excel.ognl.OgnlStack;
 
+@lombok.extern.slf4j.Slf4j
 class RowWriter{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(RowWriter.class);
-
-    //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */
     private RowWriter(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -92,8 +87,8 @@ class RowWriter{
 
             setCellStyle(sheet, styleMap, ognlStack, excelCell, rowIndex, col);
         }
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace(
+        if (log.isTraceEnabled()){
+            log.trace(
                             "write row:[{}] over,rowOffset:[{}],use time: [{}]",
                             rowIndex,
                             rowOffset,

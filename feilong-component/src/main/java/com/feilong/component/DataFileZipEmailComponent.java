@@ -17,9 +17,6 @@ package com.feilong.component;
 
 import javax.annotation.PostConstruct;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.context.Data;
 
 /**
@@ -30,15 +27,11 @@ import com.feilong.context.Data;
  *            the generic type
  * @since 2.1.0
  */
+@lombok.extern.slf4j.Slf4j
 public class DataFileZipEmailComponent<T extends Data> extends DataFileEmailComponent<T>{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DataFileZipEmailComponent.class);
-
-    //---------------------------------------------------------------
-
     /** The output zip path. */
-    private String              outputZipPathExpression;
+    private String outputZipPathExpression;
 
     //---------------------------------------------------------------
 
@@ -47,7 +40,7 @@ public class DataFileZipEmailComponent<T extends Data> extends DataFileEmailComp
     @PostConstruct
     protected void postConstruct(){
         // Validate.notBlank(outputZipPathExpression, "outputZipPathExpression can't be blank!");
-        LOGGER.info("outputZipPathExpression:[{}]", outputZipPathExpression);
+        log.info("outputZipPathExpression:[{}]", outputZipPathExpression);
         super.setFileReworker(new ZipFileReworker(outputZipPathExpression));
     }
 
