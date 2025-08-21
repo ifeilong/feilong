@@ -99,7 +99,7 @@ public final class HttpRequestExecuter{
         Validate.notNull(httpUriRequest, "httpUriRequest can't be null!");
 
         //---------------------------------------------------------------
-        HttpClient httpClient = HttpClientBuilder.build(useConnectionConfig);
+        HttpClient httpClient = HttpClientBuilder.build(httpRequest.getLogTraceContext(), useConnectionConfig);
 
         try{
             return httpClient.execute(httpUriRequest);

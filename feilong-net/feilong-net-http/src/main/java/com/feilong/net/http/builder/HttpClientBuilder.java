@@ -70,12 +70,14 @@ public class HttpClientBuilder{
     /**
      * 创造 {@link HttpClient}.
      *
+     * @param logTraceContext
+     *            the log trace context
      * @param connectionConfig
      *            the connection config
      * @return the closeable http client
      * @since 2.1.0
      */
-    public static HttpClient build(ConnectionConfig connectionConfig){
+    public static HttpClient build(String logTraceContext,ConnectionConfig connectionConfig){
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
 
         //---------------------------------------------------------------
@@ -93,7 +95,7 @@ public class HttpClientBuilder{
         synchronized (HttpClientBuilder.class){
             httpClient = cache.get(useConnectionConfig);
             if (null == httpClient){
-                httpClient = build(useConnectionConfig, null);
+                httpClient = build(logTraceContext, useConnectionConfig, null);
                 cache.put(useConnectionConfig, httpClient);
 
                 if (LOGGER.isDebugEnabled()){
@@ -110,6 +112,8 @@ public class HttpClientBuilder{
     /**
      * Builds the {@link CloseableHttpClient}.
      *
+     * @param logTraceContext
+     *            the log trace context
      * @param connectionConfig
      *            the connection config
      * @param layeredConnectionSocketFactory
@@ -118,7 +122,10 @@ public class HttpClientBuilder{
      *         {@link com.feilong.lib.org.apache.http.impl.client.HttpClientBuilder#setSSLSocketFactory(LayeredConnectionSocketFactory)}<br>
      * @see com.feilong.lib.org.apache.http.impl.client.HttpClientBuilder#build()
      */
-    public static HttpClient build(ConnectionConfig connectionConfig,LayeredConnectionSocketFactory layeredConnectionSocketFactory){
+    private static HttpClient build(
+                    String logTraceContext,
+                    ConnectionConfig connectionConfig,
+                    LayeredConnectionSocketFactory layeredConnectionSocketFactory){
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
 
         //---------------------------------------------------------------
@@ -157,7 +164,7 @@ public class HttpClientBuilder{
         customHttpClientBuilder.setDefaultRequestConfig(requestConfig);
 
         //since 3.3.0 设置重试策略
-        setRetryHandler(customHttpClientBuilder, connectionConfig);
+        setRetryHandler(logTraceContext, customHttpClientBuilder, connectionConfig);
 
         //---------------------------------------------------------------
         //CloseableHttpClient
@@ -165,19 +172,24 @@ public class HttpClientBuilder{
     }
 
     /**
-     * 设置重试策略
-     * 
+     * 设置重试策略.
+     *
+     * @param logTraceContext
+     *            the log trace context
      * @param customHttpClientBuilder
+     *            the custom http client builder
      * @param connectionConfig
+     *            the connection config
      * @since 3.3.0
      */
     private static void setRetryHandler(
+                    String logTraceContext,
                     com.feilong.lib.org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder,
                     ConnectionConfig connectionConfig){
         boolean isTimeoutRetry = connectionConfig.getIsTimeoutRetry();
         int timeoutRetryCount = connectionConfig.getTimeoutRetryCount();
         if (isTimeoutRetry && timeoutRetryCount > 1){
-            customHttpClientBuilder.setRetryHandler(new SpecialHttpRequestRetryHandler(timeoutRetryCount));
+            customHttpClientBuilder.setRetryHandler(new SpecialHttpRequestRetryHandler(logTraceContext, timeoutRetryCount));
         }
     }
 

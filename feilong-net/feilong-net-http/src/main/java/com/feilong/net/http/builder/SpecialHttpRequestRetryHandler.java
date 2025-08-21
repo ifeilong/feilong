@@ -63,6 +63,11 @@ public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandl
                     SocketTimeoutException.class,
                     ConnectTimeoutException.class);
 
+    /**
+     * @since 4.4.0
+     */
+    private String                                      logTraceContext;
+
     //---------------------------------------------------------------
 
     /**
@@ -75,12 +80,16 @@ public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandl
      * <li>SSLException</li>
      * </ul>
      * .
+     * 
+     * @param logTraceContext
+     *            日志追踪上下文.
      *
      * @param retryCount
      *            the retry count
      */
-    public SpecialHttpRequestRetryHandler(final int retryCount){
+    public SpecialHttpRequestRetryHandler(String logTraceContext, final int retryCount){
         super(retryCount, false);
+        this.logTraceContext = logTraceContext;
     }
 
     //---------------------------------------------------------------
@@ -99,8 +108,8 @@ public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandl
      */
     @Override
     public boolean retryRequest(final IOException exception,final int executionCount,final HttpContext context){
-        Args.notNull(exception, "Exception parameter");
-        Args.notNull(context, "HTTP context");
+        Args.notNull(exception, logTraceContext + "Exception parameter");
+        Args.notNull(context, logTraceContext + "HTTP context");
 
         //---------------------------------------------------------------
 
@@ -113,7 +122,7 @@ public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandl
         String commonLogMessage = getCommonLogMessage(executionCount, retryCount, context, exceptionName, retriableClasses);
 
         if (executionCount > retryCount){
-            LOGGER.info("retryRequestMoreCount{},executionCount > retryCount,returnFalse", commonLogMessage);
+            LOGGER.warn("retryRequestMoreCount{},executionCount > retryCount,returnFalse", commonLogMessage);
             // Do not retry if over max retry count
             return false;
         }
@@ -135,7 +144,7 @@ public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandl
         return super.retryRequest(exception, executionCount, context);
     }
 
-    private static String getCommonLogMessage(
+    private String getCommonLogMessage(
                     int executionCount,
                     int retryCount,
                     HttpContext context,
@@ -145,7 +154,8 @@ public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandl
         //RETRIABLE_CLASSES:[[class java.net.SocketTimeoutException, class org.apache.http.conn.ConnectTimeoutException]],
         //requestInfo:[POST /pay/redirect/doku?PAYMENTCHANNEL=01 HTTP/1.1 [User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21, Content-Length: 17, Content-Type: application/x-www-form-urlencoded; charset=UTF-8, Host: test.mapemall.com, Connection: Keep-Alive, Accept-Encoding: gzip,deflate]]
         return formatPattern(
-                        "[{}/{}]],[{}],exception:[{}],RETRIABLE_CLASSES:[{}],requestInfo:[{}]",
+                        "logTraceContext:{} [{}/{}]],[{}],exception:[{}],RETRIABLE_CLASSES:[{}],requestInfo:[{}]",
+                        logTraceContext,
                         executionCount,
                         retryCount,
 
@@ -167,6 +177,14 @@ public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandl
      */
     protected Class<? extends IOException>[] getRetriableClasses(){
         return RETRIABLE_CLASSES;
+    }
+
+    /**
+     * @param logTraceContext
+     *            the logTraceContext to set
+     */
+    public void setLogTraceContext(String logTraceContext){
+        this.logTraceContext = logTraceContext;
     }
 
 }
