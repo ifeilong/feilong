@@ -24,6 +24,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.bean.ConvertUtil.toLong;
 import static com.feilong.core.lang.ObjectUtil.defaultEmptyStringIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.lang.StringUtil.tokenizeToStringArray;
@@ -655,6 +656,26 @@ public final class RequestUtil{
     }
 
     /**
+     * 获得 attribute,如果值是null 或者没有相关属性,那么返回 <code>defaultValue</code>.
+     *
+     * @param <T>
+     *            the generic type
+     * @param request
+     *            the request
+     * @param attributeName
+     *            属性名称
+     * @param defaultValue
+     *            默认值
+     * @return 如果 <code>attributeName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>attributeName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see javax.servlet.ServletRequest#getAttribute(String)
+     * @since 4.4.0
+     */
+    public static <T> T getAttribute(HttpServletRequest request,String attributeName,T defaultValue){
+        return defaultIfNull(getAttribute(request, attributeName), defaultValue);
+    }
+
+    /**
      * 取到request里面的属性值,<span style="color:green">转换类型成指定的参数 <code>klass</code></span>.
      *
      * @param <T>
@@ -673,6 +694,33 @@ public final class RequestUtil{
     public static <T> T getAttribute(HttpServletRequest request,String name,Class<T> klass){
         Object value = getAttribute(request, name);
         return ConvertUtil.convert(value, klass);
+    }
+
+    /**
+     * 取到request里面的属性值,<span style="color:green">转换类型成指定的参数 <code>klass</code></span>.
+     * 
+     * <p>
+     * 如果值是null 或者没有相关属性,那么返回 <code>defaultValue</code>.
+     * </p>
+     *
+     * @param <T>
+     *            the generic type
+     * @param request
+     *            请求
+     * @param name
+     *            属性名称
+     * @param klass
+     *            需要被转换成的类型
+     * @param defaultValue
+     *            默认值
+     * @return the attribute
+     * @see com.feilong.core.bean.ConvertUtil#convert(Object, Class)
+     * @see #getAttribute(HttpServletRequest, String)
+     * @since 4.4.0
+     */
+    public static <T> T getAttribute(HttpServletRequest request,String name,Class<T> klass,T defaultValue){
+        Object value = getAttribute(request, name);
+        return null == value ? defaultValue : ConvertUtil.convert(value, klass);
     }
 
     //---------------------------------------------------------------
