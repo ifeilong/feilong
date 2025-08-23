@@ -21,11 +21,14 @@ import static com.feilong.core.URIComponents.SCHEME_HTTP;
 import static com.feilong.core.URIComponents.SCHEME_HTTPS;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.convert;
 import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.bean.ConvertUtil.toLong;
 import static com.feilong.core.lang.ObjectUtil.defaultEmptyStringIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrLessThanOne;
+import static com.feilong.core.lang.ObjectUtil.defaultPageNo;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.lang.StringUtil.tokenizeToStringArray;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
@@ -1570,9 +1573,11 @@ public final class RequestUtil{
      *            当前请求
      * @param paramName
      *            参数名称
-     * @return 获得request中的请求参数值
+     * @return 获得request中的请求参数值<br>
+     *         如果 <code>paramName</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static String getParameter(HttpServletRequest request,String paramName){
+        Validate.notNull(paramName, "paramName can't be null!");
         return request.getParameter(paramName);
     }
 
@@ -1621,6 +1626,146 @@ public final class RequestUtil{
      */
     public static String getParameterDefaultValue(HttpServletRequest request,String paramName,String defaultValue){
         return defaultIfNullOrEmpty(getParameter(request, paramName), defaultValue);
+    }
+
+    /**
+     * 获得request中的请求参数值,如果不存在或者是empty,那么使用默认值 <code>defaultValue</code>.
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * private static Integer buildQrChannel(HttpServletRequest request){
+     *     // 添加二维码渠道
+     *     String qrChannel = request.getParameter("_qr_channel");
+     *     if (Strings.isNullOrEmpty(qrChannel)){
+     *         return 0;
+     *     }
+     *     return Integer.parseInt(qrChannel);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * 
+     * private static Integer buildQrChannel(HttpServletRequest request){
+     *     return RequestUtil.getParameterDefaultValue(request, "_qr_channel", Integer.class, 0);
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param request
+     *            当前请求
+     * @param paramName
+     *            参数名称
+     * @param convertClass
+     *            转换类型
+     * @param defaultValue
+     *            如果参数值是空或者empty,使用默认值
+     * @return 获得request中的请求参数值
+     * @since 4.4.0
+     */
+    public static <T> T getParameterDefaultValue(HttpServletRequest request,String paramName,Class<T> convertClass,T defaultValue){
+        String value = getParameter(request, paramName);
+        return isNullOrEmpty(value) ? defaultValue : convert(value, convertClass);
+    }
+
+    /**
+     * 获得request中的请求分页页码参数,如果不存在或者是empty,那么使用默认值 <code>defaultValue</code>.
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * String parameter = request.getParameter("page");
+     * 
+     * Integer page = StringUtils.isNotBlank(parameter) ? Integer.parseInt(parameter) : 1;
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * 
+     * Integer page = RequestUtil.getParameterPageNo(request, "page");
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param request
+     *            the request
+     * @param paramName
+     *            参数名称
+     * @return 如果参数值是空或者empty 或者值小于1,使用1
+     *         如果 <code>paramName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 4.4.0
+     */
+    public static Integer getParameterPageNo(HttpServletRequest request,String paramName){
+        String value = getParameter(request, paramName);
+        if (isNullOrEmpty(value)){
+            return 1;
+        }
+        return defaultPageNo(convert(value, Integer.class));
+    }
+
+    /**
+     * 获得request中的请求分页size参数值,如果不存在或者是empty,那么使用默认值 <code>defaultValue</code>.
+     * 
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * String parameter2 = request.getParameter("count");
+     * 
+     * Integer count = StringUtils.isNotBlank(parameter2) ? Integer.parseInt(parameter2) : 20;
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * 
+     * Integer count = RequestUtil.getParameterPageSize(request, "count", 20);
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param request
+     *            the request
+     * @param paramName
+     *            参数名称
+     * @param defaultValue
+     *            如果参数值是空或者empty 或者值小于1,使用默认值
+     * @return the parameter page size
+     * @since 4.4.0
+     */
+    public static Integer getParameterPageSize(HttpServletRequest request,String paramName,Integer defaultValue){
+        String value = getParameter(request, paramName);
+        if (isNullOrEmpty(value)){
+            return defaultValue;
+        }
+        return defaultIfNullOrLessThanOne(convert(value, Integer.class), defaultValue);
     }
 
     /**
