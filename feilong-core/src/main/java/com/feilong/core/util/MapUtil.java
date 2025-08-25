@@ -207,6 +207,13 @@ import lombok.NoArgsConstructor;
 public final class MapUtil{
 
     /**
+     * 
+     * 核心功能是"懒加载"——当Map中不存在某个key时，自动调用函数生成value并存入Map。这个设计模式在编程中很常见，但Java 8将其封装成了标准方法.
+     * 
+     * <p>
+     * 用于简化 ​键不存在时的值初始化与惰性计算，核心逻辑是“按需生成值并原子性插入”
+     * </p>
+     * 
      * If the specified key is not already associated with a value (or is mapped
      * to {@code null}), attempts to compute its value using the given mapping
      * function and enters it into this map unless {@code null}.

@@ -17,8 +17,7 @@ package com.feilong.context.log;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
-import java.util.Iterator;
-import java.util.ServiceLoader;
+import com.feilong.core.util.ServiceLoaderUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,10 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ContextLogCreator{
 
-    /** SPI（Service Provider Interface）机制是Java中用于动态加载服务实现的核心技术，其底层实现基于配置文件、类加载器与反射机制。. */
-    private static volatile CustomFixedContextLogCreator cachedCreator;
-
-    //---------------------------------------------------------------
     /**
      * 创建固定的上下文.
      * 
@@ -100,21 +95,9 @@ public class ContextLogCreator{
      */
     private static String getCustomFixContextLog(){
         try{
-            if (cachedCreator == null){
-                synchronized (ContextLogCreator.class){
-                    if (cachedCreator == null){
-                        ServiceLoader<CustomFixedContextLogCreator> loader = ServiceLoader.load(CustomFixedContextLogCreator.class);
-                        Iterator<CustomFixedContextLogCreator> iterator = loader.iterator();
-                        if (iterator.hasNext()){
-                            //暂时只取一个
-                            cachedCreator = iterator.next();
-                            log.info("loadCustomFixContextLogCreator:[{}]", cachedCreator.getClass().getCanonicalName());
-                        }
-                    }
-                }
-            }
+            CustomFixedContextLogCreator customFixedContextLogCreator = ServiceLoaderUtil.loadFirst(CustomFixedContextLogCreator.class);
             // 无实现时返回null
-            return (cachedCreator == null) ? null : cachedCreator.createContextLog();
+            return customFixedContextLogCreator == null ? null : customFixedContextLogCreator.createContextLog();
         }catch (Throwable e){
             return "CustomFixedContextLogCreatorException:" + e.getMessage();
         }
