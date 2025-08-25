@@ -18,6 +18,9 @@ package com.feilong.json.processor;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.lang3.StringUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 将指定类型下面所有属性名字<b>首字母变大写</b>的处理器.
  * 
@@ -124,16 +127,11 @@ import com.feilong.lib.lang3.StringUtils;
  * @see <a href="https://github.com/venusdrogon/feilong-core/issues/505">json format 需要支持修改key的名字</a>
  * @since 1.9.3
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CapitalizePropertyNameProcessor implements PropertyNameProcessor{
 
     /** Singleton instance. */
     public static final PropertyNameProcessor INSTANCE = new CapitalizePropertyNameProcessor();
-
-    /**
-     * Instantiates a new capitalize property name processor.
-     */
-    private CapitalizePropertyNameProcessor(){
-    }
 
     //---------------------------------------------------------------
 

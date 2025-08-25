@@ -19,6 +19,9 @@ package com.feilong.lib.codec.digest;
 
 import java.security.MessageDigest;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * Standard {@link MessageDigest} algorithm names from the <cite>Java Cryptography Architecture Standard Algorithm Name
  * Documentation</cite>.
@@ -51,6 +54,7 @@ import java.security.MessageDigest;
  * @see <a href="http://dx.doi.org/10.6028/NIST.FIPS.202">FIPS PUB 202</a>
  * @since 1.7
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessageDigestAlgorithms{
 
     /**
@@ -152,9 +156,5 @@ public class MessageDigestAlgorithms{
      * @since 1.11
      */
     public static final String SHA3_512    = "SHA3-512";
-
-    private MessageDigestAlgorithms(){
-        // cannot be instantiated.
-    }
 
 }

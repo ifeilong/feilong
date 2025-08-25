@@ -21,6 +21,9 @@ import org.apache.commons.collections4.Equator;
 
 import com.feilong.lib.lang3.StringUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 忽视大小写的实现.
  * 
@@ -28,6 +31,7 @@ import com.feilong.lib.lang3.StringUtils;
  * @see com.feilong.lib.collection4.functors.DefaultEquator
  * @since 1.10.1
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class IgnoreCaseEquator implements Equator<String>,Serializable{
 
     /** The Constant serialVersionUID. */
@@ -36,15 +40,6 @@ public class IgnoreCaseEquator implements Equator<String>,Serializable{
     /** Static instance. */
     // the static instance works for all types
     public static final IgnoreCaseEquator INSTANCE         = new IgnoreCaseEquator();
-
-    //---------------------------------------------------------------
-
-    /**
-     * Restricted constructor.
-     */
-    private IgnoreCaseEquator(){
-        super();
-    }
 
     //---------------------------------------------------------------
 

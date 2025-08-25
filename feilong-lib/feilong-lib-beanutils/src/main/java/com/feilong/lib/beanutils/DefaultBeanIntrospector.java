@@ -24,6 +24,9 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * The default {@link BeanIntrospector} implementation.
  * <p>
@@ -42,6 +45,7 @@ import java.util.List;
  * @since 1.9
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DefaultBeanIntrospector implements BeanIntrospector{
 
     /** The singleton instance of this class. */
@@ -52,12 +56,6 @@ public class DefaultBeanIntrospector implements BeanIntrospector{
 
     /** Constant for arguments types of a method that expects a list argument. */
     private static final Class<?>[]      LIST_CLASS_PARAMETER   = new Class[] { java.util.List.class };
-
-    /**
-     * Private constructor so that no instances can be created.
-     */
-    private DefaultBeanIntrospector(){
-    }
 
     /**
      * Performs introspection of a specific Java class. This implementation uses
