@@ -104,7 +104,7 @@ public class LogKeyThreadLocal{
      * @param logKey
      *            the new logkey
      */
-    public static void setLogkey(String logKey){
+    public static void setLogKey(String logKey){
         LOGKEY_THREAD_LOCAL.set(logKey);
     }
 
@@ -115,12 +115,12 @@ public class LogKeyThreadLocal{
      *            the new logkey
      * @since 4.4.0
      */
-    public static void appendLogkey(String appendLogKey){
+    public static void appendLogKey(String appendLogKey){
         if (isNullOrEmpty(appendLogKey)){
             return;
         }
         //存在的老的
-        String oldString = getLogkey();
+        String oldString = getLogKey();
         LOGKEY_THREAD_LOCAL.set(defaultEmptyStringIfNull(oldString) + appendLogKey);
     }
 
@@ -131,7 +131,7 @@ public class LogKeyThreadLocal{
      *
      * @return the logkey
      */
-    public static String getLogkey(){
+    public static String getLogKey(){
         return LOGKEY_THREAD_LOCAL.get();
     }
 
@@ -140,7 +140,7 @@ public class LogKeyThreadLocal{
     /**
      * 删除通用日志.
      */
-    public static void removeLogkey(){
+    public static void removeLogKey(){
         LOGKEY_THREAD_LOCAL.remove();
     }
 }

@@ -27,11 +27,12 @@ public class AutoLog{
 
         return formatPattern(
                         "{}{}{}{}", //
-                        getCounterLogString(),
-                        getLogkeyString(),
-                        ContextLogCreator.getContextLog(),
+                        getCounterLogString(), //计步器
+                        getLogKeyString(), //指定上下文
+                        ContextLogCreator.getContextLog(), //固定上下文
 
-                        businessLog);
+                        businessLog //业务日志
+        );
     }
 
     //---------------------------------------------------------------
@@ -49,8 +50,8 @@ public class AutoLog{
     /**
      * 日志上下文
      */
-    private static String getLogkeyString(){
-        String logkey = LogKeyThreadLocal.getLogkey();
+    private static String getLogKeyString(){
+        String logkey = LogKeyThreadLocal.getLogKey();
         if (isNullOrEmpty(logkey)){
             return EMPTY;
         }

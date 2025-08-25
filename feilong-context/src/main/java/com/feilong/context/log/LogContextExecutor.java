@@ -171,7 +171,7 @@ public class LogContextExecutor{
     public static <T> T call(String logKey,Callable<T> callable,ExceptionCallback exceptionCallback){
         try{
             LogCounterThreadLocal.beginCounter();
-            LogKeyThreadLocal.setLogkey(logKey);
+            LogKeyThreadLocal.setLogKey(logKey);
 
             return callable.call();//可能有受检异常
 
@@ -191,7 +191,7 @@ public class LogContextExecutor{
             throw new DefaultRuntimeException(e);
         }finally{
             LogCounterThreadLocal.removeCounter();
-            LogKeyThreadLocal.removeLogkey();
+            LogKeyThreadLocal.removeLogKey();
         }
     }
 

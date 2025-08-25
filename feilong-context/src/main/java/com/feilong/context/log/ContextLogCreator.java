@@ -32,40 +32,41 @@ public class ContextLogCreator{
     //---------------------------------------------------------------
     /**
      * 创建固定的上下文.
+     * 
+     * <p>
+     * 分为两部分, 第一部分会自动获取http请求参数和地址 (如果是http请求 比如controller ),第二部分支持获取自定义的上下文, 比如后台应用 获取登录用户id name ; rpc应用获取调用应用名字和ip等等.
+     * </p>
      *
-     * @return the context log
+     * @return 如果有异常, 返回exception:和异常信息
      * @since 4.4.0
      */
     public static String getContextLog(){
         StringBuilder sb = new StringBuilder();
+
         //---------------------------------------------------------------
-        try{
-            //http的上下文
-            FixedContextLogCreator fixedContextLogCreator = HttpSpringFixedContextLogCreator.INSTANCE;
-            String httpContextLog = fixedContextLogCreator.createContextLog();
-            if (isNotNullOrEmpty(httpContextLog)){
-                sb.append(httpContextLog).append(" ");
-            }
-
-            //---------------------------------------------------------------
-            //自定义的固定上下文
-
-            //此处可以有登录用户的id  name 等; 或者rpc 调用的应用和ip 等
-            String customFixContextLog = getCustomFixContextLog();
-            if (isNotNullOrEmpty(customFixContextLog)){
-                sb.append(customFixContextLog).append(" ");
-            }
-
-            return sb.toString();
-        }catch (Exception e){
-            return "exception:" + e.getMessage();
+        //http的上下文
+        FixedContextLogCreator fixedContextLogCreator = HttpSpringFixedContextLogCreator.INSTANCE;
+        String httpContextLog = fixedContextLogCreator.createContextLog();
+        if (isNotNullOrEmpty(httpContextLog)){//实现已经处理了异常
+            sb.append(httpContextLog).append(" ");
         }
+
+        //---------------------------------------------------------------
+        //自定义的固定上下文
+
+        //此处可以有登录用户的id  name 等; 或者rpc 调用的应用和ip 等
+        String customFixContextLog = getCustomFixContextLog();
+        if (isNotNullOrEmpty(customFixContextLog)){ //实现已经处理了异常
+            sb.append(customFixContextLog).append(" ");
+        }
+
+        return sb.toString();
     }
 
     //---------------------------------------------------------------
 
     /**
-     * 获取自定义固定context log.
+     * 基于SPI（Service Provider Interface） 获取自定义固定context log,比如后台应用 获取登录用户id name ; rpc应用获取调用应用名字和ip等等.
      * 
      * <h3>项目实现步骤:</h3>
      * <blockquote>
@@ -98,21 +99,25 @@ public class ContextLogCreator{
      * @since 4.4.0
      */
     private static String getCustomFixContextLog(){
-        if (cachedCreator == null){
-            synchronized (ContextLogCreator.class){
-                if (cachedCreator == null){
-                    ServiceLoader<CustomFixedContextLogCreator> loader = ServiceLoader.load(CustomFixedContextLogCreator.class);
-                    Iterator<CustomFixedContextLogCreator> iterator = loader.iterator();
-                    if (iterator.hasNext()){
-                        //暂时只取一个
-                        cachedCreator = iterator.next();
-                        log.info("loadCustomFixContextLogCreator:[{}]", cachedCreator.getClass().getCanonicalName());
+        try{
+            if (cachedCreator == null){
+                synchronized (ContextLogCreator.class){
+                    if (cachedCreator == null){
+                        ServiceLoader<CustomFixedContextLogCreator> loader = ServiceLoader.load(CustomFixedContextLogCreator.class);
+                        Iterator<CustomFixedContextLogCreator> iterator = loader.iterator();
+                        if (iterator.hasNext()){
+                            //暂时只取一个
+                            cachedCreator = iterator.next();
+                            log.info("loadCustomFixContextLogCreator:[{}]", cachedCreator.getClass().getCanonicalName());
+                        }
                     }
                 }
             }
+            // 无实现时返回null
+            return (cachedCreator == null) ? null : cachedCreator.createContextLog();
+        }catch (Throwable e){
+            return "CustomFixedContextLogCreatorException:" + e.getMessage();
         }
-        // 无实现时返回null
-        return (cachedCreator == null) ? null : cachedCreator.createContextLog();
     }
 
 }
