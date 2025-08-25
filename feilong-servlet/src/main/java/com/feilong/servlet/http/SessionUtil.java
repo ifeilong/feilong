@@ -113,6 +113,8 @@ public final class SessionUtil{
         return session == null ? null : session.getId();
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 从指定的request 对应的session中获取指定的属性.
      * 
@@ -173,6 +175,8 @@ public final class SessionUtil{
         Validate.validState(null != value, "No session attribute [%s] found", attributeName);
         return value;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 设置 the session attribute with the given name to the given value.
