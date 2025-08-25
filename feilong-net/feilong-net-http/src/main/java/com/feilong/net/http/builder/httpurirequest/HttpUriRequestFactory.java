@@ -35,22 +35,17 @@ import com.feilong.net.http.HttpMethodType;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.RequestConfigBuilder;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * A factory for creating {@link HttpUriRequest} objects.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HttpUriRequestFactory{
-
-    /** Don't let anyone instantiate this class. */
-    private HttpUriRequestFactory(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 基于 <code>httpRequest</code> 和 <code>connectionConfig</code> 构造 {@link HttpUriRequest}.

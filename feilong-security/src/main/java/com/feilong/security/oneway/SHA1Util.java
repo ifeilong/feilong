@@ -18,6 +18,9 @@ package com.feilong.security.oneway;
 import com.feilong.core.CharsetType;
 import com.feilong.security.EncryptionException;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * Secure Hash Algorithm,安全散列算法 (单向加密).
  * 
@@ -47,19 +50,11 @@ import com.feilong.security.EncryptionException;
  * @see com.feilong.lib.codec.digest.DigestUtils#sha1(String)
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SHA1Util{
 
     /** The oneway type. */
     private static final OnewayType ONEWAYTYPE = OnewayType.SHA1;
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private SHA1Util(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

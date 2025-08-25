@@ -37,6 +37,9 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbVMParams;
 import com.feilong.template.TemplateUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 面包屑渲染核心工具类.
  * 
@@ -65,19 +68,11 @@ import com.feilong.template.TemplateUtil;
  * @since 1.2.2
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BreadCrumbUtil{
 
     /** The Constant VM_KEY_BREADCRUMB. */
     private static final String VM_KEY_BREADCRUMB = "breadCrumbVMParams";
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private BreadCrumbUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

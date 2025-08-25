@@ -56,6 +56,9 @@ import com.feilong.lib.lang3.time.DateFormatUtils;
 import com.feilong.lib.lang3.time.DateUtils;
 import com.feilong.lib.lang3.tuple.Pair;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link java.util.Date}操作工具类(feilong-core核心类之一).
  * 
@@ -216,6 +219,7 @@ import com.feilong.lib.lang3.tuple.Pair;
  * @since 1.0.0
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DateUtil{
 
     /**
@@ -224,15 +228,6 @@ public final class DateUtil{
      * @since 3.0.0
      */
     private static final Map<String, String> UNIT_CONFIG_MAP = toMap(getResourceBundle("config/feilong-dateutil"));
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private DateUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

@@ -24,6 +24,9 @@ import java.io.UncheckedIOException;
 import com.feilong.core.Validate;
 import com.feilong.lib.io.IOUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link java.io.Reader} 工具类.
  *
@@ -37,16 +40,9 @@ import com.feilong.lib.io.IOUtils;
  * @see java.io.LineNumberReader
  * @since 1.0.9
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ReaderUtil{
 
-    /** Don't let anyone instantiate this class. */
-    private ReaderUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
     /**
      * 构造一个 {@link StringReader}.
      *

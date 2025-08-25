@@ -18,6 +18,9 @@ package com.feilong.security.oneway;
 import com.feilong.core.CharsetType;
 import com.feilong.security.EncryptionException;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * SHA-512是一种安全哈希算法，也称为SHA-2 512，它是SHA-2系列中的一种。
  * 
@@ -35,19 +38,11 @@ import com.feilong.security.EncryptionException;
  * @see OnewayType#SHA512
  * @since 1.14.2
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SHA512Util{
 
     /** The oneway type. */
     private static final OnewayType ONEWAYTYPE = OnewayType.SHA512;
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private SHA512Util(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

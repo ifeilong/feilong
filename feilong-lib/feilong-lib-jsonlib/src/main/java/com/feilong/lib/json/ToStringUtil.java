@@ -25,12 +25,16 @@ import java.util.Map.Entry;
 
 import com.feilong.lib.json.util.JSONUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 转成string
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ToStringUtil{
 
     /**
@@ -62,15 +66,6 @@ public class ToStringUtil{
      * @since 4.0.8
      */
     public static final String OBJECT_END_CHAR   = "}";
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private ToStringUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

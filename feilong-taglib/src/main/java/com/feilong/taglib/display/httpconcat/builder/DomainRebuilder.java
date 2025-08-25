@@ -21,6 +21,9 @@ import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConf
 
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * domain 再加工.
  *
@@ -28,16 +31,8 @@ import javax.servlet.http.HttpServletRequest;
  * @since 1.11.1
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DomainRebuilder{
-
-    /** Don't let anyone instantiate this class. */
-    private DomainRebuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 如果domain 是null或者 empty 那么会使用 {@link javax.servlet.http.HttpServletRequest#getContextPath()}.

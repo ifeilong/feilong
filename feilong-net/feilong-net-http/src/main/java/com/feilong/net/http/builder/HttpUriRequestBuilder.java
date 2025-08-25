@@ -24,6 +24,9 @@ import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.httpurirequest.HttpUriRequestFactory;
 import com.feilong.net.http.packer.HttpRequestHeadersPacker;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 专门用来构造 {@link HttpUriRequest}.
  *
@@ -31,16 +34,8 @@ import com.feilong.net.http.packer.HttpRequestHeadersPacker;
  * @since 1.10.6
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class HttpUriRequestBuilder{
-
-    /** Don't let anyone instantiate this class. */
-    private HttpUriRequestBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 基于 <code>httpRequest</code> 和 <code>connectionConfig</code> 构造 {@link HttpUriRequest}.

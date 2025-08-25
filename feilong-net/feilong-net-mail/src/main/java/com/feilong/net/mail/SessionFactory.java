@@ -25,22 +25,17 @@ import com.feilong.net.mail.builder.AuthenticatorBuilder;
 import com.feilong.net.mail.builder.SessionPropertiesBuilder;
 import com.feilong.net.mail.entity.SessionConfig;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 根据邮件会话属性和密码验证器构造邮件的{@link javax.mail.Session}.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.9
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SessionFactory{
-
-    /** Don't let anyone instantiate this class. */
-    private SessionFactory(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 根据邮件会话属性和密码验证器构造邮件的{@link javax.mail.Session}.

@@ -28,6 +28,9 @@ import java.net.URI;
 import com.feilong.core.Validate;
 import com.feilong.core.net.URIUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link java.awt.Desktop}允许 Java应用程序启动已在本机桌面上注册的关联应用程序,以及处理 URI 或文件 .
  *
@@ -36,17 +39,11 @@ import com.feilong.core.net.URIUtil;
  * @since 1.0.0
  * @since jdk 1.6
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DesktopUtil{
 
     /** 判断当前系统是否支持Java AWT Desktop扩展. */
     private static final boolean DESKTOP_SUPPORTED = Desktop.isDesktopSupported();
-
-    /** Don't let anyone instantiate this class. */
-    private DesktopUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

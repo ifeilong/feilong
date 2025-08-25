@@ -34,17 +34,13 @@ import com.feilong.excel.definition.ExcelCell;
 import com.feilong.excel.definition.ExcelCellConditionStyle;
 import com.feilong.lib.excel.ognl.OgnlStack;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 class RowWriter{
 
-    /** Don't let anyone instantiate this class. */
-    private RowWriter(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
     static void write(
                     Sheet sheet,
                     ExcelBlock excelBlock,
@@ -88,11 +84,7 @@ class RowWriter{
             setCellStyle(sheet, styleMap, ognlStack, excelCell, rowIndex, col);
         }
         if (log.isTraceEnabled()){
-            log.trace(
-                            "write row:[{}] over,rowOffset:[{}],use time: [{}]",
-                            rowIndex,
-                            rowOffset,
-                            formatElapsedTime(beginTimeMillis));
+            log.trace("write row:[{}] over,rowOffset:[{}],use time: [{}]", rowIndex, rowOffset, formatElapsedTime(beginTimeMillis));
         }
     }
 

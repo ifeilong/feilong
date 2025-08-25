@@ -26,22 +26,17 @@ import java.util.Map;
 import com.feilong.lib.org.apache.http.NameValuePair;
 import com.feilong.lib.org.apache.http.message.BasicNameValuePair;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 将Map{@code <String, String>} 转成 List{@code <NameValuePair>} 的构造器.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 final class NameValuePairBuilder{
-
-    /** Don't let anyone instantiate this class. */
-    private NameValuePairBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 将Map{@code <String, String>} 转成 List{@code <NameValuePair>}.

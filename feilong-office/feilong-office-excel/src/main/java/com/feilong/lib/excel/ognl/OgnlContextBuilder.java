@@ -19,16 +19,11 @@ import java.util.Map;
 
 import com.feilong.lib.ognl.OgnlContext;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class OgnlContextBuilder{
-
-    /** Don't let anyone instantiate this class. */
-    private OgnlContextBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     static OgnlContext build(Map<String, Object> context){
         return new OgnlContext(new DefaultMemberAccess(true), null, null, context);

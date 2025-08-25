@@ -23,22 +23,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.feilong.io.FileUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link MultipartFile} 工具类.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.9
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 final class MultipartFileUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private MultipartFileUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 获得 multipart file info map for log map.

@@ -15,6 +15,9 @@
  */
 package com.feilong.servlet.http;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * Request 作用域中的属性.
  * 
@@ -23,6 +26,7 @@ package com.feilong.servlet.http;
  * @see "org.springframework.web.util.WebUtils"
  * @since 1.0.4
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RequestAttributes{
 
     //---------------------------include(Servlet 2.2)------------------------------------
@@ -196,12 +200,4 @@ public final class RequestAttributes{
 
     // 暂时还用不到下面的属性 "javax.servlet.context.tempdir" "javax.security.auth.subject"
 
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private RequestAttributes(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 }

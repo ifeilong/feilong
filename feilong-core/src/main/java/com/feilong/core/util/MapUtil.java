@@ -47,6 +47,9 @@ import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.lib.collection4.MapUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link Map}工具类.
  * 
@@ -198,18 +201,11 @@ import com.feilong.lib.collection4.MapUtils;
  * @see "com.google.common.collect.Maps"
  * @since 1.0.0
  */
-@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MapUtil{
 
-    /** Don't let anyone instantiate this class. */
-    private MapUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
     /**
      * If the specified key is not already associated with a value (or is mapped
      * to {@code null}), attempts to compute its value using the given mapping

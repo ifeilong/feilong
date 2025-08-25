@@ -19,6 +19,9 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 import com.feilong.core.Validate;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link java.lang.Byte} 工具类.
  * 
@@ -26,6 +29,7 @@ import com.feilong.core.Validate;
  * @version 1.4.0 2015年8月3日 上午3:06:20
  * @since 1.4.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ByteUtil{
 
     /** 数字 字符数组. */
@@ -33,14 +37,6 @@ public final class ByteUtil{
 
     /** The Constant hexDigits. */
     private static final String[] HEX_DIGITS    = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-
-    //---------------------------------------------------------------
-    /** Don't let anyone instantiate this class. */
-    private ByteUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

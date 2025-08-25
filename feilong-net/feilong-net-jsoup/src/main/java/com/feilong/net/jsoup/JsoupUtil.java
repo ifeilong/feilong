@@ -34,12 +34,16 @@ import com.feilong.net.SSLContextBuilder;
 import com.feilong.net.SSLProtocol;
 import com.feilong.net.UriProcessor;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * Jsoup 的工具类.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.6
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class JsoupUtil{
 
     /** <code>{@value}</code>. */
@@ -51,14 +55,6 @@ public final class JsoupUtil{
      * @since 1.8.1
      */
     private static final String DEFAULT_USER_AGENT     = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21";
-
-    //---------------------------------------------------------------
-    /** Don't let anyone instantiate this class. */
-    private JsoupUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

@@ -22,12 +22,16 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * The Class IOUtil.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class IOUtil{
 
     /**
@@ -42,13 +46,6 @@ public final class IOUtil{
      * {@link #copyLarge(Reader, Writer)}
      */
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
-
-    /** Don't let anyone instantiate this class. */
-    private IOUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

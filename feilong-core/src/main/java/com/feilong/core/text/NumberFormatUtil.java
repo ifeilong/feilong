@@ -27,6 +27,9 @@ import java.text.NumberFormat;
 import com.feilong.core.NumberPattern;
 import com.feilong.core.Validate;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link NumberFormat}是所有数值格式的抽象基类,此类提供格式化和解析数值的接口.
  * 
@@ -43,16 +46,8 @@ import com.feilong.core.Validate;
  * @since 1.0.2
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class NumberFormatUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private NumberFormatUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 将 {@link Number} 使用 {@link RoundingMode} <code>numberPattern</code>格式化.

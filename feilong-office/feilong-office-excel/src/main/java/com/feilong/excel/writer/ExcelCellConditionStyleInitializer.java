@@ -32,17 +32,13 @@ import com.feilong.excel.definition.ExcelCellConditionStyle;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.CellReferenceUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 class ExcelCellConditionStyleInitializer{
 
-    /** Don't let anyone instantiate this class. */
-    private ExcelCellConditionStyleInitializer(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
     static Map<String, CellStyle> init(Sheet sheet,ExcelSheet excelSheet){
         Map<String, CellStyle> returnMap = new HashMap<>();
 

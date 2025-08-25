@@ -36,14 +36,18 @@ import com.feilong.excel.definition.LoopBreakCondition;
 import com.feilong.excel.util.CellReferenceUtil;
 import com.feilong.lib.excel.ognl.OgnlStack;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * The Class BlockReader.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
-@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 class BlockReader{
 
     /** The Constant STATUS_SETTING_ERROR. */
@@ -54,15 +58,6 @@ class BlockReader{
 
     /** The Constant STATUS_DATA_COLLECTION_ERROR. */
     private static final int STATUS_DATA_COLLECTION_ERROR = 10;
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private BlockReader(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

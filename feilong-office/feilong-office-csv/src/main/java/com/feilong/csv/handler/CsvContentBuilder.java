@@ -22,6 +22,9 @@ import java.util.List;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.csv.entity.CsvConfig;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 构造 csv 输出内容.
  *
@@ -30,6 +33,7 @@ import com.feilong.csv.entity.CsvConfig;
  * @since 1.10.7 rename
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CsvContentBuilder{
 
     /** 转义引号用的字符 ". */
@@ -43,15 +47,6 @@ public class CsvContentBuilder{
      * 如果把这个字符输出到控制台,显示为空格.
      */
     private static final char NO_QUOTE_CHARACTER      = '\u0000';
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private CsvContentBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

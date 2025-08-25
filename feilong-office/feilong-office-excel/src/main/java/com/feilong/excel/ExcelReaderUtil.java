@@ -33,6 +33,9 @@ import com.feilong.excel.reader.ReadStatus;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.json.JsonUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 专门用来读取 excel 的.
  * 
@@ -40,16 +43,9 @@ import com.feilong.json.JsonUtil;
  * @since 1.13.0
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExcelReaderUtil{
 
-    /** Don't let anyone instantiate this class. */
-    private ExcelReaderUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
     /**
      * 获得 list.
      *

@@ -29,22 +29,18 @@ import com.feilong.excel.ExcelDefinition;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.WorkbookUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * The Class WorkbookWriter.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class WorkbookWriter{
 
-    /** Don't let anyone instantiate this class. */
-    private WorkbookWriter(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
     /**
      * Write per sheet.
      *

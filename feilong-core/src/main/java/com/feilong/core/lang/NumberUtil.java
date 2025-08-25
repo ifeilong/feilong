@@ -29,6 +29,9 @@ import com.feilong.core.Validate;
 import com.feilong.core.text.NumberFormatUtil;
 import com.feilong.lib.lang3.math.NumberUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 处理{@link Integer},{@link Long},{@link BigDecimal}等数据类型.
  * 
@@ -159,6 +162,7 @@ import com.feilong.lib.lang3.math.NumberUtils;
  * @since 1.4.0
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class NumberUtil{
 
     /**
@@ -269,14 +273,6 @@ public final class NumberUtil{
      * @since 1.10.7
      */
     public static final long TEN_BILLION      = (long) (BILLION) * 10;
-
-    //---------------------------------------------------------------
-    /** Don't let anyone instantiate this class. */
-    private NumberUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

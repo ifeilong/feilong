@@ -55,6 +55,9 @@ import com.feilong.lib.collection4.IterableUtils;
 import com.feilong.lib.collection4.ListUtils;
 import com.feilong.lib.lang3.tuple.Pair;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.
  *
@@ -274,18 +277,11 @@ import com.feilong.lib.lang3.tuple.Pair;
  * 
  * @since jdk1.5
  */
-@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CollectionsUtil{
 
-    /** Don't let anyone instantiate this class. */
-    private CollectionsUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //-----------------------------------------------------------------------
     /**
      * Returns consecutive {@link List#subList(int, int) sublists} of a
      * list, each of the same size (the final list may be smaller). For example,

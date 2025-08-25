@@ -34,6 +34,9 @@ import com.feilong.core.bean.PropertyUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.servlet.http.entity.CookieEntity;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link javax.servlet.http.Cookie Cookie} 工具类.
  * 
@@ -211,16 +214,10 @@ import com.feilong.servlet.http.entity.CookieEntity;
  * @see <a href="http://www.ietf.org/rfc/rfc2109.txt">HTTP State Management Mechanism (废弃 被rfc6265取代)</a>
  * @since 1.0.0
  */
-@lombok.extern.slf4j.Slf4j
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CookieUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private CookieUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //----------------------get-----------------------------------------
 

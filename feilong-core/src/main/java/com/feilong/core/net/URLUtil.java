@@ -31,6 +31,9 @@ import java.net.URL;
 import com.feilong.core.Validate;
 import com.feilong.lib.lang3.StringUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link URL} 工具类.
  * 
@@ -71,16 +74,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @since 1.2.1
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class URLUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private URLUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 将字符串 <code>spec</code> 转成 {@link URL}.

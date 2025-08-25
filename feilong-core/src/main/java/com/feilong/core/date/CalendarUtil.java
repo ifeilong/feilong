@@ -29,6 +29,9 @@ import java.util.Date;
 import com.feilong.core.DatePattern;
 import com.feilong.core.Validate;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 扩展 {@link DateUtil}类,更多人性化的操作及转换 .
  * 
@@ -236,16 +239,8 @@ import com.feilong.core.Validate;
  * @since 1.0.1
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 final class CalendarUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private CalendarUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     // [start]
 

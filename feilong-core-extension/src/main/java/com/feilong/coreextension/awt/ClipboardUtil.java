@@ -25,6 +25,9 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Reader;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 操作剪切板 {@link java.awt.datatransfer.Clipboard}.
  * 
@@ -32,16 +35,8 @@ import java.io.Reader;
  * @since 1.0.0
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ClipboardUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private ClipboardUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 设置剪贴板数据.

@@ -37,6 +37,9 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.io.entity.FileWriteMode;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 专注于写文件的操作的工具类.
  * 
@@ -56,19 +59,11 @@ import com.feilong.io.entity.FileWriteMode;
  * @since 1.0.6
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class IOWriteUtil{
 
     /** 默认缓冲大小 10k <code>{@value}</code>. */
     public static final int DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtil.ONE_KB);
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private IOWriteUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
     /**
@@ -281,11 +276,7 @@ public final class IOWriteUtil{
         if (log.isInfoEnabled()){
             File file = new File(filePath);
             String messagePattern = "fileSize:[{}],absolutePath:[{}],use time:[{}]";
-            log.info(
-                            messagePattern,
-                            FileUtil.getFileFormatSize(file),
-                            file.getAbsolutePath(),
-                            formatElapsedTime(beginTimeMillis));
+            log.info(messagePattern, FileUtil.getFileFormatSize(file), file.getAbsolutePath(), formatElapsedTime(beginTimeMillis));
         }
         return filePath;
     }
@@ -434,12 +425,7 @@ public final class IOWriteUtil{
             //---------------------------------------------------------------
             if (log.isDebugEnabled()){
                 String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],use time:[{}]";
-                log.debug(
-                                pattern,
-                                FileUtil.formatSize(sumSize),
-                                bufferLength,
-                                loopCount,
-                                formatElapsedTime(beginTimeMillis));
+                log.debug(pattern, FileUtil.formatSize(sumSize), bufferLength, loopCount, formatElapsedTime(beginTimeMillis));
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);

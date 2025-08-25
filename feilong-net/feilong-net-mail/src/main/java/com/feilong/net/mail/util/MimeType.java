@@ -15,6 +15,9 @@
  */
 package com.feilong.net.mail.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 多用途互联网邮件扩展(MIME,Multipurpose Internet Mail Extensions)是一个互联网标准,它扩展了电子邮件标准.
  * 
@@ -189,6 +192,7 @@ package com.feilong.net.mail.util;
  * @see com.feilong.io.entity.MimeType
  * @since 1.2.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MimeType{
 
     /** <code>{@value}</code>. */
@@ -219,14 +223,5 @@ public final class MimeType{
      * @see <a href="https://rsync.tools.ietf.org/html/rfc5545">Internet Calendaring and Scheduling Core Object Specification(iCalendar)</a>
      */
     public static final String TYPE_ICS              = "text/calendar;method=REQUEST;charset=\"UTF-8\"";
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private MimeType(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
 }

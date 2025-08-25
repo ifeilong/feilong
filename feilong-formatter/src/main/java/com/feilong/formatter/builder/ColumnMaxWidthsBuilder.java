@@ -22,22 +22,17 @@ import java.util.List;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.lib.lang3.StringUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 列的最大宽度构建.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ColumnMaxWidthsBuilder{
-
-    /** Don't let anyone instantiate this class. */
-    private ColumnMaxWidthsBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 定位每列最大的宽度.

@@ -17,6 +17,9 @@ package com.feilong.core;
 
 import java.nio.charset.StandardCharsets;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 常用字符编码.
  * 
@@ -33,6 +36,7 @@ import java.nio.charset.StandardCharsets;
  * @see java.nio.charset.StandardCharsets
  * @since 1.4.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CharsetType{
 
     /**
@@ -178,12 +182,4 @@ public final class CharsetType{
      */
     public static final String ISO_8859_1 = StandardCharsets.ISO_8859_1.name();
 
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private CharsetType(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 }

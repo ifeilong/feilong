@@ -29,6 +29,9 @@ import com.feilong.lib.lang3.StringUtils;
 import com.feilong.security.ByteUtil;
 import com.feilong.security.EncryptionException;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 单向加密算法.
  * 
@@ -50,16 +53,8 @@ import com.feilong.security.EncryptionException;
  * @see com.feilong.lib.codec.digest.DigestUtils
  * @see org.springframework.util.DigestUtils
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class OnewayEncryption{
-
-    /** Don't let anyone instantiate this class. */
-    private OnewayEncryption(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 使用算法单向加密字符串,返回大写格式.

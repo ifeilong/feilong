@@ -28,6 +28,9 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import com.feilong.core.Validate;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * Spring Expression Language 工具类.
  * 
@@ -44,6 +47,7 @@ import com.feilong.core.Validate;
  * @since 3.0.2 move from feilong-spring project
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SpelUtil{
 
     /** The expression parser. */
@@ -55,15 +59,6 @@ public final class SpelUtil{
      * @since 4.0.6
      */
     private static final Map<String, Expression> EXPRESSION_STRING_AND_EXPRESSION_MAP = newConcurrentHashMap();
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private SpelUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

@@ -30,12 +30,16 @@ import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.util.transformer.DateToStringTransformer;
 import com.feilong.core.util.transformer.NumberToStringTransformer;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 处理值转换.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ToStringHandler{
 
     /** 默认的 日期转字符串转换器. */
@@ -44,15 +48,6 @@ public final class ToStringHandler{
     /** 默认的 数字转字符串转换器. */
     private static final Transformer<Number, String> DEFAULT_NUMBERTOSTRING_TRANSFORMER = new NumberToStringTransformer(
                     com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS);
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private ToStringHandler(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

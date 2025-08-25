@@ -30,6 +30,9 @@ import com.feilong.core.net.URIUtil;
 import com.feilong.io.IOUtil;
 import com.feilong.io.InputStreamUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link java.io.Serializable}util.
  *
@@ -42,16 +45,8 @@ import com.feilong.io.InputStreamUtil;
  * @see "org.springframework.core.serializer.DefaultSerializer"
  * @since 1.2.1
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SerializableUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private SerializableUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * To byte array.

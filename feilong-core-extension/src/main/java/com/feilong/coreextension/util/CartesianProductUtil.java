@@ -23,6 +23,9 @@ import static com.feilong.core.util.CollectionsUtil.size;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 笛卡尔乘积.
  * 
@@ -39,16 +42,8 @@ import java.util.List;
  * @since 1.7.2
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CartesianProductUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private CartesianProductUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 笛卡尔乘积(数组数组参数形式).

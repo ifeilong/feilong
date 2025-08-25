@@ -36,6 +36,9 @@ import com.feilong.lib.collection4.ComparatorUtils;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 import com.feilong.lib.collection4.comparators.ReverseComparator;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 专注于排序的工具类.
  * 
@@ -64,16 +67,9 @@ import com.feilong.lib.collection4.comparators.ReverseComparator;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SortUtil{
 
-    /** Don't let anyone instantiate this class. */
-    private SortUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
     /**
      * 对 数组 <code>arrays</code> 进行排序.
      * 

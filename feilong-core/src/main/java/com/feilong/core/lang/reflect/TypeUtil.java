@@ -23,6 +23,9 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
 import com.feilong.core.lang.ClassUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * Utility methods focusing on type inspection, particularly with regard to generics.
  * 
@@ -73,16 +76,8 @@ import com.feilong.core.lang.ClassUtil;
  * @since jdk 1.5
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class TypeUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private TypeUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 获得类的 父类 上的泛型参数的类型.

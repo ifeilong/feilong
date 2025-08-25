@@ -17,16 +17,11 @@ package com.feilong.excel.writer;
 
 import org.apache.poi.ss.usermodel.Cell;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 class CellCoper{
-
-    /** Don't let anyone instantiate this class. */
-    private CellCoper(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     static void copy(Cell oldCell,Cell newCell){
         newCell.setCellStyle(oldCell.getCellStyle());

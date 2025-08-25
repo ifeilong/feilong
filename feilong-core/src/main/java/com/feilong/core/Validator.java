@@ -26,6 +26,9 @@ import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.lib.lang3.StringUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 判断给定的对象是否是null或者empty.
  * 
@@ -77,16 +80,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @see "org.apache.commons.collections4.MapUtils#isNotEmpty(Map)"
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Validator{
-
-    /** Don't let anyone instantiate this class. */
-    private Validator(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 判断内部任何对象 <code>values</code> 是不是 null或者empty.

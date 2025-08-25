@@ -18,6 +18,9 @@ package com.feilong.taglib.display.httpconcat.handler;
 import com.feilong.security.oneway.MD5Util;
 import com.feilong.security.oneway.SHA1Util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 独立成一个类,避免没有依赖 security 报错.
  *
@@ -25,16 +28,8 @@ import com.feilong.security.oneway.SHA1Util;
  * @since 1.11.1
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class VersionEncodeUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private VersionEncodeUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * Encode.

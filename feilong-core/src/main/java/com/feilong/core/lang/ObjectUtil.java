@@ -36,6 +36,9 @@ import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.reflect.ConstructorUtil;
 import com.feilong.lib.beanutils.PropertyUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link Object} 工具类.
  * 
@@ -53,14 +56,8 @@ import com.feilong.lib.beanutils.PropertyUtils;
  * @see java.util.Objects
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ObjectUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private ObjectUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     /**
      * 新建klass实例, 并将fromObj中的 指定属于 includePropertyNames 设置到新建的实例中.

@@ -38,6 +38,9 @@ import com.feilong.lib.json.util.CycleDetectionStrategy;
 import com.feilong.lib.json.util.PropertyFilter;
 import com.feilong.lib.lang3.tuple.Pair;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link JsonConfig} 构造器.
  *
@@ -45,6 +48,7 @@ import com.feilong.lib.lang3.tuple.Pair;
  * @since 1.10.3
  * @since 1.11.0 change package
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class JsonConfigBuilder{
 
     /**
@@ -103,15 +107,6 @@ public final class JsonConfigBuilder{
 
     /** The Constant DEFAULT_JAVA_TO_JSON_CONFIG. */
     public static final JsonConfig DEFAULT_JAVA_TO_JSON_CONFIG = buildDefaultJavaToJsonConfig();
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private JsonConfigBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

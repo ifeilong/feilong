@@ -45,6 +45,9 @@ import com.feilong.core.util.SortUtil;
 import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.lib.lang3.StringUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 处理参数相关.
  *
@@ -54,14 +57,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @since 1.0.0
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ParamUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private ParamUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     // -------------------------------addParameter-------------------------------
 

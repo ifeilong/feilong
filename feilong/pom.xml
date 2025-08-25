@@ -63,6 +63,8 @@
 		<!-- https://issues.apache.org/jira/projects/MSOURCES?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
 		<!-- 升级到3.3.0 feilong shade 会报错 org.apache.maven.plugins:maven-source-plugin:3.3.0:jar (attach-sources) on project feilong: Presumably you have configured maven-source-plugn to execute twice times in your build. You have to configure a classifier for at least on of them. -->
 		<v.maven-source-plugin>3.2.1</v.maven-source-plugin>
+		
+		<version.lombok>1.18.38</version.lombok>
 
 		<!-- 跑单元测试的 -->
 		<!-- http://maven.apache.org/surefire/maven-surefire-plugin/ -->
@@ -299,6 +301,14 @@
 			<optional>true</optional>
 			</dependency>
 		-->
+		
+		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${version.lombok}</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 

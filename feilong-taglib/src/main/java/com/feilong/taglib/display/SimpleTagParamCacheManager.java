@@ -22,6 +22,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.feilong.taglib.SimpleTagStringCacheManager;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 标签缓存管理器.
  *
@@ -33,6 +36,7 @@ import com.feilong.taglib.SimpleTagStringCacheManager;
  */
 //XXX 将来可能会有更好的做法
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Deprecated
 public final class SimpleTagParamCacheManager{
 
@@ -51,15 +55,6 @@ public final class SimpleTagParamCacheManager{
     private static final Map<CacheParam, Object> CACHE        = new ConcurrentHashMap<>();
 
     //-----------------------------------------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private SimpleTagParamCacheManager(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //-------------------------------------------------------------------------------------------
 
     /**
      * Builds the options.

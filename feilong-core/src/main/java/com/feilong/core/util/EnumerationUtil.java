@@ -22,6 +22,9 @@ import java.util.Enumeration;
 import com.feilong.lib.collection4.IteratorUtils;
 import com.feilong.lib.collection4.iterators.EnumerationIterator;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link Enumeration}工具类.
  * 
@@ -50,16 +53,8 @@ import com.feilong.lib.collection4.iterators.EnumerationIterator;
  * @see com.feilong.lib.collection4.EnumerationUtils
  * @since 1.5.3
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class EnumerationUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private EnumerationUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 判断<code>enumeration</code>枚举里面,是否有指定的元素<code>value</code>.

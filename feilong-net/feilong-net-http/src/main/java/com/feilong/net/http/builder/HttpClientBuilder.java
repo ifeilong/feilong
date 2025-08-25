@@ -30,6 +30,9 @@ import com.feilong.lib.org.apache.http.impl.client.HttpClients;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.packer.SSLPacker;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link HttpClient} 构造器.
  * 
@@ -42,6 +45,7 @@ import com.feilong.net.http.packer.SSLPacker;
  * @since 1.11.0 change class Access Modifiers
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HttpClientBuilder{
 
     /**
@@ -50,14 +54,6 @@ public class HttpClientBuilder{
      * @since 2.1.0
      */
     private static Map<ConnectionConfig, HttpClient> cache = newConcurrentHashMap(10);
-
-    //---------------------------------------------------------------
-    /** Don't let anyone instantiate this class. */
-    private HttpClientBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

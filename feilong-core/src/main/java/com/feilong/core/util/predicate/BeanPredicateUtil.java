@@ -36,6 +36,9 @@ import com.feilong.lib.collection4.functors.ComparatorPredicate;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.lib.collection4.functors.EqualPredicate;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 专门针对bean,提供的 BeanPredicateUtil.
  *
@@ -45,16 +48,8 @@ import com.feilong.lib.collection4.functors.EqualPredicate;
  * @since 1.8.0
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class BeanPredicateUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private BeanPredicateUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 用来指定 <code>T</code> 对象的特定属性 <code>propertyName</code> equals 指定的 <code>propertyValue</code>.

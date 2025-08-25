@@ -15,6 +15,9 @@
  */
 package com.feilong.core;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 常用字母表.
  *
@@ -22,6 +25,7 @@ package com.feilong.core;
  * @see <a href="http://algs4.cs.princeton.edu/50strings/Alphabet.java.html">Alphabet.java</a>
  * @since 1.5.3
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Alphabet{
 
     /** 数字The decimal alphabet { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }. */
@@ -64,12 +68,4 @@ public final class Alphabet{
      */
     public static final String DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE = "23456789abcdefghijkmnpqrstuvwxyz";
 
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private Alphabet(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 }

@@ -15,6 +15,9 @@
  */
 package com.feilong.io.entity;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 图片类型的枚举.
  *
@@ -22,6 +25,7 @@ package com.feilong.io.entity;
  * @see com.feilong.io.entity.MimeType
  * @since 1.7.1
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ImageType{
 
     /** JPG (Joint Photograhic Experts Group)(联合图像专家组),JPEG的文件格式一般有两种文件扩展名:.jpg和.jpeg,这两种扩展名的实质是相同的. */
@@ -45,12 +49,4 @@ public final class ImageType{
      */
     public static final String BMP  = MimeType.BMP.getExtension();
 
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private ImageType(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 }

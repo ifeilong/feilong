@@ -72,6 +72,9 @@ import com.feilong.lib.lang3.LocaleUtils;
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.lib.lang3.tuple.Pair;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 常用类型转换处理.
  * 
@@ -232,16 +235,8 @@ import com.feilong.lib.lang3.tuple.Pair;
  * @see com.feilong.lib.beanutils.locale.LocaleConvertUtils
  * @since 1.3.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ConvertUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private ConvertUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     static{
         //初始化注册器.

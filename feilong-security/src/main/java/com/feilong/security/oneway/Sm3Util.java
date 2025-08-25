@@ -20,6 +20,9 @@ import java.security.Security;
 import com.feilong.core.CharsetType;
 import com.feilong.security.EncryptionException;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 国产哈希算法.
  * 
@@ -87,6 +90,7 @@ import com.feilong.security.EncryptionException;
  * @see org.bouncycastle.crypto.digests.SM3Digest
  * @since 2.0.1
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Sm3Util{
 
     /** The oneway type. */
@@ -94,14 +98,6 @@ public final class Sm3Util{
 
     static{
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
-    }
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private Sm3Util(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
     //---------------------------------------------------------------

@@ -33,6 +33,9 @@ import com.feilong.core.lang.thread.PartitionPerHandler;
 import com.feilong.core.lang.thread.PartitionRunnableBuilder;
 import com.feilong.core.lang.thread.PartitionThreadConfig;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 线程相关工具类.
  * 
@@ -88,6 +91,7 @@ import com.feilong.core.lang.thread.PartitionThreadConfig;
  * @since 1.10.3
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ThreadUtil{
 
     /**
@@ -97,15 +101,6 @@ public final class ThreadUtil{
      * @since 4.0.6
      */
     public static final String LOG_KEY_NAME_IN_MAP = "com.feilong.core.lang.ThreadUtil.logKey";
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private ThreadUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
     /**
@@ -336,11 +331,7 @@ public final class ThreadUtil{
 
         //---------------------------------------------------------------
         if (log.isInfoEnabled()){
-            log.info(
-                            "runnable:[{}],threadCount:[{}],total use time:{}",
-                            runnable,
-                            threadCount,
-                            formatElapsedTime(beginTimeMillis));
+            log.info("runnable:[{}],threadCount:[{}],total use time:{}", runnable, threadCount, formatElapsedTime(beginTimeMillis));
         }
     }
 

@@ -26,22 +26,17 @@ import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.entity.MailSendConnectionConfig;
 import com.feilong.net.mail.entity.SessionConfig;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * The Class SessionPropertiesBuilder.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SessionPropertiesBuilder{
-
-    /** Don't let anyone instantiate this class. */
-    private SessionPropertiesBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * Properties object. Used only if a new Session object is created.

@@ -17,6 +17,9 @@ package com.feilong.security.oneway;
 
 import com.feilong.core.CharsetType;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * Message Digest algorithm 5,信息摘要算法.
  * 
@@ -47,19 +50,11 @@ import com.feilong.core.CharsetType;
  * @see "org.springframework.util.DigestUtils"
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MD5Util{
 
     /** The oneway type. */
     private static final OnewayType ONEWAYTYPE = OnewayType.MD5;
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private MD5Util(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

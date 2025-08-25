@@ -32,6 +32,9 @@ import com.feilong.io.InputStreamUtil;
 import com.feilong.io.entity.MimeType;
 import com.feilong.lib.io.IOUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 设置附件.
  *
@@ -39,19 +42,11 @@ import com.feilong.lib.io.IOUtils;
  * @since 1.13.0
  * @since 1.13.2 move package
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class AttachmentSetter{
 
     /** contentId前缀. */
     public static final String PREFIX_CONTENTID = "image";
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private AttachmentSetter(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

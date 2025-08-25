@@ -18,6 +18,9 @@ package com.feilong.xml;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * XML外部实体注入漏洞(XML External Entity Injection，简称XXE)，该安全问题是由XML组件默认没有禁用外部实体引用导致.
  * 
@@ -30,16 +33,8 @@ import javax.xml.parsers.ParserConfigurationException;
  * @since 1.12.1
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class XXEUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private XXEUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 关闭XXE，避免漏洞攻击.

@@ -38,6 +38,9 @@ import com.feilong.lib.json.util.KeyUpdater;
 import com.feilong.lib.json.util.PropertyFilter;
 import com.feilong.lib.lang3.tuple.Triple;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * JSONObject 转成 Bean的工具类.
  * 
@@ -45,16 +48,8 @@ import com.feilong.lib.lang3.tuple.Triple;
  * @since 3.0.0
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JSONObjectToBeanUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private JSONObjectToBeanUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * Creates a bean from a JSONObject, with the specific configuration.

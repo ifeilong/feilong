@@ -26,26 +26,21 @@ import com.feilong.core.util.comparator.BeanComparatorUtil;
 import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.formatter.entity.FormatterColumnEntity;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 用来给 {@code List<FormatterColumnEntity> formatterColumnEntityList} 排序的工具类.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 class FormatterColumnEntityListSorter{
 
     /** 先按照order进行排序,如果相同按照属性名字进行排序. */
     private static final Comparator<FormatterColumnEntity> CHAINED_COMPARATOR = BeanComparatorUtil
                     .chainedComparator("order", "propertyName");
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private FormatterColumnEntityListSorter(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

@@ -18,6 +18,9 @@ package com.feilong.tools.mobile;
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 手机号码操作.
  * 
@@ -46,19 +49,11 @@ import com.feilong.core.lang.StringUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.2
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MobileUtil{
 
     /** The Constant MASK. */
     private static final String DEFAULT_MASK = "*";
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private MobileUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

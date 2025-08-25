@@ -22,6 +22,9 @@ import javax.servlet.jsp.PageContext;
 
 import com.feilong.core.Validate;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * Utility class for tag library related code, exposing functionality
  * such as translating {@link String Strings} to web scopes.
@@ -47,6 +50,7 @@ import com.feilong.core.Validate;
  * @see "javax.servlet.jsp.jstl.core.ConditionalTagSupport#setScope(String)"
  * @since 1.11.1
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class TagUtils{
 
     /** Constant identifying the page scope. */
@@ -60,15 +64,6 @@ public final class TagUtils{
 
     /** Constant identifying the application scope. */
     public static final String SCOPE_APPLICATION = "application";
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private TagUtils(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

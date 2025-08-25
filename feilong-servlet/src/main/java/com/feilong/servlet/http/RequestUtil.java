@@ -69,6 +69,9 @@ import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.servlet.http.entity.RequestLogSwitch;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link javax.servlet.http.HttpServletRequest HttpServletRequest}工具类.
  * 
@@ -260,6 +263,7 @@ import com.feilong.servlet.http.entity.RequestLogSwitch;
  * @since 1.0.0
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RequestUtil{
 
     /**
@@ -294,15 +298,6 @@ public final class RequestUtil{
     private static final String[] STATIC_RESOURCE_SUFFIX            = tokenizeToStringArray(
                     getValue(getResourceBundle("config/feilong-request-staticResourceSuffix"), "request.staticResourceSuffix"),
                     ",");
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private RequestUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

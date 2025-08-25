@@ -24,6 +24,9 @@ import javax.net.ssl.TrustManager;
 import com.feilong.lib.net.util.SSLContextUtils;
 import com.feilong.lib.net.util.TrustManagerUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 用来构造 {@link SSLContext}, SSL全称是Secure Sockets Layer安全套接层协议层.
  * 
@@ -36,16 +39,8 @@ import com.feilong.lib.net.util.TrustManagerUtils;
  * @see javax.net.ssl.X509TrustManager
  * @since 1.10.6
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SSLContextBuilder{
-
-    /** Don't let anyone instantiate this class. */
-    private SSLContextBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 构造 {@link SSLContext}.

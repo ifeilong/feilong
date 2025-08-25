@@ -16,6 +16,9 @@
 
 package com.feilong.servlet.http;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * HTTP headers相关常量.
  * 
@@ -51,6 +54,7 @@ package com.feilong.servlet.http;
  * @see <a href="https://stackoverflow.com/questions/5258977/are-http-headers-case-sensitive">Are HTTP headers case-sensitive?</a>
  * @since 1.0.8
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class HttpHeaders{
 
     /** <code>{@value}</code> RFC 2616 (HTTP/1.1) Section 14.1 */
@@ -609,10 +613,4 @@ public final class HttpHeaders{
     /** <code>{@value}</code>. */
     public static final String X_REQUESTED_WITH_VALUE_AJAX = "XMLHttpRequest";
 
-    /** Don't let anyone instantiate this class. */
-    private HttpHeaders(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 }

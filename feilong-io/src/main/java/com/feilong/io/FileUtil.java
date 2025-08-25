@@ -38,6 +38,9 @@ import com.feilong.io.entity.FileWriteMode;
 import com.feilong.lib.io.FileUtils;
 import com.feilong.lib.lang3.tuple.Pair;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link File}文件操作.
  * 
@@ -73,6 +76,7 @@ import com.feilong.lib.lang3.tuple.Pair;
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class FileUtil{
 
     /**
@@ -106,14 +110,6 @@ public final class FileUtil{
                     Pair.of(ONE_GB, "GB"),                                                        //(Gigabyte,吉字节,又称“千兆”)=1024MB, 
                     Pair.of(ONE_MB, "MB"),                                                        //(Megabyte,兆字节,简称“兆”)=1024KB, 
                     Pair.of(ONE_KB, "KB"));                                                       //(Kilobyte 千字节)=1024B
-
-    //---------------------------------------------------------------
-    /** Don't let anyone instantiate this class. */
-    private FileUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

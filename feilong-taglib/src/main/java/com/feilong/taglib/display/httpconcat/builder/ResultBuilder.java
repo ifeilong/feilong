@@ -28,6 +28,9 @@ import com.feilong.lib.lang3.BooleanUtils;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ConcatLinkResolver;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 结果构造器.
  *
@@ -36,16 +39,8 @@ import com.feilong.taglib.display.httpconcat.handler.ConcatLinkResolver;
  * @since 1.11.1 rename
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ResultBuilder{
-
-    /** Don't let anyone instantiate this class. */
-    private ResultBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * 构造content.

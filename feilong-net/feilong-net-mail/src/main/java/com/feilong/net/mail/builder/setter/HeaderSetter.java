@@ -22,12 +22,16 @@ import com.feilong.net.mail.FeiLongMailVersion;
 import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.entity.Priority;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 专门用来设置header.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HeaderSetter{
 
     /** 是否需要回执. */
@@ -43,15 +47,6 @@ public class HeaderSetter{
 
     /** 邮件客户端 版本. */
     private static final String X_MAILER_VALUE              = "FeiLong Mail Api " + FeiLongMailVersion.getVersion();
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private HeaderSetter(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

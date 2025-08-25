@@ -15,6 +15,9 @@
  */
 package com.feilong.core;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * uri中使用的字符常量.
  * 
@@ -24,6 +27,7 @@ package com.feilong.core;
  * @see "org.springframework.web.util.UriComponents"
  * @since 1.0.9
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class URIComponents{
 
     /** 查询片段 <code>{@value}</code>. */
@@ -68,12 +72,4 @@ public final class URIComponents{
      */
     public static final String SCHEME_HTTPS = "https";
 
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private URIComponents(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 }

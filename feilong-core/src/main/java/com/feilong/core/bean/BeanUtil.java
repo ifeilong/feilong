@@ -33,6 +33,9 @@ import com.feilong.lib.beanutils.BeanUtils;
 import com.feilong.lib.beanutils.LazyDynaBean;
 import com.feilong.lib.lang3.reflect.FieldUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 对 {@link com.feilong.lib.beanutils.BeanUtils}的再次封装.
  * 
@@ -165,16 +168,8 @@ import com.feilong.lib.lang3.reflect.FieldUtils;
  * 
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class BeanUtil{
-
-    /** Don't let anyone instantiate this class. */
-    private BeanUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     static{
         //初始化注册器.

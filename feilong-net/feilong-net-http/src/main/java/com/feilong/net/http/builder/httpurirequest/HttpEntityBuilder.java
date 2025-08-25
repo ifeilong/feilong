@@ -37,6 +37,9 @@ import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.RequestByteArrayBody;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * {@link HttpEntity} 构造器.
  *
@@ -44,15 +47,8 @@ import com.feilong.net.http.RequestByteArrayBody;
  * @see com.feilong.lib.org.apache.http.client.entity.EntityBuilder
  * @since 1.10.6
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 final class HttpEntityBuilder{
-
-    /** Don't let anyone instantiate this class. */
-    private HttpEntityBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-    //---------------------------------------------------------------
 
     /**
      * Builds the.

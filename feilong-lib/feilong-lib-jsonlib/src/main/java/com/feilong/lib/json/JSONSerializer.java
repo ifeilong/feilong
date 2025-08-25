@@ -21,6 +21,9 @@ import static com.feilong.lib.json.ToStringUtil.OBJECT_START_CHAR;
 
 import com.feilong.lib.json.util.JSONUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * Transforms java objects into JSON and back.<br>
  * Transformation from java to JSON is pretty straightforward, but the other way
@@ -30,16 +33,8 @@ import com.feilong.lib.json.util.JSONUtils;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JSONSerializer{
-
-    /** Don't let anyone instantiate this class. */
-    private JSONSerializer(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
 
     /**
      * Transform a JSON value to a java object.<br>

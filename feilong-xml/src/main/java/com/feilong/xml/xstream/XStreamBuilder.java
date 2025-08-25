@@ -32,12 +32,16 @@ import com.thoughtworks.xstream.io.xml.CompactWriter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 基于 {@link XStreamConfig} 构造 {@link XStream}.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.7
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class XStreamBuilder{
 
     /** xstream 默认用的是 xppDriver 需要依赖 xmlpull:xmlpull jar. */
@@ -52,14 +56,6 @@ public final class XStreamBuilder{
                                                                                             return new CompactWriter(out, getNameCoder());
                                                                                         }
                                                                                     };
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private XStreamBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

@@ -29,19 +29,15 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import com.feilong.excel.util.CellReferenceUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FormulaEvaluatorUtil{
 
     /** The Constant DYNAMIC_CELL_PATTREN. */
     private static final Pattern DYNAMIC_CELL_PATTREN = Pattern.compile("[A-Z][A-Z]?\\d+");
-
-    //---------------------------------------------------------------
-    /** Don't let anyone instantiate this class. */
-    private FormulaEvaluatorUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 

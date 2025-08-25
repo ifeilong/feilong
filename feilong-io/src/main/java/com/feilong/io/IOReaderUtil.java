@@ -46,6 +46,9 @@ import com.feilong.lib.io.IOUtils;
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.validator.ValidatorUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * focus 在文件读取以及解析.
  * 
@@ -55,19 +58,11 @@ import com.feilong.validator.ValidatorUtil;
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class IOReaderUtil{
 
     /** 默认编码. */
     private static final String DEFAULT_CHARSET_NAME = UTF8;
-
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private IOReaderUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 
@@ -336,10 +331,7 @@ public final class IOReaderUtil{
             //---------------------------------------------------------------
             String result = sb.toString();
             if (log.isInfoEnabled()){
-                log.info(
-                                "end read fileInputStream:[{}],use time: [{}]",
-                                fileInputStream,
-                                formatElapsedTime(beginTimeMillis));
+                log.info("end read fileInputStream:[{}],use time: [{}]", fileInputStream, formatElapsedTime(beginTimeMillis));
             }
             return result;
         }catch (IOException e){

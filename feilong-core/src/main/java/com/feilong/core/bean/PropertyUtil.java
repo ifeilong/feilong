@@ -29,6 +29,9 @@ import com.feilong.core.lang.ClassUtil;
 import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.lang3.ClassUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 对 {@link com.feilong.lib.beanutils.PropertyUtils}的再次封装.
  * 
@@ -55,6 +58,7 @@ import com.feilong.lib.lang3.ClassUtils;
  * @since 1.0.0
  */
 @lombok.extern.slf4j.Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class PropertyUtil{
 
     /**
@@ -70,14 +74,6 @@ public final class PropertyUtil{
      * @since 2.1.0
      */
     private static final String MESSAGE_PROPERTYNAME_IS_BLANK = "propertyName can't be blank!";
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private PropertyUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
     /**
