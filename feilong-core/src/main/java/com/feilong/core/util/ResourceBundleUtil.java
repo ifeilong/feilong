@@ -250,7 +250,7 @@ public final class ResourceBundleUtil{
                 if (isNotNullOrEmpty(littleMap)){
                     map.putAll(littleMap);
                 }
-            }catch (Exception e){
+            }catch (Throwable e){
                 log.warn("baseName:[{}],message:[{}],ignore~", baseName, e.getMessage());
             }
         }

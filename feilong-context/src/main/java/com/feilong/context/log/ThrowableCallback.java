@@ -19,16 +19,13 @@ package com.feilong.context.log;
  * 异常处理回调.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 4.4.0
+ * @since 4.5.0
  */
 @FunctionalInterface
-public interface ExceptionCallback{
+public interface ThrowableCallback{
 
     /**
      * Callback.
-     *
-     * @param e
-     *            the e
      */
-    void callback(Exception e);
+    void callback(Throwable e);
 }

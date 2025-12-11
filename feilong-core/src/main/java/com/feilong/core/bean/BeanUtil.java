@@ -289,7 +289,7 @@ public final class BeanUtil{
             try{
                 BeanUtils.copyProperties(toObj, fromObj);
                 return;
-            }catch (Exception e){
+            }catch (Throwable e){
                 String pattern = "copyProperties exception,toObj:[{}],fromObj:[{}],includePropertyNames:[{}]";
                 throw new BeanOperationException(formatPattern(pattern, toObj, fromObj, includePropertyNames), e);
             }
@@ -331,7 +331,7 @@ public final class BeanUtil{
     private static void setProperty(Object bean,String propertyName,Object value){
         try{
             BeanUtils.setProperty(bean, propertyName, value);
-        }catch (Exception e){
+        }catch (Throwable e){
             String pattern = "setProperty exception,bean:[{}],propertyName:[{}],value:[{}]";
             throw new BeanOperationException(formatPattern(pattern, bean, propertyName, value), e);
         }
@@ -373,7 +373,7 @@ public final class BeanUtil{
         //---------------------------------------------------------------
         try{
             return BeanUtils.getProperty(bean, propertyName);
-        }catch (Exception e){
+        }catch (Throwable e){
             String pattern = "getProperty exception,bean:[{}],propertyName:[{}]";
             throw new BeanOperationException(formatPattern(pattern, bean, propertyName), e);
         }
@@ -431,7 +431,7 @@ public final class BeanUtil{
         //---------------------------------------------------------------
         try{
             return (T) BeanUtils.cloneBean(bean);
-        }catch (Exception e){
+        }catch (Throwable e){
             String message = formatPattern("cloneBean exception,bean:[{}]]", bean);
             throw new BeanOperationException(message, e);
         }
@@ -693,7 +693,7 @@ public final class BeanUtil{
         try{
             BeanUtils.populate(bean, properties);
             return bean;
-        }catch (Exception e){
+        }catch (Throwable e){
             String message = formatPattern("can't populate:[{}] to bean:{}", properties, bean);
             throw new BeanOperationException(message, e);
         }

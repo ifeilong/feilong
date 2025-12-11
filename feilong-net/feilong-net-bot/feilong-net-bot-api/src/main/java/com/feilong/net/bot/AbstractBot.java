@@ -94,10 +94,6 @@ public abstract class AbstractBot implements Bot{
     }
 
     /**
-     * @param logPrefix
-     * @param content
-     * @param useMessageParams
-     * @return
      * @since 4.0.8
      */
     private boolean handleSendMessage(String logPrefix,String content,MessageParams useMessageParams){

@@ -40,7 +40,7 @@ class SpringBeanUtilsHelper{
         try{
             springBeanUtilsClass = ClassUtil.getClass(className);
             log.trace("find and load:[{}]", className);
-        }catch (Exception e){
+        }catch (Throwable e){
             //just want to use e.toString
             log.warn("can't load:[{}],[{}],if you import spring, getPropertyValue will speed fast", className, e.getMessage());
         }

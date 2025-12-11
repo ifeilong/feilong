@@ -89,7 +89,7 @@ public final class PropertyUtil{
         Validate.notNull(klass, "klass can't be null!");
         try{
             return PropertyUtils.getPropertyDescriptors(klass);
-        }catch (Exception e){
+        }catch (Throwable e){
             String pattern = "getPropertyDescriptors exception,klass:[{}]";
             throw new BeanOperationException(formatPattern(pattern, klass), e);
         }
@@ -249,7 +249,7 @@ public final class PropertyUtil{
             try{
                 PropertyUtils.copyProperties(toObj, fromObj);
                 return;
-            }catch (Exception e){
+            }catch (Throwable e){
                 String pattern = "copyProperties exception,toObj:[{}],fromObj:[{}],includePropertyNames:[{}]";
                 throw new BeanOperationException(formatPattern(pattern, toObj, fromObj, includePropertyNames), e);
             }
@@ -359,7 +359,7 @@ public final class PropertyUtil{
         if (isNullOrEmpty(propertyNames)){
             try{
                 return PropertyUtils.describe(bean);
-            }catch (Exception e){
+            }catch (Throwable e){
                 String pattern = "describe exception,bean:[{}],propertyNames:[{}]";
                 throw new BeanOperationException(formatPattern(pattern, bean, propertyNames), e);
             }
@@ -438,7 +438,7 @@ public final class PropertyUtil{
         //---------------------------------------------------------------
         try{
             PropertyUtils.setProperty(bean, propertyName, value);
-        }catch (Exception e){
+        }catch (Throwable e){
             String pattern = "setProperty exception,bean:[{}],propertyName:[{}],value:[{}]";
             throw new BeanOperationException(formatPattern(pattern, bean, propertyName, value), e);
         }

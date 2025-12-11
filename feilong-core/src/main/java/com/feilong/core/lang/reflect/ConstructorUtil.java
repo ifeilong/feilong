@@ -170,7 +170,7 @@ public final class ConstructorUtil{
         //---------------------------------------------------------------
         try{
             return ConstructorUtils.invokeConstructor(klass, parameterValues, parameterTypes);
-        }catch (Exception e){
+        }catch (Throwable e){
             String pattern = "invokeConstructor exception,class:[{}].args:[{}],parameterTypes:[{}]";
             String message = formatPattern(pattern, klass, parameterValues, parameterTypes);
             throw new ReflectException(message, e);

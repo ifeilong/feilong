@@ -448,7 +448,7 @@ public final class ConvertUtil{
      *     try{
      *         int pageNo = Integer.parseInt(pageNoString);
      *         return pageNo;
-     *     }catch (Exception e){
+     *     }catch (Throwable e){
      *         log.error(e.getClass().getName(), e);
      *     }
      *     return 1; <span style="color:green">// 不带这个参数或者转换异常返回1</span>
@@ -550,7 +550,7 @@ public final class ConvertUtil{
      *     try{
      *         int pageNo = Integer.parseInt(pageNoString);
      *         return pageNo;
-     *     }catch (Exception e){
+     *     }catch (Throwable e){
      *         log.error(e.getClass().getName(), e);
      *     }
      *     return 1; <span style="color:green">// 不带这个参数或者转换异常返回1</span>
@@ -696,7 +696,7 @@ public final class ConvertUtil{
      *     try{
      *         Long pageNo = Long.parseLong(pageNoString);
      *         return pageNo;
-     *     }catch (Exception e){
+     *     }catch (Throwable e){
      *         log.error(e.getClass().getName(), e);
      *     }
      *     return 1L; <span style="color:green">// 不带这个参数或者转换异常返回1</span>

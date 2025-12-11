@@ -441,7 +441,7 @@ public final class ClassUtil{
         //---------------------------------------------------------------
         try{
             return com.feilong.lib.lang3.ClassUtils.getClass(className);
-        }catch (Exception e){
+        }catch (Throwable e){
             throw new ReflectException(formatPattern("className:[{}]", className), e);
         }
     }

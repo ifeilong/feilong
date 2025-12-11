@@ -107,7 +107,7 @@ public class PropertyDescriptorUtil{
             if (null != springPropertyDescriptor){
                 return TYPE_SPRING;
             }
-        }catch (Exception e){
+        }catch (Throwable e){
             // nothing to do 
         }
         return TYPE_COMMONS_BEANUTILS;

@@ -66,13 +66,15 @@ public abstract class AbstractStringToBeanConverter<T> implements StringToBeanCo
      * @since 1.11.5
      */
     private void preHandlerLog(String value){
-        if (log.isDebugEnabled()){
-            try{
-                log.debug("inputString:[{}],afterFormat: {}", value, formatValue(value));
-            }catch (Exception e){
-                String message = formatPattern("inputString:[{}] can't format,message:[{}]", value, e.getMessage());
-                throw new IllegalArgumentException(message, e);
-            }
+        if (!log.isDebugEnabled()){
+            return;
+        }
+
+        try{
+            log.debug("inputString:[{}],afterFormat: {}", value, formatValue(value));
+        }catch (Throwable e){
+            String message = formatPattern("inputString:[{}] can't format,message:[{}]", value, e.getMessage());
+            throw new IllegalArgumentException(message, e);
         }
     }
 

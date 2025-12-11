@@ -1436,7 +1436,7 @@ public final class StringUtil{
      *                                                       Integer max = toInteger(albumQueryParamsArray[1]);
      *                                                       return new TrackQueryExtendParam(min, max);
      * 
-     *                                                   }catch (Exception e){
+     *                                                   }catch (Throwable e){
      *                                                       return null;
      *                                                   }
      *                                               });

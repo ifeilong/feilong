@@ -164,22 +164,22 @@ public class LogContextExecutor{
      *            Supplier属于Java 8引入的函数式接口，主要场景是延迟计算和数据供给。而Callable通常用于需要返回结果且可能抛出异常的并发任务
      * 
      *            Runnable适用于无返回值的场景，Callable适用于需要返回结果或抛出异常的场景。而用户的call方法明显需要返回值，所以排除了Runnable
-     * @param exceptionCallback
+     * @param throwableCallback
      *            the exception callback
      * @return the t
      */
-    public static <T> T call(String logKey,Callable<T> callable,ExceptionCallback exceptionCallback){
+    public static <T> T call(String logKey,Callable<T> callable,ThrowableCallback throwableCallback){
         try{
             LogCounterThreadLocal.beginCounter();
             LogKeyThreadLocal.setLogKey(logKey);
 
             return callable.call();//可能有受检异常
 
-        }catch (Exception e){
+        }catch (Throwable e){
             log.warn(autoLog(""), e);
             //支持异常回调, 比如发钉钉提醒,发短信等功能
-            if (null != exceptionCallback){
-                exceptionCallback.callback(e);
+            if (null != throwableCallback){
+                throwableCallback.callback(e);
             }
 
             //如果是运行时异常, 那么直接返回,  有的exceptionHandler会解析 针对不同异常返回给客户端或者C端用户不同的错误内容

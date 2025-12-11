@@ -85,7 +85,7 @@ public class DefaultPartitionPerHandler<T> implements PartitionPerHandler<T>{
                 partitionPerElementHandler.handle(t, partitionThreadEntity, paramsMap);
 
                 log(t, current, currentTimeMillis, partitionThreadEntity, paramsMap);
-            }catch (Exception e){
+            }catch (Throwable e){
                 log.error(getLogKey(partitionThreadEntity, paramsMap) + " " + t + " partitionThreadEntity:" + partitionThreadEntity, e);
             }
         }

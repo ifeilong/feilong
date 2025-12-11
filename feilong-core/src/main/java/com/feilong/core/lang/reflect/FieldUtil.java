@@ -241,7 +241,7 @@ public final class FieldUtil{
     private static <T> T getFieldValue(Object obj,String fieldName){
         try{
             return (T) FieldUtils.readField(obj, fieldName, true);
-        }catch (Exception e){
+        }catch (Throwable e){
             String pattern = "getFieldValue exception,ownerObj:[{}],fieldName:[{}]";
             throw new ReflectException(formatPattern(pattern, obj, fieldName), e);
         }

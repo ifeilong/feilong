@@ -340,7 +340,7 @@ public final class MethodUtil{
         //---------------------------------------------------------------
         try{
             return (T) MethodUtils.invokeMethod(object, methodName, args, parameterTypes);
-        }catch (Exception e){
+        }catch (Throwable e){
             String pattern = "invokeMethod Exception,object:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
             String message = formatPattern(pattern, object, methodName, args, parameterTypes);
             throw new ReflectException(message, e);
@@ -551,7 +551,7 @@ public final class MethodUtil{
                             e);
             //---------------------------------------------------------------
             return doWithNoSuchMethodException(klass, staticMethodName, args, parameterTypes);
-        }catch (Exception e){
+        }catch (Throwable e){
             throw new ReflectException(buildMessage(klass, staticMethodName, args, parameterTypes), e);
         }
     }
@@ -593,7 +593,7 @@ public final class MethodUtil{
             //---------------------------------------------------------------
             matchingMethod.setAccessible(true);
             return (T) matchingMethod.invoke(null, args);
-        }catch (Exception e){
+        }catch (Throwable e){
             throw new ReflectException(buildMessage(klass, staticMethodName, args, parameterTypes), e);
         }
     }

@@ -77,7 +77,7 @@ public final class PropertyValueObtainer{
     private static <T> T getDataUseApache(Object bean,String propertyName){
         try{
             return (T) PropertyUtils.getProperty(bean, propertyName);
-        }catch (Exception e){
+        }catch (Throwable e){
             String pattern = "getProperty exception,bean:[{}],propertyName:[{}]";
             throw new BeanOperationException(formatPattern(pattern, bean, propertyName), e);
         }
@@ -101,7 +101,7 @@ public final class PropertyValueObtainer{
         try{
             PropertyDescriptor propertyDescriptor = PropertyDescriptorUtil.getSpringPropertyDescriptor(bean.getClass(), propertyName);
             return getValue(bean, propertyDescriptor);
-        }catch (Exception e){
+        }catch (Throwable e){
             String pattern = "getProperty exception,bean:[{}],propertyName:[{}]";
             throw new BeanOperationException(formatPattern(pattern, bean, propertyName), e);
         }

@@ -40,7 +40,7 @@ public class HttpSpringFixedContextLogCreator extends AbstractFixedContextLogCre
                             "api:[{}],paramString:[{}]",
                             RequestUtil.getRequestURL(request),
                             RequestUtil.parseParamsToQueryString(request));
-        }catch (Exception e){
+        }catch (Throwable e){
             return "HttpSpringFixedContextLogCreator exception:" + e.getMessage();
         }
     }

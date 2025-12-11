@@ -93,7 +93,7 @@ public class SignUtil{
             }
 
             return encode;
-        }catch (Exception e){
+        }catch (Throwable e){
             log.error("", e);
             throw new DefaultRuntimeException(e);
         }

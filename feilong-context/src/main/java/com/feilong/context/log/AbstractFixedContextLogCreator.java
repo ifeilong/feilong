@@ -35,7 +35,7 @@ public abstract class AbstractFixedContextLogCreator implements FixedContextLogC
             Class<?> klass = ClassUtil.getClass(className);
             log.info("findAndLoad:[{}]", className);
             return klass;
-        }catch (Exception e){
+        }catch (Throwable e){
             log.warn("can't load:[{}]", className, e);
             return null;
         }
