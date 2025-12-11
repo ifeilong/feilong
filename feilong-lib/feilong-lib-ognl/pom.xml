@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.github.ifeilong</groupId>
         <artifactId>feilong-lib</artifactId>
-        <version>4.4.0</version>
+        <version>4.5.0</version>
     </parent>
 
     <artifactId>feilong-lib-ognl</artifactId>
