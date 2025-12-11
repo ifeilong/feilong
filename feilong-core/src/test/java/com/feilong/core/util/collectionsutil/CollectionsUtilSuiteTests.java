@@ -67,6 +67,8 @@ import com.feilong.core.util.collectionsutil.select.SelectWithMapTest;
                 IndexOfTest.class,
 
                 ContainsTest.class,
+                ContainsAnyTest.class,
+                ContainsAnyStringsTest.class,
                 ContainsTrimAndIgnoreCaseTest.class,
 
                 CollectIterableTest.class,

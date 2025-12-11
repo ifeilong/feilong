@@ -432,6 +432,8 @@ public final class CollectionsUtil{
         return IterableUtils.get(iterable, index);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 循环 <code>iterable</code>, 判断元素和参数 <code>element</code> 是否equals, 如果有equals,那么返回true,否则返回false.
      * 
@@ -473,6 +475,60 @@ public final class CollectionsUtil{
         }
         return false;
     }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 循环 <code>iterable</code>, 判断元素和参数 <code>elements</code> 是否有equals, 如果任何一个equals,那么返回true,否则返回false.
+     * 
+     * <p>
+     * 使用循环每个元素,然后equals判断
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * CollectionsUtil.containsAny(toList("track", "debug"), "debug") = true
+     * CollectionsUtil.containsAny(toList("track", "debug"), "debug","debug44") = true
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <T>
+     *
+     * @param iterable
+     *            the iterable
+     * @param elements
+     *            the element
+     * @return 如果 <code>iterable</code> 是null或者empty,返回 false<br>
+     *         如果 <code>elements</code> 是null或者empty,返回 false<br>
+     * @see com.feilong.lib.collection4.IterableUtils#contains(Iterable, Object, org.apache.commons.collections4.Equator)
+     * @see com.feilong.lib.collection4.IterableUtils#contains(Iterable, Object)
+     * @since 4.5.0
+     */
+    @SafeVarargs
+    public static <T> boolean containsAny(final Iterable<T> iterable,final T...elements){
+        if (isNullOrEmpty(iterable)){
+            return false;
+        }
+        if (isNullOrEmpty(elements)){
+            return false;
+        }
+
+        //---------------------------------------------------------------
+        for (T t : iterable){
+            for (T element : elements){
+                if (Objects.equals(t, element)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 循环 <code>iterable</code>, 判断元素和参数 <code>element</code> 去空且忽视大小写后是否相等, 如果有相等的,那么返回true.
