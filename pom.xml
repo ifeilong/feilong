@@ -131,7 +131,7 @@
 
 		<!-- https://logback.qos.ch/news.html 统一版本 -->
 		<!-- 1.3 对应jdk 8    1.4 对应jdk11 -->
-		<version.logback>1.3.14</version.logback>
+		<version.logback>1.3.16</version.logback>
 
 
 		<version.aspectjweaver>1.6.8</version.aspectjweaver>
