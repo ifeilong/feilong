@@ -256,6 +256,7 @@
 		<!-- http://www.mojohaus.org/versions-maven-plugin/ -->
 		<!-- https://github.com/mojohaus/versions-maven-plugin/releases -->
 		<v.versions-maven-plugin>2.17.1</v.versions-maven-plugin>
+		
 
 		<!-- 生成项目总报告  -->
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/  -->
