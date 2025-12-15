@@ -225,7 +225,7 @@
 		<!-- 跑单元测试的 -->
 		<!-- http://maven.apache.org/surefire/maven-surefire-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-surefire-plugin>3.5.0</v.maven-surefire-plugin>
+		<v.maven-surefire-plugin>3.5.4</v.maven-surefire-plugin>
 
 
 		<!-- https://maven.apache.org/maven-release/maven-release-plugin/plugin-info.html -->
