@@ -30,7 +30,7 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 1. 国内`中文注释`最完善的API
 1. 有完善的单元测试
 
-详细的帮助文档 http://feilong-core.mydoc.io/
+详细的帮助文档 https://feilong.gitbook.io/feilong-docs
 
 
 ## :memo: 常用组件/功能
@@ -57,14 +57,14 @@ feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/artifact/c
 <dependency>
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong</artifactId>
-	<version>4.4.0</version>
+	<version>4.5.0</version>
 </dependency>
 ```
 
 ### `Gradle 配置` 
 
 ```
-com.github.ifeilong:feilong:4.4.0
+com.github.ifeilong:feilong:4.5.0
 ```
 
 ### `非Maven项目`
