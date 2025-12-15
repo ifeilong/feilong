@@ -155,9 +155,13 @@
 
 		<!--*********************begin plugins version************************************ -->
 
+		<!-- 
+		Maven 生态中用于创建自定义分发包的核心工具。
+		它的核心价值在于，能够将项目的各种输出（如代码、依赖、文档、脚本、配置文件等）按照你设定的规则，聚合到一个或多个可分发的归档文件中 
+		-->
 		<!-- http://maven.apache.org/components/plugins/maven-assembly-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/MASSEMBLY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-assembly-plugin>3.6.0</v.maven-assembly-plugin>
+		<v.maven-assembly-plugin>3.8.0</v.maven-assembly-plugin>
 
 		<!-- https://maven.apache.org/components/plugins/maven-clean-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/MCLEAN?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
