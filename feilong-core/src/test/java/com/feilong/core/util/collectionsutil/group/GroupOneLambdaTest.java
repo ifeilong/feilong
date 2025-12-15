@@ -28,13 +28,14 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
-public class GroupOneTest{
+public class GroupOneLambdaTest{
 
     @Test
     public void testGroupOne(){
@@ -42,7 +43,8 @@ public class GroupOneTest{
         User liubei25 = new User("刘备", 25);
         User liubei30 = new User("刘备", 30);
         List<User> list = toList(zhangfei, liubei25, liubei30);
-        Map<String, User> map = CollectionsUtil.groupOne(list, "name");
+
+        Map<String, User> map = CollectionsUtil.groupOne(list, User::getName);
 
         assertThat(map.keySet(), is(hasSize(2)));
         assertThat(
@@ -53,12 +55,29 @@ public class GroupOneTest{
                                         not(hasEntry("刘备", liubei30))));
     }
 
-    /**
-     * Test group one null collection.
-     */
+    @Test
+    public void testGroupOne1(){
+        User zhangfei = new User("张飞", 23);
+        User liubei25 = new User("刘备", 23);
+        User liubei30 = new User("刘备", 30);
+        List<User> list = toList(zhangfei, liubei25, liubei30);
+
+        Map<Integer, User> map = CollectionsUtil.groupOne(list, User::getAge);
+
+        assertThat(map.keySet(), is(hasSize(2)));
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry(23, zhangfei),
+                                        hasEntry(30, liubei30),
+                                        not(hasEntry(23, liubei25))));
+    }
+
+    //---------------------------------------------------------------
+
     @Test
     public void testGroupOneNullCollection(){
-        assertEquals(emptyMap(), CollectionsUtil.groupOne(null, "name"));
+        assertEquals(emptyMap(), CollectionsUtil.groupOne(null, User::getName));
     }
 
     /**
@@ -66,43 +85,18 @@ public class GroupOneTest{
      */
     @Test
     public void testGroupOneEmptyCollection(){
-        assertEquals(emptyMap(), CollectionsUtil.groupOne(new ArrayList<>(), "name"));
+        assertEquals(emptyMap(), CollectionsUtil.groupOne(new ArrayList<>(), User::getName));
     }
 
-    /**
-     * Test group one null property name.
-     */
+    //---------------------------------------------------------------
+
     @Test(expected = NullPointerException.class)
     public void testGroupOneNullPropertyName(){
         User zhangfei = new User("张飞", 23);
         User liubei25 = new User("刘备", 25);
         User liubei30 = new User("刘备", 30);
         List<User> list = toList(zhangfei, liubei25, liubei30);
-        CollectionsUtil.groupOne(list, (String) null);
-    }
-
-    /**
-     * Test group one empty property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGroupOneEmptyPropertyName(){
-        User zhangfei = new User("张飞", 23);
-        User liubei25 = new User("刘备", 25);
-        User liubei30 = new User("刘备", 30);
-        List<User> list = toList(zhangfei, liubei25, liubei30);
-        CollectionsUtil.groupOne(list, "");
-    }
-
-    /**
-     * Test group one blank property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGroupOneBlankPropertyName(){
-        User zhangfei = new User("张飞", 23);
-        User liubei25 = new User("刘备", 25);
-        User liubei30 = new User("刘备", 30);
-        List<User> list = toList(zhangfei, liubei25, liubei30);
-        CollectionsUtil.groupOne(list, " ");
+        CollectionsUtil.groupOne(list, (Function) null);
     }
 
 }

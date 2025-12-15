@@ -32,6 +32,7 @@ import com.feilong.core.util.collectionsutil.get.GetPropertyValueListWithReturnE
 import com.feilong.core.util.collectionsutil.get.GetPropertyValueMapTest;
 import com.feilong.core.util.collectionsutil.get.GetPropertyValueSetTest;
 import com.feilong.core.util.collectionsutil.get.GetPropertyValueSetWithReturnElementClassTest;
+import com.feilong.core.util.collectionsutil.group.GroupOneLambdaTest;
 import com.feilong.core.util.collectionsutil.group.GroupOneTest;
 import com.feilong.core.util.collectionsutil.group.GroupWithPropertyNameAndPredicateTest;
 import com.feilong.core.util.collectionsutil.group.GroupWithPropertyNameTest;
@@ -100,6 +101,7 @@ import com.feilong.core.util.collectionsutil.select.SelectWithMapTest;
                 GroupWithTransformerTest.class,
                 GroupWithTransformerAndPredicateTest.class,
                 GroupOneTest.class,
+                GroupOneLambdaTest.class,
 
                 SelectWithMapTest.class,
                 SelectPredicateTest.class,

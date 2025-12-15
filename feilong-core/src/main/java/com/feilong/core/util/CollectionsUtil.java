@@ -39,6 +39,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
@@ -3876,6 +3877,97 @@ public final class CollectionsUtil{
             MapUtil.putMultiValue(map, keyTransformer.transform(obj), obj);
         }
         return map;
+    }
+
+    /**
+     * 使用 Lambda 和 Stream 实现分组,保留重复键的第一个元素,提高了类型安全性和性能,避免了反射开销.
+     *
+     * <p>
+     * 接受一个Iterable, 使用一个函数来提取键分组时,如果键重复,只保留第一个对象
+     * </p>
+     * 
+     * <h3>对比 {@link #groupOne(Iterable, String)} 原方法的优势:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>代码简洁性: 去显式迭代和反射代码，改用声明式 Stream 操作.</li>
+     * <li>类型安全: 编译时检查键提取函数，避免运行时反射错误.</li>
+     * <li>易扩展性: 支持任意键提取逻辑 (如嵌套属性 user -> user.getDepartment().getId())</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的{@link LinkedHashMap},key是 <code>iterable</code>中的元素对象中 <code>propertyName</code>的值,value是
+     * <code>beanIterable</code>中的元素对象;</li>
+     *
+     * <li>顺序是 <code>beanIterable</code> <code>propertyName</code>的值 顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
+     * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
+     * {@link SortUtil#sortMap(Map, java.util.Comparator)}</li>
+     *
+     * <li>间接的可以做到基于某个属性值去重的效果</li>
+     * <li>如果value需要是集合的话,可以调用 {@link #group(Iterable, String)}方法</li>
+     * </ol>
+     * </blockquote>
+     *
+     * <h3>示例:</h3>
+     * <blockquote>
+     *
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("刘备", 25));
+     * list.add(new User("刘备", 30));
+     *
+     * Map{@code <String, User>} map = CollectionsUtil.groupOne(list, User::getName);
+     * log.info(JsonUtil.format(map));
+     * </pre>
+     *
+     * <b>返回:</b>
+     *
+     * <pre class="code">
+     * {
+        "张飞":         {
+            "age": 23,
+            "name": "张飞"
+        },
+        "刘备":         {
+            "age": 25,
+            "name": "刘备"
+        }
+    }
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <O>
+     *            the generic type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param keyExtractor
+     *            键提取函数 (例如：User::getId 或 obj -> obj.getProperty());在Lambda版本中, 为了更好的类型安全和性能,应该使用Function<O, T>而不是反射
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>keyExtractor</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see #group(Iterable, String)
+     * @since 4.5.0
+     */
+    public static <T, O> Map<T, O> groupOne(Iterable<O> beanIterable,Function<O, T> keyExtractor){
+        if (isNullOrEmpty(beanIterable)){
+            return emptyMap();
+        }
+        Validate.notNull(keyExtractor, "keyExtractor can't be null/empty!");
+        //---------------------------------------------------------------
+        // 使用 Stream 处理分组和去重 将一个 Spliterator<T>转换并封装成一个 Stream<T>对象
+        return StreamSupport.stream(beanIterable.spliterator(), false)//决定流的执行模式。true表示创建并行流；false表示创建顺序流
+                        .collect(
+                                        Collectors.toMap(
+                                                        keyExtractor, // keyMapper 键提取器
+                                                        Function.identity(), //  valueMapper 值提取器  对象本身,即Function.identity()。
+                                                        (existing,replacement) -> existing, // mergeFunction 当键重复时,保留第一个,即(existing, replacement) -> existing。
+                                                        LinkedHashMap::new // Supplier 使用 LinkedHashMap 保持插入顺序
+                                        ));
     }
 
     /**
