@@ -39,6 +39,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import org.apache.commons.collections4.Predicate;
@@ -2222,6 +2223,82 @@ public final class CollectionsUtil{
         return map;
     }
 
+    /**
+     * 循环 <code>beanIterable</code> ,通过 keyMapper 函数提取key, 通过 valueMapper 函数提取value,组成map返回.
+     *
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的是 {@link LinkedHashMap},顺序是参数 <code>beanIterable</code> 元素的顺序</li>
+     * <li>如果有元素 keyMapper 提取的key相同,那么后面的值会覆盖前面的值</li>
+     * <li>类型安全性提升 , 使用 Function接口可以在编译期进行类型检查，避免了原来通过字符串属性名可能出现的运行时错误</li>
+     * <li>利用 Lambda 表达式和方法引用来实现更类型安全、更优雅的代码</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>优势总结:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>编译期类型安全：避免了属性名字符串的拼写错误</li>
+     * <li>更好的IDE支持：代码补全和重构功能可以正常使用</li>
+     * <li>性能更好：去除了反射调用</li>
+     * <li>表达力更强：支持复杂的转换逻辑</li>
+     * <li>函数式编程风格：符合现代Java编程范式</li>
+     * </ol>
+     * </blockquote>
+     *
+     * <h3>示例:</h3>
+     * <blockquote>
+     *
+     * <pre class="code">
+     * List<User> list = new ArrayList<>();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
+     *
+     * // 使用方法引用
+     * Map<String, Integer> result1 = CollectionsUtil.getPropertyValueMap(list, User::getName, User::getAge);
+     *
+     * // 使用Lambda表达式
+     * Map<String, Integer> result2 = CollectionsUtil.getPropertyValueMap(list, user -> user.getName(), user -> user.getAge());
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param <O>
+     *            可迭代对象类型 generic type
+     * @param beanIterable
+     *            bean Iterable,诸如List<User>,Set<User>等
+     * @param keyMapper
+     *            从对象中提取key的函数
+     * @param valueMapper
+     *            从对象中提取value的函数
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>keyMapper</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>valueMapper</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 4.5.1
+     */
+    public static <K, V, O> Map<K, V> getPropertyValueMap(Iterable<O> beanIterable,Function<O, K> keyMapper,Function<O, V> valueMapper){
+        if (isNullOrEmpty(beanIterable)){
+            return emptyMap();
+        }
+        //---------------------------------------------------------------
+        Validate.notNull(keyMapper, "keyMapper can't be null!");
+        Validate.notNull(valueMapper, "valueMapper can't be null!");
+
+        return toStream(beanIterable).collect(
+                        Collectors.toMap(
+                                        keyMapper,
+                                        valueMapper,
+                                        (oldValue,newValue) -> newValue, // 键冲突时使用新值覆盖
+                                        LinkedHashMap::new // 保持插入顺序
+                        ));
+    }
+
     //---------------------------------------------------------------
 
     /**
@@ -3960,14 +4037,13 @@ public final class CollectionsUtil{
         Validate.notNull(keyExtractor, "keyExtractor can't be null/empty!");
         //---------------------------------------------------------------
         // 使用 Stream 处理分组和去重 将一个 Spliterator<T>转换并封装成一个 Stream<T>对象
-        return StreamSupport.stream(beanIterable.spliterator(), false)//决定流的执行模式。true表示创建并行流；false表示创建顺序流
-                        .collect(
-                                        Collectors.toMap(
-                                                        keyExtractor, // keyMapper 键提取器
-                                                        Function.identity(), //  valueMapper 值提取器  对象本身,即Function.identity()。
-                                                        (existing,replacement) -> existing, // mergeFunction 当键重复时,保留第一个,即(existing, replacement) -> existing。
-                                                        LinkedHashMap::new // Supplier 使用 LinkedHashMap 保持插入顺序
-                                        ));
+        return toStream(beanIterable).collect(
+                        Collectors.toMap(
+                                        keyExtractor, // keyMapper 键提取器
+                                        Function.identity(), //  valueMapper 值提取器  对象本身,即Function.identity()。
+                                        (existing,replacement) -> existing, // mergeFunction 当键重复时,保留第一个,即(existing, replacement) -> existing。
+                                        LinkedHashMap::new // Supplier 使用 LinkedHashMap 保持插入顺序
+                        ));
     }
 
     /**
@@ -4224,6 +4300,21 @@ public final class CollectionsUtil{
      */
     public static <E> Set<E> newLinkedHashSet(Collection<? extends E> collection){
         return new LinkedHashSet<>(collection);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 使用 Stream 处理分组和去重 将一个 Spliterator<T>转换并封装成一个 Stream<T>对象
+     * 
+     * @param <O>
+     * @since 4.5.1
+     */
+    private static <O> Stream<O> toStream(Iterable<O> beanIterable){
+        return StreamSupport.stream(
+                        beanIterable.spliterator(), //
+                        false //决定流的执行模式。true表示创建并行流；false表示创建顺序流
+        );
     }
 
 }

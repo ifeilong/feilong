@@ -21,7 +21,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ import org.junit.Test;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
-public class GetPropertyValueMapTest{
+public class GetPropertyValueMapFunctionTest{
 
     @Test
     public void testGetPropertyValueMap(){
@@ -42,14 +41,32 @@ public class GetPropertyValueMapTest{
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
 
-        Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(list, "name", "age");
-
+        Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(list, User::getName, User::getAge);
         assertThat(
                         map,
                         allOf(//
                                         hasEntry("张飞", 23),
                                         hasEntry("关羽", 24),
                                         hasEntry("刘备", 25)));
+    }
+
+    @Test
+    public void testGetPropertyValueMap1(){
+        User zhangfei = new User("张飞", 10);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
+
+        Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(
+                        list, //
+                        user -> user.getName() + user.getAge(),
+                        user -> user.getAge() > 18 ? 1 : 0);
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry("张飞10", 0),
+                                        hasEntry("关羽24", 1),
+                                        hasEntry("刘备25", 1)));
     }
 
     /**
@@ -62,7 +79,7 @@ public class GetPropertyValueMapTest{
         User zhangfei1 = new User("张飞", 25);
         List<User> list = toList(zhangfei, guanyu, zhangfei1);
 
-        Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(list, "name", "age");
+        Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(list, User::getName, User::getAge);
 
         assertThat(map.keySet(), hasSize(2));
         assertThat(map, allOf(hasEntry("张飞", 25), hasEntry("关羽", 24)));
@@ -75,7 +92,7 @@ public class GetPropertyValueMapTest{
      */
     @Test
     public void testGetPropertyValueMapNullCollection(){
-        assertEquals(emptyMap(), CollectionsUtil.getPropertyValueMap(null, "name", "age"));
+        assertEquals(emptyMap(), CollectionsUtil.getPropertyValueMap(null, User::getName, User::getAge));
     }
 
     /**
@@ -83,7 +100,7 @@ public class GetPropertyValueMapTest{
      */
     @Test
     public void testGetPropertyValueMapEmptyCollection(){
-        assertEquals(emptyMap(), CollectionsUtil.getPropertyValueMap(new ArrayList<>(), "name", "age"));
+        assertEquals(emptyMap(), CollectionsUtil.getPropertyValueMap(new ArrayList<>(), User::getName, User::getAge));
     }
 
     /**
@@ -93,25 +110,7 @@ public class GetPropertyValueMapTest{
     @Test(expected = NullPointerException.class)
     public void testGetPropertyValueMapNullKeyPropertyName(){
         List<User> list = toList(new User("张飞", 23));
-        CollectionsUtil.getPropertyValueMap(list, null, "age");
-    }
-
-    /**
-     * Test get property value map empty key property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetPropertyValueMapEmptyKeyPropertyName(){
-        List<User> list = toList(new User("张飞", 23));
-        CollectionsUtil.getPropertyValueMap(list, "", "age");
-    }
-
-    /**
-     * Test get property value map blank key property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetPropertyValueMapBlankKeyPropertyName(){
-        List<User> list = toList(new User("张飞", 23));
-        CollectionsUtil.getPropertyValueMap(list, " ", "age");
+        CollectionsUtil.getPropertyValueMap(list, null, User::getAge);
     }
 
     //*****************
@@ -122,25 +121,6 @@ public class GetPropertyValueMapTest{
     @Test(expected = NullPointerException.class)
     public void testGetPropertyValueMapNullValuePropertyName(){
         List<User> list = toList(new User("张飞", 23));
-        CollectionsUtil.getPropertyValueMap(list, "name", null);
+        CollectionsUtil.getPropertyValueMap(list, User::getName, null);
     }
-
-    /**
-     * Test get property value map empty value property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetPropertyValueMapEmptyValuePropertyName(){
-        List<User> list = toList(new User("张飞", 23));
-        CollectionsUtil.getPropertyValueMap(list, "name", "");
-    }
-
-    /**
-     * Test get property value map blank value property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetPropertyValueMapBlankValuePropertyName(){
-        List<User> list = toList(new User("张飞", 23));
-        CollectionsUtil.getPropertyValueMap(list, "name", " ");
-    }
-
 }
