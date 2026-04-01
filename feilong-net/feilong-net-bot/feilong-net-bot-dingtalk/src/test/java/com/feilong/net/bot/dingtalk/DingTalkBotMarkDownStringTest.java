@@ -16,6 +16,7 @@
 package com.feilong.net.bot.dingtalk;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.net.bot.MarkdownStringCreator.createListString;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
@@ -44,7 +45,9 @@ public class DingTalkBotMarkDownStringTest{
         map.put("本次耗时", "2分钟");
         map.put("total", "80000");
         map.put("etc", "222小时");
-        boolean result = bot.sendMessage(MarkdownStringCreator.createListString("数据推送成功", map));
+
+        String msg = createListString("数据推送成功", map);
+        boolean result = bot.sendMessage(msg);
         assertEquals(true, result);
     }
 

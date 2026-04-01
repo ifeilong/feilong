@@ -32,8 +32,11 @@ public class DingtalkBotTagTest extends AbstractJUnit4SpringContextTests{
         //  "@金鑫 \n" + //
                         "![](https://img.alicdn.com/tfs/TB1bB9QKpzqK1RjSZFoXXbfcXXa-576-96.png) \n" + //
                         "> 曾经有一段真挚的爱情 \n" + //
-                        "1. 美女 \n" + //
+                        "1. :fire: 美女 \n" + //  这个不行
+                        "1. 🗼美女 \n" + //
+                        "1. 📌美女 \n" + //
                         "2. 帅哥 \n" + //
+                        "2. <font color=\"#333333\">帅哥</font> \n" + //
                         "- **喝酒** \n" + //
                         "- [百度](http://baidu.com) \n" + //
                         "- *唱歌* @金鑫 \n";

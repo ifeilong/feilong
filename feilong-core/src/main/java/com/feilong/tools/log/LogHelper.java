@@ -75,7 +75,7 @@ public class LogHelper{
 
         //---------------------------------------------------------------
         //追加耗时时间
-        appendUseTIme(sbResult, needProccess, isFinish, processLogParamEntity);
+        appendUseTime(sbResult, needProccess, isFinish, processLogParamEntity);
         return sbResult.toString();
     }
 
@@ -84,7 +84,7 @@ public class LogHelper{
      * 
      * @param processLogParamEntity
      */
-    private static void appendUseTIme(StringBuilder sb,Boolean needProccess,Boolean isFinish,ProcessLogParamEntity processLogParamEntity){
+    private static void appendUseTime(StringBuilder sb,Boolean needProccess,Boolean isFinish,ProcessLogParamEntity processLogParamEntity){
         Long currentBeginTimeMillis = processLogParamEntity.getCurrentBeginTimeMillis();
         if (null == currentBeginTimeMillis){
             return;
