@@ -20,6 +20,9 @@ import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * markdown字符串生成器.
  * 
@@ -27,6 +30,7 @@ import java.util.Map;
  * @see <a href="https://open.dingtalk.com/document/orgapp/robot-overview">机器人</a>
  * @since 4.3.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MarkdownStringCreator{
 
     /**
