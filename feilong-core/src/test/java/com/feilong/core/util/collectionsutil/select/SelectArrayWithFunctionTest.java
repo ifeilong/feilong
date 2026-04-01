@@ -25,17 +25,15 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
-public class SelectArrayTest{
+public class SelectArrayWithFunctionTest{
 
-    /**
-     * Test select value.
-     */
     @Test
     public void testSelectValue(){
         User zhangfei = new User("张飞", 23);
@@ -44,13 +42,14 @@ public class SelectArrayTest{
         List<User> list = toList(zhangfei, guanyu, liubei, guanyu);
 
         assertThat(
-                        CollectionsUtil.select(list, "name", "关羽"),
-                        allOf(hasItem(guanyu), hasItem(guanyu), not(hasItem(zhangfei)), not(hasItem(liubei))));
+                        CollectionsUtil.select(list, User::getName, "关羽"),
+                        allOf(
+                                        hasItem(guanyu),
+                                        hasItem(guanyu),
+                                        not(hasItem(zhangfei)), //
+                                        not(hasItem(liubei))));
     }
 
-    /**
-     * Test select array.
-     */
     @Test
     public void testSelectArray(){
         User zhangfei = new User("张飞", 23);
@@ -58,8 +57,13 @@ public class SelectArrayTest{
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
 
-        List<User> select = CollectionsUtil.select(list, "name", "刘备", "关羽");
-        assertThat(select, allOf(hasItem(liubei), hasItem(guanyu), not(hasItem(zhangfei))));
+        List<User> select = CollectionsUtil.select(list, User::getName, "刘备", "关羽");
+        assertThat(
+                        select,
+                        allOf(
+                                        hasItem(liubei), //
+                                        hasItem(guanyu),
+                                        not(hasItem(zhangfei))));
     }
 
     /**
@@ -72,7 +76,7 @@ public class SelectArrayTest{
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
 
-        assertEquals(emptyList(), CollectionsUtil.select(list, "name", (String[]) null));
+        assertEquals(emptyList(), CollectionsUtil.select(list, User::getName, (String[]) null));
     }
 
     /**
@@ -85,7 +89,30 @@ public class SelectArrayTest{
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
 
-        assertEquals(emptyList(), CollectionsUtil.select(list, "name", (String) null));
+        assertEquals(emptyList(), CollectionsUtil.select(list, User::getName, (String) null));
+    }
+
+    @Test
+    public void testSelectNullElementValue1(){
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 30);
+        User nullName = new User((String) null, 30);
+        User liubei = new User("刘备", 25);
+
+        List<User> list = toList(zhangfei, nullName, guanyu, liubei);
+
+        List<User> select = CollectionsUtil.select(list, User::getName, (String) null);
+
+        assertThat(
+                        select,
+                        allOf(
+                                        hasItem(nullName), //
+
+                                        not(hasItem(zhangfei)),
+                                        not(hasItem(liubei)),
+                                        not(hasItem(guanyu))
+                        //
+                        ));
     }
 
     //---------------------------------------------------------------
@@ -95,15 +122,12 @@ public class SelectArrayTest{
      */
     @Test
     public void testSelectArrayNullCollection(){
-        assertEquals(emptyList(), CollectionsUtil.select(null, "name", "刘备", "关羽"));
+        assertEquals(emptyList(), CollectionsUtil.select(null, User::getName, "刘备", "关羽"));
     }
 
-    /**
-     * Test select array empty collection.
-     */
     @Test
     public void testSelectArrayEmptyCollection(){
-        assertEquals(emptyList(), CollectionsUtil.select(new ArrayList<>(), "name", "刘备", "关羽"));
+        assertEquals(emptyList(), CollectionsUtil.select(new ArrayList<>(), User::getName, "刘备", "关羽"));
     }
 
     //*****************
@@ -117,30 +141,6 @@ public class SelectArrayTest{
         User guanyu = new User("关羽", 30);
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
-        CollectionsUtil.select(list, (String) null, "刘备", "关羽");
-    }
-
-    /**
-     * Test select array empty property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectArrayEmptyPropertyName(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 30);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-        CollectionsUtil.select(list, "", "刘备", "关羽");
-    }
-
-    /**
-     * Test select array blank property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectArrayBlankPropertyName(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 30);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-        CollectionsUtil.select(list, " ", "刘备", "关羽");
+        CollectionsUtil.select(list, (Function) null, "刘备", "关羽");
     }
 }
