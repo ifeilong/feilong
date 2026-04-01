@@ -82,6 +82,7 @@ import com.feilong.core.util.collectionsutil.select.SelectWithMapTest;
                 ExistWithPredicateTest.class,
 
                 FindTest.class,
+                FindWithFunctionTest.class,
                 FindWithMapTest.class,
                 FindWithPredicateTest.class,
 

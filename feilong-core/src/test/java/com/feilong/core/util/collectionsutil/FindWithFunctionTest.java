@@ -23,20 +23,15 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
-/**
- * The Class FindTest.
- */
-public class FindTest{
+public class FindWithFunctionTest{
 
-    /**
-     * Test find.
-     */
     @Test
     public void testFind(){
         User zhangfei = new User("张飞", 23);
@@ -45,7 +40,7 @@ public class FindTest{
         User guanyu50 = new User("关羽", 50);
         List<User> list = toList(zhangfei, guanyu24, liubei, guanyu50);
 
-        assertThat(CollectionsUtil.find(list, "name", "关羽"), is(equalTo(guanyu24)));
+        assertThat(CollectionsUtil.find(list, User::getName, "关羽"), is(equalTo(guanyu24)));
     }
 
     /**
@@ -56,14 +51,14 @@ public class FindTest{
         User zhangfei = new User("张飞", 23);
         List<User> list = toList(zhangfei);
 
-        assertEquals(null, CollectionsUtil.find(list, "name", "关羽"));
+        assertEquals(null, CollectionsUtil.find(list, User::getName, "关羽"));
     }
 
     //---------------------------------------------------------------
 
     @Test
     public void testFindNullIterable(){
-        Object find = CollectionsUtil.find(null, "name", "关羽");
+        Object find = CollectionsUtil.find(null, User::getName, "关羽");
         assertEquals(null, find);
     }
 
@@ -72,22 +67,6 @@ public class FindTest{
      */
     @Test(expected = NullPointerException.class)
     public void testFindNullPropertyName(){
-        CollectionsUtil.find(new ArrayList<>(), (String) null, "关羽");
-    }
-
-    /**
-     * Test find empty property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testFindEmptyPropertyName(){
-        CollectionsUtil.find(new ArrayList<>(), "", "关羽");
-    }
-
-    /**
-     * Test find blank property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testFindBlankPropertyName(){
-        CollectionsUtil.find(new ArrayList<>(), " ", "关羽");
+        CollectionsUtil.find(new ArrayList<>(), (Function) null, "关羽");
     }
 }

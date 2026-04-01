@@ -2544,6 +2544,94 @@ public final class CollectionsUtil{
     }
 
     /**
+     * 找到 <code>iterable</code>中,第一个 <code>propertyValueExtractor</code>属性值是 <code>propertyValue</code> 的对应元素.
+     *
+     * <h3>示例:</h3>
+     * <blockquote>
+     *
+     * <p>
+     * <b>场景:</b> 从list中查找name是 关羽 的User对象
+     * </p>
+     *
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
+     * list.add(new User("关羽", 50));
+     *
+     * log.info(JsonUtil.format(CollectionsUtil.find(list, User::getName, "关羽")));
+     * </pre>
+     *
+     * <b>返回:</b>
+     *
+     * <pre class="code">
+     * {
+     * "age": 24,
+     * "name": "关羽"
+     * }
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回第一个匹配对象</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param propertyValueExtractor
+     *            属性值提取函数 (例如：User::getId 或 obj -> obj.getProperty());在Lambda版本中, 为了更好的类型安全和性能,应该使用Function<O, T>而不是反射
+     * @param propertyValue
+     *            指定的值
+     * @return 如果 <code>beanIterable</code>是null, 返回null<br>
+     *         如果 <code>propertyValueExtractor</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>beanIterable</code>中没有相关元素的属性<code>propertyValueExtractor</code> 值是<code>propertyValue</code>,返回null
+     * @see #find(Iterable, Predicate)
+     * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
+     * @since 4.5.1
+     */
+    public static <O, V> O find(Iterable<O> beanIterable,Function<O, V> propertyValueExtractor,V propertyValue){
+        if (beanIterable == null){
+            return null;
+        }
+
+        Validate.notNull(propertyValueExtractor, "propertyValueExtractor can't be null!");
+
+        return toStream(beanIterable)//
+                        .filter(equalsPredicate(propertyValueExtractor, propertyValue))//
+                        .findFirst()//
+                        .orElse(null);
+    }
+
+    /**
+     * 基于Function 构造 Predicate,用于复用
+     * 
+     * @param <V>
+     * @param <O>
+     * @param propertyValueExtractor
+     * @param propertyValue
+     * @return
+     * @since 4.5.1
+     */
+    private static <O, V> java.util.function.Predicate<O> equalsPredicate(Function<O, V> propertyValueExtractor,V propertyValue){
+        return bean -> {
+            V actualValue = propertyValueExtractor.apply(bean);
+            return Objects.equals(actualValue, propertyValue);
+        };
+    }
+
+    /**
      * 找到 <code>iterable</code>中,第一个 <code>propertyName</code>属性名称和值是 <code>propertyValue</code>是 propertyNameAndPropertyValueMap 的对应元素.
      *
      * <h3>示例:</h3>
