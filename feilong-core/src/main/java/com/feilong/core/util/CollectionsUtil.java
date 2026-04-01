@@ -2035,6 +2035,60 @@ public final class CollectionsUtil{
     }
 
     /**
+     * 解析迭代集合 <code>beanIterable</code> ,取到对象指定的属性 <code>mapper</code>的值,拼成({@link LinkedHashSet}).
+     *
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的是 {@link LinkedHashSet},顺序是参数 <code>beanIterable</code> 元素的顺序</li>
+     * </ol>
+     * </blockquote>
+     *
+     * <h3>示例:</h3>
+     * <blockquote>
+     *
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User(2L));
+     * list.add(new User(5L));
+     * list.add(new User(5L));
+     *
+     * log.info(JsonUtil.format(CollectionsUtil.getPropertyValueSet(list, User::getId)));
+     * </pre>
+     *
+     * <b>返回:</b>
+     *
+     * <pre class="code">
+     * [2,5]
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <O>
+     *            the generic type
+     * @param beanIterable
+     * @param mapper
+     *            mapper
+     * @return 如果参数 <code>beanIterable</code>是null或者empty,会返回empty {@link LinkedHashSet}<br>
+     *         如果 <code>mapper</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see PropertyValueObtainer#getPropertyValueCollection(Iterable, String, Collection)
+     * @since 4.5.1
+     */
+    public static <T, O> Set<T> getPropertyValueSet(Collection<O> beanIterable,Function<O, T> mapper){
+        if (null == beanIterable){
+            return emptySet();
+        }
+        //---------------------------------------------------------------
+        Validate.notNull(mapper, "mapper can't be null!");
+        return beanIterable.stream()//
+                        .map(mapper)//
+                        .collect(Collectors.toCollection(LinkedHashSet::new));
+        //        .collect(Collectors.toSet());
+    }
+
+    /**
      * 解析迭代集合 <code>beanIterable</code> ,取到对象指定的属性 <code>propertyName</code>的值,将值转换成
      * <code>returnElementClass</code>类型,拼成{@link Set}({@link LinkedHashSet}).
      * 
