@@ -24,6 +24,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toSet;
 import static com.feilong.core.lang.ObjectUtil.defaultEmptyStringIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.equalsAny;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static java.math.BigDecimal.ZERO;
 import static java.util.Collections.emptyMap;
@@ -1285,6 +1286,76 @@ public final class MapUtil{
     }
 
     //---------------------------------------------------------------
+    /**
+     * 获得 sub map(排除指定的 value).
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>原 <code>map</code> <span style="color:green"><b>不变</b></span></li>
+     * <li>返回值为 {@link LinkedHashMap},key的顺序按照参数 <code>map</code>的顺序</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Integer>} map = new LinkedHashMap{@code <>}();
+     * 
+        map.put("119072412", "解读");
+        map.put("76841752", "泛化");
+        map.put("87838803", "不相关");
+        map.put("119069161", "解读");
+        map.put("91920781", "不相关");
+        map.put("92440989", "泛化");
+     * 
+     * log.debug(JsonUtil.format(MapUtil.getSubMapExcludeValues(map, "不相关", "泛化")));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "119072412": "解读",
+     * "119069161": "解读"
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <K>
+     *            the key type
+     * @param <T>
+     *            the generic type
+     * @param map
+     *            the map
+     * @param excludeValues
+     *            需要排除的值
+     * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};<br>
+     *         如果 <code>excludeValues</code> 是null或者empty,直接返回 <code>map</code>
+     * @since 4.5.1
+     */
+    @SafeVarargs
+    public static <K, T> Map<K, T> getSubMapExcludeValues(Map<K, T> map,T...excludeValues){
+        if (isNullOrEmpty(map)){
+            return emptyMap();
+        }
+
+        if (isNullOrEmpty(excludeValues)){
+            return map;
+        }
+        Map<K, T> returnMap = newLinkedHashMap();
+        for (Map.Entry<K, T> entry : map.entrySet()){
+            T value = entry.getValue();
+            if (equalsAny(value, excludeValues)){
+                continue;
+            }
+            returnMap.put(entry.getKey(), value);
+        }
+        return returnMap;
+    }
 
     /**
      * 获得 sub map(排除指定的 excludeKeys).

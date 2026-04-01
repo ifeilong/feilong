@@ -33,7 +33,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetSubSumValueTest.class,
                 GetSubMapTest.class,
                 GetSubMapIterableTest.class,
+
                 GetSubMapExcludeKeysTest.class,
+                GetSubMapExcludeValuesTest.class,
                 GetSubMapExcludeIterableKeysTest.class,
 
                 ExtractSubMapTest.class,
