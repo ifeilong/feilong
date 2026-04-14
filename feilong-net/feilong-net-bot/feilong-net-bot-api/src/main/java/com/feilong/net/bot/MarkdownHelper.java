@@ -15,6 +15,13 @@
  */
 package com.feilong.net.bot;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.util.CollectionsUtil.size;
+
+import java.util.List;
+import java.util.function.Function;
+
 import com.feilong.core.Validate;
 
 import lombok.AccessLevel;
@@ -78,9 +85,132 @@ public class MarkdownHelper{
 
     /**
      * 一个\n有时无法成功换行，建议使用两个\n\n确保换行效果。
+     * 
+     * @return 换行
      */
     public static String newLine(){
         return "\n\n"; //一个\n有时无法成功换行，建议使用两个\n\n确保换行效果
+    }
+
+    //将封装到 feilong
+
+    /**
+     * 创建markdown 格式的表格.
+     * 
+     * <p>
+     * 会对以下特殊字符进行转义处理
+     * </p>
+     * 
+     * <pre>
+    {@code
+    return cell.replace("\\", "\\\\") // 先转义反斜杠
+                     .replace("|", "\\|") // 转义竖线
+                     .replace("\n", "<br>") // 换行处理
+                     .replace("\r", ""); // 回车处理
+    }
+     * </pre>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Member member = new Member();
+     * member.setCode("9523");
+     * member.setLoginName("zhouxingxing");
+     * 
+     * String msg = MarkdownHelper.createTable(
+     *                 toList("code", "登录名"), //
+     *                 toList(member),
+     *                 toList(Member::getCode, Member::getLoginName));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    | code |登录名 |
+    | ------- |------- |
+    | 9523 |zhouxingxing |
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param titleList
+     *            标题列表 , 比如传 姓名 年龄 这种
+     * @param beanList
+     *            bean 列表, 比如是user list
+     * @param valueFunctionList
+     *            提取数据的function 列表
+     * @return 如果 <code>titleList</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>titleList</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>valueFunctionList</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>valueFunctionList</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>titleList的size 和valueFunctionList size 不等</code>,抛出 {@link IllegalArgumentException}<br>
+     * @since 4.5.2
+     */
+    public static <O> String createTable(
+                    List<String> titleList,//
+                    List<O> beanList,
+                    List<Function<O, ?>> valueFunctionList){
+
+        Validate.notEmpty(titleList, "titleList can't be null/empty!");
+        Validate.notEmpty(valueFunctionList, "valueFunctionList can't be null/empty!");
+
+        Validate.isTrue(size(valueFunctionList) == size(titleList), "size(functionlist)!=size(titleList)");
+
+        //---------------------------------------------------------------
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("| ");
+        //拼接标题
+        for (String title : titleList){
+            sb.append(title);
+            sb.append(" |");
+        }
+
+        sb.append("\n");
+
+        //---------------------------------------------------------------
+        sb.append("| ");
+
+        //拼接表题符
+        for (@SuppressWarnings("unused")
+        String title : titleList){
+            sb.append("-------");
+            sb.append(" |");
+        }
+        sb.append("\n");
+
+        //---------------------------------------------------------------
+        //拼接数据
+        if (isNotNullOrEmpty(beanList)){
+            for (O o : beanList){
+                sb.append("| ");
+                for (Function<O, ?> function : valueFunctionList){
+                    Object applyResult = function.apply(o);
+                    String cellValue = applyResult != null ? applyResult.toString() : EMPTY;
+                    sb.append(escapeMarkdownTableCell(cellValue)).append(" |");
+                }
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    // Markdown 表格单元格转义方法
+    private static String escapeMarkdownTableCell(String cell){
+        if (cell == null){
+            return "";
+        }
+
+        // 转义特殊字符
+        return cell.replace("\\", "\\\\") // 先转义反斜杠
+                        .replace("|", "\\|") // 转义竖线
+                        .replace("\n", "<br>") // 换行处理
+                        .replace("\r", ""); // 回车处理
     }
 
 }
