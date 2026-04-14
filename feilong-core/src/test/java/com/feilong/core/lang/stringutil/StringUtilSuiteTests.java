@@ -67,6 +67,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToMultiValueMapKeyClassAndValueElementClassTest.class,
 
                 ToMapConvertTest.class,
+                ToMapConvertWithEntryDelimitersTest.class,
 //
 })
 public class StringUtilSuiteTests{

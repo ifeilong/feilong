@@ -25,7 +25,7 @@ import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
 import static com.feilong.core.util.CollectionsUtil.size;
-import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.emptySet;
@@ -1464,15 +1464,103 @@ public final class StringUtil{
      * @apiNote 自动去除空格,忽略空
      */
     public static <T, V> Map<T, V> toMap(String configString,Class<T> keyClass,StringToBeanConverter<V> valueStringToBeanConverter){
+        return toMap(configString, ";", "=", keyClass, valueStringToBeanConverter);
+    }
+
+    /**
+     * 将 73034693=0-50;11487680=0-43;51099626=0-50; 这种格式的字符串转换成map.
+     * 
+     * <p>
+     * 支持自定义 <code>entryDelimiters</code> (entry之间的分隔符 比如 ; 分号) 以及
+     * <code>keyAndValueDelimiters</code> (每个entry 自己key 和value之间的分隔符 , 比如 =)
+     * </p>
+     * 
+     * <p>
+     * map的key 是73034693这种, value 可以TrackQueryExtendParam对象
+     * 
+     * <pre class="code">
+     * public class TrackQueryExtendParam{
+     * 
+     *     // 单集编号 最小. 
+     *     private Integer minEpisodeNumber;
+     * 
+     *     // 单集编号 最大. 
+     *     private Integer maxEpisodeNumber;
+     * 
+     *     //setter/getter 省略
+     * }
+     * </pre>
+     * </p>
+     * 
+     * <h3>解析代码示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * String configString = "73034693=0-50;\n"//
+     *                 + "11487680=0-43;\n"//
+     *                 + "51099626=0-50;";
+     * 
+     * Map{@code <Long, TrackQueryExtendParam>} map = StringUtil.toMap(configString,";","=" Long.class, (valueString) -> {
+     *                                                   String[] albumQueryParamsArray = StringUtil.tokenizeToStringArray(valueString, "-");
+     *                                                   if (isNullOrEmpty(albumQueryParamsArray)){
+     *                                                       return null;
+     *                                                   }
+     *                                                   try{
+     *                                                       //只有1个 
+     *                                                       if (1 == size(albumQueryParamsArray)){
+     *                                                           //默认 0-x
+     *                                                           Integer max = toInteger(albumQueryParamsArray[0]);
+     *                                                           return new TrackQueryExtendParam(0, max);
+     *                                                       }
+     * 
+     *                                                       Integer min = toInteger(albumQueryParamsArray[0]);
+     *                                                       Integer max = toInteger(albumQueryParamsArray[1]);
+     *                                                       return new TrackQueryExtendParam(min, max);
+     * 
+     *                                                   }catch (Throwable e){
+     *                                                       return null;
+     *                                                   }
+     *                                               });
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param configString
+     *            73034693=0-50;11487680=0-43;51099626=0-50; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
+     * @param entryDelimiters
+     *            自定义entry之间的分隔符 比如 ; 分号
+     * @param keyAndValueDelimiters
+     *            自定义每个entry 自己key 和value之间的分隔符 , 比如 =
+     * @param keyClass
+     *            key转换的类型,比如上面的背景中, 73034693 可以转换成String Long Integer
+     * @param valueStringToBeanConverter
+     *            value转换的类型
+     * @return 如果 <code>configString</code> 是null,返回 emptyMap() <br>
+     *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
+     *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>stringToBeanConverter</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果使用=号 分隔之后 value没值的 key-value 会被忽略
+     * @since 4.5.2
+     * @apiNote 自动去除空格,忽略空
+     */
+    public static <T, V> Map<T, V> toMap(
+                    String configString,
+                    String entryDelimiters, //entry之间的分隔符 比如 ; 分号
+                    String keyAndValueDelimiters, //每个entry 自己key 和value之间的分隔符 , 比如 =
+                    Class<T> keyClass,
+                    StringToBeanConverter<V> valueStringToBeanConverter){
         if (isNullOrEmpty(configString)){
             return emptyMap();
         }
 
         //---------------------------------------------------------------
-
-        //entry之间的分隔符
-        String entryDelimiters = ";";
-
         String[] entrys = StringUtil.tokenizeToStringArray(configString, entryDelimiters);
         if (isNullOrEmpty(entrys)){
             return emptyMap();
@@ -1482,11 +1570,7 @@ public final class StringUtil{
         Validate.notNull(valueStringToBeanConverter, "stringToBeanConverter can't be null!");
 
         //---------------------------------------------------------------
-
-        //key 和value之间的分隔符
-        String keyAndValueDelimiters = "=";
-
-        Map<T, V> map = newHashMap();
+        Map<T, V> returnMap = newLinkedHashMap();
         for (String keyAndValueString : entrys){
             if (isNullOrEmpty(keyAndValueString)){
                 continue;
@@ -1499,9 +1583,9 @@ public final class StringUtil{
             //---------------------------------------------------------------
             T key = ConvertUtil.convert(keyAndValues[0], keyClass);
             V value = valueStringToBeanConverter.convert(keyAndValues[1]);
-            map.put(key, value);
+            returnMap.put(key, value);
         }
-        return map;
+        return returnMap;
     }
 
     /**
