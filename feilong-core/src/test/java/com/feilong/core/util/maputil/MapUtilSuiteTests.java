@@ -62,6 +62,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 RemoveKeysCollectionTest.class,
 
                 GetTest.class,
+                GetCaseInsensitiveTest.class,
 
                 GetByKeyTest.class,
                 GetDefaultEmptyStringIfNullTest.class,

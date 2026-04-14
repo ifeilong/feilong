@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -465,6 +466,88 @@ public final class MapUtil{
             return null;
         }
         return map.get(key);
+    }
+
+    /**
+     * 从map中取值, key 忽视大小写.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适用于 第三方数据转换时候 比如dify 返回的数据可能会大小写会变的场景</li>
+     * <li>取值前,判断了map是否是null,如果是null直接返回null</li>
+     * <li><code>org.springframework.util.LinkedCaseInsensitiveMap</code>以及
+     * <code>org.apache.commons.collections.map.CaseInsensitiveMap</code> 也有相似的效果,
+     * 但是这两个类是用来构造map的; 而 getCaseInsensitive方法不管你传入的是什么类型的map 都可以基于key 忽视大小写返回</li>
+     * <li>会基于map循环, 判断key 如果 {@code Objects.equals(caseInsensitiveKey, key)} 或者
+     * {@code null != caseInsensitiveKey &&caseInsensitiveKey.equalsIgnoreCase(key)} 那么返回对应的value</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map<String, String> map = newLinkedHashMap();
+     * map.put("name", "jim");
+     * map.put("address", "shanghai");
+     * map.put("adDress", "nantong");
+     * map.put("age", "18");
+     * 
+     * assertEquals("shanghai", MapUtil.getCaseInsensitive(map, "address"));
+     * assertEquals("shanghai", MapUtil.getCaseInsensitive(map, "Address"));
+     * assertEquals("shanghai", MapUtil.getCaseInsensitive(map, "AddrEss"));
+     * </pre>
+     * 
+     * <p>
+     * 如果传入的map 支持null key ,也可以获取,比如
+     * </p>
+     * 
+     * <pre class="code">
+     * Map<String, String> map = newLinkedHashMap();
+     * map.put("name", "jim");
+     * map.put("address", "shanghai");
+     * map.put(null, "shanghai");
+     * 
+     * assertEquals("shanghai", MapUtil.getCaseInsensitive(map, null));
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     *
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @param caseInsensitiveKey
+     *            忽略大小写的key值
+     * @return 如果 <code>map</code> 是null,返回 null<br>
+     *         会返回第一个key Objects.equals(caseInsensitiveKey, key) 或者 null != caseInsensitiveKey &&
+     *         caseInsensitiveKey.equalsIgnoreCase(key)对应的值 <br>
+     * @since 4.5.2
+     * @see "org.springframework.util.LinkedCaseInsensitiveMap"
+     * @see "org.apache.commons.collections.map.CaseInsensitiveMap"
+     */
+    public static <V> V getCaseInsensitive(Map<String, V> map,String caseInsensitiveKey){
+        if (null == map){
+            return null;
+        }
+
+        for (Map.Entry<String, V> entry : map.entrySet()){
+            String key = entry.getKey();
+            V value = entry.getValue();
+
+            if (Objects.equals(caseInsensitiveKey, key)){
+                return value;
+            }
+
+            if (null != caseInsensitiveKey && caseInsensitiveKey.equalsIgnoreCase(key)){
+                return value;
+            }
+        }
+        return null;
     }
 
     /**
