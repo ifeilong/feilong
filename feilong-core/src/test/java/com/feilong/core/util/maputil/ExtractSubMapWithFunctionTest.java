@@ -24,24 +24,16 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 import com.feilong.store.member.User;
 
-/**
- * The Class MapUtilExtractSubMapTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
-public class ExtractSubMapTest{
+public class ExtractSubMapWithFunctionTest{
 
-    /**
-     * Test extract sub map 3.
-     */
     @Test
-
     public void testExtractSubMap3(){
         Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(100L));
@@ -49,62 +41,40 @@ public class ExtractSubMapTest{
         map.put(5L, new User(500L));
         map.put(4L, new User(400L));
 
-        Map<Long, Long> extractSubMap = MapUtil.extractSubMap(map, "id");
-        assertThat(extractSubMap, allOf(hasEntry(1L, 100L), hasEntry(2L, 200L), hasEntry(5L, 500L), hasEntry(4L, 400L)));
+        Map<Long, Long> extractSubMap = MapUtil.extractSubMap(map, User::getId);
+        assertThat(
+                        extractSubMap,
+                        allOf(
+                                        hasEntry(1L, 100L), //
+                                        hasEntry(2L, 200L),
+                                        hasEntry(5L, 500L),
+                                        hasEntry(4L, 400L)));
     }
 
     /**
      * Test extract sub map.
      */
     @Test
-
     public void testExtractSubMapNullMap(){
-        assertEquals(emptyMap(), MapUtil.extractSubMap(null, "id"));
+        assertEquals(emptyMap(), MapUtil.extractSubMap(null, User::getId));
     }
 
     /**
      * Test extract sub map empty map.
      */
     @Test
-
     public void testExtractSubMapEmptyMap(){
-        assertEquals(emptyMap(), MapUtil.extractSubMap(new HashMap<>(), "id"));
+        assertEquals(emptyMap(), MapUtil.extractSubMap(new HashMap<>(), User::getId));
     }
 
-    /**
-     * Test extract sub map null extract property name.
-     */
-    @Test(expected = NullPointerException.class)
+    //---------------------------------------------------------------
 
+    @Test(expected = NullPointerException.class)
     public void testExtractSubMapNullExtractPropertyName(){
         Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
-        MapUtil.extractSubMap(map, (String) null);
-    }
-
-    /**
-     * Test extract sub map empty extract property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-
-    public void testExtractSubMapEmptyExtractPropertyName(){
-        Map<Long, User> map = newLinkedHashMap();
-        map.put(1L, new User(1L));
-        map.put(2L, new User(2L));
-        MapUtil.extractSubMap(map, "");
-    }
-
-    /**
-     * Test extract sub map empty extract property name 1.
-     */
-    @Test(expected = IllegalArgumentException.class)
-
-    public void testExtractSubMapEmptyExtractPropertyName1(){
-        Map<Long, User> map = newLinkedHashMap();
-        map.put(1L, new User(1L));
-        map.put(2L, new User(2L));
-        MapUtil.extractSubMap(map, " ");
+        MapUtil.extractSubMap(map, (Function<User, Long>) null);
     }
 
 }

@@ -1978,6 +1978,69 @@ public final class MapUtil{
     }
 
     /**
+     * 以参数 <code>map</code>的key为key,以参数 <code>map</code> value的指定<code>extractor</code>提取属性值为值,拼装成新的map返回.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回map的顺序,按照参数 map key的顺序</li>
+     * <li>相比较 {@link #extractSubMap(Map, String)}, 优点: 类型安全（编译时检查） /性能好（避免反射开销）/简洁直观</li>
+     * 
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <Long, User>} map = new LinkedHashMap{@code <>}();
+        map.put(1L, new User(100L));
+        map.put(2L, new User(200L));
+        map.put(5L, new User(500L));
+        map.put(4L, new User(400L));
+    
+        Map<Long, Long> extractSubMap = MapUtil.extractSubMap(map, User::getId);
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "1": 100,
+        "2": 200,
+        "5": 500,
+        "4": 400
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <K>
+     *            key的类型
+     * @param <O>
+     *            map value bean类型
+     * @param map
+     *            the map
+     * @param extractor
+     *            用于提取value的值的function
+     * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>extractor</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 4.5.2
+     */
+    public static <K, O, T> Map<K, T> extractSubMap(Map<K, O> map,Function<O, T> extractor){
+        if (isNullOrEmpty(map)){
+            return emptyMap();
+        }
+
+        Validate.notNull(extractor, "extractor can't be null!");
+
+        Map<K, T> returnMap = newLinkedHashMap();
+        map.forEach((key,value) -> returnMap.put(key, extractor.apply(value)));
+        return returnMap;
+    }
+
+    /**
      * 以参数 <code>map</code>的key为key,以参数 <code>map</code> value的指定<code>extractPropertyName</code>属性值为值,拼装成新的map返回.
      * 
      * <h3>说明:</h3>

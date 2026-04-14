@@ -39,6 +39,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetSubMapExcludeIterableKeysTest.class,
 
                 ExtractSubMapTest.class,
+                ExtractSubMapWithFunctionTest.class,
                 ExtractSubMapIncludeKeysTest.class,
                 ExtractIntersectionKeyDifferentValueMapTest.class,
 
