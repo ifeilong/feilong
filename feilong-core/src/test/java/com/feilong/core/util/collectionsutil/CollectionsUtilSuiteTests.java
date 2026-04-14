@@ -49,6 +49,7 @@ import com.feilong.core.util.collectionsutil.remove.RemoveElementTest;
 import com.feilong.core.util.collectionsutil.select.SelectArrayTest;
 import com.feilong.core.util.collectionsutil.select.SelectArrayWithFunctionTest;
 import com.feilong.core.util.collectionsutil.select.SelectCollectionTest;
+import com.feilong.core.util.collectionsutil.select.SelectCollectionWithFunctionTest;
 import com.feilong.core.util.collectionsutil.select.SelectNotNullOrEmptyStringPredicateTest;
 import com.feilong.core.util.collectionsutil.select.SelectPredicateTest;
 import com.feilong.core.util.collectionsutil.select.SelectRegexStringPredicateTest;
@@ -114,6 +115,7 @@ import com.feilong.core.util.collectionsutil.select.SelectWithMapTest;
                 SelectArrayTest.class,
                 SelectArrayWithFunctionTest.class,
                 SelectCollectionTest.class,
+                SelectCollectionWithFunctionTest.class,
 
                 SelectRejectedMapTest.class,
                 SelectRejectedArrayTest.class,

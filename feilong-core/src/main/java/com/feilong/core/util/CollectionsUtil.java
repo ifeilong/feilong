@@ -2982,6 +2982,112 @@ public final class CollectionsUtil{
     }
 
     /**
+     * 循环 <code>beanIterable</code>,获得元素 <code>bean</code>的 <code>propertyExtractor</code>的值,判断是否在<code>propertyValues</code>
+     * 数组中;如果在,将该对象存入list中返回.
+     * 
+     * <p>
+     * 函数式版本 - 通过属性提取器选择元素<br>
+     * 类型安全，无需反射
+     * </p>
+     *
+     * <h3>注意:</h3>
+     *
+     * <blockquote>
+     * <p>
+     * 查询的结果的顺序按照原来 <code>beanIterable</code>里面的顺序,和参数 <code>propertyValues</code> 无关,如果你需要结果里面的元素按照指定的<code>propertyValues</code>
+     * 顺序排序的话,可以将结果再调用{@link SortUtil#sortListByFixedOrderPropertyValueArray(List, String, Object...)}
+     * </p>
+     * </blockquote>
+     *
+     * <h3>示例:</h3>
+     *
+     * <blockquote>
+     *
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
+     *
+     * log.info(JsonUtil.format(CollectionsUtil.select(list, User::getName, toList("关羽", "刘备"))));
+     *
+     * </pre>
+     *
+     * <b>返回:</b>
+     *
+     * <pre class="code">
+       [{
+               "age": 24,
+               "name": "关羽"
+           },{
+               "age": 25,
+               "name": "刘备"
+       }]
+     * </pre>
+     * 
+     * <b>如果你要查询值是null的写法:</b>
+     *
+     * <pre class="code">
+     * 
+     * User zhangfei = new User("张飞", 23);
+     * User guanyu = new User("关羽", 30);
+     * <span style="color:red">User nullName = new User((String) null, 30);</span>
+     * User liubei = new User("刘备", 25);
+     * 
+     * List{@code <User>} list = toList(zhangfei, nullName, guanyu, liubei);
+     * 
+     * List{@code <User>} select = CollectionsUtil.select(list, User::getName, <span style="color:red">toList((String) null)</span>);
+     * 
+     * assertThat(
+     *                 select,
+     *                 allOf(
+     *                                 hasItem(nullName), //
+     * 
+     *                                 not(hasItem(zhangfei)),
+     *                                 not(hasItem(liubei)),
+     *                                 not(hasItem(guanyu))
+     *                 //
+     *                 ));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param propertyExtractor
+     *            propertyExtractor
+     * @param propertyValues
+     *            the values
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>propertyValues</code> 是 null或者empty,返回 {@link Collections#emptyList()}<br>
+     * 
+     *         如果 <code>propertyExtractor</code> 是null,抛出 {@link NullPointerException}<br>
+     * 
+     * @see BeanPredicateUtil#containsPredicate(String, Object...)
+     * @since 4.5.2
+     */
+    public static <O, V> List<O> select(Iterable<O> beanIterable,Function<O, V> propertyExtractor,Collection<V> propertyValues){
+        if (isNullOrEmpty(beanIterable)){
+            return emptyList();
+        }
+        if (isNullOrEmpty(propertyValues)){
+            return emptyList();
+        }
+
+        Objects.requireNonNull(propertyExtractor, "propertyExtractor cannot be null");
+        return toStream(beanIterable).filter(Objects::nonNull)//
+                        .filter(item -> {
+                            V value = propertyExtractor.apply(item);
+                            return propertyValues.contains(value);
+                        })//
+                        .collect(Collectors.toList());
+    }
+
+    /**
      * 循环 <code>beanIterable</code>,获得元素 <code>bean</code> 的<code>propertyName</code>的值,判断是否在<code>propertyValueList</code>
      * 集合中;如果在,将该对象存入list中返回.
      *
