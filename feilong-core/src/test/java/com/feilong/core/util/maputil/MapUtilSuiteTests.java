@@ -55,6 +55,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 PutSumValueBigDecimalTest.class,
 
                 PutAllIfNotNullTest.class,
+                PutAllFromListTest.class,
                 PutIfValueNotNullTest.class,
                 PutIfValueNotNullOrEmptyTest.class,
 

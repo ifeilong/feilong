@@ -28,11 +28,6 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
-/**
- * The Class MapUtilPutAllIfNotNullTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class PutAllIfNotNullTest{
 
     /**

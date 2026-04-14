@@ -950,6 +950,87 @@ public final class MapUtil{
     //---------------------------------------------------------------
 
     /**
+     * 将一组key list , 一组value list 设置到指定的map。
+     * 
+     * <h3>适用于以下场景:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 基于声音id list获取播放量, 然后返回map key是声音id, value是播放量
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <List<Long>>} partition = CollectionsUtil.partition(keys, 200);
+     * Map<Long, Long> returnMap = newLinkedHashMap();
+     * 
+     * for (List{@code <Long>} perList : partition){
+     *     //批量获取name服务下多个对象的计数值。 和各对象对应的记录值。顺序和提供的对象id顺序是一致的。
+     *     List{@code <Long>} perResult = countService.getByIds(serviceName, toStringList(perList));
+     *     putMap(returnMap, perList, perResult);
+     * }
+     * return returnMap;
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <Long, Long>} map = newLinkedHashMap();
+     * 
+     * MapUtil.putAllFromList(map, toList(123234L, 345123L), toList(1L, 2L));
+     * 
+     * assertThat(map, hasEntry(123234L, 1L));
+     * assertThat(map, hasEntry(345123L, 2L));
+     * assertThat(map.keySet(), hasSize(2));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * 如果 <code>keyList</code> 是null或者empty,啥都不处理,直接return<br>
+     * 如果 <code>valueList</code> 是null或者empty,啥都不处理,直接return<br>
+     * 
+     * 如果 keyList size 和valueList size 不是一样大,报错 {@link IllegalArgumentException}<br>
+     * 
+     * @param <K>
+     * @param <V>
+     * @param returnMap
+     *            不能是null ,否则NPE
+     * @param keyList
+     *            size必须和value list size 一样大, 不然报错
+     * @param valueList
+     *            批量获取name服务下多个对象的计数值。 和各对象对应的记录值。顺序和提供的对象id顺序是一致的。
+     * @since 4.5.2
+     * @see "org.apache.commons.collections4.MapUtils.putAll(Map<K, V>, Object[])"
+     */
+    public static <K, V> void putAllFromList(Map<K, V> returnMap,List<K> keyList,List<V> valueList){
+        Validate.notNull(returnMap, "returnMap can't be null!");
+        if (isNullOrEmpty(keyList)){
+            return;
+        }
+        if (isNullOrEmpty(valueList)){
+            return;
+        }
+
+        //---------------------------------------------------------------
+        int sizeKeyList = keyList.size();
+        int sizeValueList = valueList.size();
+
+        Validate.isTrue(sizeKeyList == sizeValueList, "sizeKeyList must = sizeValueList");
+        for (int i = 0; i < sizeKeyList; i++){
+            returnMap.put(keyList.get(i), valueList.get(i));
+        }
+    }
+    //---------------------------------------------------------------
+
+    /**
      * 将<code>key</code>和<code>value</code> 累加的形式put到 map中,如果<code>map</code>中存在<code>key</code>,那么累加<code>value</code>值;如果不存在那么直接put.
      * 
      * <h3>示例:</h3>
