@@ -30,7 +30,6 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
-		<!-- feilong-json -->
 		<dependency>
 			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-json</artifactId>

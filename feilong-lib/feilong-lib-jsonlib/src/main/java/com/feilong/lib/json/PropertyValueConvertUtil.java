@@ -39,23 +39,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyValueConvertUtil{
 
-    static List<?> toList(String key,Object value,JsonConfig jsonConfig,String name,Map<String, Class<?>> classMap){
-        Class<?> targetClass = ClassResolver.resolve(key, name, classMap);
-
-        JsonConfig jsonConfigCopy = jsonConfig.copy();
-        jsonConfigCopy.setRootClass(targetClass);
-        jsonConfigCopy.setClassMap(classMap);
-        return (List<?>) JSONArrayToBeanUtil.toCollection((JSONArray) value, jsonConfigCopy);
-    }
+    //    static List<?> toList(String key,Object value,JsonConfig jsonConfig,String name,Map<String, Class<?>> classMap){
+    //        Class<?> targetClass = ClassResolver.resolve(key, name, classMap);
+    //
+    //        JsonConfig jsonConfigCopy = jsonConfig.copy();
+    //        jsonConfigCopy.setRootClass(targetClass);
+    //        jsonConfigCopy.setClassMap(classMap);
+    //        return (List<?>) JSONArrayToBeanUtil.toCollection((JSONArray) value, jsonConfigCopy);
+    //    }
 
     static Collection<?> toCollection(
-                    String key,
                     Object value,
+                    Class<?> targetClass,
                     JsonConfig jsonConfig,
-                    String name,
                     Map<String, Class<?>> configClassMap,
                     Class<?> collectionType){
-        Class<?> targetClass = ClassResolver.resolve(key, name, configClassMap);
 
         JsonConfig jsonConfigCopy = jsonConfig.copy();
         jsonConfigCopy.setRootClass(targetClass);
