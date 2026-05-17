@@ -25,6 +25,7 @@ import com.feilong.core.util.collectionsutil.CollectionsUtilSuiteTests;
 import com.feilong.core.util.comparator.ComparatorSuiteTests;
 import com.feilong.core.util.enumerationutil.EnumerationUtilParameterizedTest;
 import com.feilong.core.util.equator.IgnoreCaseEquatorTest;
+import com.feilong.core.util.grouputil.GroupUtilSuiteTests;
 import com.feilong.core.util.maputil.MapUtilSuiteTests;
 import com.feilong.core.util.predicate.BeanPredicateUtilSuiteTests;
 import com.feilong.core.util.randomutil.RandomUtilSuiteTests;
@@ -45,14 +46,16 @@ import com.feilong.core.util.transformer.TransformerSuiteTests;
                 AggregateUtilSuiteTests.class,
                 RegexUtilSuiteTests.class,
                 MapUtilSuiteTests.class,
+
                 CollectionsUtilSuiteTests.class,
+                GroupUtilSuiteTests.class,
                 SortUtilSuiteTests.class,
 
                 ComparatorSuiteTests.class,
 
                 TransformerSuiteTests.class,
                 ClosureSuiteTests.class,
-        //
+//
 })
 public class UtilSuiteTests{
 

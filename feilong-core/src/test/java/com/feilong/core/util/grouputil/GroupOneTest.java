@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.collectionsutil.group;
+package com.feilong.core.util.grouputil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyMap;
@@ -28,18 +28,13 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 import org.junit.Test;
 
-import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.GroupUtil;
 import com.feilong.store.member.User;
 
-/**
- * @deprecated
- */
-@Deprecated
-public class GroupOneLambdaTest{
+public class GroupOneTest{
 
     @Test
     public void testGroupOne(){
@@ -47,8 +42,7 @@ public class GroupOneLambdaTest{
         User liubei25 = new User("刘备", 25);
         User liubei30 = new User("刘备", 30);
         List<User> list = toList(zhangfei, liubei25, liubei30);
-
-        Map<String, User> map = CollectionsUtil.groupOne(list, User::getName);
+        Map<String, User> map = GroupUtil.groupOne(list, "name");
 
         assertThat(map.keySet(), is(hasSize(2)));
         assertThat(
@@ -59,29 +53,12 @@ public class GroupOneLambdaTest{
                                         not(hasEntry("刘备", liubei30))));
     }
 
-    @Test
-    public void testGroupOne1(){
-        User zhangfei = new User("张飞", 23);
-        User liubei25 = new User("刘备", 23);
-        User liubei30 = new User("刘备", 30);
-        List<User> list = toList(zhangfei, liubei25, liubei30);
-
-        Map<Integer, User> map = CollectionsUtil.groupOne(list, User::getAge);
-
-        assertThat(map.keySet(), is(hasSize(2)));
-        assertThat(
-                        map,
-                        allOf(//
-                                        hasEntry(23, zhangfei),
-                                        hasEntry(30, liubei30),
-                                        not(hasEntry(23, liubei25))));
-    }
-
-    //---------------------------------------------------------------
-
+    /**
+     * Test group one null collection.
+     */
     @Test
     public void testGroupOneNullCollection(){
-        assertEquals(emptyMap(), CollectionsUtil.groupOne(null, User::getName));
+        assertEquals(emptyMap(), GroupUtil.groupOne(null, "name"));
     }
 
     /**
@@ -89,18 +66,43 @@ public class GroupOneLambdaTest{
      */
     @Test
     public void testGroupOneEmptyCollection(){
-        assertEquals(emptyMap(), CollectionsUtil.groupOne(new ArrayList<>(), User::getName));
+        assertEquals(emptyMap(), GroupUtil.groupOne(new ArrayList<>(), "name"));
     }
 
-    //---------------------------------------------------------------
-
+    /**
+     * Test group one null property name.
+     */
     @Test(expected = NullPointerException.class)
     public void testGroupOneNullPropertyName(){
         User zhangfei = new User("张飞", 23);
         User liubei25 = new User("刘备", 25);
         User liubei30 = new User("刘备", 30);
         List<User> list = toList(zhangfei, liubei25, liubei30);
-        CollectionsUtil.groupOne(list, (Function) null);
+        GroupUtil.groupOne(list, (String) null);
+    }
+
+    /**
+     * Test group one empty property name.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testGroupOneEmptyPropertyName(){
+        User zhangfei = new User("张飞", 23);
+        User liubei25 = new User("刘备", 25);
+        User liubei30 = new User("刘备", 30);
+        List<User> list = toList(zhangfei, liubei25, liubei30);
+        GroupUtil.groupOne(list, "");
+    }
+
+    /**
+     * Test group one blank property name.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testGroupOneBlankPropertyName(){
+        User zhangfei = new User("张飞", 23);
+        User liubei25 = new User("刘备", 25);
+        User liubei30 = new User("刘备", 30);
+        List<User> list = toList(zhangfei, liubei25, liubei30);
+        GroupUtil.groupOne(list, " ");
     }
 
 }

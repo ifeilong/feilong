@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.collectionsutil.group;
+package com.feilong.core.util.grouputil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.CollectionsUtil.group;
+import static com.feilong.core.util.GroupUtil.group;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
@@ -35,16 +35,17 @@ import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
 import org.junit.Test;
 
-import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.GroupUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.TransformerUtils;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.store.member.User;
 
 /**
- * @deprecated
+ * The Class CollectionsUtilGroupWithTransformerAndPredicateTest.
+ *
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
-@Deprecated
 public class GroupWithTransformerAndPredicateTest{
 
     /**
@@ -70,7 +71,7 @@ public class GroupWithTransformerAndPredicateTest{
         //---------------------------------------------------------------
 
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        Map<String, List<User>> map = CollectionsUtil.group(list, comparatorPredicate, new Transformer<User, String>(){
+        Map<String, List<User>> map = GroupUtil.group(list, comparatorPredicate, new Transformer<User, String>(){
 
             @Override
             public String transform(User user){
@@ -128,7 +129,7 @@ public class GroupWithTransformerAndPredicateTest{
     public void testGroupNullTransformer(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        CollectionsUtil.group(list, comparatorPredicate, null);
+        GroupUtil.group(list, comparatorPredicate, null);
     }
 
     //*****
@@ -142,7 +143,7 @@ public class GroupWithTransformerAndPredicateTest{
         User liubei30 = new User("刘备", 30);
         List<User> list = toList(zhangfei28, liubei32, liubei30);
 
-        Map<Integer, List<User>> map = CollectionsUtil.group(list, null, TransformerUtils.<User, Integer> constantTransformer(5));
+        Map<Integer, List<User>> map = GroupUtil.group(list, null, TransformerUtils.<User, Integer> constantTransformer(5));
 
         assertEquals(1, map.size());
         assertThat(map, allOf(hasEntry(5, toList(zhangfei28, liubei32, liubei30))));
@@ -155,6 +156,6 @@ public class GroupWithTransformerAndPredicateTest{
     public void testGroupNotPredicate(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.EQUAL);
-        assertEquals(emptyMap(), CollectionsUtil.group(list, comparatorPredicate, TransformerUtils.<User, Integer> constantTransformer(5)));
+        assertEquals(emptyMap(), GroupUtil.group(list, comparatorPredicate, TransformerUtils.<User, Integer> constantTransformer(5)));
     }
 }

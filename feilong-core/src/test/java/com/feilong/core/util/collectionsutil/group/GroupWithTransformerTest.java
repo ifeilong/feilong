@@ -39,10 +39,9 @@ import com.feilong.lib.collection4.TransformerUtils;
 import com.feilong.store.member.User;
 
 /**
- * The Class CollectionsUtilGroupWithTransformerTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @deprecated
  */
+@Deprecated
 public class GroupWithTransformerTest{
 
     /**

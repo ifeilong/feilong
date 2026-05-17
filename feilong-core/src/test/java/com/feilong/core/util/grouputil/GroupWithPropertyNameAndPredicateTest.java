@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.collectionsutil.group;
+package com.feilong.core.util.grouputil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyMap;
@@ -34,15 +34,11 @@ import java.util.Map;
 import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
-import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.GroupUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.store.member.User;
 
-/**
- * @deprecated
- */
-@Deprecated
 public class GroupWithPropertyNameAndPredicateTest{
 
     @Test
@@ -58,7 +54,7 @@ public class GroupWithPropertyNameAndPredicateTest{
                         new User("刘备", 10));
 
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        Map<String, List<User>> map = CollectionsUtil.group(list, "name", comparatorPredicate);
+        Map<String, List<User>> map = GroupUtil.group(list, "name", comparatorPredicate);
 
         assertThat(
                         map,
@@ -80,7 +76,7 @@ public class GroupWithPropertyNameAndPredicateTest{
         User liubei30 = new User("刘备", 30);
         List<User> list = toList(zhangfei28, liubei32, liubei30);
 
-        Map<String, List<User>> map = CollectionsUtil.group(list, "name", null);
+        Map<String, List<User>> map = GroupUtil.group(list, "name", null);
 
         assertEquals(2, map.size());
         assertThat(
@@ -95,7 +91,7 @@ public class GroupWithPropertyNameAndPredicateTest{
      */
     @Test
     public void testGroupNullCollection(){
-        assertEquals(emptyMap(), CollectionsUtil.group(null, "name", BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS)));
+        assertEquals(emptyMap(), GroupUtil.group(null, "name", BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS)));
     }
 
     /**
@@ -105,7 +101,7 @@ public class GroupWithPropertyNameAndPredicateTest{
     public void testGroupEmptyCollection(){
         assertEquals(
                         emptyMap(),
-                        CollectionsUtil.group(new ArrayList<>(), "name", BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS)));
+                        GroupUtil.group(new ArrayList<>(), "name", BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS)));
     }
 
     /**
@@ -116,7 +112,7 @@ public class GroupWithPropertyNameAndPredicateTest{
     public void testGroupNullPropertyName(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        CollectionsUtil.group(list, null, comparatorPredicate);
+        GroupUtil.group(list, null, comparatorPredicate);
     }
 
     /**
@@ -126,7 +122,7 @@ public class GroupWithPropertyNameAndPredicateTest{
     public void testGroupEmptyPropertyName(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        CollectionsUtil.group(list, "", comparatorPredicate);
+        GroupUtil.group(list, "", comparatorPredicate);
     }
 
     /**
@@ -136,7 +132,7 @@ public class GroupWithPropertyNameAndPredicateTest{
     public void testGroupBlankPropertyName(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        CollectionsUtil.group(list, " ", comparatorPredicate);
+        GroupUtil.group(list, " ", comparatorPredicate);
     }
 
     /**
@@ -146,6 +142,6 @@ public class GroupWithPropertyNameAndPredicateTest{
     public void testGroupNotPredicate(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.EQUAL);
-        assertEquals(emptyMap(), CollectionsUtil.group(list, "name", comparatorPredicate));
+        assertEquals(emptyMap(), GroupUtil.group(list, "name", comparatorPredicate));
     }
 }

@@ -431,8 +431,9 @@ public final class BeanPredicateUtil{
      * 判断指定的值 <code>valueToCompare</code> <code>criterion</code> 提取的bean对象属性<code>propertyName</code>的值 .
      * 
      * <p>
-     * 注意: 是参数 <code>valueToCompare</code> 和 属性值进行比较 <code>criterion</code>, BeanPredicateUtil.comparatorPredicate("age", 20,
-     * Criterion.LESS) 表示提取所有比20 大的结果
+     * <b>注意:</b>
+     * 是参数 <code>valueToCompare</code> 和 属性值进行比较 <code>criterion</code>, <br>
+     * <span style="color:green">BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS)</span> 表示提取所有比20 大的结果
      * </p>
      * 
      * <h3>说明:</h3>
@@ -505,7 +506,7 @@ public final class BeanPredicateUtil{
      *                 new User("刘备", 30),
      *                 new User("刘备", 10));
      * 
-     * Map{@code <String, List<User>>} map = CollectionsUtil.group(list, "name", new Predicate{@code <User>}(){
+     * Map{@code <String, List<User>>} map = GroupUtil.group(list, "name", new Predicate{@code <User>}(){
      * 
      *     {@code @Override}
      *     public boolean evaluate(User user){

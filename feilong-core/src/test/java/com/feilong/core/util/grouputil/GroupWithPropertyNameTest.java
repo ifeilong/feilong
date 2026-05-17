@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.collectionsutil.group;
+package com.feilong.core.util.grouputil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyMap;
@@ -28,13 +28,14 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.GroupUtil;
 import com.feilong.store.member.User;
 
 /**
- * @deprecated
+ * The Class CollectionsUtilGroupTest.
+ *
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
-@Deprecated
 public class GroupWithPropertyNameTest{
 
     /**
@@ -47,7 +48,7 @@ public class GroupWithPropertyNameTest{
         User liubei30 = new User("刘备", 30);
         List<User> list = toList(zhangfei, liubei25, liubei30);
 
-        Map<String, List<User>> map = CollectionsUtil.group(list, "name");
+        Map<String, List<User>> map = GroupUtil.group(list, "name");
 
         assertEquals(2, map.size());
         assertThat(map, allOf(hasEntry("张飞", toList(zhangfei)), hasEntry("刘备", toList(liubei25, liubei30))));
@@ -66,7 +67,7 @@ public class GroupWithPropertyNameTest{
 
         List<User> list = toList(zhangfei, hanxiangdi18, zhugeliang18);
 
-        Map<Integer, List<User>> map = CollectionsUtil.group(list, "ageInt");
+        Map<Integer, List<User>> map = GroupUtil.group(list, "ageInt");
 
         assertEquals(2, map.size());
         assertThat(map, allOf(hasEntry(25, toList(zhangfei)), hasEntry(18, toList(hanxiangdi18, zhugeliang18))));
@@ -77,7 +78,7 @@ public class GroupWithPropertyNameTest{
      */
     @Test
     public void testGroupNullCollection(){
-        assertEquals(emptyMap(), CollectionsUtil.group(null, "name"));
+        assertEquals(emptyMap(), GroupUtil.group(null, "name"));
     }
 
     /**
@@ -85,7 +86,7 @@ public class GroupWithPropertyNameTest{
      */
     @Test
     public void testGroupEmptyCollection(){
-        assertEquals(emptyMap(), CollectionsUtil.group(new ArrayList<>(), "name"));
+        assertEquals(emptyMap(), GroupUtil.group(new ArrayList<>(), "name"));
     }
 
     /**
@@ -95,7 +96,7 @@ public class GroupWithPropertyNameTest{
     @Test(expected = NullPointerException.class)
     public void testGroupNullPropertyName(){
         List<User> list = toList(new User("张飞", 23), new User("刘备", 25), new User("刘备", 25));
-        CollectionsUtil.group(list, (String) null);
+        GroupUtil.group(list, (String) null);
     }
 
     /**
@@ -104,7 +105,7 @@ public class GroupWithPropertyNameTest{
     @Test(expected = IllegalArgumentException.class)
     public void testGroupEmptyPropertyName(){
         List<User> list = toList(new User("张飞", 23), new User("刘备", 25), new User("刘备", 25));
-        CollectionsUtil.group(list, "");
+        GroupUtil.group(list, "");
     }
 
     /**
@@ -113,6 +114,6 @@ public class GroupWithPropertyNameTest{
     @Test(expected = IllegalArgumentException.class)
     public void testGroupBlankPropertyName(){
         List<User> list = toList(new User("张飞", 23), new User("刘备", 25), new User("刘备", 25));
-        CollectionsUtil.group(list, " ");
+        GroupUtil.group(list, " ");
     }
 }

@@ -34,6 +34,10 @@ import org.junit.Test;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
+/**
+ * @deprecated
+ */
+@Deprecated
 public class GroupOneTest{
 
     @Test

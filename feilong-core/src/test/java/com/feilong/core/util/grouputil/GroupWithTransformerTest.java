@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.collectionsutil.group;
+package com.feilong.core.util.grouputil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.CollectionsUtil.group;
+import static com.feilong.core.util.GroupUtil.group;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
@@ -31,21 +31,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
 import org.junit.Test;
 
-import com.feilong.core.util.CollectionsUtil;
-import com.feilong.core.util.predicate.BeanPredicateUtil;
+import com.feilong.core.util.GroupUtil;
 import com.feilong.lib.collection4.TransformerUtils;
-import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.store.member.User;
 
 /**
- * @deprecated
+ * The Class CollectionsUtilGroupWithTransformerTest.
+ *
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
-@Deprecated
-public class GroupWithTransformerAndPredicateTest{
+public class GroupWithTransformerTest{
 
     /**
      * Test group2.
@@ -68,9 +66,7 @@ public class GroupWithTransformerAndPredicateTest{
         List<User> list = toList(mateng55, machao28, madai27, maxiu25, zhangfei28, liubei32, guanyu50, guanping32, guansuo31, guanxing20);
 
         //---------------------------------------------------------------
-
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        Map<String, List<User>> map = CollectionsUtil.group(list, comparatorPredicate, new Transformer<User, String>(){
+        Map<String, List<User>> map = GroupUtil.group(list, new Transformer<User, String>(){
 
             @Override
             public String transform(User user){
@@ -87,24 +83,17 @@ public class GroupWithTransformerAndPredicateTest{
                                         hasEntry(is("马"), hasItems(mateng55, machao28, madai27, maxiu25)),
                                         hasEntry(is("张"), hasItems(zhangfei28)),
                                         hasEntry(is("刘"), hasItems(liubei32)),
-                                        hasEntry(is("关"), hasItems(guanping32, guansuo31))
+                                        hasEntry(is("关"), hasItems(guanping32, guansuo31, guanxing20))
                         //
                         ));
     }
-
-    //---------------------------------------------------------------
 
     /**
      * Test group null collection.
      */
     @Test
     public void testGroupNullCollection(){
-        assertEquals(
-                        emptyMap(),
-                        group(
-                                        null,
-                                        BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS),
-                                        TransformerUtils.constantTransformer(5)));
+        assertEquals(emptyMap(), group(null, TransformerUtils.constantTransformer(5)));
     }
 
     /**
@@ -112,12 +101,7 @@ public class GroupWithTransformerAndPredicateTest{
      */
     @Test
     public void testGroupEmptyCollection(){
-        assertEquals(
-                        emptyMap(),
-                        group(
-                                        new ArrayList<>(),
-                                        BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS),
-                                        TransformerUtils.constantTransformer(5)));
+        assertEquals(emptyMap(), group(new ArrayList<>(), TransformerUtils.constantTransformer(5)));
     }
 
     /**
@@ -127,34 +111,6 @@ public class GroupWithTransformerAndPredicateTest{
     @Test(expected = NullPointerException.class)
     public void testGroupNullTransformer(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        CollectionsUtil.group(list, comparatorPredicate, null);
-    }
-
-    //*****
-    /**
-     * Test group null predicate.
-     */
-    @Test
-    public void testGroupNullPredicate(){
-        User zhangfei28 = new User("张飞", 28);
-        User liubei32 = new User("刘备", 32);
-        User liubei30 = new User("刘备", 30);
-        List<User> list = toList(zhangfei28, liubei32, liubei30);
-
-        Map<Integer, List<User>> map = CollectionsUtil.group(list, null, TransformerUtils.<User, Integer> constantTransformer(5));
-
-        assertEquals(1, map.size());
-        assertThat(map, allOf(hasEntry(5, toList(zhangfei28, liubei32, liubei30))));
-    }
-
-    /**
-     * Test group not predicate.
-     */
-    @Test
-    public void testGroupNotPredicate(){
-        List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.EQUAL);
-        assertEquals(emptyMap(), CollectionsUtil.group(list, comparatorPredicate, TransformerUtils.<User, Integer> constantTransformer(5)));
+        GroupUtil.group(list, (Transformer<User, String>) null);
     }
 }

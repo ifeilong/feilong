@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.collectionsutil.group;
+package com.feilong.core.util.grouputil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyMap;
@@ -24,32 +24,31 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
-import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.GroupUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.store.member.User;
 
-/**
- * @deprecated
- */
-@Deprecated
-public class GroupWithPropertyNameAndPredicateTest{
+public class GroupByWithPredicateAndKeyExtractorTest{
 
     @Test
     public void testGroup2(){
         User zhangfei28 = new User("张飞", 28);
         User liubei32 = new User("刘备", 32);
         User liubei30 = new User("刘备", 30);
+
         List<User> list = toList(//
                         new User("张飞", 10),
                         zhangfei28,
@@ -58,21 +57,22 @@ public class GroupWithPropertyNameAndPredicateTest{
                         new User("刘备", 10));
 
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        Map<String, List<User>> map = CollectionsUtil.group(list, "name", comparatorPredicate);
+        Map<String, List<User>> map = GroupUtil.groupBy(list, User::getName, (user) -> comparatorPredicate.evaluate(user));
 
         assertThat(
                         map,
                         allOf(//
                                         hasKey("张飞"),
                                         hasKey("刘备"),
+
+                                        //not(hasEntry(is("张飞"), hasItem(zhangfei28))),
+
                                         hasEntry(is("张飞"), hasItem(zhangfei28)),
                                         hasEntry(is("刘备"), hasItems(liubei32, liubei30))));
+
         assertSame(2, map.size());
     }
 
-    /**
-     * Test group null predicate.
-     */
     @Test
     public void testGroupNullPredicate(){
         User zhangfei28 = new User("张飞", 28);
@@ -80,7 +80,7 @@ public class GroupWithPropertyNameAndPredicateTest{
         User liubei30 = new User("刘备", 30);
         List<User> list = toList(zhangfei28, liubei32, liubei30);
 
-        Map<String, List<User>> map = CollectionsUtil.group(list, "name", null);
+        Map<String, List<User>> map = GroupUtil.groupBy(list, User::getName, null);
 
         assertEquals(2, map.size());
         assertThat(
@@ -90,12 +90,10 @@ public class GroupWithPropertyNameAndPredicateTest{
                                         hasEntry("刘备", toList(liubei32, liubei30))));
     }
 
-    /**
-     * Test group null collection.
-     */
     @Test
     public void testGroupNullCollection(){
-        assertEquals(emptyMap(), CollectionsUtil.group(null, "name", BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS)));
+        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        assertEquals(emptyMap(), GroupUtil.groupBy(null, User::getName, (user) -> comparatorPredicate.evaluate(user)));
     }
 
     /**
@@ -103,49 +101,24 @@ public class GroupWithPropertyNameAndPredicateTest{
      */
     @Test
     public void testGroupEmptyCollection(){
-        assertEquals(
-                        emptyMap(),
-                        CollectionsUtil.group(new ArrayList<>(), "name", BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS)));
+        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        assertEquals(emptyMap(), GroupUtil.groupBy(new ArrayList<>(), User::getName, (user) -> comparatorPredicate.evaluate(user)));
     }
 
     /**
      * Test group null property name.
      */
-    //*****
     @Test(expected = NullPointerException.class)
     public void testGroupNullPropertyName(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        CollectionsUtil.group(list, null, comparatorPredicate);
+        GroupUtil.groupBy(list, (Function<User, String>) null, (user) -> comparatorPredicate.evaluate(user));
     }
 
-    /**
-     * Test group empty property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGroupEmptyPropertyName(){
-        List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        CollectionsUtil.group(list, "", comparatorPredicate);
-    }
-
-    /**
-     * Test group blank property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGroupBlankPropertyName(){
-        List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
-        CollectionsUtil.group(list, " ", comparatorPredicate);
-    }
-
-    /**
-     * Test group not predicate.
-     */
     @Test
     public void testGroupNotPredicate(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.EQUAL);
-        assertEquals(emptyMap(), CollectionsUtil.group(list, "name", comparatorPredicate));
+        assertEquals(emptyMap(), GroupUtil.groupBy(list, User::getName, (user) -> comparatorPredicate.evaluate(user)));
     }
 }
