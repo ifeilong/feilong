@@ -25,6 +25,7 @@ import com.feilong.io.fileutil.FileUtilSuiteTests;
 import com.feilong.io.inputstreamutil.InputStreamUtilSuiteTests;
 import com.feilong.io.ioreaderutil.IOReaderUtilSuiteTests;
 import com.feilong.io.iowriteutil.IOWriteUtilSuiteTests;
+import com.feilong.io.json.dify.HotBonusAnalysisDifyApplyJsonTest;
 import com.feilong.io.readerutil.ReaderUtilSuiteTests;
 
 @RunWith(Suite.class)
@@ -40,6 +41,8 @@ import com.feilong.io.readerutil.ReaderUtilSuiteTests;
 
                 FileInfoEntityTest.class,
                 MimeTypeUtilTest.class,
+
+                HotBonusAnalysisDifyApplyJsonTest.class,
 
 })
 

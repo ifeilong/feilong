@@ -86,7 +86,9 @@ import com.feilong.lib.json.util.JavaIdentifierTransformer;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="https://github.com/venusdrogon/feilong-json/issues/11">issue 11</a>
  * @since 1.11.2
+ * @deprecated 'memberNo' 会被转成{@code =>} 'memberno' (小写) ,不建议使用, 建议使用 {@link ToCamelCaseJavaIdentifierTransformer} since 4.5.2
  */
+@Deprecated
 public class SeparatorToCamelCaseJavaIdentifierTransformer extends JavaIdentifierTransformer{
 
     /** 下划线 transformer 'member_no' {@code =>} 'memberNo'. */
@@ -133,6 +135,8 @@ public class SeparatorToCamelCaseJavaIdentifierTransformer extends JavaIdentifie
         s = s.toLowerCase();
 
         //TODO 找找工具类
+
+        //建议优先使用 CaseUtils.toCamelCase()，它是专门为这类转换设计的，代码最简洁且功能完整。
         StringBuilder sb = new StringBuilder(s.length());
 
         boolean upperCase = false;

@@ -1,5 +1,8 @@
 package com.feilong.io.json.dify;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import com.feilong.io.IOReaderUtil;
@@ -23,6 +26,8 @@ public class HotBonusAnalysisDifyApplyJsonTest{
         String outputs = data.getOutputs();
 
         log.info("responseBody:[{}] outputs:[{}] bean:[{}]", responseBody, outputs, bean);
+
+        assertTrue(isNotNullOrEmpty(outputs));
     }
 
     //---------------------------------------------------------------

@@ -33,6 +33,7 @@ import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.CrmMemberInfoCommand;
 import com.feilong.json.entity.MyBean;
 import com.feilong.json.transformer.SeparatorToCamelCaseJavaIdentifierTransformer;
+import com.feilong.json.transformer.ToCamelCaseJavaIdentifierTransformer;
 import com.feilong.lib.json.util.JavaIdentifierTransformer;
 import com.feilong.store.member.Person;
 import com.feilong.store.member.User;
@@ -57,6 +58,36 @@ public class ToBeanWithJsonToJavaConfigTest{
         CrmMemberInfoCommand crmMemberInfoCommand = JsonUtil.toBean(
                         json,
                         new JsonToJavaConfig(CrmMemberInfoCommand.class, SeparatorToCamelCaseJavaIdentifierTransformer.INSTANCE));
+
+        assertThat(
+                        crmMemberInfoCommand,
+                        allOf(//
+                                        hasProperty("memberNo", is("11105000009"))
+                        //        
+                        ));
+    }
+
+    @Test
+    public void testToBeanWithUncapitalizeJavaIdentifierTransformer111(){
+        String json = "{'member_no':'11105000009'}";
+
+        CrmMemberInfoCommand crmMemberInfoCommand = JsonUtil
+                        .toBean(json, new JsonToJavaConfig(CrmMemberInfoCommand.class, ToCamelCaseJavaIdentifierTransformer.INSTANCE));
+
+        assertThat(
+                        crmMemberInfoCommand,
+                        allOf(//
+                                        hasProperty("memberNo", is("11105000009"))
+                        //        
+                        ));
+    }
+
+    @Test
+    public void testToBeanWithUncapitalizeJavaIdentifierTransformer11(){
+        String json = "{'memberNo':'11105000009'}";
+
+        CrmMemberInfoCommand crmMemberInfoCommand = JsonUtil
+                        .toBean(json, new JsonToJavaConfig(CrmMemberInfoCommand.class, ToCamelCaseJavaIdentifierTransformer.INSTANCE));
 
         assertThat(
                         crmMemberInfoCommand,
