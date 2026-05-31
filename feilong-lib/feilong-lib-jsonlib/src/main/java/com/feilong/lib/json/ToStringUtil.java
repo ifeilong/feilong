@@ -15,7 +15,7 @@
  */
 package com.feilong.lib.json;
 
-import static com.feilong.core.util.MapUtil.get;
+import static com.feilong.core.util.MapUtil.getByIndex;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
 import java.util.Iterator;
@@ -74,8 +74,7 @@ public class ToStringUtil{
 
         //---------------------------------------------------------------
         if (jsonKeyAndValueMap.size() == 1){
-
-            Entry<String, Object> entry = get(jsonKeyAndValueMap, 0);
+            Entry<String, Object> entry = getByIndex(jsonKeyAndValueMap, 0);
             sb.append(quote(entry.getKey()));
             sb.append(": ");
             sb.append(valueToString(entry.getValue(), indentFactor, indent));

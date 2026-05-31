@@ -26,14 +26,7 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
-/**
- * The Class MapUtilGetTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @deprecated
- */
-@Deprecated
-public class GetTest{
+public class GetByIndexTest{
 
     @Test
     public void testGetIndex(){
@@ -42,18 +35,20 @@ public class GetTest{
         map.put("address", "shanghai");
         map.put("age", "18");
 
-        Entry<String, String> entry = MapUtil.get(map, 2);
+        Entry<String, String> entry = MapUtil.getByIndex(map, 2);
 
         assertEquals("age", entry.getKey());
         assertEquals("18", entry.getValue());
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Test get index more index.
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetIndexMoreIndex(){
-        MapUtil.get(newHashMap(0), 2);
+        MapUtil.getByIndex(newHashMap(0), 2);
     }
 
     /**
@@ -61,7 +56,7 @@ public class GetTest{
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetIndex1(){
-        MapUtil.get(newHashMap(0), -1);
+        MapUtil.getByIndex(newHashMap(0), -1);
     }
 
     /**
@@ -69,6 +64,6 @@ public class GetTest{
      */
     @Test(expected = NullPointerException.class)
     public void testGetNullMap(){
-        MapUtil.get(null, 0);
+        MapUtil.getByIndex(null, 0);
     }
 }

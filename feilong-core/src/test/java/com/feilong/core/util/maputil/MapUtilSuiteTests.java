@@ -64,6 +64,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 RemoveKeysCollectionTest.class,
 
                 GetTest.class,
+                GetByIndexTest.class,
                 GetCaseInsensitiveTest.class,
 
                 GetByKeyTest.class,

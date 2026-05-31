@@ -297,6 +297,8 @@ public final class MapUtil{
         return map.computeIfAbsent(key, mappingFunction);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 根据索引来获得map 的entry.
      * 
@@ -402,8 +404,121 @@ public final class MapUtil{
      * @see "org.apache.commons.collections4.CollectionUtils#get(Iterable, int)"
      * @see "org.apache.commons.collections4.CollectionUtils#get(Map, int)"
      * @since 1.10.1
+     * @deprecated 有歧义, 自 4.5.3 版本起废弃，因为方法名`get`易与通过key获取值的方法产生歧义（特别是当key为Integer类型时）。
+     *             请明确使用 {@link #getByIndex(Map, int)} 替代。
      */
+    @Deprecated
     public static <K, V> Map.Entry<K, V> get(Map<K, V> map,int index){
+        return getByIndex(map, index);
+    }
+
+    /**
+     * 根据索引来获得map 的entry.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>传入的map 最好是 {@link LinkedHashMap},{@link EnumMap}等自身有顺序的map,否则如 {@link HashMap}每次结果都不一样</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 获得下面bookSectionUrlMap 第一个entry value值
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public void createFile(Novel novel){
+     *     Map{@code <String, String>} bookSectionUrlMap = parseBookSectionUrlMap(novel);
+     * 
+     *     if (isNullOrEmpty(bookSectionUrlMap)){
+     *         log.warn("bookSectionUrlMap is null/empty,Perhaps you read the latest chapter");
+     *         return;
+     *     }
+     * 
+     *     //---------------------------------------------------------------
+     *     String beginName = null; <span style="color:green">// 开始章节名称 </span>
+     * 
+     *     for (Map.Entry{@code <String, String>} entry : bookSectionUrlMap.entrySet()){
+     *         String sectionName = entry.getValue();
+     *         if (isNullOrEmpty(beginName)){
+     *             beginName = sectionName;<span style="color:red">//①这里纯粹只是为了获得 map 第一个 entry value 值</span>
+     *         }
+     *         try{
+     * 
+     *             <span style="color:green">//do some big logic</span>
+     * 
+     *         }catch (ChapterParseException e){
+     *             break; <span style="color:green">//如果出现了异常 就跳出</span>
+     *         }
+     *     }
+     * 
+     *     //---------------------------------------------------------------
+     *     write(novel, beginName);
+     * 
+     *     <span style="color:green">// do something logic</span>
+     * }
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 对于上述代码 ①处的代码,虽然只是寥寥几行,但是会减低代码的可读性,也不利于循环体代码抽取,通过sonar 扫描的时候,明显方法的复杂度很高
+     * </p>
+     * 
+     * <b>此时,你可以优化成:</b>
+     * 
+     * <pre class="code">
+     * 
+     * public void createFile(Novel novel){
+     *     Map{@code <String, String>} bookSectionUrlMap = parseBookSectionUrlMap(novel);
+     * 
+     *     if (isNullOrEmpty(bookSectionUrlMap)){
+     *         log.warn("bookSectionUrlMap is null/empty,Perhaps you read the latest chapter");
+     *         return;
+     *     }
+     * 
+     *     //---------------------------------------------------------------
+     * 
+     *     for (Map.Entry{@code <String, String>} entry : bookSectionUrlMap.entrySet()){
+     *         try{
+     * 
+     *             <span style="color:green">//do some big logic</span>
+     * 
+     *         }catch (ChapterParseException e){
+     *             break; <span style="color:green">//如果出现了异常 就跳出</span>
+     *         }
+     *     }
+     * 
+     *     //---------------------------------------------------------------
+     *     write(novel, MapUtil.getUseIndex(bookSectionUrlMap, 0).getValue());
+     * 
+     *     <span style="color:green">// do something logic</span>
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            最好是 {@link LinkedHashMap},{@link EnumMap}等自身有顺序的map,否则每次出来的结果都不一样
+     * @param index
+     *            the index
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @throws IndexOutOfBoundsException
+     *             if the index is invalid
+     * @see "org.apache.commons.collections4.CollectionUtils#get(Iterable, int)"
+     * @see "org.apache.commons.collections4.CollectionUtils#get(Map, int)"
+     * @since 4.5.3
+     */
+    public static <K, V> Map.Entry<K, V> getByIndex(Map<K, V> map,int index){
         Validate.notNull(map, "map can't be null!");
         return com.feilong.lib.collection4.CollectionUtils.get(map, index);
     }
@@ -467,6 +582,8 @@ public final class MapUtil{
         }
         return map.get(key);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 从map中取值, key 忽视大小写.
