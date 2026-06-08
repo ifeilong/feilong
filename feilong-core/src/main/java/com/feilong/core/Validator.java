@@ -69,7 +69,7 @@ import lombok.NoArgsConstructor;
  * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(char[])
  * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(int[])
  * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(long[])
- * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(short[])
+ * @see "lang3 ArrayUtils#isEmpty(short[])"
  * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(float[])
  * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(double[])
  * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(Object[])
@@ -175,7 +175,7 @@ public final class Validator{
      *         如果values是empty也返回true<br>
      *         如果values内有任何元素不是null/empty,返回false<br>
      *         逻辑和 StringUtils#isAllBlank(CharSequence...) 保持一致
-     * @see com.feilong.lib.lang3.StringUtils#isAllBlank(CharSequence...)
+     * @see "lang3 StringUtils#isAllBlank(CharSequence...)"
      * @since 3.5.0
      */
     public static boolean isAllNullOrEmpty(Object...values){

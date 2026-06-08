@@ -23,7 +23,7 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 import com.feilong.context.invoker.http.ConnectionConfigBuilder;
-import com.feilong.lib.lang3.StringUtils;
+import com.feilong.core.Validator;
 import com.feilong.namespace.RuntimeBeanReferenceBuilder;
 import com.feilong.net.http.ConnectionConfig;
 
@@ -57,7 +57,7 @@ public class ConnectionConfigBuilderBeanDefinitionBuilderBuilder{
         final String readTimeout = element.getAttribute("readTimeout");
         final String contentCharset = element.getAttribute("contentCharset");
 
-        if (StringUtils.isAllBlank(userName, password, proxyAddress, proxyPort, connectTimeout, readTimeout, contentCharset)){
+        if (Validator.isAllNullOrEmpty(userName, password, proxyAddress, proxyPort, connectTimeout, readTimeout, contentCharset)){
             return null;
         }
 

@@ -1439,7 +1439,7 @@ public final class ConvertUtil{
      * @return 如果 <code>collection</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
      * @see "org.apache.commons.collections4.IteratorUtils#toString(Iterator)"
-     * @see com.feilong.lib.lang3.StringUtils#join(Iterable, String)
+     * @see "commons-lang3 StringUtils#join(Iterable, String)"
      * @since 1.11.0
      * @apiNote
      *          <h3>说明</h3>
@@ -1483,14 +1483,14 @@ public final class ConvertUtil{
      * </p>
      * 
      * <ol>
-     * <li>{@link ArrayUtils#toObject(boolean[])}</li>
-     * <li>{@link ArrayUtils#toObject(byte[])}</li>
-     * <li>{@link ArrayUtils#toObject(char[])}</li>
-     * <li>{@link ArrayUtils#toObject(double[])}</li>
-     * <li>{@link ArrayUtils#toObject(float[])}</li>
-     * <li>{@link ArrayUtils#toObject(int[])}</li>
-     * <li>{@link ArrayUtils#toObject(long[])}</li>
-     * <li>{@link ArrayUtils#toObject(short[])}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(boolean[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(byte[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(char[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(double[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(float[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(int[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(long[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(short[])"}</li>
      * </ol>
      * </blockquote>
      *
@@ -1576,7 +1576,7 @@ public final class ConvertUtil{
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
      * @see "org.apache.commons.collections4.IteratorUtils#toString(Iterator)"
-     * @see com.feilong.lib.lang3.StringUtils#join(Iterable, String)
+     * @see "commons-lang3  StringUtils#join(Iterable, String)"
      * @since 1.8.4 change param order
      * @apiNote
      *          <h3>关于 default {@link ToStringConfig}:</h3>
@@ -1652,14 +1652,14 @@ public final class ConvertUtil{
      * </p>
      * 
      * <ol>
-     * <li>{@link ArrayUtils#toObject(boolean[])}</li>
-     * <li>{@link ArrayUtils#toObject(byte[])}</li>
-     * <li>{@link ArrayUtils#toObject(char[])}</li>
-     * <li>{@link ArrayUtils#toObject(double[])}</li>
-     * <li>{@link ArrayUtils#toObject(float[])}</li>
-     * <li>{@link ArrayUtils#toObject(int[])}</li>
-     * <li>{@link ArrayUtils#toObject(long[])}</li>
-     * <li>{@link ArrayUtils#toObject(short[])}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(boolean[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(byte[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(char[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(double[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(float[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(int[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(long[])"}</li>
+     * <li>{@link "commons-lang3 ArrayUtils#toObject(short[])"}</li>
      * </ol>
      * </blockquote>
      *
@@ -1672,7 +1672,7 @@ public final class ConvertUtil{
      *         否则循环,拼接 {@link ToStringConfig#getConnector()}
      * @see com.feilong.lib.lang3.builder.ToStringStyle
      * @see com.feilong.lib.lang3.StringUtils#join(Object[], String)
-     * @see com.feilong.lib.lang3.StringUtils#join(Iterable, String)
+     * @see "commons-lang3 StringUtils#join(Iterable, String)"
      * @since 1.8.4 change param order
      * @apiNote
      *          <h3>关于 default {@link ToStringConfig}:</h3>

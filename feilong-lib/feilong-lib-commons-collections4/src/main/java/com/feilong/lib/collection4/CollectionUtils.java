@@ -205,34 +205,6 @@ public class CollectionUtils{
     }
 
     /**
-     * Returns the immutable EMPTY_COLLECTION with generic type safety.
-     *
-     * @see #EMPTY_COLLECTION
-     * @since 4.0
-     * @param <T>
-     *            the element type
-     * @return immutable empty collection
-     */
-    @SuppressWarnings("unchecked") // OK, empty collection is compatible with any type
-    public static <T> Collection<T> emptyCollection(){
-        return EMPTY_COLLECTION;
-    }
-
-    /**
-     * Returns an immutable empty collection if the argument is <code>null</code>,
-     * or the argument itself otherwise.
-     *
-     * @param <T>
-     *            the element type
-     * @param collection
-     *            the collection, possibly <code>null</code>
-     * @return an empty collection if the argument is <code>null</code>
-     */
-    public static <T> Collection<T> emptyIfNull(final Collection<T> collection){
-        return collection == null ? CollectionUtils.<T> emptyCollection() : collection;
-    }
-
-    /**
      * Returns a {@link Collection} containing the union of the given
      * {@link Iterable}s.
      * <p>

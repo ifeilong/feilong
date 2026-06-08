@@ -24,7 +24,6 @@ import java.util.List;
 import org.apache.commons.collections4.Closure;
 import org.apache.commons.collections4.Equator;
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.Transformer;
 
 import com.feilong.lib.collection4.functors.EqualPredicate;
 
