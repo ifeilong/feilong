@@ -48,27 +48,6 @@ public class MapUtils{
 
     // Type safe getters
     //-------------------------------------------------------------------------
-    /**
-     * Gets from a Map in a null-safe manner.
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param map
-     *            the map to use
-     * @param key
-     *            the key to look up
-     * @return the value in the Map, <code>null</code> if null map input
-     */
-    public static <K, V> V getObject(final Map<? super K, V> map,final K key){
-        if (map != null){
-            return map.get(key);
-        }
-        return null;
-    }
-
-    // Type safe primitive getters with default values
 
     // Conversion methods
     //-------------------------------------------------------------------------
@@ -152,74 +131,6 @@ public class MapUtils{
             out.put(entry.getValue(), entry.getKey());
         }
         return out;
-    }
-
-    // Map decorators
-    //-----------------------------------------------------------------------
-    /**
-     * Returns a synchronized map backed by the given map.
-     * <p>
-     * You must manually synchronize on the returned buffer's iterator to
-     * avoid non-deterministic behavior:
-     *
-     * <pre>
-     * Map m = MapUtils.synchronizedMap(myMap);
-     * Set s = m.keySet(); // outside synchronized block
-     * synchronized (m){ // synchronized on MAP!
-     *     Iterator i = s.iterator();
-     *     while (i.hasNext()){
-     *         process(i.next());
-     *     }
-     * }
-     * </pre>
-     *
-     * This method uses the implementation in {@link java.util.Collections Collections}.
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param map
-     *            the map to synchronize, must not be null
-     * @return a synchronized map backed by the given map
-     */
-    public static <K, V> Map<K, V> synchronizedMap(final Map<K, V> map){
-        return Collections.synchronizedMap(map);
-    }
-
-    // SortedMap decorators
-    //-----------------------------------------------------------------------
-    /**
-     * Returns a synchronized sorted map backed by the given sorted map.
-     * <p>
-     * You must manually synchronize on the returned buffer's iterator to
-     * avoid non-deterministic behavior:
-     *
-     * <pre>
-     * Map m = MapUtils.synchronizedSortedMap(myMap);
-     * Set s = m.keySet(); // outside synchronized block
-     * synchronized (m){ // synchronized on MAP!
-     *     Iterator i = s.iterator();
-     *     while (i.hasNext()){
-     *         process(i.next());
-     *     }
-     * }
-     * </pre>
-     *
-     * This method uses the implementation in {@link java.util.Collections Collections}.
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param map
-     *            the map to synchronize, must not be null
-     * @return a synchronized map backed by the given map
-     * @throws NullPointerException
-     *             if the map is null
-     */
-    public static <K, V> SortedMap<K, V> synchronizedSortedMap(final SortedMap<K, V> map){
-        return Collections.synchronizedSortedMap(map);
     }
 
     /**

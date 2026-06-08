@@ -348,7 +348,7 @@ public final class ObjectUtil{
      *          defaultIfNull(str, EMPTY);
      */
     public static String defaultEmptyStringIfNull(final String str){
-        return defaultIfNull(str, EMPTY);
+        return null != str ? str : EMPTY;
     }
 
     //---------------------------------------------------------------
@@ -369,7 +369,7 @@ public final class ObjectUtil{
      * @since 3.3.5
      */
     public static <T> List<T> defaultEmptyListIfNull(final List<T> list){
-        return defaultIfNull(list, emptyList());
+        return null != list ? list : emptyList();
     }
 
     /**
@@ -388,7 +388,7 @@ public final class ObjectUtil{
      * @since 3.3.5
      */
     public static <T> Set<T> defaultEmptySetIfNull(final Set<T> set){
-        return defaultIfNull(set, emptySet());
+        return null != set ? set : emptySet();
     }
 
     /**
@@ -409,7 +409,7 @@ public final class ObjectUtil{
      * @since 3.3.5
      */
     public static <K, V> Map<K, V> defaultEmptyMapIfNull(final Map<K, V> map){
-        return defaultIfNull(map, emptyMap());
+        return null != map ? map : emptyMap();
     }
 
     //---------------------------------------------------------------
@@ -429,7 +429,7 @@ public final class ObjectUtil{
      * @since 3.3.6
      */
     public static <T> List<T> defaultNewArrayListIfNull(final List<T> list){
-        return defaultIfNull(list, newArrayList());
+        return null != list ? list : newArrayList();
     }
 
     /**
@@ -445,10 +445,11 @@ public final class ObjectUtil{
      * @param set
      *            the {@code Object} to test, may be {@code null}
      * @return 如果 <code>set</code> 是null,返回默认值 {@link com.feilong.core.util.CollectionsUtil#newHashSet()}.
+     * @see "collection4 SetUtils.emptyIfNull"
      * @since 3.3.6
      */
     public static <T> Set<T> defaultNewHashSetIfNull(final Set<T> set){
-        return defaultIfNull(set, newHashSet());
+        return null != set ? set : newHashSet();
     }
 
     /**
@@ -469,7 +470,7 @@ public final class ObjectUtil{
      * @since 3.3.6
      */
     public static <K, V> Map<K, V> defaultNewHashMapIfNull(final Map<K, V> map){
-        return defaultIfNull(map, newHashMap());
+        return null != map ? map : newHashMap();
     }
 
     /**
@@ -490,7 +491,7 @@ public final class ObjectUtil{
      * @since 3.3.6
      */
     public static <K, V> Map<K, V> defaultNewLinkedHashMapIfNull(final Map<K, V> map){
-        return defaultIfNull(map, newLinkedHashMap());
+        return null != map ? map : newLinkedHashMap();
     }
 
     //---------------------------------------------------------------
@@ -784,10 +785,8 @@ public final class ObjectUtil{
 
     //---------------------------------------------------------------
     /**
-     * <p>
      * 对比 given {@code t} to a vararg of {@code searchTargets},
      * 如果 {@code true} if the {@code t} is equal to any of the {@code searchTargets}.
-     * </p>
      * 
      * <p>
      * 比 apache commons-lang3 StringUtils#equalsAny 适用面更广

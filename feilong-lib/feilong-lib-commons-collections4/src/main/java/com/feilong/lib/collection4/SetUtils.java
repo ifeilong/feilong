@@ -17,8 +17,6 @@
 package com.feilong.lib.collection4;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.IdentityHashMap;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -29,33 +27,6 @@ import java.util.SortedSet;
  * @since 2.1
  */
 public class SetUtils{
-
-    /**
-     * Returns an immutable empty set if the argument is <code>null</code>,
-     * or the argument itself otherwise.
-     *
-     * @param <T>
-     *            the element type
-     * @param set
-     *            the set, possibly <code>null</code>
-     * @return an empty set if the argument is <code>null</code>
-     */
-    public static <T> Set<T> emptyIfNull(final Set<T> set){
-        return set == null ? Collections.<T> emptySet() : set;
-    }
-
-    //-----------------------------------------------------------------------
-
-    /**
-     * Get a typed empty unmodifiable Set.
-     * 
-     * @param <E>
-     *            the element type
-     * @return an empty Set
-     */
-    public static <E> Set<E> emptySet(){
-        return Collections.<E> emptySet();
-    }
 
     /**
      * Tests two sets for equality as per the <code>equals()</code> contract
@@ -99,94 +70,6 @@ public class SetUtils{
         }
 
         return set1.containsAll(set2);
-    }
-
-    /**
-     * Returns a new hash set that matches elements based on <code>==</code> not
-     * <code>equals()</code>.
-     * <p>
-     * <strong>This set will violate the detail of various Set contracts.</strong>
-     * As a general rule, don't compare this set to other sets. In particular, you can't
-     * use decorators like {@link ListOrderedSet} on it, which silently assume that these
-     * contracts are fulfilled.
-     * <p>
-     * <strong>Note that the returned set is not synchronized and is not thread-safe.</strong>
-     * If you wish to use this set from multiple threads concurrently, you must use
-     * appropriate synchronization. The simplest approach is to wrap this map
-     * using {@link java.util.Collections#synchronizedSet(Set)}. This class may throw
-     * exceptions when accessed by concurrent threads without synchronization.
-     *
-     * @param <E>
-     *            the element type
-     * @return a new identity hash set
-     * @since 4.1
-     */
-    public static <E> Set<E> newIdentityHashSet(){
-        return Collections.newSetFromMap(new IdentityHashMap<E, Boolean>());
-    }
-
-    // Set
-    //-----------------------------------------------------------------------
-    /**
-     * Returns a synchronized set backed by the given set.
-     * <p>
-     * You must manually synchronize on the returned set's iterator to
-     * avoid non-deterministic behavior:
-     *
-     * <pre>
-     * Set s = SetUtils.synchronizedSet(mySet);
-     * synchronized (s){
-     *     Iterator i = s.iterator();
-     *     while (i.hasNext()){
-     *         process(i.next());
-     *     }
-     * }
-     * </pre>
-     *
-     * This method is just a wrapper for {@link Collections#synchronizedSet(Set)}.
-     *
-     * @param <E>
-     *            the element type
-     * @param set
-     *            the set to synchronize, must not be null
-     * @return a synchronized set backed by the given set
-     * @throws NullPointerException
-     *             if the set is null
-     */
-    public static <E> Set<E> synchronizedSet(final Set<E> set){
-        return Collections.synchronizedSet(set);
-    }
-
-    // SortedSet
-    //-----------------------------------------------------------------------
-    /**
-     * Returns a synchronized sorted set backed by the given sorted set.
-     * <p>
-     * You must manually synchronize on the returned set's iterator to
-     * avoid non-deterministic behavior:
-     *
-     * <pre>
-     * Set s = SetUtils.synchronizedSortedSet(mySet);
-     * synchronized (s){
-     *     Iterator i = s.iterator();
-     *     while (i.hasNext()){
-     *         process(i.next());
-     *     }
-     * }
-     * </pre>
-     *
-     * This method is just a wrapper for {@link Collections#synchronizedSortedSet(SortedSet)}.
-     *
-     * @param <E>
-     *            the element type
-     * @param set
-     *            the sorted set to synchronize, must not be null
-     * @return a synchronized set backed by the given set
-     * @throws NullPointerException
-     *             if the set is null
-     */
-    public static <E> SortedSet<E> synchronizedSortedSet(final SortedSet<E> set){
-        return Collections.synchronizedSortedSet(set);
     }
 
     /**

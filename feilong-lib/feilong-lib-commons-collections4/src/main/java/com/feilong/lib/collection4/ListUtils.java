@@ -234,37 +234,6 @@ public class ListUtils{
 
     //-----------------------------------------------------------------------
     /**
-     * Returns a synchronized list backed by the given list.
-     * <p>
-     * You must manually synchronize on the returned list's iterator to
-     * avoid non-deterministic behavior:
-     *
-     * <pre>
-     * List list = ListUtils.synchronizedList(myList);
-     * synchronized (list){
-     *     Iterator i = list.iterator();
-     *     while (i.hasNext()){
-     *         process(i.next());
-     *     }
-     * }
-     * </pre>
-     *
-     * This method is just a wrapper for {@link Collections#synchronizedList(List)}.
-     *
-     * @param <E>
-     *            the element type
-     * @param list
-     *            the list to synchronize, must not be null
-     * @return a synchronized list backed by the given list
-     * @throws NullPointerException
-     *             if the list is null
-     */
-    public static <E> List<E> synchronizedList(final List<E> list){
-        return Collections.synchronizedList(list);
-    }
-
-    //-----------------------------------------------------------------------
-    /**
      * Finds the first index in the given List which matches the given predicate.
      * <p>
      * If the input List or predicate is null, or no element of the List

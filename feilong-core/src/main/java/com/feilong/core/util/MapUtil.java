@@ -574,6 +574,7 @@ public final class MapUtil{
      * @param key
      *            the key
      * @return 如果 <code>map</code> 是null,返回 null<br>
+     * @see "collection4 MapUtils.getObject(Map<? super K, V>, K)"
      * @since 3.3.7
      */
     public static <K, V> V get(Map<K, V> map,K key){
