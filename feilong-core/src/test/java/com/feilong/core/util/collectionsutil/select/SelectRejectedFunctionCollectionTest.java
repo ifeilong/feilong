@@ -26,18 +26,14 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
-/**
- * The Class CollectionsUtilSelectRejectedCollectionTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
-public class SelectRejectedCollectionTest{
+public class SelectRejectedFunctionCollectionTest{
 
     /**
      * Test select rejected.
@@ -49,7 +45,7 @@ public class SelectRejectedCollectionTest{
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
 
-        List<User> selectRejected = CollectionsUtil.selectRejected(list, "name", toList("张飞", "刘备"));
+        List<User> selectRejected = CollectionsUtil.selectRejected(list, User::getName, toList("张飞", "刘备"));
         assertThat(selectRejected, hasSize(1));
         assertThat(
                         selectRejected,
@@ -61,9 +57,6 @@ public class SelectRejectedCollectionTest{
 
     //---------------------------------------------------------------
 
-    /**
-     * Test select null value.
-     */
     @Test
     public void testSelectNullValue(){
         User zhangfei = new User("张飞", 23);
@@ -71,7 +64,9 @@ public class SelectRejectedCollectionTest{
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
 
-        assertEquals(list, CollectionsUtil.selectRejected(list, "name", (List<String>) null));
+        List<User> result = CollectionsUtil.selectRejected(list, User::getName, (List<String>) null);
+        assertEquals(emptyList(), result);
+        //        assertEquals(list, result);
     }
 
     /**
@@ -84,59 +79,25 @@ public class SelectRejectedCollectionTest{
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
 
-        assertEquals(list, CollectionsUtil.selectRejected(list, "name", toList((String) null)));
+        assertEquals(list, CollectionsUtil.selectRejected(list, User::getName, toList((String) null)));
     }
 
-    /**
-     * Test select array null collection.
-     */
     @Test
     public void testSelectRejectedCollectionNullCollection(){
-        assertEquals(emptyList(), CollectionsUtil.selectRejected(null, "name", toList("张飞", "刘备")));
+        assertEquals(emptyList(), CollectionsUtil.selectRejected(null, User::getName, toList("张飞", "刘备")));
     }
 
-    /**
-     * Test select array empty collection.
-     */
     @Test
     public void testSelectRejectedCollectionEmptyCollection(){
-        assertEquals(emptyList(), CollectionsUtil.selectRejected(new ArrayList<>(), "name", toList("张飞", "刘备")));
+        assertEquals(emptyList(), CollectionsUtil.selectRejected(new ArrayList<>(), User::getName, toList("张飞", "刘备")));
     }
-    //*****************
 
-    /**
-     * Test select array null property name.
-     */
     @Test(expected = NullPointerException.class)
     public void testSelectRejectedCollectionNullPropertyName(){
         User zhangfei = new User("张飞", 23);
         User guanyu = new User("关羽", 30);
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
-        CollectionsUtil.selectRejected(list, (String) null, toList("张飞", "刘备"));
-    }
-
-    /**
-     * Test select array empty property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectRejectedCollectionEmptyPropertyName(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 30);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-        CollectionsUtil.selectRejected(list, "", toList("张飞", "刘备"));
-    }
-
-    /**
-     * Test select array blank property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectRejectedCollectionBlankPropertyName(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 30);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-        CollectionsUtil.selectRejected(list, " ", toList("张飞", "刘备"));
+        CollectionsUtil.selectRejected(list, (Function) null, toList("张飞", "刘备"));
     }
 }

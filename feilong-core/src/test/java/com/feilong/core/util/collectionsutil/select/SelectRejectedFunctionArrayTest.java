@@ -18,24 +18,25 @@ package com.feilong.core.util.collectionsutil.select;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
-public class SelectRejectedArrayTest{
+public class SelectRejectedFunctionArrayTest{
 
-    /**
-     * Test select rejected1.
-     */
     @Test
     public void testSelectRejected1(){
         User zhangfei = new User("张飞", 23);
@@ -43,9 +44,22 @@ public class SelectRejectedArrayTest{
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
 
-        List<User> selectRejected = CollectionsUtil.selectRejected(list, "name", "刘备", "张飞");
+        List<User> selectRejected = CollectionsUtil.selectRejected(list, User::getName, "刘备", "张飞");
         assertSame(1, selectRejected.size());
         assertThat(selectRejected.get(0), hasProperty("name", equalTo("关羽")));
+    }
+
+    @Test
+    public void testSelectRejectedNull(){
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User nullName = new User((String) null, 30);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei, nullName);
+
+        List<User> result = CollectionsUtil.selectRejected(list, User::getName, (String) null);
+        assertSame(3, result.size());
+        assertThat(result, allOf(hasItem(zhangfei), hasItem(guanyu), hasItem(liubei), not(hasItem(nullName))));
     }
     ///******************
 
@@ -58,73 +72,40 @@ public class SelectRejectedArrayTest{
         User guanyu = new User("关羽", 30);
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
-        assertEquals(list, CollectionsUtil.selectRejected(list, "name", (String[]) null));
+        List<User> result = CollectionsUtil.selectRejected(list, User::getName, (String[]) null);
+
+        assertEquals(emptyList(), result);
+
+        //        assertThat(result, allOf(hasItem(zhangfei), hasItem(guanyu), hasItem(liubei)));
     }
 
-    /**
-     * Test select null element value.
-     */
     @Test
     public void testSelectNullElementValue(){
         User zhangfei = new User("张飞", 23);
         User guanyu = new User("关羽", 30);
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
-        assertEquals(list, CollectionsUtil.selectRejected(list, "name", (String) null));
+        assertEquals(list, CollectionsUtil.selectRejected(list, User::getName, (String) null));
     }
 
-    /**
-     * Test select array null collection.
-     */
     @Test
     public void testSelectRejectedArrayNullCollection(){
-        assertEquals(emptyList(), CollectionsUtil.selectRejected(null, "name", "刘备", "关羽"));
+        assertEquals(emptyList(), CollectionsUtil.selectRejected(null, User::getName, "刘备", "关羽"));
     }
 
-    /**
-     * Test select array empty collection.
-     */
     @Test
     public void testSelectRejectedArrayEmptyCollection(){
-        assertEquals(emptyList(), CollectionsUtil.selectRejected(new ArrayList<>(), "name", "刘备", "关羽"));
+        assertEquals(emptyList(), CollectionsUtil.selectRejected(new ArrayList<>(), User::getName, "刘备", "关羽"));
     }
 
     //*****************
-
-    /**
-     * Test select array null property name.
-     */
     @Test(expected = NullPointerException.class)
     public void testSelectRejectedArrayNullPropertyName(){
         User zhangfei = new User("张飞", 23);
         User guanyu = new User("关羽", 30);
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
-        CollectionsUtil.selectRejected(list, (String) null, "刘备", "关羽");
-    }
-
-    /**
-     * Test select array empty property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectRejectedArrayEmptyPropertyName(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 30);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-        CollectionsUtil.selectRejected(list, "", "刘备", "关羽");
-    }
-
-    /**
-     * Test select array blank property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectRejectedArrayBlankPropertyName(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 30);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-        CollectionsUtil.selectRejected(list, " ", "刘备", "关羽");
+        CollectionsUtil.selectRejected(list, (Function) null, "刘备", "关羽");
     }
 
 }

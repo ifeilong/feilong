@@ -55,6 +55,8 @@ import com.feilong.core.util.collectionsutil.select.SelectPredicateTest;
 import com.feilong.core.util.collectionsutil.select.SelectRegexStringPredicateTest;
 import com.feilong.core.util.collectionsutil.select.SelectRejectedArrayTest;
 import com.feilong.core.util.collectionsutil.select.SelectRejectedCollectionTest;
+import com.feilong.core.util.collectionsutil.select.SelectRejectedFunctionArrayTest;
+import com.feilong.core.util.collectionsutil.select.SelectRejectedFunctionCollectionTest;
 import com.feilong.core.util.collectionsutil.select.SelectRejectedMapTest;
 import com.feilong.core.util.collectionsutil.select.SelectRejectedPredicateTest;
 import com.feilong.core.util.collectionsutil.select.SelectWithMapTest;
@@ -118,8 +120,12 @@ import com.feilong.core.util.collectionsutil.select.SelectWithMapTest;
                 SelectCollectionWithFunctionTest.class,
 
                 SelectRejectedMapTest.class,
+
                 SelectRejectedArrayTest.class,
                 SelectRejectedCollectionTest.class,
+                SelectRejectedFunctionArrayTest.class,
+                SelectRejectedFunctionCollectionTest.class,
+
                 SelectRejectedPredicateTest.class,
 
                 RemoveDuplicateTest.class,
