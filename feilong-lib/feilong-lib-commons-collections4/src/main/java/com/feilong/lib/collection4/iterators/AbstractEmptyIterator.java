@@ -16,6 +16,7 @@
  */
 package com.feilong.lib.collection4.iterators;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -23,7 +24,7 @@ import java.util.NoSuchElementException;
  *
  * @since 3.1
  */
-abstract class AbstractEmptyIterator<E> {
+abstract class AbstractEmptyIterator<E> implements Iterator<E>{
 
     /**
      * Constructor.
@@ -32,10 +33,12 @@ abstract class AbstractEmptyIterator<E> {
         super();
     }
 
+    @Override
     public boolean hasNext(){
         return false;
     }
 
+    @Override
     public E next(){
         throw new NoSuchElementException("Iterator contains no elements");
     }
@@ -64,12 +67,13 @@ abstract class AbstractEmptyIterator<E> {
         throw new IllegalStateException("Iterator contains no elements");
     }
 
+    @Override
     public void remove(){
         throw new IllegalStateException("Iterator contains no elements");
     }
 
-    public void reset(){
-        // do nothing
-    }
+    //    public void reset(){
+    //        // do nothing
+    //    }
 
 }

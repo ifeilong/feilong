@@ -16,9 +16,8 @@
  */
 package com.feilong.lib.collection4.iterators;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
-
-import org.apache.commons.collections4.ResettableIterator;
 
 /**
  * <code>SingletonIterator</code> is an {@link java.util.Iterator} over a single
@@ -28,7 +27,7 @@ import org.apache.commons.collections4.ResettableIterator;
  *
  * @since 2.0
  */
-public class SingletonIterator<E> implements ResettableIterator<E>{
+public class SingletonIterator<E> implements Iterator<E>{
 
     /** Whether remove is allowed */
     private final boolean removeAllowed;
@@ -124,13 +123,13 @@ public class SingletonIterator<E> implements ResettableIterator<E>{
             throw new UnsupportedOperationException();
         }
     }
-
-    /**
-     * Reset the iterator to the start.
-     */
-    @Override
-    public void reset(){
-        beforeFirst = true;
-    }
+    //
+    //    /**
+    //     * Reset the iterator to the start.
+    //     */
+    //    @Override
+    //    public void reset(){
+    //        beforeFirst = true;
+    //    }
 
 }

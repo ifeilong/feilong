@@ -18,8 +18,6 @@ package com.feilong.lib.collection4.iterators;
 
 import java.util.Iterator;
 
-import org.apache.commons.collections4.ResettableIterator;
-
 /**
  * Provides an implementation of an empty iterator.
  * <p>
@@ -31,7 +29,7 @@ import org.apache.commons.collections4.ResettableIterator;
  *
  * @since 2.1.1 and 3.1
  */
-public class EmptyIterator<E> extends AbstractEmptyIterator<E> implements ResettableIterator<E>{
+public class EmptyIterator<E> extends AbstractEmptyIterator<E>{
 
     /**
      * Singleton instance of the iterator.
@@ -39,7 +37,7 @@ public class EmptyIterator<E> extends AbstractEmptyIterator<E> implements Resett
      * @since 3.1
      */
     @SuppressWarnings("rawtypes")
-    public static final ResettableIterator RESETTABLE_INSTANCE = new EmptyIterator<>();
+    public static final EmptyIterator RESETTABLE_INSTANCE = new EmptyIterator<>();
 
     /**
      * Singleton instance of the iterator.
@@ -47,7 +45,7 @@ public class EmptyIterator<E> extends AbstractEmptyIterator<E> implements Resett
      * @since 2.1.1 and 3.1
      */
     @SuppressWarnings("rawtypes")
-    public static final Iterator           INSTANCE            = RESETTABLE_INSTANCE;
+    public static final Iterator      INSTANCE            = RESETTABLE_INSTANCE;
 
     /**
      * Get a typed resettable empty iterator instance.
@@ -56,7 +54,7 @@ public class EmptyIterator<E> extends AbstractEmptyIterator<E> implements Resett
      *            the element type
      * @return ResettableIterator&lt;E&gt;
      */
-    public static <E> ResettableIterator<E> resettableEmptyIterator(){
+    public static <E> EmptyIterator<E> resettableEmptyIterator(){
         return RESETTABLE_INSTANCE;
     }
 

@@ -17,9 +17,8 @@
 package com.feilong.lib.collection4.iterators;
 
 import java.lang.reflect.Array;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
-
-import org.apache.commons.collections4.ResettableIterator;
 
 /**
  * Implements an {@link java.util.Iterator Iterator} over any array.
@@ -36,7 +35,7 @@ import org.apache.commons.collections4.ResettableIterator;
  *            the type of elements returned by this iterator
  * @since 1.0
  */
-public class ArrayIterator<E> implements ResettableIterator<E>{
+public class ArrayIterator<E> implements Iterator<E>{
 
     /** The array to iterate over */
     final Object array;
@@ -210,13 +209,13 @@ public class ArrayIterator<E> implements ResettableIterator<E>{
     public int getEndIndex(){
         return this.endIndex;
     }
-
-    /**
-     * Resets the iterator back to the start index.
-     */
-    @Override
-    public void reset(){
-        this.index = this.startIndex;
-    }
+    //
+    //    /**
+    //     * Resets the iterator back to the start index.
+    //     */
+    //    @Override
+    //    public void reset(){
+    //        this.index = this.startIndex;
+    //    }
 
 }

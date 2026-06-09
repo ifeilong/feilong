@@ -29,7 +29,6 @@ import java.util.Map;
 
 import org.apache.commons.collections4.Closure;
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.ResettableIterator;
 import org.apache.commons.collections4.Transformer;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -73,7 +72,7 @@ public class IteratorUtils{
      *            the element type
      * @return an iterator over nothing
      */
-    public static <E> ResettableIterator<E> emptyIterator(){
+    public static <E> EmptyIterator<E> emptyIterator(){
         return EmptyIterator.<E> resettableEmptyIterator();
     }
 
@@ -494,7 +493,7 @@ public class IteratorUtils{
      *            the single object over which to iterate
      * @return a singleton iterator over the object
      */
-    public static <E> ResettableIterator<E> singletonIterator(final E object){
+    public static <E> Iterator<E> singletonIterator(final E object){
         return new SingletonIterator<>(object);
     }
 

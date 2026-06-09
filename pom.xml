@@ -95,6 +95,8 @@
 		<!-- https://commons.apache.org/proper/commons-lang/changes-report.html#a3.13.0-->
 		<!-- https://issues.apache.org/jira/projects/LANG?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased-->
 		<version.commons-lang3>3.12.0</version.commons-lang3>
+		
+		<version.commons-collections4>4.5.0</version.commons-collections4>
 
 		<!-- http://hc.apache.org/downloads.cgi -->
 		<!-- https://downloads.apache.org/httpcomponents/httpclient/RELEASE_NOTES-4.5.x.txt -->
@@ -424,6 +426,13 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${version.commons-lang3}</version>
+			</dependency>
+			
+					
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-collections4</artifactId>
+			    <version>${version.commons-collections4}</version>
 			</dependency>
 
 			<!-- *******************spring********************************* -->
