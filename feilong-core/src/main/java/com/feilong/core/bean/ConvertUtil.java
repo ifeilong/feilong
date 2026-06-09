@@ -2620,8 +2620,8 @@ public final class ConvertUtil{
      *            the entrys
      * @return 如果 <code>entrys</code> 是null,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>entrys</code> 有元素是null,将会抛出异常 {@link IllegalArgumentException}
-     * @see com.feilong.lib.lang3.tuple.ImmutablePair#ImmutablePair(Object, Object)
-     * @see com.feilong.lib.lang3.tuple.Pair#of(Object, Object)
+     * @see "commons-lang3 tuple.ImmutablePair#ImmutablePair(Object, Object)"
+     * @see "commons-lang3 tuple.Pair#of(Object, Object)"
      * @since 1.7.1
      * @since 1.9.5 change name
      */

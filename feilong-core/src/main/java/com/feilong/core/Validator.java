@@ -62,17 +62,17 @@ import lombok.NoArgsConstructor;
  * @see Enumeration#hasMoreElements()
  * @see Iterator#hasNext()
  * @see com.feilong.lib.lang3.Validate
- * @see com.feilong.lib.lang3.StringUtils#isBlank(CharSequence)
- * @see com.feilong.lib.lang3.StringUtils#isEmpty(CharSequence)
- * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(byte[])
- * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(boolean[])
- * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(char[])
- * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(int[])
- * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(long[])
+ * @see "lang3 StringUtils#isBlank(CharSequence)"
+ * @see "lang3 StringUtils#isEmpty(CharSequence)"
+ * @see "lang3 ArrayUtils#isEmpty(byte[])"
+ * @see "lang3 ArrayUtils#isEmpty(boolean[])"
+ * @see "lang3 ArrayUtils#isEmpty(char[])"
+ * @see "lang3 ArrayUtils#isEmpty(int[])"
+ * @see "lang3 ArrayUtils#isEmpty(long[])"
  * @see "lang3 ArrayUtils#isEmpty(short[])"
- * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(float[])
- * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(double[])
- * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(Object[])
+ * @see "lang3 ArrayUtils#isEmpty(float[])"
+ * @see "lang3 ArrayUtils#isEmpty(double[])"
+ * @see "lang3 ArrayUtils#isEmpty(Object[])"
  * @see com.feilong.lib.collection4.CollectionUtils#sizeIsEmpty(Object)
  * @see com.feilong.lib.collection4.CollectionUtils#isEmpty(Collection)
  * @see com.feilong.lib.collection4.CollectionUtils#isNotEmpty(Collection)
