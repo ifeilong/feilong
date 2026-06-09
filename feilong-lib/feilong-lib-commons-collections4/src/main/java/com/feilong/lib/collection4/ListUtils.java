@@ -19,7 +19,6 @@ package com.feilong.lib.collection4;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -36,22 +35,6 @@ public class ListUtils{
      * <code>ListUtils</code> should not normally be instantiated.
      */
     private ListUtils(){
-    }
-
-    //-----------------------------------------------------------------------
-
-    /**
-     * Returns an immutable empty list if the argument is <code>null</code>,
-     * or the argument itself otherwise.
-     *
-     * @param <T>
-     *            the element type
-     * @param list
-     *            the list, possibly <code>null</code>
-     * @return an empty list if the argument is <code>null</code>
-     */
-    public static <T> List<T> emptyIfNull(final List<T> list){
-        return list == null ? Collections.<T> emptyList() : list;
     }
 
     /**
