@@ -490,7 +490,7 @@ public final class ConvertUtil{
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see com.feilong.lib.beanutils.converters.IntegerConverter
-     * @see com.feilong.lib.lang3.math.NumberUtils#toInt(String)
+     * @see "lang3 math.NumberUtils.toInt(String)"
      * @see #toInteger(Object, Integer)
      * @apiNote
      *          <p>
@@ -635,7 +635,7 @@ public final class ConvertUtil{
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see #convert(Object, Class)
      * @see com.feilong.lib.beanutils.converters.LongConverter
-     * @see com.feilong.lib.lang3.math.NumberUtils#toLong(String)
+     * @see "lang3 math.NumberUtils#toLong(String)"
      * @apiNote
      *          <p>
      *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
@@ -3626,7 +3626,7 @@ public final class ConvertUtil{
      *         如果 <code>locale instanceof <span style="color:green">Locale</span></code>,返回 <code>(Locale) locale</code><br>
      *         如果 <code>locale instanceof <span style="color:green">String</span></code>,返回 {@link LocaleUtils#toLocale(String)}<br>
      *         其他的类型,将抛出 {@link UnsupportedOperationException}
-     * @see com.feilong.lib.lang3.LocaleUtils#toLocale(String)
+     * @see "lang3 LocaleUtils#toLocale(String)"
      * @since 1.7.2
      */
     public static Locale toLocale(Object locale){

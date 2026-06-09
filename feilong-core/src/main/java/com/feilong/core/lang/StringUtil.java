@@ -574,8 +574,8 @@ public final class StringUtil{
      *            the values map
      * @return 如果 <code>templateString</code> 是 <code>StringUtils.isEmpty(templateString)</code>,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>valuesMap</code> 是null或者empty,原样返回 <code>templateString</code><br>
-     * @see com.feilong.lib.lang3.text.StrSubstitutor#replace(String)
-     * @see com.feilong.lib.lang3.text.StrSubstitutor#replace(Object, Map)
+     * @see "lang3 text.StrSubstitutor#replace(String)"
+     * @see "lang3 text.StrSubstitutor#replace(Object, Map)"
      * @since 1.1.1
      */
     public static <V> String replace(CharSequence templateString,Map<String, V> valuesMap){

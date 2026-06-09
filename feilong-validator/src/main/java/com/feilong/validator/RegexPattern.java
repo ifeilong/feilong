@@ -274,19 +274,19 @@ import lombok.NoArgsConstructor;
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>所有都是字母</td>
  * <td>^[A-Za-z]+$</td>
- * <td>{@link com.feilong.lib.lang3.StringUtils#isAlpha(CharSequence)}</td>
+ * <td>{@link "lang3 StringUtils#isAlpha(CharSequence)"}</td>
  * </tr>
  * 
  * <tr valign="top">
  * <td>大写字母</td>
  * <td>^[A-Z]+$</td>
- * <td>{@link com.feilong.lib.lang3.StringUtils#isAllUpperCase(CharSequence)}</td>
+ * <td>{@link "lang3 StringUtils#isAllUpperCase(CharSequence)"}</td>
  * </tr>
  * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>小写字母</td>
  * <td>^[a-z]+$</td>
- * <td>{@link com.feilong.lib.lang3.StringUtils#isAllLowerCase(CharSequence)}</td>
+ * <td>{@link "lang3 StringUtils#isAllLowerCase(CharSequence)"}</td>
  * </tr>
  * 
  * <tr valign="top">
@@ -300,19 +300,19 @@ import lombok.NoArgsConstructor;
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>纯数字</td>
  * <td>^[0-9]*$</td>
- * <td>{@link com.feilong.lib.lang3.StringUtils#isNumeric(CharSequence)}</td>
+ * <td>{@link "lang3 StringUtils#isNumeric(CharSequence)"}</td>
  * </tr>
  * 
  * <tr valign="top">
  * <td>字母和数字 (alpha numeric)</td>
  * <td>^[0-9a-zA-Z]+$</td>
- * <td>{@link com.feilong.lib.lang3.StringUtils#isAlphanumeric(CharSequence)}</td>
+ * <td>{@link "lang3 StringUtils#isAlphanumeric(CharSequence)"}</td>
  * </tr>
  * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>字母和数字和空格(alpha numeric space)</td>
  * <td>^[0-9a-zA-Z ]+$</td>
- * <td>{@link com.feilong.lib.lang3.StringUtils#isAlphanumericSpace(CharSequence)}</td>
+ * <td>{@link "lang3 StringUtils#isAlphanumericSpace(CharSequence)"}</td>
  * </tr>
  * 
  * </table>

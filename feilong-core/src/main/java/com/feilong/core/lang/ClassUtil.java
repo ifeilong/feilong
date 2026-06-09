@@ -340,8 +340,8 @@ public final class ClassUtil{
      * @param paramValues
      *            参数值
      * @return 如果 <code>paramValues</code> 是null,返回 null<br>
-     * @see com.feilong.lib.lang3.ClassUtils#toClass(Object...)
-     * @see com.feilong.lib.lang3.ClassUtils#convertClassNamesToClasses(java.util.List)
+     * @see "lang3 ClassUtils#toClass(Object...)"
+     * @see "lang3 ClassUtils#convertClassNamesToClasses(java.util.List)"
      * @since 1.1.1
      */
     public static Class<?>[] toClass(Object...paramValues){

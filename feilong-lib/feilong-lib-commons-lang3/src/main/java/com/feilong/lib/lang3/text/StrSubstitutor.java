@@ -992,7 +992,7 @@ public class StrSubstitutor{
      * @param priorVariables
      *            the list of prior variables
      */
-    private void checkCyclicSubstitution(final String varName,final List<String> priorVariables){
+    private static void checkCyclicSubstitution(final String varName,final List<String> priorVariables){
         if (priorVariables.contains(varName) == false){
             return;
         }

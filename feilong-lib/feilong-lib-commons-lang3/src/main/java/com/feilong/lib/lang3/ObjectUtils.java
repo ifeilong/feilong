@@ -22,9 +22,7 @@ import java.lang.reflect.Method;
 import java.util.function.Supplier;
 
 /**
- * <p>
  * Operations on {@code Object}.
- * </p>
  *
  * <p>
  * This class tries to handle {@code null} input gracefully.
@@ -41,46 +39,6 @@ import java.util.function.Supplier;
 //@Immutable
 // because it is part of the signature of deprecated methods
 public class ObjectUtils{
-
-    /**
-     * Checks if all values in the array are not {@code nulls}.
-     *
-     * <p>
-     * If any value is {@code null} or the array is {@code null} then
-     * {@code false} is returned. If all elements in array are not
-     * {@code null} or the array is empty (contains no elements) {@code true}
-     * is returned.
-     * </p>
-     *
-     * <pre>
-     * ObjectUtils.allNotNull(*)             = true
-     * ObjectUtils.allNotNull(*, *)          = true
-     * ObjectUtils.allNotNull(null)          = false
-     * ObjectUtils.allNotNull(null, null)    = false
-     * ObjectUtils.allNotNull(null, *)       = false
-     * ObjectUtils.allNotNull(*, null)       = false
-     * ObjectUtils.allNotNull(*, *, null, *) = false
-     * </pre>
-     *
-     * @param values
-     *            the values to test, may be {@code null} or empty
-     * @return {@code false} if there is at least one {@code null} value in the array or the array is {@code null},
-     *         {@code true} if all values in the array are not {@code null}s or array contains no elements.
-     * @since 3.5
-     */
-    public static boolean allNotNull(final Object...values){
-        if (values == null){
-            return false;
-        }
-
-        for (final Object val : values){
-            if (val == null){
-                return false;
-            }
-        }
-
-        return true;
-    }
 
     /**
      * <p>
