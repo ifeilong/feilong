@@ -2969,16 +2969,12 @@ public final class CollectionsUtil{
         if (isNullOrEmpty(propertyValues)){
             return emptyList();
         }
-
-        Objects.requireNonNull(propertyExtractor, "propertyExtractor cannot be null");
         // 转换为Set提高查找效率
         Set<V> targetValues = toSet(propertyValues);
-        return toStream(beanIterable).filter(Objects::nonNull)//
-                        .filter(item -> {
-                            V value = propertyExtractor.apply(item);
-                            return targetValues.contains(value);
-                        })//
-                        .collect(Collectors.toList());
+        return selectWithoutNullElement(
+                        beanIterable,
+                        propertyExtractor, //
+                        containsPredicate(propertyExtractor, targetValues));
     }
 
     /**
@@ -3077,14 +3073,10 @@ public final class CollectionsUtil{
         if (isNullOrEmpty(propertyValues)){
             return emptyList();
         }
-
-        Objects.requireNonNull(propertyExtractor, "propertyExtractor cannot be null");
-        return toStream(beanIterable).filter(Objects::nonNull)//
-                        .filter(item -> {
-                            V value = propertyExtractor.apply(item);
-                            return propertyValues.contains(value);
-                        })//
-                        .collect(Collectors.toList());
+        return selectWithoutNullElement(
+                        beanIterable,
+                        propertyExtractor, //
+                        containsPredicate(propertyExtractor, propertyValues));
     }
 
     /**
@@ -3665,9 +3657,10 @@ public final class CollectionsUtil{
         Objects.requireNonNull(propertyExtractor, "propertyExtractor cannot be null");
         // 转换为Set提高查找效率
         Set<V> targetValues = toSet(propertyValues);
-        return toStream(beanIterable).filter(Objects::nonNull)//
-                        .filter(notContains(propertyExtractor, targetValues))//
-                        .collect(Collectors.toList());
+        return selectWithoutNullElement(
+                        beanIterable,
+                        propertyExtractor, //
+                        notContainsPredicate(propertyExtractor, targetValues));
     }
 
     /**
@@ -3755,14 +3748,44 @@ public final class CollectionsUtil{
         if (isNullOrEmpty(propertyValues)){
             return emptyList();
         }
-
-        Objects.requireNonNull(propertyExtractor, "propertyExtractor cannot be null");
-        return toStream(beanIterable).filter(Objects::nonNull)//
-                        .filter(notContains(propertyExtractor, propertyValues))//
-                        .collect(Collectors.toList());
+        return selectWithoutNullElement(
+                        beanIterable,
+                        propertyExtractor, //
+                        notContainsPredicate(propertyExtractor, propertyValues));
     }
 
-    private static <O, V> java.util.function.Predicate<? super O> notContains(
+    //---------------------------------------------------------------
+
+    /**
+     * @since 4.5.3
+     */
+    private static <O, V> List<O> selectWithoutNullElement(
+                    Iterable<O> beanIterable,
+                    Function<O, V> propertyExtractor,
+                    java.util.function.Predicate<? super O> predicate){
+        if (isNullOrEmpty(beanIterable)){
+            return emptyList();
+        }
+
+        Objects.requireNonNull(propertyExtractor, "propertyExtractor cannot be null");
+        return toStream(beanIterable)//
+                        .filter(Objects::nonNull)//
+                        .filter(predicate)//
+                        .collect(Collectors.toList());//Stream.collect是 终结操作（terminal operation），不是中间操作。调用 collect后，流会被消费，不能再对其执行任何后续操作
+    }
+
+    //---------------------------------------------------------------
+
+    private static <O, V> java.util.function.Predicate<? super O> containsPredicate(
+                    Function<O, V> propertyExtractor,
+                    Collection<V> propertyValues){
+        return item -> {
+            V value = propertyExtractor.apply(item);
+            return propertyValues.contains(value);
+        };
+    }
+
+    private static <O, V> java.util.function.Predicate<? super O> notContainsPredicate(
                     Function<O, V> propertyExtractor,
                     Collection<V> propertyValues){
         return item -> {
@@ -4062,6 +4085,7 @@ public final class CollectionsUtil{
      * @since 1.0.8
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, String )}
      */
+    @SuppressWarnings("javadoc")
     @Deprecated
     public static <T, O> Map<T, List<O>> group(Iterable<O> beanIterable,String propertyName){
         return GroupUtil.group(beanIterable, propertyName);
@@ -4074,6 +4098,7 @@ public final class CollectionsUtil{
      * @since 1.5.5
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, String, Predicate)}
      */
+    @SuppressWarnings("javadoc")
     @Deprecated
     public static <T, O> Map<T, List<O>> group(Iterable<O> beanIterable,final String propertyName,Predicate<O> includePredicate){
         return GroupUtil.group(beanIterable, propertyName, includePredicate);
@@ -4086,6 +4111,7 @@ public final class CollectionsUtil{
      * @since 1.8.8
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, Transformer)}
      */
+    @SuppressWarnings("javadoc")
     @Deprecated
     public static <T, O> Map<T, List<O>> group(Iterable<O> beanIterable,Transformer<O, T> keyTransformer){
         return GroupUtil.group(beanIterable, keyTransformer);
@@ -4098,6 +4124,7 @@ public final class CollectionsUtil{
      * @since 1.8.8
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, Predicate, Transformer)}.2
      */
+    @SuppressWarnings("javadoc")
     @Deprecated
     public static <T, O> Map<T, List<O>> group(Iterable<O> beanIterable,Predicate<O> includePredicate,Transformer<O, T> keyTransformer){
         return GroupUtil.group(beanIterable, includePredicate, keyTransformer);
@@ -4111,6 +4138,7 @@ public final class CollectionsUtil{
      * @since 4.5.0
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#groupOne(Iterable, Function)}
      */
+    @SuppressWarnings("javadoc")
     @Deprecated
     public static <T, O> Map<T, O> groupOne(Iterable<O> beanIterable,Function<O, T> keyExtractor){
         return GroupUtil.groupOne(beanIterable, keyExtractor);
@@ -4124,6 +4152,7 @@ public final class CollectionsUtil{
      * @since 1.0.8
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#groupOne(Iterable, String)}
      */
+    @SuppressWarnings("javadoc")
     @Deprecated
     public static <T, O> Map<T, O> groupOne(Iterable<O> beanIterable,String propertyName){
         return GroupUtil.groupOne(beanIterable, propertyName);
