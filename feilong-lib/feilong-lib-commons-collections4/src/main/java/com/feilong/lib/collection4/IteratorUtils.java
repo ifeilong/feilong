@@ -198,51 +198,6 @@ public class IteratorUtils{
     }
 
     // org.w3c.dom.NodeList iterators
-    //-----------------------------------------------------------------------
-    /**
-     * Gets an {@link Iterator} that wraps the specified {@link NodeList}.
-     * The returned {@link Iterator} can be used for a single iteration.
-     *
-     * @param nodeList
-     *            the node list to use, may not be null
-     * @return a new, single use {@link Iterator}
-     * @throws NullPointerException
-     *             if nodeList is null
-     * @since 4.0
-     */
-    public static NodeListIterator nodeListIterator(final NodeList nodeList){
-        if (nodeList == null){
-            throw new NullPointerException("NodeList must not be null");
-        }
-        return new NodeListIterator(nodeList);
-    }
-
-    /**
-     * Gets an {@link Iterator} that wraps the specified node's childNodes.
-     * The returned {@link Iterator} can be used for a single iteration.
-     * <p>
-     * Convenience method, allows easy iteration over NodeLists:
-     * 
-     * <pre>
-     *   Iterator&lt;Node&gt; iterator = IteratorUtils.nodeListIterator(node);
-     *   for(Node childNode : IteratorUtils.asIterable(iterator)) {
-     *     ...
-     *   }
-     * </pre>
-     *
-     * @param node
-     *            the node to use, may not be null
-     * @return a new, single use {@link Iterator}
-     * @throws NullPointerException
-     *             if node is null
-     * @since 4.0
-     */
-    public static NodeListIterator nodeListIterator(final Node node){
-        if (node == null){
-            throw new NullPointerException("Node must not be null");
-        }
-        return new NodeListIterator(node);
-    }
 
     // Views
     //-----------------------------------------------------------------------
@@ -304,57 +259,6 @@ public class IteratorUtils{
             throw new NullPointerException("Iterator must not be null");
         }
         return new IteratorEnumeration<>(iterator);
-    }
-
-    /**
-     * Gets an array based on an iterator.
-     * <p>
-     * As the wrapped Iterator is traversed, an ArrayList of its values is
-     * created. At the end, this is converted to an array.
-     *
-     * @param iterator
-     *            the iterator to use, not null
-     * @return an array of the iterator contents
-     * @throws NullPointerException
-     *             if iterator parameter is null
-     */
-    public static Object[] toArray(final Iterator<?> iterator){
-        if (iterator == null){
-            throw new NullPointerException("Iterator must not be null");
-        }
-        final List<?> list = toList(iterator, 100);
-        return list.toArray();
-    }
-
-    /**
-     * Gets an array based on an iterator.
-     * <p>
-     * As the wrapped Iterator is traversed, an ArrayList of its values is
-     * created. At the end, this is converted to an array.
-     *
-     * @param <E>
-     *            the element type
-     * @param iterator
-     *            the iterator to use, not null
-     * @param arrayClass
-     *            the class of array to create
-     * @return an array of the iterator contents
-     * @throws NullPointerException
-     *             if iterator parameter or arrayClass is null
-     * @throws ArrayStoreException
-     *             if the arrayClass is invalid
-     */
-    public static <E> E[] toArray(final Iterator<? extends E> iterator,final Class<E> arrayClass){
-        if (iterator == null){
-            throw new NullPointerException("Iterator must not be null");
-        }
-        if (arrayClass == null){
-            throw new NullPointerException("Array class must not be null");
-        }
-        final List<E> list = toList(iterator, 100);
-        @SuppressWarnings("unchecked")
-        final E[] array = (E[]) Array.newInstance(arrayClass, list.size());
-        return list.toArray(array);
     }
 
     /**

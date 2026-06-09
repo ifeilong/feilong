@@ -73,9 +73,10 @@ import lombok.NoArgsConstructor;
  * @see "lang3 ArrayUtils#isEmpty(float[])"
  * @see "lang3 ArrayUtils#isEmpty(double[])"
  * @see "lang3 ArrayUtils#isEmpty(Object[])"
- * @see com.feilong.lib.collection4.CollectionUtils#sizeIsEmpty(Object)
- * @see com.feilong.lib.collection4.CollectionUtils#isEmpty(Collection)
- * @see com.feilong.lib.collection4.CollectionUtils#isNotEmpty(Collection)
+ * 
+ * @see "collection4 CollectionUtils#sizeIsEmpty(Object)"
+ * @see "collection4 CollectionUtils#isEmpty(Collection)"
+ * @see "collection4 CollectionUtils#isNotEmpty(Collection)"
  * @see "org.apache.commons.collections4.MapUtils#isEmpty(Map)"
  * @see "org.apache.commons.collections4.MapUtils#isNotEmpty(Map)"
  * @since 1.0.0
