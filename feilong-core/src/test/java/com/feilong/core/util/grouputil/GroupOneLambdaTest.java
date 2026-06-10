@@ -55,6 +55,8 @@ public class GroupOneLambdaTest{
                                         not(hasEntry("刘备", liubei30))));
     }
 
+    //---------------------------------------------------------------
+
     @Test
     public void testGroupOne1(){
         User zhangfei = new User("张飞", 23);
