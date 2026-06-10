@@ -45,11 +45,12 @@ import com.feilong.spring.expression.SpelUtilSuiteTests;
                 XMLMapBuilderStringToBeanConverterTest.class,
                 ItemDtoJsonStringToBeanConverterTest.class,
 
+                SimpleRetryUtilTest.class,
                 JsonStringFormatterTest.class,
 
                 XMLStringFormatterTest.class,
                 SpelUtilSuiteTests.class
-        //
+//
 })
 public class SuiteTests{
 
