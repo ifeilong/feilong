@@ -21,6 +21,7 @@ import java.io.Serializable;
  * Sku Item for solr.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @param <T>
  */
 public class SkuItem3<T> implements Serializable{
 

@@ -15,14 +15,12 @@
  */
 package com.feilong.core.util.predicate;
 
-import org.apache.commons.collections4.Predicate;
-
 /**
- * 字符串类型的 {@link Predicate}.
+ * 字符串类型的 {@link org.apache.commons.collections4.Predicate}.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
-public interface StringPredicate extends Predicate<String>{
+public interface StringPredicate extends org.apache.commons.collections4.Predicate<String>{
 
 }

@@ -48,25 +48,25 @@ public class ExcelWrite订阅Test extends AbstractWriteTest{
 
     //---------------------------------------------------------------
 
-    private List<SubscribtionCommand> buildAList(){
+    private static List<SubscribtionCommand> buildAList(){
         List<SubscribtionCommand> list = newArrayList();
 
         for (int i = 1; i <= 100; ++i){
             SubscribtionCommand subscribtionCommand = new SubscribtionCommand();
             subscribtionCommand.setEmail("xin.jin" + i + "@**.com");
-            subscribtionCommand.setMobile("15001841318" + i);
+            subscribtionCommand.setMobile("15005555318" + i);
             list.add(subscribtionCommand);
         }
         return list;
     }
 
-    private List<SubscribtionCommand> buildBList(){
+    private static List<SubscribtionCommand> buildBList(){
         List<SubscribtionCommand> list = newArrayList();
 
         for (int i = 1; i <= 100; ++i){
             SubscribtionCommand subscribtionCommand = new SubscribtionCommand();
             subscribtionCommand.setEmail("xin.jin" + i + "@**.com");
-            subscribtionCommand.setMobile("15001841318" + i);
+            subscribtionCommand.setMobile("1555551318" + i);
             list.add(subscribtionCommand);
         }
         return list;

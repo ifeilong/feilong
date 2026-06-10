@@ -70,7 +70,7 @@ public class GetPropertyValueListFunctionTest{
 
     @Test(expected = NullPointerException.class)
     public void testGetPropertyValueListNullFunction(){
-        getPropertyValueList(list, (Function) null);
+        getPropertyValueList(list, (Function<User, String>) null);
     }
 
 }

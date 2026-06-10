@@ -17,7 +17,6 @@ package com.feilong.core.util.predicate;
 
 import static org.junit.Assert.assertTrue;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.lib.collection4.PredicateUtils;
@@ -32,7 +31,7 @@ public class BeanPredicateTest{
     public void test(){
         User user = new User("feilong");
 
-        Predicate<User> predicate = new BeanPredicate<>("name", PredicateUtils.equalPredicate("feilong"));
+        org.apache.commons.collections4.Predicate<User> predicate = new BeanPredicate<>("name", PredicateUtils.equalPredicate("feilong"));
 
         assertTrue(predicate.evaluate(user));
     }

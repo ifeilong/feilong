@@ -67,6 +67,6 @@ public class FindWithFunctionTest{
      */
     @Test(expected = NullPointerException.class)
     public void testFindNullPropertyName(){
-        CollectionsUtil.find(new ArrayList<>(), (Function) null, "关羽");
+        CollectionsUtil.find(new ArrayList<>(), (Function<User, String>) null, "关羽");
     }
 }

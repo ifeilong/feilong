@@ -25,7 +25,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.AggregateUtil;
@@ -40,7 +39,8 @@ import com.feilong.store.member.User;
  */
 public class GroupCountPredicateTest{
 
-    private final Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
+    private final org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                    .comparatorPredicate("age", 30, Criterion.LESS);
 
     /**
      * Test group count.

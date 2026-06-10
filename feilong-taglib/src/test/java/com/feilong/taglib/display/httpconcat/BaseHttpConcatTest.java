@@ -88,7 +88,7 @@ public abstract class BaseHttpConcatTest extends AbstractTest{
      * @return
      * @since 1.10.4
      */
-    private List<String> buildList(){
+    private static List<String> buildList(){
         List<String> itemSrcList = newArrayList();
         itemSrcList.add("public/js/common.js");
 

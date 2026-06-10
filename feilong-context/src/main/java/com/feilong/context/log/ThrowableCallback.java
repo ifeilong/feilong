@@ -26,6 +26,8 @@ public interface ThrowableCallback{
 
     /**
      * Callback.
+     * 
+     * @param e
      */
     void callback(Throwable e);
 }

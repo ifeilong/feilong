@@ -98,6 +98,6 @@ public class SelectRejectedFunctionCollectionTest{
         User guanyu = new User("关羽", 30);
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
-        CollectionsUtil.selectRejected(list, (Function) null, toList("张飞", "刘备"));
+        CollectionsUtil.selectRejected(list, (Function<User, String>) null, toList("张飞", "刘备"));
     }
 }

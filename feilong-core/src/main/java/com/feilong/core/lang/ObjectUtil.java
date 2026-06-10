@@ -46,7 +46,7 @@ import lombok.NoArgsConstructor;
  * 
  * <blockquote>
  * <ol>
- * <li>{@link com.feilong.lib.lang3.ObjectUtils#equals(Object, Object)} 支持两个值都是null的情况</li>
+ * <li>{@link "commons-lang3 ObjectUtils#equals(Object, Object)"} 支持两个值都是null的情况</li>
  * <li>{@link java.util.Objects#equals(Object, Object)} (since jdk1.7) 也支持两个值都是null的情况</li>
  * </ol>
  * </blockquote>

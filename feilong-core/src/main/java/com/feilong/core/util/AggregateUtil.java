@@ -29,7 +29,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
 
 import com.feilong.core.Validate;
@@ -359,9 +358,12 @@ public final class AggregateUtil{
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>includePredicate</code> 是null,那么迭代所有的元素<br>
      *         如果<code>beanIterable</code>没有符合 <code>includePredicate</code>的元素,返回 <code>null</code>
-     * @see #sum(Iterable, String[], Predicate)
+     * @see #sum(Iterable, String[], org.apache.commons.collections4.Predicate)
      */
-    public static <O> BigDecimal sum(Iterable<O> beanIterable,String propertyName,Predicate<O> includePredicate){
+    public static <O> BigDecimal sum(
+                    Iterable<O> beanIterable,
+                    String propertyName,
+                    org.apache.commons.collections4.Predicate<O> includePredicate){
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
         return sum(beanIterable, toArray(propertyName), includePredicate).get(propertyName);
     }
@@ -418,7 +420,7 @@ public final class AggregateUtil{
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素是null 抛出 {@link IllegalArgumentException}<br>
-     * @see #sum(Iterable, String[], Predicate)
+     * @see #sum(Iterable, String[], org.apache.commons.collections4.Predicate)
      */
     public static <O> Map<String, BigDecimal> sum(Iterable<O> beanIterable,String...propertyNames){
         return sum(beanIterable, propertyNames, null);
@@ -486,7 +488,10 @@ public final class AggregateUtil{
      * @throws IllegalArgumentException
      *             果<code>propertyNames</code> 有元素 是null <br>
      */
-    public static <O> Map<String, BigDecimal> sum(Iterable<O> beanIterable,String[] propertyNames,Predicate<O> includePredicate){
+    public static <O> Map<String, BigDecimal> sum(
+                    Iterable<O> beanIterable,
+                    String[] propertyNames,
+                    org.apache.commons.collections4.Predicate<O> includePredicate){
         if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
@@ -640,7 +645,7 @@ public final class AggregateUtil{
                     Iterable<O> beanIterable,
                     String keyPropertyName,
                     String sumPropertyName,
-                    Predicate<O> includePredicate){
+                    org.apache.commons.collections4.Predicate<O> includePredicate){
         if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
@@ -717,7 +722,7 @@ public final class AggregateUtil{
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see #groupCount(Iterable , String, Predicate)
+     * @see #groupCount(Iterable , String, org.apache.commons.collections4.Predicate)
      * @see com.feilong.lib.collection4.CollectionUtils#getCardinalityMap(Iterable)
      */
     public static <O, T> Map<T, Integer> groupCount(Iterable<O> beanIterable,String propertyName){
@@ -789,7 +794,10 @@ public final class AggregateUtil{
      *         如果 <code>includePredicate</code> 是null,则统计集合中全部的元素<br>
      * @see com.feilong.lib.collection4.CollectionUtils#getCardinalityMap(Iterable)
      */
-    public static <O, T> Map<T, Integer> groupCount(Iterable<O> beanIterable,String propertyName,Predicate<O> includePredicate){
+    public static <O, T> Map<T, Integer> groupCount(
+                    Iterable<O> beanIterable,
+                    String propertyName,
+                    org.apache.commons.collections4.Predicate<O> includePredicate){
         if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
@@ -880,7 +888,7 @@ public final class AggregateUtil{
      *        change return type from {@code Map<String, Map<T, Integer>>} to {@code Map<String, Map<Object, Integer>>}
      */
     public static <O> Map<String, Map<Object, Integer>> groupCount(Iterable<O> beanIterable,String...propertyNames){
-        return groupCount(beanIterable, propertyNames, (Predicate<O>) null);
+        return groupCount(beanIterable, propertyNames, (org.apache.commons.collections4.Predicate<O>) null);
     }
 
     /**
@@ -956,7 +964,7 @@ public final class AggregateUtil{
     public static <O> Map<String, Map<Object, Integer>> groupCount(
                     Iterable<O> beanIterable,
                     String[] propertyNames,
-                    Predicate<O> includePredicate){
+                    org.apache.commons.collections4.Predicate<O> includePredicate){
         return groupCount(beanIterable, propertyNames, null, includePredicate);
     }
 
@@ -1046,7 +1054,8 @@ public final class AggregateUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValueAndTransformerMap
      *            the property name value converter map
-     * @return 如果 <code>propertyValueAndTransformerMap</code> 是null或者empty,方法等于 {@link #groupCount(Iterable, String[], Predicate)}<br>
+     * @return 如果 <code>propertyValueAndTransformerMap</code> 是null或者empty,方法等于
+     *         {@link #groupCount(Iterable, String[], org.apache.commons.collections4.Predicate)}<br>
      *         如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyNames</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyNames</code> 是empty,抛出 {@link IllegalArgumentException}<br>
@@ -1147,7 +1156,8 @@ public final class AggregateUtil{
      *            the property name value converter map
      * @param includePredicate
      *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的元素
-     * @return 如果 <code>propertyValueAndTransformerMap</code> 是null或者empty,方法等于 {@link #groupCount(Iterable, String[], Predicate)}<br>
+     * @return 如果 <code>propertyValueAndTransformerMap</code> 是null或者empty,方法等于
+     *         {@link #groupCount(Iterable, String[], org.apache.commons.collections4.Predicate)}<br>
      *         如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyNames</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyNames</code> 是empty,抛出 {@link IllegalArgumentException}<br>
@@ -1161,7 +1171,7 @@ public final class AggregateUtil{
                     Iterable<O> beanIterable,
                     String[] propertyNames,
                     Map<String, Transformer<Object, Object>> propertyValueAndTransformerMap,
-                    Predicate<O> includePredicate){
+                    org.apache.commons.collections4.Predicate<O> includePredicate){
         if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }

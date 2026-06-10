@@ -100,7 +100,7 @@ public class GroupOneLambdaTest{
         User liubei25 = new User("刘备", 25);
         User liubei30 = new User("刘备", 30);
         List<User> list = toList(zhangfei, liubei25, liubei30);
-        CollectionsUtil.groupOne(list, (Function) null);
+        CollectionsUtil.groupOne(list, (Function<User, String>) null);
     }
 
 }

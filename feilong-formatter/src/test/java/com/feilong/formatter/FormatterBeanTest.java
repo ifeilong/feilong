@@ -31,7 +31,7 @@ public class FormatterBeanTest extends AbstractTest{
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
-    public final void test(){
+    public void test(){
         User user = new User();
         user.setAge(15);
         user.setId(88L);

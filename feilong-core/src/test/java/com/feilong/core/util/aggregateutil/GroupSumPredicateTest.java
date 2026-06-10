@@ -27,7 +27,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.AggregateUtil;
@@ -37,7 +36,8 @@ import com.feilong.store.member.User;
 
 public class GroupSumPredicateTest{
 
-    private final Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.GREATER_OR_EQUAL);
+    private final org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                    .comparatorPredicate("age", 30, Criterion.GREATER_OR_EQUAL);
 
     //---------------------------------------------------------------
 

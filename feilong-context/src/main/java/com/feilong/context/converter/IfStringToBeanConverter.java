@@ -15,8 +15,6 @@
  */
 package com.feilong.context.converter;
 
-import org.apache.commons.collections4.Predicate;
-
 import com.feilong.lib.collection4.functors.IfClosure;
 import com.feilong.lib.collection4.functors.IfTransformer;
 
@@ -111,13 +109,13 @@ import com.feilong.lib.collection4.functors.IfTransformer;
 public class IfStringToBeanConverter<T> extends AbstractStringToBeanConverter<T>{
 
     /** 指定的判定条件. */
-    private Predicate<String>        predicate;
+    private org.apache.commons.collections4.Predicate<String> predicate;
 
     /** 如果满足条件,使用的对应的字符串转bean converter. */
-    private StringToBeanConverter<T> trueStringToBeanConverter;
+    private StringToBeanConverter<T>                          trueStringToBeanConverter;
 
     /** 如果不满足条件,使用的对应的字符串转bean converter. */
-    private StringToBeanConverter<T> falseStringToBeanConverter;
+    private StringToBeanConverter<T>                          falseStringToBeanConverter;
 
     //---------------------------------------------------------------
 
@@ -138,8 +136,8 @@ public class IfStringToBeanConverter<T> extends AbstractStringToBeanConverter<T>
      * @param falseStringToBeanConverter
      *            the false string to bean converter
      */
-    public IfStringToBeanConverter(Predicate<String> predicate, StringToBeanConverter<T> trueStringToBeanConverter,
-                    StringToBeanConverter<T> falseStringToBeanConverter){
+    public IfStringToBeanConverter(org.apache.commons.collections4.Predicate<String> predicate,
+                    StringToBeanConverter<T> trueStringToBeanConverter, StringToBeanConverter<T> falseStringToBeanConverter){
         super();
         this.predicate = predicate;
         this.trueStringToBeanConverter = trueStringToBeanConverter;
@@ -171,7 +169,7 @@ public class IfStringToBeanConverter<T> extends AbstractStringToBeanConverter<T>
      * @param predicate
      *            the new 指定的判定条件
      */
-    public void setPredicate(Predicate<String> predicate){
+    public void setPredicate(org.apache.commons.collections4.Predicate<String> predicate){
         this.predicate = predicate;
     }
 

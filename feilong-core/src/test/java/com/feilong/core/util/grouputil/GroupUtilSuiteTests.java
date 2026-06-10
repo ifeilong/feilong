@@ -31,7 +31,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 GroupOneLambdaTest.class,
 
                 GroupByWithKeyExtractorTest.class,
+                GroupByToSetWithPredicateAndKeyExtractorDistinctByFunctionTest.class,
                 GroupByWithPredicateAndKeyExtractorTest.class,
+
+                GroupByToSetWithPredicateAndKeyExtractorTest.class,
 //
 })
 public class GroupUtilSuiteTests{

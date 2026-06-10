@@ -69,7 +69,7 @@ public class GetPropertyValueSetWithFunctionTest{
     @Test(expected = NullPointerException.class)
     public void testGetPropertyValueSetNullPropertyName(){
         List<User> list = toList(new User(2L), new User(5L), new User(5L));
-        CollectionsUtil.getPropertyValueSet(list, (Function) null);
+        CollectionsUtil.getPropertyValueSet(list, (Function<User, String>) null);
     }
 
 }

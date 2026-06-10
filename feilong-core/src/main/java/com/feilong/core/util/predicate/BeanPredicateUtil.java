@@ -22,8 +22,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.ArrayUtil;
@@ -58,11 +56,12 @@ public final class BeanPredicateUtil{
      * <blockquote>
      * <ol>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
+     * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -106,7 +105,7 @@ public final class BeanPredicateUtil{
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.lib.collection4.PredicateUtils#equalPredicate(Object)
      */
-    public static <T, V> Predicate<T> equalPredicate(String propertyName,V propertyValue){
+    public static <T, V> org.apache.commons.collections4.Predicate<T> equalPredicate(String propertyName,V propertyValue){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         return new BeanPredicate<>(propertyName, PredicateUtils.equalPredicate(propertyValue));
     }
@@ -118,11 +117,12 @@ public final class BeanPredicateUtil{
      * <blockquote>
      * <ol>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
+     * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -174,7 +174,7 @@ public final class BeanPredicateUtil{
      * @see com.feilong.core.util.equator.IgnoreCaseEquator#INSTANCE
      * @since 1.10.1
      */
-    public static <T> Predicate<T> equalIgnoreCasePredicate(String propertyName,String propertyValue){
+    public static <T> org.apache.commons.collections4.Predicate<T> equalIgnoreCasePredicate(String propertyName,String propertyValue){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         return new BeanPredicate<>(propertyName, EqualPredicate.equalPredicate(propertyValue, IgnoreCaseEquator.INSTANCE));
     }
@@ -186,11 +186,12 @@ public final class BeanPredicateUtil{
      * <blockquote>
      * <ol>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
+     * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -249,7 +250,7 @@ public final class BeanPredicateUtil{
      * @see #equalPredicate(String, Object)
      * @since 1.9.5
      */
-    public static <T> Predicate<T> equalPredicate(Map<String, ?> propertyNameAndPropertyValueMap){
+    public static <T> org.apache.commons.collections4.Predicate<T> equalPredicate(Map<String, ?> propertyNameAndPropertyValueMap){
         Validate.notEmpty(propertyNameAndPropertyValueMap, "propertyNameAndPropertyValueMap can't be null!");
 
         @SuppressWarnings("unchecked")
@@ -275,11 +276,12 @@ public final class BeanPredicateUtil{
      * <blockquote>
      * <ol>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
+     * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -337,7 +339,7 @@ public final class BeanPredicateUtil{
      * @see com.feilong.core.bean.PropertyUtil#describe(Object, String...)
      * @since 1.10.6
      */
-    public static <T> Predicate<T> equalPredicate(T bean,String...propertyNames){
+    public static <T> org.apache.commons.collections4.Predicate<T> equalPredicate(T bean,String...propertyNames){
         if (null == bean){
             return PredicateUtils.nullPredicate();
         }
@@ -355,11 +357,12 @@ public final class BeanPredicateUtil{
      * <blockquote>
      * <ol>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
+     * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -378,7 +381,7 @@ public final class BeanPredicateUtil{
      * @see com.feilong.lib.lang3.ArrayUtils#contains(Object[], Object)
      */
     @SafeVarargs
-    public static <T, V> Predicate<T> containsPredicate(final String propertyName,final V...propertyValues){
+    public static <T, V> org.apache.commons.collections4.Predicate<T> containsPredicate(final String propertyName,final V...propertyValues){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         return new BeanPredicate<>(
                         propertyName, //
@@ -395,11 +398,12 @@ public final class BeanPredicateUtil{
      * 
      * <ol>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
+     * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
      * </ol>
      * 
@@ -418,7 +422,9 @@ public final class BeanPredicateUtil{
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.util.Collection#contains(Object)
      */
-    public static <T, V> Predicate<T> containsPredicate(final String propertyName,final Collection<V> propertyValueList){
+    public static <T, V> org.apache.commons.collections4.Predicate<T> containsPredicate(
+                    final String propertyName,
+                    final Collection<V> propertyValueList){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         return new BeanPredicate<>(
                         propertyName,
@@ -442,11 +448,12 @@ public final class BeanPredicateUtil{
      * <li>使用 {@link ComparatorUtils#naturalComparator()} 自然排序比较器.</li>
      * <li>比较 <code><b><span style="color:red">comparator.compare(valueToCompare, propertyValue)</span></b></code>.</li>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
+     * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -548,7 +555,7 @@ public final class BeanPredicateUtil{
      * @see ComparatorUtils#naturalComparator()
      * @since commons-collections 4
      */
-    public static <T, V extends Comparable<? super V>> Predicate<T> comparatorPredicate(
+    public static <T, V extends Comparable<? super V>> org.apache.commons.collections4.Predicate<T> comparatorPredicate(
                     String propertyName,
                     V valueToCompare,
                     Criterion criterion){
@@ -565,11 +572,12 @@ public final class BeanPredicateUtil{
      * <li>使用 <code>comparator</code> 比较器</li>
      * <li>比较 <code><b><span style="color:red">comparator.compare(valueToCompare, propertyValue)</span></b></code>.</li>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
+     * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -631,7 +639,7 @@ public final class BeanPredicateUtil{
      * @see com.feilong.lib.collection4.functors.ComparatorPredicate
      * @since commons-collections 4
      */
-    public static <T, V extends Comparable<? super V>> Predicate<T> comparatorPredicate(
+    public static <T, V extends Comparable<? super V>> org.apache.commons.collections4.Predicate<T> comparatorPredicate(
                     String propertyName,
                     V valueToCompare,
                     Comparator<V> comparator,

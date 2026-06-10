@@ -43,14 +43,14 @@ import lombok.NoArgsConstructor;
  * </p>
  * 
  * <h3>{@link WebApplicationContextUtils#getWebApplicationContext(ServletContext)}VS
- * {@link RequestContextUtils#getWebApplicationContext(javax.servlet.ServletRequest)}:</h3>
+ * {@link "RequestContextUtils#getWebApplicationContext(javax.servlet.ServletRequest)"}:</h3>
  * <blockquote>
  * 
  * <p style="color:red">
  * 注意: {@link WebApplicationContext#ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE} 存放的是spring ApplicationContext而非 springmvc ApplicationContext
  * </p>
  * <p>
- * {@link RequestContextUtils#getWebApplicationContext(javax.servlet.ServletRequest)}可以取到 springmvc ApplicationContext,他的原理是,每次
+ * {@link "RequestContextUtils#getWebApplicationContext(javax.servlet.ServletRequest)"}可以取到 springmvc ApplicationContext,他的原理是,每次
  * 
  * {@link DispatcherServlet#doService(HttpServletRequest, HttpServletResponse)} 都会往request里面设置 key为
  * {@link DispatcherServlet#WEB_APPLICATION_CONTEXT_ATTRIBUTE} 的属性,而此时的值 WebApplicationContext是通过
@@ -124,7 +124,7 @@ public final class WebSpringUtil{
      * 普通类获得spring 注入的类方法.
      * 
      * <p>
-     * 此方法底层调用的是 {@link RequestContextUtils#getWebApplicationContext(ServletRequest, ServletContext)} ,会从spingmvc 以及spring
+     * 此方法底层调用的是 {@link "RequestContextUtils#getWebApplicationContext(ServletRequest, ServletContext)"} ,会从spingmvc 以及spring
      * ApplicationContext 查找bean
      * </p>
      * 
@@ -138,7 +138,7 @@ public final class WebSpringUtil{
      *         如果没有,会在 global context里面找;<br>
      *         如果在servlet-specific 或者 global context 都找不到,会抛出 {@link IllegalStateException}
      * @see #getWebApplicationContext(HttpServletRequest)
-     * @see RequestContextUtils#getWebApplicationContext(ServletRequest, ServletContext)
+     * @see "RequestContextUtils#getWebApplicationContext(ServletRequest, ServletContext)"
      */
     public static <T> T getBean(HttpServletRequest request,String beanName){
         WebApplicationContext webApplicationContext = getWebApplicationContext(request);
@@ -149,8 +149,8 @@ public final class WebSpringUtil{
      * Gets the bean.
      * 
      * <p>
-     * 此方法底层调用的是 {@link RequestContextUtils#getWebApplicationContext(ServletRequest,
-     * ServletContext)} ,会从spingmvc 以及spring ApplicationContext 查找bean
+     * 此方法底层调用的是 {@link "RequestContextUtils#getWebApplicationContext(ServletRequest,ServletContext)"} ,会从spingmvc 以及spring
+     * ApplicationContext 查找bean
      * </p>
      * 
      * @param <T>
@@ -163,7 +163,7 @@ public final class WebSpringUtil{
      *         如果没有,会在 global context里面找;<br>
      *         如果在servlet-specific 或者 global context 都找不到,会抛出 {@link IllegalStateException}
      * @see #getWebApplicationContext(HttpServletRequest)
-     * @see RequestContextUtils#getWebApplicationContext(ServletRequest, ServletContext)
+     * @see "RequestContextUtils#getWebApplicationContext(ServletRequest, ServletContext)"
      */
     public static <T> T getBean(HttpServletRequest request,Class<T> requiredType){
         WebApplicationContext webApplicationContext = getWebApplicationContext(request);
@@ -322,7 +322,7 @@ public final class WebSpringUtil{
      * @return 如果有 servlet-specific WebApplicationContext那么返回;<br>
      *         否则找 global context; <br>
      *         两个都没有 会抛出 IllegalStateException
-     * @see org.springframework.web.servlet.support.RequestContextUtils#getWebApplicationContext(ServletRequest)
+     * @see "org.springframework.web.servlet.support.RequestContextUtils#getWebApplicationContext(ServletRequest)"
      * @since 1.5.3
      */
     public static WebApplicationContext getWebApplicationContext(HttpServletRequest request){

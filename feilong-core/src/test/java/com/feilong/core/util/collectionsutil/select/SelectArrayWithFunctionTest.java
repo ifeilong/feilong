@@ -141,6 +141,6 @@ public class SelectArrayWithFunctionTest{
         User guanyu = new User("关羽", 30);
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
-        CollectionsUtil.select(list, (Function) null, "刘备", "关羽");
+        CollectionsUtil.select(list, (Function<User, String>) null, "刘备", "关羽");
     }
 }

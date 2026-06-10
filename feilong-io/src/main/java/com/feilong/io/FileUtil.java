@@ -690,7 +690,7 @@ public final class FileUtil{
      * </blockquote>
      * 
      * <p>
-     * Common-io 2.4{@link com.feilong.lib.io.FileUtils#byteCountToDisplaySize(long)}有缺点,显示的是整数GB 不带小数(比如1.99G 显示为1G),apache 论坛上争议比较大
+     * Common-io 2.4 {@link com.feilong.lib.io.FileUtils#byteCountToDisplaySize(long)}有缺点,显示的是整数GB 不带小数(比如1.99G 显示为1G),apache 论坛上争议比较大
      * </p>
      * 
      * @param fileSize

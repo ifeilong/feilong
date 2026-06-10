@@ -50,8 +50,8 @@ import lombok.NoArgsConstructor;
  * @version 1.0.0 2012-3-25 上午7:19:18
  * @version 1.0.7 2014-7-10 14:30 update class type is final
  * @see OnewayType
- * @see com.feilong.lib.codec.digest.DigestUtils
- * @see org.springframework.util.DigestUtils
+ * @see "digest DigestUtils"
+ * @see "org.springframework.util.DigestUtils"
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class OnewayEncryption{

@@ -15,8 +15,6 @@
  */
 package com.feilong.core.util.predicate;
 
-import org.apache.commons.collections4.Predicate;
-
 import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 
@@ -32,17 +30,17 @@ import com.feilong.core.bean.PropertyUtil;
  * @since 1.8.0
  */
 //XXX 如果{@link org.apache.commons.beanutils.BeanPredicate}支持泛型且支持 commons-collections4之后,那么这么类将会废弃
-public class BeanPredicate<T> implements Predicate<T>{
+public class BeanPredicate<T> implements org.apache.commons.collections4.Predicate<T>{
 
     /**
      * 泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      * <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>.
      */
-    private final String    propertyName;
+    private final String                                    propertyName;
 
     /** The value predicate. */
     @SuppressWarnings("rawtypes")
-    private final Predicate valuePredicate;
+    private final org.apache.commons.collections4.Predicate valuePredicate;
 
     //---------------------------------------------------------------
 
@@ -61,7 +59,7 @@ public class BeanPredicate<T> implements Predicate<T>{
      * @param valuePredicate
      *            the predicate
      */
-    public BeanPredicate(String propertyName, @SuppressWarnings("rawtypes") Predicate valuePredicate){
+    public BeanPredicate(String propertyName, @SuppressWarnings("rawtypes") org.apache.commons.collections4.Predicate valuePredicate){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         Validate.notNull(valuePredicate, "predicate can't be null!");
 

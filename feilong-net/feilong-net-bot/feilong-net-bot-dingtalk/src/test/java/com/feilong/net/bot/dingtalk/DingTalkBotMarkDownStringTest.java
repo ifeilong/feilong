@@ -24,7 +24,6 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.net.bot.Bot;
-import com.feilong.net.bot.MarkdownStringCreator;
 
 public class DingTalkBotMarkDownStringTest{
 

@@ -17,7 +17,6 @@ package com.feilong.core.util.predicate.beanpredicateutil;
 
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.predicate.BeanPredicateUtil;
@@ -30,7 +29,7 @@ public class ContainsPredicateTest{
     public void testContainsPredicate12(){
         User guanyu30 = new User("关羽", 30);
 
-        Predicate<User> predicate = PredicateUtils.andPredicate(
+        org.apache.commons.collections4.Predicate<User> predicate = PredicateUtils.andPredicate(
                         BeanPredicateUtil.containsPredicate("name", "关羽", "刘备"),
                         BeanPredicateUtil.containsPredicate("age", 30));
 
@@ -45,7 +44,7 @@ public class ContainsPredicateTest{
     @Test
     public void testContainsPredicate(){
         User user = new User(2L);
-        Predicate<User> containsPredicate = BeanPredicateUtil.containsPredicate("id", 2L);
+        org.apache.commons.collections4.Predicate<User> containsPredicate = BeanPredicateUtil.containsPredicate("id", 2L);
         assertEquals(true, containsPredicate.evaluate(user));
     }
 
@@ -55,7 +54,7 @@ public class ContainsPredicateTest{
     @Test
     public void testContainsPredicate1(){
         User user = new User(2L);
-        Predicate<User> containsPredicate = BeanPredicateUtil.containsPredicate("id", (String) null);
+        org.apache.commons.collections4.Predicate<User> containsPredicate = BeanPredicateUtil.containsPredicate("id", (String) null);
         assertEquals(false, containsPredicate.evaluate(user));
     }
 

@@ -113,7 +113,7 @@ public class FormatWithIncludesTest extends AbstractJsonTest{
 
     }
 
-    private List<User> buildList(){
+    private static List<User> buildList(){
         User user1 = new User("feilong1", 24);
         user1.setNickNames(toArray("xin.jin", "shuai.ge"));
         User user2 = new User((String) null, 240);

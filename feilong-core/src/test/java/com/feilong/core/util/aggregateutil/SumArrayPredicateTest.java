@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
@@ -51,7 +50,7 @@ public class SumArrayPredicateTest{
                         new User(50L),
                         new User(50L));
 
-        assertEquals(new BigDecimal(100L), AggregateUtil.sum(list, "id", new Predicate<User>(){
+        assertEquals(new BigDecimal(100L), AggregateUtil.sum(list, "id", new org.apache.commons.collections4.Predicate<User>(){
 
             @Override
             public boolean evaluate(User user){
@@ -59,7 +58,10 @@ public class SumArrayPredicateTest{
             }
         }));
 
-        Predicate<Long> predicate = new ComparatorPredicate<Long>(10L, ComparatorUtils.<Long> naturalComparator(), Criterion.LESS);
+        org.apache.commons.collections4.Predicate<Long> predicate = new ComparatorPredicate<Long>(
+                        10L,
+                        ComparatorUtils.<Long> naturalComparator(),
+                        Criterion.LESS);
         BigDecimal sum = AggregateUtil.sum(list, "id", new BeanPredicate<User>("id", predicate));
         assertEquals(new BigDecimal(100L), sum);
     }
@@ -83,7 +85,7 @@ public class SumArrayPredicateTest{
      */
     @Test
     public void testSumNullCollection(){
-        assertEquals(null, AggregateUtil.sum(null, "id", new Predicate<User>(){
+        assertEquals(null, AggregateUtil.sum(null, "id", new org.apache.commons.collections4.Predicate<User>(){
 
             @Override
             public boolean evaluate(User user){
@@ -97,7 +99,7 @@ public class SumArrayPredicateTest{
      */
     @Test
     public void testSumEmptyCollection(){
-        assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), "id", new Predicate<User>(){
+        assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), "id", new org.apache.commons.collections4.Predicate<User>(){
 
             @Override
             public boolean evaluate(User user){
@@ -111,13 +113,15 @@ public class SumArrayPredicateTest{
      */
     @Test(expected = NullPointerException.class)
     public void testSumNullPropertyName(){
-        assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), (String) null, new Predicate<User>(){
+        assertEquals(
+                        null,
+                        AggregateUtil.sum(ConvertUtil.<User> toList(), (String) null, new org.apache.commons.collections4.Predicate<User>(){
 
-            @Override
-            public boolean evaluate(User user){
-                return user.getId() > 10L;
-            }
-        }));
+                            @Override
+                            public boolean evaluate(User user){
+                                return user.getId() > 10L;
+                            }
+                        }));
     }
 
     /**
@@ -125,7 +129,7 @@ public class SumArrayPredicateTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testSumEmptyPropertyName(){
-        assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), "", new Predicate<User>(){
+        assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), "", new org.apache.commons.collections4.Predicate<User>(){
 
             @Override
             public boolean evaluate(User user){
@@ -139,7 +143,7 @@ public class SumArrayPredicateTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testSumBlankPropertyName(){
-        assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), " ", new Predicate<User>(){
+        assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), " ", new org.apache.commons.collections4.Predicate<User>(){
 
             @Override
             public boolean evaluate(User user){
@@ -158,7 +162,7 @@ public class SumArrayPredicateTest{
                         new User(50L),
                         new User(50L));
 
-        assertEquals(null, AggregateUtil.sum(list, "id", new Predicate<User>(){
+        assertEquals(null, AggregateUtil.sum(list, "id", new org.apache.commons.collections4.Predicate<User>(){
 
             @Override
             public boolean evaluate(User user){

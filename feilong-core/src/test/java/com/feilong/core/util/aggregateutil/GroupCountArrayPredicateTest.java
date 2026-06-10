@@ -26,7 +26,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
@@ -41,7 +40,8 @@ import com.feilong.store.member.User;
  */
 public class GroupCountArrayPredicateTest{
 
-    private final Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
+    private final org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                    .comparatorPredicate("age", 30, Criterion.LESS);
 
     /**
      * Test group count.
@@ -77,7 +77,8 @@ public class GroupCountArrayPredicateTest{
                         new User("刘备", 30),
                         new User("赵云", 50));
 
-        Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(list, toArray("name"), (Predicate<User>) null);
+        Map<String, Map<Object, Integer>> map = AggregateUtil
+                        .groupCount(list, toArray("name"), (org.apache.commons.collections4.Predicate<User>) null);
         assertThat(
                         map.get("name"),
                         allOf(//
@@ -97,7 +98,8 @@ public class GroupCountArrayPredicateTest{
                         new User("刘备", 30),
                         new User("赵云", 50));
 
-        Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(list, toArray("name", "age"), (Predicate<User>) null);
+        Map<String, Map<Object, Integer>> map = AggregateUtil
+                        .groupCount(list, toArray("name", "age"), (org.apache.commons.collections4.Predicate<User>) null);
         assertThat(
                         map.get("name"),
                         allOf(//

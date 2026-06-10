@@ -6,6 +6,7 @@ import lombok.ToString;
  * 当 response_mode 为 blocking 时，返回 CompletionResponse object
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @param <T>
  */
 //public String toString(){
 //  return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);

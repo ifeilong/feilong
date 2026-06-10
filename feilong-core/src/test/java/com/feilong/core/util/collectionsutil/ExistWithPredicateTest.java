@@ -22,47 +22,49 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.store.member.User;
 
-public class ExistWithPredicateTest {
+public class ExistWithPredicateTest{
 
     @Test
-    public void testExist2() {
+    public void testExist2(){
         User guanyu30 = new User("关羽", 30);
         List<User> list = toList(//
-                new User("张飞", 23), new User("关羽", 24), new User("刘备", 25), guanyu30);
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25),
+                        guanyu30);
 
         Map<String, ?> map = toMap("name", "关羽", "age", 30);
 
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(map);
+        org.apache.commons.collections4.Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(map);
         assertEquals(true, CollectionsUtil.exist(list, equalPredicate));
     }
 
     @Test(expected = NullPointerException.class)
-    public void testExistNullPredicate() {
+    public void testExistNullPredicate(){
         List<User> list = toList(new User("张飞", 23));
-        CollectionsUtil.exist(list, (Predicate<User>) null);
+        CollectionsUtil.exist(list, (org.apache.commons.collections4.Predicate<User>) null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void testExistNullPredicate1() {
-        CollectionsUtil.exist(null, (Predicate<User>) null);
+    public void testExistNullPredicate1(){
+        CollectionsUtil.exist(null, (org.apache.commons.collections4.Predicate<User>) null);
     }
 
     @Test
-    public void testExistNullIterable() {
-        assertEquals(false, CollectionsUtil.<Object>exist(null, BeanPredicateUtil.equalPredicate("name", "关羽")));
+    public void testExistNullIterable(){
+        assertEquals(false, CollectionsUtil.<Object> exist(null, BeanPredicateUtil.equalPredicate("name", "关羽")));
     }
 
     @Test
-    public void testExistNotFind() {
+    public void testExistNotFind(){
         List<User> list = toList(new User("张飞", 23));
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate("name", "关羽");
+        org.apache.commons.collections4.Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate("name", "关羽");
         assertEquals(false, CollectionsUtil.exist(list, equalPredicate));
     }
 }

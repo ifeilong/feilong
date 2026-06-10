@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
@@ -57,7 +56,8 @@ public class GroupWithPropertyNameAndPredicateTest{
                         liubei30,
                         new User("刘备", 10));
 
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.LESS);
         Map<String, List<User>> map = CollectionsUtil.group(list, "name", comparatorPredicate);
 
         assertThat(
@@ -115,7 +115,8 @@ public class GroupWithPropertyNameAndPredicateTest{
     @Test(expected = NullPointerException.class)
     public void testGroupNullPropertyName(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.LESS);
         CollectionsUtil.group(list, null, comparatorPredicate);
     }
 
@@ -125,7 +126,8 @@ public class GroupWithPropertyNameAndPredicateTest{
     @Test(expected = IllegalArgumentException.class)
     public void testGroupEmptyPropertyName(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.LESS);
         CollectionsUtil.group(list, "", comparatorPredicate);
     }
 
@@ -135,7 +137,8 @@ public class GroupWithPropertyNameAndPredicateTest{
     @Test(expected = IllegalArgumentException.class)
     public void testGroupBlankPropertyName(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.LESS);
         CollectionsUtil.group(list, " ", comparatorPredicate);
     }
 
@@ -145,7 +148,8 @@ public class GroupWithPropertyNameAndPredicateTest{
     @Test
     public void testGroupNotPredicate(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.EQUAL);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.EQUAL);
         assertEquals(emptyMap(), CollectionsUtil.group(list, "name", comparatorPredicate));
     }
 }

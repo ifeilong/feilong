@@ -32,7 +32,7 @@ import com.feilong.test.AbstractTest;
 public class FormatterMapTest extends AbstractTest{
 
     @Test
-    public final void testFormatToSimpleTable(){
+    public void testFormatToSimpleTable(){
         Map<String, String> map = toMapUseEntrys(//
                         Pair.of(
                                         "Loading entityengine.xml from",
@@ -52,12 +52,12 @@ public class FormatterMapTest extends AbstractTest{
     //---------------------------------------------------------------
 
     @Test
-    public final void testFormatToSimpleTableNull(){
+    public void testFormatToSimpleTableNull(){
         assertEquals(EMPTY, formatToSimpleTable((Map<String, String>) null));
     }
 
     @Test
-    public final void testFormatToSimpleTableEmpty(){
+    public void testFormatToSimpleTableEmpty(){
         assertEquals(EMPTY, formatToSimpleTable(emptyMap()));
     }
 }

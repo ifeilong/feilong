@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.predicate.BeanPredicateUtil;
@@ -34,7 +33,7 @@ public class EqualBeanPredicateTest{
      * Test find2.
      */
     @Test
-    
+
     public void testFind2(){
         User guanyu30 = new User("关羽", 30);
         List<User> list = toList(//
@@ -50,25 +49,25 @@ public class EqualBeanPredicateTest{
      * Test equal predicate.
      */
     @Test
-    
+
     public void testEqualPredicate(){
         User user = new User(2L);
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(new User(2L), "id");
+        org.apache.commons.collections4.Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(new User(2L), "id");
         assertEquals(true, equalPredicate.evaluate(user));
     }
 
     @Test
-    
+
     public void testEqualPredicate1(){
         User user = new User(2L);
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(new User(1L), "id");
+        org.apache.commons.collections4.Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(new User(1L), "id");
         assertEquals(false, equalPredicate.evaluate(user));
     }
 
     //---------------------------------------------------------------------------
 
     @Test
-    
+
     public void testEqualPredicateNullMap(){
         assertEquals(PredicateUtils.nullPredicate(), BeanPredicateUtil.equalPredicate((User) null));
     }

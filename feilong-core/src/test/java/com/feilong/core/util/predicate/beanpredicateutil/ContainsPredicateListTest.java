@@ -20,7 +20,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.predicate.BeanPredicateUtil;
@@ -33,7 +32,7 @@ public class ContainsPredicateListTest{
     public void testContainsPredicate12(){
         User guanyu30 = new User("关羽", 30);
 
-        Predicate<User> predicate = PredicateUtils.andPredicate(
+        org.apache.commons.collections4.Predicate<User> predicate = PredicateUtils.andPredicate(
                         BeanPredicateUtil.containsPredicate("name", toList("关羽", "刘备")),
                         BeanPredicateUtil.containsPredicate("age", toList(30)));
 
@@ -48,7 +47,7 @@ public class ContainsPredicateListTest{
     @Test
     public void testContainsPredicate(){
         User user = new User(2L);
-        Predicate<User> containsPredicate = BeanPredicateUtil.containsPredicate("id", toList(2L));
+        org.apache.commons.collections4.Predicate<User> containsPredicate = BeanPredicateUtil.containsPredicate("id", toList(2L));
         assertEquals(true, containsPredicate.evaluate(user));
     }
 
@@ -58,7 +57,7 @@ public class ContainsPredicateListTest{
     @Test
     public void testContainsPredicate1(){
         User user = new User(2L);
-        Predicate<User> containsPredicate = BeanPredicateUtil.containsPredicate("id", (List<String>) null);
+        org.apache.commons.collections4.Predicate<User> containsPredicate = BeanPredicateUtil.containsPredicate("id", (List<String>) null);
         assertEquals(false, containsPredicate.evaluate(user));
     }
 

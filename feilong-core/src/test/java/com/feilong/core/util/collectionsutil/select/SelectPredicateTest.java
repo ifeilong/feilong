@@ -28,7 +28,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
@@ -104,7 +103,10 @@ public class SelectPredicateTest{
     @Test
     public void testSelectPredicate(){
         //查询 >10 的元素
-        Predicate<Integer> predicate = new ComparatorPredicate<Integer>(10, ComparatorUtils.<Integer> naturalComparator(), Criterion.LESS);
+        org.apache.commons.collections4.Predicate<Integer> predicate = new ComparatorPredicate<Integer>(
+                        10,
+                        ComparatorUtils.<Integer> naturalComparator(),
+                        Criterion.LESS);
 
         List<Integer> result = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
         assertThat(result, contains(30, 55, 88, 12));

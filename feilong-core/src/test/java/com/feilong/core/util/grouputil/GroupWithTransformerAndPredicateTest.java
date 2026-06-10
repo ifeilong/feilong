@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
 import org.junit.Test;
 
@@ -70,7 +69,8 @@ public class GroupWithTransformerAndPredicateTest{
 
         //---------------------------------------------------------------
 
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.LESS);
         Map<String, List<User>> map = GroupUtil.group(list, comparatorPredicate, new Transformer<User, String>(){
 
             @Override
@@ -128,7 +128,8 @@ public class GroupWithTransformerAndPredicateTest{
     @Test(expected = NullPointerException.class)
     public void testGroupNullTransformer(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.LESS);
         GroupUtil.group(list, comparatorPredicate, null);
     }
 
@@ -155,7 +156,8 @@ public class GroupWithTransformerAndPredicateTest{
     @Test
     public void testGroupNotPredicate(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.EQUAL);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.EQUAL);
         assertEquals(emptyMap(), GroupUtil.group(list, comparatorPredicate, TransformerUtils.<User, Integer> constantTransformer(5)));
     }
 }

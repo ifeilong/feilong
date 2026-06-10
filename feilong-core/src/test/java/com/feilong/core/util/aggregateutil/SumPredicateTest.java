@@ -29,7 +29,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.AggregateUtil;
@@ -68,7 +67,8 @@ public class SumPredicateTest{
 
         List<User> list = toList(liubei, guanyu, zhangfei, zhaoyun);
 
-        Predicate<User> notPredicate = PredicateUtils.notPredicate(BeanPredicateUtil.equalPredicate("name", "张飞"));
+        org.apache.commons.collections4.Predicate<User> notPredicate = PredicateUtils
+                        .notPredicate(BeanPredicateUtil.equalPredicate("name", "张飞"));
         Map<String, BigDecimal> map = AggregateUtil.sum(list, toArray("id", "age"), notPredicate);
 
         assertThat(map, allOf(hasEntry("id", toBigDecimal(30)), hasEntry("age", toBigDecimal(200))));
@@ -101,7 +101,8 @@ public class SumPredicateTest{
 
         List<User> list = toList(zhangfei);
 
-        Predicate<User> notPredicate = PredicateUtils.notPredicate(BeanPredicateUtil.equalPredicate("name", "张飞"));
+        org.apache.commons.collections4.Predicate<User> notPredicate = PredicateUtils
+                        .notPredicate(BeanPredicateUtil.equalPredicate("name", "张飞"));
         Map<String, BigDecimal> map = AggregateUtil.sum(list, toArray("id", "age"), notPredicate);
 
         assertEquals(true, isNullOrEmpty(map));

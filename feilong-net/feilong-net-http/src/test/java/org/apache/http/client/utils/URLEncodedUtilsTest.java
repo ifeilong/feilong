@@ -36,7 +36,7 @@ import com.feilong.test.AbstractTest;
 public class URLEncodedUtilsTest extends AbstractTest{
 
     @Test
-    public final void test(){
+    public void test(){
         List<NameValuePair> list = newArrayList();
         list.add(new BasicNameValuePair("name", "jinxin"));
         list.add(new BasicNameValuePair("name1", "jinxin1"));
@@ -46,7 +46,7 @@ public class URLEncodedUtilsTest extends AbstractTest{
     }
 
     @Test
-    public final void test1(){
+    public void test1(){
         List<NameValuePair> list = newArrayList();
         list.add(new BasicNameValuePair("name", "%"));
         log.debug(URLEncodedUtils.format(list, UTF8));

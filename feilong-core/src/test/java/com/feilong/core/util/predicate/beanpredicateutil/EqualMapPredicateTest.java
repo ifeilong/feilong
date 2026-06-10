@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.predicate.BeanPredicateUtil;
@@ -41,7 +40,7 @@ public class EqualMapPredicateTest{
      * Test find2.
      */
     @Test
-    
+
     public void testFind2(){
         User guanyu30 = new User("关羽", 30);
         List<User> list = toList(//
@@ -59,10 +58,10 @@ public class EqualMapPredicateTest{
      * Test equal predicate.
      */
     @Test
-    
+
     public void testEqualPredicate(){
         User user = new User(2L);
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(toMap("id", 2L));
+        org.apache.commons.collections4.Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(toMap("id", 2L));
         assertEquals(true, equalPredicate.evaluate(user));
     }
 
@@ -70,10 +69,10 @@ public class EqualMapPredicateTest{
      * Test equal predicate 1.
      */
     @Test
-    
+
     public void testEqualPredicate1(){
         User user = new User(2L);
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(toMap("id", null));
+        org.apache.commons.collections4.Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(toMap("id", null));
         assertEquals(false, equalPredicate.evaluate(user));
     }
 
@@ -83,7 +82,7 @@ public class EqualMapPredicateTest{
      * Test equal predicate null map.
      */
     @Test(expected = NullPointerException.class)
-    
+
     public void testEqualPredicateNullMap(){
         BeanPredicateUtil.equalPredicate(null);
     }
@@ -92,7 +91,7 @@ public class EqualMapPredicateTest{
      * Test equal predicate empty map.
      */
     @Test(expected = IllegalArgumentException.class)
-    
+
     public void testEqualPredicateEmptyMap(){
         BeanPredicateUtil.equalPredicate(new HashMap<String, Object>());
     }

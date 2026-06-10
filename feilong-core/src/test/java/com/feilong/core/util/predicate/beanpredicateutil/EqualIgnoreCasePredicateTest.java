@@ -20,7 +20,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
@@ -39,7 +38,7 @@ public class EqualIgnoreCasePredicateTest{
      * Test ignore case find 2.
      */
     @Test
-    
+
     public void testIgnoreCaseFind2(){
         User guanyu30 = new User("guanYu", 30);
         List<User> list = toList(//
@@ -48,7 +47,7 @@ public class EqualIgnoreCasePredicateTest{
                         new User("刘备", 25),
                         guanyu30);
 
-        Predicate<User> predicate = PredicateUtils.andPredicate(
+        org.apache.commons.collections4.Predicate<User> predicate = PredicateUtils.andPredicate(
                         BeanPredicateUtil.equalIgnoreCasePredicate("name", "guanyu"),
                         BeanPredicateUtil.equalPredicate("age", 30));
 
@@ -59,10 +58,10 @@ public class EqualIgnoreCasePredicateTest{
      * Test equal ignore case predicate.
      */
     @Test
-    
+
     public void testEqualIgnoreCasePredicate(){
         User user = new User("guanYu", 30);
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalIgnoreCasePredicate("name", "GUANYU");
+        org.apache.commons.collections4.Predicate<User> equalPredicate = BeanPredicateUtil.equalIgnoreCasePredicate("name", "GUANYU");
         assertEquals(true, equalPredicate.evaluate(user));
     }
 
@@ -70,10 +69,10 @@ public class EqualIgnoreCasePredicateTest{
      * Test equal ignore case predicate 1.
      */
     @Test
-    
+
     public void testEqualIgnoreCasePredicate1(){
         User user = new User("guanYu", 30);
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalIgnoreCasePredicate("name", null);
+        org.apache.commons.collections4.Predicate<User> equalPredicate = BeanPredicateUtil.equalIgnoreCasePredicate("name", null);
         assertEquals(false, equalPredicate.evaluate(user));
     }
 
@@ -83,7 +82,7 @@ public class EqualIgnoreCasePredicateTest{
      * Test equal ignore case predicate null property name.
      */
     @Test(expected = NullPointerException.class)
-    
+
     public void testEqualIgnoreCasePredicateNullPropertyName(){
         BeanPredicateUtil.equalIgnoreCasePredicate(null, null);
     }
@@ -92,7 +91,7 @@ public class EqualIgnoreCasePredicateTest{
      * Test equal ignore case predicate empty property name.
      */
     @Test(expected = IllegalArgumentException.class)
-    
+
     public void testEqualIgnoreCasePredicateEmptyPropertyName(){
         BeanPredicateUtil.equalIgnoreCasePredicate("", null);
     }
@@ -101,7 +100,7 @@ public class EqualIgnoreCasePredicateTest{
      * Test equal ignore case predicate blank property name.
      */
     @Test(expected = IllegalArgumentException.class)
-    
+
     public void testEqualIgnoreCasePredicateBlankPropertyName(){
         BeanPredicateUtil.equalIgnoreCasePredicate("", null);
     }

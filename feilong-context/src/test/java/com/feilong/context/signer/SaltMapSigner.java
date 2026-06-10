@@ -42,6 +42,7 @@ public class SaltMapSigner extends AbstractMapSigner{
 
     /**
      * @param mapSignConfig
+     * @param sha1Key
      */
     public SaltMapSigner(MapSignConfig mapSignConfig, String sha1Key){
         super(mapSignConfig);

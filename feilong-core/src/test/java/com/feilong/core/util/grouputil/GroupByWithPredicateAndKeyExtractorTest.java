@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.GroupUtil;
@@ -55,7 +54,8 @@ public class GroupByWithPredicateAndKeyExtractorTest{
                         liubei30,
                         new User("刘备", 10));
 
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.LESS);
         Map<String, List<User>> map = GroupUtil.groupBy(list, User::getName, (user) -> comparatorPredicate.evaluate(user));
 
         assertThat(
@@ -91,7 +91,8 @@ public class GroupByWithPredicateAndKeyExtractorTest{
 
     @Test
     public void testGroupNullCollection(){
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.LESS);
         assertEquals(emptyMap(), GroupUtil.groupBy(null, User::getName, (user) -> comparatorPredicate.evaluate(user)));
     }
 
@@ -100,7 +101,8 @@ public class GroupByWithPredicateAndKeyExtractorTest{
      */
     @Test
     public void testGroupEmptyCollection(){
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.LESS);
         assertEquals(emptyMap(), GroupUtil.groupBy(new ArrayList<>(), User::getName, (user) -> comparatorPredicate.evaluate(user)));
     }
 
@@ -110,14 +112,16 @@ public class GroupByWithPredicateAndKeyExtractorTest{
     @Test(expected = NullPointerException.class)
     public void testGroupNullPropertyName(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.LESS);
         GroupUtil.groupBy(list, (Function<User, String>) null, (user) -> comparatorPredicate.evaluate(user));
     }
 
     @Test
     public void testGroupNotPredicate(){
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.EQUAL);
+        org.apache.commons.collections4.Predicate<User> comparatorPredicate = BeanPredicateUtil
+                        .comparatorPredicate("age", 20, Criterion.EQUAL);
         assertEquals(emptyMap(), GroupUtil.groupBy(list, User::getName, (user) -> comparatorPredicate.evaluate(user)));
     }
 }

@@ -46,8 +46,8 @@ public class LogAndBotCombination{
      * @param logger
      *            the log
      * @param bot
-     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
-     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     *            机器人, 目前支持微信机器人 {@link "com.feilong.net.bot.wxwork.DefaultWxworkBot"} 和
+     *            钉钉机器人{@link "com.feilong.net.bot.dingtalk.DefaultDingTalkBot"}
      * @param pattern
      *            the pattern
      * @param arguments
@@ -63,8 +63,8 @@ public class LogAndBotCombination{
      * @param logger
      *            the log
      * @param bot
-     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
-     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     *            机器人, 目前支持微信机器人 {@link "com.feilong.net.bot.wxwork.DefaultWxworkBot"} 和
+     *            钉钉机器人{@link "com.feilong.net.bot.dingtalk.DefaultDingTalkBot"}
      * @param pattern
      *            the pattern
      * @param arguments
@@ -80,8 +80,8 @@ public class LogAndBotCombination{
      * @param logger
      *            the log
      * @param bot
-     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
-     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     *            机器人, 目前支持微信机器人 {@link "com.feilong.net.bot.wxwork.DefaultWxworkBot"} 和
+     *            钉钉机器人{@link "com.feilong.net.bot.dingtalk.DefaultDingTalkBot"}
      * @param pattern
      *            the pattern
      * @param arguments
@@ -97,8 +97,8 @@ public class LogAndBotCombination{
      * @param logger
      *            the log
      * @param bot
-     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
-     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     *            机器人, 目前支持微信机器人 {@link "com.feilong.net.bot.wxwork.DefaultWxworkBot"} 和
+     *            钉钉机器人{@link "com.feilong.net.bot.dingtalk.DefaultDingTalkBot"}
      * @param pattern
      *            the pattern
      * @param arguments
@@ -202,8 +202,8 @@ public class LogAndBotCombination{
      * @param logger
      *            the log
      * @param bot
-     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
-     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     *            机器人, 目前支持微信机器人 {@link "com.feilong.net.bot.wxwork.DefaultWxworkBot"} 和
+     *            钉钉机器人{@link "com.feilong.net.bot.dingtalk.DefaultDingTalkBot"}
      * @param signName
      *            the sign name
      * @param pattern
@@ -222,8 +222,8 @@ public class LogAndBotCombination{
      * @param logger
      *            the log
      * @param bot
-     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
-     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     *            机器人, 目前支持微信机器人 {@link "com.feilong.net.bot.wxwork.DefaultWxworkBot"} 和
+     *            钉钉机器人{@link "com.feilong.net.bot.dingtalk.DefaultDingTalkBot"}
      * @param signName
      *            the sign name
      * @param pattern
@@ -242,8 +242,8 @@ public class LogAndBotCombination{
      * @param logger
      *            the log
      * @param bot
-     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
-     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     *            机器人, 目前支持微信机器人 {@link "com.feilong.net.bot.wxwork.DefaultWxworkBot"} 和
+     *            钉钉机器人{@link "com.feilong.net.bot.dingtalk.DefaultDingTalkBot"}
      * @param signName
      *            the sign name
      * @param pattern
@@ -262,8 +262,8 @@ public class LogAndBotCombination{
      * @param logger
      *            the log
      * @param bot
-     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
-     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     *            机器人, 目前支持微信机器人 {@link "com.feilong.net.bot.wxwork.DefaultWxworkBot"} 和
+     *            钉钉机器人{@link "com.feilong.net.bot.dingtalk.DefaultDingTalkBot"}
      * @param signName
      *            the sign name
      * @param pattern

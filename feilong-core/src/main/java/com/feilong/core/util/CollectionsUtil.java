@@ -39,11 +39,11 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
 
 import com.feilong.core.Validate;
@@ -1059,7 +1059,7 @@ public final class CollectionsUtil{
      *             如果 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
-     * @see com.feilong.lib.collection4.ListUtils#indexOf(List, Predicate)
+     * @see "collection4 ListUtils#indexOf(List, org.apache.commons.collections4.Predicate)"
      * @see BeanPredicateUtil#equalPredicate(String, Object)
      * @since 1.5.5
      */
@@ -2533,7 +2533,7 @@ public final class CollectionsUtil{
      *         如果 <code>iterable</code>中没有相关元素匹配 <code>predicate</code>,返回false
      * @since 3.0.8
      */
-    public static <O> boolean exist(Iterable<O> iterable,Predicate<O> predicate){
+    public static <O> boolean exist(Iterable<O> iterable,org.apache.commons.collections4.Predicate<O> predicate){
         return null != find(iterable, predicate);
     }
 
@@ -2591,7 +2591,7 @@ public final class CollectionsUtil{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>iterable</code>中没有相关元素的属性<code>propertyName</code> 值是<code>propertyValue</code>,返回null
-     * @see #find(Iterable, Predicate)
+     * @see #find(Iterable, org.apache.commons.collections4.Predicate)
      * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
      */
     public static <O, V> O find(Iterable<O> beanIterable,String propertyName,V propertyValue){
@@ -2652,7 +2652,7 @@ public final class CollectionsUtil{
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
      *         如果 <code>beanIterable</code>中没有相关元素的属性<code>propertyValueExtractor</code> 值是<code>propertyValue</code>,返回null
-     * @see #find(Iterable, Predicate)
+     * @see #find(Iterable, org.apache.commons.collections4.Predicate)
      * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
      * @since 4.5.1
      */
@@ -2667,23 +2667,6 @@ public final class CollectionsUtil{
                         .filter(equalsPredicate(propertyValueExtractor, propertyValue))//
                         .findFirst()//
                         .orElse(null);
-    }
-
-    /**
-     * 基于Function 构造 Predicate,用于复用
-     * 
-     * @param <V>
-     * @param <O>
-     * @param propertyValueExtractor
-     * @param propertyValue
-     * @return
-     * @since 4.5.1
-     */
-    private static <O, V> java.util.function.Predicate<O> equalsPredicate(Function<O, V> propertyValueExtractor,V propertyValue){
-        return bean -> {
-            V actualValue = propertyValueExtractor.apply(bean);
-            return Objects.equals(actualValue, propertyValue);
-        };
     }
 
     /**
@@ -2738,7 +2721,7 @@ public final class CollectionsUtil{
      *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是null,抛出{@link NullPointerException}<br>
      *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是blank,抛出{@link IllegalArgumentException}<br>
      *         如果 <code>iterable</code>中没有相关元素的属性<code>propertyName</code> 值是<code>propertyValue</code>,返回null
-     * @see #find(Iterable, Predicate)
+     * @see #find(Iterable, org.apache.commons.collections4.Predicate)
      * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
      * @since 2.1.0
      */
@@ -2801,10 +2784,10 @@ public final class CollectionsUtil{
      * @return 如果 <code>predicate</code> 是 null,将抛出{@link NullPointerException} <br>
      *         如果 <code>iterable</code>是null, 返回null<br>
      *         如果 <code>iterable</code>中没有相关元素匹配 <code>predicate</code>,返回null
-     * @see IterableUtils#find(Iterable, Predicate)
+     * @see IterableUtils#find(Iterable, org.apache.commons.collections4.Predicate)
      * @since 1.5.5
      */
-    public static <O> O find(Iterable<O> iterable,Predicate<O> predicate){
+    public static <O> O find(Iterable<O> iterable,org.apache.commons.collections4.Predicate<O> predicate){
         return IterableUtils.find(iterable, predicate);
     }
 
@@ -3185,8 +3168,8 @@ public final class CollectionsUtil{
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         否则调用 {@link #select(Iterable, Predicate)}
-     * @see #select(Iterable, Predicate)
+     *         否则调用 {@link #select(Iterable, org.apache.commons.collections4.Predicate)}
+     * @see #select(Iterable, org.apache.commons.collections4.Predicate)
      * @see BeanPredicateUtil#containsPredicate(String, Collection)
      * @since 1.5.0
      */
@@ -3246,7 +3229,7 @@ public final class CollectionsUtil{
      *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是null,抛出{@link NullPointerException}<br>
      *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是blank,抛出{@link IllegalArgumentException}<br>
      *         如果 <code>iterable</code>查找不到<code>propertyNameAndPropertyValueMap</code>,返回空集合
-     * @see #select(Iterable, Predicate)
+     * @see #select(Iterable, org.apache.commons.collections4.Predicate)
      * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
      * @since 3.1.1
      */
@@ -3256,12 +3239,12 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 按照指定的 {@link Predicate},返回查询出来的集合.
+     * 按照指定的 {@link org.apache.commons.collections4.Predicate},返回查询出来的集合.
      *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>和该方法正好相反的是 {@link #selectRejected(Iterable, Predicate)}</li>
+     * <li>和该方法正好相反的是 {@link #selectRejected(Iterable, org.apache.commons.collections4.Predicate)}</li>
      * </ol>
      * </blockquote>
      *
@@ -3326,10 +3309,10 @@ public final class CollectionsUtil{
      *            <li>....</li>
      *            </ul>
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
-     *         否则返回 {@link CollectionUtils#select(Iterable, Predicate)},如果查不到返回空集合
-     * @see com.feilong.lib.collection4.CollectionUtils#select(Iterable, Predicate)
+     *         否则返回 {@link CollectionUtils#select(Iterable, org.apache.commons.collections4.Predicate)},如果查不到返回空集合
+     * @see com.feilong.lib.collection4.CollectionUtils#select(Iterable, org.apache.commons.collections4.Predicate)
      */
-    public static <O> List<O> select(Iterable<O> beanIterable,Predicate<O> predicate){
+    public static <O> List<O> select(Iterable<O> beanIterable,org.apache.commons.collections4.Predicate<O> predicate){
         return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList() : (List<O>) CollectionUtils.select(beanIterable, predicate);
     }
 
@@ -3385,7 +3368,7 @@ public final class CollectionsUtil{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see BeanPredicateUtil#containsPredicate(String, Object...)
-     * @see #selectRejected(Iterable, Predicate)
+     * @see #selectRejected(Iterable, org.apache.commons.collections4.Predicate)
      */
     @SafeVarargs
     public static <O, V> List<O> selectRejected(Iterable<O> beanIterable,String propertyName,V...propertyValues){
@@ -3452,7 +3435,7 @@ public final class CollectionsUtil{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see BeanPredicateUtil#containsPredicate(String, Collection)
-     * @see #selectRejected(Iterable, Predicate)
+     * @see #selectRejected(Iterable, org.apache.commons.collections4.Predicate)
      * @since 1.5.0
      */
     public static <O, V> List<O> selectRejected(Iterable<O> beanIterable,String propertyName,Collection<V> propertyValueList){
@@ -3513,7 +3496,7 @@ public final class CollectionsUtil{
      *         如果 <code>propertyNameAndPropertyValueMap</code> 是empty,抛出{@link IllegalArgumentException}<br>
      *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是null,抛出{@link NullPointerException}<br>
      *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是blank,抛出{@link IllegalArgumentException}<br>
-     * @see #selectRejected(Iterable, Predicate)
+     * @see #selectRejected(Iterable, org.apache.commons.collections4.Predicate)
      * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
      * @since 3.1.1
      */
@@ -3529,7 +3512,7 @@ public final class CollectionsUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>和该方法正好相反的是 {@link #select(Iterable, Predicate)}</li>
+     * <li>和该方法正好相反的是 {@link #select(Iterable, org.apache.commons.collections4.Predicate)}</li>
      * </ol>
      * </blockquote>
      *
@@ -3561,10 +3544,10 @@ public final class CollectionsUtil{
      * @param predicate
      *            the predicate
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     * @see com.feilong.lib.collection4.CollectionUtils#selectRejected(Iterable, Predicate)
+     * @see "collection4 CollectionUtils#selectRejected(Iterable, org.apache.commons.collections4.Predicate)"
      * @since 1.4.0
      */
-    public static <O> List<O> selectRejected(Iterable<O> beanIterable,Predicate<O> predicate){
+    public static <O> List<O> selectRejected(Iterable<O> beanIterable,org.apache.commons.collections4.Predicate<O> predicate){
         return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
                         : (List<O>) CollectionUtils.selectRejected(beanIterable, predicate);
     }
@@ -3762,7 +3745,7 @@ public final class CollectionsUtil{
     private static <O, V> List<O> selectWithoutNullElement(
                     Iterable<O> beanIterable,
                     Function<O, V> propertyExtractor,
-                    java.util.function.Predicate<? super O> predicate){
+                    Predicate<? super O> predicate){
         if (isNullOrEmpty(beanIterable)){
             return emptyList();
         }
@@ -3776,21 +3759,31 @@ public final class CollectionsUtil{
 
     //---------------------------------------------------------------
 
-    private static <O, V> java.util.function.Predicate<? super O> containsPredicate(
-                    Function<O, V> propertyExtractor,
-                    Collection<V> propertyValues){
+    private static <O, V> Predicate<? super O> containsPredicate(Function<O, V> propertyExtractor,Collection<V> propertyValues){
         return item -> {
             V value = propertyExtractor.apply(item);
             return propertyValues.contains(value);
         };
     }
 
-    private static <O, V> java.util.function.Predicate<? super O> notContainsPredicate(
-                    Function<O, V> propertyExtractor,
-                    Collection<V> propertyValues){
+    private static <O, V> Predicate<? super O> notContainsPredicate(Function<O, V> propertyExtractor,Collection<V> propertyValues){
         return item -> {
             V value = propertyExtractor.apply(item);
             return !propertyValues.contains(value);
+        };
+    }
+
+    /**
+     * 基于Function 构造 Predicate,用于复用
+     * 
+     * @param <V>
+     * @param <O>
+     * @since 4.5.1
+     */
+    private static <O, V> Predicate<O> equalsPredicate(Function<O, V> propertyValueExtractor,V propertyValue){
+        return bean -> {
+            V actualValue = propertyValueExtractor.apply(bean);
+            return Objects.equals(actualValue, propertyValue);
         };
     }
 
@@ -4100,7 +4093,10 @@ public final class CollectionsUtil{
      */
     @SuppressWarnings("javadoc")
     @Deprecated
-    public static <T, O> Map<T, List<O>> group(Iterable<O> beanIterable,final String propertyName,Predicate<O> includePredicate){
+    public static <T, O> Map<T, List<O>> group(
+                    Iterable<O> beanIterable,
+                    final String propertyName,
+                    org.apache.commons.collections4.Predicate<O> includePredicate){
         return GroupUtil.group(beanIterable, propertyName, includePredicate);
     }
 
@@ -4126,7 +4122,10 @@ public final class CollectionsUtil{
      */
     @SuppressWarnings("javadoc")
     @Deprecated
-    public static <T, O> Map<T, List<O>> group(Iterable<O> beanIterable,Predicate<O> includePredicate,Transformer<O, T> keyTransformer){
+    public static <T, O> Map<T, List<O>> group(
+                    Iterable<O> beanIterable,
+                    org.apache.commons.collections4.Predicate<O> includePredicate,
+                    Transformer<O, T> keyTransformer){
         return GroupUtil.group(beanIterable, includePredicate, keyTransformer);
     }
 
@@ -4338,7 +4337,7 @@ public final class CollectionsUtil{
      * 
      * @param <O>
      * @param beanIterable
-     * @return
+     * @return Stream
      * @since 4.5.1
      */
     public static <O> Stream<O> toStream(Iterable<O> beanIterable){

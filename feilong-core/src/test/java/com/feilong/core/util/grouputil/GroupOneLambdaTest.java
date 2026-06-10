@@ -98,7 +98,7 @@ public class GroupOneLambdaTest{
         User liubei25 = new User("刘备", 25);
         User liubei30 = new User("刘备", 30);
         List<User> list = toList(zhangfei, liubei25, liubei30);
-        GroupUtil.groupOne(list, (Function) null);
+        GroupUtil.groupOne(list, (Function<User, String>) null);
     }
 
 }

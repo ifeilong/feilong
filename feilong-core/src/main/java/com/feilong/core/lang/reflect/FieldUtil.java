@@ -29,8 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.apache.commons.collections4.Predicate;
-
 import com.feilong.core.Validate;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.PredicateUtils;
@@ -204,9 +202,10 @@ public final class FieldUtil{
         }
 
         //---------------------------------------------------------------
-        Predicate<Field> excludeFieldPredicate = BeanPredicateUtil.containsPredicate("name", excludeFieldNames);
+        org.apache.commons.collections4.Predicate<Field> excludeFieldPredicate = BeanPredicateUtil
+                        .containsPredicate("name", excludeFieldNames);
 
-        Predicate<Field> staticPredicate = field -> {
+        org.apache.commons.collections4.Predicate<Field> staticPredicate = field -> {
             int modifiers = field.getModifiers();
             // 私有并且静态 一般是log 或者  serialVersionUID
             boolean isStatic = Modifier.isStatic(modifiers);
