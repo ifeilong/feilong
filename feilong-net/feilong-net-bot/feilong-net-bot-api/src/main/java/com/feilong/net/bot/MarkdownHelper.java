@@ -84,15 +84,89 @@ public class MarkdownHelper{
     }
 
     /**
-     * 一个\n有时无法成功换行，建议使用两个\n\n确保换行效果。
-     * 
-     * @return 换行
+     * 返回 Markdown 换行符（两个换行符）。
+     * <p>
+     * 在 Markdown 语法中，单个换行符 {@code \n} 通常不会产生视觉上的段落换行，
+     * 需要使用两个连续的换行符 {@code \n\n} 来表示段落结束。
+     * 本方法直接返回 {@code "\n\n"}，确保在拼接 Markdown 文本时换行效果可靠。
+     * </p>
+     *
+     * <h3>使用示例</h3>
+     * <pre>{@code
+     * StringBuilder sb = new StringBuilder();
+     * sb.append("第一段").append(MarkdownHelper.newLine());
+     * sb.append("第二段");
+     * // 结果: "第一段\n\n第二段"
+     * }</pre>
+     *
+     * @return 字符串 {@code "\n\n"}，用于 Markdown 段落换行
      */
     public static String newLine(){
         return "\n\n"; //一个\n有时无法成功换行，建议使用两个\n\n确保换行效果
     }
 
-    //将封装到 feilong
+    //---------------------------------------------------------------
+    /**
+     * 向 StringBuilder 追加一行 Markdown 文本，并在末尾追加默认数量的换行符（1 次 {@link #newLine()}）。
+     * <p>
+     * 此方法等价于调用 {@link #appendMarkdownLine(StringBuilder, CharSequence, int)} 且 {@code newLineCount = 1}。
+     * 常用于逐行构建 Markdown 内容，如列表项、标题、普通段落等。
+     * </p>
+     *
+     * <h3>使用示例</h3>
+     * <pre>{@code
+     * StringBuilder sb = new StringBuilder();
+     * MarkdownHelper.appendMarkdownLine(sb, "# 标题");
+     * MarkdownHelper.appendMarkdownLine(sb, "这是一段正文。");
+     * // 结果: "# 标题\n\n这是一段正文\n\n"
+     * }</pre>
+     *
+     * @param sb
+     *            目标 StringBuilder，不能为 {@code null}
+     * @param str
+     *            要追加的文本内容，不能为 {@code null}
+     * @since 4.5.4
+     */
+    public static void appendMarkdownLine(StringBuilder sb,CharSequence str){
+        appendMarkdownLine(sb, str, 1);
+    }
+
+    /**
+     * 向 StringBuilder 追加一行 Markdown 文本，并在末尾追加指定次数的换行符。
+     * <p>
+     * 该方法首先将 {@code str} 追加到 {@code sb} 中，然后连续追加 {@code newLineCount} 次 {@link #newLine()} 的结果。
+     * 通过控制 {@code newLineCount} 可以实现不同的间距效果：
+     * <ul>
+     * <li>{@code newLineCount = 1}：追加一段后换行（适用于段落之间的分隔）。</li>
+     * <li>{@code newLineCount = 2}：追加两段空白（适用于章节之间的大间隔）。</li>
+     * </ul>
+     * </p>
+     *
+     * <h3>使用示例</h3>
+     * <pre>{@code
+     * StringBuilder sb = new StringBuilder();
+     * MarkdownHelper.appendMarkdownLine(sb, "## 二级标题", 2);
+     * MarkdownHelper.appendMarkdownLine(sb, "正文内容");
+     * // 结果: "## 二级标题\n\n\n\n正文内容\n\n"
+     * // 标题后有两个段落空白（4个换行符），正文后有一个段落空白（2个换行符）
+     * }</pre>
+     *
+     * @param sb
+     *            目标 StringBuilder，不能为 {@code null}
+     * @param str
+     *            要追加的文本内容，不能为 {@code null}
+     * @param newLineCount
+     *            追加换行符的次数，必须大于等于 0（为 0 时仅追加文本，不换行）
+     * @since 4.5.4
+     */
+    public static void appendMarkdownLine(StringBuilder sb,CharSequence str,int newLineCount){
+        sb.append(str);
+        for (int i = 0; i < newLineCount; i++){
+            sb.append(newLine());
+        }
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 创建markdown 格式的表格.
