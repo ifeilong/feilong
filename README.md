@@ -60,14 +60,14 @@ feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/artifact/c
 <dependency>
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong</artifactId>
-	<version>4.5.3</version>
+	<version>4.5.4</version>
 </dependency>
 ```
 
 ### `Gradle 配置` 
 
 ```
-com.github.ifeilong:feilong:4.5.3
+com.github.ifeilong:feilong:4.5.4
 ```
 
 ### `非Maven项目`
