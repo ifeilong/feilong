@@ -15,6 +15,8 @@
  */
 package com.feilong.context.converter;
 
+import java.util.function.Function;
+
 /**
  * 将字符串转成 bean 的转换器.
  * 
@@ -31,9 +33,10 @@ package com.feilong.context.converter;
  * @since 1.8.3
  * @since 1.11.2 rename from AbstractParse
  * @since 4.1.2 move from feilong-context
+ * @since 4.5.5 extends Function<String, T>
  */
 @FunctionalInterface
-public interface StringToBeanConverter<T> {
+public interface StringToBeanConverter<T> extends Function<String, T>{
 
     /**
      * 转换.
@@ -43,5 +46,15 @@ public interface StringToBeanConverter<T> {
      * @return 如果 <code>value</code> 是null或者empty,返回 null<br>
      */
     T convert(String value);
+
+    //---------------------------------------------------------------
+
+    /**
+     * @since 4.5.5
+     */
+    @Override
+    default T apply(final String t){
+        return convert(t);
+    }
 
 }
