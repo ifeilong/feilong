@@ -791,7 +791,33 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 添加所有的{@link Iterable}元素到指定的<code>objectCollection</code>,如果 {@code iterable}是null将忽略.
+     * 添加多个可迭代对象中{@link Iterable} Iterables元素到指定的<code>objectCollection</code>,如果 {@code iterable}是null将忽略.
+     * 
+     * <p>
+     * 该方法会遍历所有传入的 {@code iterables}，对于非 null 的 iterable，将其所有元素通过
+     * {@link CollectionUtils#addAll(Collection, Iterable)} 添加到 {@code objectCollection} 中。<br>
+     * 即使某个 iterable 为 null 或添加失败，仍然会继续处理后续的非 null iterable，确保所有可用的元素都被添加。<br>
+     * 最终返回 {@code true} 当且仅当所有 iterable 都非 null 且 {@code addAll} 均成功（即至少添加了一个元素）。
+     * </p>
+     *
+     * <h3>注意事项</h3>
+     * <ul>
+     * <li>如果 {@code objectCollection} 为 null，抛出 {@link NullPointerException}。</li>
+     * <li>如果 {@code iterables} 为空或为 null，返回 {@code false}。</li>
+     * <li>如果某个 iterable 为 null，它会被跳过，但最终结果会标记为 {@code false}。</li>
+     * <li>如果某个 iterable 非 null 但 {@code addAll} 返回 {@code false}（例如 iterable 为空或所有元素已存在），
+     * 则该 iterable 被视为“添加失败”，最终结果也为 {@code false}。</li>
+     * <li>该方法保证所有非 null 的 iterable 都会被尝试添加，即使前面的 iterable 失败了。</li>
+     * </ul>
+     * 
+     * <h3>可能返回false 集合未被修改情形:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>iterable为空（没有元素可添加）</li>
+     * <li>objectCollection不允许重复（如 Set），且 iterable中的所有元素都已存在于集合中</li>
+     * <li>objectCollection有容量限制或拒绝某些元素（如 Queue满时）</li>
+     * </ol>
+     * </blockquote>
      *
      * <h3>示例:</h3>
      *
@@ -848,12 +874,31 @@ public final class CollectionsUtil{
      * 重构之后,方法的复杂度会更小,阅读性更高
      * </p>
      * </blockquote>
+     * 
+     * 
+     * <h3>其他使用示例</h3>
+     * <pre>{@code
+     * List<String> target = new ArrayList<>(Arrays.asList("a"));
+     * List<String> list1 = Arrays.asList("b", "c");
+     * List<String> list2 = null;
+     * List<String> list3 = Arrays.asList("d");
      *
+     * // 添加 list1, list2, list3 中的元素到 target
+     * boolean result = addAllIgnoreNull(target, list1, list2, list3);
+     * System.out.println(result);  // false（因为 list2 为 null）
+     * System.out.println(target);  // [a, b, c, d]（list2 被忽略，list1 和 list3 仍被添加）
+     *
+     * // 所有 iterable 非 null 且成功
+     * boolean allOk = addAllIgnoreNull(target, list1, list3);
+     * System.out.println(allOk);   // true
+     * }</pre>
+     *
+     * 
      * @param <O>
      *            the type of object the {@link Collection} contains
      * @param objectCollection
      *            the collection to add to, 不能为null
-     * @param iterable
+     * @param iterables
      *            the iterable of elements to add
      * @return a boolean 标识 <code>objectCollection</code> 是否改变,如果改变了,返回true.<br>
      *         如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
@@ -863,10 +908,25 @@ public final class CollectionsUtil{
      * @see com.feilong.lib.collection4.CollectionUtils#addAll(Collection, Iterable)
      * @see com.feilong.lib.collection4.CollectionUtils#addAll(Collection, Iterator)
      * @since 1.6.3
+     * @since 4.5.5 change to Iterable<? extends O> ... iterables
      */
-    public static <O> boolean addAllIgnoreNull(final Collection<O> objectCollection,final Iterable<? extends O> iterable){
+    @SafeVarargs
+    public static <O> boolean addAllIgnoreNull(final Collection<O> objectCollection,final Iterable<? extends O>...iterables){
         Validate.notNull(objectCollection, "objectCollection can't be null!");
-        return null != iterable && CollectionUtils.addAll(objectCollection, iterable);
+        if (isNullOrEmpty(iterables)){
+            return false;
+        }
+
+        boolean result = true;
+        for (Iterable<? extends O> iterable : iterables){
+            //一旦false 那么就一直为false
+            //CollectionUtils.addAll(Collection<O>, Iterable<? extends O>) 返回 false：集合未被修改。常见于：
+            //   iterable为空（没有元素可添加）。
+            //   objectCollection不允许重复（如 Set），且 iterable中的所有元素都已存在于集合中。
+            //   objectCollection有容量限制或拒绝某些元素（如 Queue满时）。
+            result = null != iterable && CollectionUtils.addAll(objectCollection, iterable) && result;
+        }
+        return result;
     }
 
     /**
@@ -1255,9 +1315,8 @@ public final class CollectionsUtil{
         }
         //---------------------------------------------------------------
         List<O> allWillRemovelist = newArrayList();
-        for (Collection<O> removeCollection : removeCollections){
-            addAllIgnoreNull(allWillRemovelist, removeCollection);
-        }
+        addAllIgnoreNull(allWillRemovelist, removeCollections);
+
         return ListUtils.removeAll(objectCollection, allWillRemovelist);
     }
 
