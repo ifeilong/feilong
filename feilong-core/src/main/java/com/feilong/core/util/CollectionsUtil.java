@@ -316,6 +316,70 @@ public final class CollectionsUtil{
         return ListUtils.partition(list, size);
     }
 
+    /**
+     * 返回指定列表的前 {@code maxSize} 个元素组成的新列表。
+     * <p>
+     * 如果输入列表为 {@code null} 或空列表，则直接返回原列表（不做拷贝）。
+     * 如果 {@code maxSize} 为 0，则返回空列表（{@link Collections#emptyList()}）。
+     * 如果 {@code maxSize} 小于 0，则抛出 {@link IllegalArgumentException}。
+     * 返回的列表是新的 {@link ArrayList}，不会修改原列表。
+     * </p>
+     *
+     * <h3>使用示例</h3>
+     * <pre>{@code
+     * List<String> list = Arrays.asList("a", "b", "c", "d", "e");
+     *
+     * // 取前3个
+     * List<String> limited = CollectionsUtil.limit(list, 3);
+     * System.out.println(limited); // [a, b, c]
+     *
+     * // maxSize 大于列表长度，返回全部
+     * List<String> all = CollectionsUtil.limit(list, 10);
+     * System.out.println(all); // [a, b, c, d, e]
+     *
+     * // maxSize 为 0 返回空列表
+     * List<String> empty = CollectionsUtil.limit(list, 0);
+     * System.out.println(empty); // []
+     *
+     * // null 输入返回 null
+     * List<String> nullResult = CollectionsUtil.limit(null, 5);
+     * System.out.println(nullResult); // null
+     *
+     * // 空列表输入返回原空列表
+     * List<String> emptyList = Collections.emptyList();
+     * List<String> result = CollectionsUtil.limit(emptyList, 5);
+     * System.out.println(result); // [] (same instance)
+     *
+     * // maxSize < 0 会抛出异常
+     * try {
+     *     CollectionsUtil.limit(list, -1);
+     * } catch (IllegalArgumentException e) {
+     *     System.out.println(e.getMessage()); // maxSize must >=0,-1
+     * }
+     * }</pre>
+     *
+     * @param <T>
+     *            列表元素类型
+     * @param list
+     *            原始列表，可以为 {@code null}
+     * @param maxSize
+     *            要截取的最大元素个数，必须大于等于 0
+     * @return 包含前 {@code maxSize} 个元素的新列表；如果 {@code list} 为 {@code null} 或空则返回原列表；如果 {@code maxSize} 为 0 返回空列表
+     * @throws IllegalArgumentException
+     *             如果 {@code maxSize < 0}
+     * @since 4.5.5
+     */
+    public static <T> List<T> limit(List<T> list,int maxSize){
+        if (isNullOrEmpty(list)){
+            return list;
+        }
+        if (0 == maxSize){
+            return emptyList();
+        }
+        Validate.isTrue(maxSize >= 0, "maxSize must >=0,%s", maxSize);
+        return list.stream().limit(maxSize).collect(Collectors.toList());
+    }
+
     //---------------------------------------------------------------
 
     /**

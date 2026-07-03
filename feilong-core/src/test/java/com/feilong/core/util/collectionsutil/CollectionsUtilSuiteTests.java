@@ -64,6 +64,8 @@ import com.feilong.core.util.collectionsutil.select.SelectWithMapTest;
 @RunWith(Suite.class)
 @SuiteClasses({
 
+                LimitListTest.class,
+
                 NewTest.class,
 
                 AddAllIgnoreNullTest.class,
