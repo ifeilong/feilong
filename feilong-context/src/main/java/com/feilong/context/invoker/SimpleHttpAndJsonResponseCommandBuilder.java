@@ -18,6 +18,7 @@ package com.feilong.context.invoker;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 import java.util.Map;
+import java.util.Objects;
 
 import com.feilong.context.beanproperty.SimpleHttpTypeBeanProperty;
 import com.feilong.context.converter.JsonStringToBeanConverter;
@@ -154,8 +155,15 @@ public class SimpleHttpAndJsonResponseCommandBuilder<R extends InvokerRequest, T
      * @return the 字符串转换成bean 转换器
      * @since 4.1.0 add param responseString
      */
+    @SuppressWarnings("unchecked")
     @Override
     protected StringToBeanConverter<T> createStringToBeanConverter(String responseString){
+        //since 4.5.5
+        if (Objects.equals(responseCommandRootClass, String.class)){
+            //接收一个字符串参数，然后原样返回它
+            return (StringToBeanConverter<T>) (StringToBeanConverter<String>) s -> s;
+        }
+
         if (JsonHelper.isNeedConvertToJSONArray(StringUtils.trim(responseString))){
             return new JsonStringToListConverter(responseCommandRootClass);
         }
