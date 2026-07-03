@@ -1530,7 +1530,7 @@ public final class CollectionsUtil{
      *            如果是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
      * @return 如果 <code>propertyName</code> 是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
      *         如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
-     *         否则调用 {@link #group(Iterable, String)},将map 的values转成list返回<br>
+     *         否则调用 {@link GroupUtil#group(Iterable, String)},将map 的values转成list返回<br>
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
      * @see "org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)"
@@ -1548,7 +1548,67 @@ public final class CollectionsUtil{
         }
 
         //---------------------------------------------------------------
-        Map<Object, O> map = groupOne(objectCollection, propertyName);
+        Map<Object, O> map = GroupUtil.groupOne(objectCollection, propertyName);
+        return toList(map.values());
+    }
+
+    /**
+     * 根据指定的 key 提取函数对集合进行去重，返回一个新的列表，保留每个 key 第一次出现的元素。
+     * <p>
+     * 使用 {@link LinkedHashMap} 实现，支持 key 为 null 的情况。
+     * 如果 {@code keyExtractor} 为 null，则退化为基于元素自身的 {@code equals()} 方法去重
+     * （调用 {@link #removeDuplicate(Collection)}）。
+     * 如果 {@code objectCollection} 为 null 或空，则返回空列表。
+     * </p>
+     *
+     * <h3>使用示例</h3>
+     * <pre>{@code
+     * List<User> users = Arrays.asList(
+     *     new User("张飞", 28),
+     *     new User("刘备", 32),
+     *     new User("刘备", 30),   // 同名，保留第一个
+     *     new User("关羽", 35)
+     * );
+     *
+     * // 按姓名去重
+     * List<User> uniqueByName = removeDuplicate(users, User::getName);
+     * System.out.println(uniqueByName.size()); // 3
+     *
+     * // 按自身 identity 去重（元素自身的 equals）
+     * List<String> uniqueStrings = removeDuplicate(
+     *     Arrays.asList("a", null, "b", null, "a"),
+     *     Function.identity()
+     * );
+     * System.out.println(uniqueStrings); // [a, null, b]
+     * }</pre>
+     *
+     * @param <O>
+     *            元素类型
+     * @param <T>
+     *            去重 key 的类型
+     * @param objectCollection
+     *            待去重的集合，可以为 null 或空
+     * @param keyExtractor
+     *            去重 key 提取函数，可以为 null（此时退化为基于元素自身 equals 去重）
+     * @return 去重后的新列表，保持首次出现顺序；如果输入为 null 或空则返回空列表
+     * @since 4.5.5
+     */
+    public static <O, T> List<O> removeDuplicate(Collection<O> objectCollection,Function<O, T> keyExtractor){
+        if (isNullOrEmpty(keyExtractor)){
+            return removeDuplicate(objectCollection);
+        }
+        if (isNullOrEmpty(objectCollection)){
+            return Collections.<O> emptyList();
+        }
+
+        //---------------------------------------------------------------
+        //如果有null 元素 groupOne 会报NPE ,
+        //GroupUtil.groupOne内部使用了 Collectors.toMap，而 Collectors.toMap默认不允许 key 为 null（会抛出 NullPointerException）。当 keyExtractor返回 null时（例如 Function.identity()作用于 null元素），groupOne会抛出异常
+        //Map<T, O> map = GroupUtil.groupOne(objectCollection, keyExtractor);
+        Map<T, O> map = newLinkedHashMap(); // LinkedHashMap 允许 null key
+        for (O obj : objectCollection){
+            map.putIfAbsent(keyExtractor.apply(obj), obj); // putIfAbsent 保留第一次出现的元素
+        }
         return toList(map.values());
     }
 
@@ -4332,7 +4392,6 @@ public final class CollectionsUtil{
      * 用于分组处理.
      * 具体实现参考 {@link GroupUtil#groupOne(Iterable, Function)} 的实现逻辑
      * 
-     * @see #group(Iterable, String)
      * @since 4.5.0
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#groupOne(Iterable, Function)}
      */
@@ -4346,7 +4405,6 @@ public final class CollectionsUtil{
      * 用于分组处理.
      * 具体实现参考 {@link GroupUtil#groupOne(Iterable, String)} 的实现逻辑
      * 
-     * @see #group(Iterable, String)
      * @since 1.0.8
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#groupOne(Iterable, String)}
      */

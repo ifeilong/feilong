@@ -42,6 +42,7 @@ import com.feilong.core.util.collectionsutil.group.GroupWithTransformerAndPredic
 import com.feilong.core.util.collectionsutil.group.GroupWithTransformerTest;
 import com.feilong.core.util.collectionsutil.remove.RemoveAllCollectionTest;
 import com.feilong.core.util.collectionsutil.remove.RemoveAllNullTest;
+import com.feilong.core.util.collectionsutil.remove.RemoveDuplicateFunctionTest;
 import com.feilong.core.util.collectionsutil.remove.RemoveDuplicateOnePropertyNameTest;
 import com.feilong.core.util.collectionsutil.remove.RemoveDuplicatePropertyNamesTest;
 import com.feilong.core.util.collectionsutil.remove.RemoveDuplicateTest;
@@ -137,6 +138,7 @@ import com.feilong.core.util.collectionsutil.select.SelectWithMapTest;
                 RemoveElementTest.class,
                 RemoveAllNullTest.class,
                 RemoveAllCollectionTest.class,
+                RemoveDuplicateFunctionTest.class,
 
                 SplitDuplicatePropertyNamesTest.class,
 

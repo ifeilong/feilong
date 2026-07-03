@@ -27,6 +27,7 @@ import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.util.AggregateUtil;
 import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.GroupUtil;
 import com.feilong.core.util.equator.IgnoreCaseEquator;
 import com.feilong.lib.collection4.ComparatorUtils;
 import com.feilong.lib.collection4.PredicateUtils;
@@ -59,7 +60,7 @@ public final class BeanPredicateUtil{
      * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
      * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
      * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
      * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
      * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
@@ -120,7 +121,7 @@ public final class BeanPredicateUtil{
      * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
      * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
      * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
      * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
      * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
@@ -189,7 +190,7 @@ public final class BeanPredicateUtil{
      * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
      * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
      * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
      * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
      * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
@@ -279,7 +280,7 @@ public final class BeanPredicateUtil{
      * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
      * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
      * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
      * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
      * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
@@ -360,7 +361,7 @@ public final class BeanPredicateUtil{
      * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
      * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
      * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
      * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
      * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
@@ -401,7 +402,7 @@ public final class BeanPredicateUtil{
      * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
      * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
      * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
      * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
      * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
@@ -451,7 +452,7 @@ public final class BeanPredicateUtil{
      * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
      * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
      * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
      * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
      * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
@@ -575,7 +576,7 @@ public final class BeanPredicateUtil{
      * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, org.apache.commons.collections4.Predicate)
      * select},{@link CollectionsUtil#find(Iterable, org.apache.commons.collections4.Predicate) find},
      * {@link CollectionsUtil#selectRejected(Iterable, org.apache.commons.collections4.Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
+     * {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate) group},
      * {@link AggregateUtil#groupCount(Iterable, String, org.apache.commons.collections4.Predicate) groupCount},
      * {@link AggregateUtil#sum(Iterable, String, org.apache.commons.collections4.Predicate) sum} 等方法.
      * </li>
