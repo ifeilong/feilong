@@ -317,13 +317,14 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 返回指定列表的前 {@code maxSize} 个元素组成的新列表。
-     * <p>
-     * 如果输入列表为 {@code null} 或空列表，则直接返回原列表（不做拷贝）。
-     * 如果 {@code maxSize} 为 0，则返回空列表（{@link Collections#emptyList()}）。
-     * 如果 {@code maxSize} 小于 0，则抛出 {@link IllegalArgumentException}。
-     * 返回的列表是新的 {@link ArrayList}，不会修改原列表。
-     * </p>
+     * 返回指定列表的前 {@code maxSize} 个元素组成的新列表
+     * 
+     * <ul>
+     * <li>如果输入列表为 {@code null} 或空列表，则直接返回原列表不做拷贝</li>
+     * <li>如果 {@code maxSize} 为 0，则返回空列表{@link Collections#emptyList()}</li>
+     * <li>如果 {@code maxSize} 小于 0，则抛出 {@link IllegalArgumentException}</li>
+     * <li>返回的列表是新的 {@link ArrayList}，不会修改原列表</li>
+     * </ul>
      *
      * <h3>使用示例</h3>
      * <pre>{@code
@@ -378,6 +379,71 @@ public final class CollectionsUtil{
         }
         Validate.isTrue(maxSize >= 0, "maxSize must >=0,%s", maxSize);
         return list.stream().limit(maxSize).collect(Collectors.toList());
+    }
+
+    /**
+     * 返回指定集合的前 {@code maxSize} 个元素组成的新集合
+     * 
+     * <ul>
+     * <li>如果输入集合为 {@code null} 或空集合，则直接返回原集合不做拷贝</li>
+     * <li>如果 {@code maxSize} 为 0，则返回空集合{@link Collections#emptySet()}</li>
+     * <li>如果 {@code maxSize} 小于 0，则抛出 {@link IllegalArgumentException}</li>
+     * <li>返回的集合是新的 {@link HashSet}通过 {@link Collectors#toSet()} 收集，
+     * <b>不保证元素顺序</b>，且不会修改原集合</li>
+     * </ul>
+     * <h3>使用示例</h3>
+     * <pre>{@code
+     * Set<String> set = new LinkedHashSet<>(Arrays.asList("a", "b", "c", "d", "e"));
+     *
+     * // 取前3个注意：toSet() 不保证顺序，但 LinkedHashSet 输入能保持插入顺序
+     * Set<String> limited = CollectionsUtil.limit(set, 3);
+     * System.out.println(limited); // 可能输出 [a, b, c] 或 [b, a, c] 等，取决于 Set 实现
+     *
+     * // maxSize 大于集合大小，返回全部
+     * Set<String> all = CollectionsUtil.limit(set, 10);
+     * System.out.println(all); // [a, b, c, d, e]
+     *
+     * // maxSize 为 0 返回空集合
+     * Set<String> empty = CollectionsUtil.limit(set, 0);
+     * System.out.println(empty); // []
+     *
+     * // null 输入返回 null
+     * Set<String> nullResult = CollectionsUtil.limit(null, 5);
+     * System.out.println(nullResult); // null
+     *
+     * // 空集合输入返回原空集合
+     * Set<String> emptySet = Collections.emptySet();
+     * Set<String> result = CollectionsUtil.limit(emptySet, 5);
+     * System.out.println(result); // [] (same instance)
+     *
+     * // maxSize < 0 会抛出异常
+     * try {
+     *     CollectionsUtil.limit(set, -1);
+     * } catch (IllegalArgumentException e) {
+     *     System.out.println(e.getMessage()); // maxSize must >=0,-1
+     * }
+     * }</pre>
+     *
+     * @param <T>
+     *            集合元素类型
+     * @param set
+     *            原始集合，可以为 {@code null}
+     * @param maxSize
+     *            要截取的最大元素个数，必须大于等于 0
+     * @return 包含前 {@code maxSize} 个元素的新集合；如果 {@code set} 为 {@code null} 或空则返回原集合；如果 {@code maxSize} 为 0 返回空集合
+     * @throws IllegalArgumentException
+     *             如果 {@code maxSize < 0}
+     * @since 4.5.5
+     */
+    public static <T> Set<T> limit(Set<T> set,int maxSize){
+        if (isNullOrEmpty(set)){
+            return set;
+        }
+        if (0 == maxSize){
+            return emptySet();
+        }
+        Validate.isTrue(maxSize >= 0, "maxSize must >=0,%s", maxSize);
+        return set.stream().limit(maxSize).collect(Collectors.toSet());
     }
 
     //---------------------------------------------------------------
@@ -3818,7 +3884,7 @@ public final class CollectionsUtil{
         return toStream(beanIterable)//
                         .filter(Objects::nonNull)//
                         .filter(predicate)//
-                        .collect(Collectors.toList());//Stream.collect是 终结操作（terminal operation），不是中间操作。调用 collect后，流会被消费，不能再对其执行任何后续操作
+                        .collect(Collectors.toList());//Stream.collect是 终结操作terminal operation，不是中间操作调用 collect后，流会被消费，不能再对其执行任何后续操作
     }
 
     //---------------------------------------------------------------
@@ -4137,7 +4203,7 @@ public final class CollectionsUtil{
 
     /**
      * 用于分组处理.
-     * 具体实现参考 {@link GroupUtil#group(Iterable, String )} 的实现逻辑。
+     * 具体实现参考 {@link GroupUtil#group(Iterable, String )} 的实现逻辑
      * 
      * @since 1.0.8
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, String )}
@@ -4150,7 +4216,7 @@ public final class CollectionsUtil{
 
     /**
      * 用于分组处理.
-     * 具体实现参考 {@link GroupUtil#group(Iterable, String, Predicate)} 的实现逻辑。
+     * 具体实现参考 {@link GroupUtil#group(Iterable, String, Predicate)} 的实现逻辑
      * 
      * @since 1.5.5
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, String, Predicate)}
@@ -4166,7 +4232,7 @@ public final class CollectionsUtil{
 
     /**
      * 用于分组处理.
-     * 具体实现参考 {@link GroupUtil#group(Iterable, Transformer)} 的实现逻辑。
+     * 具体实现参考 {@link GroupUtil#group(Iterable, Transformer)} 的实现逻辑
      * 
      * @since 1.8.8
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, Transformer)}
@@ -4179,7 +4245,7 @@ public final class CollectionsUtil{
 
     /**
      * 用于分组处理.
-     * 具体实现参考 {@link GroupUtil#group(Iterable, Predicate, Transformer)} 的实现逻辑。
+     * 具体实现参考 {@link GroupUtil#group(Iterable, Predicate, Transformer)} 的实现逻辑
      * 
      * @since 1.8.8
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, Predicate, Transformer)}.2
@@ -4195,7 +4261,7 @@ public final class CollectionsUtil{
 
     /**
      * 用于分组处理.
-     * 具体实现参考 {@link GroupUtil#groupOne(Iterable, Function)} 的实现逻辑。
+     * 具体实现参考 {@link GroupUtil#groupOne(Iterable, Function)} 的实现逻辑
      * 
      * @see #group(Iterable, String)
      * @since 4.5.0
@@ -4209,7 +4275,7 @@ public final class CollectionsUtil{
 
     /**
      * 用于分组处理.
-     * 具体实现参考 {@link GroupUtil#groupOne(Iterable, String)} 的实现逻辑。
+     * 具体实现参考 {@link GroupUtil#groupOne(Iterable, String)} 的实现逻辑
      * 
      * @see #group(Iterable, String)
      * @since 1.0.8
@@ -4407,7 +4473,7 @@ public final class CollectionsUtil{
     public static <O> Stream<O> toStream(Iterable<O> beanIterable){
         return StreamSupport.stream(
                         beanIterable.spliterator(), //
-                        false //决定流的执行模式。true表示创建并行流；false表示创建顺序流
+                        false //决定流的执行模式true表示创建并行流；false表示创建顺序流
         );
     }
 

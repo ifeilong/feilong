@@ -94,7 +94,7 @@ public class LimitListTest{
      */
     @Test
     public void testLimitWithNullList(){
-        List<String> result = CollectionsUtil.limit(null, 5);
+        List<String> result = CollectionsUtil.limit((List<String>) null, 5);
         assertNull(result);
     }
 
@@ -153,7 +153,7 @@ public class LimitListTest{
      */
     @Test
     public void testLimitWithMaxSizeZeroOnNullList(){
-        List<String> result = CollectionsUtil.limit(null, 0);
+        List<String> result = CollectionsUtil.limit((List<String>) null, 0);
         assertNull(result);
     }
 }
