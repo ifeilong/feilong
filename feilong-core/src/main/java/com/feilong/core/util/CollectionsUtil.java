@@ -942,6 +942,7 @@ public final class CollectionsUtil{
      * @since 1.8.2
      * @since 3.2.1 change to variable argument
      */
+    @SafeVarargs
     public static <T> boolean addIgnoreNullOrEmpty(final Collection<T> objectCollection,final T...elements){
         Validate.notNull(objectCollection, "objectCollection can't be null!");
         if (isNullOrEmpty(elements)){
@@ -1199,7 +1200,7 @@ public final class CollectionsUtil{
     //***********************删除****************************************************
 
     /**
-     * 从 <code>objectCollection</code>中删除所有的 <code>removeCollection</code> <span style="color:red">(原集合对象不变)</span>.
+     * 从 <code>objectCollection</code>中删除所有的 <code>removeCollections</code> <span style="color:red">(原集合对象不变)</span>.
      *
      * <h3>说明:</h3>
      * <blockquote>
@@ -1235,7 +1236,7 @@ public final class CollectionsUtil{
      *            the generic type
      * @param objectCollection
      *            the collection from which items are removed (in the returned collection)
-     * @param removeCollection
+     * @param removeCollections
      *            the items to be removed from the returned <code>collection</code>
      * @return 从 <code>objectCollection</code>中排除掉 <code>removeCollection</code> 元素的新的 list <br>
      *         如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
@@ -1244,13 +1245,20 @@ public final class CollectionsUtil{
      * @since Commons Collections 4
      * @since 1.0.8
      * @since 3.3.6 如果 <code>removeCollection</code> 是null,直接返回 <code>objectCollection</code>
+     * @since 4.5.5 change to Collection<O>...removeCollections
      */
-    public static <O> List<O> removeAll(Collection<O> objectCollection,Collection<O> removeCollection){
+    @SafeVarargs
+    public static <O> List<O> removeAll(Collection<O> objectCollection,Collection<O>...removeCollections){
         Validate.notNull(objectCollection, "objectCollection can't be null!");
-        if (null == removeCollection){
+        if (null == removeCollections){
             return toList(objectCollection);
         }
-        return ListUtils.removeAll(objectCollection, removeCollection);
+        //---------------------------------------------------------------
+        List<O> allWillRemovelist = newArrayList();
+        for (Collection<O> removeCollection : removeCollections){
+            addAllIgnoreNull(allWillRemovelist, removeCollection);
+        }
+        return ListUtils.removeAll(objectCollection, allWillRemovelist);
     }
 
     /**
@@ -3075,6 +3083,7 @@ public final class CollectionsUtil{
      * @see BeanPredicateUtil#containsPredicate(String, Object...)
      * @since 4.5.1
      */
+    @SafeVarargs
     public static <O, V> List<O> select(Iterable<O> beanIterable,Function<O, V> propertyExtractor,V...propertyValues){
         if (isNullOrEmpty(beanIterable)){
             return emptyList();
@@ -3759,6 +3768,7 @@ public final class CollectionsUtil{
      * @see BeanPredicateUtil#containsPredicate(String, Object...)
      * @since 4.5.3
      */
+    @SafeVarargs
     public static <O, V> List<O> selectRejected(Iterable<O> beanIterable,Function<O, V> propertyExtractor,V...propertyValues){
         if (isNullOrEmpty(beanIterable)){
             return emptyList();
