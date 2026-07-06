@@ -32,6 +32,7 @@ import com.feilong.spring.expression.SpelUtilSuiteTests;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                BatchProcessorUtilTest.class,
                 SimpleValueLoaderTest.class,
 
                 SimpleParamNameValueLoaderTest.class,
