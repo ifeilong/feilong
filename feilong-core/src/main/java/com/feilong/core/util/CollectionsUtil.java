@@ -446,6 +446,110 @@ public final class CollectionsUtil{
         return set.stream().limit(maxSize).collect(Collectors.toSet());
     }
 
+    /**
+     * 将多个集合展平合并为一个有序、去重的集合。
+     * <p>
+     * 该方法接收一个包含多个 {@link Set} 的集合，将所有 Set 中的元素合并到一个新的 {@link LinkedHashSet} 中，<br>
+     * 保持元素首次出现的顺序，并自动去除重复元素。<br>
+     * 内部使用 for 循环遍历，并通过 {@code addAllIgnoreNull} 安全地跳过 null 元素 <span style="color:red">(values中的null 而不是values set 中的null)</span>。
+     * </p>
+     *
+     * <h3>使用示例</h3>
+     * <pre>{@code
+     * Set<Integer> set1 = new LinkedHashSet<>(Arrays.asList(1,null, 2, 3));
+     * Set<Integer> set2 = new LinkedHashSet<>(Arrays.asList(3, 4, 5));
+     *
+     * // 合并 set1 和 set2
+     * Set<Integer> merged = flattenToSet(Arrays.asList(set1, set2));
+     * System.out.println(merged); // [1,null, 2, 3, 4, 5]
+     *
+     * // 输入为 null 或空集合时返回空 Set
+     * Set<Integer> emptyResult = flattenToSet(null);
+     * System.out.println(emptyResult); // []
+     * }</pre>
+     *
+     * <h3>注意事项</h3>
+     * <ul>
+     * <li>如果 {@code values} 为 null 或空，返回 {@link Collections#emptySet()}。</li>
+     * <li>返回的 {@link LinkedHashSet} 保留了元素首次出现的顺序，且自动去重。</li>
+     * <li>该方法使用 for 循环而非 Stream，便于调试和打断点。</li>
+     * </ul>
+     *
+     * @param <T>
+     *            集合元素类型
+     * @param values
+     *            包含多个 Set 的集合，可以为 null 或空，允许包含 null 元素
+     * @return 合并后的有序、去重 Set；如果输入为 null 或空则返回空 Set
+     * @since 4.5.5
+     */
+    public static <T> Set<T> flattenToSet(Collection<Set<T>> values){
+        if (isNullOrEmpty(values)){
+            return emptySet();
+        }
+        //调试便利性​ 较差（Stream 链式调用不易打断点）
+        //return values.stream()//
+        //  //.filter(Objects::nonNull)//// 注意：此处未过滤 null，如果 values 中包含 null 元素，下一行会抛出 NPE
+        //  .flatMap(Set::stream)//
+        //  .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        //调试便利性​ 较好（for 循环内可轻松打断点）
+        Set<T> allSet = newLinkedHashSet();
+        for (Set<T> set : values){
+            addAllIgnoreNull(allSet, set);
+        }
+        return allSet;
+    }
+
+    /**
+     * 将多个列表展平合并为一个新的列表，保留所有元素及其顺序。
+     * <p>
+     * 该方法接收一个包含多个 {@link List} 的集合，将所有 List 中的元素按顺序追加到一个新的 {@link ArrayList} 中，
+     * 不会去重（与 {@link #flattenToSet(Collection)} 不同）。
+     * 内部使用 for 循环遍历，并通过 {@code addAllIgnoreNull} 安全地跳过 null 元素。
+     * </p>
+     *
+     * <h3>使用示例</h3>
+     * <pre>{@code
+     * List<Integer> list1 = Arrays.asList(1, 2, 3);
+     * List<Integer> list2 = Arrays.asList(3, 4, 5);
+     * List<Integer> list3 = null; // 会被安全跳过
+     *
+     * // 合并 list1 和 list2
+     * List<Integer> merged = flattenToList(Arrays.asList(list1, list2, list3));
+     * System.out.println(merged); // [1, 2, 3, 3, 4, 5]
+     *
+     * // 输入为 null 或空集合时返回空列表
+     * List<Integer> emptyResult = flattenToList(null);
+     * System.out.println(emptyResult); // []
+     * }</pre>
+     *
+     * <h3>注意事项</h3>
+     * <ul>
+     * <li>如果 {@code values} 为 null 或空，返回 {@link Collections#emptyList()}。</li>
+     * <li>如果 {@code values} 中包含 null 元素，该元素会被自动忽略，不会抛出异常。</li>
+     * <li>返回的列表保留所有元素的原始顺序（先按外层集合顺序，再按内层列表顺序），不会去重。</li>
+     * <li>该方法使用 for 循环而非 Stream，便于调试和打断点。</li>
+     * </ul>
+     *
+     * @param <T>
+     *            列表元素类型
+     * @param values
+     *            包含多个 List 的集合，可以为 null 或空，允许包含 null 元素
+     * @return 合并后的新列表；如果输入为 null 或空则返回空列表
+     * @since 4.5.5
+     */
+    public static <T> List<T> flattenToList(Collection<List<T>> values){
+        if (isNullOrEmpty(values)){
+            return emptyList();
+        }
+        //调试便利性​ 较好（for 循环内可轻松打断点）
+        List<T> allList = newArrayList();
+        for (List<T> list : values){
+            addAllIgnoreNull(allList, list);
+        }
+        return allList;
+    }
+
     //---------------------------------------------------------------
 
     /**

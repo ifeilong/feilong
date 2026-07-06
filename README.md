@@ -5,7 +5,7 @@ feilong 让Java开发更简便的工具库
 ![JDK 1.8](https://img.shields.io/badge/JDK-1.8-green.svg "JDK 1.8")
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.ifeilong/feilong.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.ifeilong%22%20AND%20a:%22feilong%22)
 [![javadoc 83%](http://progressed.io/bar/83?title=javadoc "javadoc 83%")](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/)
-[![tests 3230](https://img.shields.io/badge/tests-3230%20%2F%203230-green.svg "tests 3230")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core)
+[![tests 3293](https://img.shields.io/badge/tests-3293%20%2F%203293-green.svg "tests 3293")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core)
 
 
 Reduce development, Release ideas (灵感从重复简单的代码中释放出来)
@@ -60,14 +60,14 @@ feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/artifact/c
 <dependency>
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong</artifactId>
-	<version>4.5.4</version>
+	<version>4.5.5</version>
 </dependency>
 ```
 
 ### `Gradle 配置` 
 
 ```
-com.github.ifeilong:feilong:4.5.4
+com.github.ifeilong:feilong:4.5.5
 ```
 
 ### `非Maven项目`
