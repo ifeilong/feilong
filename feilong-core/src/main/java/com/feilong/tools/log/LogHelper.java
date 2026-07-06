@@ -27,18 +27,29 @@ import com.feilong.lib.lang3.BooleanUtils;
 import com.feilong.lib.lang3.StringUtils;
 
 /**
- * 日志辅助类.
- * 
+ * 日志辅助类，提供格式化进度日志、耗时统计等工具方法。
+ * <p>
+ * 主要用于批量任务处理场景，帮助输出可读性强的进度信息和预估剩余时间。
+ * </p>
+ *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 4.0.0
  */
 public class LogHelper{
 
     /**
-     * 用来渲染进度日志的.
-     * 
+     * 根据 {@link ProcessLogParamEntity} 渲染进度日志字符串。
+     * <p>
+     * 生成的日志格式示例：
+     * <pre>{@code
+     * 进度: [3/20]  15.00% ,perUseTimes: 00:01:23 ,已经执行时间(elapsedTime): 00:04:10 ,预估剩余时间(estimatedRemainingTime): 00:23:20
+     * 进度: [20/20] 100.00%, done ,perUseTimes: 00:00:05 ,总耗时(totalUseTimes): 00:26:45
+     * }</pre>
+     * </p>
+     *
      * @param processLogParamEntity
-     * @return 如果 <code>processLogParamEntity</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     *            进度日志参数实体，包含当前进度、总数、开始时间等信息；可以为 null
+     * @return 格式化后的进度日志字符串；如果 {@code processLogParamEntity} 为 null，返回 {@link StringUtils#EMPTY}
      * @since 4.0.0
      */
     public static String getProcessLog(ProcessLogParamEntity processLogParamEntity){
@@ -80,9 +91,19 @@ public class LogHelper{
     }
 
     /**
-     * 追加耗时时间
-     * 
+     * 追加耗时相关信息到 {@link StringBuilder} 中。
+     * <p>
+     * 包括单次耗时、总耗时（如果已完成）、已执行时间和预估剩余时间（如果未完成）。
+     * </p>
+     *
+     * @param sb
+     *            目标 StringBuilder
+     * @param needProccess
+     *            是否需要渲染进度（如果为 null 或 false，则不追加任何内容）
+     * @param isFinish
+     *            是否已完成（如果为 true，则追加总耗时）
      * @param processLogParamEntity
+     *            进度日志参数实体，从中获取时间信息
      */
     private static void appendUseTime(StringBuilder sb,Boolean needProccess,Boolean isFinish,ProcessLogParamEntity processLogParamEntity){
         Long currentBeginTimeMillis = processLogParamEntity.getCurrentBeginTimeMillis();
@@ -130,12 +151,16 @@ public class LogHelper{
     //---------------------------------------------------------------
 
     /**
-     * 追加name <code>itemName</code>和值 <code>itemValue</code>, 值使用<code>itemValueLenth</code>来left pad.
-     * 
+     * 追加一个带有名称和值的条目到 {@link StringBuilder} 中，值会按指定长度左对齐填充。
+     *
      * @param sb
+     *            目标 StringBuilder
      * @param itemName
+     *            条目名称（如 "进度:", "perUseTimes:"）
      * @param itemValue
+     *            条目值字符串
      * @param itemValueLenth
+     *            值部分的填充长度（左对齐）
      * @since 4.0.0
      */
     private static void appendItem(StringBuilder sb,String itemName,String itemValue,int itemValueLenth){
@@ -144,13 +169,14 @@ public class LogHelper{
     }
 
     /**
-     * 追加值 <code>itemValue</code>, 值使用<code>itemValueLenth</code>来left pad.
-     * 
+     * 追加一个值到 {@link StringBuilder} 中，值会按指定长度左对齐填充。
+     *
      * @param sb
+     *            目标 StringBuilder
      * @param itemValue
-     *            值
+     *            值字符串
      * @param itemValueLenth
-     *            left pad 长度
+     *            填充长度（左对齐）
      * @since 4.0.0
      */
     private static void appendItem(StringBuilder sb,String itemValue,int itemValueLenth){
