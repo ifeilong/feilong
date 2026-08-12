@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.context.batch.ExecutePartitionsTest;
+import com.feilong.context.batch.ExecutePartitionsToMapTest;
 import com.feilong.context.codecreator.CodeSuiteTests;
 import com.feilong.context.condition.SimpleParamNameConfigConditionTest;
 import com.feilong.context.converter.ItemDtoJsonStringToBeanConverterTest;
@@ -32,7 +34,8 @@ import com.feilong.spring.expression.SpelUtilSuiteTests;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                BatchProcessorUtilTest.class,
+                ExecutePartitionsTest.class,
+                ExecutePartitionsToMapTest.class,
                 SimpleValueLoaderTest.class,
 
                 SimpleParamNameValueLoaderTest.class,

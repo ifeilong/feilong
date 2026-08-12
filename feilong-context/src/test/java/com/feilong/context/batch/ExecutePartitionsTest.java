@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.context;
+package com.feilong.context.batch;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
@@ -29,6 +29,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.feilong.context.BatchProcessorUtil;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -37,7 +39,7 @@ import lombok.extern.slf4j.Slf4j;
  * @since 4.5.5
  */
 @Slf4j
-public class BatchProcessorUtilTest{
+public class ExecutePartitionsTest{
 
     // ==================== normal scenarios ====================
 
