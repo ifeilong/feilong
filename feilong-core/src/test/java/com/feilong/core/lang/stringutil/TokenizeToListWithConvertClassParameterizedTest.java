@@ -34,7 +34,7 @@ public class TokenizeToListWithConvertClassParameterizedTest extends Abstract2Pa
     @Parameters(name = "index:{index}:StringUtil.tokenizeToList({0},{1})={2}")
     public static Iterable<Object[]> data(){
         return toList(//
-
+                        toArray("天下;12;18 ", Long.class, toList(12L, 18L)),
                         toArray("8  9 ,0;12;18 ", Integer.class, toList(8, 9, 0, 12, 18)),
                         toArray("8  9 ,0;12;18 ", Long.class, toList(8L, 9L, 0L, 12L, 18L))
 
