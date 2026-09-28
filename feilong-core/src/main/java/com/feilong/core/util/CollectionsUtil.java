@@ -316,6 +316,8 @@ public final class CollectionsUtil{
         return ListUtils.partition(list, size);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 返回指定列表的前 {@code maxSize} 个元素组成的新列表
      * 
@@ -443,8 +445,10 @@ public final class CollectionsUtil{
             return emptySet();
         }
         Validate.isTrue(maxSize >= 0, "maxSize must >=0,%s", maxSize);
-        return set.stream().limit(maxSize).collect(Collectors.toSet());
+        return set.stream().limit(maxSize).collect(Collectors.toCollection(LinkedHashSet::new));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 将多个集合展平合并为一个有序、去重的集合。
