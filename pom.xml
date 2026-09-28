@@ -305,14 +305,14 @@
 		<!-- 用于读取javadoc 内部使用的 配置文件, 比如 描述文字为 描述,英文环境为description -->
 		<maven-javadoc-plugin.locale>en_US</maven-javadoc-plugin.locale>
 
-		<maven-javadoc-plugin.outputDirectory>/Users/feilong/workspace/feilong/else/javadoc/${project.artifactId}
+		<maven-javadoc-plugin.outputDirectory>${user.home}/workspace/feilong/else/javadoc/${project.artifactId}
 		</maven-javadoc-plugin.outputDirectory>
 		<maven-javadoc-plugin.reportOutputDirectory>
-			/Users/feilong/workspace/feilong/else/javadoc/${project.artifactId}
+			${user.home}/workspace/feilong/else/javadoc/${project.artifactId}
 		</maven-javadoc-plugin.reportOutputDirectory>
 		<maven-javadoc-plugin.destDir>${project.artifactId}</maven-javadoc-plugin.destDir>
 		<maven-javadoc-plugin.javadocVersion>1.8.0</maven-javadoc-plugin.javadocVersion>
-		<maven-javadoc-plugin.javadocDirectory>/Users/feilong/Development/DataCommon/Files/Java/Apache
+		<maven-javadoc-plugin.javadocDirectory>${user.home}/Development/DataCommon/Files/Java/Apache
 			Maven/javadoc/springframework
 		</maven-javadoc-plugin.javadocDirectory>
 
@@ -330,7 +330,7 @@
 		-->
 		<maven-javadoc-plugin.stylesheet>java</maven-javadoc-plugin.stylesheet>
 
-		<maven-site-plugin.outputDirectory>/Users/feilong/workspace/feilong/else/site/${project.artifactId}
+		<maven-site-plugin.outputDirectory>${user.home}/workspace/feilong/else/site/${project.artifactId}
 		</maven-site-plugin.outputDirectory>
 
 		<!-- **********************end maven-javadoc-plugin config******************************************* -->

@@ -45,7 +45,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 批量数据处理器工具类，用于将大数据集按指定大小分批处理，支持批次间休眠和进度日志输出。
  * <p>
- * 此类为静态工具类，无需实例化，直接通过 {@code BatchProcessor.executePartitions(...)} 调用。
+ * 此类为静态工具类，无需实例化，直接通过 {@code BatchProcessorUtil.executePartitions(...)} 调用。
  * 典型使用场景包括：
  * <ul>
  * <li>调用第三方 API 时需要控制并发量（如每次只处理 100 条，间隔 200ms）。</li>

@@ -139,7 +139,7 @@ public final class EmailAddressUtil{
      * 获得邮件地址的前缀.
      * 
      * <pre class="code">
-     * EmailAddressUtil.getUserName("feilong@163.com") = feilong
+     * EmailAddressUtil.getUser("feilong@163.com") = feilong
      * </pre>
      *
      * @param emailAddress

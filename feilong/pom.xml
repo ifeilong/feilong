@@ -103,7 +103,7 @@
 
 		<maven-javadoc-plugin.javadocVersion>1.8.0</maven-javadoc-plugin.javadocVersion>
 
-		<maven-javadoc-plugin.stylesheetfile>/Users/feilong/Development/DataCommon/Files/Java/Apache Maven/javadoc/springframework/stylesheet.css</maven-javadoc-plugin.stylesheetfile>
+		<maven-javadoc-plugin.stylesheetfile>${user.home}/Development/DataCommon/Files/Java/Apache Maven/javadoc/springframework/stylesheet.css</maven-javadoc-plugin.stylesheetfile>
 		<maven-javadoc-plugin.stylesheet>java</maven-javadoc-plugin.stylesheet>
 		<!-- **********************end maven-javadoc-plugin config******************************************* -->
 	</properties>

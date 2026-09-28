@@ -65,7 +65,8 @@ public final class JsonHelper{
      * 
      * <blockquote>
      * <ol>
-     * <li>如果 <code>null==jsonConfig</code>,将使用 {@link #DEFAULT_JAVA_TO_JSON_CONFIG}</li>
+     * <li>如果 <code>null==jsonConfig</code>,将使用
+     * {@link com.feilong.json.builder.JsonConfigBuilder#DEFAULT_JAVA_TO_JSON_CONFIG}</li>
      * 
      * <li>
      * 

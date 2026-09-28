@@ -1708,7 +1708,7 @@ public final class MapUtil{
      * <blockquote>
      * <ol>
      * <li>原 <code>map</code> <span style="color:green"><b>不变</b></span>, 如果你希望原map直接改变,可以调用 {@link #removeKeys(Map, Object...)}或者
-     * {@link #removeKeys(Map, Collection)}</li></li>
+     * {@link #removeKeys(Map, Collection)}</li>
      * <li>此方法可以提取{@link Collections#unmodifiableMap(Map)}</li>
      * <li>返回值为 {@link LinkedHashMap},key的顺序按照参数 <code>map</code>的顺序</li>
      * </ol>

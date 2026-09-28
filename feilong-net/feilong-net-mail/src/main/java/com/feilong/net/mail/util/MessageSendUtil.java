@@ -63,8 +63,8 @@ public class MessageSendUtil{
 
     /**
      * @param message
-     * @return
-     * @throws MessagingException
+     *            the message
+     * @return 邮件信息日志,包含 from、subject、allRecipients
      * @since 4.0.8
      */
     private static String createLog(Message message){

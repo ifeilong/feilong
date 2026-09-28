@@ -25,17 +25,6 @@ import com.feilong.io.IOWriteUtil;
 
 public class WriteInputAndOutStreamTest{
 
-    //    @Test
-    //    public void test(){
-    //
-    //        FileInputStream inputStream = FileUtil
-    //                        .getFileInputStream("/Users/feilong/Downloads/[电影天堂www.dytt89.com]科拉尔金矿2-2022_HD中字.mp4/科拉尔金矿2-2022_HD中字.mp4");
-    //        FileOutputStream outputStream = FileUtil
-    //                        .getFileOutputStream("/Users/feilong/Downloads/[电影天堂www.dytt89.com]科拉尔金矿2-2022_HD中字.mp4/new.rmvb");
-    //
-    //        IOWriteUtil.write(inputStream, outputStream);
-    //    }
-
     @Test(expected = NullPointerException.class)
     public void testIOWriteUtilInputStreamTestNull(){
         IOWriteUtil.write(null, new OutputStream(){

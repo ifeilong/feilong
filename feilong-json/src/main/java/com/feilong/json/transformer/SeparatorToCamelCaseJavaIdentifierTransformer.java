@@ -62,7 +62,7 @@ import com.feilong.lib.json.util.JavaIdentifierTransformer;
  *     String json = "{'member_no':'11105000009'}";
  * 
  *     CrmMemberInfoCommand crmMemberInfoCommand = JsonUtil
- *                     .toBean(new JsonToJavaConfig(CrmMemberInfoCommand.class, SeparatorToCamelCaseJavaIdentifierTransformer.INSTANCE));
+ *                     .toBean(json, new JsonToJavaConfig(CrmMemberInfoCommand.class, SeparatorToCamelCaseJavaIdentifierTransformer.INSTANCE));
  *     //.....
  * }
  * 

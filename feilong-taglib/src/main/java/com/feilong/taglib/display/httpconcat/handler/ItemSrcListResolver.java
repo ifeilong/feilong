@@ -48,7 +48,7 @@ public final class ItemSrcListResolver{
      *            the domain
      * @return 如果 <code>blockContent</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>blockContent</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         使用换行符,转成字符串数组,如果 <code>数组</code> 是null或者是empty,抛出 {@link IllegalArgumentException}<br>
+     *         使用换行符,转成字符串数组,如果 <code>数组</code> 处理后为空,返回 {@link java.util.Collections#emptyList()}<br>
      * @since 1.11.1 remove type param
      */
     public static List<String> resolve(String blockContent,String domain){

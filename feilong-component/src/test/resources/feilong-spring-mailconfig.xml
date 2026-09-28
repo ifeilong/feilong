@@ -10,7 +10,7 @@
 
 	<!-- 常用不改的参数 -->
 	<context:property-placeholder
-		location="file:/Users/feilong/Development/DataCommon/Files/Java/config/mail-feilongtestemail.properties" />
+		location="file:${user.home}/Development/DataCommon/Files/Java/config/mail-feilongtestemail.properties" />
 
 	<bean id="mailSendRequest" class="com.feilong.net.mail.entity.MailSendRequest">
 		<property name="personal" value="test邮件使者11" />

@@ -59,7 +59,7 @@ public final class CartesianProductUtil{
      * Integer[] array3 = { 5 };
      * Integer[] array4 = { 4, 8 };
      * 
-     * log.debug(JsonUtil.format(cartesianProduct(v1, v2, v3, v4), 0, 4));
+     * log.debug(JsonUtil.format(cartesianProduct(array1, array2, array3, array4), 0, 4));
      * 
      * </pre>
      * 

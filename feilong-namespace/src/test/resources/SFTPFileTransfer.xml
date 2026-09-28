@@ -9,7 +9,7 @@
     ">
 
     <util:properties id="p_sftp"
-                     location="file:/Users/feilong/Development/DataCommon/Files/Java/config/fileTransfer-sftp-gap.properties"/>
+                     location="file:${user.home}/Development/DataCommon/Files/Java/config/fileTransfer-sftp-gap.properties"/>
 
     <feilong:sftpFileTransfer id="sftpFileTransfer" hostName="#{p_sftp['fileTransfer.sftp.hostName']}"
                               userName="#{p_sftp['fileTransfer.sftp.userName']}"

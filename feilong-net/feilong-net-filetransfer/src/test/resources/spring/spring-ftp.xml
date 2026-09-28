@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd 	
 		">
 
-	<util:properties id="p_ftp" location="file:/Users/feilong/Development/DataCommon/Files/Java/config/fileTransfer-ftp.properties"></util:properties>
+	<util:properties id="p_ftp" location="file:${user.home}/Development/DataCommon/Files/Java/config/fileTransfer-ftp.properties"></util:properties>
 
 	<!-- ftp -->
 	<bean id="ftpFileTransfer" class="com.feilong.net.filetransfer.ftp.FTPFileTransfer" scope="prototype">

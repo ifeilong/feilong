@@ -95,10 +95,10 @@ public class StringOverLengthJsonValueProcessor extends AbstractJsonValueProcess
      *            the value
      * @param maxLength
      *            the max length
-     * @return 如果 <code>value</code> 是null,返回 null<br>
-     *         如果 maxLength{@code <}0 是null,抛出 {@link NullPointerException}<br>
-     *         如果 maxLength{@code <}0 是empty,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>value</code> 是null,使用默认值 {@link #DEFAULT_OVERLENGTH_MASKSTRING} <br>
+     * @return 如果 <code>value</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
+     *         如果 maxLength{@code <=}0,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>value</code> 长度超过 maxLength,超出部分使用掩码字符串替换<br>
+     *         如果 <code>value</code> 长度不超过 maxLength,直接返回原字符串<br>
      */
     public static Object format(Object value,int maxLength){
         return format(value, maxLength, DEFAULT_OVERLENGTH_MASKSTRING);
@@ -112,11 +112,11 @@ public class StringOverLengthJsonValueProcessor extends AbstractJsonValueProcess
      * @param maxLength
      *            the max length
      * @param overLengthMaskString
-     *            the over length mask string
-     * @return 如果 <code>value</code> 是null,返回 null<br>
-     *         如果 maxLength{@code <}0 是null,抛出 {@link NullPointerException}<br>
-     *         如果 maxLength{@code <}0 是empty,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>value</code> 是null,使用默认值 {@link #DEFAULT_OVERLENGTH_MASKSTRING} <br>
+     *            the over length mask string,为null 时使用默认值 {@code DEFAULT_OVERLENGTH_MASKSTRING}
+     * @return 如果 <code>value</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
+     *         如果 maxLength{@code <=}0,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>value</code> 长度超过 maxLength,超出部分使用掩码字符串替换<br>
+     *         如果 <code>value</code> 长度不超过 maxLength,直接返回原字符串<br>
      */
     public static Object format(Object value,int maxLength,String overLengthMaskString){
         if (null == value){

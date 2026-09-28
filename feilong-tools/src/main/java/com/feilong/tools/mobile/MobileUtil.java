@@ -159,7 +159,7 @@ public final class MobileUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * MobileUtil.getMobileNumberNumberSegment("15000001318") returns 150
+     * MobileUtil.getMobileNumberSegment("15000001318") returns 150
      * </pre>
      * 
      * </blockquote>
