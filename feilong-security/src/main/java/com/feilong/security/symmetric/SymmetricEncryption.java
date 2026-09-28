@@ -40,7 +40,7 @@ import com.feilong.security.symmetric.builder.TransformationBuilder;
  * 
  * <pre class="code">
  * {@code
- *  <bean id="blowfishForPassword" class="com.feilong.tools.security.symmetric.SymmetricEncryption" lazy-init="true">
+ *  <bean id="blowfishForPassword" class="com.feilong.security.symmetric.SymmetricEncryption" lazy-init="true">
  *      <!-- 第1个参数是加密解密方式 -->
  *      <constructor-arg index="0" value="Blowfish" />
  *      <!-- 第2个参数是密钥字符串 -->
@@ -259,7 +259,7 @@ public class SymmetricEncryption{
      * 
      * <pre class="code">
      * keyString=feilong
-     * encrypBase64("鑫哥爱feilong") {@code ---->}BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2
+     * encryptBase64("鑫哥爱feilong") {@code ---->}BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2
      * </pre>
      *
      * @param original
@@ -280,7 +280,7 @@ public class SymmetricEncryption{
      * 
      * <pre class="code">
      * keyString=feilong
-     * encrypBase64("鑫哥爱feilong") {@code ---->}BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2
+     * encryptBase64("鑫哥爱feilong") {@code ---->}BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2
      * </pre>
      *
      * @param original
@@ -389,7 +389,7 @@ public class SymmetricEncryption{
      *         如果 <code>original</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>original</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see StringUtil#getBytes(String, String)
-     * @see CipherUtil#opBytes(byte[], int, String, Key)
+     * @see CipherUtil#encrypt(byte[], String, Key)
      * @see ByteUtil#bytesToHexStringUpperCase(byte[])
      * @since 3.0.0
      */
@@ -416,7 +416,7 @@ public class SymmetricEncryption{
      *         如果 <code>original</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>original</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see StringUtil#getBytes(String, String)
-     * @see CipherUtil#opBytes(byte[], int, String, Key)
+     * @see CipherUtil#encrypt(byte[], String, Key)
      * @see ByteUtil#bytesToHexStringUpperCase(byte[])
      * 
      * @since 1.11.0 change original type to String
@@ -449,7 +449,7 @@ public class SymmetricEncryption{
      * @return 解密 String明文输出<br>
      *         如果 <code>hexString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>hexString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see CipherUtil#opBytes(byte[], int, String, Key)
+     * @see CipherUtil#encrypt(byte[], String, Key)
      * @since 3.0.0
      */
     public String decryptHex(String hexString){
@@ -473,7 +473,7 @@ public class SymmetricEncryption{
      *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>hexString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>hexString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see CipherUtil#opBytes(byte[], int, String, Key)
+     * @see CipherUtil#encrypt(byte[], String, Key)
      */
     public String decryptHex(String hexString,String charsetName){
         Validate.notBlank(charsetName, "charsetName can't be blank!");

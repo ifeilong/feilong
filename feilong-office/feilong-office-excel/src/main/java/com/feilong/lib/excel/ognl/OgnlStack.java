@@ -67,8 +67,8 @@ public class OgnlStack{
      * @param expr
      *            the expr
      * @return the expression
-     * @throws OgnlException
-     *             the ognl exception
+     * @throws DefaultRuntimeException
+     *             the default runtime exception
      */
     private Object getExpression(String expr){
         synchronized (expressionsMap){

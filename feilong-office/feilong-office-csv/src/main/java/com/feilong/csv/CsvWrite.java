@@ -228,7 +228,7 @@ public interface CsvWrite{
      * <p>
      * 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * 如果 <code>columnTitles和dataList</code> 都是null或者empty,抛出 {@link NullPointerException}<br>
+     * 如果 <code>columnTitles</code> 和 <code>dataList</code> 都是null或者empty,抛出 {@link IllegalArgumentException}<br>
      * </p>
      *
      * @param fileName
@@ -261,7 +261,7 @@ public interface CsvWrite{
      *         list.add(ConvertUtil.toArray(i + "金,鑫", i + "jin'\"xin"));
      *     }
      * 
-     *     CSVUtil.write(path, columnTitles, list, new CSVConfig(GBK));
+     *     new DefaultCsvWrite().write(path, columnTitles, list, new CsvConfig(GBK));
      * }
      * 
      * </pre>
@@ -270,27 +270,27 @@ public interface CsvWrite{
      * 
      * 
      * <pre class="code">
-    a   b
-    0金,鑫    0jin'"xin
-    1金,鑫    1jin'"xin
-    2金,鑫    2jin'"xin
-    3金,鑫    3jin'"xin
-    4金,鑫    4jin'"xin
-    5金,鑫    5jin'"xin
-    6金,鑫    6jin'"xin
-    7金,鑫    7jin'"xin
-    8金,鑫    8jin'"xin
-    9金,鑫    9jin'"xin
-    10金,鑫   10jin'"xin
-    11金,鑫   11jin'"xin
-    12金,鑫   12jin'"xin
-    13金,鑫   13jin'"xin
-    14金,鑫   14jin'"xin
-    15金,鑫   15jin'"xin
-    16金,鑫   16jin'"xin
-    17金,鑫   17jin'"xin
-    18金,鑫   18jin'"xin
-    19金,鑫   19jin'"xin
+    "a","b"
+    "0金,鑫","0jin'""xin"
+    "1金,鑫","1jin'""xin"
+    "2金,鑫","2jin'""xin"
+    "3金,鑫","3jin'""xin"
+    "4金,鑫","4jin'""xin"
+    "5金,鑫","5jin'""xin"
+    "6金,鑫","6jin'""xin"
+    "7金,鑫","7jin'""xin"
+    "8金,鑫","8jin'""xin"
+    "9金,鑫","9jin'""xin"
+    "10金,鑫","10jin'""xin"
+    "11金,鑫","11jin'""xin"
+    "12金,鑫","12jin'""xin"
+    "13金,鑫","13jin'""xin"
+    "14金,鑫","14jin'""xin"
+    "15金,鑫","15jin'""xin"
+    "16金,鑫","16jin'""xin"
+    "17金,鑫","17jin'""xin"
+    "18金,鑫","18jin'""xin"
+    "19金,鑫","19jin'""xin"
      * 
      * </pre>
      * 
@@ -299,7 +299,7 @@ public interface CsvWrite{
      * <p>
      * 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * 如果 <code>columnTitles和dataList</code> 都是null或者empty,抛出 {@link NullPointerException}<br>
+     * 如果 <code>columnTitles</code> 和 <code>dataList</code> 都是null或者empty,抛出 {@link IllegalArgumentException}<br>
      * 如果 <code>csvConfig</code> 是null,会使用默认的 <code>csvConfig</code><br>
      * </p>
      *

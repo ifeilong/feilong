@@ -45,7 +45,7 @@ public class CompressUnzipHandler extends AbstractUnzipHandler{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.compress.AbstractUnzipManager#handler(java.lang.String, java.lang.String)
+     * @see com.feilong.zip.AbstractUnzipHandler#handle(java.lang.String, java.lang.String)
      */
     @Override
     protected void handle(String unZipFilePath,String outputDirectory) throws IOException{

@@ -43,7 +43,7 @@ public abstract class AbstractZipHandler implements ZipHandler{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.compress.UnzipManager#unZip(java.lang.String, java.lang.String)
+     * @see com.feilong.zip.ZipHandler#zip(java.lang.String, java.lang.String)
      */
     @Override
     public void zip(String tobeZipFilePath,String outputZipPath){

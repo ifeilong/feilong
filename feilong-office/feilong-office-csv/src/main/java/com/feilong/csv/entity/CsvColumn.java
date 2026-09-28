@@ -31,8 +31,8 @@ import java.lang.annotation.Target;
  * <pre>
  *    Example 1:
  *
- *    &#064;Column(name="DESC",order=1)
- *    public String getDescription() { return description; }
+ *    &#064;CsvColumn(name="DESC",order=1)
+ *    private String description;
  *
  * </pre>
  * 

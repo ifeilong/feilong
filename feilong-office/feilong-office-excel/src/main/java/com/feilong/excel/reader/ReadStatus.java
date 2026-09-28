@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Interface ReadStatus.
+ * The Class ReadStatus.
  */
 public class ReadStatus{
 

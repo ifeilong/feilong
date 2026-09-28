@@ -27,7 +27,7 @@ import com.feilong.lib.lang3.BooleanUtils;
  * </p>
  * 
  * <pre class="code">
- * DataConvertorConfigurator.getInstance().registerDataConvertor(new BooleanConvertor());
+ * DataConvertorConfig.getInstance().registerDataConvertor(new BooleanConvertor());
  * </pre>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>

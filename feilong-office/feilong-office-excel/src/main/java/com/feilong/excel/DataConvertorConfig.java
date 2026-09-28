@@ -29,7 +29,7 @@ import com.feilong.lib.excel.convertor.LongConvertor;
 import com.feilong.lib.excel.convertor.StringConvertor;
 
 /**
- * The Class DataConvertorConfigurator.
+ * The Class DataConvertorConfig.
  */
 public class DataConvertorConfig implements Serializable{
 
@@ -104,9 +104,9 @@ public class DataConvertorConfig implements Serializable{
     //---------------------------------------------------------------
 
     /**
-     * Gets the single instance of DataConvertorConfigurator.
+     * Gets the single instance of DataConvertorConfig.
      *
-     * @return single instance of DataConvertorConfigurator
+     * @return single instance of DataConvertorConfig
      */
     public static DataConvertorConfig getInstance(){
         if (instance == null){

@@ -129,8 +129,6 @@ public class InstantiatingNullHandler implements NullHandler{
      * @return the object
      * @throws IllegalAccessException
      * @throws InstantiationException
-     * @throws Exception
-     *             the exception
      */
     private static Object createObject(Class<?> clazz) throws InstantiationException,IllegalAccessException{
         if (Collection.class.isAssignableFrom(clazz)){

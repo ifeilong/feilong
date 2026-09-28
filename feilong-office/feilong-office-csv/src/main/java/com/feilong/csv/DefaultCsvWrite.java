@@ -160,7 +160,7 @@ public class DefaultCsvWrite implements CsvWrite{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.office.csv.CsvWrite#write(java.lang.String, java.lang.Iterable)
+     * @see com.feilong.csv.CsvWrite#write(java.lang.String, java.lang.Iterable)
      */
     @Override
     public <T> void write(String fileName,Iterable<T> iterable){
@@ -173,8 +173,8 @@ public class DefaultCsvWrite implements CsvWrite{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.office.csv.CsvWrite#write(java.lang.String, java.lang.Iterable,
-     * com.feilong.tools.office.csv.entity.BeanCsvConfig)
+     * @see com.feilong.csv.CsvWrite#write(java.lang.String, java.lang.Iterable,
+     * com.feilong.csv.entity.BeanCsvConfig)
      */
     @Override
     public <T> void write(String fileName,Iterable<T> iterable,BeanCsvConfig<T> beanCsvConfig){
@@ -198,7 +198,7 @@ public class DefaultCsvWrite implements CsvWrite{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.office.csv.CsvWrite#write(java.lang.String, java.lang.String[], java.util.List)
+     * @see com.feilong.csv.CsvWrite#write(java.lang.String, java.lang.String[], java.util.List)
      */
     @Override
     public void write(String fileName,String[] columnTitles,List<Object[]> dataList){
@@ -209,8 +209,8 @@ public class DefaultCsvWrite implements CsvWrite{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.office.csv.CsvWrite#write(java.lang.String, java.lang.String[], java.util.List,
-     * com.feilong.tools.office.csv.entity.CsvConfig)
+     * @see com.feilong.csv.CsvWrite#write(java.lang.String, java.lang.String[], java.util.List,
+     * com.feilong.csv.entity.CsvConfig)
      */
     @Override
     public void write(String fileName,String[] columnTitles,List<Object[]> dataList,CsvConfig csvConfig){

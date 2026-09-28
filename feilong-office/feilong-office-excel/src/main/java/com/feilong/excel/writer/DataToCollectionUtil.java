@@ -24,7 +24,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * The Class DataToListUtil.
+ * The Class DataToCollectionUtil.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
@@ -37,7 +37,7 @@ class DataToCollectionUtil{
      *
      * @param value
      *            the value
-     * @return the collection<? extends object>
+     * @return the collection
      */
     static Collection<?> convert(Object value){
         if (!(value instanceof Collection)){

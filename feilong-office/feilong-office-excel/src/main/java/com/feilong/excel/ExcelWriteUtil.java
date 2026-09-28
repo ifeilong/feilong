@@ -183,8 +183,8 @@ public class ExcelWriteUtil{
     /**
      * Builds the excel writer.
      *
-     * @param sheetDefinitionLocation
-     *            the sheet definition location
+     * @param sheetDefinitions
+     *            the sheet definitions
      * @param sheetNames
      *            the sheet names
      * @return the excel writer
@@ -235,8 +235,8 @@ public class ExcelWriteUtil{
      *            the beans
      * @param outputFileName
      *            the output file name
-     * @param beginDate
-     *            the begin date
+     * @param beginTimeMillis
+     *            the begin time millis
      * @return the map
      */
     private static Map<String, Object> buildMap(
