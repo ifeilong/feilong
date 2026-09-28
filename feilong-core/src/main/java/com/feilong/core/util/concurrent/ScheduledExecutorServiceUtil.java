@@ -63,7 +63,7 @@ public class ScheduledExecutorServiceUtil{
      * @return 已启动定时任务的 ScheduledExecutorService<br>
      * 
      *         如果 <code>initialDelay{@code <}0</code> ,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>period{@code <}0</code> ,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>period{@code <=}0</code> ,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>timeUnit</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>runnable</code> 是null,抛出 {@link NullPointerException}<br>
      * 

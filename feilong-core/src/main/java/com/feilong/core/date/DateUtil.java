@@ -138,7 +138,7 @@ import lombok.NoArgsConstructor;
  * <td>
  * <ul>
  * <li>{@link DateUtil#isBefore(Date, Date)}</li>
- * <li>{@link DateUtil#isBefore(Date, Date)}</li>
+ * <li>{@link DateUtil#isAfter(Date, Date)}</li>
  * </ul>
  * </td>
  * </tr>
@@ -747,7 +747,7 @@ public final class DateUtil{
      *            任意时间
      * @param year
      *            加减年数 ,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
+     * @return 如果 <code>date</code>是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>year==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
@@ -785,7 +785,7 @@ public final class DateUtil{
      * @param month
      *            加减月份, <span style="color:red">可以是负数</span>,表示前面多少<br>
      *            比如-3 表示 3个月之前
-     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
+     * @return 如果 <code>date</code>是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>month==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
@@ -824,7 +824,7 @@ public final class DateUtil{
      *            任意时间
      * @param day
      *            需要加减的天数,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
+     * @return 如果 <code>date</code>是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>day==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
@@ -862,7 +862,7 @@ public final class DateUtil{
      *            任意时间
      * @param week
      *            需要加减的星期数,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
+     * @return 如果 <code>date</code>是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>week==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
@@ -898,7 +898,7 @@ public final class DateUtil{
      *            任意时间
      * @param hour
      *            加减小时数,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
+     * @return 如果 <code>date</code>是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>hour==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
@@ -934,7 +934,7 @@ public final class DateUtil{
      *            任意时间
      * @param minute
      *            加减分钟数,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
+     * @return 如果 <code>date</code>是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>minute==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
@@ -970,7 +970,7 @@ public final class DateUtil{
      *            任意时间
      * @param second
      *            加减秒,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
+     * @return 如果 <code>date</code>是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>second==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
@@ -1006,7 +1006,7 @@ public final class DateUtil{
      *            任意时间
      * @param millisecond
      *            加减毫秒,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
+     * @return 如果 <code>date</code>是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>millisecond==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
@@ -2523,7 +2523,7 @@ public final class DateUtil{
      * 
      * <pre class="code">
      * DateUtil.formatDuration(2011-05-19 8:30:40,2011-05-19 11:30:24)             = 2小时59分44秒
-     * DateUtil.formatDuration(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)    = 1分钟1秒
+     * DateUtil.formatDuration(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)    = 1分钟561毫秒
      * </pre>
      * 
      * </blockquote>
@@ -2692,7 +2692,7 @@ public final class DateUtil{
      *
      * @param spaceTime
      *            the space time
-     * @return the interval week
+     * @return 相差的月数
      * @see com.feilong.core.TimeInterval#MILLISECOND_PER_MONTH
      * @since 3.1.1
      */

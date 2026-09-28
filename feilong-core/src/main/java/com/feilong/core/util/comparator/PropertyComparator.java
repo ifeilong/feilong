@@ -155,7 +155,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * 
      *     assertEquals(4, set.size());
      *     assertThat(set, allOf(contains(
-     *                     nullPropertyValue, <span style="color:green">//如果对应的属性值是null,排在后面</span>
+     *                     nullPropertyValue, <span style="color:green">//如果对应的属性值是null,排在最前面</span>
      *                     userSameHashCode_1_name1, <span style="color:green">//指定属性的属性值越小对应的对象排在前面,反之排在后面</span>
      * 
      *                     <span style="color:green">//如果两个值相等,那么比较对象本身</span>

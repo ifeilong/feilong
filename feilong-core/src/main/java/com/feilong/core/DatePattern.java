@@ -153,7 +153,7 @@ import lombok.NoArgsConstructor;
  * <td>Second in minute</td>
  * <td><a href="#number">Number</a></td>
  * <td><code>55</code></td>
- * <tr>
+ * </tr>
  * 
  * <td><code>S</code></td>
  * <td>Millisecond</td>
@@ -399,7 +399,7 @@ public final class DatePattern{
      * 印尼日期格式 <span style="color:green"><code>{@value}</code></span>.
      * 
      * <p>
-     * example: <span style="color:green">31/03/2014 14:53:39</span>
+     * example: <span style="color:green">31/03/2014</span>
      * </p>
      * 
      * <p>

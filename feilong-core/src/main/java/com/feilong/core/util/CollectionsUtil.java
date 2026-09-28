@@ -390,16 +390,16 @@ public final class CollectionsUtil{
      * <li>如果输入集合为 {@code null} 或空集合，则直接返回原集合不做拷贝</li>
      * <li>如果 {@code maxSize} 为 0，则返回空集合{@link Collections#emptySet()}</li>
      * <li>如果 {@code maxSize} 小于 0，则抛出 {@link IllegalArgumentException}</li>
-     * <li>返回的集合是新的 {@link HashSet}通过 {@link Collectors#toSet()} 收集，
-     * <b>不保证元素顺序</b>，且不会修改原集合</li>
+     * <li>返回的集合是新的 {@link LinkedHashSet}，通过 {@link Collectors#toCollection(java.util.function.Supplier)} 收集，
+     * <b>保持元素的插入顺序</b>，且不会修改原集合</li>
      * </ul>
      * <h3>使用示例</h3>
      * <pre>{@code
      * Set<String> set = new LinkedHashSet<>(Arrays.asList("a", "b", "c", "d", "e"));
      *
-     * // 取前3个注意：toSet() 不保证顺序，但 LinkedHashSet 输入能保持插入顺序
+     * // 取前3个,返回的是 LinkedHashSet,保持插入顺序
      * Set<String> limited = CollectionsUtil.limit(set, 3);
-     * System.out.println(limited); // 可能输出 [a, b, c] 或 [b, a, c] 等，取决于 Set 实现
+     * System.out.println(limited); // 输出 [a, b, c]
      *
      * // maxSize 大于集合大小，返回全部
      * Set<String> all = CollectionsUtil.limit(set, 10);
@@ -2840,7 +2840,7 @@ public final class CollectionsUtil{
      * @param propertyNameAndPropertyValueMap
      *            属性和指定属性值对应的map,其中key是泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>iterable</code>是null, 返回null<br>
+     * @return 如果 <code>iterable</code>是null, 返回false<br>
      *         如果 <code>propertyNameAndPropertyValueMap</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyNameAndPropertyValueMap</code> 是empty,抛出{@link IllegalArgumentException}<br>
      *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是null,抛出{@link NullPointerException}<br>
@@ -2894,7 +2894,7 @@ public final class CollectionsUtil{
      * @param predicate
      *            the predicate to use, may not be null
      * @return 如果 <code>predicate</code> 是 null,将抛出{@link NullPointerException} <br>
-     *         如果 <code>iterable</code>是null, 返回null<br>
+     *         如果 <code>iterable</code>是null, 返回false<br>
      *         如果 <code>iterable</code>中没有相关元素匹配 <code>predicate</code>,返回false
      * @since 3.0.8
      */
@@ -3907,7 +3907,7 @@ public final class CollectionsUtil{
      *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param predicate
      *            the predicate
-     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      * @see "collection4 CollectionUtils#selectRejected(Iterable, org.apache.commons.collections4.Predicate)"
      * @since 1.4.0
      */
