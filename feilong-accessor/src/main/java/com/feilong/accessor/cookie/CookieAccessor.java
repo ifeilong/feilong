@@ -17,7 +17,6 @@ package com.feilong.accessor.cookie;
 
 import static com.feilong.core.CharsetType.UTF8;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

@@ -15,9 +15,6 @@
  */
 package com.feilong.context.converter;
 
-import com.feilong.lib.collection4.functors.IfClosure;
-import com.feilong.lib.collection4.functors.IfTransformer;
-
 /**
  * 根据predicate 条件,来判断是使用 trueStringToBeanConverter 还是falseStringToBeanConverter来转换结果.
  * 

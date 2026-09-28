@@ -17,7 +17,6 @@ package com.feilong.context.encryptor;
 
 import static com.feilong.core.CharsetType.UTF8;
 
-import com.feilong.core.CharsetType;
 import com.feilong.json.JsonUtil;
 import com.feilong.security.symmetric.SymmetricEncryption;
 import com.feilong.security.symmetric.SymmetricType;
