@@ -25,6 +25,7 @@ import java.net.URL;
 import org.junit.Test;
 
 import com.feilong.core.lang.ClassLoaderUtil;
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.test.AbstractTest;
 
@@ -48,15 +49,9 @@ public class FileUtilTest extends AbstractTest{
         log.debug(esapiDirectory.getAbsolutePath());
     }
 
-    /**
-     * List files.
-     * 
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
     @Test
     public void listFiles() throws IOException{
-        String localPath = "/Users/feilong/feilong/logs";
+        String localPath = SystemUtil.USER_HOME + "/feilong/logs";
         // 读取localPath目录下的全部properties文件
         File file = new File(localPath);
         File[] files = file.listFiles();

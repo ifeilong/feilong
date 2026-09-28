@@ -20,6 +20,7 @@ import java.io.UncheckedIOException;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.io.IOReaderUtil;
 
 public class ReadToByteArrayTest extends AbstractReadFileToStringTest{
@@ -41,7 +42,7 @@ public class ReadToByteArrayTest extends AbstractReadFileToStringTest{
 
     @Test(expected = UncheckedIOException.class)
     public void testReadToByteArrayTestUncheckedIOException(){
-        IOReaderUtil.readToByteArray("/Users/feilong/Downloads/11111111111111.java");
+        IOReaderUtil.readToByteArray(SystemUtil.USER_HOME + "/Downloads/11111111111111.java");
     }
 
     //---------------------------------------------------------------

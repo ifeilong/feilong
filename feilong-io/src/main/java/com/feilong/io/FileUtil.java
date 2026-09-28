@@ -338,7 +338,7 @@ public final class FileUtil{
      *            指定一个存在的文件夹
      * @return
      *         <ul>
-     *         <li>如果directory isNullOrEmpty,抛出 {@link IllegalArgumentException}</li>
+     *         <li>如果directory 是null,抛出 {@link NullPointerException};如果directory 是blank,抛出 {@link IllegalArgumentException}</li>
      *         <li>如果directory don't exists,抛出 {@link IllegalArgumentException}</li>
      *         <li>如果directory is not Directory,抛出 {@link IllegalArgumentException}</li>
      *         <li>return file.list() ==0</li>

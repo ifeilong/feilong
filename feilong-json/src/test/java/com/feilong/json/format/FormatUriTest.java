@@ -24,6 +24,7 @@ import java.net.URISyntaxException;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 
@@ -32,20 +33,20 @@ public class FormatUriTest extends AbstractJsonTest{
 
     @Test
     public void testToURLs() throws URISyntaxException{
-        URI urLs = new URI("file:///Users/feilong/.m2/settings.xml");
+        URI urLs = new URI("file://" + SystemUtil.USER_HOME + "/.m2/settings.xml");
         log.debug(JsonUtil.format(urLs));
     }
 
     @Test
     public void testToUriArray() throws URISyntaxException{
-        String format = JsonUtil.format(toArray(new URI("file:///Users/feilong/.m2/settings.xml")));
-        assertEquals("[\"file:///Users/feilong/.m2/settings.xml\"]", format);
+        String format = JsonUtil.format(toArray(new URI("file://" + SystemUtil.USER_HOME + "/.m2/settings.xml")));
+        assertEquals("[\"file://" + SystemUtil.USER_HOME + "/.m2/settings.xml\"]", format);
     }
 
     @Test
     public void testToURiList() throws URISyntaxException{
-        String format = JsonUtil.format(toList(new URI("file:///Users/feilong/.m2/settings.xml")));
-        assertEquals("[\"file:///Users/feilong/.m2/settings.xml\"]", format);
+        String format = JsonUtil.format(toList(new URI("file://" + SystemUtil.USER_HOME + "/.m2/settings.xml")));
+        assertEquals("[\"file://" + SystemUtil.USER_HOME + "/.m2/settings.xml\"]", format);
     }
 
 }

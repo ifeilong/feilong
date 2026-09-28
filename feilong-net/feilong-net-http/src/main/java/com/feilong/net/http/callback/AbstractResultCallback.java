@@ -91,7 +91,7 @@ public abstract class AbstractResultCallback<T> implements ResultCallback<T>{
      *
      * @param allHeaders
      *            the all headers
-     * @return 如果 <code>allHeaders</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>allHeaders</code> 是null或者empty,返回 {@link java.util.Collections#emptyMap()}<br>
      */
     private static Map<String, String> convert(Header[] allHeaders){
         if (isNullOrEmpty(allHeaders)){

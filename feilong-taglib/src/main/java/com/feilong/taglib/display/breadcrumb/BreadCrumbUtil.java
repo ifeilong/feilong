@@ -83,8 +83,8 @@ public class BreadCrumbUtil{
      *            the bread crumb params
      * @return
      *         <ul>
-     *         <li>如果 isNullOrEmpty(breadCrumbParams) , throw {@link NullPointerException}</li>
-     *         <li>如果 isNullOrEmpty(breadCrumbEntityList) , throw {@link NullPointerException}</li>
+     *         <li>如果 breadCrumbParams 是null , throw {@link NullPointerException}</li>
+     *         <li>如果 breadCrumbEntityList 是null , throw {@link NullPointerException};如果是empty , throw {@link IllegalArgumentException}</li>
      *         <li>如果 isNullOrEmpty(currentBreadCrumbEntityTreeList) ,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}</li>
      *         </ul>
      */

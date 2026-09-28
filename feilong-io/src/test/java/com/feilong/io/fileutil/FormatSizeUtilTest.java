@@ -21,6 +21,7 @@ import java.io.File;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.test.AbstractTest;
 
@@ -41,7 +42,7 @@ public class FormatSizeUtilTest extends AbstractTest{
     //---------------------------------------------------------------
     @Test
     public void testGetFileSizes1(){
-        String testFile = "/Users/feilong/.m2/settings.xml";
+        String testFile = SystemUtil.USER_HOME + "/.m2/settings.xml";
         File file = new File(testFile);
 
         long fileSizes = FileUtil.getFileSize(file);

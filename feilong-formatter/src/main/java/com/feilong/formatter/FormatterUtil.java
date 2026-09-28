@@ -410,7 +410,7 @@ public final class FormatterUtil{
      * @param map
      *            the map
      * @return 如果 <code>map</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
-     * @see com.feilong.formatter.AbstractFormatter#format(Map)
+     *
      * @see com.feilong.core.util.SortUtil#sortMapByKeyAsc(Map)
      */
     public static final <K, V> String formatToSimpleTable(Map<K, V> map){

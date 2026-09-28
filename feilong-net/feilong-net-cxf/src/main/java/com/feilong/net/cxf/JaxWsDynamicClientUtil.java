@@ -42,15 +42,15 @@ import lombok.NoArgsConstructor;
  * </p>
  * 
  * <h3>
- * 对于 {@link <a href=
+ * 对于 <a href=
  * "https://www.mkyong.com/webservices/jax-ws/suncertpathbuilderexception-unable-to-find-valid-certification-path-to-requested-target/">SunCertPathBuilderException:
- * unable to find valid certification path to requested target</a>}
+ * unable to find valid certification path to requested target</a>
  * </h3>
  * 
  * <blockquote>
- * 参见 {@link <a href=
+ * 参见 <a href=
  * "https://www.mkyong.com/webservices/jax-ws/suncertpathbuilderexception-unable-to-find-valid-certification-path-to-requested-target/">SunCertPathBuilderException:
- * unable to find valid certification path to requested target</a>}
+ * unable to find valid certification path to requested target</a>
  * </blockquote>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>

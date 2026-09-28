@@ -625,7 +625,7 @@ public class XmlUtil{
      *                 + "<sign><![CDATA[288AE0E455273102147B9CF95F43D222]]></sign>\r\n" + "<result_code><![CDATA[SUCCESS]]></result_code>\r\n"
      *                 + "</xml>}";
      * 
-     * Map{@code <String, String>} map = XmlUtil.fromXML(xml, "xml");
+     * Map{@code <String, String>} map = XmlUtil.toMap(xml, "xml");
      * log.debug(JsonUtil.format(map));
      * </pre>
      * 
@@ -756,7 +756,7 @@ public class XmlUtil{
      *                     + "<sign><![CDATA[288AE0E455273102147B9CF95F43D222]]></sign>\r\n"
      *                     + "<result_code><![CDATA[SUCCESS]]></result_code>\r\n" + "</xml>";}
      * 
-     * <span style="color:red">WechatCloseResponse map = XmlUtil.fromXML(xml, WechatCloseResponse.class);</span>
+     * <span style="color:red">WechatCloseResponse map = XmlUtil.toBean(xml, WechatCloseResponse.class);</span>
      * log.debug("{}", JsonUtil.format(map));
      * </pre>
      * 

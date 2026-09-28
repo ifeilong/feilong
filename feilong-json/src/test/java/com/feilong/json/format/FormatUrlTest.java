@@ -24,6 +24,7 @@ import java.net.URL;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 
@@ -32,20 +33,20 @@ public class FormatUrlTest extends AbstractJsonTest{
 
     @Test
     public void testToURLs() throws MalformedURLException{
-        URL urLs = new URL("file:///Users/feilong/.m2/settings.xml");
+        URL urLs = new URL("file://" + SystemUtil.USER_HOME + "/.m2/settings.xml");
         log.debug(JsonUtil.format(urLs));
     }
 
     @Test
     public void testToURLs2() throws MalformedURLException{
-        String format = JsonUtil.format(toArray(new URL("file:///Users/feilong/.m2/settings.xml")));
-        assertEquals("[\"file:/Users/feilong/.m2/settings.xml\"]", format);
+        String format = JsonUtil.format(toArray(new URL("file://" + SystemUtil.USER_HOME + "/.m2/settings.xml")));
+        assertEquals("[\"file:" + SystemUtil.USER_HOME + "/.m2/settings.xml\"]", format);
     }
 
     @Test
     public void testToURLs22() throws MalformedURLException{
-        String format = JsonUtil.format(toList(new URL("file:///Users/feilong/.m2/settings.xml")));
-        assertEquals("[\"file:/Users/feilong/.m2/settings.xml\"]", format);
+        String format = JsonUtil.format(toList(new URL("file://" + SystemUtil.USER_HOME + "/.m2/settings.xml")));
+        assertEquals("[\"file:" + SystemUtil.USER_HOME + "/.m2/settings.xml\"]", format);
     }
 
 }

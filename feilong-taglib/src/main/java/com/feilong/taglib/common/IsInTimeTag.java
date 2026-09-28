@@ -87,7 +87,7 @@ public class IsInTimeTag extends AbstractConditionalTag{
      * 判断指定日期 <code>date</code>是否在两个时间之间.
      * 
      * <pre class="code">
-     * DateUtil.isInTime("2012-10-16 23:00:02", "2012-10-10 22:59:00", "2012-10-18 22:59:00", DatePattern.commonWithTime) = true
+     * DateUtil.isInTime(date, "2012-10-10 22:59:00", "2012-10-18 22:59:00", DatePattern.COMMON_DATE_AND_TIME) = true
      * </pre>
      * 
      * @param date

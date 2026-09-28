@@ -100,7 +100,7 @@ public final class HttpConcatGlobalConfigBuilder{
      * 获得 required value.
      * 
      * <p>
-     * 如果 {@code isNullOrEmpty(Object)} ,抛出NullPointerException
+     * 如果 value 是null ,抛出 {@link NullPointerException};如果 value 是blank ,抛出 {@link IllegalArgumentException}
      * </p>
      * 
      * @param <T>

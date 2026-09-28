@@ -279,7 +279,7 @@ public final class FilenameUtil{
      * 
      * <pre class="code">
      * String fileName="F:/pie2.png";
-     * FileUtil.getNewFileName(fileName, "gif")
+     * FilenameUtil.getNewFileName(fileName, "gif")
      * 
      * return F:/pie2.gif
      * </pre>

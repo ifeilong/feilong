@@ -44,7 +44,7 @@ public final class ReturnResultBuilder{
      * 
      * ReturnResult returnResult = new ReturnResult();
      * 
-     * returnResult.setResult(false);
+     * returnResult.setIsSuccess(false);
      * returnResult.setStatusCode("member.email.error");
      * return returnResult;
      * 

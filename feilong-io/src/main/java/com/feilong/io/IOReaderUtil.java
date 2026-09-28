@@ -563,7 +563,6 @@ public final class IOReaderUtil{
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
      * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.12.10
      * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
      * @since 1.14.0 rename from read
@@ -633,7 +632,6 @@ public final class IOReaderUtil{
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
      * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.12.10
      * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
      * @since 1.14.0 rename from read
@@ -792,7 +790,6 @@ public final class IOReaderUtil{
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
      * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 4.1.2
      */
     public static List<String> readToList(File file,ReaderConfig readerConfig){
@@ -860,7 +857,6 @@ public final class IOReaderUtil{
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
      * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 4.1.2
      */
     public static List<String> readToList(Reader reader,ReaderConfig readerConfig){
@@ -929,9 +925,7 @@ public final class IOReaderUtil{
      * @param collection
      *            the collection
      * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>collection</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>collection</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * @since 4.1.2
      */
     public static <T extends Collection<String>> T readToCollection(Reader reader,ReaderConfig readerConfig,T collection){

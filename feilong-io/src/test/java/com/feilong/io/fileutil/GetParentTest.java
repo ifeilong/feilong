@@ -20,6 +20,7 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.io.FileUtil;
 
 /**
@@ -36,17 +37,21 @@ public class GetParentTest{
 
     @Test
     public void testGetParentTestNull11(){
-        assertEquals("/Users/feilong/feilong/logs", FileUtil.getParent("/Users/feilong/feilong/logs/createDirectoryByFilePath"));
+        assertEquals(
+                     SystemUtil.USER_HOME + "/feilong/logs",
+                     FileUtil.getParent(SystemUtil.USER_HOME + "/feilong/logs/createDirectoryByFilePath"));
     }
 
     @Test
     public void testGetParentTestNull11NotExist(){
-        assertEquals("/Users/feilong/feilong/logs/getParent", FileUtil.getParent("/Users/feilong/feilong/logs/getParent/getParent"));
+        assertEquals(
+                     SystemUtil.USER_HOME + "/feilong/logs/getParent",
+                     FileUtil.getParent(SystemUtil.USER_HOME + "/feilong/logs/getParent/getParent"));
     }
 
     @Test
     public void testGetParentTestFile(){
-        assertEquals("/Users/feilong/feilong/logs", FileUtil.getParent("/Users/feilong/feilong/logs/1.txt"));
+        assertEquals(SystemUtil.USER_HOME + "/feilong/logs", FileUtil.getParent(SystemUtil.USER_HOME + "/feilong/logs/1.txt"));
     }
 
     //---------------------------------------------------------------

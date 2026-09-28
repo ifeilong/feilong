@@ -31,7 +31,7 @@ import java.lang.annotation.Target;
  * 
  * <pre>
  *    {@code @}FormatterColumn(name="DESC",order=1)
- *    public String getDescription() { return description; }
+ *    private String description;
  *
  * </pre>
  * 

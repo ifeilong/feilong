@@ -301,8 +301,8 @@ public class LogAndBotCombination{
      * @param logger
      *            the log
      * @param bot
-     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
-     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     *            机器人, 目前支持微信机器人 <code>com.feilong.net.bot.wxwork.DefaultWxworkBot</code> 和
+     *            钉钉机器人<code>com.feilong.net.bot.dingtalk.DefaultDingTalkBot</code>
      * @param type
      *            the type
      * @param pattern

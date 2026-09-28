@@ -88,7 +88,7 @@ public interface FileTransfer{
      *            可以是文件,也可以文件夹 <br>
      *            如果 <code>remotePaths</code> 是null,抛出 {@link NullPointerException}<br>
      *            如果 <code>remotePaths</code> 是empty,抛出 {@link IllegalArgumentException}<br>
-     *            任意一个值 null或者empty, {@link IllegalArgumentException}
+     *            任意一个值 是null,抛出 {@link NullPointerException};如果是blank,抛出 {@link IllegalArgumentException}
      */
     void download(String localAbsoluteDirectoryPath,String...remotePaths);
 
@@ -117,7 +117,7 @@ public interface FileTransfer{
      * @param batchLocalFileFullPaths
      *            上传的文件名(数组),全路径 <br>
      *            不能为 null或者empty,否则 {@link IllegalArgumentException}<br>
-     *            任意一个值 null或者empty, {@link IllegalArgumentException}<br>
+     *            任意一个值 是blank,抛出 {@link IllegalArgumentException}<br>
      *            任意一个值localFileFullPath文件不存在, {@link IllegalArgumentException}
      * @return 全部成功返回true,否则一旦有失败则返回false<br>
      *         如果 <code>remoteDirectory</code> 是null,抛出 {@link NullPointerException}<br>
@@ -146,8 +146,8 @@ public interface FileTransfer{
      * 
      * @param remoteAbsolutePaths
      *            一组文件,绝对路径 <br>
-     *            任意一个值 null或者empty, {@link IllegalArgumentException}<br>
-     *            任意一个值= / , {@link IllegalArgumentException} 危险!!
+     *            任意一个值 是blank,抛出 {@link IllegalArgumentException}<br>
+     *            任意一个值 = / ,抛出 {@link UnsupportedOperationException} 危险!!
      * @return 如果 <code>remoteAbsolutePaths</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>remoteAbsolutePaths</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * 
