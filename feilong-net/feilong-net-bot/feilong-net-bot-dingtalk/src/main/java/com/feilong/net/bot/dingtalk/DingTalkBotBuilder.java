@@ -44,7 +44,7 @@ public class DingTalkBotBuilder{
         defaultDingTalkBot.setIsAsync(true);
 
         //当出现异常, 是否抛出异常.
-        //默认false,表示抛出, 会抛出exception;如果是true 那么不会抛出异常.
+        //默认false,表示不抛出异常;如果是true 那么会抛出异常,需要自行捕获处理.
         defaultDingTalkBot.setIsThrowException(false);
         return defaultDingTalkBot;
     }

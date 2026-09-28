@@ -113,9 +113,13 @@ public abstract class AbstractBot implements Bot{
     //---------------------------------------------------------------
 
     /**
+     * @param logPrefix
+     *            日志追踪上下文.
      * @param content
+     *            the content
      * @param messageParams
-     * @return
+     *            the message params
+     * @return 如果发送成功返回 true,否则返回 false
      * @since 4.0.8
      */
     protected abstract boolean doSendMessage(String logPrefix,String content,MessageParams messageParams);
@@ -150,7 +154,7 @@ public abstract class AbstractBot implements Bot{
      * 默认false,表示不抛出exception; 如果是true 那么会抛出异常,需要自定捕获异常处理.
      * </p>
      * 
-     * @return 默认false,表示抛出, 会抛出exception;如果是true 那么不会抛出异常.
+     * @return 默认false,表示不抛出异常;如果是true 那么会抛出异常,需要自行捕获处理.
      * @since 4.0.0
      */
     public boolean getIsThrowException(){
@@ -165,7 +169,7 @@ public abstract class AbstractBot implements Bot{
      * </p>
      *
      * @param isThrowException
-     *            默认false,表示抛出, 会抛出exception;如果是true 那么不会抛出异常.
+     *            默认false,表示不抛出异常;如果是true 那么会抛出异常,需要自行捕获处理.
      * @since 4.0.0
      */
     public void setIsThrowException(boolean isThrowException){

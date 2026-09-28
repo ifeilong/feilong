@@ -49,6 +49,8 @@ import com.feilong.taglib.display.SimpleTagParamCacheManager;
     </c:forEach>
 }
  * </pre>
+ *
+ * </blockquote>
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.apache.taglibs.standard.tag.rt.fmt.BundleTag"

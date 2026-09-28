@@ -1,0 +1,62 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build (JDK ${{ matrix.java }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java: [ '8', '17' ]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
+          cache: 'maven'
+
+      - name: Build (tests are run in the unit-tests job)
+        run: mvn -B -ntp -DskipTests clean install
+
+  unit-tests:
+    name: Unit tests (network free modules)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+          cache: 'maven'
+
+      - name: Install all modules without running tests
+        run: mvn -B -ntp -DskipTests install
+
+      # 说明: 项目里有一部分测试依赖外部服务(邮件/FTP/SFTP/公网 HTTP), 无法在 CI 里直接跑;
+      # 这里只跑与外部服务无关的模块, 需要全量测试时, 去掉 -pl 参数并先准备好外部服务。
+      - name: Run unit tests
+        run: >
+          mvn -B -ntp -o test
+          -pl feilong-core,feilong-json,feilong-io,feilong-validator,feilong-security,feilong-formatter,feilong-xml,feilong-taglib
+
+      - name: Upload surefire reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: '**/target/surefire-reports/*.txt'
+          if-no-files-found: ignore
