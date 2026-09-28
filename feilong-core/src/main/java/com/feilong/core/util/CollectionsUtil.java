@@ -610,7 +610,8 @@ public final class CollectionsUtil{
      *            the type of object in the {@link Iterable}.
      * @param iterable
      *            the {@link Iterable} to get a value from, may be null
-     * @return 如果 <code>iterable</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 <code>iterable</code> 中的第一个元素
+     *         如果 <code>iterable</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws IndexOutOfBoundsException
      *             if the request is invalid
      * @since 3.0.6
@@ -641,7 +642,8 @@ public final class CollectionsUtil{
      *            the type of object in the {@link Iterable}.
      * @param iterable
      *            the {@link Iterable} to get a value from, may be null
-     * @return 如果 <code>iterable</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 <code>iterable</code> 中的最后一个元素
+     *         如果 <code>iterable</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws IndexOutOfBoundsException
      *             if the request is invalid
      * @since 3.5.0
@@ -663,7 +665,8 @@ public final class CollectionsUtil{
      *            the {@link Iterable} to get a value from, may be null
      * @param index
      *            the index to get
-     * @return 如果 <code>iterable</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 <code>iterable</code> 中第 <code>index</code> 个元素
+     *         如果 <code>iterable</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws IndexOutOfBoundsException
      *             if the index is invalid
      * @since 3.0.6

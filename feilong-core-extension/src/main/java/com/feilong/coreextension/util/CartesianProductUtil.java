@@ -83,7 +83,7 @@ public final class CartesianProductUtil{
      * @see <a href="http://baike.baidu.com/subview/348542/348542.htm#4_2">程序使用说明</a>
      * @see "com.google.common.collect.Sets#cartesianProduct(Set<? extends B>...)"
      * @see "com.google.common.collect.Lists#cartesianProduct(List<? extends B>...)"
-     * @see #cartesianProduct(Iterable)
+     * @see #cartesianProduct(Iterable...)
      * @since 1.7.2
      */
     @SafeVarargs
@@ -128,7 +128,7 @@ public final class CartesianProductUtil{
      * @see <a href="http://baike.baidu.com/subview/348542/348542.htm#4_2">程序使用说明</a>
      * @see "com.google.common.collect.Sets#cartesianProduct(Set<? extends B>...)"
      * @see "com.google.common.collect.Lists#cartesianProduct(List<? extends B>...)"
-     * @see #cartesianProduct(Iterable)
+     * @see #cartesianProduct(Iterable...)
      * @since 1.7.2
      */
     @SafeVarargs

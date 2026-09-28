@@ -192,7 +192,8 @@ public final class URIUtil{
      *
      * @param uri
      *            the uri
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 根据 <code>uri</code> 创建的 {@link URI}<br>
+     *         如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}
      * @throws URIParseException
      *             如果转换的时候有任何异常
@@ -218,7 +219,8 @@ public final class URIUtil{
      * @param charsetType
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
-     * @return 如果 <code>uriString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 根据编码后的 <code>uriString</code> 创建的 {@link URI}<br>
+     *         如果 <code>uriString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uriString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 Exception,抛出 {@link URIParseException}
      * @see URI#create(String)

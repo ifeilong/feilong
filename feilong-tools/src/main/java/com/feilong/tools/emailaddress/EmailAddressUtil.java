@@ -73,7 +73,7 @@ public final class EmailAddressUtil{
      * <h3>原理:</h3>
      * <blockquote>
      * <p>
-     * 先基于 <code>emailAddress</code>,解析获得 <code>domain</code>,然后转成小写,从 {@link #domainAndEmailProviderMap}中取到对应的value
+     * 先基于 <code>emailAddress</code>,解析获得 <code>domain</code>,然后转成小写,从 {@code #domainAndEmailProviderMap}中取到对应的value
      * </p>
      * </blockquote>
      * 

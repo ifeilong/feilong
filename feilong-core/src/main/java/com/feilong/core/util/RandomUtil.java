@@ -75,7 +75,8 @@ public final class RandomUtil{
      *
      * @param length
      *            设定所取出随机数的长度.
-     * @return 如果 <code>length</code> {@code <=0} ,抛出 {@link IllegalArgumentException}
+     * @return 返回 指定长度 <code>length</code> 的随机正整数
+     *         如果 <code>length</code> {@code <=0} ,抛出 {@link IllegalArgumentException}
      */
     public static long createRandomWithLength(int length){
         Validate.isTrue(length > 0, "input param [length] must >0,but is [%s]", length);
@@ -118,7 +119,8 @@ public final class RandomUtil{
      *            被抽取的字符串,比如{@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}
      * @param length
      *            指定字符串长度,比如 5
-     * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 从 <code>str</code> 中随机抽取字符组成的长度为 <code>length</code> 的字符串<br>
+     *         如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>str</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>length</code> {@code <=0}, 抛出 {@link IllegalArgumentException}
      * 
@@ -155,7 +157,8 @@ public final class RandomUtil{
      * 
      * @param length
      *            指定字符串长度,比如 5
-     * @return 如果 <code>length</code> {@code <=0}, 抛出 {@link IllegalArgumentException}
+     * @return 返回 从 {@link com.feilong.core.Alphabet#DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE} 中随机抽取字符组成的长度为 <code>length</code> 的字符串
+     *         如果 <code>length</code> {@code <=0}, 抛出 {@link IllegalArgumentException}
      * 
      * @see com.feilong.lib.lang3.RandomStringUtils#random(int, String)
      * @since 2.1.0

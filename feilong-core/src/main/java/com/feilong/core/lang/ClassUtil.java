@@ -425,7 +425,8 @@ public final class ClassUtil{
      * 
      * @param className
      *            包名+类名,比如 "com.feilong.core.FeiLongVersion"
-     * @return 如果 <code>className</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 指定类名 <code>className</code> 对应的 {@link Class} 对象<br>
+     *         如果 <code>className</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>className</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>className</code> 找不到相关类,那么抛出 {@link ReflectException}
      * @see java.lang.ClassLoader#loadClass(String)
