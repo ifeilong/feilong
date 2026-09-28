@@ -18,7 +18,6 @@ package com.feilong.context.invoker.jaxws;
 import com.feilong.context.beanproperty.JaxWsTypeBeanProperty;
 import com.feilong.context.invoker.AbstractResponseStringBuilder;
 import com.feilong.context.invoker.RequestArrayParamsBuilder;
-import com.feilong.context.invoker.ResponseStringBuilder;
 import com.feilong.net.cxf.JaxWsDynamicClientUtil;
 
 /**

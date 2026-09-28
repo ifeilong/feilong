@@ -19,12 +19,8 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static java.math.RoundingMode.HALF_UP;
 
 import java.math.RoundingMode;
-import java.text.ChoiceFormat;
 import java.text.DecimalFormat;
-import java.text.Format;
-import java.text.NumberFormat;
 
-import com.feilong.core.NumberPattern;
 import com.feilong.core.Validate;
 
 import lombok.AccessLevel;

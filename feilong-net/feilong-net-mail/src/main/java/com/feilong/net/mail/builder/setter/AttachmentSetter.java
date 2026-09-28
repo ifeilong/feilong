@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 
 import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;

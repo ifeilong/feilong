@@ -32,18 +32,13 @@ import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 import static com.feilong.lib.lang3.StringUtils.defaultString;
 import static java.util.Collections.emptyMap;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
-import com.feilong.core.util.SortUtil;
 import com.feilong.lib.lang3.ArrayUtils;
-import com.feilong.lib.lang3.StringUtils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

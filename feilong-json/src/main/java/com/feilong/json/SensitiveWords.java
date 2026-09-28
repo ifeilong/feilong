@@ -22,8 +22,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.feilong.json.processor.SensitiveWordsJsonValueProcessor;
-
 /**
  * 标识是否是敏感词.
  * 

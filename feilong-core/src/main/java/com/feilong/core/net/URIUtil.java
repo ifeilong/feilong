@@ -25,15 +25,10 @@ import static com.feilong.lib.lang3.StringUtils.INDEX_NOT_FOUND;
 import static com.feilong.lib.lang3.StringUtils.isEmpty;
 
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.Map;
 
-import com.feilong.core.CharsetType;
-import com.feilong.core.URIComponents;
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.StringUtils;

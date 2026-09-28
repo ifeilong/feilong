@@ -15,7 +15,6 @@
  */
 package com.feilong.core.text;
 
-import java.text.Format;
 import java.text.MessageFormat;
 
 import com.feilong.core.Validate;

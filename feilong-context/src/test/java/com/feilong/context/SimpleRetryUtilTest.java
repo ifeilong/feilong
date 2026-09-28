@@ -1,11 +1,9 @@
 package com.feilong.context;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
-import lombok.extern.slf4j.Slf4j;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +11,10 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+
+import org.junit.Test;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * SimpleRetryUtil 单元测试

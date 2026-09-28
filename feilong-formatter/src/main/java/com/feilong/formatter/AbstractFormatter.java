@@ -32,7 +32,6 @@ import java.util.Map;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.util.CollectionsUtil;
 import com.feilong.formatter.builder.FormatterBuilder;
 import com.feilong.formatter.builder.FormatterBuilderFactory;
 import com.feilong.formatter.entity.BeanFormatterConfig;

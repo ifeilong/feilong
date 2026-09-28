@@ -22,10 +22,6 @@ import javax.net.ssl.SSLHandshakeException;
 import com.feilong.lib.org.apache.http.HttpEntityEnclosingRequest;
 import com.feilong.lib.org.apache.http.HttpRequest;
 import com.feilong.lib.org.apache.http.NoHttpResponseException;
-import com.feilong.lib.org.apache.http.client.methods.HttpExecutionAware;
-import com.feilong.lib.org.apache.http.client.methods.HttpRequestWrapper;
-import com.feilong.lib.org.apache.http.client.protocol.HttpClientContext;
-import com.feilong.lib.org.apache.http.conn.routing.HttpRoute;
 import com.feilong.lib.org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 

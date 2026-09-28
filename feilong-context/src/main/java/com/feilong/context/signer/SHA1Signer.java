@@ -19,7 +19,6 @@ import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 
-import com.feilong.core.CharsetType;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.security.oneway.SHA1Util;
 

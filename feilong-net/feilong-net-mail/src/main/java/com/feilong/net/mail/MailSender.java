@@ -16,7 +16,6 @@
 package com.feilong.net.mail;
 
 import com.feilong.net.mail.entity.MailSendRequest;
-import com.feilong.net.mail.exception.MailException;
 
 /**
  * 邮件发送器.

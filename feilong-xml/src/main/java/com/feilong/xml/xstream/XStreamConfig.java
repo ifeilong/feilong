@@ -20,12 +20,7 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
-import com.thoughtworks.xstream.io.xml.CompactWriter;
-import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
-import com.thoughtworks.xstream.mapper.ClassAliasingMapper;
-import com.thoughtworks.xstream.mapper.DefaultImplementationsMapper;
 
 /**
  * XStream相关配置.

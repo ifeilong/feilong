@@ -16,7 +16,6 @@
 package com.feilong.context.invoker.http;
 
 import com.feilong.context.invoker.AbstractResponseStringBuilder;
-import com.feilong.context.invoker.ResponseStringBuilder;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpClientUtil;
 import com.feilong.net.http.HttpRequest;

@@ -23,7 +23,6 @@ import static com.feilong.core.util.MapUtil.newTreeMap;
 import static com.feilong.net.http.HttpLogHelper.autoLog;
 import static java.util.Collections.emptyMap;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 

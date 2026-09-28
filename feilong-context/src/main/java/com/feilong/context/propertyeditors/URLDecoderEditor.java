@@ -17,7 +17,6 @@ package com.feilong.context.propertyeditors;
 
 import java.beans.PropertyEditorSupport;
 
-import com.feilong.core.CharsetType;
 import com.feilong.core.net.URIUtil;
 
 /**

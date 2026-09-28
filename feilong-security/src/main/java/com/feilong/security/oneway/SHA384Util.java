@@ -15,9 +15,6 @@
  */
 package com.feilong.security.oneway;
 
-import com.feilong.core.CharsetType;
-import com.feilong.security.EncryptionException;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

@@ -38,11 +38,8 @@ import org.w3c.dom.NodeList;
 
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.lang3.StringUtils;
 import com.feilong.xml.xstream.XStreamConfig;
 import com.feilong.xml.xstream.XStreamConfigBuilder;
-import com.feilong.xml.xstream.converters.SimpleMapConverter;
-import com.thoughtworks.xstream.XStream;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

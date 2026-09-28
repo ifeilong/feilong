@@ -21,7 +21,6 @@ import static com.feilong.security.symmetric.LogBuilder.errorMessage;
 
 import java.security.Key;
 
-import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.codec.binary.Base64;

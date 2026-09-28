@@ -15,8 +15,6 @@
  */
 package com.feilong.core;
 
-import java.text.DecimalFormat;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

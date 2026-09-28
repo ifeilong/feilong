@@ -15,7 +15,6 @@
  */
 package com.feilong.formatter.entity;
 
-import com.feilong.formatter.FormatterColumn;
 import com.feilong.lib.lang3.builder.ToStringBuilder;
 import com.feilong.lib.lang3.builder.ToStringStyle;
 
