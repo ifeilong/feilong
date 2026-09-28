@@ -17,23 +17,23 @@ package com.feilong.zip;
 
 import static com.feilong.core.date.DateUtil.nowTimestamp;
 
+import java.io.File;
+
 import org.junit.Test;
 
+import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.core.lang.SystemUtil;
 
 public class CompressUnzipHandlerTest{
 
-    private final UnzipHandler unzipHandler  = new CompressUnzipHandler();
-
-    String                     unZipFilePath = SystemUtil.USER_HOME
-                    + "/workspace/feilong/feilong/feilong-office/feilong-office-zip/src/test/resources/for-unzip.zip";
+    private final UnzipHandler unzipHandler = new CompressUnzipHandler();
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void test(){
         unzipHandler.unzip(
-                        unZipFilePath, //需要被解压的zip文件
-                        SystemUtil.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "Compress"); // 解压到文件路径
+                           getUnZipFilePath(), //需要被解压的zip文件
+                           SystemUtil.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "Compress"); // 解压到文件路径
     }
 
     @Test(expected = NullPointerException.class)
@@ -54,16 +54,25 @@ public class CompressUnzipHandlerTest{
 
     @Test(expected = NullPointerException.class)
     public void testAntUnzipHandlerTestNull1(){
-        unzipHandler.unzip(unZipFilePath, null);
+        unzipHandler.unzip(getUnZipFilePath(), null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAntUnzipHandlerTestEmpty1(){
-        unzipHandler.unzip(unZipFilePath, "");
+        unzipHandler.unzip(getUnZipFilePath(), "");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAntUnzipHandlerTestBlank1(){
-        unzipHandler.unzip(unZipFilePath, " ");
+        unzipHandler.unzip(getUnZipFilePath(), " ");
+    }
+
+    //---------------------------------------------------------------
+    private String getUnZipFilePath(){
+        try{
+            return new File(ClassLoaderUtil.getResource("/for-unzip.zip").toURI()).getAbsolutePath();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }
