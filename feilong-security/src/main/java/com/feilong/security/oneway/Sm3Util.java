@@ -17,9 +17,6 @@ package com.feilong.security.oneway;
 
 import java.security.Security;
 
-import com.feilong.core.CharsetType;
-import com.feilong.security.EncryptionException;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -143,8 +140,8 @@ public final class Sm3Util{
      * <blockquote>
      * 
      * <pre class="code">
-     * Sm3Util.encode("") = "1AB21D8355CFA17F8E61194831E81A8F22BEC8C728FEFB747ED035EB5082AA2B"
-     * Sm3Util.encode("123456") = "207CF410532F92A47DEE245CE9B11FF71F578EBD763EB3BBEA44EBD043D018FB"
+     * Sm3Util.encodeUpperCase("") = "1AB21D8355CFA17F8E61194831E81A8F22BEC8C728FEFB747ED035EB5082AA2B"
+     * Sm3Util.encodeUpperCase("123456") = "207CF410532F92A47DEE245CE9B11FF71F578EBD763EB3BBEA44EBD043D018FB"
      * </pre>
      * 
      * </blockquote>
