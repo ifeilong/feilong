@@ -23,7 +23,6 @@ import java.awt.Desktop.Action;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.net.URI;
 
 import com.feilong.core.Validate;
 import com.feilong.core.net.URIUtil;

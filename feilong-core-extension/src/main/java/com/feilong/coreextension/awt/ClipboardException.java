@@ -15,8 +15,6 @@
  */
 package com.feilong.coreextension.awt;
 
-import java.awt.datatransfer.Clipboard;
-
 import com.feilong.core.DefaultRuntimeException;
 
 /**

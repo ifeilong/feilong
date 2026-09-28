@@ -15,7 +15,6 @@
  */
 package com.feilong.net.filetransfer.sftp;
 
-import java.net.SocketOptions;
 import java.util.Properties;
 
 import com.feilong.core.TimeInterval;

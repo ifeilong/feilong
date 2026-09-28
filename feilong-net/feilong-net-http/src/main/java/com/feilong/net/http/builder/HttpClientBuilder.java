@@ -25,7 +25,6 @@ import com.feilong.lib.lang3.StringUtils;
 import com.feilong.lib.org.apache.http.client.HttpClient;
 import com.feilong.lib.org.apache.http.client.config.RequestConfig;
 import com.feilong.lib.org.apache.http.conn.socket.LayeredConnectionSocketFactory;
-import com.feilong.lib.org.apache.http.impl.client.CloseableHttpClient;
 import com.feilong.lib.org.apache.http.impl.client.HttpClients;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.packer.SSLPacker;

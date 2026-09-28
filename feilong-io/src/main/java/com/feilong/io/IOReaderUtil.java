@@ -39,7 +39,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.io.IOUtils;

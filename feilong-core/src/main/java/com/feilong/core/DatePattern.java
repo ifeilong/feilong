@@ -15,9 +15,6 @@
  */
 package com.feilong.core;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

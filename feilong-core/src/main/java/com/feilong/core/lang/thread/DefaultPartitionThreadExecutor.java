@@ -23,7 +23,6 @@ import java.util.Map;
 
 import com.feilong.core.Validate;
 import com.feilong.core.lang.ThreadUtil;
-import com.feilong.core.util.CollectionsUtil;
 
 /**
  * 默认基于 {@link Thread} 数组的执行实现.

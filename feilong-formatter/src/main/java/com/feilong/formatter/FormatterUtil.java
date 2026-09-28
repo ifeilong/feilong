@@ -18,7 +18,6 @@ package com.feilong.formatter;
 import java.util.Map;
 
 import com.feilong.formatter.entity.BeanFormatterConfig;
-import com.feilong.lib.lang3.StringUtils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

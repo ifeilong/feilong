@@ -26,7 +26,6 @@ import static java.util.Calendar.SECOND;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.feilong.core.DatePattern;
 import com.feilong.core.Validate;
 
 import lombok.AccessLevel;
