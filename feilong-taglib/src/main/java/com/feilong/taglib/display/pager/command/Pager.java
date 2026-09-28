@@ -48,7 +48,7 @@ import java.util.List;
  * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link #getOriginatingAllPageNo()}</td>
- * <td>获得原始的总页数(不经过 {@link #maxShowPageNo}) 修饰过的,(通过这个值可以实现一些特殊的功能,一般用不到)</td>
+ * <td>获得原始的总页数(不经过 {@code maxShowPageNo}) 修饰过的,(通过这个值可以实现一些特殊的功能,一般用不到)</td>
  * </tr>
  * 
  * <tr valign="top">
@@ -136,7 +136,7 @@ public final class Pager<T> implements Serializable{
     //---------------------------------------------------------------
 
     /**
-     * 总页数({@link #maxShowPageNo} 参与装饰).
+     * 总页数({@code maxShowPageNo} 参与装饰).
      * 
      * <p>
      * 如果要获得原始的真正的总页数,请使用 {@link #getOriginatingAllPageNo()}
@@ -168,7 +168,7 @@ public final class Pager<T> implements Serializable{
     }
 
     /**
-     * 获得原始的总页数(不经过 {@link #maxShowPageNo})修饰过的.
+     * 获得原始的总页数(不经过 {@code maxShowPageNo})修饰过的.
      * 
      * <p>
      * 通过这个值可以实现一些特殊的功能,一般用不到

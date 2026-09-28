@@ -92,7 +92,7 @@ public final class ValidatorUtil{
      *            the email
      * @return 如果 <code>email</code> 是null或者empty,返回 false<br>
      *         如果 <code>email</code> 以. 结尾,返回 false<br>
-     *         如果 <code>email</code> 不匹配 {@link EmailValidator#EMAIL_PATTERN} ,返回 false<br>
+     *         如果 <code>email</code> 不匹配 {@code EmailValidator#EMAIL_PATTERN} ,返回 false<br>
      *         <code>email</code> 提取 user 部分值,如果不是有效的user,{@link EmailValidator#isValidUser(String)},返回 false<br>
      *         <code>email</code> 提取 domain 部分值,如果不是有效的domain {@link EmailValidator#isValidDomain(String)},返回 false<br>
      *         其余返回true<br>

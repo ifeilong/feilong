@@ -46,7 +46,7 @@ public class HttpConcatGlobalConfig{
     private boolean defaultCacheEnable;
 
     /**
-     * cache size 限制,仅当 {@link #DEFAULT_CACHEENABLE}开启生效, 当cache数达到 {@link #DEFAULT_CACHESIZELIMIT},将不会再缓存结果
+     * cache size 限制,仅当 {@code defaultCacheEnable}开启生效, 当cache数达到 {@code defaultCacheSizeLimit},将不会再缓存结果
      * 经过测试
      * <ul>
      * <li>300000 size cache占用 内存 :87.43KB(非精准)</li>
@@ -266,7 +266,7 @@ public class HttpConcatGlobalConfig{
     //---------------------------------------------------------------
 
     /**
-     * cache size 限制,仅当 {@link #defaultCacheEnable}开启生效, 当cache数达到 {@link #defaultCacheEnable},将不会再缓存结果
+     * cache size 限制,仅当 {@code defaultCacheEnable}开启生效, 当cache数达到 {@code defaultCacheEnable},将不会再缓存结果
      * 经过测试
      * <ul>
      * <li>300000 size cache占用 内存 :87.43KB(非精准)</li>
@@ -285,7 +285,7 @@ public class HttpConcatGlobalConfig{
     }
 
     /**
-     * cache size 限制,仅当 {@link #defaultCacheEnable}开启生效, 当cache数达到 {@link #defaultCacheEnable},将不会再缓存结果
+     * cache size 限制,仅当 {@code defaultCacheEnable}开启生效, 当cache数达到 {@code defaultCacheEnable},将不会再缓存结果
      * 经过测试
      * <ul>
      * <li>300000 size cache占用 内存 :87.43KB(非精准)</li>

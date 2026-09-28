@@ -91,7 +91,7 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
  * </blockquote>
  * 
  * <p>
- * 为了简化操作,{@link com.feilong.json.builder.JsonConfigBuilder#buildDefaultJavaToJsonConfig() feilong json} 内置了
+ * 为了简化操作,{@code feilong json} 内置了
  * <code>yyyy-MM-dd HH:mm:ss</code>,如果你想输出成其他的日期格式,也可以使用这个类来提前渲染:
  * </p>
  * 

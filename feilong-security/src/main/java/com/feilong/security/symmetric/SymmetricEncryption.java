@@ -388,7 +388,7 @@ public class SymmetricEncryption{
      *         如果 <code>original</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>original</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see StringUtil#getBytes(String, String)
-     * @see CipherUtil#encrypt(byte[], String, Key)
+     * @see CipherUtil#opBytes(byte[], int, String, Key)
      * @see ByteUtil#bytesToHexStringUpperCase(byte[])
      * @since 3.0.0
      */
@@ -415,7 +415,7 @@ public class SymmetricEncryption{
      *         如果 <code>original</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>original</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see StringUtil#getBytes(String, String)
-     * @see CipherUtil#encrypt(byte[], String, Key)
+     * @see CipherUtil#opBytes(byte[], int, String, Key)
      * @see ByteUtil#bytesToHexStringUpperCase(byte[])
      * 
      * @since 1.11.0 change original type to String
@@ -448,7 +448,7 @@ public class SymmetricEncryption{
      * @return 解密 String明文输出<br>
      *         如果 <code>hexString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>hexString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see CipherUtil#encrypt(byte[], String, Key)
+     * @see CipherUtil#opBytes(byte[], int, String, Key)
      * @since 3.0.0
      */
     public String decryptHex(String hexString){
@@ -472,7 +472,7 @@ public class SymmetricEncryption{
      *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>hexString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>hexString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see CipherUtil#encrypt(byte[], String, Key)
+     * @see CipherUtil#opBytes(byte[], int, String, Key)
      */
     public String decryptHex(String hexString,String charsetName){
         Validate.notBlank(charsetName, "charsetName can't be blank!");

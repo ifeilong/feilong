@@ -38,7 +38,7 @@ public final class VersionFormatter{
      *            the version
      * @return 如果 version 是null或者是 empty,那么直接返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 version 有值,判断 {@link HttpConcatGlobalConfigBuilder#GLOBAL_CONFIG} versionEncode 配置, 如果没有配置, 那么直接返回 version参数<br>
-     *         如果有值, 那么将调用 {@link VersionEncodeUtil#encode(String, String)}<br>
+     *         如果有值, 那么将调用 {@code VersionEncodeUtil#encode(String, String)}<br>
      * @see com.feilong.taglib.display.httpconcat.handler.VersionEncodeUtil#encode(String, String)
      */
     public static String format(String version){

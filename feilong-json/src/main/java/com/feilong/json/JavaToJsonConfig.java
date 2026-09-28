@@ -37,7 +37,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 是否 mask 默认的敏感字符.
      * 
      * <p>
-     * 默认是 true, 表示会将默认的敏感字符({@link JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES}),格式化的时候,输出成 *******代替
+     * 默认是 true, 表示会将默认的敏感字符({@code JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES}),格式化的时候,输出成 *******代替
      * </p>
      *
      * @see com.feilong.json.processor.SensitiveWordsJsonValueProcessor
@@ -698,7 +698,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 是否 mask 默认的敏感字符.
      * 
      * <p>
-     * 默认是 true, 表示会将默认的敏感字符({@link JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES}),格式化的时候,输出成 *******代替
+     * 默认是 true, 表示会将默认的敏感字符({@code JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES}),格式化的时候,输出成 *******代替
      * </p>
      *
      * @return the isMaskDefaultSensitiveWords
@@ -714,7 +714,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 是否 mask 默认的敏感字符.
      * 
      * <p>
-     * 默认是 true, 表示会将默认的敏感字符({@link JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES}),格式化的时候,输出成 *******代替
+     * 默认是 true, 表示会将默认的敏感字符({@code JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES}),格式化的时候,输出成 *******代替
      * </p>
      *
      * @param isMaskDefaultSensitiveWords
