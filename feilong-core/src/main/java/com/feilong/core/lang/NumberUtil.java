@@ -796,13 +796,13 @@ public final class NumberUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * NumberUtil.getSubtractValue(null, 2, 2)                 =   NullPointerException
+     * NumberUtil.getSubtractValueWithScale(null, 2, 2)                 =   NullPointerException
      * 
-     * NumberUtil.getSubtractValue(0, 2, 0)                 =   -2
-     * NumberUtil.getSubtractValue(0, 2, 2)                 =   -2.00
+     * NumberUtil.getSubtractValueWithScale(0, 2, 0)                 =   -2
+     * NumberUtil.getSubtractValueWithScale(0, 2, 2)                 =   -2.00
      * 
-     * NumberUtil.getSubtractValue(0,null,0)                  =   0
-     * NumberUtil.getSubtractValue(0,null,2)                  =   0.00
+     * NumberUtil.getSubtractValueWithScale(0,null,0)                  =   0
+     * NumberUtil.getSubtractValueWithScale(0,null,2)                  =   0.00
      * </pre>
      * 
      * </blockquote>

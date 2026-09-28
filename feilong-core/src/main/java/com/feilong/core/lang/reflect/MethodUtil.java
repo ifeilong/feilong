@@ -84,7 +84,6 @@ import lombok.NoArgsConstructor;
  * <li>{@link MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)}</li>
  * <li>{@link MethodUtils#getMethodsListWithAnnotation(Class, Class)} 获得一个类中,指定泛型的方法(集合形式),比较实用</li>
  * <li>{@link MethodUtils#getMethodsWithAnnotation(Class, Class)} 获得一个类中,指定泛型的方法(数组形式),比较实用</li>
- * <li>{@link MethodUtils#getOverrideHierarchy(java.lang.reflect.Method, ClassUtils.Interfaces)}</li>
  * </ol>
  * 
  * </blockquote>

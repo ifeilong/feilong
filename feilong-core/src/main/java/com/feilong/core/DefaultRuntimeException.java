@@ -164,7 +164,7 @@ public class DefaultRuntimeException extends RuntimeException{
     private static final long serialVersionUID = -1699987643831455524L;
 
     /**
-     * Instantiates a new abstract runtime exception.
+     * Instantiates a new default runtime exception.
      *
      * @param message
      *            the message
@@ -174,7 +174,7 @@ public class DefaultRuntimeException extends RuntimeException{
     }
 
     /**
-     * Instantiates a new abstract runtime exception.
+     * Instantiates a new default runtime exception.
      * 
      * <h3>示例:</h3>
      * 
@@ -204,7 +204,7 @@ public class DefaultRuntimeException extends RuntimeException{
     //---------------------------------------------------------------
 
     /**
-     * Instantiates a new abstract runtime exception.
+     * Instantiates a new default runtime exception.
      *
      * @param message
      *            the message
@@ -216,7 +216,7 @@ public class DefaultRuntimeException extends RuntimeException{
     }
 
     /**
-     * Instantiates a new abstract runtime exception.
+     * Instantiates a new default runtime exception.
      *
      * @param cause
      *            the cause

@@ -265,7 +265,7 @@ public final class URLUtil{
      * <pre class="code">
      * 
      * URL url = new URL("http://www.exiaoshuo.com/jinyiyexing/");
-     * URIUtil.getUnionUrl(url, "/jinyiyexing/1173348/")    =  http://www.exiaoshuo.com/jinyiyexing/1173348/
+     * URLUtil.getUnionUrl(url, "/jinyiyexing/1173348/")    =  http://www.exiaoshuo.com/jinyiyexing/1173348/
      * </pre>
      * 
      * </blockquote>
@@ -302,20 +302,20 @@ public final class URLUtil{
      * 
      * <pre class="code">
      * 
-     * URIUtil.getUnionUrl("http://www.feilong.com/", "/1173348/")    =  http://www.feilong.com/1173348/
-     * URIUtil.getUnionUrl("http://www.feilong.com/", "1173348/")    =  http://www.feilong.com/1173348/
-     * URIUtil.getUnionUrl("http://www.feilong.com/", "/1173348")    =  http://www.feilong.com/1173348
-     * URIUtil.getUnionUrl("http://www.feilong.com/", "1173348")    =  http://www.feilong.com/1173348
+     * URLUtil.getUnionUrl("http://www.feilong.com/", "/1173348/")    =  http://www.feilong.com/1173348/
+     * URLUtil.getUnionUrl("http://www.feilong.com/", "1173348/")    =  http://www.feilong.com/1173348/
+     * URLUtil.getUnionUrl("http://www.feilong.com/", "/1173348")    =  http://www.feilong.com/1173348
+     * URLUtil.getUnionUrl("http://www.feilong.com/", "1173348")    =  http://www.feilong.com/1173348
      * 
-     * URIUtil.getUnionUrl("http://www.feilong.com", "/1173348/")    =  http://www.feilong.com/1173348/
-     * URIUtil.getUnionUrl("http://www.feilong.com", "/1173348")    =  http://www.feilong.com/1173348
-     * URIUtil.getUnionUrl("http://www.feilong.com", "1173348/")    =  http://www.feilong.com/1173348/
-     * URIUtil.getUnionUrl("http://www.feilong.com", "1173348")    =  http://www.feilong.com/1173348
+     * URLUtil.getUnionUrl("http://www.feilong.com", "/1173348/")    =  http://www.feilong.com/1173348/
+     * URLUtil.getUnionUrl("http://www.feilong.com", "/1173348")    =  http://www.feilong.com/1173348
+     * URLUtil.getUnionUrl("http://www.feilong.com", "1173348/")    =  http://www.feilong.com/1173348/
+     * URLUtil.getUnionUrl("http://www.feilong.com", "1173348")    =  http://www.feilong.com/1173348
      * 
-     * URIUtil.getUnionUrl("http://www.feilong.com/", "storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
-     * URIUtil.getUnionUrl("http://www.feilong.com/", "/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
-     * URIUtil.getUnionUrl("http://www.feilong.com", "/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
-     * URIUtil.getUnionUrl("http://www.feilong.com", "storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
+     * URLUtil.getUnionUrl("http://www.feilong.com/", "storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
+     * URLUtil.getUnionUrl("http://www.feilong.com/", "/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
+     * URLUtil.getUnionUrl("http://www.feilong.com", "/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
+     * URLUtil.getUnionUrl("http://www.feilong.com", "storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
      * </pre>
      * 
      * @apiNote 底层调用的是 {@link java.net.URL#URL(URL, String)}
@@ -527,15 +527,15 @@ public final class URLUtil{
      * 
      * <pre class="code">
      * 
-     * ifHttpChangeToHttps("") = ""
-     * ifHttpChangeToHttps(" ") = " "
-     * ifHttpChangeToHttps(null) = null
-     * ifHttpChangeToHttps("http://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
-     * ifHttpChangeToHttps(" http://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
-     * ifHttpChangeToHttps("https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
-     * ifHttpChangeToHttps("https://aod.baidu.com/storay41w-aacv2-48K.m4a?http") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a?http"
-     * ifHttpChangeToHttps(" https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
-     * ifHttpChangeToHttps("//aod.baidu.com/storay41w-aacv2-48K.m4a") = "//aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * transformHttpToHttps("") = ""
+     * transformHttpToHttps(" ") = " "
+     * transformHttpToHttps(null) = null
+     * transformHttpToHttps("http://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * transformHttpToHttps(" http://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * transformHttpToHttps("https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * transformHttpToHttps("https://aod.baidu.com/storay41w-aacv2-48K.m4a?http") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a?http"
+     * transformHttpToHttps(" https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * transformHttpToHttps("//aod.baidu.com/storay41w-aacv2-48K.m4a") = "//aod.baidu.com/storay41w-aacv2-48K.m4a"
      * 
      * </pre>
      * 
@@ -565,16 +565,16 @@ public final class URLUtil{
      * 
      * <pre class="code">
      * 
-     * ifHttpChangeToHttps("") = ""
-     * ifHttpChangeToHttps(" ") = " "
-     * ifHttpChangeToHttps(null) = null
+     * transformHttpsToHttp("") = ""
+     * transformHttpsToHttp(" ") = " "
+     * transformHttpsToHttp(null) = null
      * 
-     * ifHttpChangeToHttps("https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
-     * ifHttpChangeToHttps(" https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
-     * ifHttpChangeToHttps("http://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
-     * ifHttpChangeToHttps("http://aod.baidu.com/storay41w-aacv2-48K.m4a?https") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a?https"
-     * ifHttpChangeToHttps(" https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
-     * ifHttpChangeToHttps("//aod.baidu.com/storay41w-aacv2-48K.m4a") = "//aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * transformHttpsToHttp("https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * transformHttpsToHttp(" https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * transformHttpsToHttp("http://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * transformHttpsToHttp("http://aod.baidu.com/storay41w-aacv2-48K.m4a?https") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a?https"
+     * transformHttpsToHttp(" https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * transformHttpsToHttp("//aod.baidu.com/storay41w-aacv2-48K.m4a") = "//aod.baidu.com/storay41w-aacv2-48K.m4a"
      * 
      * </pre>
      * 

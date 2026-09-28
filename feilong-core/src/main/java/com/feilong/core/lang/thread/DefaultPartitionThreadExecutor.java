@@ -186,7 +186,7 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
      * <h3>格式:</h3>
      * 
      * <blockquote>
-     * "Thread-partitionRunnableBuilder 实现类名称-{@link com.feilong.core.lang.PartitionThreadEntity#getBatchNumber() batchNumber}"
+     * "Thread-partitionRunnableBuilder 实现类名称-{@link com.feilong.core.lang.thread.PartitionThreadEntity#getBatchNumber() batchNumber}"
      * </blockquote>
      * 
      * <h3>作用:</h3>

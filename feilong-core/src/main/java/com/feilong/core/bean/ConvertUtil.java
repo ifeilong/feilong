@@ -667,12 +667,12 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * ConvertUtil.Long(null,null)               = null
-     * ConvertUtil.Long(null,1L)                  = 1L
-     * ConvertUtil.Long("aaaa",1L)                = 1L
-     * ConvertUtil.Long(8L,1L)                    = 8L
-     * ConvertUtil.Long("8",1L)                   = 8L
-     * ConvertUtil.Long(new BigDecimal("8"),1L)   = 8L
+     * ConvertUtil.toLong(null,null)               = null
+     * ConvertUtil.toLong(null,1L)                  = 1L
+     * ConvertUtil.toLong("aaaa",1L)                = 1L
+     * ConvertUtil.toLong(8L,1L)                    = 8L
+     * ConvertUtil.toLong("8",1L)                   = 8L
+     * ConvertUtil.toLong(new BigDecimal("8"),1L)   = 8L
      * ConvertUtil.toLong(new String[] { "1", "2", "3" }, 8L) = 1L
      * ConvertUtil.toLong(toList("1", "2"), 8L) = 1L
      * </pre>
@@ -724,7 +724,7 @@ public final class ConvertUtil{
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 <code>defaultValue</code>
-     * @see com.feilong.lib.beanutils.converters.IntegerConverter
+     * @see com.feilong.lib.beanutils.converters.LongConverter
      * @since 3.3.2
      * @apiNote
      *          <p>

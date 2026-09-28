@@ -1638,7 +1638,7 @@ public final class CollectionsUtil{
      *            如果是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
      * @return 如果 <code>propertyName</code> 是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
      *         如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
-     *         否则调用 {@link GroupUtil#group(Iterable, String)},将map 的values转成list返回<br>
+     *         否则调用 {@link GroupUtil#groupOne(Iterable, String)},将map 的values转成list返回<br>
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
      * @see "org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)"

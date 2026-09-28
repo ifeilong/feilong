@@ -1244,7 +1244,7 @@ public final class StringUtil{
      *     return 0;
      * }
      * 
-     * boolean contains = StringUtil.tokenizeToStringArrayContains(redMultiBookIds, entryId);
+     * boolean contains = StringUtil.tokenizeToArrayContains(redMultiBookIds, entryId);
      * return contains ? 1 : 0;
      * </pre>
      * 

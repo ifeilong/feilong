@@ -106,7 +106,7 @@ public final class ResourceBundleUtil{
      * 
      * <pre class="code">
      * ResourceBundle resourceBundle = ResourceBundle.getBundle("messages/feilong-core-test");
-     * ResourceBundleUtil.getValueWithArguments(resourceBundle, "test.arguments", "feilong", "18");
+     * ResourceBundleUtil.getValue(resourceBundle, "test.arguments", "feilong", "18");
      * </pre>
      * 
      * <b>返回:</b>
@@ -731,13 +731,13 @@ public final class ResourceBundleUtil{
      *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
      *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param beanClass
-     *            the alias bean class
+     *            the bean class
      * @return the t
      * @throws NullPointerException
      *             如果 <code>baseName</code>或者 <code>beanClass</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>baseName</code>是空
-     * @see BeanUtil#populateAliasBean(Object, Map)
+     * @see BeanUtil#populate(Object, Map)
      * @since 4.0.1
      */
     public static <T> T toBean(String baseName,Class<T> beanClass){
