@@ -161,7 +161,7 @@ public abstract class RequestLogSwitch implements Serializable{
      * <li>{@link #showMethod} 提交方法</li>
      * <li>{@link #showParams} 参数</li>
      * <li>{@link #setShowErrors} 错误</li>
-     * <li>{@link #setShowIdentity(boolean)}设置 显示IDENTITY(包含ip以及UA)..</li>
+     * <li>{@link #setShowIdentity(boolean)} 设置 显示IDENTITY(包含ip以及UA)..</li>
      * <li>{@link #setShowForwardInfos} 设置 显示和forward相关.</li>
      * <li>{@link #setShowIncludeInfos} 设置 显示和include相关信息.</li>
      * </ul>

@@ -166,7 +166,7 @@ import lombok.NoArgsConstructor;
  * </p>
  * 
  * <p>
- * 使用场景,如 {@link com.feilong.servlet.http.RequestLogBuilder#build()}
+ * 使用场景,如 <code>RequestLogBuilder#build()</code>
  * </p>
  * </blockquote>
  * 
@@ -184,7 +184,7 @@ import lombok.NoArgsConstructor;
  * </p>
  * 
  * <p>
- * <code>CookieUtil.deleteCookie(request, "shopName")</code>
+ * <code>CookieUtil.deleteCookie("shopName", response)</code>
  * </p>
  * 
  * <p>
@@ -196,7 +196,7 @@ import lombok.NoArgsConstructor;
  * <pre class="code">
  * CookieEntity cookieEntity = new CookieEntity("shopName", "feilong");
  * cookieEntity.setPath("/member/account");
- * CookieUtil.deleteCookie(request, "shopName");
+ * CookieUtil.deleteCookie(cookieEntity, response);
  * </pre>
  * 
  * </blockquote>

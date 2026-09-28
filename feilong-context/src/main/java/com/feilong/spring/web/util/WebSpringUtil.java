@@ -43,14 +43,14 @@ import lombok.NoArgsConstructor;
  * </p>
  * 
  * <h3>{@link WebApplicationContextUtils#getWebApplicationContext(ServletContext)}VS
- * {@link "RequestContextUtils#getWebApplicationContext(javax.servlet.ServletRequest)"}:</h3>
+ * <code>RequestContextUtils#getWebApplicationContext(javax.servlet.ServletRequest)</code>:</h3>
  * <blockquote>
  * 
  * <p style="color:red">
  * 注意: {@link WebApplicationContext#ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE} 存放的是spring ApplicationContext而非 springmvc ApplicationContext
  * </p>
  * <p>
- * {@link "RequestContextUtils#getWebApplicationContext(javax.servlet.ServletRequest)"}可以取到 springmvc ApplicationContext,他的原理是,每次
+ * <code>RequestContextUtils#getWebApplicationContext(javax.servlet.ServletRequest)</code>可以取到 springmvc ApplicationContext,他的原理是,每次
  * 
  * {@link DispatcherServlet#doService(HttpServletRequest, HttpServletResponse)} 都会往request里面设置 key为
  * {@link DispatcherServlet#WEB_APPLICATION_CONTEXT_ATTRIBUTE} 的属性,而此时的值 WebApplicationContext是通过
@@ -124,7 +124,7 @@ public final class WebSpringUtil{
      * 普通类获得spring 注入的类方法.
      * 
      * <p>
-     * 此方法底层调用的是 {@link "RequestContextUtils#getWebApplicationContext(ServletRequest, ServletContext)"} ,会从spingmvc 以及spring
+     * 此方法底层调用的是 <code>RequestContextUtils#getWebApplicationContext(ServletRequest, ServletContext)</code> ,会从spingmvc 以及spring
      * ApplicationContext 查找bean
      * </p>
      * 
@@ -149,7 +149,7 @@ public final class WebSpringUtil{
      * Gets the bean.
      * 
      * <p>
-     * 此方法底层调用的是 {@link "RequestContextUtils#getWebApplicationContext(ServletRequest,ServletContext)"} ,会从spingmvc 以及spring
+     * 此方法底层调用的是 <code>RequestContextUtils#getWebApplicationContext(ServletRequest,ServletContext)</code> ,会从spingmvc 以及spring
      * ApplicationContext 查找bean
      * </p>
      * 

@@ -26,19 +26,23 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * // <!-- sftp scope="prototype" -->
- * // <bean id="sftpFileTransfer" class="com.feilong.net.filetransfer.sftp.SFTPFileTransfer" scope="prototype">
- * // <property name="sftpFileTransferConfig">
- * // <bean class="com.feilong.net.filetransfer.sftp.SFTPFileTransferConfig">
- * // <property name="hostName" value="#{p_sftp['fileTransfer.sftp.hostName']}" />
- * // <property name="userName" value="#{p_sftp['fileTransfer.sftp.userName']}" />
- * // <property name="password">
- * // <value><![CDATA[#{p_sftp['fileTransfer.sftp.password']}]]></value>
- * // </property>
- * // <property name="port" value="#{p_sftp['fileTransfer.sftp.port']}" />
- * // </bean>
- * // </property>
- * // </bean>
+ * 用于构造 {@link SFTPFileTransferConfig} 的相关 bean definition.
+ * 
+ * <pre class="code">
+ * // &lt;!-- sftp scope="prototype" --&gt;
+ * // &lt;bean id="sftpFileTransfer" class="com.feilong.net.filetransfer.sftp.SFTPFileTransfer" scope="prototype"&gt;
+ * // &lt;property name="sftpFileTransferConfig"&gt;
+ * // &lt;bean class="com.feilong.net.filetransfer.sftp.SFTPFileTransferConfig"&gt;
+ * // &lt;property name="hostName" value="#{p_sftp['fileTransfer.sftp.hostName']}" /&gt;
+ * // &lt;property name="userName" value="#{p_sftp['fileTransfer.sftp.userName']}" /&gt;
+ * // &lt;property name="password"&gt;
+ * // &lt;value&gt;&lt;![CDATA[#{p_sftp['fileTransfer.sftp.password']}]]&gt;&lt;/value&gt;
+ * // &lt;/property&gt;
+ * // &lt;property name="port" value="#{p_sftp['fileTransfer.sftp.port']}" /&gt;
+ * // &lt;/bean&gt;
+ * // &lt;/property&gt;
+ * // &lt;/bean&gt;
+ * </pre>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.8

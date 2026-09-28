@@ -31,9 +31,6 @@ import com.feilong.net.bot.wxwork.DefaultWxworkBot;
    }
  * 
  * </pre>
- * 
- * 
- * </blockquote>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * 

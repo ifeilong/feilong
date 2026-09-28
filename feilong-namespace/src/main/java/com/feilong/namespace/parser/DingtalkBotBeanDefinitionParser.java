@@ -27,13 +27,10 @@ import com.feilong.net.bot.dingtalk.DefaultDingTalkBot;
  * 
  * <pre class="code">
  * {@code 
-    <feilong:wxworkBot id="wxworkBot" key="*****"/>
+    <feilong:dingtalkBot id="dingtalkBot" key="*****"/>
    }
  * 
  * </pre>
- * 
- * 
- * </blockquote>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * 

@@ -19,7 +19,7 @@ package com.feilong.context.log;
  * 耗时时间 标识接口.
  * 
  * <p>
- * 通常和 {@link "com.feilong.spring.aop.log.UseTimeLogableAspect"} 搭配使用,用来输出执行方法耗时时间
+ * 通常和 <code>com.feilong.spring.aop.log.UseTimeLogableAspect</code> 搭配使用,用来输出执行方法耗时时间
  * </p>
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>

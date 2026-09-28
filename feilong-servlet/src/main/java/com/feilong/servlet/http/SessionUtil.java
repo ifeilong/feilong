@@ -163,7 +163,7 @@ public final class SessionUtil{
      *            current HTTP request
      * @param attributeName
      *            the name of the session attribute
-     * @return the value of the session attribute, or {@code null} if not found <br>
+     * @return the value of the session attribute <br>
      *         如果 <code>request</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws IllegalStateException
      *             if the session attribute could not be found

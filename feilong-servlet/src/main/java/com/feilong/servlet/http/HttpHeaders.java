@@ -33,14 +33,14 @@ import lombok.NoArgsConstructor;
  * both HTTP/1.1 and HTTP/2 headers are <span style="color:red">case-insensitive</span>.
  * 
  * <p>
- * According to {@link <a href="https://tools.ietf.org/html/rfc7230#section-3.2">RFC 7230 (HTTP/1.1)</a>}:
+ * According to <a href="https://tools.ietf.org/html/rfc7230#section-3.2">RFC 7230 (HTTP/1.1)</a>:
  * </p>
  * 
  * Each header field consists of a case-insensitive field name followed by a colon (":"), optional leading whitespace, the field value, and
  * optional trailing whitespace.
  * 
  * <p>
- * Also, {@link <a href="https://tools.ietf.org/html/rfc7540#section-8.1.2">RFC 7540 (HTTP/2)</a>}:
+ * Also, <a href="https://tools.ietf.org/html/rfc7540#section-8.1.2">RFC 7540 (HTTP/2)</a>:
  * </p>
  * Just as in HTTP/1.x, header field names are strings of ASCII characters that are compared in a case-insensitive fashion.
  * 

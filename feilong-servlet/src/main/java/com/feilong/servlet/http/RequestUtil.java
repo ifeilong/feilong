@@ -784,7 +784,7 @@ public final class RequestUtil{
      * @return 如:http://localhost:8080/feilong/requestdemo.jsp?id=2
      * @since 3.1.1
      * @since 4.0.6 修改内部实现逻辑,原先直接使用request.getQueryString() 拼接,现在改成兼容非get类型,从参数中提取, see
-     *        {@link <a href="https://github.com/ifeilong/feilong/issues/76">post 请求 显示的full url不全 #76</a>}
+     *        <a href="https://github.com/ifeilong/feilong/issues/76">post 请求 显示的full url不全 #76</a>
      */
     public static String getRequestFullURL(HttpServletRequest request){
         StringBuilder sb = new StringBuilder(getRequestURL(request));
@@ -807,7 +807,7 @@ public final class RequestUtil{
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      * @return 如:http://localhost:8080/feilong/requestdemo.jsp?id=2
      * @since 4.0.6 修改内部实现逻辑,原先直接使用request.getQueryString() 拼接,现在改成兼容非get类型,从参数中提取, see
-     *        {@link <a href="https://github.com/ifeilong/feilong/issues/76">post 请求 显示的full url不全 #76</a>}
+     *        <a href="https://github.com/ifeilong/feilong/issues/76">post 请求 显示的full url不全 #76</a>
      * @deprecated since 4.0.6这个不需要charsetType,直接使用 {@link #getRequestFullURL(HttpServletRequest)} 就好
      */
     @Deprecated
@@ -827,7 +827,7 @@ public final class RequestUtil{
      *            the request
      * @return 如果 <code>request</code> 是null,返回 ""<br>
      *         如果request是get 请求,那么直接返回 request.getQueryString()<br>
-     *         如果request不是get,那么提取参数组装成字符串返回</li>
+     *         如果request不是get,那么提取参数组装成字符串返回
      * @see javax.servlet.http.HttpServletRequest#getMethod()
      * @since 4.0.6
      */
@@ -875,7 +875,7 @@ public final class RequestUtil{
      *            字符串
      * @param charsetType
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量
-     * @return 如果 <code>str</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>str</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see "org.apache.commons.codec.net.URLCodec#encode(String, String)"
      * @see "org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport"
      * @see "org.apache.catalina.filters.SetCharacterEncodingFilter"
@@ -1410,8 +1410,8 @@ public final class RequestUtil{
      * 判断一个请求是否是 <b>微信小程序</b> 的请求.
      * 
      * <p>
-     * <span style="color:red">注意:此方法目前android weixin userAgent 会带特殊字符,IOS环境没有,{@link <a href=
-     * "https://developers.weixin.qq.com/community/develop/doc/000488d0378078a7f926fd36456c00?_at=1581959544792">ios微信web-view的user-agent缺失miniprogram</a>}
+     * <span style="color:red">注意:此方法目前android weixin userAgent 会带特殊字符,IOS环境没有,<a href=
+     * "https://developers.weixin.qq.com/community/develop/doc/000488d0378078a7f926fd36456c00?_at=1581959544792">ios微信web-view的user-agent缺失miniprogram</a>
      * 请谨慎使用,为了将来扩展,暂时保留此方法</span>
      * </p>
      * 
@@ -1449,8 +1449,8 @@ public final class RequestUtil{
      * 判断一个请求 不是 <b>微信小程序</b> 的请求.
      * 
      * <p>
-     * <span style="color:red">注意:此方法目前android weixin userAgent 会带特殊字符,IOS环境没有,{@link <a href=
-     * "https://developers.weixin.qq.com/community/develop/doc/000488d0378078a7f926fd36456c00?_at=1581959544792">ios微信web-view的user-agent缺失miniprogram</a>}
+     * <span style="color:red">注意:此方法目前android weixin userAgent 会带特殊字符,IOS环境没有,<a href=
+     * "https://developers.weixin.qq.com/community/develop/doc/000488d0378078a7f926fd36456c00?_at=1581959544792">ios微信web-view的user-agent缺失miniprogram</a>
      * 请谨慎使用,为了将来扩展,暂时保留此方法</span>
      * </p>
      * 
