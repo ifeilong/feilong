@@ -257,7 +257,7 @@
 		<v.maven-shade-plugin>3.2.0</v.maven-shade-plugin>
 
 		<!-- https://github.com/mojohaus/native2ascii-maven-plugin/wiki -->
-		<v.native2ascii-maven-plugin>2.1.0</v.native2ascii-maven-plugin>
+		<v.native2ascii-maven-plugin>2.1.1</v.native2ascii-maven-plugin>
 
 		<v.site-maven-plugin>0.12</v.site-maven-plugin>
 		
