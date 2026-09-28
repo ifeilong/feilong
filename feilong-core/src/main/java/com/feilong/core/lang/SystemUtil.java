@@ -39,20 +39,25 @@ import lombok.NoArgsConstructor;
  * <th align="left">字段</th>
  * <th align="left">说明</th>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>file.encoding <br>
  * {@link "org.apache.commons.lang3.SystemUtils#FILE_ENCODING"}</td>
  * <td>utf-8</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>file.separator <br>
  * {@link "org.apache.commons.lang3.SystemUtils#FILE_SEPARATOR"}</td>
  * <td>\\</td>
+ * </tr>
+ * 
  * <tr valign="top">
  * <td>java.home <br>
  * {@link "org.apache.commons.lang3.SystemUtils#JAVA_HOME"}</td>
  * <td>D:\\Program Files\\Java\\jdk1.6.0_37\\jre</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>java.io.tmpdir <br>
  * {@link "org.apache.commons.lang3.SystemUtils#JAVA_IO_TMPDIR"}</td>

@@ -19,8 +19,6 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.containsTrimAndIgnoreCase;
 
-import com.feilong.core.lang.StringUtil;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -142,23 +140,23 @@ public final class Slf4jUtil{
      * 
      * <pre class="code">
      * 
-     * Slf4jUtil.isEnabledDebug("debug") = true;
-     * Slf4jUtil.isEnabledDebug("debug ") = true;
-     * Slf4jUtil.isEnabledDebug(" debug ") = true;
-     * Slf4jUtil.isEnabledDebug(" DEBUG ") = true;
-     * Slf4jUtil.isEnabledDebug(" track ") = true;
-     * Slf4jUtil.isEnabledDebug(" TRACK ") = true;
-     * Slf4jUtil.isEnabledDebug("TRACK") = true;
+     * Slf4jUtil.isEnabledInfo("debug") = true;
+     * Slf4jUtil.isEnabledInfo("debug ") = true;
+     * Slf4jUtil.isEnabledInfo(" debug ") = true;
+     * Slf4jUtil.isEnabledInfo(" DEBUG ") = true;
+     * Slf4jUtil.isEnabledInfo(" track ") = true;
+     * Slf4jUtil.isEnabledInfo(" TRACK ") = true;
+     * Slf4jUtil.isEnabledInfo("TRACK") = true;
      * 
-     * Slf4jUtil.isEnabledDebug("info") = true;
-     * Slf4jUtil.isEnabledDebug("INFO") = true;
+     * Slf4jUtil.isEnabledInfo("info") = true;
+     * Slf4jUtil.isEnabledInfo("INFO") = true;
      * 
-     * Slf4jUtil.isEnabledDebug("error") = false;
-     * Slf4jUtil.isEnabledDebug("ERROR") = false;
+     * Slf4jUtil.isEnabledInfo("error") = false;
+     * Slf4jUtil.isEnabledInfo("ERROR") = false;
      * 
-     * Slf4jUtil.isEnabledDebug("track1111") = false;
-     * Slf4jUtil.isEnabledDebug("debug1111") = false;
-     * Slf4jUtil.isEnabledDebug("info1111") = false;
+     * Slf4jUtil.isEnabledInfo("track1111") = false;
+     * Slf4jUtil.isEnabledInfo("debug1111") = false;
+     * Slf4jUtil.isEnabledInfo("info1111") = false;
      * 
      * </pre>
      * 
