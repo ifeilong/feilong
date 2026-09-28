@@ -233,7 +233,7 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
      * 获得所有页码的连接.
      * 
      * <p>
-     * 注:(key={@link #DEFAULT_TEMPLATE_PAGE_NO} 为模板链接,可用户前端解析 {@link PagerVMParam#getHrefUrlTemplate()}.
+     * 注:(key={@link PagerConstants#DEFAULT_TEMPLATE_PAGE_NO} 为模板链接,可用户前端解析 {@link PagerVMParam#getPagerUrlTemplate()}.
      * </p>
      *
      * @param <T>
