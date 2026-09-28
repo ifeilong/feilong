@@ -563,7 +563,7 @@ public final class ParamUtil{
      * map.put("totalActual", <span style="color:red">null</span>);
      * map.put("province", "江苏省");
      * 
-     * log.debug(ParamUtil.toNaturalOrderingKeyJoinValue(map));
+     * log.debug(ParamUtil.toNaturalOrderingJoinValue(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -709,7 +709,7 @@ public final class ParamUtil{
      * singleValueMap.put("province", "江苏省");
      * singleValueMap.put("city", "南通市");
      * 
-     * log.info(ParamUtil.joinSingleValueMap(singleValueMap));
+     * log.info(ParamUtil.toQueryStringUseSingleValueMap(singleValueMap));
      * </pre>
      * 
      * <b>返回:</b>
@@ -776,7 +776,7 @@ public final class ParamUtil{
      * 
      * keyAndArrayMap.put("province", new String[] { "江苏省", "浙江省" });
      * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * log.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
+     * log.info(ParamUtil.toQueryStringUseArrayValueMap(keyAndArrayMap));
      * </pre>
      * 
      * <b>返回:</b>
@@ -795,7 +795,7 @@ public final class ParamUtil{
      * 
      * keyAndArrayMap.put("province", new String[] { "江苏省", <span style="color:red">null</span> });
      * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * log.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
+     * log.info(ParamUtil.toQueryStringUseArrayValueMap(keyAndArrayMap));
      * </pre>
      * 
      * <b>返回:</b>

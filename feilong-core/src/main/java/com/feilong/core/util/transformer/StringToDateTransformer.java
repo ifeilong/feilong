@@ -43,7 +43,7 @@ public class StringToDateTransformer implements Transformer<String, Date>,Serial
     //---------------------------------------------------------------
 
     /**
-     * Instantiates a new date to string transformer.
+     * Instantiates a new string to date transformer.
      * 
      * <p>
      * 如果 <code>pattern</code> 是null,抛出 {@link NullPointerException}<br>

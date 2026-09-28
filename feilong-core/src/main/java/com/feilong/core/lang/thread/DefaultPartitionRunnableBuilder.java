@@ -48,9 +48,9 @@ import java.util.Map;
  * <b>可以重构成:</b>
  * 
  * <pre class="code">
- * ThreadUtil.execute(list, 5, new DefaultPartitionRunnableBuilder{@code <>}(new Call{@code <String>}(){
+ * ThreadUtil.execute(list, 5, new DefaultPartitionRunnableBuilder{@code <>}(new PartitionPerHandler{@code <String>}(){
  * 
- *     public void call(List{@code <String>} perBatchList,PartitionThreadEntity partitionThreadEntity,Map{@code <String, ?>} paramsMap){
+ *     public void handle(List{@code <String>} perBatchList,PartitionThreadEntity partitionThreadEntity,Map{@code <String, ?>} paramsMap){
  *         map.putAll(handle(perBatchList, noList));
  *     }
  * }));
@@ -64,15 +64,11 @@ import java.util.Map;
  * </p>
  * 
  * <pre class="code">
- * ThreadUtil.execute(list, 5, new DefaultPartitionRunnableBuilder{@code <>}(new Call{@code <String>}(){
- * 
- *     public void call(List{@code <String>} perBatchList,PartitionThreadEntity partitionThreadEntity,Map{@code <String, ?>} paramsMap){
- *         map.putAll(handle(perBatchList, noList));
- *     }
- * }));
+ * ThreadUtil.execute(list, 5, new DefaultPartitionRunnableBuilder{@code <>}(
+ *                 (perBatchList, partitionThreadEntity, paramsMap) -> map.putAll(handle(perBatchList, noList))));
  * </pre>
  * 
- * 从 13 行 简写到 6 行
+ * 从 13 行 简写到 2 行
  * 
  * </blockquote>
  *
