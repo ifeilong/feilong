@@ -15,7 +15,6 @@
  */
 package com.feilong.security;
 
-import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
 
 import lombok.AccessLevel;

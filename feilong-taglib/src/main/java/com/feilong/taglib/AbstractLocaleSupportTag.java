@@ -15,10 +15,6 @@
  */
 package com.feilong.taglib;
 
-import java.util.Locale;
-
-import com.feilong.core.util.ResourceBundleUtil;
-
 /**
  * 支持 locale 国际化.
  *

@@ -15,8 +15,6 @@
  */
 package com.feilong.taglib;
 
-import java.util.Locale;
-
 /**
  * 标识支持 locale 语言环境的标签 support.
  *

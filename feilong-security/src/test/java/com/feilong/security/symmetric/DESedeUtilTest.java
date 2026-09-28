@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.feilong.security.AbstractSecurityTest;
-import com.feilong.security.EncryptionException;
 
 /**
  * The Class DESedeUtilTest.

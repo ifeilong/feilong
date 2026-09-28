@@ -20,8 +20,6 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.feilong.taglib.SimpleTagStringCacheManager;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

@@ -25,7 +25,6 @@ import java.net.URL;
 import java.util.Date;
 import java.util.Map;
 
-import com.feilong.core.DatePattern;
 import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.processor.CalendarJsonValueProcessor;
 import com.feilong.json.processor.DateJsonValueProcessor;
@@ -34,7 +33,6 @@ import com.feilong.json.processor.ToStringJsonValueProcessor;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
-import com.feilong.lib.json.util.CycleDetectionStrategy;
 import com.feilong.lib.json.util.PropertyFilter;
 import com.feilong.lib.lang3.tuple.Pair;
 

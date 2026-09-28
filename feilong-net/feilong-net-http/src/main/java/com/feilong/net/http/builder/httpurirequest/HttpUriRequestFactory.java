@@ -33,7 +33,6 @@ import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpMethodType;
 import com.feilong.net.http.HttpRequest;
-import com.feilong.net.http.builder.RequestConfigBuilder;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

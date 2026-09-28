@@ -22,11 +22,8 @@ import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PA
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 
-import com.feilong.core.CharsetType;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.LocaleSupport;

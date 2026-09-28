@@ -19,7 +19,6 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static java.util.Collections.emptyList;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 

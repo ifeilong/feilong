@@ -15,7 +15,6 @@
  */
 package com.feilong.core.util.comparator;
 
-import java.util.Comparator;
 import java.util.List;
 
 import com.feilong.core.Validate;

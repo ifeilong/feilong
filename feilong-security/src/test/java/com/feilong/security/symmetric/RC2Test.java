@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.feilong.security.AbstractSecurityTest;
-import com.feilong.security.EncryptionException;
 
 @lombok.extern.slf4j.Slf4j
 public class RC2Test extends AbstractSecurityTest{

@@ -27,13 +27,8 @@ import java.io.UncheckedIOException;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.feilong.core.CharsetType;
-import com.feilong.core.TimeInterval;
 import com.feilong.core.Validate;
 import com.feilong.io.entity.MimeType;
 

@@ -23,11 +23,7 @@ import java.net.SocketTimeoutException;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.lib.lang3.ArrayUtils;
-import com.feilong.lib.org.apache.http.client.methods.HttpExecutionAware;
-import com.feilong.lib.org.apache.http.client.methods.HttpRequestWrapper;
-import com.feilong.lib.org.apache.http.client.protocol.HttpClientContext;
 import com.feilong.lib.org.apache.http.conn.ConnectTimeoutException;
-import com.feilong.lib.org.apache.http.conn.routing.HttpRoute;
 import com.feilong.lib.org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 import com.feilong.lib.org.apache.http.protocol.HttpCoreContext;

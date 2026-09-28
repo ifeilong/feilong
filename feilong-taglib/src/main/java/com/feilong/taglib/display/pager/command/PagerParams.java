@@ -20,11 +20,9 @@ import static com.feilong.core.CharsetType.UTF8;
 import java.io.Serializable;
 import java.util.Locale;
 
-import com.feilong.core.CharsetType;
 import com.feilong.lib.lang3.builder.EqualsBuilder;
 import com.feilong.lib.lang3.builder.HashCodeBuilder;
 import com.feilong.taglib.display.CacheParam;
-import com.feilong.taglib.display.pager.PagerBuilder;
 
 /**
  * 方法参数.

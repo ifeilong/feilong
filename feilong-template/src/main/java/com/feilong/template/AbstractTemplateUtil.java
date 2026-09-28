@@ -18,11 +18,9 @@ package com.feilong.template;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static java.util.Collections.emptyMap;
 
-import java.io.Writer;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.velocity.Template;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.runtime.resource.loader.StringResourceLoader;

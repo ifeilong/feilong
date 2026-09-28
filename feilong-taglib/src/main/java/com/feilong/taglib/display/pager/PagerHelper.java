@@ -20,7 +20,6 @@ import static com.feilong.core.bean.ConvertUtil.toInteger;
 import javax.servlet.http.HttpServletRequest;
 
 import com.feilong.servlet.http.RequestUtil;
-import com.feilong.taglib.display.pager.command.PagerConstants;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

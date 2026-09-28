@@ -33,7 +33,6 @@ import com.feilong.core.util.comparator.BeanComparatorUtil;
 import com.feilong.core.util.comparator.ComparatorUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.lib.collection4.ComparatorUtils;
-import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 import com.feilong.lib.collection4.comparators.ReverseComparator;
 
 import lombok.AccessLevel;

@@ -20,7 +20,6 @@ import java.util.Date;
 
 import org.apache.commons.collections4.Transformer;
 
-import com.feilong.core.DatePattern;
 import com.feilong.core.Validate;
 import com.feilong.core.date.DateUtil;
 

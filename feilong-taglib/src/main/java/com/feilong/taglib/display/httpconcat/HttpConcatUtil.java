@@ -24,9 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.feilong.core.Validate;
-import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.lang3.StringUtils;
 import com.feilong.taglib.display.httpconcat.builder.ResultBuilder;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver;
