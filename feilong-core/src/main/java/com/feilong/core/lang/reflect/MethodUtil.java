@@ -75,7 +75,7 @@ import lombok.NoArgsConstructor;
  * </ol>
  * 
  * <p>
- * 当然,你还可以调用 {@link "lang3 reflect.MethodUtils MethodUtils"}其他方法:
+ * 当然,你还可以调用 <code>lang3 reflect.MethodUtils MethodUtils</code>其他方法:
  * </p>
  * 
  * <ol>

@@ -42,30 +42,30 @@ import lombok.NoArgsConstructor;
  * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>file.encoding <br>
- * {@link "org.apache.commons.lang3.SystemUtils#FILE_ENCODING"}</td>
+ * <code>org.apache.commons.lang3.SystemUtils#FILE_ENCODING</code></td>
  * <td>utf-8</td>
  * </tr>
  * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>file.separator <br>
- * {@link "org.apache.commons.lang3.SystemUtils#FILE_SEPARATOR"}</td>
+ * <code>org.apache.commons.lang3.SystemUtils#FILE_SEPARATOR</code></td>
  * <td>\\</td>
  * </tr>
  * 
  * <tr valign="top">
  * <td>java.home <br>
- * {@link "org.apache.commons.lang3.SystemUtils#JAVA_HOME"}</td>
+ * <code>org.apache.commons.lang3.SystemUtils#JAVA_HOME</code></td>
  * <td>D:\\Program Files\\Java\\jdk1.6.0_37\\jre</td>
  * </tr>
  * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>java.io.tmpdir <br>
- * {@link "org.apache.commons.lang3.SystemUtils#JAVA_IO_TMPDIR"}</td>
+ * <code>org.apache.commons.lang3.SystemUtils#JAVA_IO_TMPDIR</code></td>
  * <td>C:\\Users\\feilong\\AppData\\Local\\Temp\\</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>java.version <br>
- * {@link "org.apache.commons.lang3.SystemUtils#JAVA_VERSION"}</td>
+ * <code>org.apache.commons.lang3.SystemUtils#JAVA_VERSION</code></td>
  * <td>1.6.0_37</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
@@ -75,12 +75,12 @@ import lombok.NoArgsConstructor;
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>user.dir <br>
- * {@link "org.apache.commons.lang3.SystemUtils#USER_DIR"}</td>
+ * <code>org.apache.commons.lang3.SystemUtils#USER_DIR</code></td>
  * <td>E:\\Workspaces\\feilong\\feilong-platform\\commons\\feilong-core</td>
  * </tr>
  * <tr valign="top">
  * <td>user.home<br>
- * {@link "org.apache.commons.lang3.SystemUtils#USER_HOME"}</td>
+ * <code>org.apache.commons.lang3.SystemUtils#USER_HOME</code></td>
  * <td>C:\\Users\\feilong</td>
  * </tr>
  * </table>

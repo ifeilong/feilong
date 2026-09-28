@@ -1483,14 +1483,14 @@ public final class ConvertUtil{
      * </p>
      * 
      * <ol>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(boolean[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(byte[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(char[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(double[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(float[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(int[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(long[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(short[])"}</li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(boolean[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(byte[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(char[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(double[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(float[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(int[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(long[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(short[])</code></li>
      * </ol>
      * </blockquote>
      *
@@ -1652,14 +1652,14 @@ public final class ConvertUtil{
      * </p>
      * 
      * <ol>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(boolean[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(byte[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(char[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(double[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(float[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(int[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(long[])"}</li>
-     * <li>{@link "commons-lang3 ArrayUtils#toObject(short[])"}</li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(boolean[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(byte[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(char[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(double[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(float[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(int[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(long[])</code></li>
+     * <li><code>commons-lang3 ArrayUtils#toObject(short[])</code></li>
      * </ol>
      * </blockquote>
      *
