@@ -94,7 +94,7 @@ import java.io.Serializable;
  * </blockquote>
  * 
  * 
- * <h3>关于 {@link #path}:</h3>
+ * <h3>关于 {@code path}:</h3>
  * 
  * <blockquote>
  * <p>
