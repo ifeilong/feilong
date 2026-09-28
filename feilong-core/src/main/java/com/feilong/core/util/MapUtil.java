@@ -496,7 +496,7 @@ public final class MapUtil{
      *     }
      * 
      *     //---------------------------------------------------------------
-     *     write(novel, MapUtil.getUseIndex(bookSectionUrlMap, 0).getValue());
+     *     write(novel, MapUtil.getByIndex(bookSectionUrlMap, 0).getValue());
      * 
      *     <span style="color:green">// do something logic</span>
      * }

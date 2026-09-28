@@ -429,7 +429,7 @@ public final class DateUtil{
      * 
      * <pre class="code">
      * //如果今天是 2011-01-02 10:20:20
-     * DateUtil.getFirstDateOfYesterday()  =2011-01-03 00:00:00
+     * DateUtil.getFirstDateOfTomorrow()   =2011-01-03 00:00:00
      * </pre>
      * 
      * </blockquote>

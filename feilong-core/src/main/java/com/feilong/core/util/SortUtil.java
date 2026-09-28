@@ -1109,7 +1109,7 @@ public final class SortUtil{
      * 如果我们只是使用 :
      * 
      * <pre class="code">
-     * log.debug(JsonUtil.format(SortUtil.sortByKeyAsc(map)));
+     * log.debug(JsonUtil.format(SortUtil.sortMapByKeyAsc(map)));
      * </pre>
      * 
      * <b>返回:</b>
