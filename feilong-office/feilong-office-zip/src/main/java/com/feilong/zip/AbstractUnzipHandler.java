@@ -105,9 +105,10 @@ public abstract class AbstractUnzipHandler implements UnzipHandler{
     protected static void write(String zipEntryName,InputStream inputStream,String outputDirectory){
         //① 可信的基准目录：基于 outputDirectory，转成绝对路径并化简
         Path basePath = Paths.get(outputDirectory).toAbsolutePath().normalize();
-
         //② 按同样的方式算出"我准备写到哪个路径"（等价于 IOWriteUtil 内部拼出来的那个路径）
         Path targetPath = basePath.resolve(zipEntryName).normalize();
+        
+        //主要避免 zipEntryName 出现 ~  ../../..等不安全的名字
 
         //③ 关键校验：最终路径必须仍在基准目录内，否则抛 IllegalArgumentException
         Validate.isTrue(targetPath.startsWith(basePath), "zipEntryName:[%s] is out of outputDirectory:[%s]", zipEntryName, outputDirectory);
@@ -116,7 +117,6 @@ public abstract class AbstractUnzipHandler implements UnzipHandler{
         IOWriteUtil.write(inputStream, outputDirectory, zipEntryName);
 
         //---------------------------------------------------------------
-
         if (log.isDebugEnabled()){
             log.debug("unzip [{}] to [{}]", zipEntryName, outputDirectory + File.separator + zipEntryName);
         }
