@@ -305,6 +305,7 @@
 		<!-- 用于读取javadoc 内部使用的 配置文件, 比如 描述文字为 描述,英文环境为description -->
 		<maven-javadoc-plugin.locale>en_US</maven-javadoc-plugin.locale>
 
+		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<maven-javadoc-plugin.outputDirectory>${user.home}/workspace/feilong/else/javadoc/${project.artifactId}
 		</maven-javadoc-plugin.outputDirectory>
 		<maven-javadoc-plugin.reportOutputDirectory>
@@ -834,7 +835,7 @@
 					<!-- Includes the version text in the generated docs.  -->
 					<version>true</version>
 
-					<failOnError>false</failOnError>
+					<failOnError>${maven.javadoc.failOnError}</failOnError>
 
 					<locale>${maven-javadoc-plugin.locale}</locale>
 
@@ -1279,5 +1280,17 @@
 		<system>github</system>
 		<url>https://github.com/ifeilong/feilong/issues</url>
 	</issueManagement>
+
+	<!-- 严格 javadoc 校验: 默认不激活, 使用 mvn -Pstrict-javadoc javadoc:javadoc 运行 -->
+	<profiles>
+		<profile>
+			<id>strict-javadoc</id>
+			<properties>
+				<maven.javadoc.failOnError>true</maven.javadoc.failOnError>
+				<maven.javadoc.failOnWarnings>true</maven.javadoc.failOnWarnings>
+				<maven.javadoc.additionalparam>-Xdoclint:all</maven.javadoc.additionalparam>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>

@@ -98,20 +98,20 @@ public final class MobileUtil{
      *         <th>返回</th>
      *         </tr>
      *         <tr>
-     *         <td>isNullOrEmpty(mobileNumber)</td>
-     *         <td>throw {@link NullPointerException}</td>
+     *         <td>isNullOrBlank(mobileNo)</td>
+     *         <td>null throw {@link NullPointerException}, blank throw {@link IllegalArgumentException}</td>
      *         </tr>
      *         <tr>
      *         <td>count &lt; 0</td>
      *         <td>throw {@link IllegalArgumentException}</td>
      *         </tr>
      *         <tr>
-     *         <td>mobileNumber.length(){@code <=} 3</td>
-     *         <td>mobileNumber</td>
+     *         <td>mobileNo.length(){@code <=} 3</td>
+     *         <td>mobileNo</td>
      *         </tr>
      *         <tr>
      *         <td>0 == count</td>
-     *         <td>mobileNumber</td>
+     *         <td>mobileNo</td>
      *         </tr>
      *         <tr>
      *         <td>else</td>

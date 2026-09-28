@@ -36,7 +36,7 @@ public interface Rebuilder<T> {
      *
      * @param t
      *            the t
-     * @return the http request
+     * @return 重新加工后的对象
      */
     T rebuild(T t);
 }

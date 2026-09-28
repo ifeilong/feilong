@@ -37,12 +37,15 @@ final class XPathUtil{
     /**
      * 通过xpath 获取对象.
      * 
+     * @param node
+     *            the node
      * @param expression
      *            xpath表达式
      * @param qName
      *            qname 定义的数据类型
      * 
      * @param <T>
+     *            the generic type
      *
      * @return 通过xpath 获取对象
      */

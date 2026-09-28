@@ -66,10 +66,10 @@ import com.feilong.json.JsonUtil;
 <property name="stringToBeanConverter">
     <bean class="com.feilong.context.converter.JsonStringToBeanConverter">
        <property name="jsonToJavaConfig">
-           <bean class="com.feilong.json.jsonlib.JsonToJavaConfig" p:rootClass=
+           <bean class="com.feilong.json.JsonToJavaConfig" p:rootClass=
 "com.feilong.netpay.doku.generatepaycode.DokuGeneratePayCodeResultCommand">
                 <property name="javaIdentifierTransformer">
-                      <bean class="com.feilong.json.jsonlib.transformer.SeparatorToCamelCaseJavaIdentifierTransformer" />
+                      <bean class="com.feilong.json.transformer.SeparatorToCamelCaseJavaIdentifierTransformer" />
                 </property>
             </bean>
         </property>

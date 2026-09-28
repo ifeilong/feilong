@@ -163,8 +163,6 @@ import lombok.NoArgsConstructor;
  * </blockquote>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="https://x-stream.github.io/faq.html">Frequently Asked Questions</a>
  * @see <a href="https://x-stream.github.io/news.html">News</a>
  * @see "org.apache.solr.common.util.DOMUtil"
@@ -362,8 +360,8 @@ public class XmlUtil{
      *            the map
      * @param rootElementName
      *            根元素名字
-     * @return 如果 <code>rootName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>rootName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @return 如果 <code>rootElementName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>rootElementName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>map</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>map</code> 有 null key,将抛出 异常<br>
@@ -459,8 +457,8 @@ public class XmlUtil{
      *            根元素名字
      * @param isPrettyPrint
      *            是否格式化输出
-     * @return 如果 <code>rootName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>rootName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @return 如果 <code>rootElementName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>rootElementName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>map</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>map</code> 有 null key,将抛出 异常<br>

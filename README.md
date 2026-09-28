@@ -4,8 +4,8 @@ feilong 让Java开发更简便的工具库
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 ![JDK 1.8](https://img.shields.io/badge/JDK-1.8-green.svg "JDK 1.8")
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.ifeilong/feilong.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.ifeilong%22%20AND%20a:%22feilong%22)
-[![javadoc 83%](http://progressed.io/bar/83?title=javadoc "javadoc 83%")](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/)
-[![tests 3293](https://img.shields.io/badge/tests-3293%20%2F%203293-green.svg "tests 3293")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core)
+[![CI](https://github.com/ifeilong/feilong/actions/workflows/maven.yml/badge.svg)](https://github.com/ifeilong/feilong/actions/workflows/maven.yml)
+![tests](https://img.shields.io/badge/tests-SuiteTests-success.svg "各模块单元测试入口为 SuiteTests")
 
 
 Reduce development, Release ideas (灵感从重复简单的代码中释放出来)
@@ -115,6 +115,13 @@ feilong-office-zip | 压缩解压缩操作
 feilong-component  | 组件式操作,含配置式即可获取数据-->转成excel-->打成zip压缩包-->发送邮件   (推荐)
 feilong | 一体化total jar包,包含上述所有功能
 feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含所有optional jar依赖
+feilong-core-extension | 基于 feilong-core 的扩展 (awt, io 等)
+feilong-office | csv/excel/zip 等办公相关操作的聚合
+feilong-net-api | http 请求/响应相关的基础 api
+feilong-net-bot-api | 机器人消息发送的基础 api
+feilong-net-bot-dingtalk | 钉钉机器人
+feilong-net-bot-wxwork | 企业微信机器人
+feilong-lib | 从第三方库 fork 而来的源码 (commons-lang3, commons-io, commons-compress 等)
 
 ## Star History
 

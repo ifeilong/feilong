@@ -27,7 +27,7 @@ import com.feilong.json.JsonUtil;
  * <blockquote>
  * <ol>
  * <li>第1步,通过 调用 {@link ResponseStringBuilder} 来得到响应字符串</li>
- * <li>第2步,将得到的字符串,使用 {@link StringToBeanConverter} 来转换成对象</li>
+ * <li>第2步,将得到的字符串,使用 {@link ResponseStringHandler} 来转换成对象</li>
  * </ol>
  * </blockquote>
  *

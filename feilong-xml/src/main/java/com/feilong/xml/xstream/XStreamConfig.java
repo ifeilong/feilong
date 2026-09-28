@@ -51,7 +51,7 @@ public final class XStreamConfig{
     /**
      * 哪个类的注解需要被激活.
      * 
-     * @see com.feilong.lib.xstream.XStream#processAnnotations(Class[])
+     * @see com.thoughtworks.xstream.XStream#processAnnotations(Class[])
      */
     private Class<?>[]              processAnnotationsTypes;
 
@@ -67,7 +67,7 @@ public final class XStreamConfig{
     /**
      * 别名.
      * 
-     * @see com.feilong.lib.xstream.XStream#alias(String, Class)
+     * @see com.thoughtworks.xstream.XStream#alias(String, Class)
      */
     private Map<String, Class<?>>   aliasMap                 = newHashMap();
 
@@ -103,9 +103,9 @@ public final class XStreamConfig{
      * 
      * </blockquote>
      *
-     * @see com.feilong.lib.xstream.mapper.ClassAliasingMapper#serializedClass(Class)
-     * @see com.feilong.lib.xstream.XStream#addDefaultImplementation(Class, Class)
-     * @see com.feilong.lib.xstream.mapper.DefaultImplementationsMapper#serializedClass(Class)
+     * @see com.thoughtworks.xstream.mapper.ClassAliasingMapper#serializedClass(Class)
+     * @see com.thoughtworks.xstream.XStream#addDefaultImplementation(Class, Class)
+     * @see com.thoughtworks.xstream.mapper.DefaultImplementationsMapper#serializedClass(Class)
      * @since 1.10.7
      */
     private Map<Class<?>, Class<?>> defaultImplementationMap = newHashMap();

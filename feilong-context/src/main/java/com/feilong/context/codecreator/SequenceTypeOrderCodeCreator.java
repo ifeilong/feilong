@@ -32,8 +32,8 @@ public interface SequenceTypeOrderCodeCreator extends OrderCodeCreator{
      *            最大长度
      * @return 如果 <code>sequence</code> 是 {@code <=} 0,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>maxLength</code> 是 {@code <=} 0,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>maxLength</code> 是 {@code <} <code>sequence</code> 长度,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>maxLength</code> 是 {@code >=} <code>sequence</code> 长度,直接返回 <code>sequence</code><br>
+     *         如果 <code>sequence</code> 长度 {@code >} <code>maxLength</code>,直接返回 <code>sequence</code><br>
+     *         如果 <code>sequence</code> 长度 {@code <=} <code>maxLength</code>,拼接时间信息生成 <code>maxLength</code> 长度的序列(当前实现要求 <code>maxLength</code> 为 11,否则抛出 {@link IllegalArgumentException})<br>
      * @since 1.10.4
      */
     String create(long sequence,int maxLength);
