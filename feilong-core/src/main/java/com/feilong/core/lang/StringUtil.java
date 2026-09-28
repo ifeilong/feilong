@@ -503,7 +503,7 @@ public final class StringUtil{
      *            用来匹配此字符串的正则表达式,规则参见 RegexPattern 注释
      * @param replacement
      *            用来替换每个匹配项的字符串
-     * @return 如果 <code>content</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>content</code> 是null,返回 {@link #EMPTY}<br>
      *         如果 <code>content</code> 中,没有 regex匹配的字符串或者格式,返回<code>content</code><br>
      * @see <a href="http://stamen.iteye.com/blog/2028256">String字符串替换的一个诡异问题</a>
      * @see <a href="https://blog.csdn.net/hadues/article/details/128002667">Java中String对象的replaceAll方法调用性能优化小技巧</a>
@@ -574,7 +574,7 @@ public final class StringUtil{
      *            the template string
      * @param valuesMap
      *            the values map
-     * @return 如果 <code>templateString</code> 是 <code>StringUtils.isEmpty(templateString)</code>,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>templateString</code> 是 <code>StringUtils.isEmpty(templateString)</code>,返回 {@link #EMPTY}<br>
      *         如果 <code>valuesMap</code> 是null或者empty,原样返回 <code>templateString</code><br>
      * @see "lang3 text.StrSubstitutor#replace(String)"
      * @see "lang3 text.StrSubstitutor#replace(Object, Map)"
@@ -660,7 +660,7 @@ public final class StringUtil{
      * @param lastLenth
      *            最后的位数
      * @return 如果 <code>text</code> 是null,返回 null<br>
-     *         如果 {@code lastLenth<0},返回 {@link StringUtils#EMPTY}<br>
+     *         如果 {@code lastLenth<0},返回 {@link #EMPTY}<br>
      *         如果 {@code text.length() <= lastLenth},返回text<br>
      *         否则返回<code> text.substring(text.length() - lastLenth)</code>
      * @see com.feilong.lib.lang3.StringUtils#right(String, int)
@@ -690,7 +690,7 @@ public final class StringUtil{
      *            文字
      * @param lastLenth
      *            最后的位数
-     * @return 如果 <code>text</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>text</code> 是null,返回 {@link #EMPTY}<br>
      * @see java.lang.String#substring(int, int)
      * @see com.feilong.lib.lang3.StringUtils#left(String, int)
      */
@@ -717,7 +717,7 @@ public final class StringUtil{
      *            the text
      * @param lastString
      *            the last string
-     * @return 如果 <code>text</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>text</code> 是null,返回 {@link #EMPTY}<br>
      *         如果 <code>lastString</code> 是null,返回 <code>text.toString()</code><br>
      * @since 1.4.0
      */
@@ -1569,7 +1569,7 @@ public final class StringUtil{
         }
         //---------------------------------------------------------------
         Validate.notNull(keyClass, "keyClass can't be null!");
-        Validate.notNull(valueStringToBeanConverter, "stringToBeanConverter can't be null!");
+        Validate.notNull(valueStringToBeanConverter, "valueStringToBeanConverter can't be null!");
 
         //---------------------------------------------------------------
         Map<T, V> returnMap = newLinkedHashMap();
@@ -1937,7 +1937,7 @@ public final class StringUtil{
      *            the format
      * @param args
      *            the args
-     * @return 如果 <code>format</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>format</code> 是null,返回 {@link #EMPTY}<br>
      *         如果 <code>format</code> 包含不需要转化的字符串,这些字符串是你写什么,最终就输出什么<br>
      *         否则返回 {@link String#format(String, Object...)}
      * @see java.util.Formatter

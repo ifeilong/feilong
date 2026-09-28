@@ -50,6 +50,11 @@ public interface StringToBeanConverter<T> extends Function<String, T>{
     //---------------------------------------------------------------
 
     /**
+     * 转换,内部调用 {@link #convert(String)}.
+     *
+     * @param t
+     *            the value
+     * @return 转换后的值,参见 {@link #convert(String)}
      * @since 4.5.5
      */
     @Override

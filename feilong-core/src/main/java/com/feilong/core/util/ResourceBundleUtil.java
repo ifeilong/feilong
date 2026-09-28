@@ -123,7 +123,7 @@ public final class ResourceBundleUtil{
      *            Properties配置文件键名
      * @param arguments
      *            此处可以传递Object[]数组过来
-     * @return 如果配置文件中,key不存在,log.warn警告输出,并返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果配置文件中,key不存在,log.warn警告输出,并返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @throws NullPointerException
      *             如果 <code>resourceBundle</code> 或者 <code>key</code> 是null
      * @throws IllegalArgumentException

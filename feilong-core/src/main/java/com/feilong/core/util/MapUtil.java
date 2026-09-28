@@ -2962,7 +2962,6 @@ public final class MapUtil{
      *      capacity while indexing a List</a>
      * @see java.util.HashMap#HashMap(Map)
      * @see "com.google.common.collect.Maps#capacity(int)"
-     * @see java.util.HashMap#inflateTable(int)
      * @see org.apache.commons.collections4.map.AbstractHashedMap#calculateNewCapacity(int)
      * @since 1.7.1
      */

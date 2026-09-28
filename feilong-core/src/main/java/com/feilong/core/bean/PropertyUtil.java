@@ -82,7 +82,8 @@ public final class PropertyUtil{
      *
      * @param klass
      *            the klass
-     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return <code>klass</code> 的属性描述符数组<br>
+     *         如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 3.0.0
      */
     public static PropertyDescriptor[] getPropertyDescriptors(Class<?> klass){

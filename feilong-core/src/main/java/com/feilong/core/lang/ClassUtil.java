@@ -284,7 +284,8 @@ public final class ClassUtil{
      *            the klass
      * @param cls
      *            the cls
-     * @return 如果 <code>klass</code> 是null,返回false<br>
+     * @return 是否 <code>cls</code> 可以赋值给 <code>klass</code><br>
+     *         如果 <code>klass</code> 是null,返回false<br>
      *         如果 <code>cls</code> 是null,返回false
      * @see java.lang.Class#isAssignableFrom(Class)
      * @see com.feilong.lib.lang3.ClassUtils#isAssignable(Class, Class)

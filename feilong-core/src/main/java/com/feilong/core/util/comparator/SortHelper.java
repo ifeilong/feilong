@@ -47,7 +47,7 @@ public final class SortHelper{
      * 将 <code>propertyNameAndOrder</code>字符串转换成数组.
      * 
      * <p>
-     * 会先进行trim操作,再使用{@link StringUtils#SPACE} 分隔成数组
+     * 会先进行trim操作,再使用{@link com.feilong.core.lang.StringUtil#SPACE} 分隔成数组
      * </p>
      * 
      * <h3>示例:</h3>
@@ -104,8 +104,8 @@ public final class SortHelper{
      *             如果 <code>propertyNameAndOrder</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyNameAndOrder</code> 是blank;<br>
-     *             或者如果<code>propertyNameAndOrder</code>使用{@link StringUtils#SPACE}转换的数组length {@code >} 2<br>
-     *             或者如果<code>propertyNameAndOrder</code>使用{@link StringUtils#SPACE}转换的数组length {@code =} 2,但是第二个值不是asc也不是desc
+     *             或者如果<code>propertyNameAndOrder</code>使用{@link com.feilong.core.lang.StringUtil#SPACE}转换的数组length {@code >} 2<br>
+     *             或者如果<code>propertyNameAndOrder</code>使用{@link com.feilong.core.lang.StringUtil#SPACE}转换的数组length {@code =} 2,但是第二个值不是asc也不是desc
      * @see com.feilong.core.lang.StringUtil#tokenizeToStringArray(String, String)
      */
     public static String[] parsePropertyNameAndOrder(String propertyNameAndOrder){

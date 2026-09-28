@@ -417,7 +417,7 @@ public final class URLUtil{
      *            给定的url地址
      * @param perfix
      *            追加的前缀
-     * @return 如果 <code>url</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>url</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>perfix</code> 是null或者empty,直接返回 <code>url</code><br>
      * @see com.feilong.lib.lang3.StringUtils#prependIfMissing(String, CharSequence, CharSequence...)
      * @see com.feilong.lib.lang3.StringUtils#prependIfMissingIgnoreCase(String, CharSequence, CharSequence...)
@@ -472,7 +472,7 @@ public final class URLUtil{
      *            比如传http https, 会循环判断 ,有其中的任意一个将不会拼接, 忽视大小写
      * @param perfix
      *            追加的前缀
-     * @return 如果 <code>url</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>url</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * 
      *         如果 <code>protocolPres</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>protocolPres</code> 是empty,抛出 {@link IllegalArgumentException}<br>

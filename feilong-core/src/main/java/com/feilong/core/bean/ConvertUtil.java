@@ -1436,7 +1436,7 @@ public final class ConvertUtil{
      *            集合,建议元素泛型不要使用自定义的对象(比如UserCommand等),因为这个方法是迭代collection,拿每个元素的字符串格式 进行拼接
      * @param connector
      *            the connector
-     * @return 如果 <code>collection</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>collection</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
      * @see "org.apache.commons.collections4.IteratorUtils#toString(Iterator)"
      * @see "commons-lang3 StringUtils#join(Iterable, String)"
@@ -1446,7 +1446,7 @@ public final class ConvertUtil{
      *          <blockquote>
      * 
      *          <ol>
-     *          <li>如果有元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     *          <li>如果有元素是null,使用{@link com.feilong.core.lang.StringUtil#EMPTY}替代拼接</li>
      *          <li>最后一个元素后面不拼接拼接符</li>
      *          </ol>
      *          </blockquote>
@@ -1498,7 +1498,7 @@ public final class ConvertUtil{
      *            支持包装类型,<b>不直接支持</b>原始类型
      * @param connector
      *            the connector
-     * @return 如果 <code>arrays</code> 是null 或者Empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>arrays</code> 是null 或者Empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see com.feilong.lib.lang3.builder.ToStringStyle
      * @see com.feilong.lib.lang3.StringUtils#join(Object[], String)
      * @since 1.11.0
@@ -1507,7 +1507,7 @@ public final class ConvertUtil{
      *          <blockquote>
      * 
      *          <ol>
-     *          <li>如果有元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     *          <li>如果有元素是null,使用{@link com.feilong.core.lang.StringUtil#EMPTY}替代拼接</li>
      *          <li>最后一个元素后面不拼接拼接符</li>
      *          </ol>
      *          </blockquote>
@@ -1571,7 +1571,7 @@ public final class ConvertUtil{
      *            集合,建议元素泛型不要使用自定义的对象(比如UserCommand等),因为这个方法是迭代collection,拿每个元素的字符串格式 进行拼接
      * @param toStringConfig
      *            连接字符串 实体
-     * @return 如果 <code>collection</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>collection</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>toStringConfig</code> 是null,使用默认 {@link ToStringConfig#DEFAULT_CONNECTOR}以及 joinNullOrEmpty 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
@@ -1589,7 +1589,7 @@ public final class ConvertUtil{
      *          <ol>
      *          <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
      *          <li>拼接null或者empty元素</li>
-     *          <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     *          <li>如果元素是null,使用{@link com.feilong.core.lang.StringUtil#EMPTY}替代拼接</li>
      *          <li>最后一个元素后面不拼接拼接符</li>
      *          </ol>
      *          </blockquote>
@@ -1667,7 +1667,7 @@ public final class ConvertUtil{
      *            支持包装类型,<b>不直接支持</b>原始类型
      * @param toStringConfig
      *            the to string config
-     * @return 如果 <code>arrays</code> 是null 或者Empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>arrays</code> 是null 或者Empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>toStringConfig</code> 是null,使用默认 {@link ToStringConfig#DEFAULT_CONNECTOR}以及 joinNullOrEmpty 进行连接<br>
      *         否则循环,拼接 {@link ToStringConfig#getConnector()}
      * @see com.feilong.lib.lang3.builder.ToStringStyle
@@ -1685,7 +1685,7 @@ public final class ConvertUtil{
      *          <ol>
      *          <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
      *          <li>拼接null或者empty元素</li>
-     *          <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     *          <li>如果元素是null,使用{@link com.feilong.core.lang.StringUtil#EMPTY}替代拼接</li>
      *          <li>最后一个元素后面不拼接拼接符</li>
      *          </ol>
      *          </blockquote>

@@ -102,7 +102,8 @@ public final class TypeUtil{
      * 
      * @param klass
      *            the klass
-     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 父类泛型参数的 raw types 数组<br>
+     *         如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>klass</code> 没有父类(除了Object),抛出 {@link NullPointerException}<br>
      *         如果 <code>klass</code> 有父类(除了Object)但是父类没有泛型参数,抛出 {@link NullPointerException}<br>
      * @since 1.1.1
@@ -155,7 +156,8 @@ public final class TypeUtil{
      *            the klass
      * @param extractInterfaceClass
      *            待抽取的接口类型
-     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 指定接口泛型参数的 raw types 数组<br>
+     *         如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>extractInterfaceClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>klass</code> 是没有泛型接口,抛出 {@link NullPointerException}<br>
      *         如果 <code>klass</code> 有泛型接口但是其中没有指定的接口类型<code>extractInterfaceClass</code> ,抛出 {@link NullPointerException}<br>

@@ -4451,10 +4451,10 @@ public final class CollectionsUtil{
 
     /**
      * 用于分组处理.
-     * 具体实现参考 {@link GroupUtil#group(Iterable, String, Predicate)} 的实现逻辑
+     * 具体实现参考 {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate)} 的实现逻辑
      * 
      * @since 1.5.5
-     * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, String, Predicate)}
+     * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate)}
      */
     @SuppressWarnings("javadoc")
     @Deprecated
@@ -4480,10 +4480,11 @@ public final class CollectionsUtil{
 
     /**
      * 用于分组处理.
-     * 具体实现参考 {@link GroupUtil#group(Iterable, Predicate, Transformer)} 的实现逻辑
+     * 具体实现参考 {@link GroupUtil#group(Iterable, org.apache.commons.collections4.Predicate, Transformer)} 的实现逻辑
      * 
      * @since 1.8.8
-     * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, Predicate, Transformer)}.2
+     * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用
+     *             {@link GroupUtil#group(Iterable, org.apache.commons.collections4.Predicate, Transformer)}
      */
     @SuppressWarnings("javadoc")
     @Deprecated

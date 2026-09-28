@@ -68,13 +68,13 @@ public final class Slf4jUtil{
      *            message的格式,比如 callbackUrl:[{}] ,length:[{}]
      * @param args
      *            参数
-     * @return 如果 <code>messagePattern</code> 是null,返回 {@link StringUtil#EMPTY}<br>
+     * @return 如果 <code>messagePattern</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>args</code> 是null,返回 <code>messagePattern</code><br>
      * @see org.slf4j.helpers.FormattingTuple
      * @see org.slf4j.helpers.MessageFormatter#arrayFormat(String, Object[])
      * @see org.slf4j.helpers.FormattingTuple#getMessage()
      * @since 1.6.0
-     * @deprecated since 3.3.8 pls use {@link StringUtil#formatPattern(String, Object...)} see
+     * @deprecated since 3.3.8 pls use {@link com.feilong.core.lang.StringUtil#formatPattern(String, Object...)} see
      *             https://github.com/ifeilong/feilong/issues/479
      */
     @Deprecated

@@ -106,9 +106,9 @@ public final class ParamUtil{
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     *         如果 <code>paramName</code> 是null,以 {@link StringUtils#EMPTY}替代<br>
-     *         如果 <code>paramValue</code> 是null,以 {@link StringUtils#EMPTY}替代<br>
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
+     *         如果 <code>paramName</code> 是null,以 {@link com.feilong.core.lang.StringUtil#EMPTY}替代<br>
+     *         如果 <code>paramValue</code> 是null,以 {@link com.feilong.core.lang.StringUtil#EMPTY}替代<br>
      * @see #addParameterSingleValueMap(String, Map, String)
      * @since 1.9.0 change paramValue type from Object to String
      */
@@ -181,7 +181,7 @@ public final class ParamUtil{
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>singleValueMap</code> 是null,当作empty map处理<br>
      * @see #addParameterArrayValueMap(String, Map, String)
      */
@@ -254,7 +254,7 @@ public final class ParamUtil{
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>arrayValueMap</code> 是null,当作empty map处理<br>
      *         如果 <code>charsetType</code> 是null或者empty,那么参数部分原样拼接处理,自行处理兼容性问题<br>
      * @see #addParameterArrayValueMap(String, String, Map, String)
@@ -448,8 +448,8 @@ public final class ParamUtil{
      * <blockquote>
      * <p>
      * 如果 <code>singleValueMap</code> 中,<br>
-     * 如果有 <code>key</code> 是<code>null</code>,那么会使用 {@link StringUtils#EMPTY} 进行拼接;<br>
-     * 如果有 <code>value</code> 是 <code>null</code>,那么会使用 {@link StringUtils#EMPTY} 进行拼接
+     * 如果有 <code>key</code> 是<code>null</code>,那么会使用 {@link com.feilong.core.lang.StringUtil#EMPTY} 进行拼接;<br>
+     * 如果有 <code>value</code> 是 <code>null</code>,那么会使用 {@link com.feilong.core.lang.StringUtil#EMPTY} 进行拼接
      * </p>
      * 
      * <h4>示例:</h4>
@@ -477,7 +477,7 @@ public final class ParamUtil{
      * 
      * @param singleValueMap
      *            用于拼接签名的参数
-     * @return 如果 <code>singleValueMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>singleValueMap</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         否则将<code>singleValueMap</code>排序之后,循环直接拼接key和value
      * @since 1.10.6
      */
@@ -551,7 +551,7 @@ public final class ParamUtil{
      * <blockquote>
      * <p>
      * 如果 <code>singleValueMap</code> 中,<br>
-     * 如果有 <code>value</code> 是 <code>null</code>,那么会使用 {@link StringUtils#EMPTY} 进行拼接
+     * 如果有 <code>value</code> 是 <code>null</code>,那么会使用 {@link com.feilong.core.lang.StringUtil#EMPTY} 进行拼接
      * </p>
      * 
      * <h4>示例:</h4>
@@ -578,7 +578,7 @@ public final class ParamUtil{
      * 
      * @param singleValueMap
      *            用于拼接签名的参数
-     * @return 如果 <code>singleValueMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>singleValueMap</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         否则将<code>singleValueMap</code>排序之后,循环直接拼接value
      * @since 2.0.1
      */
@@ -646,8 +646,8 @@ public final class ParamUtil{
      * <blockquote>
      * <p>
      * 如果 <code>singleValueMap</code> 中,<br>
-     * 如果有 <code>key</code> 是<code>null</code>,那么会使用 {@link StringUtils#EMPTY} 进行拼接;<br>
-     * 如果有 <code>value</code> 是 <code>null</code>,那么会使用 {@link StringUtils#EMPTY} 进行拼接
+     * 如果有 <code>key</code> 是<code>null</code>,那么会使用 {@link com.feilong.core.lang.StringUtil#EMPTY} 进行拼接;<br>
+     * 如果有 <code>value</code> 是 <code>null</code>,那么会使用 {@link com.feilong.core.lang.StringUtil#EMPTY} 进行拼接
      * </p>
      * 
      * <h4>示例:</h4>
@@ -675,7 +675,7 @@ public final class ParamUtil{
      * 
      * @param singleValueMap
      *            用于拼接签名的参数
-     * @return 如果 <code>singleValueMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>singleValueMap</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         否则将<code>singleValueMap</code>排序之后,调用 {@link #toQueryStringUseSingleValueMap(Map)}
      * @since 1.4.0
      */
@@ -693,8 +693,8 @@ public final class ParamUtil{
      * 只是简单的将map的key value 按照 <code>singleValueMap</code>的顺序 连接起来,最终格式类似于 url 的queryString,<br>
      * 比如,参数名字<code>param Name=name</code>,<code>param Value=zhangfei</code>,那么返回值是 <code>name=zhangfei</code>
      * </li>
-     * <li>如果<code>singleValueMap</code>有key 是null,将使用 {@link StringUtils#EMPTY} 进行拼接</li>
-     * <li>如果<code>singleValueMap</code>有value 是null,将使用 {@link StringUtils#EMPTY} 进行拼接</li>
+     * <li>如果<code>singleValueMap</code>有key 是null,将使用 {@link com.feilong.core.lang.StringUtil#EMPTY} 进行拼接</li>
+     * <li>如果<code>singleValueMap</code>有value 是null,将使用 {@link com.feilong.core.lang.StringUtil#EMPTY} 进行拼接</li>
      * </ol>
      * </blockquote>
      * 
@@ -741,7 +741,7 @@ public final class ParamUtil{
      *
      * @param singleValueMap
      *            the params map
-     * @return 如果<code>singleValueMap</code>是 null或者empty,返回 {@link StringUtils#EMPTY} <br>
+     * @return 如果<code>singleValueMap</code>是 null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY} <br>
      *         否则将 <code>singleValueMap</code> 转成 {@link MapUtil#toArrayValueMap(Map)},再调用 {@link #toQueryStringUseArrayValueMap(Map)}
      * @see MapUtil#toArrayValueMap(Map)
      * @see #toQueryStringUseArrayValueMap(Map)
@@ -761,8 +761,8 @@ public final class ParamUtil{
      * <ul>
      * <li>该方法<span style="color:red">不会执行encode操作</span>,使用原生值进行拼接</li>
      * <li>按照传入的map key顺序进行排序,不会自行自动排序转换;如有有业务需求,先行排序完传入进来</li>
-     * <li>如果<code>arrayValueMap</code>有key 是null,将使用 {@link StringUtils#EMPTY} 进行拼接</li>
-     * <li>如果<code>arrayValueMap</code>有value的元素是null,将使用 {@link StringUtils#EMPTY} 进行拼接</li>
+     * <li>如果<code>arrayValueMap</code>有key 是null,将使用 {@link com.feilong.core.lang.StringUtil#EMPTY} 进行拼接</li>
+     * <li>如果<code>arrayValueMap</code>有value的元素是null,将使用 {@link com.feilong.core.lang.StringUtil#EMPTY} 进行拼接</li>
      * </ul>
      * </blockquote>
      * 
@@ -806,7 +806,7 @@ public final class ParamUtil{
      *
      * @param arrayValueMap
      *            the array value map
-     * @return 如果 <code>arrayValueMap</code> 是 null或者Empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>arrayValueMap</code> 是 null或者Empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         否则循环 <code>arrayValueMap</code> 拼接成QueryString
      * @see <a href="http://www.leveluplunch.com/java/examples/build-convert-map-to-query-string/">build-convert-map-to-query-string</a>
      * @since 1.5.5
@@ -868,7 +868,7 @@ public final class ParamUtil{
      * <blockquote>
      * <ol>
      * <li>拼接的顺序按照 <code>includeKeys</code> 的顺序,目前适用于个别银行(比如汇付天下)需要将值拼接起来加密</li>
-     * <li>如果<code>singleValueMap</code>中的value是null,那么会以{@link StringUtils#EMPTY}替代,进行拼接</li>
+     * <li>如果<code>singleValueMap</code>中的value是null,那么会以{@link com.feilong.core.lang.StringUtil#EMPTY}替代,进行拼接</li>
      * </ol>
      * </blockquote>
      * 
@@ -896,7 +896,7 @@ public final class ParamUtil{
      * @param includeKeys
      *            包含的key
      * @return 如果 <code>singleValueMap</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>includeKeys</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>includeKeys</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         否则循环 <code>includeKeys</code>,依次从 <code>singleValueMap</code>中取到值,连接起来;<br>
      * @see com.feilong.lib.lang3.StringUtils#defaultString(String)
      * @since 1.5.5
@@ -1022,7 +1022,7 @@ public final class ParamUtil{
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 如果 <code>value</code>是 null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>value</code>是 null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果<code>charsetType</code>是 null或者empty,直接返回 <code>value</code><br>
      *         否则先 {@link URIUtil#decode(String, String)} 再 {@link URIUtil#encode(String, String)}值
      * @see <a
@@ -1048,7 +1048,7 @@ public final class ParamUtil{
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 如果 <code>beforePathWithoutQueryString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>beforePathWithoutQueryString</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果<code>arrayValueMap</code> 是null或者empty,返回 <code>beforePathWithoutQueryString</code>
      * @since 1.4.0
      */

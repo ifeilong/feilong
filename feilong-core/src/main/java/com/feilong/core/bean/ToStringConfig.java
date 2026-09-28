@@ -31,7 +31,7 @@ import com.feilong.lib.lang3.builder.ToStringStyle;
  * <ol>
  * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
  * <li>拼接null或者empty元素</li>
- * <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+ * <li>如果元素是null,使用{@link com.feilong.core.lang.StringUtil#EMPTY}替代拼接</li>
  * <li>最后一个元素后面不拼接拼接符</li>
  * </ol>
  * </blockquote>
@@ -66,7 +66,7 @@ public final class ToStringConfig implements Serializable{
      * <ol>
      * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
      * <li>拼接null或者empty元素</li>
-     * <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     * <li>如果元素是null,使用{@link com.feilong.core.lang.StringUtil#EMPTY}替代拼接</li>
      * <li>最后一个元素后面不拼接拼接符</li>
      * </ol>
      * </blockquote>
@@ -157,7 +157,7 @@ public final class ToStringConfig implements Serializable{
      * <ol>
      * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
      * <li>拼接null或者empty元素</li>
-     * <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     * <li>如果元素是null,使用{@link com.feilong.core.lang.StringUtil#EMPTY}替代拼接</li>
      * <li>最后一个元素后面不拼接拼接符</li>
      * </ol>
      * </blockquote>

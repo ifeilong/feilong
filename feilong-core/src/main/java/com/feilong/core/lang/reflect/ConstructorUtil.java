@@ -105,7 +105,8 @@ public final class ConstructorUtil{
      *            类
      * @param parameterValues
      *            构造函数的参数值, 比如100L
-     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 构造出来的 <code>klass</code> 实例<br>
+     *         如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         有任何异常(比如 NoSuchMethodException 找不到相关参数的构造函数),将抛出 {@link ReflectException}
      * @see com.feilong.core.lang.ClassUtil#toClass(Object...)
      * @see java.lang.Class#getConstructor(Class...)
@@ -159,7 +160,8 @@ public final class ConstructorUtil{
      *            the array of arguments, {@code null} treated as empty
      * @param parameterTypes
      *            the array of parameter types, {@code null} treated as empty
-     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 构造出来的 <code>klass</code> 实例<br>
+     *         如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         有任何异常(比如 NoSuchMethodException 找不到相关参数的构造函数),将抛出 {@link ReflectException}
      * @see com.feilong.lib.lang3.reflect.ConstructorUtils#invokeConstructor(Class, Object[], Class[])
      * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"

@@ -325,7 +325,7 @@ public final class URIUtil{
      *
      * @param uriString
      *            the uri
-     * @return 如果 isNullOrEmpty(uriString),返回 {@link StringUtils#EMPTY}
+     * @return 如果 isNullOrEmpty(uriString),返回 {@link com.feilong.core.lang.StringUtil#EMPTY}
      * @since 1.8.0 change to default
      */
     static String getFullPathWithoutQueryString(String uriString){
@@ -352,8 +352,8 @@ public final class URIUtil{
      * 
      * @param uriString
      *            the uri
-     * @return 如果传入的参数 <code>uriString</code> 是null或者是empty,返回 {@link StringUtils#EMPTY};<br>
-     *         如果传入的参数 <code>uriString</code> 不含有?,返回 {@link StringUtils#EMPTY};<br>
+     * @return 如果传入的参数 <code>uriString</code> 是null或者是empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY};<br>
+     *         如果传入的参数 <code>uriString</code> 不含有?,返回 {@link com.feilong.core.lang.StringUtil#EMPTY};<br>
      *         否则截取第一个出现的?后面内容返回
      * @since 1.8.0 change to default
      */
@@ -418,7 +418,7 @@ public final class URIUtil{
      * 
      * @param value
      *            the value
-     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see URLEncoder#encode(String, String)
      * @see <a href="http://www.freeformatter.com/url-encoder.html">URL Encoder / Decoder</a>
      * @since 3.2.1
@@ -463,7 +463,7 @@ public final class URIUtil{
      *            the value
      * @param charsetType
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量
-     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @see URLEncoder#encode(String, String)
      * @see <a href="http://www.freeformatter.com/url-encoder.html">URL Encoder / Decoder</a>
@@ -496,7 +496,7 @@ public final class URIUtil{
      * 
      * @param value
      *            需要被解码的值
-     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
      *      URLDecoder: Incomplete trailing escape (%) pattern</a>
      * @see java.net.URLDecoder#decode(String, String)
@@ -533,7 +533,7 @@ public final class URIUtil{
      *            需要被解码的值
      * @param defaultValue
      *            the default value
-     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
      *      URLDecoder: Incomplete trailing escape (%) pattern</a>
      * @see java.net.URLDecoder#decode(String, String)
@@ -573,7 +573,7 @@ public final class URIUtil{
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      * @param defaultValue
      *            the default value
-     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
      *      URLDecoder: Incomplete trailing escape (%) pattern</a>
@@ -615,7 +615,7 @@ public final class URIUtil{
      *            需要被解码的值
      * @param charsetType
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量
-     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
      *      URLDecoder: Incomplete trailing escape (%) pattern</a>
@@ -637,7 +637,7 @@ public final class URIUtil{
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      * @param encodeOrDecode
      *            true 为encode,false为 decode
-     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @see java.net.URLEncoder#encode(String, String)
      * @see java.net.URLDecoder#decode(String, String)

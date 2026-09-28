@@ -925,9 +925,9 @@ public final class SortUtil{
      * map.put("S", 6);
      * 
      * //L-上市,S-暂停,DE-终止上市,UN-未上市
-     * Map{@code <String, Integer>} sortByKeyAsc = sortMapByKeyFixOrder(map, "L", "UN", "DE", "S", "O");
+     * Map{@code <String, Integer>} fixedOrderMap = sortMapByKeyFixOrder(map, "L", "UN", "DE", "S", "O");
      * 
-     * log.debug(JsonUtil.format(sortByKeyAsc));
+     * log.debug(JsonUtil.format(fixedOrderMap));
      * </pre>
      * 
      * <b>返回:</b>

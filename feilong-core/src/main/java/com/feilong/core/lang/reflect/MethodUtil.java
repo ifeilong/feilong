@@ -321,7 +321,8 @@ public final class MethodUtil{
      *            the args
      * @param parameterTypes
      *            the parameter types
-     * @return 如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 方法执行后的返回值<br>
+     *         如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>methodName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>methodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>obj</code>没有指定的<code>methodName</code>方法,抛出 {@link ReflectException}<br>
@@ -440,7 +441,8 @@ public final class MethodUtil{
      *            静态方法名
      * @param params
      *            动态参数
-     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 方法执行后的返回值<br>
+     *         如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>staticMethodName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>staticMethodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>staticMethodName</code> 是实例方法,非静态方法,抛出 {@link ReflectException}<br>
@@ -525,7 +527,8 @@ public final class MethodUtil{
      *            the args
      * @param parameterTypes
      *            the parameter types
-     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 方法执行后的返回值<br>
+     *         如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>staticMethodName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>staticMethodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>staticMethodName</code> 是实例方法,非静态方法,抛出 {@link ReflectException}<br>

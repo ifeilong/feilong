@@ -142,8 +142,8 @@ public final class ClassLoaderUtil{
      *
      * @param resourceName
      *            the resource name
-     * @return 如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果找不到该资源,或者调用者没有足够的权限获取该资源,则返回 null
+     * @return 资源的 {@link URL};如果找不到该资源,或者调用者没有足够的权限获取该资源,则返回 null<br>
+     *         如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}
      * @see "org.apache.commons.lang3.ClassPathUtils#toFullyQualifiedPath(Package, String)"
      * @see #getResource(ClassLoader, String)
      * @see #getClassLoaderByClass(Class)
@@ -202,8 +202,8 @@ public final class ClassLoaderUtil{
      *            The name of the resource to load
      * @param callingClass
      *            The Class object of the calling object
-     * @return 如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果查找不到资源,那么返回 null
+     * @return 资源的 {@link InputStream};如果查找不到资源,那么返回 null<br>
+     *         如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}
      * @see #getResourceInAllClassLoader(String, Class)
      * @see "org.apache.velocity.util.ClassUtils#getResourceAsStream(Class, String)"
      */
@@ -238,7 +238,8 @@ public final class ClassLoaderUtil{
      *            The name of the resource to load
      * @param callingClass
      *            The Class object of the calling object
-     * @return 如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 资源的 {@link URL}<br>
+     *         如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>callingClass</code> 是null,将会忽略此参数<br>
      *         如果在所有的{@link ClassLoader}里面都查不到资源,那么返回null
      * @since 1.6.2

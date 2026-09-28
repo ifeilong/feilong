@@ -49,7 +49,7 @@ public class LogHelper{
      *
      * @param processLogParamEntity
      *            进度日志参数实体，包含当前进度、总数、开始时间等信息；可以为 null
-     * @return 格式化后的进度日志字符串；如果 {@code processLogParamEntity} 为 null，返回 {@link StringUtils#EMPTY}
+     * @return 格式化后的进度日志字符串；如果 {@code processLogParamEntity} 为 null，返回 {@link com.feilong.core.lang.StringUtil#EMPTY}
      * @since 4.0.0
      */
     public static String getProcessLog(ProcessLogParamEntity processLogParamEntity){

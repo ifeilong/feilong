@@ -108,7 +108,8 @@ public final class ArrayUtil{
      *            数组
      * @param index
      *            索引,从0开始
-     * @return 如果指定的参数{@code index}是负数,或者大于等于指定数组 <code>array</code> 的长度,抛出 {@link ArrayIndexOutOfBoundsException}
+     * @return 指定数组 <code>array</code> 中索引 <code>index</code> 处的元素<br>
+     *         如果指定的参数{@code index}是负数,或者大于等于指定数组 <code>array</code> 的长度,抛出 {@link ArrayIndexOutOfBoundsException}
      * @throws NullPointerException
      *             如果 <code>array</code> 是null
      * @throws IllegalArgumentException
@@ -141,11 +142,12 @@ public final class ArrayUtil{
      *            数组的类型
      * @param length
      *            数组的长度
-     * @return 如果 <code>componentType</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 指定类型 <code>componentType</code>、指定长度 <code>length</code> 的新数组<br>
+     *         如果 <code>componentType</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 {@code length < 0} ,抛出 {@link IllegalArgumentException}<br>
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @see java.lang.reflect.Array#newInstance(Class, int...)
-     * @see "com.google.common.collect#newArray(Class, int)"
+     * @see "com.google.common.collect.ObjectArrays#newArray(Class, int)"
      * @since 1.6.1
      */
     @SuppressWarnings("unchecked")

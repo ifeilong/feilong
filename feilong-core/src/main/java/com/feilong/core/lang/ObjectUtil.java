@@ -115,7 +115,8 @@ public final class ObjectUtil{
      *            {@link com.feilong.lib.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object) copyProperties}
      *            Line2078</li>
      *            </ol>
-     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 按 <code>includePropertyNames</code> 从 <code>fromObj</code> 复制属性后的 <code>klass</code> 新实例<br>
+     *         如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fromObj</code> 是null,直接返回 klass 的实例<br>
      *         如果 <code>includePropertyNames</code> 是null或者empty,将复制全部属性<br>
      * @see com.feilong.core.lang.reflect.ConstructorUtil#newInstance(Class, Object...)
@@ -736,7 +737,8 @@ public final class ObjectUtil{
      *
      * @param object
      *            the object
-     * @return 如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 是否数组<br>
+     *         如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
      * @see <a href="http://stackoverflow.com/questions/219881/java-array-reflection-isarray-vs-instanceof">Java array reflection: isArray
      *      vs. instanceof</a>
      * @see <a href="http://stackoverflow.com/questions/2725533/how-to-see-if-an-object-is-an-array-without-using-reflection">How to see if
@@ -775,7 +777,8 @@ public final class ObjectUtil{
      *
      * @param object
      *            the object
-     * @return 如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 是否是原生类型数组<br>
+     *         如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.8.4
      */
     public static boolean isPrimitiveArray(Object object){
