@@ -56,7 +56,7 @@ abstract class AbstractFormatter{
      *            the generic type
      * @param bean
      *            the bean
-     * @return 如果 <code>bean</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>bean</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      */
     public <T> String format(T bean){
         return isNullOrEmpty(bean) ? EMPTY : format(PropertyUtil.describe(bean));
@@ -71,7 +71,7 @@ abstract class AbstractFormatter{
      *            the value type
      * @param map
      *            the map
-     * @return 如果 <code>map</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>map</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      */
     public <K, V> String format(Map<K, V> map){
         if (isNullOrEmpty(map)){
@@ -107,7 +107,7 @@ abstract class AbstractFormatter{
      *            the generic type
      * @param iterable
      *            the iterable
-     * @return 如果 <code>iterable</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>iterable</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      */
     public <T> String format(Iterable<T> iterable){
         return format(iterable, null);
@@ -122,7 +122,7 @@ abstract class AbstractFormatter{
      *            the iterable
      * @param beanFormatterConfig
      *            the bean formatter config
-     * @return 如果 <code>iterable</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>iterable</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      */
     public <T> String format(Iterable<T> iterable,BeanFormatterConfig beanFormatterConfig){
         if (isNullOrEmpty(iterable)){

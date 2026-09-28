@@ -200,7 +200,7 @@ public final class FilenameUtil{
      * 
      * <pre class="code">
      * F:/pie2.png  返回  png
-     * F:/pie2      返回 {@link StringUtils#EMPTY}
+     * F:/pie2      返回 {@link com.feilong.core.lang.StringUtil#EMPTY}
      * </pre>
      * 
      * </blockquote>
@@ -221,7 +221,7 @@ public final class FilenameUtil{
      * @param fileName
      *            文件名称
      * @return 不带. 的后缀,<br>
-     *         如果 <code>fileName</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>fileName</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see com.feilong.lib.io.FilenameUtils#getExtension(String)
      * @see java.lang.String#substring(int, int)
      * @since 1.4.0

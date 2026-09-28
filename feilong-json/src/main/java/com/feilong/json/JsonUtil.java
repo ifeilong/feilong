@@ -173,7 +173,7 @@ public final class JsonUtil{
      * 
      * @param obj
      *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see #format(Object, JavaToJsonConfig)
      */
     public static String format(Object obj){
@@ -260,7 +260,7 @@ public final class JsonUtil{
      *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param isIgnoreNullValueElement
      *            是否忽略 null value 元素,true 表示忽略
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see #format(Object, JavaToJsonConfig)
      * @see com.feilong.json.JavaToJsonConfig#JavaToJsonConfig(boolean)
      * @since 2.0.0
@@ -279,7 +279,7 @@ public final class JsonUtil{
      *            是否忽略 null value 元素,true 表示忽略
      * @param ifIgnoreNullValueElementIncludes
      *            the if ignore null value element includes
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see #format(Object, JavaToJsonConfig)
      * @see com.feilong.json.JavaToJsonConfig#JavaToJsonConfig(boolean)
      * @since 4.0.4
@@ -317,7 +317,7 @@ public final class JsonUtil{
      *            the value type
      * @param inputMap
      *            the input map
-     * @return 如果 <code>inputMap</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>inputMap</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @since 1.3.0
      */
     public static <K, V> String formatSimpleMap(Map<K, V> inputMap){
@@ -353,7 +353,7 @@ public final class JsonUtil{
      *            the input map
      * @param allowFormatClassTypes
      *            除了基本类型,数组之外允许的类型,请确保该类型可以被json format输出
-     * @return 如果 <code>inputMap</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>inputMap</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @since 1.3.0
      */
     public static <K, V> String formatSimpleMap(Map<K, V> inputMap,Class<?>...allowFormatClassTypes){
@@ -416,7 +416,7 @@ public final class JsonUtil{
      *
      * @param obj
      *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @since 3.1.1
      */
     public static String toString(Object obj){
@@ -482,7 +482,7 @@ public final class JsonUtil{
      *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param excludes
      *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @since 4.3.1
      */
     public static String toString(Object obj,String...excludes){
@@ -548,7 +548,7 @@ public final class JsonUtil{
      *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param isIgnoreNullValueElement
      *            是否忽略 null value 元素,true 表示忽略
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see #format(Object, JavaToJsonConfig)
      * @see com.feilong.json.JavaToJsonConfig#JavaToJsonConfig(boolean)
      * @since 3.2.2
@@ -567,7 +567,7 @@ public final class JsonUtil{
      *            是否忽略 null value 元素,true 表示忽略
      * @param ifIgnoreNullValueElementIncludes
      *            the if ignore null value element includes
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see #format(Object, JavaToJsonConfig)
      * @see com.feilong.json.JavaToJsonConfig#JavaToJsonConfig(boolean)
      * @since 4.0.4
@@ -611,7 +611,7 @@ public final class JsonUtil{
      *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param javaToJsonConfig
      *            the json format config
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @since 3.2.2
      */
     public static String toString(Object obj,JavaToJsonConfig javaToJsonConfig){
@@ -677,7 +677,7 @@ public final class JsonUtil{
      *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param excludes
      *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">java.lang.ClassCastException: JSON keys must be strings</a>
      * @since 3.0.5 change param type {@code String[]excludes} to {@code String...excludes}
      */
@@ -737,7 +737,7 @@ public final class JsonUtil{
      *            the indent factor
      * @param indent
      *            the indent
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see #format(Object, JavaToJsonConfig)
      * @see JavaToJsonConfigBuilder#build(String[], String[])
      */
@@ -789,7 +789,7 @@ public final class JsonUtil{
      *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param includes
      *            the includes
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see #format(Object, JavaToJsonConfig)
      * @see JavaToJsonConfigBuilder#build(String[], String[])
      * @since 1.0.8
@@ -906,7 +906,7 @@ public final class JsonUtil{
      *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param javaToJsonConfig
      *            the json format config
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @since 1.2.2
      */
     public static String format(Object obj,JavaToJsonConfig javaToJsonConfig){
@@ -926,7 +926,7 @@ public final class JsonUtil{
      *            the indent factor
      * @param indent
      *            the indent
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>javaToJsonConfig</code> 是null,将使用默认的,参见
      *         {@link JavaToJsonConfigBuilder#buildUseJavaToJsonConfig(Object, JavaToJsonConfig)} <br>
      * @since 1.2.2
@@ -970,7 +970,7 @@ public final class JsonUtil{
      * 
      * @param obj
      *            可以是Java bean
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         否则取到该对象 所有field 的name 和value值 map {@link FieldUtil#getAllFieldNameAndValueMap(Object, String...)} 调用
      *         {@link #format(Object, JavaToJsonConfig)},再次过程中,会处理 {@link SensitiveWords}
      * @see FieldUtil#getAllFieldNameAndValueMap(Object, String...)

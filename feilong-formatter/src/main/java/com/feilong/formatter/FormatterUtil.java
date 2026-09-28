@@ -193,7 +193,7 @@ public final class FormatterUtil{
      *            支持entity,比如Member,也支持 Map
      * @param iterable
      *            the iterable
-     * @return 如果 <code>iterable</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>iterable</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      */
     public static final <T> String formatToSimpleTable(Iterable<T> iterable){
         return SIMPLE_TABLE_FORMATTER.format(iterable);
@@ -252,7 +252,7 @@ public final class FormatterUtil{
      *            the iterable
      * @param beanFormatterConfig
      *            the bean formatter config
-     * @return 如果 <code>iterable</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>iterable</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      */
     public static final <T> String formatToSimpleTable(Iterable<T> iterable,BeanFormatterConfig beanFormatterConfig){
         return SIMPLE_TABLE_FORMATTER.format(iterable, beanFormatterConfig);
@@ -336,7 +336,7 @@ public final class FormatterUtil{
      *            the iterable
      * @param sorts
      *            the sorts
-     * @return 如果 <code>iterable</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>iterable</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @since 1.11.0
      */
     public static final <T> String formatToSimpleTable(Iterable<T> iterable,String...sorts){
@@ -409,7 +409,7 @@ public final class FormatterUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果 <code>map</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>map</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      * @see com.feilong.formatter.AbstractFormatter#format(Map)
      * @see com.feilong.core.util.SortUtil#sortMapByKeyAsc(Map)
      */
@@ -474,7 +474,7 @@ public final class FormatterUtil{
      *            the generic type
      * @param bean
      *            the bean
-     * @return 如果 <code>bean</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>bean</code> 是null,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      */
     public static final <T> String formatToSimpleTable(T bean){
         return SIMPLE_TABLE_FORMATTER.format(bean);

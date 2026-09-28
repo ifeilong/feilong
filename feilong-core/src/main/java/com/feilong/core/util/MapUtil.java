@@ -755,7 +755,7 @@ public final class MapUtil{
      * 
      * arrayValueMap.put("province", new String[] { "江苏省" });
      * arrayValueMap.put("city", new String[] { "南通市" });
-     * log.info(JsonUtil.format(ParamUtil.toSingleValueMap(arrayValueMap)));
+     * log.info(JsonUtil.format(MapUtil.toSingleValueMap(arrayValueMap)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -781,7 +781,7 @@ public final class MapUtil{
      * 
      * arrayValueMap.put("province", new String[] { "浙江省", "江苏省" });
      * arrayValueMap.put("city", new String[] { "南通市" });
-     * log.info(JsonUtil.format(ParamUtil.toSingleValueMap(arrayValueMap)));
+     * log.info(JsonUtil.format(MapUtil.toSingleValueMap(arrayValueMap)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -838,7 +838,7 @@ public final class MapUtil{
      * singleValueMap.put("province", "江苏省");
      * singleValueMap.put("city", "南通市");
      * 
-     * log.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap)));
+     * log.info(JsonUtil.format(MapUtil.toArrayValueMap(singleValueMap)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -884,7 +884,7 @@ public final class MapUtil{
      * singleValueMap.put("province", "江苏省");
      * singleValueMap.put("city", "南通市");
      * 
-     * log.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap,String.class)));
+     * log.info(JsonUtil.format(MapUtil.toArrayValueMap(singleValueMap,String.class)));
      * </pre>
      * 
      * <b>返回:</b>

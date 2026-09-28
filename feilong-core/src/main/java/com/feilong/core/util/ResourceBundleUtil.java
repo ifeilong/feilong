@@ -392,7 +392,7 @@ public final class ResourceBundleUtil{
      * </b>
      * 
      * <pre class="code">
-     * Properties properties = ResourceBundleUtil.toProperties("messages.memcached");
+     * Properties properties = ResourceBundleUtil.toProperties(ResourceBundleUtil.getResourceBundle("messages.memcached"));
      * log.debug(JsonUtil.format(properties));
      * </pre>
      * 
@@ -526,7 +526,8 @@ public final class ResourceBundleUtil{
      * </b>
      * 
      * <pre class="code">
-     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.toAliasBean("messages.memcached", DangaMemCachedConfig.class);
+     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.toAliasBean(
+     *                 ResourceBundleUtil.getResourceBundle("messages.memcached"), DangaMemCachedConfig.class);
      * log.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
@@ -573,7 +574,8 @@ public final class ResourceBundleUtil{
      * 
      * ConvertUtils.register(arrayConverter, String[].class);
      * 
-     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.toAliasBean("messages.memcached", DangaMemCachedConfig.class);
+     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.toAliasBean(
+     *                 ResourceBundleUtil.getResourceBundle("messages.memcached"), DangaMemCachedConfig.class);
      * log.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
