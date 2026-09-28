@@ -34,7 +34,6 @@ import java.util.Set;
 import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.reflect.ConstructorUtil;
-import com.feilong.lib.beanutils.PropertyUtils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

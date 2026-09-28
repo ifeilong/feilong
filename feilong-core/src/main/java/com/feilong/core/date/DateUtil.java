@@ -50,7 +50,6 @@ import java.util.GregorianCalendar;
 import java.util.Map;
 
 import com.feilong.core.DatePattern;
-import com.feilong.core.TimeInterval;
 import com.feilong.core.Validate;
 import com.feilong.lib.lang3.time.DateFormatUtils;
 import com.feilong.lib.lang3.time.DateUtils;

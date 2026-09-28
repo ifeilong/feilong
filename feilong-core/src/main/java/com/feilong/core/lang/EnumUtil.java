@@ -18,7 +18,6 @@ package com.feilong.core.lang;
 import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import com.feilong.core.Validate;
-import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.lang3.StringUtils;
 

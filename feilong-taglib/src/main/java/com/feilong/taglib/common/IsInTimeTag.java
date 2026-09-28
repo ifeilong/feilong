@@ -21,7 +21,6 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.util.Date;
 
-import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.taglib.AbstractConditionalTag;
 

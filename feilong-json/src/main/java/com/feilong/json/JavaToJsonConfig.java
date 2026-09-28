@@ -17,7 +17,6 @@ package com.feilong.json;
 
 import java.util.Map;
 
-import com.feilong.json.builder.JsonConfigBuilder;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.util.PropertyFilter;

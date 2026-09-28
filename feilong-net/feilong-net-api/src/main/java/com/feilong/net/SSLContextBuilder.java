@@ -17,9 +17,7 @@ package com.feilong.net;
 
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
-import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
 
 import com.feilong.lib.net.util.SSLContextUtils;
 import com.feilong.lib.net.util.TrustManagerUtils;

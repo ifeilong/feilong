@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.feilong.core.Validate;
-import com.feilong.core.bean.ConvertUtil;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

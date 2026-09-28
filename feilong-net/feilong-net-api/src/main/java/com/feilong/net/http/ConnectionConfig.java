@@ -18,10 +18,6 @@ package com.feilong.net.http;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 
-import javax.net.ssl.HostnameVerifier;
-
-import com.feilong.core.CharsetType;
-import com.feilong.core.TimeInterval;
 import com.feilong.lib.lang3.builder.EqualsBuilder;
 import com.feilong.lib.lang3.builder.HashCodeBuilder;
 import com.feilong.lib.lang3.builder.ToStringBuilder;

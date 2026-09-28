@@ -21,7 +21,6 @@ import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static java.util.Collections.emptyList;
 
-import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +30,6 @@ import com.feilong.core.net.URIUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.core.util.AggregateUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.lang3.StringUtils;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbVMParams;

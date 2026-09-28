@@ -17,7 +17,6 @@ package com.feilong.core.bean;
 
 import java.io.Serializable;
 
-import com.feilong.lib.lang3.StringUtils;
 import com.feilong.lib.lang3.builder.ToStringBuilder;
 import com.feilong.lib.lang3.builder.ToStringStyle;
 

@@ -21,7 +21,6 @@ import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
-import com.feilong.lib.lang3.StringUtils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

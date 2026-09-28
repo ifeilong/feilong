@@ -21,7 +21,6 @@ import static com.feilong.core.util.CollectionsUtil.toStream;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -36,7 +35,6 @@ import org.apache.commons.collections4.Transformer;
 
 import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.util.predicate.BeanPredicateUtil;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

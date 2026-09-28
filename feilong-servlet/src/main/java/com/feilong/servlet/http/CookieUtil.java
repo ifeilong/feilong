@@ -21,7 +21,6 @@ import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.bean.ConvertUtil.toLong;
 import static java.util.Collections.emptyMap;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
