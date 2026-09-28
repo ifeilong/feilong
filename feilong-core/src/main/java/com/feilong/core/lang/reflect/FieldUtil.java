@@ -187,7 +187,7 @@ public final class FieldUtil{
      * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>excludeFieldNames</code> 是null或者empty,解析所有的field<br>
      *         如果 {@link FieldUtils#getAllFieldsList(Class)} 是null或者empty,返回 {@link Collections#emptyList()}<br>
-     *         如果 <code>klass</code>没有字段或者字段都被参数 <code>excludeFieldNames</code> 排除掉了,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>klass</code>没有字段或者字段都被参数 <code>excludeFieldNames</code> 排除掉了,返回 {@link Collections#emptyList()}<br>
      * @see FieldUtils#getAllFieldsList(Class)
      * @since 1.7.1
      */
@@ -228,10 +228,8 @@ public final class FieldUtil{
      *            the owner
      * @param fieldName
      *            the field name
-     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>fieldName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>fieldName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>obj</code> 中没有 <code>fieldName</code>,抛出 {@link ReflectException}<br>
+     * @return 如果 <code>obj</code> 是null,或者 <code>fieldName</code> 是null/blank,或者 <code>obj</code> 中没有 <code>fieldName</code>,<br>
+     *         读取过程中的任何异常都会统一包装成 {@link ReflectException} 抛出<br>
      * @see com.feilong.lib.lang3.reflect.FieldUtils#readField(Object, String, boolean)
      * @since 1.4.0
      * @since 1.9.2 change to private

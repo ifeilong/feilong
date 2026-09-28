@@ -321,7 +321,7 @@ public final class ParamUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>内部使用 {@link LinkedHashMap},map顺序依照 <code>queryString</code> 逗号分隔的顺序</li>
+     * <li>内部使用 {@link LinkedHashMap},map顺序依照 <code>queryString</code> 中参数的顺序</li>
      * <li>解析方式:参数和参数之间是以 {@code &} 分隔, 参数的key和value 是以 = 号分隔</li>
      * </ol>
      * </blockquote>

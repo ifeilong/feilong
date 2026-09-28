@@ -59,8 +59,10 @@ public final class ToStringHandler{
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
      *         如果 <code>toBeConvertedValue</code> 是 {@link CharSequence},直接 toString返回<br>
      *         如果 <code>toBeConvertedValue</code> 是 数组,那么调用 {@link ConvertUtil#toString(Object[], String)}<br>
-     *         如果 <code>toBeConvertedValue</code> 是 {@link Collection},那么调用 {@link ConvertUtil#toString(Object[], String)}<br>
+     *         如果 <code>toBeConvertedValue</code> 是 {@link Collection},那么调用 {@link ConvertUtil#toString(Collection, String)}<br>
      *         如果 <code>toBeConvertedValue</code> 是 {@link Date},那么返回 {@link com.feilong.core.DatePattern#COMMON_DATE_AND_TIME} 格式字符串<br>
+     *         如果 <code>toBeConvertedValue</code> 是 {@link Calendar},那么返回其 {@link Calendar#getTime()} 的
+     *         {@link com.feilong.core.DatePattern#COMMON_DATE_AND_TIME} 格式字符串<br>
      *         如果 <code>toBeConvertedValue</code> 是 {@link BigDecimal}或者是{@link Float}或者是 {@link Double},那么返回
      *         {@link com.feilong.core.NumberPattern#TWO_DECIMAL_POINTS} 2 位小数点格式字符串<br>
      *         其他调用 {@link com.feilong.core.bean.ConvertUtil#convert(Object, Class)}

@@ -282,7 +282,7 @@ public final class NumberUtil{
      * <h3>原理:</h3>
      * <blockquote>
      * <ol>
-     * <li>是将两个数组转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
+     * <li>是将两个数字转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
      * </ol>
      * </blockquote>
      * 
@@ -324,7 +324,7 @@ public final class NumberUtil{
      * <h3>原理:</h3>
      * <blockquote>
      * <ol>
-     * <li>是将两个数组转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
+     * <li>是将两个数字转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
      * </ol>
      * </blockquote>
      * 
@@ -367,7 +367,7 @@ public final class NumberUtil{
      * <h3>原理:</h3>
      * <blockquote>
      * <ol>
-     * <li>是将两个数组转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
+     * <li>是将两个数字转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
      * </ol>
      * </blockquote>
      * 
@@ -410,7 +410,7 @@ public final class NumberUtil{
      * <h3>原理:</h3>
      * <blockquote>
      * <ol>
-     * <li>是将两个数组转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
+     * <li>是将两个数字转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
      * </ol>
      * </blockquote>
      * 
@@ -451,7 +451,7 @@ public final class NumberUtil{
      * <h3>原理:</h3>
      * <blockquote>
      * <ol>
-     * <li>是将两个数组转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
+     * <li>是将两个数字转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
      * </ol>
      * </blockquote>
      * 
@@ -541,9 +541,9 @@ public final class NumberUtil{
      * </blockquote>
      * 
      * @param one
-     *            除数
-     * @param two
      *            被除数,自动转成{@link BigDecimal}做除法运算
+     * @param two
+     *            除数
      * @param scale
      *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
      *            如果为零或正数,则标度是小数点后的位数。<br>
@@ -579,9 +579,9 @@ public final class NumberUtil{
      * </blockquote>
      * 
      * @param one
-     *            除数
-     * @param two
      *            被除数,自动转成{@link BigDecimal}做除法运算
+     * @param two
+     *            除数
      * @param scale
      *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
      *            如果为零或正数,则标度是小数点后的位数。<br>
@@ -737,7 +737,7 @@ public final class NumberUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>支持跳过null 元素相加 (since 1.11.5)</li>
+     * <li>支持跳过null 元素相减 (since 1.11.5)</li>
      * </ol>
      * </blockquote>
      * 

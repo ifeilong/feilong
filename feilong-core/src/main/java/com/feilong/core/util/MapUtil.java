@@ -256,7 +256,7 @@ public final class MapUtil{
      * 
      *           {@code
      *         V result = map.get(key);
-     *         if (null != mappingFunction){
+     *         if (null != result){
      *             return result;
      *           }
      *           return map.computeIfAbsent(key, mappingFunction);
@@ -2466,7 +2466,7 @@ public final class MapUtil{
      *            the key type
      * @param <V>
      *            the value type
-     * @return a new, empty {@code ConcurrentHashMap}
+     * @return a new, empty {@code TreeMap}
      * @since 1.10.7
      * @apiNote 可以使用静态导入,简化 {@code new TreeMap<>()} 的写法
      */

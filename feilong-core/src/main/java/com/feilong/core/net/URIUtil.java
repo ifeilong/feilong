@@ -373,7 +373,7 @@ public final class URIUtil{
      *
      * @param uriString
      *            the uri string
-     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 false
      * @since 1.8.0 change to private
      */
     // XXX 有待严谨

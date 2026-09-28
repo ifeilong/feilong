@@ -68,7 +68,7 @@ public final class Slf4jUtil{
      *            message的格式,比如 callbackUrl:[{}] ,length:[{}]
      * @param args
      *            参数
-     * @return 如果 <code>messagePattern</code> 是null,返回 null<br>
+     * @return 如果 <code>messagePattern</code> 是null,返回 {@link StringUtil#EMPTY}<br>
      *         如果 <code>args</code> 是null,返回 <code>messagePattern</code><br>
      * @see org.slf4j.helpers.FormattingTuple
      * @see org.slf4j.helpers.MessageFormatter#arrayFormat(String, Object[])

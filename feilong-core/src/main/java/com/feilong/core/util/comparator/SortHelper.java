@@ -59,9 +59,9 @@ public final class SortHelper{
      * SortHelper.parsePropertyNameAndOrder("name ") = toArray("name", null);
      * SortHelper.parsePropertyNameAndOrder(" name") = toArray("name", null);
      * 
-     * SortHelper.parsePropertyNameAndOrder("name asc") = toArray("name", "aSc");
-     * SortHelper.parsePropertyNameAndOrder("name aSc") = toArray("name", "asc");
-     * SortHelper.parsePropertyNameAndOrder("name   aSc") = toArray("name", "asc");
+     * SortHelper.parsePropertyNameAndOrder("name asc") = toArray("name", "asc");
+     * SortHelper.parsePropertyNameAndOrder("name aSc") = toArray("name", "aSc");
+     * SortHelper.parsePropertyNameAndOrder("name   aSc") = toArray("name", "aSc");
      * 
      * SortHelper.parsePropertyNameAndOrder("name desc") = toArray("name", "desc");
      * 
@@ -158,7 +158,7 @@ public final class SortHelper{
      * @param propertyNameAndOrderArray
      *            属性名称和排序因子数组,length 是2<br>
      *            第一个元素是属性名称,比如 "name",第二个元素是排序因子,比如asc或者是desc或者是null<br>
-     * @return 如果数组第二个值是null或者empty,或者值是asc(忽略大小写),那么判定是asc排序
+     * @return 如果数组第二个值是null,或者值是asc(忽略大小写),那么判定是asc排序
      * @throws NullPointerException
      *             如果 <code>propertyNameAndOrderArray</code> 是null
      * @throws IllegalArgumentException

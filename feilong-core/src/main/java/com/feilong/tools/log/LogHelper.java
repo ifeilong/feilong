@@ -151,7 +151,7 @@ public class LogHelper{
     //---------------------------------------------------------------
 
     /**
-     * 追加一个带有名称和值的条目到 {@link StringBuilder} 中，值会按指定长度左对齐填充。
+     * 追加一个带有名称和值的条目到 {@link StringBuilder} 中，值会按指定长度右对齐填充（左侧补空格）。
      *
      * @param sb
      *            目标 StringBuilder
@@ -160,7 +160,7 @@ public class LogHelper{
      * @param itemValue
      *            条目值字符串
      * @param itemValueLenth
-     *            值部分的填充长度（左对齐）
+     *            值部分的填充长度（右对齐,左侧补空格）
      * @since 4.0.0
      */
     private static void appendItem(StringBuilder sb,String itemName,String itemValue,int itemValueLenth){
@@ -169,14 +169,14 @@ public class LogHelper{
     }
 
     /**
-     * 追加一个值到 {@link StringBuilder} 中，值会按指定长度左对齐填充。
+     * 追加一个值到 {@link StringBuilder} 中，值会按指定长度右对齐填充（左侧补空格）。
      *
      * @param sb
      *            目标 StringBuilder
      * @param itemValue
      *            值字符串
      * @param itemValueLenth
-     *            填充长度（左对齐）
+     *            填充长度（右对齐,左侧补空格）
      * @since 4.0.0
      */
     private static void appendItem(StringBuilder sb,String itemValue,int itemValueLenth){

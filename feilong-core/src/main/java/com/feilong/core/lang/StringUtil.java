@@ -269,9 +269,10 @@ public final class StringUtil{
      * </p>
      *
      * @param bytes
-     *            The bytes to be decoded into characters, may be <code>null</code>
-     * @return A new <code>String</code> decoded from the specified array of bytes using the given charset,
-     *         or <code>null</code> if the input byte array was <code>null</code>.
+     *            The bytes to be decoded into characters, must not be <code>null</code>
+     * @return a new <code>String</code> decoded from the specified array of bytes using the given charset
+     * @throws NullPointerException
+     *             if the input byte array is <code>null</code>
      * @see String#String(byte[], String)
      * @see "org.apache.commons.lang3.StringUtils#toString(byte[], String)"
      * @see com.feilong.lib.lang3.StringUtils#toEncodedString(byte[], Charset)
@@ -286,11 +287,12 @@ public final class StringUtil{
      * Constructs a new <code>String</code> by decoding the specified array of bytes using the given charset.
      *
      * @param bytes
-     *            The bytes to be decoded into characters, may be <code>null</code>
+     *            The bytes to be decoded into characters, must not be <code>null</code>
      * @param charsetType
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量
-     * @return A new <code>String</code> decoded from the specified array of bytes using the given charset,
-     *         or <code>null</code> if the input byte array was <code>null</code>.
+     * @return a new <code>String</code> decoded from the specified array of bytes using the given charset
+     * @throws NullPointerException
+     *             if the input byte array is <code>null</code>
      * @see String#String(byte[], String)
      * @see "org.apache.commons.lang3.StringUtils#toString(byte[], String)"
      * @see com.feilong.lib.lang3.StringUtils#toEncodedString(byte[], Charset)
@@ -1278,7 +1280,7 @@ public final class StringUtil{
      *            the element
      * @return 如果 <code>config</code> 是null或者empty,返回false<br>
      *         如果 <code>element</code> 是null,返回false<br>
-     *         否则将config 使用逗号分隔成字符串数组,然后逐个转换成element类型,如果相等,返回true ,否则false
+     *         否则将config 使用 <code>delimiters</code> 分隔成字符串数组,然后逐个转换成element类型,如果相等,返回true ,否则false
      * @since 3.3.7
      */
     public static <T> boolean tokenizeToArrayContains(String config,String delimiters,T element){
@@ -1307,7 +1309,7 @@ public final class StringUtil{
     //---------------------------------------------------------------
 
     /**
-     * 将 189=988;200=455;这种格式的字符串转换成map , map的key 是189这种, value 是988,455 这种等号后面的值,使用逗号分隔成list.
+     * 将 189=988;200=455;这种格式的字符串转换成map , map的key 是189这种, value 是988这种等号后面的值.
      * 
      * <h3>示例:</h3>
      * 
@@ -1342,7 +1344,7 @@ public final class StringUtil{
     }
 
     /**
-     * 将 189=988;200=455;这种格式的字符串转换成map , map的key 是189这种, value 是988,455 这种等号后面的值,使用逗号分隔成list.
+     * 将 189=988;200=455;这种格式的字符串转换成map , map的key 是189这种, value 是988这种等号后面的值.
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -1984,7 +1986,7 @@ public final class StringUtil{
      *            message的格式,比如 callbackUrl:[{}] ,length:[{}]
      * @param args
      *            参数
-     * @return 如果 <code>messagePattern</code> 是null,返回 null<br>
+     * @return 如果 <code>messagePattern</code> 是null,返回 {@link #EMPTY}<br>
      *         如果 <code>args</code> 是null,返回 <code>messagePattern</code><br>
      * @see org.slf4j.helpers.FormattingTuple
      * @see org.slf4j.helpers.MessageFormatter#arrayFormat(String, Object[])

@@ -254,7 +254,7 @@ public final class ObjectUtil{
     }
 
     /**
-     * 如果 <code>booleanValue</code> 是null,返回 <code>booleanValue</code>;非null时候原样返回.
+     * 如果 <code>booleanValue</code> 是null,返回 <code>false</code>;非null时候原样返回.
      *
      * <pre>
      * ObjectUtil.defaultFalseIfNull(null)      = false
@@ -647,7 +647,7 @@ public final class ObjectUtil{
      * @return 如果 <code>count</code> 是null 返回 <code>defaultValue</code>
      *         如果 <code>count</code> {@code <=} 0,返回 <code>defaultValue</code>
      *         如果 <code>count</code> {@code >} defaultValue,返回 <code>defaultValue</code>
-     *         否则返回 <code>defaultValue</code>
+     *         否则返回 <code>count</code>
      * @since 4.3.0
      */
     public static Integer defaultCountIfNullZeroOrGreaterThan(Integer count,Integer defaultValue){

@@ -1241,7 +1241,7 @@ public final class AggregateUtil{
      *            the property name
      * @param propertyValueAndTransformerMap
      *            the property name value converter map
-     * @return the string
+     * @return 转换之后的值
      * @since 1.10.7
      */
     private static <O> Object convertValue(
