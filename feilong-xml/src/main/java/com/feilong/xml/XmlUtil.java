@@ -367,7 +367,7 @@ public class XmlUtil{
      *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>map</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>map</code> 有 null key,将抛出 异常<br>
-     *         如果 <code>map</code> 有 null value,将转成 {@link StringUtils#EMPTY}代替<br>
+     *         如果 <code>map</code> 有 null value,将转成 {@link com.feilong.core.lang.StringUtil#EMPTY}代替<br>
      * 
      * @see SimpleMapConverter
      * @since 1.10.7
@@ -464,7 +464,7 @@ public class XmlUtil{
      *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>map</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>map</code> 有 null key,将抛出 异常<br>
-     *         如果 <code>map</code> 有 null value,将转成 {@link StringUtils#EMPTY}代替<br>
+     *         如果 <code>map</code> 有 null value,将转成 {@link com.feilong.core.lang.StringUtil#EMPTY}代替<br>
      * @see SimpleMapConverter
      */
     public static <K, V> String toXML(Map<K, V> map,String rootElementName,boolean isPrettyPrint){

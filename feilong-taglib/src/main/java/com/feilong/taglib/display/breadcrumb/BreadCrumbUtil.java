@@ -85,7 +85,7 @@ public class BreadCrumbUtil{
      *         <ul>
      *         <li>如果 isNullOrEmpty(breadCrumbParams) , throw {@link NullPointerException}</li>
      *         <li>如果 isNullOrEmpty(breadCrumbEntityList) , throw {@link NullPointerException}</li>
-     *         <li>如果 isNullOrEmpty(currentBreadCrumbEntityTreeList) , throw {@link StringUtils#EMPTY}</li>
+     *         <li>如果 isNullOrEmpty(currentBreadCrumbEntityTreeList) ,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}</li>
      *         </ul>
      */
     public static String getBreadCrumbContent(BreadCrumbParams breadCrumbParams){

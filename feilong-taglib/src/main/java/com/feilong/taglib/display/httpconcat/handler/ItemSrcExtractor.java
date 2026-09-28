@@ -126,7 +126,7 @@ public class ItemSrcExtractor{
      *            the regex pattern
      * @param domain
      *            the domain
-     * @return 如果 <code>workItem</code> 不符合regexPattern,那么返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>workItem</code> 不符合regexPattern,那么返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      */
     private static String pickUp(String workItem,String regexPattern,String domain){
         String value = RegexUtil.group(regexPattern, workItem, 1);

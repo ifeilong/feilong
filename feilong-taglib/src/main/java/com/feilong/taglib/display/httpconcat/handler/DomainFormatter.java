@@ -37,7 +37,7 @@ public final class DomainFormatter{
      *
      * @param domain
      *            the domain
-     * @return 如果 <code>domain</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>domain</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果 <code>domain</code> 不是以 单斜杆 / 结尾,拼接一个 单斜杆 / <br>
      *         如果 <code>domain</code> 是以 双斜杠 // 结尾,只保留一个 / <br>
      *         其他原样返回<br>

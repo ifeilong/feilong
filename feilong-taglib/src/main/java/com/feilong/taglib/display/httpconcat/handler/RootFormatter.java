@@ -38,7 +38,7 @@ public final class RootFormatter{
      *
      * @param root
      *            the root
-     * @return 如果 <code>root</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>root</code> 是null或者empty,返回 {@link com.feilong.core.lang.StringUtil#EMPTY}<br>
      *         如果不是以 单斜杆结尾,那么加上一个单斜杆 <br>
      *         如果是以 单斜杆开头,去掉开头的单斜杆 <br>
      */
