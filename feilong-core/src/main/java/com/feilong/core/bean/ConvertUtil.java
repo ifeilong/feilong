@@ -3420,7 +3420,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * ConvertUtil.convert("1", Integer.class)      =1
-     * ConvertUtil.convert("", Integer.class)       =0
+     * ConvertUtil.convert("", Integer.class)       = null
      * ConvertUtil.convert("1", Long.class)         =1
      * </pre>
      * 
@@ -3515,7 +3515,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * Integer[] int1 = { 2, null, 1, null };
-     * log.debug(ConvertUtil.toString(int1),String.class);        = 2
+     * log.debug(ConvertUtil.toString(int1));        = 2
      * </pre>
      * 
      * <p>
