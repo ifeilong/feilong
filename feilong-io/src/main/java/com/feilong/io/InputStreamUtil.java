@@ -108,7 +108,7 @@ public final class InputStreamUtil{
      * 使用默认的编码集 {@link Charset#defaultCharset()} 将 {@link java.io.InputStream} 转成string.
      * 
      * <p>
-     * 如果需要将 {@link String} 转成 {@link InputStream} 可以调用 {@link IOUtils#toInputStream(String, Charset)}
+     * 如果需要将 {@link String} 转成 {@link InputStream} 可以调用 {@code IOUtils#toInputStream(String, Charset)}
      * </p>
      * 
      * @param inputStream
@@ -134,7 +134,7 @@ public final class InputStreamUtil{
      * </p>
      * 
      * <p>
-     * 如果需要将 {@link String} 转成 {@link InputStream} 可以调用 {@link IOUtils#toInputStream(String, Charset)}
+     * 如果需要将 {@link String} 转成 {@link InputStream} 可以调用 {@code IOUtils#toInputStream(String, Charset)}
      * </p>
      * 
      * @param inputStream

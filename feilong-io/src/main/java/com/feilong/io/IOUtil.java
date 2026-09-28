@@ -39,9 +39,9 @@ public final class IOUtil{
 
     /**
      * The default buffer size ({@value}) to use for
-     * {@link #copyLarge(InputStream, OutputStream)}
+     * {@code copyLarge(InputStream, OutputStream)}
      * and
-     * {@link #copyLarge(Reader, Writer)}
+     * {@code copyLarge(Reader, Writer)}
      */
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
@@ -175,7 +175,7 @@ public final class IOUtil{
      * This method buffers the input internally, so there is no need to use a
      * <code>BufferedInputStream</code>.
      * <p>
-     * The buffer size is given by {@link #DEFAULT_BUFFER_SIZE}.
+     * The buffer size is given by {@code DEFAULT_BUFFER_SIZE}.
      *
      * @param input
      *            the <code>InputStream</code> to read from

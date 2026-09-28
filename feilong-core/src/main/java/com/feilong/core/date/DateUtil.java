@@ -277,7 +277,8 @@ public final class DateUtil{
      *
      * @param datePattern
      *            the date pattern
-     * @return 如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 当前时间使用 <code>datePattern</code> 格式化后的字符串<br>
+     *         如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.14.0
      */
@@ -1044,7 +1045,8 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 指定日期 <code>date</code> 中的年份
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#YEAR
      */
@@ -1066,7 +1068,8 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 指定日期 <code>date</code> 中的月份(已经+1处理)
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#MONTH
      */
@@ -1434,7 +1437,8 @@ public final class DateUtil{
      *            任意时间
      * @param datePattern
      *            模式 {@link DatePattern}
-     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 指定日期 <code>date</code> 使用 <code>datePattern</code> 格式化后的字符串<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>datePattern</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>datePattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.lib.lang3.time.DateFormatUtils#format(Date, String)
@@ -1576,7 +1580,8 @@ public final class DateUtil{
      *            时间字符串
      * @param datePatterns
      *            模式,时间字符串的模式{@link DatePattern}
-     * @return 如果 <code>dateString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 依次使用 <code>datePatterns</code> 解析 <code>dateString</code> 得到的 {@link Date}<br>
+     *         如果 <code>dateString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>dateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>datePatterns</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>datePatterns</code> 是 empty,抛出 {@link IllegalArgumentException}<br>
@@ -1643,7 +1648,8 @@ public final class DateUtil{
      * 
      * @param dateString
      *            时间字符串
-     * @return 如果 <code>dateString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 使用 {@link DatePattern#COMMON_DATE} 解析 <code>dateString</code> 得到的 {@link Date}<br>
+     *         如果 <code>dateString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>dateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.lib.lang3.time.DateUtils#parseDate(String, String...)
      * @since 3.2.1
@@ -1675,7 +1681,8 @@ public final class DateUtil{
      *
      * @param date
      *            任意时间
-     * @return 如果date 是null,抛出 {@link NullPointerException}
+     * @return 返回 指定日期 <code>date</code> 对应的 {@link Calendar}
+     *         如果date 是null,抛出 {@link NullPointerException}
      * @see Calendar#getInstance()
      * @see GregorianCalendar
      * @see Calendar#setTime(Date)
@@ -1774,7 +1781,8 @@ public final class DateUtil{
      *            结束时间
      * @param datePattern
      *            the date pattern
-     * @return 如果 <code>beginDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 <code>true</code> 表示当前时间在 <code>beginDateString</code> 和 <code>endDateString</code> 之间,否则返回 <code>false</code><br>
+     *         如果 <code>beginDateString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>beginDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
      *         如果 <code>endDateString</code> 是null,抛出 {@link NullPointerException}<br>
@@ -1820,7 +1828,8 @@ public final class DateUtil{
      *            the end date string
      * @param datePattern
      *            the date pattern
-     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 <code>true</code> 表示 <code>date</code> 在 <code>beginDateString</code> 和 <code>endDateString</code> 之间,否则返回 <code>false</code><br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>beginDateString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>beginDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
@@ -1904,7 +1913,8 @@ public final class DateUtil{
      *            结束时间
      * @param datePattern
      *            the date pattern
-     * @return 如果 <code>beginDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 <code>true</code> 表示当前时间不在 <code>beginDateString</code> 和 <code>endDateString</code> 之间,否则返回 <code>false</code><br>
+     *         如果 <code>beginDateString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>beginDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
      *         如果 <code>endDateString</code> 是null,抛出 {@link NullPointerException}<br>
@@ -1935,7 +1945,8 @@ public final class DateUtil{
      *            结束时间
      * @param datePattern
      *            the date pattern
-     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 <code>true</code> 表示 <code>date</code> 不在 <code>beginDateString</code> 和 <code>endDateString</code> 之间,否则返回 <code>false</code><br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>beginDateString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>beginDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
@@ -2495,7 +2506,8 @@ public final class DateUtil{
      * 
      * @param beginDate
      *            开始日期
-     * @return 如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 从 <code>beginDate</code> 到当前时间间隔的中文格式化字符串,比如 <code>6天13小时3分钟53秒259毫秒</code><br>
+     *         如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #formatDuration(Date, Date)
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
@@ -2558,7 +2570,8 @@ public final class DateUtil{
      *            开始日期
      * @param endDate
      *            结束日期
-     * @return 如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 <code>beginDate</code> 和 <code>endDate</code> 之间绝对值间隔的中文格式化字符串,比如 <code>6天13小时3分钟53秒259毫秒</code><br>
+     *         如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>endDate</code> 是null,抛出 {@link NullPointerException}
      * @see #formatDuration(long)
      * @see #getIntervalTime(Date, Date)
@@ -2695,7 +2708,8 @@ public final class DateUtil{
      *            第一个时间
      * @param date2
      *            第二个时间
-     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 两个时间相差的月数(绝对值)<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalMonth(long)
      * @since 3.1.1
@@ -2758,7 +2772,8 @@ public final class DateUtil{
      *            第一个时间
      * @param date2
      *            第二个时间
-     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 两个时间相差的星期数(绝对值)<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalWeek(long)
      * @since 1.6.0
@@ -2831,7 +2846,8 @@ public final class DateUtil{
      *            第一个时间
      * @param date2
      *            第二个时间
-     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 两个时间相差的天数(绝对值)<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalDay(long)
@@ -2900,7 +2916,8 @@ public final class DateUtil{
      *            第一个时间
      * @param date2
      *            第二个时间
-     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 两个时间相差的小时数(绝对值)<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalHour(long)
@@ -2968,7 +2985,8 @@ public final class DateUtil{
      *            第一个时间
      * @param date2
      *            第二个时间
-     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 两个时间相差的分钟数(绝对值)<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalMinute(long)
@@ -3027,7 +3045,8 @@ public final class DateUtil{
      *            第一个时间
      * @param date2
      *            第二个时间
-     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 两个时间相差的秒数(绝对值)<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalSecond(long)
@@ -3080,7 +3099,8 @@ public final class DateUtil{
      *            第一个时间
      * @param date2
      *            第二个时间
-     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 两个时间相差的毫秒数(绝对值)<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see DateUtil#getTime(Date)
      * @see Math#abs(long)

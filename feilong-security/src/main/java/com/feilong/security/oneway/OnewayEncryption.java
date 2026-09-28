@@ -132,6 +132,7 @@ public final class OnewayEncryption{
      *            the input bytes
      * @return 加密之后的转成<span style="color:red">小写的</span>16进制字符串<br>
      *         如果 <code>onewayType</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see #getMessageDigest(OnewayType)
      * @see java.security.MessageDigest#digest(byte[])
      * @see ByteUtil#bytesToHexStringLowerCase(byte[])
      */
@@ -166,6 +167,7 @@ public final class OnewayEncryption{
      *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.io.File#File(String)
+     * @see #getMessageDigest(OnewayType)
      * @see java.io.FileInputStream#read(byte[], int, int)
      * @see java.security.MessageDigest#update(byte[], int, int)
      * @see java.security.MessageDigest#digest()
