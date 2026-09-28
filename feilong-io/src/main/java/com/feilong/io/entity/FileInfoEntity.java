@@ -86,7 +86,7 @@ public class FileInfoEntity implements Serializable{
     //---------------------------------------------------------------
 
     /**
-     * 格式化显示的时间默认 yy-mm hh:ss.
+     * 格式化显示的时间默认 MM-dd HH:mm.
      * 
      * @return the formatLastModified
      */
