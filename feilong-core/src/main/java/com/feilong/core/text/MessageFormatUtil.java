@@ -157,7 +157,8 @@ public final class MessageFormatUtil{
      *            模式参数
      * @param arguments
      *            动态参数
-     * @return 如果 <code>pattern</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 使用 <code>pattern</code> 格式化 <code>arguments</code> 之后的字符串
+     *         如果 <code>pattern</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static String format(String pattern,Object...arguments){
         Validate.notNull(pattern, "pattern can't be null!");

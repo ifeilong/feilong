@@ -398,7 +398,8 @@ public final class MapUtil{
      *            最好是 {@link LinkedHashMap},{@link EnumMap}等自身有顺序的map,否则每次出来的结果都不一样
      * @param index
      *            the index
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 <code>map</code> 中指定索引 <code>index</code> 处的 {@link Map.Entry}
+     *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws IndexOutOfBoundsException
      *             if the index is invalid
      * @see "org.apache.commons.collections4.CollectionUtils#get(Iterable, int)"
@@ -511,7 +512,8 @@ public final class MapUtil{
      *            最好是 {@link LinkedHashMap},{@link EnumMap}等自身有顺序的map,否则每次出来的结果都不一样
      * @param index
      *            the index
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 <code>map</code> 中指定索引 <code>index</code> 处的 {@link Map.Entry}
+     *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws IndexOutOfBoundsException
      *             if the index is invalid
      * @see "org.apache.commons.collections4.CollectionUtils#get(Iterable, int)"
@@ -1209,7 +1211,8 @@ public final class MapUtil{
      *            the key
      * @param value
      *            数值,不能为null,可以是负数
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 累加了 <code>value</code> 之后的 <code>map</code>(即入参 <code>map</code> 本身)<br>
+     *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      * @see "org.apache.commons.collections4.bag.HashBag"
      * @see "org.apache.commons.lang3.mutable.MutableInt"
@@ -1267,7 +1270,8 @@ public final class MapUtil{
      *            the key
      * @param value
      *            数值,不能为null,可以是负数
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 累加了 <code>value</code> 之后的 <code>map</code>(即入参 <code>map</code> 本身)<br>
+     *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      * @see "org.apache.commons.collections4.bag.HashBag"
      * @see "java.util.Map#getOrDefault(Object, Object)"
@@ -1423,7 +1427,8 @@ public final class MapUtil{
      *            the key
      * @param value
      *            the value
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 追加了 <code>value</code> 之后的 <code>map</code>(即入参 <code>map</code> 本身)
+     *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @see "com.google.common.collect.ArrayListMultimap"
      * @see "org.apache.commons.collections4.MultiValuedMap"
      * @see "org.apache.commons.collections4.IterableMap"
@@ -2346,7 +2351,8 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 使用 <code>map</code> 中所有映射构造的新的 {@link ConcurrentHashMap}
+     *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
      * @apiNote 可以使用静态导入,简化 {@code new ConcurrentHashMap<>(map)} 的写法
      */
@@ -2482,7 +2488,8 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 使用 <code>map</code> 中所有映射构造的新的 {@link TreeMap}
+     *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
      * @apiNote 可以使用静态导入,简化 {@code new TreeMap<>(map)} 的写法
      */
@@ -2572,7 +2579,8 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 使用 <code>map</code> 中所有映射构造的新的 {@link HashMap}
+     *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
      * @apiNote 可以使用静态导入,简化 {@code new HashMap<>(map)} 的写法
      */
@@ -2826,7 +2834,8 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 使用 <code>map</code> 中所有映射构造的新的 {@link LinkedHashMap}
+     *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
      * @apiNote 可以使用静态导入,简化 {@code new LinkedHashMap<>(map)} 的写法
      */

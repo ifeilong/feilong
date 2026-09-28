@@ -46,7 +46,8 @@ public final class ComparatorUtil{
      *            the value type
      * @param list
      *            the property values
-     * @return 如果 <code>list</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 以 <code>list</code> 为固定顺序,未知元素排在后面({@link UnknownObjectBehavior#AFTER})的 {@link FixedOrderComparator}
+     *         如果 <code>list</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static <T> FixedOrderComparator<T> buildFixedOrderComparator(List<T> list){
         return buildFixedOrderComparator(list, UnknownObjectBehavior.AFTER);
@@ -61,7 +62,8 @@ public final class ComparatorUtil{
      *            the property values
      * @param unknownObjectBehavior
      *            the unknown object behavior
-     * @return 如果 <code>list</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 以 <code>list</code> 为固定顺序,并按照 <code>unknownObjectBehavior</code> 处理未知元素的 {@link FixedOrderComparator}<br>
+     *         如果 <code>list</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>unknownObjectBehavior</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static <T> FixedOrderComparator<T> buildFixedOrderComparator(List<T> list,UnknownObjectBehavior unknownObjectBehavior){

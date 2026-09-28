@@ -236,7 +236,8 @@ public final class MethodUtil{
      *            方法名
      * @param params
      *            参数
-     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 指定方法 <code>methodName</code> 执行后的返回值<br>
+     *         如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>methodName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>methodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>obj</code>没有指定的<code>methodName</code>方法,抛出 {@link ReflectException}<br>

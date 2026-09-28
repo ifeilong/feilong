@@ -99,7 +99,8 @@ public final class BeanPredicateUtil{
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValue
      *            the property value
-     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 判断 <code>propertyName</code> 属性值是否等于 <code>propertyValue</code> 的 {@link org.apache.commons.collections4.Predicate}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.lib.collection4.PredicateUtils#equalPredicate(Object)
      */
@@ -166,7 +167,8 @@ public final class BeanPredicateUtil{
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValue
      *            the property value
-     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 判断 <code>propertyName</code> 属性值是否忽略大小写等于 <code>propertyValue</code> 的 {@link org.apache.commons.collections4.Predicate}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.lib.collection4.PredicateUtils#equalPredicate(Object)
      * @see com.feilong.core.util.equator.IgnoreCaseEquator#INSTANCE
@@ -241,7 +243,8 @@ public final class BeanPredicateUtil{
      * @param propertyNameAndPropertyValueMap
      *            属性和指定属性值对应的map,其中key是泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>propertyNameAndPropertyValueMap</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 判断 <code>propertyNameAndPropertyValueMap</code> 中所有属性都等于对应值的组合 {@link org.apache.commons.collections4.Predicate}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyNameAndPropertyValueMap</code> 是empty,抛出{@link IllegalArgumentException}<br>
      *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是null,抛出{@link NullPointerException}<br>
      *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是blank,抛出{@link IllegalArgumentException}<br>
@@ -374,7 +377,8 @@ public final class BeanPredicateUtil{
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
      *            the property values
-     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 判断 <code>propertyName</code> 属性值是否在 <code>propertyValues</code> 数组中的 {@link org.apache.commons.collections4.Predicate}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.lib.lang3.ArrayUtils#contains(Object[], Object)
      */
@@ -416,7 +420,8 @@ public final class BeanPredicateUtil{
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValueList
      *            the property value list
-     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 判断 <code>propertyName</code> 属性值是否在 <code>propertyValueList</code> 中的 {@link org.apache.commons.collections4.Predicate}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.util.Collection#contains(Object)
      */
@@ -548,7 +553,8 @@ public final class BeanPredicateUtil{
      *            the value to compare
      * @param criterion
      *            the criterion
-     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 使用自然排序,根据 <code>criterion</code> 比较 <code>propertyName</code> 属性值和 <code>valueToCompare</code> 的 {@link org.apache.commons.collections4.Predicate}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see ComparatorUtils#naturalComparator()
      * @since commons-collections 4
@@ -632,7 +638,8 @@ public final class BeanPredicateUtil{
      *            the comparator
      * @param criterion
      *            the criterion
-     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 返回 使用 <code>comparator</code>,根据 <code>criterion</code> 比较 <code>propertyName</code> 属性值和 <code>valueToCompare</code> 的 {@link org.apache.commons.collections4.Predicate}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.lib.collection4.functors.ComparatorPredicate
      * @since commons-collections 4
