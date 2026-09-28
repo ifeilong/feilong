@@ -986,7 +986,7 @@ public class GroupUtil{
      * <li>如果集合为空, 返回空 Map.</li>
      * <li>校验 keyExtractor 非空.</li>
      * <li>使用 {@link Collectors#groupingBy} 按 keyExtractor 分组, 结果容器使用 {@link LinkedHashMap} 保持顺序.</li>
-     * <li>调用 {@link #filterAndCollect(Iterable, Predicate, Collector)} 执行过滤和收集.</li>
+     * <li>调用 {@code filterAndCollect(Iterable, Function, Predicate, Collector)} 执行过滤和收集.</li>
      * </ol>
      *
      * @param <O>

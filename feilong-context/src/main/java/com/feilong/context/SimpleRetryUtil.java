@@ -144,7 +144,7 @@ public final class SimpleRetryUtil{
      *         <ul>
      *         <li>如果某次执行成功且结果不符合重试条件，返回该结果</li>
      *         <li>如果所有重试耗尽且最后一次是异常，抛出该异常</li>
-     *         <li>如果所有重试耗尽且最后一次结果仍符合重试条件，返回该结果（可能为 {@code null}）</li>
+     *         <li>如果所有重试耗尽且最后一次结果仍符合重试条件，返回 {@code null}</li>
      *         </ul>
      * @throws Throwable
      *             如果所有重试耗尽且最后一次执行抛出异常，则抛出该异常

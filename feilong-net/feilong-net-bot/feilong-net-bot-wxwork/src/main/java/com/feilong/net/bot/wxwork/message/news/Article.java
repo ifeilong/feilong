@@ -64,7 +64,7 @@ public class Article{
      * @param title
      *            the title
      * @param description
-     *            描述，不超过512个字节，超过会自动截断w
+     *            描述，不超过512个字节，超过会自动截断
      * @param url
      *            the url
      * @param picurl

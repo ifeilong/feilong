@@ -234,7 +234,7 @@ public final class JsonConfigBuilder{
      * </blockquote>
      *
      * @return the default json config
-     * @see see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
+     * @see com.feilong.lib.json.JsonConfig
      * @see com.feilong.lib.json.util.CycleDetectionStrategy#LENIENT
      * 
      * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">通过setAllowNonStringKeys解决java.lang.ClassCastException: JSON keys must be

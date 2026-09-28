@@ -118,8 +118,8 @@ public final class FileUtil{
      *
      * @param filePath
      *            文件路径
-     * @return 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #toByteArray(File)
      * @see java.io.ByteArrayOutputStream#toByteArray()
      * @since 1.2.1
@@ -485,8 +485,8 @@ public final class FileUtil{
      *
      * @param filePath
      *            文件或者文件夹路径
-     * @return 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         {@code true} if the file or directory was deleted, otherwise {@code false}
      * @see #deleteFileOrDirectory(File)
      */

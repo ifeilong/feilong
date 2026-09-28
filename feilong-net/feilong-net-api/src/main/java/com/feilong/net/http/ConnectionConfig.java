@@ -46,17 +46,17 @@ import com.feilong.lib.lang3.builder.ToStringStyle;
  * <blockquote>
  * 
  * <dl>
- * <dt>{@link <a href=
- * "https://github.com/funaiy/captcha-java-demo/blob/master/src/main/java/com/netease/is/nc/sdk/utils/HttpClient4Utils.java">网易易盾</a>}</dt>
+ * <dt><a href=
+ * "https://github.com/funaiy/captcha-java-demo/blob/master/src/main/java/com/netease/is/nc/sdk/utils/HttpClient4Utils.java">网易易盾</a></dt>
  * <dd>默认是 20,20</dd>
  * 
- * <dt>{@link <a href="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor">spring</a>}</dt>
+ * <dt><a href="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor">spring</a></dt>
  * <dd>默认是 5,10</dd>
  * 
- * <dt>{@link <a href="org.apache.solr.client.solrj.impl.HttpClientUtil#createClient">solr7</a>}</dt>
+ * <dt><a href="org.apache.solr.client.solrj.impl.HttpClientUtil#createClient">solr7</a></dt>
  * <dd>10000,10000</dd>
  * 
- * <dt>{@link <a href="com.aliyun.oss.common.comm.DefaultServiceClient.createHttpClientConnectionManager()">ali oss</a>}</dt>
+ * <dt><a href="com.aliyun.oss.common.comm.DefaultServiceClient.createHttpClientConnectionManager()">ali oss</a></dt>
  * <dd>1024,1024</dd>
  * </dl>
  * 

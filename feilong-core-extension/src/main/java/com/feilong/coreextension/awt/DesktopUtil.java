@@ -108,7 +108,7 @@ public final class DesktopUtil{
      * </p>
      *
      * @param urlPattern
-     *            the url
+     *            the url pattern
      * @param args
      *            the args
      * @since 1.2.0
@@ -123,12 +123,12 @@ public final class DesktopUtil{
      * Desktop action.
      * 
      * <p>
-     * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>urlPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>urlPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * </p>
      *
-     * @param url
-     *            the url
+     * @param urlPattern
+     *            the url pattern
      * @param action
      *            the action
      * @since 1.2.0

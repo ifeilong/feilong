@@ -84,7 +84,7 @@ public final class URLUtil{
      * <blockquote>
      * <ol>
      * <li>处理 check exception,转成 uncheck exception</li>
-     * <li>如果使用new URL 出现异常,会尝试使用 {@link #toFileURL(String)}</li>
+     * <li>如果使用new URL 出现异常,会尝试使用 {@code toFileURL(String)}</li>
      * </ol>
      * </blockquote>
      * 
@@ -122,7 +122,7 @@ public final class URLUtil{
      * URL newURL = new URL(spec);
      * </pre>
      * 
-     * 也就是说,此方法必须要有协议支持 (file URI scheme),如果你是文件需要转成 url的话,建议直接调用 {@link #toFileURL(String)}
+     * 也就是说,此方法必须要有协议支持 (file URI scheme),如果你是文件需要转成 url的话,建议直接调用 {@code toFileURL(String)}
      * </blockquote>
      * 
      * @param spec

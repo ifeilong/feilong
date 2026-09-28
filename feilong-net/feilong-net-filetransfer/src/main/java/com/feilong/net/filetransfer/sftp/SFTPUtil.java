@@ -69,6 +69,8 @@ class SFTPUtil{
      *         如果 <code>sftpFileTransferConfig.userName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>sftpFileTransferConfig.userName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
+     * @param logTraceContext
+     *            日志追踪上下文.
      * @throws JSchException
      *             the j sch exception
      */

@@ -90,7 +90,7 @@ public final class WebSpringUtil{
      * <blockquote>
      * <p>
      * spring 3中可以通过 {@link RequestContextHolder} 得到 {@link HttpServletRequest},但是得不到 {@link HttpServletResponse},具体参见
-     * {@link <a href="https://github.com/venusdrogon/feilong-spring/issues/6">WebSpringUtil.getResponse()方法获取到的response是null</a>}
+     * <a href="https://github.com/venusdrogon/feilong-spring/issues/6">WebSpringUtil.getResponse()方法获取到的response是null</a>
      * </p>
      * </blockquote>
      * 

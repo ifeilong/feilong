@@ -126,7 +126,7 @@ public class HttpRequestExecuterExceptionMessageBuilder{
     /**
      * 构造和 http 相关的属性.
      *
-     * @return the string
+     * @return the http properties map
      */
     private static Map<String, String> buildHttpPropertiesMap(){
         Map<String, String> propertiesMap = SystemUtil.getPropertiesMap();

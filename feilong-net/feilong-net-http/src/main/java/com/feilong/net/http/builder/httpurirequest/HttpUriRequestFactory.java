@@ -159,11 +159,11 @@ public class HttpUriRequestFactory{
     }
 
     /**
-     * Builds the put.
+     * Builds the patch.
      *
      * @param httpRequest
      *            the http request
-     * @return the http put
+     * @return the http patch
      * @since 3.5.1
      */
     private static HttpPatch buildPatch(HttpRequest httpRequest){

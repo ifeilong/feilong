@@ -34,14 +34,14 @@ public class DingtalkMarkdownMessage extends BotMessage{
 
     //---------------------------------------------------------------
     /**
-     * Instantiates a new wxwork bot message.
+     * Instantiates a new dingtalk markdown message.
      */
     public DingtalkMarkdownMessage(){
         super("markdown");
     }
 
     /**
-     * Instantiates a new wxwork bot message.
+     * Instantiates a new dingtalk markdown message.
      *
      * @param markdown
      *            the markdown

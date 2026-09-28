@@ -57,7 +57,7 @@ public final class RegexUtil{
      * 编译给定正则表达式 <code>regexPattern</code> ,并尝试将给定输入 <code>input</code> 与其匹配.
      * 
      * <p>
-     * {@link Pattern#matches(String, CharSequence)} 等价于{@link #getMatcher(String, CharSequence)}.matches();
+     * {@link Pattern#matches(String, CharSequence)} 等价于{@code getMatcher(String, CharSequence)}.matches();
      * </p>
      *
      * @param regexPattern
@@ -67,7 +67,7 @@ public final class RegexUtil{
      * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>input</code> 是null,返回 false<br>
      *         如果input 符合 regex的正则表达式格式,返回true,否则返回 false;<br>
-     * @see #getMatcher(String, CharSequence)
+     * @see Pattern#matcher(CharSequence)
      * @see Matcher#matches()
      * @see Pattern#matches(String, CharSequence)
      * @since 1.0.7
@@ -119,7 +119,7 @@ public final class RegexUtil{
      * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>input</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 匹配不了,返回 {@link java.util.Collections#emptyMap()}
-     * @see #getMatcher(String, CharSequence)
+     * @see Pattern#matcher(CharSequence)
      * @see Matcher#group(int)
      * @since 1.0.7
      */
@@ -181,7 +181,7 @@ public final class RegexUtil{
      * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>input</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 {@code groupNo < 0} ,抛出 {@link IllegalArgumentException}<br>
-     * @see #getMatcher(String, CharSequence)
+     * @see Pattern#matcher(CharSequence)
      * @see Matcher#group(int)
      * @since 1.0.7
      */

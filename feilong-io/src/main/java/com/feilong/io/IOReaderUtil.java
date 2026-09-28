@@ -82,7 +82,7 @@ public final class IOReaderUtil{
      *            </ul>
      * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
+     *         如果 <code>location</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @since 4.0.1
      */
     public static byte[] readToByteArray(String location){
@@ -136,7 +136,7 @@ public final class IOReaderUtil{
      *            </ul>
      * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
+     *         如果 <code>location</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @see "org.apache.commons.io.FilenameUtils#readFileToString(File, Charset)"
      * @see #readToString(File, String)
      * @since 2.1.0
@@ -188,7 +188,7 @@ public final class IOReaderUtil{
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
+     *         如果 <code>location</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @see "org.apache.commons.io.FilenameUtils#readFileToString(File, Charset)"
      * @see #readToString(File, String)
      * @since 1.0.8

@@ -83,11 +83,11 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
      * 
      * <p>
      * 调用 {@link CollectionsUtil#partition(List, int)} 对list 分成N份,对应的创建N份线程,每个线程的 名字 参见
-     * {@link #buildThreadName(int, PartitionRunnableBuilder)}
+     * {@code buildThreadName(int, PartitionRunnableBuilder)}
      * </p>
      * 
      * <p>
-     * 会自动创建 ThreadGroup,线程组名字参见 {@link #buildThreadGroupName(List, PartitionRunnableBuilder)}, <br>
+     * 会自动创建 ThreadGroup,线程组名字参见 {@code buildThreadGroupName(List, PartitionRunnableBuilder)}, <br>
      * 所有新建的线程将归属到该 线程组,你可以在自定义的partitionRunnableBuilder中监控或者管理 该ThreadGroup
      * </p>
      *

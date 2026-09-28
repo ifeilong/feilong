@@ -57,14 +57,14 @@ public class DefaultDingTalkBot extends AbstractBot implements DingTalkBot{
     //---------------------------------------------------------------
 
     /**
-     * Instantiates a new default wxwork bot.
+     * Instantiates a new default ding talk bot.
      */
     public DefaultDingTalkBot(){
         super();
     }
 
     /**
-     * Instantiates a new default wxwork bot.
+     * Instantiates a new default ding talk bot.
      *
      * @param accessToken
      *            the key

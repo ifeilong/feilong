@@ -59,8 +59,7 @@ public class HeaderSetter{
      * <li>邮件的优先级</li>
      * <li>是否需要回执</li>
      * <li>邮件客户端</li>
-     * <li>邮件消息发送的时间</li>
-     * </ol>
+     *      * </ol>
      * </blockquote>
      *
      * @param message

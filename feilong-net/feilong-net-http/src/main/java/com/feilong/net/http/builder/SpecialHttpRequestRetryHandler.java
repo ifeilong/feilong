@@ -65,7 +65,7 @@ public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandl
     //---------------------------------------------------------------
 
     /**
-     * Create the request retry handler with a retry count of 3, requestSentRetryEnabled false
+     * Create the request retry handler with the given {@code retryCount}, requestSentRetryEnabled false
      * and using the following list of non-retriable IOException classes: <br>
      * <ul>
      * <li>InterruptedIOException</li>

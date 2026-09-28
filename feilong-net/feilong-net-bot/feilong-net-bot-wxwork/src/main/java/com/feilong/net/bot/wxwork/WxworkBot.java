@@ -23,7 +23,7 @@ import com.feilong.net.bot.wxwork.message.news.Article;
  * 微信机器人.
  * 
  * <p>
- * 当前自定义机器人支持文本（text）、markdown（markdown）两种消息类型。
+ * 当前自定义机器人支持图文（news）消息类型。
  * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>

@@ -202,7 +202,7 @@ public final class HttpClientUtil{
     IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a>  <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p id=
     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp;  <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
             "useTime": 1721,
-            "headerList":         [
+            "headerMap":         [
                             {
                     "name": "Cache-Control",
                     "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
@@ -289,7 +289,7 @@ public final class HttpClientUtil{
     IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a>  <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p id=
     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp;  <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
             "useTime": 1721,
-            "headerList":         [
+            "headerMap":         [
                             {
                     "name": "Cache-Control",
                     "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
@@ -379,7 +379,7 @@ public final class HttpClientUtil{
     IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a>  <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p id=
     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp;  <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
             "useTime": 1721,
-            "headerList":         [
+            "headerMap":         [
                             {
                     "name": "Cache-Control",
                     "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
@@ -493,7 +493,7 @@ public final class HttpClientUtil{
     IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a>  <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p id=
     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp;  <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
             "useTime": 1721,
-            "headerList":         [
+            "headerMap":         [
                             {
                     "name": "Cache-Control",
                     "value": "private, no-cache, no-store, proxy-revalidate, no-transform"

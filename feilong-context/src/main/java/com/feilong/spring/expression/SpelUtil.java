@@ -35,8 +35,8 @@ import lombok.NoArgsConstructor;
  * Spring Expression Language 工具类.
  * 
  * <p>
- * 同很多可用的Java 表达式语言相比，例如{@link <a href="http://commons.apache.org/proper/commons-ognl/">OGNL</a>}，{@link <a href=
- * "http://camel.apache.org/mvel.html">MVEL</a>}和JBoss EL，SpEL的诞生是为了给Spring社区提供一个可以给Spring目录中所有产品提供单一良好支持的表达式语言。
+ * 同很多可用的Java 表达式语言相比，例如<a href="http://commons.apache.org/proper/commons-ognl/">OGNL</a>，<a href=
+ * "http://camel.apache.org/mvel.html">MVEL</a>和JBoss EL，SpEL的诞生是为了给Spring社区提供一个可以给Spring目录中所有产品提供单一良好支持的表达式语言。
  * </p>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>

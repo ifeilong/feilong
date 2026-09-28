@@ -55,7 +55,7 @@ public class PropertyDescriptorUtil{
      *            the klass
      * @param propertyName
      *            the property name
-     * @return 如果解析出来的类型是 {@link #TYPE_SPRING}, 表示可以使用spring来解析
+     * @return 如果解析出来的类型是 {@code TYPE_SPRING}, 表示可以使用spring来解析
      */
     static boolean isUseSpringOperate(Class<?> klass,String propertyName){
         String type = getType(klass, propertyName);
