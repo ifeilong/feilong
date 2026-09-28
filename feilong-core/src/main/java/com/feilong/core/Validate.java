@@ -393,7 +393,7 @@ public final class Validate{
      *            the optional values for the formatted exception message, null array not recommended
      * @return the validated iterable (never {@code null} method for chaining)
      * @throws NullPointerException
-     *             if the array is {@code null}
+     *             if the iterable is {@code null}
      * @throws IllegalArgumentException
      *             if an element is {@code null}
      */

@@ -325,7 +325,7 @@ public final class URIUtil{
      *
      * @param uriString
      *            the uri
-     * @return 如果 isNullOrEmpty(url),返回 {@link StringUtils#EMPTY}
+     * @return 如果 isNullOrEmpty(uriString),返回 {@link StringUtils#EMPTY}
      * @since 1.8.0 change to default
      */
     static String getFullPathWithoutQueryString(String uriString){

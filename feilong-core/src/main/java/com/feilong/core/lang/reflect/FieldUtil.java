@@ -184,10 +184,10 @@ public final class FieldUtil{
      *            the klass
      * @param excludeFieldNames
      *            需要排除的field names,如果传递过来是null或者empty 那么不会判断
-     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>excludeFieldNames</code> 是null或者empty,解析所有的field<br>
      *         如果 {@link FieldUtils#getAllFieldsList(Class)} 是null或者empty,返回 {@link Collections#emptyList()}<br>
-     *         如果 <code>obj</code>没有字段或者字段都被参数 <code>excludeFieldNames</code> 排除掉了,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>klass</code>没有字段或者字段都被参数 <code>excludeFieldNames</code> 排除掉了,返回 {@link Collections#emptyMap()}<br>
      * @see FieldUtils#getAllFieldsList(Class)
      * @since 1.7.1
      */
@@ -220,7 +220,7 @@ public final class FieldUtil{
     //---------------------------------------------------------------
 
     /**
-     * 得到某个对象 <code>owner</code> 的公共字段 <code>fieldName</code> 值.
+     * 得到某个对象 <code>obj</code> 的字段 <code>fieldName</code> 值.
      *
      * @param <T>
      *            the generic type
@@ -228,7 +228,7 @@ public final class FieldUtil{
      *            the owner
      * @param fieldName
      *            the field name
-     * @return 如果 <code>owner</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fieldName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fieldName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>obj</code> 中没有 <code>fieldName</code>,抛出 {@link ReflectException}<br>

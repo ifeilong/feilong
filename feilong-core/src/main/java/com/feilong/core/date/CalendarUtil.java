@@ -350,7 +350,7 @@ final class CalendarUtil{
      *            日:{@link Calendar#DAY_OF_MONTH},<br>
      *            年份:{@link Calendar#YEAR}<br>
      *            ...
-     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getFieldValue(Calendar, int)
      * @since 1.3.0
      */

@@ -3013,8 +3013,6 @@ public final class CollectionsUtil{
      *            指定的值
      * @return 如果 <code>beanIterable</code>是null, 返回null<br>
      *         如果 <code>propertyValueExtractor</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
      *         如果 <code>beanIterable</code>中没有相关元素的属性<code>propertyValueExtractor</code> 值是<code>propertyValue</code>,返回null
      * @see #find(Iterable, org.apache.commons.collections4.Predicate)

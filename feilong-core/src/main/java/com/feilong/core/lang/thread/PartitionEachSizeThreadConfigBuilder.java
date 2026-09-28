@@ -61,9 +61,9 @@ public class PartitionEachSizeThreadConfigBuilder implements PartitionEachSizeBu
      * @param totalSize
      *            the total size
      * @return 如果 totalSize{@code <=}0 ,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>partitionConfig</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 partitionConfig.maxThreadCount{@code <=}0 是empty,抛出 {@link IllegalArgumentException}<br>
-     *         如果 partitionConfig.minPerThreadHandlerCount{@code <=}0 是empty,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>partitionThreadConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 partitionThreadConfig.maxThreadCount{@code <=}0 是empty,抛出 {@link IllegalArgumentException}<br>
+     *         如果 partitionThreadConfig.minPerThreadHandlerCount{@code <=}0 是empty,抛出 {@link IllegalArgumentException}<br>
      * 
      *         如果 <code>totalSize</code> 小于等于 <code>minPerThreadHandlerCount</code>(每个线程最少处理数量),那么直接返回<code>totalSize</code>,也就是说接下来开 1
      *         个线程就足够了<br>

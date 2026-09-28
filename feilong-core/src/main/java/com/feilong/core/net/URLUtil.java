@@ -474,8 +474,8 @@ public final class URLUtil{
      *            追加的前缀
      * @return 如果 <code>url</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      * 
-     *         如果 <code>protocols</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>protocols</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>protocolPres</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>protocolPres</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * 
      *         如果 <code>perfix</code> 是null或者empty,直接返回 <code>url</code><br>
      * @see com.feilong.lib.lang3.StringUtils#prependIfMissing(String, CharSequence, CharSequence...)

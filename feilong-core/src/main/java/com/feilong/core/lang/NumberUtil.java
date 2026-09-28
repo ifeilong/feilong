@@ -883,8 +883,8 @@ public final class NumberUtil{
      * @param numberPattern
      *            转成字符串格式 {@link NumberPattern}
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>toStringPattern</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>toStringPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see NumberFormatUtil#format(Number, String, RoundingMode)
      */
     public static String toString(Number value,String numberPattern){
@@ -962,8 +962,8 @@ public final class NumberUtil{
      *         如果 {@code current <= 0},抛出 {@link IllegalArgumentException}<br>
      *         如果 {@code total <= 0},抛出 {@link IllegalArgumentException}<br>
      *         如果 {@code current > total},抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>toStringPattern</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>toStringPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see NumberPattern
      * @see #getDivideValue(Number, Number, int)
      * @see #toString(Number, String)

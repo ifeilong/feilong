@@ -608,7 +608,7 @@ public final class ResourceBundleUtil{
      *            the alias bean class
      * @return the t
      * @throws NullPointerException
-     *             如果 <code>resourceBundle</code>或者 <code>aliasBean</code> 是null
+     *             如果 <code>resourceBundle</code>或者 <code>aliasBeanClass</code> 是null
      * @see BeanUtil#populateAliasBean(Object, Map)
      * @since 1.8.8
      */

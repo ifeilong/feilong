@@ -122,10 +122,9 @@ public final class ParamUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么循环<code>arrayValueMap</code>,追加新的参数<code>paramName</code>和值
-     * <code>paramValue</code>.</li>
-     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>paramValue</code>.</li>
-     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>paramValue</code>,其他的被丢弃.</li>
+     * <li>如果原来的<code>uriString</code>不包含<code>singleValueMap</code>中的某个key,那么追加该key和它的value.</li>
+     * <li>如果原来的<code>uriString</code>已经包含<code>singleValueMap</code>中的某个key,那么它的值会被替换成map中的value.</li>
+     * <li>如果原来的<code>uriString</code>已经包含该key,并且是多值类型(参数数组),那么多值参数中第一个会被替换成map中的value,其他的被丢弃.</li>
      * <li>如果原来的<code>uriString</code>有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
      * <li>如果<code>uriString</code>带有? 和参数,会先被截取,最后再拼接.</li>
      * <li>如果<code>uriString</code>不带?,则自动增加?</li>
@@ -196,10 +195,9 @@ public final class ParamUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么循环<code>arrayValueMap</code>,追加新的参数<code>paramName</code>和值
-     * <code>paramValue</code>.</li>
-     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>paramValue</code>.</li>
-     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>paramValue</code>,其他的被丢弃.</li>
+     * <li>如果原来的<code>uriString</code>不包含<code>arrayValueMap</code>中的某个key,那么追加该key和它的值.</li>
+     * <li>如果原来的<code>uriString</code>已经包含<code>arrayValueMap</code>中的某个key,那么它的值会被替换.</li>
+     * <li>如果原来的<code>uriString</code>已经包含该key,并且是多值类型(参数数组),那么多值参数中第一个会被替换,其他的被丢弃.</li>
      * <li>如果原来的<code>uriString</code>有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
      * <li>如果<code>uriString</code>带有? 和参数,会先被截取,最后再拼接.</li>
      * <li>如果<code>uriString</code>不带?,则自动增加?</li>

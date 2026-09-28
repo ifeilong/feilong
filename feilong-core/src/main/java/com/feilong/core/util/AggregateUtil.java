@@ -1235,8 +1235,6 @@ public final class AggregateUtil{
      *
      * @param <O>
      *            the generic type
-     * @param <T>
-     *            the generic type
      * @param obj
      *            the obj
      * @param propertyName

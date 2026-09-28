@@ -1418,8 +1418,8 @@ public final class DateUtil{
      * @param datePattern
      *            模式 {@link DatePattern}
      * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>datePattern</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>datePattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.lib.lang3.time.DateFormatUtils#format(Date, String)
      * @see "org.joda.time.base.AbstractDateTime#toString(String)"
      * @see <a href="http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string">convert-java-util-date-to-string</a>
@@ -2028,8 +2028,8 @@ public final class DateUtil{
      *         如果 <code>date1 == date2</code> 直接返回true<br>
      *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>datePattern</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>datePattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
      * @see #toString(Date, String)
      * @see com.feilong.lib.lang3.time.DateUtils#isSameDay(Date, Date)
      * @since 1.0.5 change name from isEqual to isEquals

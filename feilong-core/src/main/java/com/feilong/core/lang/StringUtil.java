@@ -1458,7 +1458,7 @@ public final class StringUtil{
      * @return 如果 <code>configString</code> 是null,返回 emptyMap() <br>
      *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
      *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>stringToBeanConverter</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>valueStringToBeanConverter</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果使用=号 分隔之后 value没值的 key-value 会被忽略
      * @since 4.1.2
      * @apiNote 自动去除空格,忽略空
@@ -1545,7 +1545,7 @@ public final class StringUtil{
      * @return 如果 <code>configString</code> 是null,返回 emptyMap() <br>
      *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
      *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>stringToBeanConverter</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>valueStringToBeanConverter</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果使用=号 分隔之后 value没值的 key-value 会被忽略
      * @since 4.5.2
      * @apiNote 自动去除空格,忽略空

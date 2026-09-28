@@ -631,9 +631,9 @@ public final class SortUtil{
      *            </blockquote>
      * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
      * @throws NullPointerException
-     *             如果 <code>propertyNames</code> 是null
+     *             如果 <code>propertyNameAndOrders</code> 是null
      * @throws IllegalArgumentException
-     *             如果 <code>propertyNames</code> 是empty ,或者有 null元素
+     *             如果 <code>propertyNameAndOrders</code> 是empty ,或者有 null元素
      * @see BeanComparatorUtil#chainedComparator(String...)
      * @see com.feilong.lib.collection4.ComparatorUtils#chainedComparator(java.util.Comparator...)
      * @see #sortList(List, Comparator...)

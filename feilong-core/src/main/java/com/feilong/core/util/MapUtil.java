@@ -562,7 +562,7 @@ public final class MapUtil{
      * <b>可以重构成:</b>
      * 
      * <pre class="code">
-     * return MapUtil.get(singleValueMapentryId, entryId);
+     * return MapUtil.get(singleValueMap, entryId);
      * </pre>
      * 
      * </blockquote>

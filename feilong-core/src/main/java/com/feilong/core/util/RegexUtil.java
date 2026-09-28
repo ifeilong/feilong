@@ -180,7 +180,7 @@ public final class RegexUtil{
      *            组号,从0开始
      * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>input</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 {@code input < 0} ,抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code groupNo < 0} ,抛出 {@link IllegalArgumentException}<br>
      * @see #getMatcher(String, CharSequence)
      * @see Matcher#group(int)
      * @since 1.0.7
