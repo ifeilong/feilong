@@ -57,7 +57,7 @@ public final class DesktopUtil{
      * @param urlPattern
      *            url地址
      * @param args
-     *            the args
+     *            用来替换 <code>urlPattern</code> 中 <code>{}</code> 占位符的参数
      */
     public static void browse(String urlPattern,Object...args){
         desktopAction(urlPattern, Action.BROWSE, args);
@@ -73,7 +73,7 @@ public final class DesktopUtil{
      * @param urlPattern
      *            url地址
      * @param args
-     *            the args
+     *            用来替换 <code>urlPattern</code> 中 <code>{}</code> 占位符的参数
      */
     public static void open(String urlPattern,Object...args){
         desktopAction(urlPattern, Action.OPEN, args);
@@ -91,7 +91,7 @@ public final class DesktopUtil{
      * @param urlPattern
      *            the mail
      * @param args
-     *            the args
+     *            用来替换 <code>urlPattern</code> 中 <code>{}</code> 占位符的参数
      * @see java.awt.Desktop#mail(URI)
      */
     public static void mail(String urlPattern,Object...args){
@@ -109,7 +109,7 @@ public final class DesktopUtil{
      * @param urlPattern
      *            the url pattern
      * @param args
-     *            the args
+     *            用来替换 <code>urlPattern</code> 中 <code>{}</code> 占位符的参数
      * @since 1.2.0
      */
     public static void print(String urlPattern,Object...args){

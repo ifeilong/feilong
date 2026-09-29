@@ -85,7 +85,7 @@ public class DefaultRequestResultInvoker<T extends ResponseCommand, R extends In
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.netpay.handler.query.QueryHandler#handler(com.feilong.netpay.handler.query.QueryRequest)
+     * @see com.feilong.context.invoker.RequestResultInvoker#invoke(com.feilong.context.invoker.InvokerRequest)
      */
     @Override
     public N invoke(R queryRequest){

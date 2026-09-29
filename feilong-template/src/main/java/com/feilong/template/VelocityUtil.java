@@ -46,7 +46,7 @@ final class VelocityUtil extends AbstractTemplateUtil{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.velocity.BaseVelocityUtil#constructContext(java.util.Map)
+     * @see com.feilong.template.AbstractTemplateUtil#buildContext(java.util.Map)
      */
     @Override
     protected Context buildContext(Map<String, ?> contextKeyValues){

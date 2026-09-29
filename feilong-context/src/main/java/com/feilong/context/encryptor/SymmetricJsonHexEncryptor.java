@@ -48,7 +48,7 @@ public class SymmetricJsonHexEncryptor<T extends Encryptorable> implements Encry
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.psi.controller.redirectresult.PayResultParamDataSafe#encryptPayResult(java.io.Serializable)
+     * @see com.feilong.context.encryptor.Encryptor#encrypt(com.feilong.context.encryptor.Encryptorable)
      */
     @Override
     public String encrypt(T bean){
@@ -63,7 +63,7 @@ public class SymmetricJsonHexEncryptor<T extends Encryptorable> implements Encry
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.psi.controller.redirectresult.PayResultParamDataSafe#decryptPayResult(java.lang.String)
+     * @see com.feilong.context.encryptor.Encryptor#decrypt(java.lang.String, java.lang.Class)
      */
     @Override
     public T decrypt(String encryptPayResultType,Class<T> klass){

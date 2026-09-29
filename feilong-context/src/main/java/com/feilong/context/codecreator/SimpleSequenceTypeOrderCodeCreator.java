@@ -73,7 +73,7 @@ public class SimpleSequenceTypeOrderCodeCreator implements SequenceTypeOrderCode
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.framework.code.CodeCreator#create(java.lang.Number, java.lang.Integer)
+     * @see com.feilong.context.codecreator.SequenceTypeOrderCodeCreator#create(long, int)
      */
     @Override
     public String create(long sequence,int maxLength){

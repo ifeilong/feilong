@@ -80,7 +80,7 @@ public abstract class AbstractResponseStringBuilder<T> implements ResponseString
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.netpay.handler.close.GatewayCloseResponseBuilder#build(com.feilong.netpay.handler.close.CloseRequest)
+     * @see com.feilong.context.invoker.ResponseStringBuilder#build(java.lang.Object)
      */
     @Override
     public String build(T request){
