@@ -124,7 +124,7 @@ public class JaxWsDynamicClientUtil{
      *            the operation name,Example: GetMemPoints
      * @param params
      *            参数,Example: 15001841317
-     * @return 如果 <code>wsdlUrl</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 与operation输出消息各部分匹配的返回值数组,如果 <code>wsdlUrl</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>wsdlUrl</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
      *         The return values that matche the parts of the output message of the operation

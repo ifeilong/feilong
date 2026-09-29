@@ -40,7 +40,8 @@ public final class BeanLogMessageBuilder{
      *
      * @param obj
      *            the obj
-     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 对象字段名和值组成的简单日志字符串<br>
+     *         如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static String buildFieldsMessage(Object obj){
         Validate.notNull(obj, "obj can't be null!");
@@ -56,7 +57,8 @@ public final class BeanLogMessageBuilder{
      *
      * @param obj
      *            the obj
-     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 对象字段名和值组成的日志字符串<br>
+     *         如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.11.5
      */
     public static String buildFieldsSimpleMessage(Object obj){

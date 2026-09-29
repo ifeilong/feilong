@@ -79,7 +79,7 @@ public final class HttpClientUtil{
      *
      * @param urlString
      *            the url string
-     * @return 如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应状态码,比如 200;如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     public static int getResponseStatusCode(String urlString){
@@ -121,7 +121,7 @@ public final class HttpClientUtil{
      *            the url string
      * @param connectionConfig
      *            the connection config
-     * @return 如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应状态码,比如 200;如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     public static int getResponseStatusCode(String urlString,ConnectionConfig connectionConfig){
@@ -160,7 +160,7 @@ public final class HttpClientUtil{
      *            the http request
      * @param connectionConfig
      *            the connection config
-     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static int getResponseStatusCode(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
@@ -248,7 +248,7 @@ public final class HttpClientUtil{
      * 
      * @param urlString
      *            the url string
-     * @return 如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应状态码,比如 200;如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     public static com.feilong.net.http.HttpResponse getHttpResponse(String urlString){
@@ -337,7 +337,7 @@ public final class HttpClientUtil{
      *            the url string
      * @param connectionConfig
      *            the connection config
-     * @return 如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应状态码,比如 200;如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     public static com.feilong.net.http.HttpResponse getHttpResponse(String urlString,ConnectionConfig connectionConfig){
@@ -427,7 +427,7 @@ public final class HttpClientUtil{
      *            the http request
      * @param connectionConfig
      *            the connection config
-     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static com.feilong.net.http.HttpResponse getHttpResponse(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
@@ -445,7 +445,7 @@ public final class HttpClientUtil{
      *            the connection config
      * @param resultBeanConverter
      *            the result bean converter
-     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>resultBeanConverter</code> 是null,那么返回的HttpFullInfo 属性resultBean 会是null <br>
      * @since 4.2.0
      * @since 4.3.0 add resultBeanConverter param
@@ -539,7 +539,7 @@ public final class HttpClientUtil{
      *
      * @param httpRequest
      *            the http request
-     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 4.0.1
      */
     public static com.feilong.net.http.HttpResponse getHttpResponse(HttpRequest httpRequest){
@@ -589,7 +589,7 @@ public final class HttpClientUtil{
      * 
      * @param uri
      *            请求的uri地址
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.10.7
      */
@@ -646,7 +646,7 @@ public final class HttpClientUtil{
      *            参数名字
      * @param paramValue
      *            参数值
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 3.1.1
      */
@@ -698,7 +698,7 @@ public final class HttpClientUtil{
      *            请求的uri地址
      * @param requestParamMap
      *            the request param map
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.10.7
      */
@@ -717,7 +717,7 @@ public final class HttpClientUtil{
      *            the request param map
      * @param headerMap
      *            the header map
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 3.5.1
      */
@@ -772,7 +772,7 @@ public final class HttpClientUtil{
      * 
      * @param uri
      *            请求的uri地址
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.12.5
      */
@@ -829,7 +829,7 @@ public final class HttpClientUtil{
      *            参数名字
      * @param paramValue
      *            参数值
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 3.1.1
      */
@@ -844,7 +844,7 @@ public final class HttpClientUtil{
      *            请求的uri地址
      * @param requestParamMap
      *            the request param map
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.12.5
      */
@@ -862,7 +862,7 @@ public final class HttpClientUtil{
      *            the request param map
      * @param headerMap
      *            the header map
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 3.5.1
      */
@@ -916,7 +916,7 @@ public final class HttpClientUtil{
      * 
      * @param uri
      *            请求的uri地址
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.10.7
      */
@@ -972,7 +972,7 @@ public final class HttpClientUtil{
      *            参数名字
      * @param paramValue
      *            参数值
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 3.1.1
      */
@@ -1024,7 +1024,7 @@ public final class HttpClientUtil{
      *            请求的uri地址
      * @param requestParamMap
      *            the request param map
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.10.7
      */
@@ -1042,7 +1042,7 @@ public final class HttpClientUtil{
      *            the request param map
      * @param headerMap
      *            the header map
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 3.5.1
      */
@@ -1080,7 +1080,7 @@ public final class HttpClientUtil{
      *            the uri
      * @param requestBody
      *            the request body
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.10.7
      */
@@ -1120,7 +1120,7 @@ public final class HttpClientUtil{
      *            the request body
      * @param headerMap
      *            the header map
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 2.1.0
      */
@@ -1142,7 +1142,7 @@ public final class HttpClientUtil{
      *            the uri
      * @param requestBody
      *            the request body
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 3.5.1
      */
@@ -1160,7 +1160,7 @@ public final class HttpClientUtil{
      *            the request body
      * @param headerMap
      *            the header map
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 3.5.1
      */
@@ -1215,7 +1215,7 @@ public final class HttpClientUtil{
      * 
      * @param httpRequest
      *            the http request
-     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static String getResponseBodyAsString(HttpRequest httpRequest){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
@@ -1231,7 +1231,7 @@ public final class HttpClientUtil{
      *            the request param map
      * @param httpMethod
      *            <span style="color:red">不区分大小写</span>, 比如get,Get,GET都可以,但是需要对应 {@link HttpMethodType}的支持的枚举值
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.11.0
      */
@@ -1249,7 +1249,7 @@ public final class HttpClientUtil{
      *            the request param map
      * @param httpMethodType
      *            the http method type
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.11.0
      */
@@ -1265,7 +1265,7 @@ public final class HttpClientUtil{
      *            the uri
      * @param connectionConfig
      *            the connection config
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 2.1.0
      */
@@ -1319,7 +1319,7 @@ public final class HttpClientUtil{
      *            the http request
      * @param connectionConfig
      *            the connection config
-     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>connectionConfig</code> 是null,使用 {@link ConnectionConfig#INSTANCE}<br>
      */
     public static String getResponseBodyAsString(HttpRequest httpRequest,ConnectionConfig connectionConfig){

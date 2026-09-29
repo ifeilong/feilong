@@ -62,7 +62,8 @@ class SFTPUtil{
      *
      * @param sftpFileTransferConfig
      *            sftp 文件传输的配置
-     * @return 如果 <code>sftpFileTransferConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 连接得到的 {@link Session}<br>
+     *         如果 <code>sftpFileTransferConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * 
      *         如果 <code>sftpFileTransferConfig.hostName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>sftpFileTransferConfig.hostName</code> 是blank,抛出 {@link IllegalArgumentException}<br>

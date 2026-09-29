@@ -334,7 +334,8 @@ public final class RequestUtil{
      *            支持的method 数组
      * @param method
      *            the method
-     * @return 如果 <code>method</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>method</code> 在支持的方法数组中返回 true,否则返回 false<br>
+     *         如果 <code>method</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>method</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>supportHttpMethods</code> 是null或者empty,返回 false <br>
      *         循环 supportHttpMethods, 忽视大小写判断和 method 是否equalsIgnoreCase, 如果是返回true,否则false
@@ -637,7 +638,8 @@ public final class RequestUtil{
      *            the request
      * @param attributeName
      *            属性名称
-     * @return 如果 <code>attributeName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return <code>attributeName</code> 对应的属性值,没有该属性时返回 null<br>
+     *         如果 <code>attributeName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>attributeName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see javax.servlet.ServletRequest#getAttribute(String)
      * @since 1.3.0
@@ -659,7 +661,8 @@ public final class RequestUtil{
      *            属性名称
      * @param defaultValue
      *            默认值
-     * @return 如果 <code>attributeName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return <code>attributeName</code> 对应的属性值,没有该属性或值为null时返回 <code>defaultValue</code><br>
+     *         如果 <code>attributeName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>attributeName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see javax.servlet.ServletRequest#getAttribute(String)
      * @since 4.4.0

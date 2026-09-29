@@ -181,7 +181,8 @@ public class XmlUtil{
      *            the xml
      * @param xpathExpression
      *            the xpath expression
-     * @return 如果 <code>xml</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 节点名称和节点文本值组成的 {@link Map},key 是节点名称,value 是节点文本值<br>
+     *         如果 <code>xml</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 3.0.0
      */
     public static Map<String, String> getNodeNameAndStringValueMap(Object xml,String xpathExpression){
@@ -200,7 +201,8 @@ public class XmlUtil{
      *            the xpath expression
      * @param nodeAttributeName
      *            the node attribute name
-     * @return 如果 <code>xml</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 节点属性值和节点文本值组成的 {@link Map},key 是指定属性的值,value 是节点文本值<br>
+     *         如果 <code>xml</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 3.0.0
      */
     public static Map<String, String> getNodeAttributeValueAndStringValueMap(
@@ -223,7 +225,8 @@ public class XmlUtil{
      *            the xpath expression
      * @param hook
      *            the hook
-     * @return 如果 <code>xml</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 按 xpath 解析出的节点数据组成的 {@link Map},没有匹配节点时返回 emptyMap<br>
+     *         如果 <code>xml</code> 是null,抛出 {@link NullPointerException}<br>
      */
     private static Map<String, String> getNodeMap(Object xml,String xpathExpression,Hook hook){
         Document document = FeilongDocumentBuilder.buildDocument(xml);
@@ -357,7 +360,8 @@ public class XmlUtil{
      *            the map
      * @param rootElementName
      *            根元素名字
-     * @return 如果 <code>rootElementName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 由 <code>map</code> 转换得到的 XML 字符串<br>
+     *         如果 <code>rootElementName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>rootElementName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>map</code> 是empty,抛出 {@link IllegalArgumentException}<br>
@@ -454,7 +458,8 @@ public class XmlUtil{
      *            根元素名字
      * @param isPrettyPrint
      *            是否格式化输出
-     * @return 如果 <code>rootElementName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 由 <code>map</code> 转换得到的 XML 字符串<br>
+     *         如果 <code>rootElementName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>rootElementName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>map</code> 是empty,抛出 {@link IllegalArgumentException}<br>
@@ -569,7 +574,8 @@ public class XmlUtil{
      *            the obj
      * @param xStreamConfig
      *            the to xml config
-     * @return 如果 <code>bean</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 由 <code>bean</code> 转换得到的 XML 字符串<br>
+     *         如果 <code>bean</code> 是null,抛出 {@link NullPointerException}<br>
      * @see XStream#toXML(Object)
      * @see XStream#alias(String, Class)
      * @see XStream#addImplicitCollection(Class, String)
@@ -645,7 +651,8 @@ public class XmlUtil{
      *            the xml
      * @param rootElementName
      *            the root element name
-     * @return 如果 <code>rootElementName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 由 XML 解析得到的子节点名称和值组成的 {@link Map},如果 <code>xml</code> 是null或者empty,返回 null<br>
+     *         如果 <code>rootElementName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>rootElementName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>xml</code> 是null,返回 null<br>
      * @since 3.0.0 change name from fromXMl

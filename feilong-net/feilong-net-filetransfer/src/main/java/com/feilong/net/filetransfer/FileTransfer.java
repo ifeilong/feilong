@@ -148,7 +148,7 @@ public interface FileTransfer{
      *            一组文件,绝对路径 <br>
      *            任意一个值 是blank,抛出 {@link IllegalArgumentException}<br>
      *            任意一个值 = / ,抛出 {@link UnsupportedOperationException} 危险!!
-     * @return 如果 <code>remoteAbsolutePaths</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 删除成功返回 true,否则返回 false,如果 <code>remoteAbsolutePaths</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>remoteAbsolutePaths</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * 
      *         删除成功返回true,否则false<br>
@@ -215,7 +215,7 @@ public interface FileTransfer{
      *            远程地址
      * @param fileNames
      *            文件名称组
-     * @return 如果 <code>remotePath</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件名和文件信息实体组成的 {@link Map},空文件夹时返回 empty MAP,如果 <code>remotePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>remotePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>fileNames</code> 是null 或者是 empty,那么返回这个 <code>remotePath</code> 下面所有的文件<br>
      *         如果 <code>remotePath</code> 不存在,会抛出异常,示例 com.feilong.net.filetransfer.FileTransferException:

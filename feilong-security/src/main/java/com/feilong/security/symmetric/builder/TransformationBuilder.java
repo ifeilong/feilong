@@ -50,7 +50,8 @@ public class TransformationBuilder{
      *            the cipher mode
      * @param cipherPadding
      *            the cipher padding
-     * @return 如果 <code>algorithm</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 转换名称字符串,由 <code>algorithm</code> 拼接 cipherMode 和 cipherPadding 而成<br>
+     *         如果 <code>algorithm</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>algorithm</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
      *         如果 <code>null == cipherMode && null == cipherPadding</code> ,返回 <code>algorithm</code><br>

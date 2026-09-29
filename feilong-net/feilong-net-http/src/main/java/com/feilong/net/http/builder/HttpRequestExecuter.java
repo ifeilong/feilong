@@ -52,7 +52,8 @@ public final class HttpRequestExecuter{
      *            the connection config
      * @param resultCallback
      *            the call
-     * @return 如果 <code>resultCallback</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 由 <code>resultCallback</code> 处理之后得到的返回数据<br>
+     *         如果 <code>resultCallback</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 2.1.0
      */
     public static <T> T execute(HttpRequest httpRequest,ConnectionConfig connectionConfig,ResultCallback<T> resultCallback){
@@ -86,7 +87,8 @@ public final class HttpRequestExecuter{
      *            the http uri request
      * @param useConnectionConfig
      *            the connection config
-     * @return 如果 <code>httpUriRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的 {@link HttpResponse}<br>
+     *         如果 <code>httpUriRequest</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.11.0 change method Access Modifiers
      * @since 2.1.0 change method Access Modifiers to private
      */

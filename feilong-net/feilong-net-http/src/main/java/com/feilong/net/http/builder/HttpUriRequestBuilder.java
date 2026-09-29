@@ -44,7 +44,8 @@ public final class HttpUriRequestBuilder{
      *            the http request
      * @param connectionConfig
      *            the connection config
-     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 根据 <code>httpRequest</code> 构造出的 {@link HttpUriRequest}<br>
+     *         如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>httpRequest Uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>httpRequest Uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */

@@ -55,7 +55,8 @@ class HttpRequestUriResolver{
      *            the uri
      * @param request
      *            the request
-     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 解析之后得到的 uri 字符串,如果 <code>uri</code> 不包含模板符号则原样返回<br>
+     *         如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>uri</code> 不包含 $ 符号,那么直接返回 <code>uri</code><br>
      *         如果 <code>uri</code> 包含 $ 符号,那么如果 <code>request</code> 是null,抛出 {@link NullPointerException}<br>
