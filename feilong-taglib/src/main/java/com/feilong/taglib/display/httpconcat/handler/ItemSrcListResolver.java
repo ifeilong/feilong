@@ -91,7 +91,7 @@ public final class ItemSrcListResolver{
      * 是否忽略.
      * 
      * @param item
-     * @return
+     * @return 如果 <code>item</code> 是null/empty(空行) 或者以 {@code <!--} 开头(html 注释行),返回 true;否则返回 false
      * @since 1.12.8
      */
     private static boolean isIgnore(String item){
