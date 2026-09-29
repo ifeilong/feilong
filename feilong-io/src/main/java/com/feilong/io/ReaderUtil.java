@@ -48,7 +48,8 @@ public final class ReaderUtil{
      *
      * @param str
      *            the str
-     * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 包装 <code>str</code> 的 {@link StringReader}<br>
+     *         如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.11.5
      */
     public static StringReader newStringReader(String str){
@@ -64,7 +65,8 @@ public final class ReaderUtil{
      *
      * @param reader
      *            the reader
-     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return <code>reader</code> 中的全部内容字符串<br>
+     *         如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
      * @see com.feilong.lib.io.IOUtils#toBufferedReader(Reader)
      * @see com.feilong.lib.io.IOUtils#toString(Reader)
      * @since 1.10.6 call {@link com.feilong.lib.io.IOUtils#toString(Reader)}
@@ -87,7 +89,8 @@ public final class ReaderUtil{
      *
      * @param reader
      *            the reader
-     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return <code>reader</code> 的第一行内容,如果已经到达末尾,返回 null<br>
+     *         如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
      * @see com.feilong.lib.io.IOUtils#toBufferedReader(Reader)
      */
     public static String readLine(Reader reader){

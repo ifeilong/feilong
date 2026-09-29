@@ -108,7 +108,8 @@ public final class FilenameUtil{
      * 
      * @param fileName
      *            the file name
-     * @return 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 带后缀的文件纯名称,比如 pie2.png<br>
+     *         如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.io.File#getName()
      * @see com.feilong.lib.io.FilenameUtils#getName(String)
@@ -255,7 +256,8 @@ public final class FilenameUtil{
      * 
      * @param fileName
      *            文件名称
-     * @return 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件后缀名的小写形式,如果文件没有后缀名,返回空字符串<br>
+     *         如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.lib.io.FilenameUtils#getExtension(String)
      * @see #getExtension(String)
@@ -288,7 +290,8 @@ public final class FilenameUtil{
      *            文件名称,比如 F:/pie2.png
      * @param newPostfixName
      *            不带.号, 比如 gif
-     * @return 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 替换后缀后的新文件名称,比如 F:/pie2.gif<br>
+     *         如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>newPostfixName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>newPostfixName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
@@ -418,7 +421,8 @@ public final class FilenameUtil{
      *
      * @param path
      *            the path
-     * @return 如果 <code>path</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 从当前路径到根路径的所有父路径列表,比如 [&quot;/home/sftp-speedo/test/aa/bbb/ccc/ddd&quot;, ...]<br>
+     *         如果 <code>path</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>path</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.7.1
      */

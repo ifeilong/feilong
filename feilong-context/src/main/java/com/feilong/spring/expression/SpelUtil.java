@@ -123,7 +123,8 @@ public final class SpelUtil{
      *            the generic type
      * @param expressionString
      *            the expression string
-     * @return 如果 <code>expressionString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 表达式求值得到的结果对象<br>
+     *         如果 <code>expressionString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>expressionString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
      * @see org.springframework.expression.Expression#getValue()
@@ -152,7 +153,8 @@ public final class SpelUtil{
      *            the root object to use, see
      *            {@link org.springframework.expression.spel.support.StandardEvaluationContext#StandardEvaluationContext(Object)
      *            StandardEvaluationContext}
-     * @return 如果 <code>expressionString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 以 <code>rootObject</code> 为根对象求值得到的结果对象<br>
+     *         如果 <code>expressionString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>expressionString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>rootObject</code> 是null或者empty,返回 {@link #getValue(String)}<br>
      * @see org.springframework.expression.Expression#getValue(EvaluationContext)

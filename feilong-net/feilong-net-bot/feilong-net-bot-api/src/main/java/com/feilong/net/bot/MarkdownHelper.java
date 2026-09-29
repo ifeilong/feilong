@@ -217,7 +217,8 @@ public class MarkdownHelper{
      *            bean 列表, 比如是user list
      * @param valueFunctionList
      *            提取数据的function 列表
-     * @return 如果 <code>titleList</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 生成的 markdown 表格字符串<br>
+     *         如果 <code>titleList</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>titleList</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>valueFunctionList</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>valueFunctionList</code> 是empty,抛出 {@link IllegalArgumentException}<br>

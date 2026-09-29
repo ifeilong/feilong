@@ -59,7 +59,8 @@ class FormatterColumnEntityListSorter{
      *            the formatter column entity list
      * @param beanFormatterConfig
      *            the bean formatter config
-     * @return 如果 <code>beanFormatterConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 排序之后的 {@link FormatterColumnEntity} 列表<br>
+     *         如果 <code>beanFormatterConfig</code> 是null,抛出 {@link NullPointerException}<br>
      */
     static List<FormatterColumnEntity> sortFormatterColumnEntityList(
                     List<FormatterColumnEntity> formatterColumnEntityList,

@@ -30,7 +30,8 @@ public interface Bot{
      *
      * @param content
      *            markdown内容，最长不超过4096个字节，必须是utf8编码
-     * @return 如果 <code>content</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果发送成功返回 true,否则返回 false<br>
+     *         如果 <code>content</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>content</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     boolean sendMessage(String content);
@@ -40,7 +41,8 @@ public interface Bot{
      * 
      * @param content
      * @param messageParams
-     * @return 如果 <code>content</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果发送成功返回 true,否则返回 false<br>
+     *         如果 <code>content</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>content</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 4.0.8
      */

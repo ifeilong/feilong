@@ -93,7 +93,8 @@ public final class InputStreamUtil{
      *            the str
      * @param charsetType
      *            受支持的 charset 名称,比如 utf-8, {@link CharsetType}
-     * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 包装 <code>str</code> 的 {@link ByteArrayInputStream}<br>
+     *         如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
      * @see "org.apache.commons.io.IOUtils#toInputStream(String, Charset)"
      * @since 1.12.1
      */
@@ -162,7 +163,8 @@ public final class InputStreamUtil{
      *            the input stream
      * @param charsetName
      *            the charset name
-     * @return 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 包装 <code>inputStream</code> 的 {@link BufferedReader}<br>
+     *         如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.io.BufferedReader
      * @see java.io.InputStreamReader#InputStreamReader(InputStream, String)
      * @see com.feilong.lib.io.IOUtils#toBufferedReader(Reader)

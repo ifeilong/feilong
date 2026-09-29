@@ -60,7 +60,8 @@ public final class ReturnResultBuilder{
      *
      * @param statusCode
      *            返回状态码
-     * @return 如果 <code>statusCode</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 成功的标志为 false、并携带 <code>statusCode</code> 的 {@link ReturnResult}<br>
+     *         如果 <code>statusCode</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>statusCode</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     public static ReturnResult<Object> buildFailureResult(String statusCode){

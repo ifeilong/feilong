@@ -79,7 +79,8 @@ public final class IOReaderUtil{
      *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
      *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
      *            </ul>
-     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件内容的 byte 数组<br>
+     *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>location</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @since 4.0.1
@@ -133,7 +134,8 @@ public final class IOReaderUtil{
      *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
      *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
      *            </ul>
-     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件内容的字符串<br>
+     *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>location</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @see "org.apache.commons.io.FilenameUtils#readFileToString(File, Charset)"
@@ -185,7 +187,8 @@ public final class IOReaderUtil{
      *            </ul>
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
-     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件内容按 <code>charsetName</code> 解码后的字符串<br>
+     *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>location</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @see "org.apache.commons.io.FilenameUtils#readFileToString(File, Charset)"
@@ -235,7 +238,8 @@ public final class IOReaderUtil{
      *            文件
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
-     * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件内容按 <code>charsetName</code> 解码后的字符串<br>
+     *         如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @see "org.apache.commons.io.FilenameUtils#readFileToString(File, Charset)"
      * @since 1.5.3
@@ -293,7 +297,8 @@ public final class IOReaderUtil{
      *            the file input stream
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
-     * @return 如果 <code>fileInputStream</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 输入流内容按 <code>charsetName</code> 解码后的字符串<br>
+     *         如果 <code>fileInputStream</code> 是null,抛出 {@link NullPointerException}<br>
      * @see "org.apache.commons.io.FilenameUtils#readFileToString(File, Charset)"
      * @since 1.5.3
      * @since 1.14.0 rename from getContent
@@ -384,7 +389,8 @@ public final class IOReaderUtil{
      *            the input stream
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
-     * @return 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 输入流内容按 <code>charsetName</code> 解码后的字符串<br>
+     *         如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
      * @see "org.apache.commons.io.IOUtils#toString(InputStream, String)"
      * @see InputStreamUtil#toString(InputStream, String)
      * @since 1.5.3
@@ -431,7 +437,8 @@ public final class IOReaderUtil{
      *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
      *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
      *            </ul>
-     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 读取到的内容行组成的 {@link Set},已按配置去重<br>
+     *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.14.0
      */
@@ -497,7 +504,8 @@ public final class IOReaderUtil{
      *            </ul>
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 读取到的内容行组成的 {@link Set}<br>
+     *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.12.10
      * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
@@ -561,7 +569,8 @@ public final class IOReaderUtil{
      *            the file
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 读取到的内容行组成的 {@link Set}<br>
+     *         如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.12.10
      * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
      * @since 1.14.0 rename from read
@@ -630,7 +639,8 @@ public final class IOReaderUtil{
      *            the reader
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 读取到的内容行组成的 {@link Set}<br>
+     *         如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.12.10
      * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
      * @since 1.14.0 rename from read
@@ -660,7 +670,8 @@ public final class IOReaderUtil{
      *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
      *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
      *            </ul>
-     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 读取到的内容行组成的 {@link List}<br>
+     *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 4.1.2
      */
@@ -726,7 +737,8 @@ public final class IOReaderUtil{
      *            </ul>
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 读取到的内容行组成的 {@link List}<br>
+     *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 4.1.2
      */
@@ -788,7 +800,8 @@ public final class IOReaderUtil{
      *            the file
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 读取到的内容行组成的 {@link List}<br>
+     *         如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 4.1.2
      */
     public static List<String> readToList(File file,ReaderConfig readerConfig){
@@ -855,7 +868,8 @@ public final class IOReaderUtil{
      *            the reader
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 读取到的内容行组成的 {@link List}<br>
+     *         如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 4.1.2
      */
     public static List<String> readToList(Reader reader,ReaderConfig readerConfig){
@@ -923,7 +937,8 @@ public final class IOReaderUtil{
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
      * @param collection
      *            the collection
-     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 传入的 <code>collection</code> 本身,内部已填充读取到的行数据<br>
+     *         如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>collection</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 4.1.2
      */
@@ -1152,7 +1167,8 @@ public final class IOReaderUtil{
      *
      * @param location
      *            the location
-     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 根据 <code>location</code> 打开得到的 {@link InputStream}<br>
+     *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 4.0.1
      */
