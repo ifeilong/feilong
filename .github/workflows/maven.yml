@@ -48,9 +48,11 @@ jobs:
 
       # 说明: 项目里有一部分测试依赖外部服务(邮件/FTP/SFTP/公网 HTTP), 无法在 CI 里直接跑;
       # 这里只跑与外部服务无关的模块, 需要全量测试时, 去掉 -pl 参数并先准备好外部服务。
+      # 注意: 这里不能加 -o(offline)。上一步 install 带了 -DskipTests, surefire 的 provider
+      # (org.apache.maven.surefire:surefire-junit4) 还没下载到本地仓库, 离线模式会直接失败。
       - name: Run unit tests
         run: >
-          mvn -B -ntp -o test
+          mvn -B -ntp test
           -pl feilong-core,feilong-json,feilong-io,feilong-validator,feilong-security,feilong-formatter,feilong-xml,feilong-taglib
 
       - name: Upload surefire reports
