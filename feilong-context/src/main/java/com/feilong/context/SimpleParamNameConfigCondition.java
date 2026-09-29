@@ -31,7 +31,7 @@ public class SimpleParamNameConfigCondition implements Condition{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.spring.scheduling.quartz.Condition#is()
+     * @see com.feilong.context.Condition#canRun()
      */
     @Override
     public boolean canRun(){

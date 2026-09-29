@@ -61,7 +61,7 @@ public class SimpleParamNameValueLoader<V> implements ValueLoader<V>{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.spring.scheduling.quartz.Condition#is()
+     * @see com.feilong.context.ValueLoader#load()
      */
     @Override
     public V load(){

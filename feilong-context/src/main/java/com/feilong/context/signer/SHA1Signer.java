@@ -74,7 +74,7 @@ public class SHA1Signer implements Signer{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.spring.web.handler.signer.Signer#sign(java.lang.CharSequence[])
+     * @see com.feilong.context.signer.Signer#sign(java.lang.CharSequence[])
      */
     @Override
     public String sign(CharSequence...strs){
