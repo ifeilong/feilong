@@ -24,7 +24,6 @@ import java.util.List;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
-import com.feilong.core.lang.SystemUtil;
 import com.feilong.io.IOReaderUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.test.AbstractTest;
@@ -37,14 +36,17 @@ import com.feilong.test.AbstractTest;
  */
 public abstract class BaseHttpConcatTest extends AbstractTest{
 
-    protected static final String vmFloder = SystemUtil.USER_HOME
-                    + "/workspace/feilong/feilong/feilong-taglib/src/test/resources/velocity/";
+    /** 存放 velocity 模板的目录,相对于模块根目录. */
+    protected static final String vmFloder = "src/test/resources/velocity/";
 
     //---------------------------------------------------------------
 
     /**
+     * 读取 vmFloder 目录下指定名称的 velocity 模板内容.
+     *
      * @param filePath
-     * @return
+     *            模板文件名,相对于 {@link #vmFloder}
+     * @return 模板文件的内容
      * @since 1.12.8
      */
     protected static String read(String filePath){
@@ -85,7 +87,9 @@ public abstract class BaseHttpConcatTest extends AbstractTest{
     //---------------------------------------------------------------
 
     /**
-     * @return
+     * 构造测试用的 js 文件列表.
+     *
+     * @return the list
      * @since 1.10.4
      */
     private static List<String> buildList(){
