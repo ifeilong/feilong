@@ -8,7 +8,10 @@
 ### Fixed
 
 - 修正 `feilong-office-zip` 解压时的路径穿越风险（zip slip）：`AbstractUnzipHandler#write` 现在会校验解压条目不会逃出 `outputDirectory`，否则抛出 `IllegalArgumentException`
-- `feilong-xml` 的 `XStreamBuilder` 不再调用 `xstream.addPermission(AnyTypePermission.ANY)`，恢复 XStream 1.4.18+ 的默认安全策略，避免反序列化漏洞
+
+### Security（有意延后）
+
+- ⏳ **`feilong-xml` 的 `XStreamBuilder#buildDefault` 仍保留 `xstream.addPermission(AnyTypePermission.ANY)`**：该调用会关闭 XStream 的安全框架，解析不可信 XML 时存在反序列化风险。为**保持已发布 jar 的行为兼容**，本版本刻意不改；计划在**下一个 major 版本**移除并改用 `xstream.allowTypes(...)` 显式白名单（属 breaking change）。跟踪 issue：`ifeilong/feilong`（待登记，标题建议 `[Security] 移除 XStreamBuilder 中的 AnyTypePermission.ANY`）
 
 ### Changed
 

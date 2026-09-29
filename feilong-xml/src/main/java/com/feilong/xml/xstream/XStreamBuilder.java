@@ -146,8 +146,15 @@ public final class XStreamBuilder{
      */
     private static XStream buildDefault(XStreamConfig xStreamConfig){
         XStream xstream = new XStream(buildHierarchicalStreamDriver(xStreamConfig));
+
         //since 1.4.7
         xstream.addPermission(AnyTypePermission.ANY);
+
+        //据说 1.4.18 xstream 默认使用黑名单安全策略, 不再放开所有类型(避免反序列化漏洞)
+        //如需放开指定的类型, 请使用 xstream.allowTypes(...) 显式声明
+        //为了保持兼容, 我暂时不动
+
+        //---------------------------------------------------------------
 
         //自动探测注解
         xstream.autodetectAnnotations(true);
