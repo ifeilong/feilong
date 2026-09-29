@@ -32,6 +32,11 @@ jobs:
   unit-tests:
     name: Unit tests (network free modules)
     runs-on: ubuntu-latest
+    env:
+      # 少数单测的断言依赖"东八区 + 中文 Locale"(例如 DateUtil 的 yyyy 解析硬编码时间戳、G 纪元解析"公元前"),
+      # GitHub runner 默认是 UTC + en_US, 会导致假失败; 这里显式对齐到开发者环境。
+      TZ: Asia/Shanghai
+      JAVA_TOOL_OPTIONS: "-Duser.timezone=Asia/Shanghai -Duser.language=zh -Duser.country=CN"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

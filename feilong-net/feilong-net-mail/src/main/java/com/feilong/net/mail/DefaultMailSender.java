@@ -59,7 +59,7 @@ public final class DefaultMailSender implements MailSender{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.mail.MailSender#sendMail(com.feilong.tools.mail.entity.MailSenderConfig)
+     * @see com.feilong.net.mail.MailSender#send(MailSendRequest)
      */
     @Override
     public void send(MailSendRequest mailSendRequest){

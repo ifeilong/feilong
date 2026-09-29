@@ -215,7 +215,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     /*
      * (non-Javadoc)
      *
-     * @see com.feilong.tools.net.FileTransfer#getLsFileMap(java.lang.String)
+     * @see com.feilong.net.filetransfer.FileTransfer#getLsFileMap(java.lang.String)
      */
     @Override
     protected Map<String, FileInfoEntity> getLsFileMap(String remotePath){
@@ -266,7 +266,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     /*
      * (non-Javadoc)
      *
-     * @see com.feilong.tools.net.AbstractFileTransfer#mkdir(java.lang.String)
+     * @see com.feilong.net.filetransfer.AbstractFileTransfer#mkdir(java.lang.String)
      */
     @Override
     protected boolean mkdir(String remoteDirectory){
@@ -286,7 +286,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     /*
      * (non-Javadoc)
      *
-     * @see com.feilong.tools.net.filetransfer.AbstractFileTransfer#tryCd(java.lang.String)
+     * @see com.feilong.net.filetransfer.AbstractFileTransfer#tryCd(java.lang.String)
      */
     @Override
     protected void tryCd(String remoteDirectory) throws Exception{
@@ -297,7 +297,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     /*
      * (non-Javadoc)
      *
-     * @see com.feilong.tools.net.filetransfer.FileTransfer#upload(java.io.FileInputStream, java.lang.String)
+     * @see com.feilong.net.filetransfer.FileTransfer#upload(java.io.FileInputStream, java.lang.String)
      */
     @Override
     protected boolean upload(FileInputStream fileInputStream,String toFileName){
@@ -332,7 +332,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     /*
      * (non-Javadoc)
      *
-     * @see com.feilong.tools.net.FileTransfer#rmdir(java.lang.String)
+     * @see com.feilong.net.filetransfer.FileTransfer#rmdir(java.lang.String)
      */
     @Override
     protected boolean rmdir(String remotePath){
@@ -347,7 +347,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     /*
      * (non-Javadoc)
      *
-     * @see com.feilong.tools.net.FileTransfer#rm(java.lang.String)
+     * @see com.feilong.net.filetransfer.FileTransfer#rm(java.lang.String)
      */
     @Override
     protected boolean rm(String remotePath){
@@ -362,7 +362,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     /*
      * (non-Javadoc)
      *
-     * @see com.feilong.tools.net.FileTransfer#_downRemoteSingleFile(java.lang.String, java.lang.String)
+     * @see com.feilong.net.filetransfer.FileTransfer#_downRemoteSingleFile(java.lang.String, java.lang.String)
      */
     @Override
     protected boolean downRemoteSingleFile(String remoteSingleFile,String filePath){

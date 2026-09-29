@@ -35,7 +35,7 @@ import lombok.NoArgsConstructor;
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.org.apache.http.client.methods.HttpUriRequest
- * @see "com.feilong.tools.net.httpclient3.HttpClientUtil"
+ * @see "com.feilong.net.http.HttpClientUtil"
  * @see "org.springframework.http.client.HttpComponentsClientHttpResponse"
  * @see <a href="http://hc.apache.org/index.html">Apache HttpComponents</a>
  * @see <a href="https://wiki.apache.org/HttpComponents/QuickStart">QuickStart</a>
