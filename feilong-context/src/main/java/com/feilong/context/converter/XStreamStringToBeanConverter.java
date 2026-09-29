@@ -103,7 +103,7 @@ public class XStreamStringToBeanConverter<T> extends AbstractBeanClassStringToBe
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.bind.AbstractStringToBeanConverter#handler(java.lang.String)
+     * @see com.feilong.context.converter.AbstractStringToBeanConverter#handler(java.lang.String)
      */
     @Override
     protected T handler(String inputString){

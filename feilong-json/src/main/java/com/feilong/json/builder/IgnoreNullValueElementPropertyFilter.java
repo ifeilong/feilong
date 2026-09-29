@@ -71,7 +71,7 @@ class IgnoreNullValueElementPropertyFilter implements PropertyFilter{
     /*
      * (non-Javadoc)
      * 
-     * @see net.sf.json.util.PropertyFilter#apply(java.lang.Object, java.lang.String, java.lang.Object)
+     * @see com.feilong.lib.json.util.PropertyFilter#apply(java.lang.Object, java.lang.String, java.lang.Object)
      */
     @Override
     //返回 true 表示过滤 

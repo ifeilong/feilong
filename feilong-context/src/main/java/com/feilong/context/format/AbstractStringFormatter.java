@@ -28,7 +28,7 @@ public abstract class AbstractStringFormatter implements StringFormatter{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.context.formatter.StringFormatter#format(java.lang.String)
+     * @see com.feilong.context.format.StringFormatter#format(java.lang.String)
      */
     @Override
     public String format(String str){

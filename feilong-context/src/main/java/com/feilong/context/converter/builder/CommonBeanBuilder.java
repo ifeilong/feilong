@@ -35,7 +35,7 @@ public class CommonBeanBuilder implements BeanBuilder{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.bind.builder.BeanBuilder#populate(java.util.Map, java.lang.Object)
+     * @see com.feilong.context.converter.builder.BeanBuilder#populate(java.util.Map, java.lang.Object)
      */
     @Override
     public <T> T build(Map<String, String> nameAndValueMap,T t){

@@ -87,7 +87,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.taglib.base.AbstractCommonTag#writeContent()
+     * @see com.feilong.taglib.AbstractWriteContentTag#writeContent()
      */
     @Override
     protected Object buildContent(HttpServletRequest request){

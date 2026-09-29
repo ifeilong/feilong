@@ -99,7 +99,7 @@ public class XmlNodeNameAndValueMapBuilder implements NameAndValueMapBuilder{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.bind.builder.NameAndValueMapBuilder#buildNameAndValueMap(java.lang.String)
+     * @see com.feilong.context.converter.builder.NameAndValueMapBuilder#buildNameAndValueMap(java.lang.String)
      */
     @Override
     public Map<String, String> build(String inputString){

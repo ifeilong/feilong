@@ -124,7 +124,7 @@ public class JsonStringToBeanConverter<T> extends AbstractStringToBeanConverter<
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.bind.AbstractBeanClassStringToBeanConverter#handler(java.lang.Class, java.lang.String)
+     * @see com.feilong.context.converter.AbstractBeanClassStringToBeanConverter#handler(java.lang.Class, java.lang.String)
      */
     @Override
     protected T handler(String inputString){

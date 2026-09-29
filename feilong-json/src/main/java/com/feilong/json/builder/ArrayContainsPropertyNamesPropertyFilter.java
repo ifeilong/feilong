@@ -48,7 +48,7 @@ class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{
     /*
      * (non-Javadoc)
      * 
-     * @see net.sf.json.util.PropertyFilter#apply(java.lang.Object, java.lang.String, java.lang.Object)
+     * @see com.feilong.lib.json.util.PropertyFilter#apply(java.lang.Object, java.lang.String, java.lang.Object)
      */
     @Override
     //返回true 会被过滤
