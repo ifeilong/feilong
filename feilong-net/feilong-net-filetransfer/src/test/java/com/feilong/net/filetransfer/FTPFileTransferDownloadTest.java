@@ -57,7 +57,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferDownloadTest#downloadNullLocalAbsoluteDirectoryPath()
+     * @see com.feilong.net.filetransfer.FileTransferDownloadTest#downloadNullLocalAbsoluteDirectoryPath()
      */
     @Override
     @Test(expected = NullPointerException.class)
@@ -68,7 +68,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferDownloadTest#downloadEmptyLocalAbsoluteDirectoryPath()
+     * @see com.feilong.net.filetransfer.FileTransferDownloadTest#downloadEmptyLocalAbsoluteDirectoryPath()
      */
     @Override
     @Test(expected = IllegalArgumentException.class)
@@ -79,7 +79,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferDownloadTest#downloadBlankLocalAbsoluteDirectoryPath()
+     * @see com.feilong.net.filetransfer.FileTransferDownloadTest#downloadBlankLocalAbsoluteDirectoryPath()
      */
     @Override
     @Test(expected = IllegalArgumentException.class)
@@ -91,7 +91,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferDownloadTest#downloadNullRemotePaths()
+     * @see com.feilong.net.filetransfer.FileTransferDownloadTest#downloadNullRemotePaths()
      */
     @Override
     @Test(expected = NullPointerException.class)
@@ -103,7 +103,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferDownloadTest#downloadEmptyRemotePaths()
+     * @see com.feilong.net.filetransfer.FileTransferDownloadTest#downloadEmptyRemotePaths()
      */
     @Override
     @Test(expected = IllegalArgumentException.class)
@@ -115,7 +115,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferDownloadTest#downloadEmptyWithNullRemotePath()
+     * @see com.feilong.net.filetransfer.FileTransferDownloadTest#downloadEmptyWithNullRemotePath()
      */
     @Override
     @Test(expected = NullPointerException.class)
@@ -129,7 +129,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferDownloadTest#downloadEmptyWithEmptyRemotePath()
+     * @see com.feilong.net.filetransfer.FileTransferDownloadTest#downloadEmptyWithEmptyRemotePath()
      */
     @Override
     @Test(expected = IllegalArgumentException.class)
@@ -144,7 +144,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferDownloadTest#downloadEmptyWithBlankRemotePath()
+     * @see com.feilong.net.filetransfer.FileTransferDownloadTest#downloadEmptyWithBlankRemotePath()
      */
     @Override
     @Test(expected = IllegalArgumentException.class)

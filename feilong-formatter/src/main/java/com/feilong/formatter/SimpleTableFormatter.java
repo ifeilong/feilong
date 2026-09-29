@@ -148,7 +148,7 @@ public class SimpleTableFormatter extends AbstractFormatter{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.coreextension.formatter.Formatter#format(java.lang.String[], java.util.List)
+     * @see com.feilong.formatter.AbstractFormatter#format(java.lang.String[], java.util.List)
      */
     @Override
     public String format(String[] columnTitles,List<Object[]> dataList){

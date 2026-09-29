@@ -35,7 +35,7 @@ public class EmptyPartitionRunnableBuilder implements PartitionRunnableBuilder<I
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.core.lang.PartitionRunnableBuilder#build(java.util.List, com.feilong.core.lang.PartitionThreadEntity, java.util.Map)
+     * @see com.feilong.core.lang.thread.PartitionRunnableBuilder#build(java.util.List, com.feilong.core.lang.thread.PartitionThreadEntity, java.util.Map)
      */
     @Override
     public Runnable build(final List<Integer> perBatchList,final PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap){

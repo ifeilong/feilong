@@ -50,7 +50,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferTest#sendLocalFileToRemote_dir()
+     * @see com.feilong.net.filetransfer.FileTransferTest#uploadDir()
      */
     @Override
     @Test
@@ -62,7 +62,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferTest#sendLocalFileToRemote_dirs()
+     * @see com.feilong.net.filetransfer.FileTransferTest#uploadDirs()
      */
     @Override
     @Test
@@ -75,7 +75,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.FileTransferTest#delete()
+     * @see com.feilong.net.filetransfer.FileTransferTest#delete()
      */
     @Override
     @Test
@@ -87,7 +87,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.FileTransferTest#delete_dir()
+     * @see com.feilong.net.filetransfer.FileTransferTest#deleteDir()
      */
     @Override
     @Test
@@ -99,7 +99,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.FileTransferTest#delete_dir_empty()
+     * @see com.feilong.net.filetransfer.FileTransferTest#deleteDirEmpty()
      */
     @Override
     @Test
@@ -111,7 +111,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.FileTransferTest#delete_not_exist()
+     * @see com.feilong.net.filetransfer.FileTransferTest#deleteNotExist()
      */
     @Override
     @Test
@@ -137,7 +137,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferTest#testGetFileEntityMap()
+     * @see com.feilong.net.filetransfer.FileTransferTest#testGetFileEntityMap()
      */
     @Override
     @Test
@@ -150,7 +150,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.FileTransferTest#sendLocalFileToRemote_dir_chinese()
+     * @see com.feilong.net.filetransfer.FileTransferTest#sendLocalFileToRemote_dir_chinese()
      */
     @Override
     public void sendLocalFileToRemote_dir_chinese() throws Exception{
