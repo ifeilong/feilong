@@ -112,7 +112,8 @@ public final class TagUtils{
      *            the version name in scope
      * @param scope
      *            the version search scope
-     * @return 如果 <code>pageContext</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 在指定 scope 中找到的属性值,找不到时返回 null<br>
+     *         如果 <code>pageContext</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>attributeName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>attributeName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>scope</code> 是null或者 blank,将会调用 {@link javax.servlet.jsp.JspContext#findAttribute(String)}<br>

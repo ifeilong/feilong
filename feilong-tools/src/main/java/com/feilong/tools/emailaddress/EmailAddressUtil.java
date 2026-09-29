@@ -99,7 +99,8 @@ public final class EmailAddressUtil{
      *
      * @param emailAddress
      *            邮箱地址
-     * @return 如果 <code>emailAddress</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 匹配到的 {@link EmailProvider},如果域名为空或者没有匹配的邮件服务商,返回 null<br>
+     *         如果 <code>emailAddress</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>emailAddress</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #getDomain(String)
      * @since 1.5.3
@@ -126,7 +127,8 @@ public final class EmailAddressUtil{
      * 
      * @param emailAddress
      *            邮件地址
-     * @return 如果 <code>emailAddress</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 邮件地址 @ 符号之后的后缀名,比如 163.com<br>
+     *         如果 <code>emailAddress</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>emailAddress</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.5.3
      */
@@ -144,7 +146,8 @@ public final class EmailAddressUtil{
      *
      * @param emailAddress
      *            邮箱地址
-     * @return 如果 <code>emailAddress</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 邮件地址 @ 符号之前的前缀,比如 feilong<br>
+     *         如果 <code>emailAddress</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>emailAddress</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.5.3
      */

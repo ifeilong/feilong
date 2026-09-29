@@ -166,7 +166,8 @@ public final class MobileUtil{
      * 
      * @param mobileNumber
      *            11位mobileNumber
-     * @return 如果 <code>mobileNumber</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 手机号码的前3位号码段,比如 150<br>
+     *         如果 <code>mobileNumber</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>mobileNumber</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     public static String getMobileNumberSegment(String mobileNumber){

@@ -46,7 +46,8 @@ public final class ItemSrcListResolver{
      *            内容,目前 以 \n 分隔
      * @param domain
      *            the domain
-     * @return 如果 <code>blockContent</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 解析处理之后的 item src 字符串 {@link List},没有内容时返回空 {@link List}<br>
+     *         如果 <code>blockContent</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>blockContent</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         使用换行符,转成字符串数组,如果 <code>数组</code> 处理后为空,返回 {@link java.util.Collections#emptyList()}<br>
      * @since 1.11.1 remove type param

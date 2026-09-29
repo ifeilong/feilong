@@ -138,7 +138,8 @@ public final class PagerBuilder{
      * 
      * @param pagerParams
      *            构造分页需要的请求参数
-     * @return 如果 <code>pagerParams</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 生成的分页 html 代码字符串,总数不大于0时返回空字符串<br>
+     *         如果 <code>pagerParams</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 {@link PagerParams#getTotalCount()}{@code <=0} 返回 {@link com.feilong.core.lang.StringUtil#EMPTY} <br>
      *         否则 生成分页html代码
      */

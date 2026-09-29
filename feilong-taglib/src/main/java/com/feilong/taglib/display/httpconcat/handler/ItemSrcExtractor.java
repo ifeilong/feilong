@@ -79,7 +79,8 @@ public class ItemSrcExtractor{
      *            the item
      * @param domain
      *            the domain
-     * @return 如果 <code>item</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 提取并去掉 domain 和 {@code ?} 之后内容得到的 src 字符串<br>
+     *         如果 <code>item</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>item</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>item</code> 以 {@code "<link "} 开头,那么将提取href 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容<br>
      *         如果 <code>item</code> 以 {@code "<script "} 开头,那么将提取src 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容<br>
