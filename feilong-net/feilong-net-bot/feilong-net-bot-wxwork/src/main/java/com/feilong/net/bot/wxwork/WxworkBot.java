@@ -37,7 +37,8 @@ public interface WxworkBot extends Bot{
      *
      * @param articles
      *            the article
-     * @return 如果 <code>articles</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 企业微信接口返回的 {@link WxworkResponse}<br>
+     *         如果 <code>articles</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>articles</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      */
     WxworkResponse sendNewsMessage(Article...articles);

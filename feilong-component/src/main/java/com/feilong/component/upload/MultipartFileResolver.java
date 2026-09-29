@@ -40,7 +40,8 @@ public interface MultipartFileResolver{
      *            指定目录
      * @param fileName
      *            the file name
-     * @return 如果 <code>multipartFile</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 保存文件的新全路径<br>
+     *         如果 <code>multipartFile</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>directoryName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>directoryName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
@@ -61,7 +62,8 @@ public interface MultipartFileResolver{
      *            指定目录
      * @param fileNames
      *            the file names
-     * @return 如果 <code>multipartFiles</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 每个文件保存后的新全路径组成的 {@link List}<br>
+     *         如果 <code>multipartFiles</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>multipartFiles</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>directoryName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>directoryName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
