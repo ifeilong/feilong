@@ -23,8 +23,6 @@ import java.io.File;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
-import com.feilong.core.lang.SystemUtil;
-
 public class FeilongDocumentBuilderTest{
 
     @Test(expected = NullPointerException.class)
@@ -46,7 +44,7 @@ public class FeilongDocumentBuilderTest{
 
     @Test(expected = IllegalArgumentException.class)
     public void testFile1(){
-        String xml = SystemUtil.USER_HOME + "/workspace/feilong/feilon11/feilong-xml/src/test/resources/weather-response.xml";
+        String xml = "src/test/resources/weather-response.xml";
         FeilongDocumentBuilder.buildDocument(new File(xml));
     }
 
@@ -55,7 +53,7 @@ public class FeilongDocumentBuilderTest{
     @Test
     public void testFile(){
         Document buildDocument = buildDocument(
-                        SystemUtil.USER_HOME + "/workspace/feilong/feilong/feilong-xml/src/test/resources/weather-response.xml");
+                        "src/test/resources/weather-response.xml");
         assertNotNull(buildDocument.getChildNodes());
     }
 
