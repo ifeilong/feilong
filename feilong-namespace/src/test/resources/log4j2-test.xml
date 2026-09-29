@@ -31,7 +31,7 @@
 		<Logger name="com.feilong.security" level="debug" />
 		<Logger name="com.feilong.lib.beanutils" level="info" />
 		<Logger name="com.feilong.taglib.display.pager.PagerBuilder" level="info" />
-		<Logger name="com.feilong.taglib.display.TagCacheManager" level="info" />
+		<Logger name="com.feilong.taglib.display.SimpleTagParamCacheManager" level="info" />
 		<Logger name="com.feilong.taglib.display.httpconcat.HttpConcatUtil" level="info" />
 		<Logger name="com.feilong.json.jsonlib.builder.PropertyStrategyWrapper" level="error" />
 
