@@ -121,7 +121,7 @@ feilong-net-api | http 请求/响应相关的基础 api
 feilong-net-bot-api | 机器人消息发送的基础 api
 feilong-net-bot-dingtalk | 钉钉机器人
 feilong-net-bot-wxwork | 企业微信机器人
-feilong-lib | 从第三方库 fork 而来的源码 (commons-lang3, commons-io, commons-compress 等)
+feilong-lib | 从第三方库 fork 而来的源码 (commons-lang3, commons-io, commons-compress 等,请不要直接调用)
 
 ## Star History
 

@@ -61,10 +61,10 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     int responseStatusCode = HttpClientUtil.getResponseStatusCode(urlString);
-     *     log.debug("" + responseStatusCode);
+     * int responseStatusCode = HttpClientUtil.getResponseStatusCode(urlString);
+     * log.debug("" + responseStatusCode);
      * }
      * 
      * </pre>
@@ -101,10 +101,10 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     int responseStatusCode = HttpClientUtil.getResponseStatusCode(urlString);
-     *     log.debug("" + responseStatusCode);
+     * int responseStatusCode = HttpClientUtil.getResponseStatusCode(urlString);
+     * log.debug("" + responseStatusCode);
      * }
      * 
      * </pre>
@@ -140,10 +140,10 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     int responseStatusCode = HttpClientUtil.getResponseStatusCode(urlString);
-     *     log.debug("" + responseStatusCode);
+     * int responseStatusCode = HttpClientUtil.getResponseStatusCode(urlString);
+     * log.debug("" + responseStatusCode);
      * }
      * 
      * </pre>
@@ -160,7 +160,8 @@ public final class HttpClientUtil{
      *            the http request
      * @param connectionConfig
      *            the connection config
-     * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应状态码,比如 200;<br>
+     *         如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static int getResponseStatusCode(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
@@ -183,73 +184,76 @@ public final class HttpClientUtil{
      * <pre>
      * 
      * public void testGetResponseBodyAsString1(){
-     *     String urlString = "http://localhost:8081/member/login";
-     *     urlString = "http://www.baidu.com";
+     * String urlString = "http://localhost:8081/member/login";
+     * urlString = "http://www.baidu.com";
      * 
-     *     HttpClientUtil.getHttpResponse(urlString);
+     * HttpClientUtil.getHttpResponse(urlString);
      * }
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    
-    response:[    {
-            "statusCode": 200,
-            "resultString": "<!DOCTYPE html>\r\n<!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv
-    =X-UA-Compatible content=
-    IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a>  <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp;  <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
-            "useTime": 1721,
-            "headerMap":         [
-                            {
-                    "name": "Cache-Control",
-                    "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
-                },
-                            {
-                    "name": "Connection",
-                    "value": "Keep-Alive"
-                },
-                            {
-                    "name": "Content-Type",
-                    "value": "text/html"
-                },
-                            {
-                    "name": "Date",
-                    "value": "Wed, 29 Nov 2017 14:41:32 GMT"
-                },
-                            {
-                    "name": "Last-Modified",
-                    "value": "Mon, 23 Jan 2017 13:28:36 GMT"
-                },
-                            {
-                    "name": "Pragma",
-                    "value": "no-cache"
-                },
-                            {
-                    "name": "Server",
-                    "value": "bfe/1.0.8.18"
-                },
-                            {
-                    "name": "Set-Cookie",
-                    "value": "BDORZ=27315; max-age=86400; domain=.baidu.com; path=/"
-                },
-                            {
-                    "name": "Transfer-Encoding",
-                    "value": "chunked"
-                }
-            ]
-        }]
-    }
+     * {@code
+     * 
+     * response:[ {
+     * "statusCode": 200,
+     * "resultString": "<!DOCTYPE html>\r\n<!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta
+     * http-equiv
+     * =X-UA-Compatible content=
+     * IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a> <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p
+     * id=
+     * cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/
+     * class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp; <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
+     * "useTime": 1721,
+     * "headerMap": [
+     * {
+     * "name": "Cache-Control",
+     * "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
+     * },
+     * {
+     * "name": "Connection",
+     * "value": "Keep-Alive"
+     * },
+     * {
+     * "name": "Content-Type",
+     * "value": "text/html"
+     * },
+     * {
+     * "name": "Date",
+     * "value": "Wed, 29 Nov 2017 14:41:32 GMT"
+     * },
+     * {
+     * "name": "Last-Modified",
+     * "value": "Mon, 23 Jan 2017 13:28:36 GMT"
+     * },
+     * {
+     * "name": "Pragma",
+     * "value": "no-cache"
+     * },
+     * {
+     * "name": "Server",
+     * "value": "bfe/1.0.8.18"
+     * },
+     * {
+     * "name": "Set-Cookie",
+     * "value": "BDORZ=27315; max-age=86400; domain=.baidu.com; path=/"
+     * },
+     * {
+     * "name": "Transfer-Encoding",
+     * "value": "chunked"
+     * }
+     * ]
+     * }]
+     * }
      * </pre>
      * 
      * </blockquote>
      * 
      * @param urlString
-     *            the url string
+     * the url string
      * @return 请求得到的响应状态码,比如 200;如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     public static com.feilong.net.http.HttpResponse getHttpResponse(String urlString){
         Validate.notBlank(urlString, "urlString can't be blank!");
@@ -270,75 +274,78 @@ public final class HttpClientUtil{
      * <pre>
      * 
      * public void testGetResponseBodyAsString1(){
-     *     String urlString = "http://localhost:8081/member/login";
-     *     urlString = "http://www.baidu.com";
+     * String urlString = "http://localhost:8081/member/login";
+     * urlString = "http://www.baidu.com";
      * 
-     *     HttpClientUtil.getHttpResponse(urlString);
+     * HttpClientUtil.getHttpResponse(urlString);
      * }
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    
-    response:[    {
-            "statusCode": 200,
-            "resultString": "<!DOCTYPE html>\r\n<!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv
-    =X-UA-Compatible content=
-    IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a>  <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp;  <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
-            "useTime": 1721,
-            "headerMap":         [
-                            {
-                    "name": "Cache-Control",
-                    "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
-                },
-                            {
-                    "name": "Connection",
-                    "value": "Keep-Alive"
-                },
-                            {
-                    "name": "Content-Type",
-                    "value": "text/html"
-                },
-                            {
-                    "name": "Date",
-                    "value": "Wed, 29 Nov 2017 14:41:32 GMT"
-                },
-                            {
-                    "name": "Last-Modified",
-                    "value": "Mon, 23 Jan 2017 13:28:36 GMT"
-                },
-                            {
-                    "name": "Pragma",
-                    "value": "no-cache"
-                },
-                            {
-                    "name": "Server",
-                    "value": "bfe/1.0.8.18"
-                },
-                            {
-                    "name": "Set-Cookie",
-                    "value": "BDORZ=27315; max-age=86400; domain=.baidu.com; path=/"
-                },
-                            {
-                    "name": "Transfer-Encoding",
-                    "value": "chunked"
-                }
-            ]
-        }]
-    }
+     * {@code
+     * 
+     * response:[ {
+     * "statusCode": 200,
+     * "resultString": "<!DOCTYPE html>\r\n<!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta
+     * http-equiv
+     * =X-UA-Compatible content=
+     * IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a> <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p
+     * id=
+     * cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/
+     * class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp; <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
+     * "useTime": 1721,
+     * "headerMap": [
+     * {
+     * "name": "Cache-Control",
+     * "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
+     * },
+     * {
+     * "name": "Connection",
+     * "value": "Keep-Alive"
+     * },
+     * {
+     * "name": "Content-Type",
+     * "value": "text/html"
+     * },
+     * {
+     * "name": "Date",
+     * "value": "Wed, 29 Nov 2017 14:41:32 GMT"
+     * },
+     * {
+     * "name": "Last-Modified",
+     * "value": "Mon, 23 Jan 2017 13:28:36 GMT"
+     * },
+     * {
+     * "name": "Pragma",
+     * "value": "no-cache"
+     * },
+     * {
+     * "name": "Server",
+     * "value": "bfe/1.0.8.18"
+     * },
+     * {
+     * "name": "Set-Cookie",
+     * "value": "BDORZ=27315; max-age=86400; domain=.baidu.com; path=/"
+     * },
+     * {
+     * "name": "Transfer-Encoding",
+     * "value": "chunked"
+     * }
+     * ]
+     * }]
+     * }
      * </pre>
      * 
      * </blockquote>
      * 
      * @param urlString
-     *            the url string
+     * the url string
      * @param connectionConfig
-     *            the connection config
+     * the connection config
      * @return 请求得到的响应状态码,比如 200;如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     public static com.feilong.net.http.HttpResponse getHttpResponse(String urlString,ConnectionConfig connectionConfig){
         Validate.notBlank(urlString, "urlString can't be blank!");
@@ -360,73 +367,76 @@ public final class HttpClientUtil{
      * <pre>
      * 
      * public void testGetResponseBodyAsString1(){
-     *     String urlString = "http://localhost:8081/member/login";
-     *     urlString = "http://www.baidu.com";
+     * String urlString = "http://localhost:8081/member/login";
+     * urlString = "http://www.baidu.com";
      * 
-     *     HttpClientUtil.getHttpResponse(urlString);
+     * HttpClientUtil.getHttpResponse(urlString);
      * }
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    
-    response:[    {
-            "statusCode": 200,
-            "resultString": "<!DOCTYPE html>\r\n<!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv
-    =X-UA-Compatible content=
-    IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a>  <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp;  <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
-            "useTime": 1721,
-            "headerMap":         [
-                            {
-                    "name": "Cache-Control",
-                    "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
-                },
-                            {
-                    "name": "Connection",
-                    "value": "Keep-Alive"
-                },
-                            {
-                    "name": "Content-Type",
-                    "value": "text/html"
-                },
-                            {
-                    "name": "Date",
-                    "value": "Wed, 29 Nov 2017 14:41:32 GMT"
-                },
-                            {
-                    "name": "Last-Modified",
-                    "value": "Mon, 23 Jan 2017 13:28:36 GMT"
-                },
-                            {
-                    "name": "Pragma",
-                    "value": "no-cache"
-                },
-                            {
-                    "name": "Server",
-                    "value": "bfe/1.0.8.18"
-                },
-                            {
-                    "name": "Set-Cookie",
-                    "value": "BDORZ=27315; max-age=86400; domain=.baidu.com; path=/"
-                },
-                            {
-                    "name": "Transfer-Encoding",
-                    "value": "chunked"
-                }
-            ]
-        }]
-    }
+     * {@code
+     * 
+     * response:[ {
+     * "statusCode": 200,
+     * "resultString": "<!DOCTYPE html>\r\n<!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta
+     * http-equiv
+     * =X-UA-Compatible content=
+     * IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a> <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p
+     * id=
+     * cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/
+     * class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp; <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
+     * "useTime": 1721,
+     * "headerMap": [
+     * {
+     * "name": "Cache-Control",
+     * "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
+     * },
+     * {
+     * "name": "Connection",
+     * "value": "Keep-Alive"
+     * },
+     * {
+     * "name": "Content-Type",
+     * "value": "text/html"
+     * },
+     * {
+     * "name": "Date",
+     * "value": "Wed, 29 Nov 2017 14:41:32 GMT"
+     * },
+     * {
+     * "name": "Last-Modified",
+     * "value": "Mon, 23 Jan 2017 13:28:36 GMT"
+     * },
+     * {
+     * "name": "Pragma",
+     * "value": "no-cache"
+     * },
+     * {
+     * "name": "Server",
+     * "value": "bfe/1.0.8.18"
+     * },
+     * {
+     * "name": "Set-Cookie",
+     * "value": "BDORZ=27315; max-age=86400; domain=.baidu.com; path=/"
+     * },
+     * {
+     * "name": "Transfer-Encoding",
+     * "value": "chunked"
+     * }
+     * ]
+     * }]
+     * }
      * </pre>
      * 
      * </blockquote>
      *
      * @param httpRequest
-     *            the http request
+     * the http request
      * @param connectionConfig
-     *            the connection config
+     * the connection config
      * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static com.feilong.net.http.HttpResponse getHttpResponse(HttpRequest httpRequest,ConnectionConfig connectionConfig){
@@ -445,7 +455,8 @@ public final class HttpClientUtil{
      *            the connection config
      * @param resultBeanConverter
      *            the result bean converter
-     * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的 {@link HttpFullInfo};<br>
+     *         如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>resultBeanConverter</code> 是null,那么返回的HttpFullInfo 属性resultBean 会是null <br>
      * @since 4.2.0
      * @since 4.3.0 add resultBeanConverter param
@@ -474,71 +485,74 @@ public final class HttpClientUtil{
      * <pre>
      * 
      * public void testGetResponseBodyAsString1(){
-     *     String urlString = "http://localhost:8081/member/login";
-     *     urlString = "http://www.baidu.com";
+     * String urlString = "http://localhost:8081/member/login";
+     * urlString = "http://www.baidu.com";
      * 
-     *     HttpClientUtil.getHttpResponse(urlString);
+     * HttpClientUtil.getHttpResponse(urlString);
      * }
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    
-    response:[    {
-            "statusCode": 200,
-            "resultString": "<!DOCTYPE html>\r\n<!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv
-    =X-UA-Compatible content=
-    IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a>  <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp;  <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
-            "useTime": 1721,
-            "headerMap":         [
-                            {
-                    "name": "Cache-Control",
-                    "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
-                },
-                            {
-                    "name": "Connection",
-                    "value": "Keep-Alive"
-                },
-                            {
-                    "name": "Content-Type",
-                    "value": "text/html"
-                },
-                            {
-                    "name": "Date",
-                    "value": "Wed, 29 Nov 2017 14:41:32 GMT"
-                },
-                            {
-                    "name": "Last-Modified",
-                    "value": "Mon, 23 Jan 2017 13:28:36 GMT"
-                },
-                            {
-                    "name": "Pragma",
-                    "value": "no-cache"
-                },
-                            {
-                    "name": "Server",
-                    "value": "bfe/1.0.8.18"
-                },
-                            {
-                    "name": "Set-Cookie",
-                    "value": "BDORZ=27315; max-age=86400; domain=.baidu.com; path=/"
-                },
-                            {
-                    "name": "Transfer-Encoding",
-                    "value": "chunked"
-                }
-            ]
-        }]
-    }
+     * {@code
+     * 
+     * response:[ {
+     * "statusCode": 200,
+     * "resultString": "<!DOCTYPE html>\r\n<!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta
+     * http-equiv
+     * =X-UA-Compatible content=
+     * IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a> <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p
+     * id=
+     * cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/
+     * class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp; <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
+     * "useTime": 1721,
+     * "headerMap": [
+     * {
+     * "name": "Cache-Control",
+     * "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
+     * },
+     * {
+     * "name": "Connection",
+     * "value": "Keep-Alive"
+     * },
+     * {
+     * "name": "Content-Type",
+     * "value": "text/html"
+     * },
+     * {
+     * "name": "Date",
+     * "value": "Wed, 29 Nov 2017 14:41:32 GMT"
+     * },
+     * {
+     * "name": "Last-Modified",
+     * "value": "Mon, 23 Jan 2017 13:28:36 GMT"
+     * },
+     * {
+     * "name": "Pragma",
+     * "value": "no-cache"
+     * },
+     * {
+     * "name": "Server",
+     * "value": "bfe/1.0.8.18"
+     * },
+     * {
+     * "name": "Set-Cookie",
+     * "value": "BDORZ=27315; max-age=86400; domain=.baidu.com; path=/"
+     * },
+     * {
+     * "name": "Transfer-Encoding",
+     * "value": "chunked"
+     * }
+     * ]
+     * }]
+     * }
      * </pre>
      * 
      * </blockquote>
      *
      * @param httpRequest
-     *            the http request
+     * the http request
      * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 4.0.1
      */
@@ -562,9 +576,9 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     log.debug(HttpClientUtil.get(urlString));
+     * log.debug(HttpClientUtil.get(urlString));
      * }
      * 
      * </pre>
@@ -572,17 +586,17 @@ public final class HttpClientUtil{
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    <!DOCTYPE html>
-    <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
-    IE=Edge><meta content=always name=
-    referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
-    =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
-    u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
-    =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
-    
-    }
+     * {@code
+     <!DOCTYPE html>
+     <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
+     IE=Edge><meta content=always name=
+     referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
+     =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
+     u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
+     =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
+     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
+     
+     }
      * </pre>
      * 
      * </blockquote>
@@ -615,9 +629,9 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     log.debug(HttpClientUtil.get(urlString, "name", "test"));
+     * log.debug(HttpClientUtil.get(urlString, "name", "test"));
      * }
      * 
      * </pre>
@@ -625,17 +639,17 @@ public final class HttpClientUtil{
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    <!DOCTYPE html>
-    <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
-    IE=Edge><meta content=always name=
-    referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
-    =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
-    u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
-    =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
-    
-    }
+     * {@code
+     <!DOCTYPE html>
+     <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
+     IE=Edge><meta content=always name=
+     referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
+     =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
+     u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
+     =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
+     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
+     
+     }
      * </pre>
      * 
      * </blockquote>
@@ -668,9 +682,9 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     log.debug(HttpClientUtil.get(urlString, null));
+     * log.debug(HttpClientUtil.get(urlString, null));
      * }
      * 
      * </pre>
@@ -678,7 +692,7 @@ public final class HttpClientUtil{
      * <b>返回:</b>
      * 
      * <pre>
-     *     {@code
+     * {@code
      *     <!DOCTYPE html>
      *     <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=
     X-UA-Compatible content=
@@ -745,9 +759,9 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     log.debug(HttpClientUtil.put(urlString));
+     * log.debug(HttpClientUtil.put(urlString));
      * }
      * 
      * </pre>
@@ -755,17 +769,17 @@ public final class HttpClientUtil{
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    <!DOCTYPE html>
-    <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
-    IE=Edge><meta content=always name=
-    referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
-    =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
-    u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
-    =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
-    
-    }
+     * {@code
+     <!DOCTYPE html>
+     <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
+     IE=Edge><meta content=always name=
+     referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
+     =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
+     u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
+     =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
+     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
+     
+     }
      * </pre>
      * 
      * </blockquote>
@@ -798,9 +812,9 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     log.debug(HttpClientUtil.put(urlString, "name", "test"));
+     * log.debug(HttpClientUtil.put(urlString, "name", "test"));
      * }
      * 
      * </pre>
@@ -808,17 +822,17 @@ public final class HttpClientUtil{
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    <!DOCTYPE html>
-    <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
-    IE=Edge><meta content=always name=
-    referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
-    =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
-    u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
-    =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
-    
-    }
+     * {@code
+     <!DOCTYPE html>
+     <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
+     IE=Edge><meta content=always name=
+     referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
+     =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
+     u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
+     =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
+     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
+     
+     }
      * </pre>
      * 
      * </blockquote>
@@ -889,9 +903,9 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     log.debug(HttpClientUtil.post(urlString));
+     * log.debug(HttpClientUtil.post(urlString));
      * }
      * 
      * </pre>
@@ -899,17 +913,17 @@ public final class HttpClientUtil{
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    <!DOCTYPE html>
-    <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
-    IE=Edge><meta content=always name=
-    referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
-    =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
-    u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
-    =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
-    
-    }
+     * {@code
+     <!DOCTYPE html>
+     <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
+     IE=Edge><meta content=always name=
+     referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
+     =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
+     u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
+     =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
+     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
+     
+     }
      * </pre>
      * 
      * </blockquote>
@@ -941,9 +955,9 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     log.debug(HttpClientUtil.post(urlString, "name", "test"));
+     * log.debug(HttpClientUtil.post(urlString, "name", "test"));
      * }
      * 
      * </pre>
@@ -951,17 +965,17 @@ public final class HttpClientUtil{
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    <!DOCTYPE html>
-    <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
-    IE=Edge><meta content=always name=
-    referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
-    =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
-    u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
-    =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
-    
-    }
+     * {@code
+     <!DOCTYPE html>
+     <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
+     IE=Edge><meta content=always name=
+     referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
+     =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
+     u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
+     =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
+     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
+     
+     }
      * </pre>
      * 
      * </blockquote>
@@ -994,9 +1008,9 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     log.debug(HttpClientUtil.post(urlString, null));
+     * log.debug(HttpClientUtil.post(urlString, null));
      * }
      * 
      * </pre>
@@ -1004,7 +1018,7 @@ public final class HttpClientUtil{
      * <b>返回:</b>
      * 
      * <pre>
-     *     {@code
+     * {@code
      *     <!DOCTYPE html>
      *     <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=
     X-UA-Compatible content=
@@ -1067,9 +1081,9 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * private static String getResponse(String url,Map{@code <String, String>} map){
-     *     String xmlInfo = XStreamUtil.toXML(map, "xml", false);
+     * String xmlInfo = XStreamUtil.toXML(map, "xml", false);
      * 
-     *     return HttpClientUtil.post(url, xmlInfo);
+     * return HttpClientUtil.post(url, xmlInfo);
      * }
      * 
      * </pre>
@@ -1102,12 +1116,12 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * private static String getResult(String city){
-     *     String soap = buildSoapString(city);
+     * String soap = buildSoapString(city);
      * 
-     *     Map{@code <String, String>} mapUseEntrys = toMapUseEntrys(
-     *                     Pair.of("Content-Type", "text/xml; charset=utf-8"), //
-     *                     Pair.of("SOAPAction", SOAP_ACTION));
-     *     return HttpClientUtil.post(URL_WEATHER_SERVICE, soap, mapUseEntrys);
+     * Map{@code <String, String>} mapUseEntrys = toMapUseEntrys(
+     * Pair.of("Content-Type", "text/xml; charset=utf-8"), //
+     * Pair.of("SOAPAction", SOAP_ACTION));
+     * return HttpClientUtil.post(URL_WEATHER_SERVICE, soap, mapUseEntrys);
      * }
      * 
      * </pre>
@@ -1188,9 +1202,9 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     log.debug(HttpClientUtil.getResponseBodyAsString(urlString));
+     * log.debug(HttpClientUtil.getResponseBodyAsString(urlString));
      * }
      * 
      * </pre>
@@ -1198,24 +1212,25 @@ public final class HttpClientUtil{
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    <!DOCTYPE html>
-    <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
-    IE=Edge><meta content=always name=
-    referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
-    =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
-    u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
-    =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
-    
-    }
+     * {@code
+     <!DOCTYPE html>
+     <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
+     IE=Edge><meta content=always name=
+     referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
+     =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
+     u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
+     =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
+     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
+     
+     }
      * </pre>
      * 
      * </blockquote>
      * 
      * @param httpRequest
      *            the http request
-     * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;<br>
+     *         如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static String getResponseBodyAsString(HttpRequest httpRequest){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
@@ -1290,9 +1305,9 @@ public final class HttpClientUtil{
      * <pre class="code">
      * 
      * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
+     * String urlString = "http://www.baidu.com";
      * 
-     *     log.debug(HttpClientUtil.getResponseBodyAsString(urlString));
+     * log.debug(HttpClientUtil.getResponseBodyAsString(urlString));
      * }
      * 
      * </pre>
@@ -1300,17 +1315,17 @@ public final class HttpClientUtil{
      * <b>返回:</b>
      * 
      * <pre>
-    {@code
-    <!DOCTYPE html>
-    <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
-    IE=Edge><meta content=always name=
-    referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
-    =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
-    u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
-    =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
-    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
-    
-    }
+     * {@code
+     <!DOCTYPE html>
+     <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=X-UA-Compatible content=
+     IE=Edge><meta content=always name=
+     referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
+     =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
+     u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
+     =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
+     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
+     
+     }
      * </pre>
      * 
      * </blockquote>
@@ -1319,7 +1334,8 @@ public final class HttpClientUtil{
      *            the http request
      * @param connectionConfig
      *            the connection config
-     * @return 请求得到的 {@link HttpResponse};如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 请求得到的响应内容字符串;<br>
+     *         如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>connectionConfig</code> 是null,使用 {@link ConnectionConfig#INSTANCE}<br>
      */
     public static String getResponseBodyAsString(HttpRequest httpRequest,ConnectionConfig connectionConfig){
