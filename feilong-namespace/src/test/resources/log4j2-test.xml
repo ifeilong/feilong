@@ -33,7 +33,6 @@
 		<Logger name="com.feilong.taglib.display.pager.PagerBuilder" level="info" />
 		<Logger name="com.feilong.taglib.display.SimpleTagParamCacheManager" level="info" />
 		<Logger name="com.feilong.taglib.display.httpconcat.HttpConcatUtil" level="info" />
-		<Logger name="com.feilong.json.jsonlib.builder.PropertyStrategyWrapper" level="error" />
 
 		<Logger name="org.springframework" level="info" />
 		<Logger name="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" level="info" />

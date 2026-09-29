@@ -56,7 +56,6 @@ packages="com.feilong.tools.log4j2.aaa,com.feilong.tools.log4j2.bbb"
 		<Logger name="com.feilong.taglib.display.SimpleTagParamCacheManager" level="info" />
 		<Logger name="com.feilong.taglib.display.httpconcat.HttpConcatUtil" level="info" />
 		<Logger name="com.feilong.core.net.URIUtil" level="info" />
-		<Logger name="com.feilong.json.jsonlib.builder.PropertyStrategyWrapper" level="error" />
 		<Logger name="org.apache.velocity" level="info" />
 		<Logger name="org.apache" level="info" />
 		<Logger name="org.apache.commons.beanutils" level="info" />
