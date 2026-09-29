@@ -116,7 +116,8 @@ public final class FileUtil{
      *
      * @param filePath
      *            文件路径
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件内容对应的 byte 数组<br>
+     *         如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #toByteArray(File)
      * @see java.io.ByteArrayOutputStream#toByteArray()
@@ -136,7 +137,8 @@ public final class FileUtil{
      *
      * @param file
      *            file
-     * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件内容对应的 byte 数组<br>
+     *         如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getFileInputStream(File)
      * @see java.io.ByteArrayOutputStream#toByteArray()
      * @see com.feilong.lib.io.FileUtils#readFileToByteArray(File)
@@ -172,7 +174,8 @@ public final class FileUtil{
      * 
      * @param filePath
      *            文件路径
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 打开 <code>filePath</code> 的 {@link FileOutputStream}(覆盖模式)<br>
+     *         如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.io.FileOutputStream#FileOutputStream(String)
      * @see #getFileOutputStream(String, boolean)
@@ -198,7 +201,8 @@ public final class FileUtil{
      *            the file path
      * @param fileWriteMode
      *            the file write mode
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 打开 <code>filePath</code> 的 {@link FileOutputStream},写入模式由 <code>fileWriteMode</code> 决定<br>
+     *         如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>fileWriteMode</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getFileOutputStream(String, boolean)
@@ -230,7 +234,8 @@ public final class FileUtil{
      *            the file path
      * @param append
      *            if {@code true}, then bytes will be added to the end of the file rather than overwriting
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 打开 <code>filePath</code> 的 {@link FileOutputStream}<br>
+     *         如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.io.FileOutputStream#FileOutputStream(String, boolean)
      * @see com.feilong.lib.io.FileUtils#openOutputStream(File, boolean)
@@ -286,7 +291,8 @@ public final class FileUtil{
      *
      * @param filePath
      *            该文件通过文件系统中的路径名 filePath 指定.
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 打开 <code>filePath</code> 的 {@link FileInputStream}<br>
+     *         如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #getFileInputStream(File)
      */
@@ -313,7 +319,8 @@ public final class FileUtil{
      *
      * @param file
      *            为了进行读取而打开的文件.
-     * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 打开 <code>file</code> 的 {@link FileInputStream}<br>
+     *         如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      * @see com.feilong.lib.io.FileUtils#openInputStream(File)
      */
     public static FileInputStream getFileInputStream(File file){
@@ -556,7 +563,8 @@ public final class FileUtil{
      *
      * @param filePath
      *            the path
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件路径的父目录路径,如果此路径名没有指定父目录,则返回 null<br>
+     *         如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
      *         如果此路径名没有指定父目录,则返回 null.
@@ -576,7 +584,8 @@ public final class FileUtil{
      * 
      * @param filePath
      *            the file path
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果文件存在返回true,否则返回false<br>
+     *         如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果文件存在,返回true
      * @see java.io.File#exists()
@@ -617,7 +626,8 @@ public final class FileUtil{
      * 
      * @param file
      *            文件
-     * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 指定文件或目录的大小,单位字节<br>
+     *         如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      *         此抽象路径名表示的文件的长度,以字节为单位;<br>
      *         如果文件不存在,则返回 0L.<br>
      *         对于表示特定于系统的实体(比如设备或管道)的路径名,某些操作系统可能返回 0L.
@@ -647,7 +657,8 @@ public final class FileUtil{
      *
      * @param file
      *            the file
-     * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件格式化后的大小,比如 3.74KB、35.12MB<br>
+     *         如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getFileSize(File)
      * @see com.feilong.io.FileUtil#formatSize(long)
      * @see "com.feilong.lib.io.FileUtils#byteCountToDisplaySize(long)"
@@ -693,7 +704,8 @@ public final class FileUtil{
      * 
      * @param fileSize
      *            文件大小 单位byte
-     * @return 如果 {@code fileSize < 0} ,抛出 {@link IllegalArgumentException}<br>
+     * @return 文件大小的人类可读字符串,比如 100Bytes、1.5KB<br>
+     *         如果 {@code fileSize < 0} ,抛出 {@link IllegalArgumentException}<br>
      *         如果 {@code fileSize < } {@link FileUtils#ONE_KB},直接返回 <code>fileSize + "Bytes"</code><br>
      * @see com.feilong.lib.io.FileUtils#ONE_TB
      * @see com.feilong.lib.io.FileUtils#ONE_GB
@@ -726,7 +738,8 @@ public final class FileUtil{
      *
      * @param filePathList
      *            the paths
-     * @return 如果 <code>filePathList</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 每个文件路径对应的 {@link URL} 数组<br>
+     *         如果 <code>filePathList</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePathList</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * @see #toURLs(String...)
      * @since 1.4.0
@@ -745,7 +758,8 @@ public final class FileUtil{
      *
      * @param filePaths
      *            the file paths
-     * @return 如果 <code>filePaths</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 每个文件路径对应的 {@link URL} 数组<br>
+     *         如果 <code>filePaths</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePaths</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.core.bean.ConvertUtil#toArray(String[], Class)
      * @see com.feilong.lib.io.FileUtils#toURLs(File[])
