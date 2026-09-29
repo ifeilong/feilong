@@ -45,6 +45,13 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
+		<!-- javax.annotation-api：@PostConstruct，JDK11+ 起 JDK 不再自带；标记 optional，运行时由 Spring 等容器提供 -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<!-- spring-test -->
 		<dependency>
 			<groupId>org.springframework</groupId>

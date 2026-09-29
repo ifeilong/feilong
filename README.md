@@ -16,7 +16,7 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 
 - **20+ 模块、覆盖日常 Java 开发全场景**：日期、集合/Map、字符串、IO、JSON、XML、HTTP、FTP/SFTP、邮件、钉钉/企业微信机器人、加密、CSV/Excel/ZIP、分页标签、Spring 集成……
 - **静态工具类 + 中文 javadoc**：每个方法都写清"什么情况返回什么、什么情况抛什么异常"，可直接照抄示例。
-- **一处引依赖**：`com.github.ifeilong:feilong` 一体化 jar 包含全部功能；也可按模块单独引入，版本由 `feilong-parent` 统一管理。
+- **一处引依赖**：中央仓库只发布聚合包 `com.github.ifeilong:feilong`（由 `maven-shade-plugin` 打包的一体化 jar），引入一次即可用上全部模块功能；各子模块**不作为独立坐标发布**。
 - **运行时异常化 + 统一校验语义**：`Validate` 的 NPE / IllegalArgumentException 语义固定，不再到处写 `try/catch` 和判空。
 - **兼容 JDK 8 起**，CI 同时用 JDK 8 / 17 编译验证。
 
@@ -48,7 +48,7 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 | **常量类统一** | 日期格式 `DatePattern`、字符集 `CharsetType`、时间间隔 `TimeInterval`、随机字符集 `Alphabet`、HTTP 方法 `HttpMethodType`……避免魔法值散落 |
 | **办公场景开箱即用** | CSV / Excel（xml 配置式）/ ZIP 压缩解压 / 邮件 / 钉钉、企业微信机器人；`feilong-component` 还提供"取数 → 生成 Excel → 打 ZIP → 发邮件"的配置式流水线 |
 | **Web / Spring 项目友好** | `feilong-servlet`（request/response/header/cookie/session 快捷封装）、`feilong-accessor`（session/cookie 存取）、`feilong-namespace`（Spring XML 配置式装配） |
-| **依赖版本由父 POM 统一管理** | 引入 `feilong-parent` 作为 parent 或在项目里 import BOM 后，相关依赖版本不用自己对齐 |
+| **版本统一，不会错配** | 全部模块由 `feilong-parent` 统一管理版本、同版本发布；使用方只需要一个坐标 |
 | **低门槛** | 兼容 JDK 8+（Android 未测试）；不依赖 Spring 也能用核心模块 |
 
 ### 对比：同样的功能，代码量差多少
@@ -206,7 +206,7 @@ new DefaultCsvWrite().write("/data/out/users.csv", columnTitles, dataList, new C
 
 ## 三、核心能力速览
 
-| 场景 | 入口类（模块） |
+| 场景 | 入口类（括号内为所在模块，便于浏览源码；子模块非独立发布坐标） |
 |---|---|
 | 日期格式化 / 解析 / 区间 / 加减 | `DateUtil`、`DatePattern`、`TimeInterval`（feilong-core） |
 | 集合 / List / Set 操作 | `CollectionsUtil`（feilong-core） |
@@ -280,7 +280,7 @@ new DefaultCsvWrite().write("/data/out/users.csv", columnTitles, dataList, new C
 **需要谨慎 / 评估**
 
 - 已经在用 `commons-lang3` / `hutool` / Guava 且只需单个工具类：避免功能重复引入；
-- 对依赖体积敏感：建议**按模块引入**（`feilong-core`、`feilong-json`…），而不是 `feilong` 一体化 jar；
+- 对依赖体积敏感：目前**只发布聚合包** `feilong`（包含各模块及其必需依赖），无法只取单个子模块；若只需要一两个工具类，可先评估直接用 `commons-lang3` / `hutool` 是否更合适；
 - 偏好函数式/不可变风格：feilong 是**静态工具类 + 运行时异常**风格；
 - 需要用旧算法（MD5/DES）承载安全场景，或需要直接反序列化不可信 XML/Java 对象。
 
@@ -306,15 +306,10 @@ feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/artifact/c
 </dependency>
 ```
 
-按需引入单个模块（推荐，体积更小）：
-
-```XML
-<dependency>
-	<groupId>com.github.ifeilong</groupId>
-	<artifactId>feilong-core</artifactId>
-	<version>4.5.6</version>
-</dependency>
-```
+> 说明：
+> - 中央仓库**只发布聚合包 `feilong`**：`maven-shade-plugin` 把 `com.github.ifeilong:*` 各子模块的类打平到同一个 jar；子模块（`feilong-core`、`feilong-json`…）不作为独立坐标发布，无法单独引入。
+> - **第三方依赖不会缺**：shade 只打包 feilong 自己的模块，并使用 dependency-reduced POM + `promoteTransitiveDependencies`，第三方依赖（velocity、poi、javax.mail、jsoup、xstream、cxf 等）仍由 `feilong` 的 POM 正常解析。
+> - 同时会附带 sources jar 与 javadoc jar。
 
 ### `Gradle 配置`
 
@@ -399,8 +394,8 @@ feilong-component  | 组件式操作,含配置式即可获取数据-->转成exce
 
 module | 介绍
 :----  | :---------
-feilong | 一体化total jar包,包含上述所有功能
-feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含所有optional jar依赖
+feilong | **发布到中央仓库的聚合包**（shade 成一体化 jar，包含上述所有模块）
+feilong-with-optional | **未发布到中央仓库**：仅列出"使用全部功能"所需的完整依赖，可作依赖清单参考
 feilong-lib | 从第三方库 fork 而来的源码 (commons-lang3, commons-io, commons-compress 等,请不要直接调用)
 
 ## Star History

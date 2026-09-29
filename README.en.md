@@ -14,7 +14,7 @@
 
 - **20+ modules covering everyday Java work**: dates, collections/maps, strings, IO, JSON, XML, HTTP, FTP/SFTP, mail, DingTalk / WeCom bots, crypto, CSV/Excel/ZIP, pagination tags, Spring integration.
 - **Static utility classes with exhaustive javadoc**: every method documents what it returns and which exception it throws for which input (`@return` / `@throws`), with copy-pasteable examples.
-- **One dependency or twenty**: use the all-in-one `feilong` jar, or pick individual modules (`feilong-core`, `feilong-json`, …).
+- **One dependency**: Maven Central only hosts the aggregate artifact `com.github.ifeilong:feilong` — a shaded all-in-one jar built with `maven-shade-plugin`. Individual modules are **not** published as separate coordinates.
 - **Runtime exceptions + uniform validation semantics**: `Validate` always uses the same NPE / `IllegalArgumentException` rules, so you stop writing `try/catch` and null-guard boilerplate.
 - **JDK 8+**, with CI compiling on both JDK 8 and JDK 17.
 
@@ -45,6 +45,7 @@
 | **Office scenarios out of the box** | CSV, config-driven Excel, ZIP, mail, DingTalk / WeCom bots; `feilong-component` wires "fetch data → Excel → ZIP → mail" declaratively. |
 | **Friendly to Servlet / Spring projects** | `feilong-servlet` (request/response/header/cookie/session helpers), `feilong-accessor` (session & cookie access), `feilong-namespace` (Spring XML configuration). |
 | **Low barrier to entry** | JDK 8+; core modules do not require Spring. |
+| **Consistent versions** | Every module is versioned and released together under `feilong-parent`, so a single coordinate means nothing to align. |
 
 ### Side by side
 
@@ -175,7 +176,7 @@ new DefaultCsvWrite().write("/data/out/users.csv", columnTitles, dataList, new C
 
 ## 3. Capability map
 
-| Scenario | Entry class (module) |
+| Scenario | Entry class (module in parentheses — modules are not released as separate coordinates) |
 |---|---|
 | Date format / parse / interval / add | `DateUtil`, `DatePattern`, `TimeInterval` (feilong-core) |
 | Collection, List, Set helpers | `CollectionsUtil` (feilong-core) |
@@ -246,7 +247,7 @@ new DefaultCsvWrite().write("/data/out/users.csv", columnTitles, dataList, new C
 **Evaluate first**
 
 - You already use `commons-lang3` / `hutool` / Guava for a single helper — avoid duplicating dependencies;
-- You care about dependency size — depend on individual modules instead of the all-in-one `feilong` jar;
+- You care about dependency size — only the aggregate `feilong` jar is published, so a single module cannot be pulled on its own; if you only need one or two helpers, evaluate `commons-lang3` / `hutool` instead;
 - You prefer functional/immutable APIs — feilong is a static-utility, runtime-exception style library;
 - You need legacy algorithms (MD5/DES) for security, or must deserialize untrusted XML/Java objects.
 
@@ -310,15 +311,15 @@ feilong-component | configurable pipeline: data → Excel → ZIP → mail (reco
 
 module | description
 :----  | :---------
-feilong | all-in-one jar with every module above
-feilong-with-optional | all-in-one jar including every optional dependency
+feilong | **the artifact published to Maven Central** — a shaded all-in-one jar containing every module above
+feilong-with-optional | **not published** to Maven Central: lists the complete dependency set needed to use every feature (useful as a reference)
 feilong-lib | forked third-party sources (commons-lang3, commons-io, commons-compress, …) — do not call directly
 
 ## 8. Installation
 
 Published to Maven Central since 3.0.0: https://search.maven.org/artifact/com.github.ifeilong/feilong
 
-**Maven — all-in-one**
+**Maven**
 
 ```XML
 <dependency>
@@ -328,15 +329,10 @@ Published to Maven Central since 3.0.0: https://search.maven.org/artifact/com.gi
 </dependency>
 ```
 
-**Maven — single module (smaller footprint, recommended)**
-
-```XML
-<dependency>
-	<groupId>com.github.ifeilong</groupId>
-	<artifactId>feilong-core</artifactId>
-	<version>4.5.6</version>
-</dependency>
-```
+> Notes:
+> - Maven Central **only hosts the aggregate `feilong` artifact**: `maven-shade-plugin` flattens the classes of every `com.github.ifeilong:*` module into one jar. Individual modules (`feilong-core`, `feilong-json`, …) are **not** released as separate coordinates.
+> - **Third-party dependencies are still resolved**: the shade step packages only feilong's own modules and keeps a dependency-reduced POM with `promoteTransitiveDependencies`, so velocity, poi, javax.mail, jsoup, xstream, cxf and friends are still pulled in through `feilong`'s POM.
+> - Sources and javadoc jars are published as well.
 
 **Gradle**
 
