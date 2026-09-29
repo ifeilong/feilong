@@ -25,7 +25,6 @@ import java.net.URL;
 import org.junit.Test;
 
 import com.feilong.core.lang.ClassLoaderUtil;
-import com.feilong.core.lang.SystemUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.test.AbstractTest;
 
@@ -51,10 +50,9 @@ public class FileUtilTest extends AbstractTest{
 
     @Test
     public void listFiles() throws IOException{
-        String localPath = SystemUtil.USER_HOME + "/feilong/logs";
-        // 读取localPath目录下的全部properties文件
-        File file = new File(localPath);
-        File[] files = file.listFiles();
+        //读取 classpath 下测试资源所在的目录,不依赖本机目录
+        File resource = new File(URLUtil.toURI(ClassLoaderUtil.getResource("readFileToString.txt")));
+        File[] files = resource.getParentFile().listFiles();
         for (int i = 0; i < files.length; i++){
             log.debug(files[i].getCanonicalPath());
         }

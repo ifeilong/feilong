@@ -27,8 +27,7 @@ public class CompressZipHandlerTest extends AbstractTest{
 
     private final ZipHandler zipHandler        = new CompressZipHandler();
 
-    String                   tobeZipFileFloder = SystemUtil.USER_HOME
-                    + "/workspace/feilong/feilong/feilong-office/feilong-office-zip/src/test/resources";
+    String                   tobeZipFileFloder = "src/test/resources";
 
     //---------------------------------------------------------------
 

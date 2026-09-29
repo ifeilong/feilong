@@ -15,8 +15,6 @@
  */
 package com.feilong.io.ioreaderutil;
 
-import com.feilong.core.lang.SystemUtil;
-
 /**
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
