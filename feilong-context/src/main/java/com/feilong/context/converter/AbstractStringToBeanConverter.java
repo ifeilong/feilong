@@ -36,7 +36,7 @@ public abstract class AbstractStringToBeanConverter<T> implements StringToBeanCo
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.bind.StringToBeanConverter#convert(java.lang.String, java.lang.Class)
+     * @see com.feilong.context.converter.StringToBeanConverter#convert(java.lang.String, java.lang.Class)
      */
     @Override
     public T convert(String value){

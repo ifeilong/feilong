@@ -49,7 +49,7 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.controller.MultipartFileResolver#upload(org.springframework.web.multipart.MultipartFile, java.lang.String,
+     * @see com.feilong.component.upload.MultipartFileResolver#upload(org.springframework.web.multipart.MultipartFile, java.lang.String,
      * java.lang.String)
      */
     @Override
@@ -82,7 +82,7 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.spring.web.multipart.MultipartFileResolver#upload(org.springframework.web.multipart.MultipartFile[],
+     * @see com.feilong.component.upload.MultipartFileResolver#upload(org.springframework.web.multipart.MultipartFile[],
      * java.lang.String, java.lang.String[])
      */
     @Override

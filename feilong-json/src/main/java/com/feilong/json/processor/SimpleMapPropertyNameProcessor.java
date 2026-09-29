@@ -90,7 +90,7 @@ public class SimpleMapPropertyNameProcessor implements PropertyNameProcessor{
     /*
      * (non-Javadoc)
      * 
-     * @see net.sf.json.processors.PropertyNameProcessor#processPropertyName(java.lang.Class, java.lang.String)
+     * @see com.feilong.lib.json.processors.PropertyNameProcessor#processPropertyName(java.lang.Class, java.lang.String)
      */
     @Override
     public String processPropertyName(@SuppressWarnings("rawtypes") Class beanClass,String currentPropertyName){

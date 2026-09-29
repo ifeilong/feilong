@@ -109,7 +109,7 @@ public class UncapitalizeJavaIdentifierTransformer extends JavaIdentifierTransfo
     /*
      * (non-Javadoc)
      * 
-     * @see net.sf.json.util.JavaIdentifierTransformer#transformToJavaIdentifier(java.lang.String)
+     * @see com.feilong.lib.json.util.JavaIdentifierTransformer#transformToJavaIdentifier(java.lang.String)
      */
     @Override
     public String transformToJavaIdentifier(String str){

@@ -54,7 +54,7 @@ public class IMAPMailReader implements MailReader{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.mail.MailReader#getMailInfoList(com.feilong.tools.mail.entity.mailReaderConfig)
+     * @see com.feilong.net.mail.MailReader#read(MailReaderConfig)
      */
     @Override
     public List<MailInfo> read(MailReaderConfig mailReaderConfig){
@@ -66,8 +66,7 @@ public class IMAPMailReader implements MailReader{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.mail.MailReader#getMailInfoList(com.feilong.tools.mail.entity.mailReaderConfig, java.lang.Integer,
-     * javax.mail.search.SearchTerm)
+     * @see com.feilong.net.mail.MailReader#read(MailReaderConfig, Integer, SearchTerm)
      */
     @Override
     public List<MailInfo> read(MailReaderConfig mailReaderConfig,Integer newstIndex,SearchTerm searchTerm){

@@ -55,7 +55,7 @@ public class SessionAutoKeyAccessor extends AbstractSessionKeyAccessor implement
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.framework.accessor.AutoKeyAccessor#save(java.io.Serializable, javax.servlet.http.HttpServletRequest)
+     * @see com.feilong.accessor.AutoKeyAccessor#save(java.io.Serializable, javax.servlet.http.HttpServletRequest)
      */
     @Override
     public String save(Serializable serializable,HttpServletRequest request){

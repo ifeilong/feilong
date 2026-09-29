@@ -62,7 +62,7 @@ public abstract class AbstractSessionKeyAccessor{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.servlet.Accessor#get(java.lang.String, javax.servlet.http.HttpServletRequest)
+     * @see com.feilong.accessor.Accessor#get(java.lang.String, javax.servlet.http.HttpServletRequest)
      */
     public <T extends Serializable> T get(String key,HttpServletRequest request){
         T t = SessionUtil.getAttribute(request, key);
@@ -85,7 +85,7 @@ public abstract class AbstractSessionKeyAccessor{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.servlet.Accessor#remove(java.lang.String, javax.servlet.http.HttpServletRequest)
+     * @see com.feilong.accessor.Accessor#remove(java.lang.String, javax.servlet.http.HttpServletRequest)
      */
     public void remove(String key,HttpServletRequest request){
         SessionUtil.removeAttribute(request, key);
