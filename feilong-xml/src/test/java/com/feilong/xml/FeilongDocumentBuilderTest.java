@@ -44,7 +44,8 @@ public class FeilongDocumentBuilderTest{
 
     @Test(expected = IllegalArgumentException.class)
     public void testFile1(){
-        String xml = "src/test/resources/weather-response.xml";
+        //文件不存在
+        String xml = "src/test/resources/weather-response1.xml";
         FeilongDocumentBuilder.buildDocument(new File(xml));
     }
 
