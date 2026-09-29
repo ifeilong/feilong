@@ -30,7 +30,7 @@
 
 		<Logger name="com.feilong" level="debug">
 		</Logger>
-		<Logger name="com.feilong.tools.security" level="debug" />
+		<Logger name="com.feilong.security" level="debug" />
 		<Logger name="com.feilong.lib.beanutils" level="info" />
 
 		<Logger name="org.springframework" level="info" />

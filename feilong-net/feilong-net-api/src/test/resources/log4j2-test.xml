@@ -27,7 +27,7 @@
 
 		<Logger name="com.feilong" level="debug">
 		</Logger>
-		<Logger name="com.feilong.tools.security" level="debug" />
+		<Logger name="com.feilong.security" level="debug" />
 		<Logger name="com.feilong.lib.beanutils" level="info" />
 
 		<Logger name="org.springframework" level="info" />
@@ -49,7 +49,6 @@
 		<Logger name="org.apache.commons.digester.Digester" level="warn" />
 		<Logger name="org.apache.commons.digester3" level="info" />
 		<Logger name="org.springframework" level="info" />
-		<Logger name="com.feilong.tools.security" level="debug" />
 
 
 		<!-- Root:日志默认打印到控制台 -->

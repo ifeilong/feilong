@@ -28,7 +28,7 @@
 		<priority value="debug" />
 	</category>
 
-	<category name="com.feilong.tools.security">
+	<category name="com.feilong.security">
 		<priority value="debug" />
 	</category>
 

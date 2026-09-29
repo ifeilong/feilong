@@ -43,7 +43,7 @@ packages="com.feilong.tools.log4j2.aaa,com.feilong.tools.log4j2.bbb"
 
 		<Logger name="com.feilong" level="debug" />
 		<Logger name="com.feilong.core.lang.threadutil.ExecuteConfigWithParamMapTest" level="trace" />
-		<Logger name="com.feilong.tools.security" level="debug" />
+		<Logger name="com.feilong.security" level="debug" />
 		<Logger name="com.feilong.lib.beanutils" level="info" />
 
 		<Logger name="org.springframework" level="info" />
@@ -65,7 +65,6 @@ packages="com.feilong.tools.log4j2.aaa,com.feilong.tools.log4j2.bbb"
 		<Logger name="org.apache.commons.digester.Digester" level="warn" />
 		<Logger name="org.apache.commons.digester3" level="info" />
 		<Logger name="org.springframework" level="info" />
-		<Logger name="com.feilong.tools.security" level="debug" />
 		<Logger name="org.apache.http.impl.conn.LoggingManagedHttpClientConnection" level="info" />
 		<Logger name="org.apache.http.headers" level="info" />
 		<Logger name="org.apache.http.wire" level="info" />
