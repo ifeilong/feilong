@@ -24,7 +24,8 @@ import com.feilong.core.lang.SystemUtil;
  */
 public abstract class AbstractReadFileToStringTest{
 
-    protected String floderPath = SystemUtil.USER_HOME + "/workspace/feilong/feilong/feilong-io/";
+    //surefire 的工作目录就是模块目录
+    protected String floderPath = "";
 
     protected String filePath   = floderPath + "src/test/resources/readFileToString.txt";
 }
