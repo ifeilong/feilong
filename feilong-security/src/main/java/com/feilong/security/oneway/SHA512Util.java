@@ -156,7 +156,8 @@ public final class SHA512Util{
      *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
      *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
      *            </ul>
-     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件内容计算得到的 SHA-512 十六进制小写字符串<br>
+     *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @throws EncryptionException
      *             如果在加密解密的过程中发生了异常,会以EncryptionException形式抛出

@@ -110,7 +110,8 @@ public class ExcelWriteUtil{
      * @param outputFileName
      *            输出文件名字(全路径),<br>
      *            如果是null,默认输出地址是 USER_HOME +/feilong/excel/{sheetNames}{nowTimestamp()}.{FilenameUtil.getExtension(templateLocation)}
-     * @return 如果 <code>templateLocation</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 导出的 excel 文件全路径<br>
+     *         如果 <code>templateLocation</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>templateLocation</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>sheetDefinitionLocation</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>sheetDefinitionLocation</code> 是blank,抛出 {@link IllegalArgumentException}<br>

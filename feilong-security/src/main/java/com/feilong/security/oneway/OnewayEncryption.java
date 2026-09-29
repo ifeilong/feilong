@@ -163,7 +163,8 @@ public final class OnewayEncryption{
      *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
      *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
      *            </ul>
-     * @return 如果 <code>onewayType</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 文件内容计算得到的十六进制小写加密字符串<br>
+     *         如果 <code>onewayType</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.io.File#File(String)
@@ -195,7 +196,8 @@ public final class OnewayEncryption{
      *
      * @param onewayType
      *            the oneway type
-     * @return 如果 <code>onewayType</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 由 <code>onewayType</code> 创建出的 {@link MessageDigest}<br>
+     *         如果 <code>onewayType</code> 是null,抛出 {@link NullPointerException}<br>
      *         {@link java.security.MessageDigest#getInstance(String)}
      * @see java.security.MessageDigest#getInstance(String)
      * @see com.feilong.lib.codec.digest.DigestUtils#getDigest(String)

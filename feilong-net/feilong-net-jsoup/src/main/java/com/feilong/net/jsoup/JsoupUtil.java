@@ -63,7 +63,7 @@ public final class JsoupUtil{
      * 
      * @param urlString
      *            the url string
-     * @return the document
+     * @return 请求该 url 得到的 {@link Document},请求过程发生异常时抛出 {@link JsoupUtilException}<br>
      * @throws JsoupUtilException
      *             if Exception
      */
@@ -100,7 +100,8 @@ public final class JsoupUtil{
      *
      * @param html
      *            the html
-     * @return 如果 <code>html</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 解析 <code>html</code> 得到的 {@link Document}<br>
+     *         如果 <code>html</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.13.0
      */
     public static Document parse(String html){
@@ -117,7 +118,7 @@ public final class JsoupUtil{
      *            the url
      * @param userAgent
      *            the user agent
-     * @return the document
+     * @return 请求该 url 得到的 {@link Document},请求过程发生异常时抛出 {@link JsoupUtilException}<br>
      * @throws JsoupUtilException
      *             if Exception
      * @see org.jsoup.Jsoup#connect(String)
@@ -155,7 +156,8 @@ public final class JsoupUtil{
      *            the url
      * @param selectQuery
      *            the select query
-     * @return 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 该 url 文档中匹配 <code>selectQuery</code> 的元素集合,匹配不到时返回空集合<br>
+     *         如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>selectQuery</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>selectQuery</code> 是blank,抛出 {@link IllegalArgumentException}<br>
@@ -179,7 +181,8 @@ public final class JsoupUtil{
      *            the url
      * @param id
      *            the id
-     * @return 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 该 url 页面中 id 为 <code>id</code> 的元素,找不到时返回 null<br>
+     *         如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>id</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>id</code> 是blank,抛出 {@link IllegalArgumentException}<br>

@@ -142,7 +142,7 @@ public final class InternetAddressUtil{
      *            the personal
      * @param fromAddress
      *            the from address
-     * @return 如果 <code>fromAddress</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 由 <code>personal</code> 和 <code>fromAddress</code> 构造出的 {@link Address},如果 <code>fromAddress</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fromAddress</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.13.0
      */
