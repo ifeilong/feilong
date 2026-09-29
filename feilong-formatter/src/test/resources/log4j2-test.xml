@@ -59,7 +59,7 @@
 		<Logger name="org.apache.commons.httpclient.Wire" level="info" />
 		<Logger name="org.springframework.beans.factory.support" level="info" />
 
-		<Logger name="com.feilong.tools.net.AbstractFileTransfer" level="debug" />
+		<Logger name="com.feilong.net.filetransfer.AbstractFileTransfer" level="debug" />
 		<Logger name="org.apache.commons.httpclient.HttpMethodBase" level="warn" />
 		<Logger name="org.apache.commons.httpclient.HttpParser" level="warn" />
 		<Logger name="org.apache.commons.httpclient.HttpConnection" level="warn" />
