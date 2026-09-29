@@ -34,9 +34,9 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 - [八、Maven / Gradle / 非 Maven 配置](#八maven--gradle--非-maven-配置)
 - [九、自行 install](#九自行-install)
 - [十、子模块介绍](#十子模块介绍)
-- [常用组件 / 功能](#常用组件--功能)
+- [常用组件/功能](#memo-常用组件功能)
 - [Star History](#star-history)
-- [说明 / 常见问题 / 反馈](#说明--常见问题--反馈)
+- [说明](#memo-说明) · [常见问题](#memo-常见问题) · [提bug反馈或建议](#panda_face-提bug反馈或建议) · [即时交流](#cyclone-feilong-即时交流)
 
 ## 一、为什么选择 feilong
 
