@@ -1649,7 +1649,9 @@ public final class CollectionsUtil{
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
      * @since 2.1.0
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 {@link #removeDuplicate(Collection, Function)} 代替
      */
+    @Deprecated
     public static <O> List<O> removeDuplicate(Collection<O> objectCollection,String propertyName){
         if (isNullOrEmpty(propertyName)){
             return removeDuplicate(objectCollection);
@@ -1784,7 +1786,9 @@ public final class CollectionsUtil{
      * @since 2.1.0
      * @since 4.5.6 性能优化,将判断重复的实现由 List 双层循环(时间复杂度 O(n^2))改为 {@link LinkedHashSet}(时间复杂度 O(n)),参见 <a
      *        href="https://github.com/ifeilong/feilong/issues/327">issues/327</a>
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 {@link #removeDuplicate(Collection, Function)} 代替(多个属性可以组合成一个 key)
      */
+    @Deprecated
     public static <O> List<O> removeDuplicate(Collection<O> objectCollection,String...propertyNames){
         if (isNullOrEmpty(propertyNames)){
             return removeDuplicate(objectCollection);
@@ -2251,7 +2255,9 @@ public final class CollectionsUtil{
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see PropertyValueObtainer#getPropertyValueCollection(Iterable, String, Collection)
      * @since jdk1.5
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 {@link #getPropertyValueList(Collection, Function)} 代替
      */
+    @Deprecated
     public static <T, O> List<T> getPropertyValueList(Iterable<O> beanIterable,String propertyName){
         return getPropertyValueList(beanIterable, propertyName, null);
     }
@@ -2529,7 +2535,9 @@ public final class CollectionsUtil{
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see PropertyValueObtainer#getPropertyValueCollection(Iterable, String, Collection)
      * @since 1.0.8
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 {@link #getPropertyValueSet(Collection, Function)} 代替
      */
+    @Deprecated
     public static <T, O> Set<T> getPropertyValueSet(Iterable<O> beanIterable,String propertyName){
         return getPropertyValueSet(beanIterable, propertyName, null);
     }
@@ -2757,7 +2765,9 @@ public final class CollectionsUtil{
      *         如果 <code>valuePropertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>valuePropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 {@link #getPropertyValueMap(Iterable, Function, Function)} 代替
      */
+    @Deprecated
     public static <K, V, O> Map<K, V> getPropertyValueMap(Iterable<O> beanIterable,String keyPropertyName,String valuePropertyName){
         if (isNullOrEmpty(beanIterable)){
             return emptyMap();
@@ -2932,7 +2942,8 @@ public final class CollectionsUtil{
      * @since 3.0.8
      */
     public static <O, V> boolean exist(Iterable<O> beanIterable,String propertyName,V propertyValue){
-        return null != find(beanIterable, propertyName, propertyValue);
+        //不再调用已过期的 find(Iterable, String, V), 避免 deprecation 警告
+        return null != find(beanIterable, BeanPredicateUtil.<O, V> equalPredicate(propertyName, propertyValue));
     }
 
     /**
@@ -3089,7 +3100,9 @@ public final class CollectionsUtil{
      *         如果 <code>iterable</code>中没有相关元素的属性<code>propertyName</code> 值是<code>propertyValue</code>,返回null
      * @see #find(Iterable, org.apache.commons.collections4.Predicate)
      * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 {@link #find(Iterable, Function, Object)} 代替
      */
+    @Deprecated
     public static <O, V> O find(Iterable<O> beanIterable,String propertyName,V propertyValue){
         return null == beanIterable ? null : find(beanIterable, BeanPredicateUtil.<O, V> equalPredicate(propertyName, propertyValue));
     }
@@ -3345,7 +3358,9 @@ public final class CollectionsUtil{
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>propertyValues</code> 是null,返回 {@code new ArrayList<O>}<br>
      * @see BeanPredicateUtil#containsPredicate(String, Object...)
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 Function 版本的 select 代替
      */
+    @Deprecated
     @SafeVarargs
     public static <O, V> List<O> select(Iterable<O> beanIterable,String propertyName,V...propertyValues){
         return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
@@ -3668,7 +3683,9 @@ public final class CollectionsUtil{
      * @see #select(Iterable, org.apache.commons.collections4.Predicate)
      * @see BeanPredicateUtil#containsPredicate(String, Collection)
      * @since 1.5.0
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 {@link #select(Iterable, Function, Collection)} 代替
      */
+    @Deprecated
     public static <O, V> List<O> select(Iterable<O> beanIterable,String propertyName,Collection<V> propertyValueList){
         return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
                         : select(beanIterable, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValueList));
@@ -3865,7 +3882,9 @@ public final class CollectionsUtil{
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see BeanPredicateUtil#containsPredicate(String, Object...)
      * @see #selectRejected(Iterable, org.apache.commons.collections4.Predicate)
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 Function 版本的 selectRejected 代替
      */
+    @Deprecated
     @SafeVarargs
     public static <O, V> List<O> selectRejected(Iterable<O> beanIterable,String propertyName,V...propertyValues){
         return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
@@ -3933,7 +3952,9 @@ public final class CollectionsUtil{
      * @see BeanPredicateUtil#containsPredicate(String, Collection)
      * @see #selectRejected(Iterable, org.apache.commons.collections4.Predicate)
      * @since 1.5.0
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 {@link #selectRejected(Iterable, Function, Collection)} 代替
      */
+    @Deprecated
     public static <O, V> List<O> selectRejected(Iterable<O> beanIterable,String propertyName,Collection<V> propertyValueList){
         return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
                         : selectRejected(beanIterable, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValueList));
