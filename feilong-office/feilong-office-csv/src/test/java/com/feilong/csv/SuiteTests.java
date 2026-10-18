@@ -19,11 +19,30 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.csv.entity.CsvConfigTest;
+import com.feilong.csv.handler.CsvColumnEntityBuilderTest;
+import com.feilong.csv.handler.CsvColumnEntityListBuilderTest;
+import com.feilong.csv.handler.CsvContentBuilderTest;
+import com.feilong.csv.handler.DataListBuilderTest;
+
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                //参数校验
                 DefaultCsvWriteWriteDataTest.class,
-                DefaultCsvWriteWriteDataWithBeanCsvConfigTest.class
+                DefaultCsvWriteWriteDataWithBeanCsvConfigTest.class,
+
+                //核心逻辑
+                CsvContentBuilderTest.class,
+                CsvColumnEntityBuilderTest.class,
+                CsvColumnEntityListBuilderTest.class,
+                DataListBuilderTest.class,
+
+                //配置
+                CsvConfigTest.class,
+
+                //写文件之后读回来断言
+                DefaultCsvWriteWriteFileTest.class
         //
 })
 public class SuiteTests{
