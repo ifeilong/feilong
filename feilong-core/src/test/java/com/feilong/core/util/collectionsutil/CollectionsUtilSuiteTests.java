@@ -144,6 +144,7 @@ import com.feilong.core.util.collectionsutil.select.SelectWithMapTest;
                 RemoveDuplicateFunctionTest.class,
 
                 SplitDuplicatePropertyNamesTest.class,
+                SplitByExistIdTest.class,
 
                 ForEachTest.class,
 

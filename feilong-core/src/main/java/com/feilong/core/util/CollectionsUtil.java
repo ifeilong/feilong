@@ -800,7 +800,7 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * return (StringUtil.trimAndEqualsIgnoreCase(logLevel, "track") //
-     *                 || StringUtil.trimAndEqualsIgnoreCase(logLevel, "debug"));
+     * || StringUtil.trimAndEqualsIgnoreCase(logLevel, "debug"));
      * 
      * </pre>
      * 
@@ -846,12 +846,12 @@ public final class CollectionsUtil{
      *
      * <span style="color:green">//找到需要处理的对象list</span>
      * List{@code <ShoppingCartLineCommand>} toDoNeedChangeCheckedCommandList = select(
-     *                 needChangeCheckedCommandList,
-     *                 toggleCheckStatusShoppingCartLinePredicateBuilder.build(shoppingCartLineCommandList, checkStatus));
+     * needChangeCheckedCommandList,
+     * toggleCheckStatusShoppingCartLinePredicateBuilder.build(shoppingCartLineCommandList, checkStatus));
      *
      * <span style="color:green">// 将状态修改成对应状态</span>
      * for (ShoppingCartLineCommand shoppingCartLineCommand : toDoNeedChangeCheckedCommandList){
-     *     shoppingCartLineCommand.setSettlementState(1);
+     * shoppingCartLineCommand.setSettlementState(1);
      * }
      *
      * </pre>
@@ -861,8 +861,8 @@ public final class CollectionsUtil{
      * <pre class="code">
      * <span style="color:green">//找到需要处理的对象list</span>
      * List{@code <ShoppingCartLineCommand>} toDoNeedChangeCheckedCommandList = select(
-     *                 needChangeCheckedCommandList,
-     *                 toggleCheckStatusShoppingCartLinePredicateBuilder.build(shoppingCartLineCommandList, checkStatus));
+     * needChangeCheckedCommandList,
+     * toggleCheckStatusShoppingCartLinePredicateBuilder.build(shoppingCartLineCommandList, checkStatus));
      *
      * <span style="color:green">// 将状态修改成对应状态</span>
      * CollectionsUtil.forEach(toDoNeedChangeCheckedCommandList, "settlementState", 1);
@@ -952,15 +952,15 @@ public final class CollectionsUtil{
      * <pre class="code">
      *
      * private Set{@code <String>} getItemComboIds(List{@code <ShoppingCartLineCommand>} lines){
-     *     Set{@code <String>} set = new HashSet{@code <>}();
-     *     if ({@code null != lines && lines.size() > 0}){
-     *         for (ShoppingCartLineCommand line : lines){
-     *             if (line.getComboIds() != null){
-     *                 set.addAll(line.getComboIds());
-     *             }
-     *         }
-     *     }
-     *     return set;
+     * Set{@code <String>} set = new HashSet{@code <>}();
+     * if ({@code null != lines && lines.size() > 0}){
+     * for (ShoppingCartLineCommand line : lines){
+     * if (line.getComboIds() != null){
+     * set.addAll(line.getComboIds());
+     * }
+     * }
+     * }
+     * return set;
      * }
      *
      * </pre>
@@ -970,14 +970,14 @@ public final class CollectionsUtil{
      * <pre class="code">
      *
      * private Set{@code <String>} getItemComboIds(List{@code <ShoppingCartLineCommand>} lines){
-     *     if (isNullOrEmpty(lines)){
-     *         return Collections.emptySet();
-     *     }
-     *     Set{@code <String>} set = new HashSet{@code <>}();
-     *     for (ShoppingCartLineCommand line : lines){
-     *         CollectionsUtil.addAllIgnoreNull(set, line.getComboIds());
-     *     }
-     *     return set;
+     * if (isNullOrEmpty(lines)){
+     * return Collections.emptySet();
+     * }
+     * Set{@code <String>} set = new HashSet{@code <>}();
+     * for (ShoppingCartLineCommand line : lines){
+     * CollectionsUtil.addAllIgnoreNull(set, line.getComboIds());
+     * }
+     * return set;
      * }
      * </pre>
      *
@@ -1053,10 +1053,10 @@ public final class CollectionsUtil{
      *
      * List{@code <Object[]>} dataList = new ArrayList{@code <>}();
      * for (T bean : iterable){
-     *     Object[] objectArray = toObjectArray(bean, propertyNameList);
-     *     if (isNotNullOrEmpty(objectArray)){
-     *         dataList.add(objectArray);
-     *     }
+     * Object[] objectArray = toObjectArray(bean, propertyNameList);
+     * if (isNotNullOrEmpty(objectArray)){
+     * dataList.add(objectArray);
+     * }
      * }
      * return dataList;
      *
@@ -1068,7 +1068,7 @@ public final class CollectionsUtil{
      *
      * List{@code <Object[]>} dataList = new ArrayList{@code <>}();
      * for (T bean : iterable){
-     *     addIgnoreNullOrEmpty(dataList, toObjectArray(bean, propertyNameList));
+     * addIgnoreNullOrEmpty(dataList, toObjectArray(bean, propertyNameList));
      * }
      * return dataList;
      * </pre>
@@ -1204,7 +1204,7 @@ public final class CollectionsUtil{
      * <pre class="code">
      * 
      * if (lib.getEnableXimaTeach() == 1){
-     *     bookIds.add(ximaTeach);
+     * bookIds.add(ximaTeach);
      * }
      * 
      * </pre>
@@ -1278,7 +1278,7 @@ public final class CollectionsUtil{
      * 
      * String reason = getCategoryReason(appId, classifyCopyrightStrategyConfig);
      * if (isNotNullOrEmpty(reason)){
-     *     result.set(6, reason);
+     * result.set(6, reason);
      * }
      * 
      * </pre>
@@ -1329,10 +1329,10 @@ public final class CollectionsUtil{
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
      *
-     * CollectionsUtil.indexOf(list, "name", "张飞")                          =   0
+     * CollectionsUtil.indexOf(list, "name", "张飞") = 0
      *
-     * CollectionsUtil.indexOf(null, "age", 24)                             =   -1
-     * CollectionsUtil.indexOf(new ArrayList{@code <User>}(), "age", 24)    =   -1
+     * CollectionsUtil.indexOf(null, "age", 24) = -1
+     * CollectionsUtil.indexOf(new ArrayList{@code <User>}(), "age", 24) = -1
      * </pre>
      *
      * </blockquote>
@@ -1455,7 +1455,7 @@ public final class CollectionsUtil{
      *
      * <pre class="code">
      * List{@code <String>} list = toList("xinge", <span style="color:red">null</span>, "feilong2", <span style=
-    "color:red">null</span>, "feilong2");
+     * "color:red">null</span>, "feilong2");
      * List{@code <String>} removeList = CollectionsUtil.removeAllNull(list);
      * </pre>
      *
@@ -1835,7 +1835,7 @@ public final class CollectionsUtil{
      * 
      * User user1 = new User(1L, 15);
      * User user2 = new User(1L, 16);
-     * User user3 = new User(1L, 15);  <span style="color:green">//这条和第一条重复了</span>
+     * User user3 = new User(1L, 15); <span style="color:green">//这条和第一条重复了</span>
      * List{@code <User>} list = toList(user1, user2, user3);
      * 
      * Pair{@code <List<User>, List<User>>} splitDuplicate = CollectionsUtil.splitDuplicate(list, "id", "age");
@@ -1921,6 +1921,130 @@ public final class CollectionsUtil{
     }
 
     /**
+     * 根据 <code>idExtractor</code> 提取的 id 值, 将集合拆分成两批: 一批是 <code>existIdCollection</code> 里面已经存在的, 一批是不存在的.
+     *
+     * <p>
+     * 典型场景: 一批数据要 <b>插入或者更新</b> 到数据库<br>
+     * 先根据 id 从数据库里面查出已经存在的 id 集合, 再调用本方法拆分, 然后分别走 insert / update, <br>
+     * 避免使用 <code>ON DUPLICATE KEY UPDATE</code> 这种会导致主键频繁更新的方案.
+     * </p>
+     *
+     * <p>
+     * 使用 {@link Function} 提取 id, 而不是传递属性名:<br>
+     * 前者不需要反射, 性能更好, 并且属性写错的时候编译期就能发现.
+     * </p>
+     *
+     * <h3>示例:</h3>
+     *
+     * <blockquote>
+     *
+     * <pre class="code">
+     * List{@code <Command>} all = ...;
+     *
+     * <span style="color:green">//先从数据库里面查出已经存在的 id</span>
+     * Set{@code <Long>} existIdSet = commandDao.findExistIdSet(CollectionsUtil.getPropertyValueSet(all, Command::getAlbumId));
+     *
+     * Pair{@code <List<Command>, List<Command>>} pair = CollectionsUtil.splitByExistId(all, Command::getAlbumId, existIdSet);
+     *
+     * <span style="color:green">//已经存在, 走 update</span>
+     * List{@code <Command>} updateList = pair.getLeft();
+     *
+     * <span style="color:green">//不存在, 走 insert</span>
+     * List{@code <Command>} insertList = pair.getRight();
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * <h3>示例:</h3>
+     *
+     * <blockquote>
+     *
+     * <pre class="code">
+     * List{@code <User>} list = toList(new User(1L), new User(2L), new User(5L));
+     *
+     * Pair{@code <List<User>, List<User>>} pair = CollectionsUtil.splitByExistId(list, User::getId, toList(1L, 5L));
+     *
+     * <span style="color:green">//已经存在</span>
+     * assertThat(pair.getLeft(), contains(list.get(0), list.get(2)));
+     *
+     * <span style="color:green">//不存在</span>
+     * assertThat(pair.getRight(), contains(list.get(1)));
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>{@link Pair#getLeft() left} 是已经存在的, {@link Pair#getRight() right} 是不存在的</li>
+     * <li>如果原 <code>objectCollection</code> 是有序的, 那么返回的结果参照原 <code>objectCollection</code> 元素顺序</li>
+     * <li>原 <code>objectCollection</code> 不变, {@link Pair#getLeft() left} 和 {@link Pair#getRight() right} 都是新的
+     * list</li>
+     * <li>如果 <code>existIdCollection</code> 是null或者empty, 那么所有元素都会进 {@link Pair#getRight() right}(全部当作不存在),
+     * 也就是说可以直接走 insert</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param <V>
+     *            the id type
+     * @param objectCollection
+     *            the object collection
+     * @param idExtractor
+     *            id 提取函数,不能为null
+     * @param existIdCollection
+     *            数据库中已经存在的 id 集合,如果是null或者empty,所有元素都会进 {@link Pair#getRight() right}
+     * @return 如果 <code>objectCollection</code> 是null或者empty, 返回 {@code Pair.of(emptyList, emptyList)}<br>
+     *         否则返回的 {@link Pair} 不为null: {@link Pair#getLeft() left} 是已经存在的元素,
+     *         {@link Pair#getRight() right} 是不存在的元素, 两边都不会是null<br>
+     * @throws NullPointerException
+     *             如果 <code>idExtractor</code> 是null<br>
+     *             如果 <code>objectCollection</code> 里面有null元素, 并且 <code>idExtractor</code> 不能处理null<br>
+     * @see #select(Iterable, Function, Collection)
+     * @see #selectRejected(Iterable, Function, Collection)
+     * @see #getPropertyValueSet(Collection, Function)
+     * @since 4.5.6
+     */
+    public static <O, V> Pair<List<O>, List<O>> splitByExistId(
+                    Collection<O> objectCollection,
+                    Function<O, V> idExtractor,
+                    Collection<V> existIdCollection){
+        Validate.notNull(idExtractor, "idExtractor can't be null!");
+
+        //---------------------------------------------------------------
+        if (isNullOrEmpty(objectCollection)){
+            return Pair.of(Collections.<O> emptyList(), Collections.<O> emptyList());
+        }
+
+        //---------------------------------------------------------------
+        if (isNullOrEmpty(existIdCollection)){
+            //没有已经存在的 id, 全部当作不存在(注意:要返回新的 list, 不能直接把原集合返回)
+            return Pair.of(Collections.<O> emptyList(), new ArrayList<>(objectCollection));
+        }
+
+        //---------------------------------------------------------------
+        //使用 HashSet 保证 contains 是 O(1), 避免调用方传递 List 的时候退化成 O(n*m)
+        Set<V> existIdSet = new HashSet<>(existIdCollection);
+
+        //---------------------------------------------------------------
+        //已经存在的
+        List<O> existList = new ArrayList<>(size(objectCollection));
+        //不存在的
+        List<O> notExistList = new ArrayList<>(size(objectCollection));
+
+        for (O o : objectCollection){
+            V value = idExtractor.apply(o);
+            if (existIdSet.contains(value)){
+                existList.add(o);
+            }else{
+                notExistList.add(o);
+            }
+        }
+        return Pair.of(existList, notExistList);
+    }
+
+    /**
      * 取 <code>bean</code> 指定 <code>propertyNames</code> 的值,按照 <code>propertyNames</code> 的顺序组成 {@link List},用作去重的 key.
      *
      * <p>
@@ -1959,9 +2083,9 @@ public final class CollectionsUtil{
      * <pre class="code">
      *
      * List{@code <User>} list = toList(//
-     *                 new User(2L),
-     *                 new User(5L),
-     *                 new User(5L));
+     * new User(2L),
+     * new User(5L),
+     * new User(5L));
      *
      * List{@code <Long>} resultList = CollectionsUtil.getPropertyValueList(list, "id");
      * log.debug(JsonUtil.format(resultList));
@@ -2028,16 +2152,16 @@ public final class CollectionsUtil{
      *
      * <pre class="code">
      * <span style="color:green">//数组,取userList 每个元素的 loves属性第2个元素的值</span>
-     * CollectionsUtil.getPropertyValueList(userList, <b>"loves[1]"</b>)                   =   ["xiaoshuo1","xiaoshuo2"]
+     * CollectionsUtil.getPropertyValueList(userList, <b>"loves[1]"</b>) = ["xiaoshuo1","xiaoshuo2"]
      *
      * <span style="color:green">//级联对象,取userList 每个元素的 userInfo属性的 age 属性的值</span>
-     * CollectionsUtil.getPropertyValueList(userList, <b>"userInfo.age"</b>)               =   [28,null]
+     * CollectionsUtil.getPropertyValueList(userList, <b>"userInfo.age"</b>) = [28,null]
      *
      * <span style="color:green">//Map,取userList 每个元素的 attrMap属性中的key是 "蜀国" 的值</span>
-     * CollectionsUtil.getPropertyValueList(userList, <b>"attrMap(蜀国)"</b>)                =   ["赵子龙","赵子龙"]
+     * CollectionsUtil.getPropertyValueList(userList, <b>"attrMap(蜀国)"</b>) = ["赵子龙","赵子龙"]
      *
      * <span style="color:green">//集合,取userList 每个元素的 userAddresseList属性中的第一个元素</span>
-     * CollectionsUtil.getPropertyValueList(userList, <b>"userAddresseList[0]"</b>)        = [{"address": "中南海"},{"address": "中南海"}]
+     * CollectionsUtil.getPropertyValueList(userList, <b>"userAddresseList[0]"</b>) = [{"address": "中南海"},{"address": "中南海"}]
      * </pre>
      *
      * </blockquote>
@@ -2146,9 +2270,9 @@ public final class CollectionsUtil{
      * <pre class="code">
      * 
      * List{@code <User>} list = toList(//
-     *                 new User(2L),
-     *                 new User(5L),
-     *                 new User(5L));
+     * new User(2L),
+     * new User(5L),
+     * new User(5L));
      * 
      * List{@code <Long>} resultList = CollectionsUtil.getPropertyValueList(list, User::getId);
      * log.debug(JsonUtil.format(resultList));
@@ -2169,12 +2293,12 @@ public final class CollectionsUtil{
      *           </p>
      * 
      *           <pre>
-     * {@code
+     *           {@code
                 beanIterable.stream()//
                         .map(mapper)//
                         .collect(Collectors.toList())
      * }
-     * </pre>
+     *           </pre>
      *
      * @param <T>
      *            返回集合类型 generic type
@@ -2196,8 +2320,8 @@ public final class CollectionsUtil{
         //---------------------------------------------------------------
         Validate.notNull(mapper, "mapper can't be null!");
         return beanIterable.stream()//
-                        .map(mapper)//
-                        .collect(Collectors.toList());
+            .map(mapper)//
+            .collect(Collectors.toList());
     }
 
     //---------------------------------------------------------------
@@ -2217,9 +2341,9 @@ public final class CollectionsUtil{
      * <pre class="code">
      * 
      * List{@code <User>} list = toList(//
-     *                 new User(2L),
-     *                 new User(5L),
-     *                 new User(5L));
+     * new User(2L),
+     * new User(5L),
+     * new User(5L));
      * 
      * List{@code <String>} resultList = CollectionsUtil.getPropertyValueList(list, "id",String.class);
      * log.debug(JsonUtil.format(resultList));
@@ -2245,7 +2369,7 @@ public final class CollectionsUtil{
      * 
      * List{@code <String>} albumIdList = newArrayList();
      * for (SingleBookPo singleBookPo : albums){
-     *     albumIdList.add(singleBookPo.getAlbumId().toString());
+     * albumIdList.add(singleBookPo.getAlbumId().toString());
      * }
      * 
      * </pre>
@@ -2351,7 +2475,7 @@ public final class CollectionsUtil{
             return emptyList();
         }
         return PropertyValueObtainer
-                        .getPropertyValueCollection(beanIterable, propertyName, new ArrayList<T>(size(beanIterable)), returnElementClass);
+            .getPropertyValueCollection(beanIterable, propertyName, new ArrayList<T>(size(beanIterable)), returnElementClass);
     }
 
     /**
@@ -2459,8 +2583,8 @@ public final class CollectionsUtil{
         //---------------------------------------------------------------
         Validate.notNull(mapper, "mapper can't be null!");
         return beanIterable.stream()//
-                        .map(mapper)//
-                        .collect(Collectors.toCollection(LinkedHashSet::new));
+            .map(mapper)//
+            .collect(Collectors.toCollection(LinkedHashSet::new));
         //        .collect(Collectors.toSet());
     }
 
@@ -2507,7 +2631,7 @@ public final class CollectionsUtil{
      * 
      * Set{@code <String>} albumIdSet = newHashSet();
      * for (SingleBookPo singleBookPo : albums){
-     *     albumIdSet.add(singleBookPo.getAlbumId().toString());
+     * albumIdSet.add(singleBookPo.getAlbumId().toString());
      * }
      * 
      * </pre>
@@ -2549,11 +2673,8 @@ public final class CollectionsUtil{
         if (isNullOrEmpty(beanIterable)){//避免null point
             return emptySet();
         }
-        return PropertyValueObtainer.getPropertyValueCollection(
-                        beanIterable,
-                        propertyName,
-                        new LinkedHashSet<T>(size(beanIterable)),
-                        returnElementClass);
+        return PropertyValueObtainer
+            .getPropertyValueCollection(beanIterable, propertyName, new LinkedHashSet<T>(size(beanIterable)), returnElementClass);
     }
 
     //----------------------------getPropertyValueMap-----------------------------------
@@ -2721,12 +2842,12 @@ public final class CollectionsUtil{
         Validate.notNull(valueMapper, "valueMapper can't be null!");
 
         return toStream(beanIterable).collect(
-                        Collectors.toMap(
-                                        keyMapper,
-                                        valueMapper,
-                                        (oldValue,newValue) -> newValue, // 键冲突时使用新值覆盖
-                                        LinkedHashMap::new // 保持插入顺序
-                        ));
+                                              Collectors.toMap(
+                                                               keyMapper,
+                                                               valueMapper,
+                                                               (oldValue,newValue) -> newValue, // 键冲突时使用新值覆盖
+                                                               LinkedHashMap::new // 保持插入顺序
+                                              ));
     }
 
     //---------------------------------------------------------------
@@ -2770,13 +2891,13 @@ public final class CollectionsUtil{
      *
      * Long soundId = singleBookQueryRequest.getSoundId();
      * List{@code <SoundVo>} soundVoList = soundVoListBuilderFactory
-     *                 .querySoundVoByMaterial(libraryPo, materialId, forceSetPaidUrl, doNotCheckNumberLimit, pageIndex);
+     * .querySoundVoByMaterial(libraryPo, materialId, forceSetPaidUrl, doNotCheckNumberLimit, pageIndex);
      * boolean isContain = false;
      * for (SoundVo soundVo : soundVoList){
-     *     if (soundVo.getSoundId().equals(soundId)){
-     *         isContain = true;
-     *         break;
-     *     }
+     * if (soundVo.getSoundId().equals(soundId)){
+     * isContain = true;
+     * break;
+     * }
      * }
      * </pre>
      * 
@@ -2786,7 +2907,7 @@ public final class CollectionsUtil{
      * <pre class="code">
      * Long soundId = singleBookQueryRequest.getSoundId();
      * List{@code <SoundVo>} soundVoList = soundVoListBuilderFactory
-     *                 .querySoundVoByMaterial(libraryPo, materialId, forceSetPaidUrl, doNotCheckNumberLimit, pageIndex);
+     * .querySoundVoByMaterial(libraryPo, materialId, forceSetPaidUrl, doNotCheckNumberLimit, pageIndex);
      * <span style="color:green">boolean isContain = CollectionsUtil.exist(soundVoList, "soundId", soundId);</span>
      * </pre>
      * 
@@ -2875,10 +2996,10 @@ public final class CollectionsUtil{
      *
      * <pre class="code">
      * List{@code <User>} list = toList(//
-     *                 new User("张飞", 23),
-     *                 new User("关羽", 24),
-     *                 new User("刘备", 25),
-     *                 new User("关羽", 30));
+     * new User("张飞", 23),
+     * new User("关羽", 24),
+     * new User("刘备", 25),
+     * new User("关羽", 30));
      *
      * Map{@code <String, Object>} map = new HashMap{@code <>}();
      * map.put("name", "关羽");
@@ -3037,9 +3158,9 @@ public final class CollectionsUtil{
         Validate.notNull(propertyValueExtractor, "propertyValueExtractor can't be null!");
 
         return toStream(beanIterable)//
-                        .filter(equalsPredicate(propertyValueExtractor, propertyValue))//
-                        .findFirst()//
-                        .orElse(null);
+            .filter(equalsPredicate(propertyValueExtractor, propertyValue))//
+            .findFirst()//
+            .orElse(null);
     }
 
     /**
@@ -3115,10 +3236,10 @@ public final class CollectionsUtil{
      *
      * <pre class="code">
      * List{@code <User>} list = toList(//
-     *                 new User("张飞", 23),
-     *                 new User("关羽", 24),
-     *                 new User("刘备", 25),
-     *                 new User("关羽", 30));
+     * new User("张飞", 23),
+     * new User("关羽", 24),
+     * new User("刘备", 25),
+     * new User("关羽", 30));
      *
      * Map{@code <String, Object>} map = new HashMap{@code <>}();
      * map.put("name", "关羽");
@@ -3198,11 +3319,11 @@ public final class CollectionsUtil{
      *
      * <pre class="code">
      * [{
-     *     "age": 24,
-     *     "name": "关羽"
+     * "age": 24,
+     * "name": "关羽"
      * },{
-     *     "age": 25,
-     *     "name": "刘备"
+     * "age": 25,
+     * "name": "刘备"
      * }]
      * </pre>
      *
@@ -3267,11 +3388,11 @@ public final class CollectionsUtil{
      *
      * <pre class="code">
      * [{
-     *     "age": 24,
-     *     "name": "关羽"
+     * "age": 24,
+     * "name": "关羽"
      * },{
-     *     "age": 25,
-     *     "name": "刘备"
+     * "age": 25,
+     * "name": "刘备"
      * }]
      * </pre>
      * 
@@ -3289,15 +3410,15 @@ public final class CollectionsUtil{
      * List{@code <User>} select = CollectionsUtil.select(list, User::getName, <span style="color:red">(String) null</span>);
      * 
      * assertThat(
-     *                 select,
-     *                 allOf(
-     *                                 hasItem(nullName), //
+     * select,
+     * allOf(
+     * hasItem(nullName), //
      * 
-     *                                 not(hasItem(zhangfei)),
-     *                                 not(hasItem(liubei)),
-     *                                 not(hasItem(guanyu))
-     *                 //
-     *                 ));
+     * not(hasItem(zhangfei)),
+     * not(hasItem(liubei)),
+     * not(hasItem(guanyu))
+     * //
+     * ));
      * </pre>
      * 
      * </blockquote>
@@ -3329,9 +3450,9 @@ public final class CollectionsUtil{
         // 转换为Set提高查找效率
         Set<V> targetValues = toSet(propertyValues);
         return selectWithoutNullElement(
-                        beanIterable,
-                        propertyExtractor, //
-                        containsPredicate(propertyExtractor, targetValues));
+                                        beanIterable,
+                                        propertyExtractor, //
+                                        containsPredicate(propertyExtractor, targetValues));
     }
 
     /**
@@ -3370,11 +3491,11 @@ public final class CollectionsUtil{
      *
      * <pre class="code">
      * [{
-     *     "age": 24,
-     *     "name": "关羽"
+     * "age": 24,
+     * "name": "关羽"
      * },{
-     *     "age": 25,
-     *     "name": "刘备"
+     * "age": 25,
+     * "name": "刘备"
      * }]
      * </pre>
      * 
@@ -3392,15 +3513,15 @@ public final class CollectionsUtil{
      * List{@code <User>} select = CollectionsUtil.select(list, User::getName, <span style="color:red">toList((String) null)</span>);
      * 
      * assertThat(
-     *                 select,
-     *                 allOf(
-     *                                 hasItem(nullName), //
+     * select,
+     * allOf(
+     * hasItem(nullName), //
      * 
-     *                                 not(hasItem(zhangfei)),
-     *                                 not(hasItem(liubei)),
-     *                                 not(hasItem(guanyu))
-     *                 //
-     *                 ));
+     * not(hasItem(zhangfei)),
+     * not(hasItem(liubei)),
+     * not(hasItem(guanyu))
+     * //
+     * ));
      * </pre>
      * 
      * </blockquote>
@@ -3431,9 +3552,9 @@ public final class CollectionsUtil{
             return emptyList();
         }
         return selectWithoutNullElement(
-                        beanIterable,
-                        propertyExtractor, //
-                        containsPredicate(propertyExtractor, propertyValues));
+                                        beanIterable,
+                                        propertyExtractor, //
+                                        containsPredicate(propertyExtractor, propertyValues));
     }
 
     /**
@@ -3473,11 +3594,11 @@ public final class CollectionsUtil{
      *
      * <pre class="code">
      * [{
-     *     "age": 23,
-     *     "name": "张飞"
+     * "age": 23,
+     * "name": "张飞"
      * },{
-     *     "age": 25,
-     *     "name": "刘备"
+     * "age": 25,
+     * "name": "刘备"
      * }]
      *
      * </pre>
@@ -3496,7 +3617,7 @@ public final class CollectionsUtil{
      * <span style="color:green">// 当前店铺 的物流方式Id set</span>
      * Set{@code <Long>} distributionModeIdSet = new HashSet{@code <>}();
      * for (TemeplateDistributionMode tdCmd : temeplateDistributionModeList){
-     *     distributionModeIdSet.add(tdCmd.getDistributionModeId());
+     * distributionModeIdSet.add(tdCmd.getDistributionModeId());
      * }
      *
      * <span style="color:green">// 拿到所有的物流方式 列表</span>
@@ -3506,11 +3627,11 @@ public final class CollectionsUtil{
      * List{@code <DistributionCommand>} curShopDistributionCommandList = new ArrayList{@code <>}();
      *
      * for (Long modeId : distributionModeIdSet){
-     *     for (DistributionCommand distributionCmd : distributionCommandList){
-     *         if (modeId.equals(distributionCmd.getDistributionModeId())){
-     *             curShopDistributionCommandList.add(distributionCmd);
-     *         }
-     *     }
+     * for (DistributionCommand distributionCmd : distributionCommandList){
+     * if (modeId.equals(distributionCmd.getDistributionModeId())){
+     * curShopDistributionCommandList.add(distributionCmd);
+     * }
+     * }
      * }
      * </pre>
      *
@@ -3523,7 +3644,8 @@ public final class CollectionsUtil{
      * List{@code <DistributionCommand>} distributionCommandList = freigthMemoryManager.getDistributionList();
      *
      * <span style="color:green">// 根据 物流方式ID 找出 支持本商铺的 DistributionCommand</span>
-     * List{@code <DistributionCommand>} curShopDistributionCommandList = CollectionsUtil.select(distributionCommandList, "distributionModeId", distributionModeIdSet);
+     * List{@code <DistributionCommand>} curShopDistributionCommandList = CollectionsUtil.select(distributionCommandList,
+     * "distributionModeId", distributionModeIdSet);
      * </pre>
      *
      * </blockquote>
@@ -3581,7 +3703,7 @@ public final class CollectionsUtil{
      * [{
      * "age": 24,
      * "name": "关羽"
-     * }, 
+     * },
      * {
      * "age": 24,
      * "name": "关羽"
@@ -3846,7 +3968,7 @@ public final class CollectionsUtil{
      * [{
      * "age": 23,
      * "name": "张飞"
-     * }, 
+     * },
      * {
      * "age": 25,
      * "name": "刘备"
@@ -3965,8 +4087,8 @@ public final class CollectionsUtil{
      *
      * <pre class="code">
      * [{
-     *     "age": 24,
-     *     "name": "关羽"
+     * "age": 24,
+     * "name": "关羽"
      * }]
      * </pre>
      * 
@@ -4016,9 +4138,9 @@ public final class CollectionsUtil{
         // 转换为Set提高查找效率
         Set<V> targetValues = toSet(propertyValues);
         return selectWithoutNullElement(
-                        beanIterable,
-                        propertyExtractor, //
-                        notContainsPredicate(propertyExtractor, targetValues));
+                                        beanIterable,
+                                        propertyExtractor, //
+                                        notContainsPredicate(propertyExtractor, targetValues));
     }
 
     /**
@@ -4058,8 +4180,8 @@ public final class CollectionsUtil{
      *
      * <pre class="code">
      * [{
-     *     "age": 23,
-     *     "name": "张飞"
+     * "age": 23,
+     * "name": "张飞"
      * }]
      * </pre>
      * 
@@ -4075,7 +4197,7 @@ public final class CollectionsUtil{
      * List{@code <User>} list = toList(zhangfei, nullName, guanyu, liubei);
      * 
      * List{@code <User>} select = CollectionsUtil.selectRejected(list, User::getName, <span style=
-    "color:red">toList((String) null)</span>);
+     * "color:red">toList((String) null)</span>);
      * 
      * </pre>
      * 
@@ -4107,9 +4229,9 @@ public final class CollectionsUtil{
             return emptyList();
         }
         return selectWithoutNullElement(
-                        beanIterable,
-                        propertyExtractor, //
-                        notContainsPredicate(propertyExtractor, propertyValues));
+                                        beanIterable,
+                                        propertyExtractor, //
+                                        notContainsPredicate(propertyExtractor, propertyValues));
     }
 
     //---------------------------------------------------------------
@@ -4127,9 +4249,9 @@ public final class CollectionsUtil{
 
         Objects.requireNonNull(propertyExtractor, "propertyExtractor cannot be null");
         return toStream(beanIterable)//
-                        .filter(Objects::nonNull)//
-                        .filter(predicate)//
-                        .collect(Collectors.toList());//Stream.collect是 终结操作terminal operation，不是中间操作调用 collect后，流会被消费，不能再对其执行任何后续操作
+            .filter(Objects::nonNull)//
+            .filter(predicate)//
+            .collect(Collectors.toList());//Stream.collect是 终结操作terminal operation，不是中间操作调用 collect后，流会被消费，不能再对其执行任何后续操作
     }
 
     //---------------------------------------------------------------
@@ -4208,20 +4330,21 @@ public final class CollectionsUtil{
      *
      * <pre class="code">
      *
-     * class <b>ToShoppingCartLineCommandTransformer</b> implements <b>Transformer</b>{@code <CookieShoppingCartLine, ShoppingCartLineCommand>}{
+     * class <b>ToShoppingCartLineCommandTransformer</b> implements
+     * <b>Transformer</b>{@code <CookieShoppingCartLine, ShoppingCartLineCommand>}{
      *
-     *     private static final String[] COPY_PROPERTY_NAMES = {"skuId","extentionCode","quantity","createTime","settlementState","lineGroup" };
+     * private static final String[] COPY_PROPERTY_NAMES = {"skuId","extentionCode","quantity","createTime","settlementState","lineGroup" };
      *
-     *     public ShoppingCartLineCommand <b>transform</b>(CookieShoppingCartLine cookieShoppingCartLine){
-     *         <span style="color:green">// 将cookie中的购物车 转换为 shoppingCartLineCommand</span>
-     *         ShoppingCartLineCommand shoppingLineCommand = new ShoppingCartLineCommand();
-     *         PropertyUtil.copyProperties(shoppingLineCommand, cookieShoppingCartLine, COPY_PROPERTY_NAMES);
+     * public ShoppingCartLineCommand <b>transform</b>(CookieShoppingCartLine cookieShoppingCartLine){
+     * <span style="color:green">// 将cookie中的购物车 转换为 shoppingCartLineCommand</span>
+     * ShoppingCartLineCommand shoppingLineCommand = new ShoppingCartLineCommand();
+     * PropertyUtil.copyProperties(shoppingLineCommand, cookieShoppingCartLine, COPY_PROPERTY_NAMES);
      *
-     *         shoppingLineCommand.setId(cookieShoppingCartLine.getId());
-     *         shoppingLineCommand.setGift(null == cookieShoppingCartLine.getIsGift() ? false : cookieShoppingCartLine.getIsGift());
+     * shoppingLineCommand.setId(cookieShoppingCartLine.getId());
+     * shoppingLineCommand.setGift(null == cookieShoppingCartLine.getIsGift() ? false : cookieShoppingCartLine.getIsGift());
      *
-     *         return shoppingLineCommand;
-     *     }
+     * return shoppingLineCommand;
+     * }
      * }
      *
      * </pre>
@@ -4233,13 +4356,13 @@ public final class CollectionsUtil{
      * <pre class="code">
      *
      * public List{@code <ShoppingCartLineCommand>} load(HttpServletRequest request){
-     *     <span style="color:green">// 获取cookie中的购物车行集合</span>
-     *     List{@code <CookieShoppingCartLine>} cookieShoppingCartLineList = getCookieShoppingCartLines(request);
-     *     if (isNullOrEmpty(cookieShoppingCartLineList)){
-     *         return null;
-     *     }
+     * <span style="color:green">// 获取cookie中的购物车行集合</span>
+     * List{@code <CookieShoppingCartLine>} cookieShoppingCartLineList = getCookieShoppingCartLines(request);
+     * if (isNullOrEmpty(cookieShoppingCartLineList)){
+     * return null;
+     * }
      *
-     *     return CollectionsUtil.collect(cookieShoppingCartLineList, new ToShoppingCartLineCommandTransformer());
+     * return CollectionsUtil.collect(cookieShoppingCartLineList, new ToShoppingCartLineCommandTransformer());
      * }
      * </pre>
      *
@@ -4277,21 +4400,21 @@ public final class CollectionsUtil{
      *
      * public class User{
      *
-     *     // The id.
-     *     private Long id = 0L;
+     * // The id.
+     * private Long id = 0L;
      *
-     *     //** The name.
-     *     private String name = "feilong";
+     * //** The name.
+     * private String name = "feilong";
      *
-     *     //** 年龄.
-     *     private Integer age;
+     * //** 年龄.
+     * private Integer age;
      *
-     *     //setter /getter
+     * //setter /getter
      *
-     *     public User(Long id, String name){
-     *         this.id = id;
-     *         this.name = name;
-     *     }
+     * public User(Long id, String name){
+     * this.id = id;
+     * this.name = name;
+     * }
      *
      * }
      *
@@ -4301,13 +4424,13 @@ public final class CollectionsUtil{
      *
      * public class Customer{
      *
-     *     //** The id.
-     *     private long id;
+     * //** The id.
+     * private long id;
      *
-     *     //* The name.
-     *     private String name;
+     * //* The name.
+     * private String name;
      *
-     *     //setter /getter
+     * //setter /getter
      *
      * }
      *
@@ -4318,9 +4441,9 @@ public final class CollectionsUtil{
      * <pre class="code">
      *
      * List{@code <User>} list = toList(//
-     *                 new User(23L, "张飞"),
-     *                 new User(24L, "关羽"),
-     *                 new User(25L, "刘备"));
+     * new User(23L, "张飞"),
+     * new User(24L, "关羽"),
+     * new User(25L, "刘备"));
      * </pre>
      *
      * <b>以前你需要如此这般写:</b>
@@ -4328,10 +4451,10 @@ public final class CollectionsUtil{
      * <pre class="code">
      * List{@code <Customer>} customerList = new ArrayList{@code <>}();
      * for (User user : list){
-     *     Customer customer = new Customer();
-     *     customer.setId(user.getId());
-     *     customer.setName(user.getName());
-     *     customerList.add(customer);
+     * Customer customer = new Customer();
+     * customer.setId(user.getId());
+     * customer.setName(user.getName());
+     * customerList.add(customer);
      * }
      * </pre>
      *
@@ -4344,7 +4467,7 @@ public final class CollectionsUtil{
      * </p>
      *
      * <pre class="code">
-     *  List{@code <Customer>} customerList = CollectionsUtil.collect(list, Customer.class);
+     * List{@code <Customer>} customerList = CollectionsUtil.collect(list, Customer.class);
      * </pre>
      *
      * <p>
@@ -4356,7 +4479,7 @@ public final class CollectionsUtil{
      * </p>
      *
      * <pre class="code">
-     *  List{@code <Customer>} customerList = CollectionsUtil.collect(list, Customer.class,"id");
+     * List{@code <Customer>} customerList = CollectionsUtil.collect(list, Customer.class,"id");
      * </pre>
      *
      * </blockquote>
@@ -4464,7 +4587,8 @@ public final class CollectionsUtil{
      * 具体实现参考 {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate)} 的实现逻辑
      * 
      * @since 1.5.5
-     * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate)}
+     * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用
+     *             {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate)}
      */
     @SuppressWarnings("javadoc")
     @Deprecated
@@ -4716,8 +4840,8 @@ public final class CollectionsUtil{
      */
     public static <O> Stream<O> toStream(Iterable<O> beanIterable){
         return StreamSupport.stream(
-                        beanIterable.spliterator(), //
-                        false //决定流的执行模式true表示创建并行流；false表示创建顺序流
+                                    beanIterable.spliterator(), //
+                                    false //决定流的执行模式true表示创建并行流；false表示创建顺序流
         );
     }
 
