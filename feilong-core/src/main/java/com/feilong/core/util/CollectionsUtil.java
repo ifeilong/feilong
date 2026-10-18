@@ -1774,6 +1774,7 @@ public final class CollectionsUtil{
      * @return 如果 <code>propertyNames</code> 是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
      *         如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>propertyNames</code> 只有1个元素,那么调用 {@link #removeDuplicate(Collection, String)} 返回<br>
+     *         否则使用 {@link LinkedHashSet} 按照 <code>propertyNames</code> 组合值去重后返回<br>
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
      * @see "org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)"
@@ -1781,6 +1782,8 @@ public final class CollectionsUtil{
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
      * @since 2.1.0
+     * @since 4.5.6 性能优化,将判断重复的实现由 List 双层循环(时间复杂度 O(n^2))改为 {@link LinkedHashSet}(时间复杂度 O(n)),参见 <a
+     *        href="https://github.com/ifeilong/feilong/issues/327">issues/327</a>
      */
     public static <O> List<O> removeDuplicate(Collection<O> objectCollection,String...propertyNames){
         if (isNullOrEmpty(propertyNames)){
@@ -1796,49 +1799,51 @@ public final class CollectionsUtil{
         }
 
         //---------------------------------------------------------------
-        //用来识别是否重复
-        List<Map<String, Object>> allValueMapList = newArrayList();
+        //since 4.5.6 性能优化:原实现用 List 双层循环判断是否重复,时间复杂度 O(n^2),万级数据时性能很差,参见 https://github.com/ifeilong/feilong/issues/327
+        //改成 LinkedHashSet 判断是否重复,时间复杂度 O(n);key 是 propertyNames 组合的值 list,保留每个 key 第一次出现的元素,并保持原集合的迭代顺序
+        Set<List<Object>> existPropertyValueListSet = new LinkedHashSet<>(size(objectCollection));
 
         //用来存放返回list
         List<O> returnList = new ArrayList<>(size(objectCollection));
 
         //---------------------------------------------------------------
         for (O o : objectCollection){
-            Map<String, Object> propertyNameAndValueMap = PropertyUtil.describe(o, propertyNames);
-            boolean isNotExist = !isExist(allValueMapList, propertyNameAndValueMap, propertyNames);
-            if (isNotExist){
+            if (existPropertyValueListSet.add(buildPropertyValueList(o, propertyNames))){
                 returnList.add(o);
-                allValueMapList.add(propertyNameAndValueMap);
             }
         }
         return returnList;
     }
 
     /**
-     * 分隔集合,将新数据放left , 重复的数据放right.
+     * 分隔集合, 将不重复的数据放到 {@link Pair#getLeft() left} , 重复的数据放到 {@link Pair#getRight() right}.
      * 
      * <p>
-     * 请自行先进行排序处理
+     * 是否重复, 取决于 <code>propertyNames</code> 指定的属性值组合是否一致:<br>
+     * <code>propertyNames</code> 是多个属性的时候, 需要所有属性的值都一致, 才算重复.
      * </p>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
-     * 有 User 对象,两个属性 id和age
+     * <p>
+     * <b>场景:</b> 有 User 对象, 两个属性 id 和 age; 其中 user3 和 user1 的 id 以及 age 都一样
+     * </p>
      * 
      * <pre class="code">
      * 
      * User user1 = new User(1L, 15);
      * User user2 = new User(1L, 16);
-     * User user3 = new User(1L, 15);  //这条和第一条重复了
+     * User user3 = new User(1L, 15);  <span style="color:green">//这条和第一条重复了</span>
      * List{@code <User>} list = toList(user1, user2, user3);
      * 
      * Pair{@code <List<User>, List<User>>} splitDuplicate = CollectionsUtil.splitDuplicate(list, "id", "age");
      * 
-     * //left 保存的是不重复的数据
+     * <span style="color:green">//left 保存的是不重复的数据</span>
      * List{@code <User>} newDuplicate = splitDuplicate.getLeft();
-       // right 保存的是和left有属性值重复的数据
+     * 
+     * <span style="color:green">//right 保存的是和 left 有属性值重复的数据</span>
      * List{@code <User>} rightDuplicate = splitDuplicate.getRight();
      * 
      * assertSame(2, newDuplicate.size());
@@ -1851,16 +1856,39 @@ public final class CollectionsUtil{
      * 
      * </blockquote>
      * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果原 <code>objectCollection</code> 是有序的, 那么返回的结果参照原 <code>objectCollection</code> 元素顺序</li>
+     * <li><code>propertyNames</code> 组合值重复的话, {@link Pair#getLeft() left} 里面只保留第一个元素, 其余的放到
+     * {@link Pair#getRight() right}</li>
+     * <li>原 <code>objectCollection</code> 不变, {@link Pair#getLeft() left} 和 {@link Pair#getRight() right} 都是新的
+     * list</li>
+     * <li>不要依赖本方法做排序; 如果需要按指定顺序(比如时间倒序)保留每一组的第一个元素, 请自行先排序</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param <O>
+     *            the generic type
      * @param objectCollection
      *            the object collection
      * @param propertyNames
-     *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo),<br>
-     *            如果是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
-     * @return 将新数据放left , 重复的数据放right.<br>
-     *         如果 <code>propertyNames</code> 是null或者empty,返回 null<br>
-     *         如果 <code>objectCollection</code> 是null或者empty,返回 null<br>
+     *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo),参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a><br>
+     *            如果是null或者empty,直接返回 null<br>
+     * @return 将不重复的数据放 {@link Pair#getLeft() left} , 重复的数据放 {@link Pair#getRight() right}.<br>
+     *         如果 <code>propertyNames</code> 是null或者empty, 返回 null<br>
+     *         如果 <code>objectCollection</code> 是null或者empty, 返回 null<br>
+     *         否则返回的 {@link Pair} 不为null: {@link Pair#getLeft() left} 至少有1个元素,
+     *         {@link Pair#getRight() right} 没有重复数据时是 empty list (不为null)<br>
+     * @throws NullPointerException
+     *             如果 <code>objectCollection</code> 里面有null元素<br>
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyNames</code> 里面有blank的元素<br>
+     * @see #removeDuplicate(Collection, String...)
      * @since 4.0.7
+     * @since 4.5.6 性能优化,将判断重复的实现由 List 双层循环(时间复杂度 O(n^2))改为 {@link LinkedHashSet}(时间复杂度 O(n)),参见 <a
+     *        href="https://github.com/ifeilong/feilong/issues/327">issues/327</a>
      */
     public static <O> Pair<List<O>, List<O>> splitDuplicate(Collection<O> objectCollection,String...propertyNames){
         if (isNullOrEmpty(propertyNames)){
@@ -1880,13 +1908,11 @@ public final class CollectionsUtil{
         //---------------------------------------------------------------
 
         //用来识别是否重复
-        List<Map<String, Object>> allValueMapList = newArrayList();
+        //since 4.5.6 性能优化:同 removeDuplicate(Collection, String...),参见 https://github.com/ifeilong/feilong/issues/327
+        Set<List<Object>> existPropertyValueListSet = new LinkedHashSet<>(size(objectCollection));
         for (O o : objectCollection){
-            Map<String, Object> propertyNameAndValueMap = PropertyUtil.describe(o, propertyNames);
-            boolean isNotExist = !isExist(allValueMapList, propertyNameAndValueMap, propertyNames);
-            if (isNotExist){
+            if (existPropertyValueListSet.add(buildPropertyValueList(o, propertyNames))){
                 newList.add(o);
-                allValueMapList.add(propertyNameAndValueMap);
             }else{
                 duplicateList.add(o);
             }
@@ -1895,45 +1921,26 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 判断<code>allValueMapList</code> 中,是否含有指定 key-value 的map.
+     * 取 <code>bean</code> 指定 <code>propertyNames</code> 的值,按照 <code>propertyNames</code> 的顺序组成 {@link List},用作去重的 key.
      *
-     * @param allValueMapList
-     *            the map list
-     * @param propertyNameAndValueMap
-     *            the property name and value map
-     * @param keys
-     *            the keys
-     * @return 存在,返回true
-     * @since 2.1.0
-     */
-    private static boolean isExist(List<Map<String, Object>> allValueMapList,Map<String, Object> propertyNameAndValueMap,String...keys){
-        for (Map<String, Object> map : allValueMapList){
-            if (eqauls(map, propertyNameAndValueMap, keys)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 判断两个map ,提取每个属性 <code>keys</code> 值, 看看是否一致, 如果有不一致的返回false; 如果都一致那么返回true.
+     * <p>
+     * 使用 {@link List} 作为 key,是借助 {@link List#equals(Object)} 逐元素比较的特性:<br>
+     * 既能支持属性值是 null 的情况,也和原先 {@link Objects#equals(Object, Object)} 逐属性比较的语义一致.
+     * </p>
      *
-     * @param map
-     *            the map
-     * @param propertyNameAndValueMap
-     *            the property name and value map
-     * @param keys
+     * @param bean
+     *            the bean
+     * @param propertyNames
      *            the property names
-     * @return true, if successful
-     * @since 2.1.0
+     * @return the property value list
+     * @since 4.5.6
      */
-    private static boolean eqauls(Map<String, Object> map,Map<String, Object> propertyNameAndValueMap,String...keys){
-        for (String propertyName : keys){
-            if (!Objects.equals(map.get(propertyName), propertyNameAndValueMap.get(propertyName))){
-                return false;
-            }
+    private static List<Object> buildPropertyValueList(Object bean,String[] propertyNames){
+        List<Object> propertyValueList = new ArrayList<>(propertyNames.length);
+        for (String propertyName : propertyNames){
+            propertyValueList.add(PropertyUtil.getProperty(bean, propertyName));
         }
-        return true;
+        return propertyValueList;
     }
 
     //----------------------获得 属性值-----------------------------------------
