@@ -41,12 +41,14 @@ import com.feilong.core.date.dateutil.get.GetDayStartAndEndPairTest;
 import com.feilong.core.date.dateutil.get.GetFirstDateOfThisDayTest;
 import com.feilong.core.date.dateutil.get.GetFirstDateOfThisMonthTest;
 import com.feilong.core.date.dateutil.get.GetFirstDateOfThisWeekTest;
+import com.feilong.core.date.dateutil.get.GetFirstDateOfThisWeekUseMondayTest;
 import com.feilong.core.date.dateutil.get.GetFirstDateOfThisYearTest;
 import com.feilong.core.date.dateutil.get.GetHourOfDayTest;
 import com.feilong.core.date.dateutil.get.GetHourOfYearTest;
 import com.feilong.core.date.dateutil.get.GetLastDateOfThisDayTest;
 import com.feilong.core.date.dateutil.get.GetLastDateOfThisMonthTest;
 import com.feilong.core.date.dateutil.get.GetLastDateOfThisWeekTest;
+import com.feilong.core.date.dateutil.get.GetLastDateOfThisWeekUseSundayTest;
 import com.feilong.core.date.dateutil.get.GetLastDateOfThisYearTest;
 import com.feilong.core.date.dateutil.get.GetMinuteTest;
 import com.feilong.core.date.dateutil.get.GetMonthParameterizedTest;
@@ -58,6 +60,8 @@ import com.feilong.core.date.dateutil.get.GetSecondTest;
 import com.feilong.core.date.dateutil.get.GetTimeTest;
 import com.feilong.core.date.dateutil.get.GetWeekOfYearParameterizedTest;
 import com.feilong.core.date.dateutil.get.GetWeekOfYearTest;
+import com.feilong.core.date.dateutil.get.GetWeekStartAndEndPairSundayFirstTest;
+import com.feilong.core.date.dateutil.get.GetWeekStartAndEndPairTest;
 import com.feilong.core.date.dateutil.get.GetYearParameterizedTest;
 import com.feilong.core.date.dateutil.get.GetYearStartAndEndPairTest;
 import com.feilong.core.date.dateutil.get.GetYearTest;
@@ -97,11 +101,13 @@ import com.feilong.core.date.dateutil.is.IsTodayTest;
                 GetFirstDateOfThisYearTest.class,
                 GetFirstDateOfThisMonthTest.class,
                 GetFirstDateOfThisWeekTest.class,
+                GetFirstDateOfThisWeekUseMondayTest.class,
                 GetFirstDateOfThisDayTest.class,
 
                 GetLastDateOfThisYearTest.class,
                 GetLastDateOfThisMonthTest.class,
                 GetLastDateOfThisWeekTest.class,
+                GetLastDateOfThisWeekUseSundayTest.class,
                 GetLastDateOfThisDayTest.class,
 
                 //---------------------------------------------------------------
@@ -171,6 +177,8 @@ import com.feilong.core.date.dateutil.is.IsTodayTest;
                 //---------------------------------------------------------------
 
                 GetDayStartAndEndPairTest.class,
+                GetWeekStartAndEndPairTest.class,
+                GetWeekStartAndEndPairSundayFirstTest.class,
                 GetMonthStartAndEndPairTest.class,
                 GetYearStartAndEndPairTest.class,
 

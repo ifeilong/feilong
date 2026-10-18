@@ -36,6 +36,7 @@ import static java.util.Calendar.DAY_OF_YEAR;
 import static java.util.Calendar.HOUR_OF_DAY;
 import static java.util.Calendar.JANUARY;
 import static java.util.Calendar.MINUTE;
+import static java.util.Calendar.MONDAY;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.SATURDAY;
 import static java.util.Calendar.SECOND;
@@ -603,6 +604,96 @@ public final class DateUtil{
     public static Date getLastDateOfThisWeek(Date date){
         Calendar calendar = toCalendar(date);
         calendar.set(DAY_OF_WEEK, SATURDAY);
+        return CalendarUtil.toDate(resetDayEnd(calendar));
+    }
+
+    /**
+     * 获得指定日期所在的<span style="color:red">星期第一天(周一)</span> <code>00:00:00.000</code> 到毫秒.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateUtil.getFirstDateOfThisWeekUseMonday(2012-10-11 17:10:30.701)  =2012-10-08 00:00:00.000
+     * DateUtil.getFirstDateOfThisWeekUseMonday(2014-01-01 05:00:00)      =2013-12-30 00:00:00.000 //跨年
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>按照中国制,<span style="color:red">周一为一个星期第一天,周日为最后一天</span></li>
+     * <li>和 {@link #getFirstDateOfThisWeek(Date)} 的区别是, 后者按照外国制,周日为一个星期第一天</li>
+     * <li>使用日期算术计算,<b>不依赖</b> {@link Calendar#getFirstDayOfWeek()},不受 JVM 默认 {@link java.util.Locale} 影响</li>
+     * <li>会自动跨月,跨年操作</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @param date
+     *            任意时间
+     * @return 指定日期所在周的第一天(周一)的 <code>00:00:00.000</code> 时间<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
+     * @see #toCalendar(Date)
+     * @see Calendar#add(int, int)
+     * @see CalendarUtil#resetDayBegin(Calendar)
+     * @see #getLastDateOfThisWeekUseSunday(Date)
+     * @see #getWeekStartAndEndPairMondayFirst(Date)
+     * @since 4.5.6
+     */
+    public static Date getFirstDateOfThisWeekUseMonday(Date date){
+        Calendar calendar = toCalendar(date);
+        //Calendar 里 SUNDAY=1, MONDAY=2, ..., SATURDAY=7
+        //距离本周一的天数: 周一~周六直接减 MONDAY(2)(周一得0, 周六得5), 周日要退回 6 天
+        
+        //算出「今天距离本周一还有几天」，然后往回退
+        int dayOfWeek = calendar.get(DAY_OF_WEEK);
+        int daysFromMonday = (dayOfWeek == SUNDAY) ? 6 : (dayOfWeek - MONDAY);
+        calendar.add(DAY_OF_MONTH, -daysFromMonday);
+        return CalendarUtil.toDate(resetDayBegin(calendar));
+    }
+
+    /**
+     * 获得指定日期所在<span style="color:red">星期的最后一天(周日)</span> <code>23:59:59.999</code> 到毫秒.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateUtil.getLastDateOfThisWeekUseSunday(2012-10-11 17:10:30.701)   =2012-10-14 23:59:59.999
+     * DateUtil.getLastDateOfThisWeekUseSunday(2014-12-31 05:00:00)       =2015-01-04 23:59:59.999 //跨年
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>按照中国制,<span style="color:red">周一为一个星期第一天,周日为最后一天</span></li>
+     * <li>和 {@link #getLastDateOfThisWeek(Date)} 的区别是, 后者按照外国制,周六为一个星期最后一天</li>
+     * <li>使用日期算术计算,<b>不依赖</b> {@link Calendar#getFirstDayOfWeek()},不受 JVM 默认 {@link java.util.Locale} 影响</li>
+     * <li>会自动跨月,跨年操作</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @param date
+     *            任意时间
+     * @return 指定日期所在周的最后一天(周日)的 <code>23:59:59.999</code> 时间<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
+     * @see #toCalendar(Date)
+     * @see Calendar#add(int, int)
+     * @see CalendarUtil#resetDayEnd(Calendar)
+     * @see #getFirstDateOfThisWeekUseMonday(Date)
+     * @see #getWeekStartAndEndPairMondayFirst(Date)
+     * @since 4.5.6
+     */
+    public static Date getLastDateOfThisWeekUseSunday(Date date){
+        //先定位到本周一, 再往后推 6 天, 就是本周日
+        Calendar calendar = toCalendar(getFirstDateOfThisWeekUseMonday(date));
+
+        calendar.add(DAY_OF_MONTH, 6);
         return CalendarUtil.toDate(resetDayEnd(calendar));
     }
 
@@ -2221,6 +2312,162 @@ public final class DateUtil{
     public static Pair<Date, Date> getDayStartAndEndPair(Date date){
         Validate.notNull(date, "date can't be null!");
         return Pair.of(getFirstDateOfThisDay(date), getLastDateOfThisDay(date));
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 获得 当前周的开始时间 <code>00:00:00.000</code> 及当前周的结束时间 <code>23:59:59.999</code>.
+     * 
+     * <p>
+     * 一般用于统计当前周的数据,between ... and ...
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 比如当前时间是 2012-10-16 22:18:34
+     * </p>
+     * 
+     * <b>返回:</b> 2012-10-15 00:00:00.000, 2012-10-21 23:59:59.999
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>按照中国制,<span style="color:red">周一为开始时间,周日为结束时间</span></li>
+     * <li>和 {@link #getFirstDateOfThisWeek(Date)} / {@link #getLastDateOfThisWeek(Date)} 的外国制(周日~周六)不同</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @return 左边,当前周的第一天(周一) <code>00:00:00.000</code> <br>
+     *         右边,当前周最后一天(周日) <code>23:59:59.999</code> <br>
+     * @see #getFirstDateOfThisWeekUseMonday(Date)
+     * @see #getLastDateOfThisWeekUseSunday(Date)
+     * @see #getWeekStartAndEndPairSundayFirst()
+     * @since 4.5.6
+     */
+    public static Pair<Date, Date> getWeekStartAndEndPairMondayFirst(){
+        return getWeekStartAndEndPairMondayFirst(now());
+    }
+
+    /**
+     * 获得 指定周的开始时间 <code>00:00:00.000</code> 及指定周的结束时间 <code>23:59:59.999</code>.
+     * 
+     * <p>
+     * 一般用于统计指定周的数据,between ... and ...
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 比如传入的是 2012-10-16 22:18:34
+     * </p>
+     * 
+     * <b>返回:</b> 2012-10-15 00:00:00.000, 2012-10-21 23:59:59.999
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>按照中国制,<span style="color:red">周一为开始时间,周日为结束时间</span></li>
+     * <li>和 {@link #getFirstDateOfThisWeek(Date)} / {@link #getLastDateOfThisWeek(Date)} 的外国制(周日~周六)不同</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @param date
+     *            the date
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     *         左边,指定周的第一天(周一) <code>00:00:00.000</code> <br>
+     *         右边,指定周最后一天(周日) <code>23:59:59.999</code> <br>
+     * @see #getFirstDateOfThisWeekUseMonday(Date)
+     * @see #getLastDateOfThisWeekUseSunday(Date)
+     * @see #getWeekStartAndEndPairSundayFirst(Date)
+     * @since 4.5.6
+     */
+    public static Pair<Date, Date> getWeekStartAndEndPairMondayFirst(Date date){
+        Validate.notNull(date, "date can't be null!");
+        return Pair.of(getFirstDateOfThisWeekUseMonday(date), getLastDateOfThisWeekUseSunday(date));
+    }
+
+    /**
+     * 获得 当前周的开始时间 <code>00:00:00.000</code> 及当前周的结束时间 <code>23:59:59.999</code>.
+     * 
+     * <p>
+     * 按照外国制,<span style="color:red">周日为开始时间, 周六为结束时间</span>, 和 {@link #getWeekStartAndEndPairMondayFirst()} 的中国制(周一~周日)相对.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 比如当前时间是 2012-10-16 22:18:34
+     * </p>
+     * 
+     * <b>返回:</b> 2012-10-14 00:00:00.000, 2012-10-20 23:59:59.999
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>按照外国制,<span style="color:red">周日为开始时间, 周六为结束时间</span></li>
+     * <li>内部调用 {@link #getFirstDateOfThisWeek(Date)} / {@link #getLastDateOfThisWeek(Date)}, 这两个方法基于
+     * {@link Calendar#set(int, int)} 设置 {@link Calendar#DAY_OF_WEEK}, 结果会受 {@link Calendar#getFirstDayOfWeek()} 影响</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @return 左边,当前周的第一天(周日) <code>00:00:00.000</code> <br>
+     *         右边,当前周最后一天(周六) <code>23:59:59.999</code> <br>
+     * @see #getWeekStartAndEndPairMondayFirst()
+     * @see #getWeekStartAndEndPairMondayFirst(Date)
+     * @see #getFirstDateOfThisWeek(Date)
+     * @see #getLastDateOfThisWeek(Date)
+     * @since 4.5.6
+     */
+    public static Pair<Date, Date> getWeekStartAndEndPairSundayFirst(){
+        return getWeekStartAndEndPairSundayFirst(now());
+    }
+
+    /**
+     * 获得 指定周的开始时间 <code>00:00:00.000</code> 及指定周的结束时间 <code>23:59:59.999</code>.
+     * 
+     * <p>
+     * 按照外国制,<span style="color:red">周日为开始时间, 周六为结束时间</span>, 和 {@link #getWeekStartAndEndPairMondayFirst(Date)} 的中国制(周一~周日)相对.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 比如传入的是 2012-10-16 22:18:34
+     * </p>
+     * 
+     * <b>返回:</b> 2012-10-14 00:00:00.000, 2012-10-20 23:59:59.999
+     * 
+     * </blockquote>
+     * 
+     * @param date
+     *            the date
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     *         左边,指定周的第一天(周日) <code>00:00:00.000</code> <br>
+     *         右边,指定周最后一天(周六) <code>23:59:59.999</code> <br>
+     * @see #getWeekStartAndEndPairMondayFirst(Date)
+     * @see #getFirstDateOfThisWeek(Date)
+     * @see #getLastDateOfThisWeek(Date)
+     * @since 4.5.6
+     */
+    public static Pair<Date, Date> getWeekStartAndEndPairSundayFirst(Date date){
+        Validate.notNull(date, "date can't be null!");
+        return Pair.of(getFirstDateOfThisWeek(date), getLastDateOfThisWeek(date));
     }
 
     //---------------------------------------------------------------
