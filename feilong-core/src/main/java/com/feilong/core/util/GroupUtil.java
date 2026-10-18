@@ -114,22 +114,22 @@ public class GroupUtil{
      * <b>返回:</b>
      *
      * <pre class="code">
-    {
-        "张飞": [ {
-            "age": 23,
-            "name": "张飞",
-        }],
-        "刘备": [
-            {
-                "age": 25,
-                "name": "刘备",
-            },
-            {
-                "age": 30,
-                "name": "刘备",
-            }
-        ]
-    }
+     * {
+     *     "张飞": [ {
+     *         "age": 23,
+     *         "name": "张飞",
+     *     }],
+     *     "刘备": [
+     *         {
+     *             "age": 25,
+     *             "name": "刘备",
+     *         },
+     *         {
+     *             "age": 30,
+     *             "name": "刘备",
+     *         }
+     *     ]
+     * }
      * </pre>
      *
      * </blockquote>
@@ -183,40 +183,40 @@ public class GroupUtil{
      * </p>
      *
      * <pre class="code">
-        List{@code <User>} list = new ArrayList{@code <>}();
-        list.add(new User("张飞", 10));
-        list.add(new User("张飞", 28));
-        list.add(new User("刘备", 32));
-        list.add(new User("刘备", 30));
-        list.add(new User("刘备", 10));
-    
-        Map{@code <String, List<User>>} map = GroupUtil.group(list, "name", new Predicate{@code <User>}(){
-    
-            {@code @Override}
-            public boolean evaluate(User user){
-                return user.getAge() {@code >} 20;
-            }
-        });
-        log.info(JsonUtil.format(map));
+     *     List{@code <User>} list = new ArrayList{@code <>}();
+     *     list.add(new User("张飞", 10));
+     *     list.add(new User("张飞", 28));
+     *     list.add(new User("刘备", 32));
+     *     list.add(new User("刘备", 30));
+     *     list.add(new User("刘备", 10));
+     *
+     *     Map{@code <String, List<User>>} map = GroupUtil.group(list, "name", new Predicate{@code <User>}(){
+     *
+     *         {@code @Override}
+     *         public boolean evaluate(User user){
+     *             return user.getAge() {@code >} 20;
+     *         }
+     *     });
+     *     log.info(JsonUtil.format(map));
      * </pre>
      *
      * <b>返回:</b>
      *
      * <pre class="code">
-    {
-        "张飞": [{
-            "age": 28,
-            "name": "张飞"
-        }],
-        "刘备": [{
-                "age": 32,
-                "name": "刘备"
-            },{
-                "age": 30,
-                "name": "刘备"
-            }
-        ]
-    }
+     * {
+     *     "张飞": [{
+     *         "age": 28,
+     *         "name": "张飞"
+     *     }],
+     *     "刘备": [{
+     *         "age": 32,
+     *         "name": "刘备"
+     *     },{
+     *         "age": 30,
+     *         "name": "刘备"
+     *     }
+     *     ]
+     * }
      * </pre>
      *
      * <p>
@@ -333,44 +333,44 @@ public class GroupUtil{
      * <b>返回:</b>
      *
      * <pre class="code">
-    {
-        "马":[{
-                "age": 55,
-                "name": "马腾",
-            },{
-                "age": 28,
-                "name": "马超",
-            },{
-                "age": 27,
-                "name": "马岱",
-            },{
-                "age": 25,
-                "name": "马休",
-            }
-        ],
-        "张": [{
-            "age": 28,
-            "name": "张飞",
-        }],
-        "刘": [{
-            "age": 32,
-            "name": "刘备",
-        }],
-        "关": [{
-                "age": 50,
-                "name": "关羽",
-            },{
-                "age": 32,
-                "name": "关平",
-            },{
-                "age": 31,
-                "name": "关索",
-            },{
-                "age": 18,
-                "name": "关兴",
-            }
-        ]
-    }
+     * {
+     *     "马":[{
+     *         "age": 55,
+     *         "name": "马腾",
+     *     },{
+     *         "age": 28,
+     *         "name": "马超",
+     *     },{
+     *         "age": 27,
+     *         "name": "马岱",
+     *     },{
+     *         "age": 25,
+     *         "name": "马休",
+     *     }
+     *     ],
+     *     "张": [{
+     *         "age": 28,
+     *         "name": "张飞",
+     *     }],
+     *     "刘": [{
+     *         "age": 32,
+     *         "name": "刘备",
+     *     }],
+     *     "关": [{
+     *         "age": 50,
+     *         "name": "关羽",
+     *     },{
+     *         "age": 32,
+     *         "name": "关平",
+     *     },{
+     *         "age": 31,
+     *         "name": "关索",
+     *     },{
+     *         "age": 18,
+     *         "name": "关兴",
+     *     }
+     *     ]
+     * }
      * </pre>
      *
      * </blockquote>
@@ -457,39 +457,39 @@ public class GroupUtil{
      * <b>返回:</b>
      *
      * <pre class="code">
-    {
-            "马":[{
-                    "age": 55,
-                    "name": "马腾",
-                },{
-                    "age": 28,
-                    "name": "马超",
-                },{
-                    "age": 27,
-                    "name": "马岱",
-                },{
-                    "age": 25,
-                    "name": "马休"
-                }],
-            "张": [{
-                "age": 28,
-                "name": "张飞"
-            }],
-            "刘": [{
-                "age": 32,
-                "name": "刘备"
-            }],
-            "关": [{
-                    "age": 50,
-                    "name": "关羽"
-                },{
-                    "age": 32,
-                    "name": "关平"
-                },{
-                    "age": 31,
-                    "name": "关索"
-                }]
-        }
+     * {
+     *     "马":[{
+     *         "age": 55,
+     *         "name": "马腾",
+     *     },{
+     *         "age": 28,
+     *         "name": "马超",
+     *     },{
+     *         "age": 27,
+     *         "name": "马岱",
+     *     },{
+     *         "age": 25,
+     *         "name": "马休"
+     *     }],
+     *     "张": [{
+     *         "age": 28,
+     *         "name": "张飞"
+     *     }],
+     *     "刘": [{
+     *         "age": 32,
+     *         "name": "刘备"
+     *     }],
+     *     "关": [{
+     *         "age": 50,
+     *         "name": "关羽"
+     *     },{
+     *         "age": 32,
+     *         "name": "关平"
+     *     },{
+     *         "age": 31,
+     *         "name": "关索"
+     *     }]
+     * }
      * </pre>
      *
      * </blockquote>
@@ -574,22 +574,22 @@ public class GroupUtil{
      * <b>返回:</b>
      *
      * <pre class="code">
-    {
-        "张飞": [ {
-            "age": 23,
-            "name": "张飞",
-        }],
-        "刘备": [
-            {
-                "age": 25,
-                "name": "刘备",
-            },
-            {
-                "age": 30,
-                "name": "刘备",
-            }
-        ]
-    }
+     * {
+     *     "张飞": [ {
+     *         "age": 23,
+     *         "name": "张飞",
+     *     }],
+     *     "刘备": [
+     *         {
+     *             "age": 25,
+     *             "name": "刘备",
+     *         },
+     *         {
+     *             "age": 30,
+     *             "name": "刘备",
+     *         }
+     *     ]
+     * }
      * </pre>
      *
      * </blockquote>
@@ -664,22 +664,22 @@ public class GroupUtil{
      * <b>返回:</b>
      *
      * <pre class="code">
-    {
-        "张飞": [ {
-            "age": 23,
-            "name": "张飞",
-        }],
-        "刘备": [
-            {
-                "age": 25,
-                "name": "刘备",
-            },
-            {
-                "age": 30,
-                "name": "刘备",
-            }
-        ]
-    }
+     * {
+     *     "张飞": [ {
+     *         "age": 23,
+     *         "name": "张飞",
+     *     }],
+     *     "刘备": [
+     *         {
+     *             "age": 25,
+     *             "name": "刘备",
+     *         },
+     *         {
+     *             "age": 30,
+     *             "name": "刘备",
+     *         }
+     *     ]
+     * }
      * </pre>
      *
      * </blockquote>
@@ -1069,15 +1069,15 @@ public class GroupUtil{
      *
      * <pre class="code">
      * {
-        "张飞":         {
-            "age": 23,
-            "name": "张飞"
-        },
-        "刘备":         {
-            "age": 25,
-            "name": "刘备"
-        }
-    }
+     *     "张飞":         {
+     *         "age": 23,
+     *         "name": "张飞"
+     *     },
+     *     "刘备":         {
+     *         "age": 25,
+     *         "name": "刘备"
+     *     }
+     * }
      * </pre>
      *
      * </blockquote>
@@ -1146,15 +1146,15 @@ public class GroupUtil{
      *
      * <pre class="code">
      * {
-        "张飞":         {
-            "age": 23,
-            "name": "张飞"
-        },
-        "刘备":         {
-            "age": 25,
-            "name": "刘备"
-        }
-    }
+     *     "张飞":         {
+     *         "age": 23,
+     *         "name": "张飞"
+     *     },
+     *     "刘备":         {
+     *         "age": 25,
+     *         "name": "刘备"
+     *     }
+     * }
      * </pre>
      *
      * </blockquote>

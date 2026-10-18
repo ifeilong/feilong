@@ -787,19 +787,19 @@ public final class ThreadUtil{
      * </p>
      * 
      * <pre>
-    29:21 DEBUG (ThreadUtilExample.java:161) [testExecuteTestUsePartitionRunnableBuilderParamsMap()]     {
-        "0": true,
-        "1": true,
-        "2": true,
-        "3": true,
-        "4": true,
-        "5": false,
-        "6": true,
-        "7": true,
-        "8": false,
-        "9": true
-    }
-    29:21 INFO  (ThreadUtilExample.java:164) [testExecuteTestUsePartitionRunnableBuilderParamsMap()] use time:2秒181毫秒
+     * 29:21 DEBUG (ThreadUtilExample.java:161) [testExecuteTestUsePartitionRunnableBuilderParamsMap()]     {
+     *     "0": true,
+     *     "1": true,
+     *     "2": true,
+     *     "3": true,
+     *     "4": true,
+     *     "5": false,
+     *     "6": true,
+     *     "7": true,
+     *     "8": false,
+     *     "9": true
+     * }
+     * 29:21 INFO  (ThreadUtilExample.java:164) [testExecuteTestUsePartitionRunnableBuilderParamsMap()] use time:2秒181毫秒
      * 
      * </pre>
      * 

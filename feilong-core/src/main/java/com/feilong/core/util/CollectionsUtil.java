@@ -2029,7 +2029,7 @@ public final class CollectionsUtil{
      * <pre class="code">
      * <span style="color:green">//数组,取userList 每个元素的 loves属性第2个元素的值</span>
      * CollectionsUtil.getPropertyValueList(userList, <b>"loves[1]"</b>)                   =   ["xiaoshuo1","xiaoshuo2"]
-    
+     *
      * <span style="color:green">//级联对象,取userList 每个元素的 userInfo属性的 age 属性的值</span>
      * CollectionsUtil.getPropertyValueList(userList, <b>"userInfo.age"</b>)               =   [28,null]
      *
@@ -2767,7 +2767,7 @@ public final class CollectionsUtil{
      * </p>
      * 
      * <pre class="code">
-    
+     *
      * Long soundId = singleBookQueryRequest.getSoundId();
      * List{@code <SoundVo>} soundVoList = soundVoListBuilderFactory
      *                 .querySoundVoByMaterial(libraryPo, materialId, forceSetPaidUrl, doNotCheckNumberLimit, pageIndex);
@@ -3197,13 +3197,13 @@ public final class CollectionsUtil{
      * <b>返回:</b>
      *
      * <pre class="code">
-       [{
-               "age": 24,
-               "name": "关羽"
-           },{
-               "age": 25,
-               "name": "刘备"
-       }]
+     * [{
+     *     "age": 24,
+     *     "name": "关羽"
+     * },{
+     *     "age": 25,
+     *     "name": "刘备"
+     * }]
      * </pre>
      *
      * </blockquote>
@@ -3266,13 +3266,13 @@ public final class CollectionsUtil{
      * <b>返回:</b>
      *
      * <pre class="code">
-       [{
-               "age": 24,
-               "name": "关羽"
-           },{
-               "age": 25,
-               "name": "刘备"
-       }]
+     * [{
+     *     "age": 24,
+     *     "name": "关羽"
+     * },{
+     *     "age": 25,
+     *     "name": "刘备"
+     * }]
      * </pre>
      * 
      * <b>如果你要查询值是null的写法:</b>
@@ -3369,13 +3369,13 @@ public final class CollectionsUtil{
      * <b>返回:</b>
      *
      * <pre class="code">
-       [{
-               "age": 24,
-               "name": "关羽"
-           },{
-               "age": 25,
-               "name": "刘备"
-       }]
+     * [{
+     *     "age": 24,
+     *     "name": "关羽"
+     * },{
+     *     "age": 25,
+     *     "name": "刘备"
+     * }]
      * </pre>
      * 
      * <b>如果你要查询值是null的写法:</b>
@@ -3472,13 +3472,13 @@ public final class CollectionsUtil{
      * <b>返回:</b>
      *
      * <pre class="code">
-    [{
-                "age": 23,
-                "name": "张飞"
-            },{
-                "age": 25,
-                "name": "刘备"
-     }]
+     * [{
+     *     "age": 23,
+     *     "name": "张飞"
+     * },{
+     *     "age": 25,
+     *     "name": "刘备"
+     * }]
      *
      * </pre>
      *
@@ -3964,10 +3964,10 @@ public final class CollectionsUtil{
      * <b>返回:</b>
      *
      * <pre class="code">
-       [{
-               "age": 24,
-               "name": "关羽"
-           }]
+     * [{
+     *     "age": 24,
+     *     "name": "关羽"
+     * }]
      * </pre>
      * 
      * <b>如果你要查询name不是null的写法:</b>
@@ -4057,10 +4057,10 @@ public final class CollectionsUtil{
      * <b>返回:</b>
      *
      * <pre class="code">
-       [{
-               "age": 23,
-               "name": "张飞"
-           }]
+     * [{
+     *     "age": 23,
+     *     "name": "张飞"
+     * }]
      * </pre>
      * 
      * <b>如果你要查询值是null的写法:</b>

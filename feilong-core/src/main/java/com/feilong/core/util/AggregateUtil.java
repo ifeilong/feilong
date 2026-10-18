@@ -102,10 +102,10 @@ public final class AggregateUtil{
      * </pre>
      * 
      * <pre class="code">
-    List{@code <UserWithStringAge>} list = toList(//
-                        new UserWithStringAge("4"),
-                        new UserWithStringAge(""),
-                        new UserWithStringAge("5"));
+     * List{@code <UserWithStringAge>} list = toList(//
+     *                     new UserWithStringAge("4"),
+     *                     new UserWithStringAge(""),
+     *                     new UserWithStringAge("5"));
      * AggregateUtil.avg(list, "ageString", 2)
      * </pre>
      * 
@@ -987,58 +987,58 @@ public final class AggregateUtil{
      * </p>
      * 
      * <pre class="code">
-    List{@code <User>} list = toList(//
-                        new User("张飞", 20),
-                        new User("关羽", 30),
-                        new User("刘备", 32),
-                        new User("刘备", 40),
-                        new User("赵云", 51),
-                        new User("赵云", 50));
-    
-        Transformer{@code <?, ?>} transformer = new Transformer{@code <Integer, String>}(){
-    
-            public String transform(Integer input){
-                if ({@code input >= 50}){
-                    return {@code ">=50"};
-                }
-                if ({@code input >= 30 && input < 50}){
-                    return {@code ">=30&&<50"};
-                }
-                if ({@code input >= 20 && input < 30}){
-                    return {@code ">=20&&<30"};
-                }               
-                throw new UnsupportedOperationException("value not support!");
-            }
-    
-        };
-    
-        //---------------------------------------------------------------
-        Map{@code <String, Transformer<Object, Object>>} propertyValueAndTransformerMap = toMap("age", (Transformer{@code <Object, Object>}) transformer);
-    
-        //---------------------------------------------------------------
-    
-        Map{@code <String, Map<Object, Integer>>} map = AggregateUtil
-                        .groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap);
-    
-        log.debug(JsonUtil.format(map));
+     * List{@code <User>} list = toList(//
+     *                     new User("张飞", 20),
+     *                     new User("关羽", 30),
+     *                     new User("刘备", 32),
+     *                     new User("刘备", 40),
+     *                     new User("赵云", 51),
+     *                     new User("赵云", 50));
+     * 
+     *     Transformer{@code <?, ?>} transformer = new Transformer{@code <Integer, String>}(){
+     * 
+     *         public String transform(Integer input){
+     *             if ({@code input >= 50}){
+     *                 return {@code ">=50"};
+     *             }
+     *             if ({@code input >= 30 && input < 50}){
+     *                 return {@code ">=30&&<50"};
+     *             }
+     *             if ({@code input >= 20 && input < 30}){
+     *                 return {@code ">=20&&<30"};
+     *             }               
+     *             throw new UnsupportedOperationException("value not support!");
+     *         }
+     * 
+     *     };
+     * 
+     *     //---------------------------------------------------------------
+     *     Map{@code <String, Transformer<Object, Object>>} propertyValueAndTransformerMap = toMap("age", (Transformer{@code <Object, Object>}) transformer);
+     * 
+     *     //---------------------------------------------------------------
+     * 
+     *     Map{@code <String, Map<Object, Integer>>} map = AggregateUtil
+     *                     .groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap);
+     * 
+     *     log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "name":         {
-            "张飞": 1,
-            "关羽": 1,
-            "刘备": 2,
-            "赵云": 2
-        },
-        "age":         {
-            {@code ">=20&&<30"}: 1,
-            {@code ">=30&&<50"}: 3,
-            {@code ">=50"}: 2
-        }
-    }
+     * {
+     *     "name":         {
+     *         "张飞": 1,
+     *         "关羽": 1,
+     *         "刘备": 2,
+     *         "赵云": 2
+     *     },
+     *     "age":         {
+     *         {@code ">=20&&<30"}: 1,
+     *         {@code ">=30&&<50"}: 3,
+     *         {@code ">=50"}: 2
+     *     }
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -1083,54 +1083,54 @@ public final class AggregateUtil{
      * </p>
      * 
      * <pre class="code">
-    List{@code <User>} list = toList(//
-                        new User("张飞", 20),
-                        new User("关羽", 30),
-                        new User("刘备", 32),
-                        new User("刘备", 40),
-                        new User("赵云", 51),
-                        new User("赵云", 50));
-    
-        Transformer{@code <?, ?>} transformer = new Transformer{@code <Integer, String>}(){
-    
-            public String transform(Integer input){
-                if ({@code input >= 50}){
-                    return {@code ">=50"};
-                }
-                if ({@code input >= 30 && input < 50}){
-                    return {@code ">=30&&<50"};
-                }
-                throw new UnsupportedOperationException("value not support!");
-            }
-    
-        };
-    
-        //---------------------------------------------------------------
-        Map{@code <String, Transformer<Object, Object>>} propertyValueAndTransformerMap = toMap("age", (Transformer{@code <Object, Object>}) transformer);
-    
-        Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
-    
-        //---------------------------------------------------------------
-    
-        Map{@code <String, Map<Object, Integer>>} map = AggregateUtil
-                        .groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap, comparatorPredicate);
-    
-        log.debug(JsonUtil.format(map));
+     * List{@code <User>} list = toList(//
+     *                     new User("张飞", 20),
+     *                     new User("关羽", 30),
+     *                     new User("刘备", 32),
+     *                     new User("刘备", 40),
+     *                     new User("赵云", 51),
+     *                     new User("赵云", 50));
+     * 
+     *     Transformer{@code <?, ?>} transformer = new Transformer{@code <Integer, String>}(){
+     * 
+     *         public String transform(Integer input){
+     *             if ({@code input >= 50}){
+     *                 return {@code ">=50"};
+     *             }
+     *             if ({@code input >= 30 && input < 50}){
+     *                 return {@code ">=30&&<50"};
+     *             }
+     *             throw new UnsupportedOperationException("value not support!");
+     *         }
+     * 
+     *     };
+     * 
+     *     //---------------------------------------------------------------
+     *     Map{@code <String, Transformer<Object, Object>>} propertyValueAndTransformerMap = toMap("age", (Transformer{@code <Object, Object>}) transformer);
+     * 
+     *     Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
+     * 
+     *     //---------------------------------------------------------------
+     * 
+     *     Map{@code <String, Map<Object, Integer>>} map = AggregateUtil
+     *                     .groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap, comparatorPredicate);
+     * 
+     *     log.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "name":         {
-            "刘备": 2,
-            "赵云": 2
-        },
-        "age":         {
-            {@code ">=30&&<50"}: 2,
-            {@code ">=50"}: 2
-        }
-    }
+     * {
+     *     "name":         {
+     *         "刘备": 2,
+     *         "赵云": 2
+     *     },
+     *     "age":         {
+     *         {@code ">=30&&<50"}: 2,
+     *         {@code ">=50"}: 2
+     *     }
+     * }
      * </pre>
      * 
      * </blockquote>

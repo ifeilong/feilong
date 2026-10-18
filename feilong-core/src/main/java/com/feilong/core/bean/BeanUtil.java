@@ -579,36 +579,36 @@ public final class BeanUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "subject": "hello world",
-        "mailServerHost": "smtp.exmail.qq.com",
-        "bccs":         [
-            "123456test2",
-            "163.com",
-            "123456test3",
-            "163.cn"
-        ],
-        "ccs":         [
-            "123456test",
-            "163.com",
-            "123456test1",
-            "163.cn"
-        ],
-        "password": "******",
-        "mailServerPort": "25",
-        "content": "",
-        "tos":         [
-            "123456",
-            "163.com",
-            "1234567",
-            "163.cn"
-        ],
-        "personal": "feilong store",
-        "isNeedReturnReceipt": true,
-        "fromAddress": "",
-        "userName": "feilong@feilong.cn",
-        "isDebug": true
-    }
+     * {
+     *     "subject": "hello world",
+     *     "mailServerHost": "smtp.exmail.qq.com",
+     *     "bccs":         [
+     *         "123456test2",
+     *         "163.com",
+     *         "123456test3",
+     *         "163.cn"
+     *     ],
+     *     "ccs":         [
+     *         "123456test",
+     *         "163.com",
+     *         "123456test1",
+     *         "163.cn"
+     *     ],
+     *     "password": "******",
+     *     "mailServerPort": "25",
+     *     "content": "",
+     *     "tos":         [
+     *         "123456",
+     *         "163.com",
+     *         "1234567",
+     *         "163.cn"
+     *     ],
+     *     "personal": "feilong store",
+     *     "isNeedReturnReceipt": true,
+     *     "fromAddress": "",
+     *     "userName": "feilong@feilong.cn",
+     *     "isDebug": true
+     * }
      * </pre>
      * 
      * <p>
@@ -638,30 +638,30 @@ public final class BeanUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "subject": "hello world",
-        "mailServerHost": "smtp.exmail.qq.com",
-        "bccs":         [
-            "123456test2@163.com",
-            "123456test3@163.cn"
-        ],
-        "ccs":         [
-            "123456test@163.com",
-            "123456test1@163.cn"
-        ],
-        "password": "******",
-        "mailServerPort": "25",
-        "content": "",
-        "tos":         [
-            "123456@163.com",
-            "1234567@163.cn"
-        ],
-        "personal": "feilong store",
-        "isNeedReturnReceipt": true,
-        "fromAddress": "",
-        "userName": "feilong@feilong.cn",
-        "isDebug": true
-    }
+     * {
+     *     "subject": "hello world",
+     *     "mailServerHost": "smtp.exmail.qq.com",
+     *     "bccs":         [
+     *         "123456test2@163.com",
+     *         "123456test3@163.cn"
+     *     ],
+     *     "ccs":         [
+     *         "123456test@163.com",
+     *         "123456test1@163.cn"
+     *     ],
+     *     "password": "******",
+     *     "mailServerPort": "25",
+     *     "content": "",
+     *     "tos":         [
+     *         "123456@163.com",
+     *         "1234567@163.cn"
+     *     ],
+     *     "personal": "feilong store",
+     *     "isNeedReturnReceipt": true,
+     *     "fromAddress": "",
+     *     "userName": "feilong@feilong.cn",
+     *     "isDebug": true
+     * }
      * </pre>
      * 
      * <p>
@@ -816,24 +816,24 @@ public final class BeanUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "maxConnection": 250,
-        "expireTime": 180,
-        "serverList":         [
-            "172.20.31.23",
-            "11211",
-            "172.20.31.22",
-            "11211"
-        ],
-        "weight": [2],
-        "nagle": false,
-        "initConnection": 10,
-        "aliveCheck": false,
-        "poolName": "sidsock2",
-        "maintSleep": 30,
-        "socketTo": 3000,
-        "minConnection": 5
-    }
+     * {
+     *     "maxConnection": 250,
+     *     "expireTime": 180,
+     *     "serverList":         [
+     *         "172.20.31.23",
+     *         "11211",
+     *         "172.20.31.22",
+     *         "11211"
+     *     ],
+     *     "weight": [2],
+     *     "nagle": false,
+     *     "initConnection": 10,
+     *     "aliveCheck": false,
+     *     "poolName": "sidsock2",
+     *     "maintSleep": 30,
+     *     "socketTo": 3000,
+     *     "minConnection": 5
+     * }
      * </pre>
      * 
      * <p>
@@ -862,22 +862,22 @@ public final class BeanUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "maxConnection": 250,
-        "expireTime": 180,
-        "serverList":         [
-            "172.20.31.23:11211",
-            "172.20.31.22:11211"
-        ],
-        "weight": [2],
-        "nagle": false,
-        "initConnection": 10,
-        "aliveCheck": false,
-        "poolName": "sidsock2",
-        "maintSleep": 30,
-        "socketTo": 3000,
-        "minConnection": 5
-    }
+     * {
+     *     "maxConnection": 250,
+     *     "expireTime": 180,
+     *     "serverList":         [
+     *         "172.20.31.23:11211",
+     *         "172.20.31.22:11211"
+     *     ],
+     *     "weight": [2],
+     *     "nagle": false,
+     *     "initConnection": 10,
+     *     "aliveCheck": false,
+     *     "poolName": "sidsock2",
+     *     "maintSleep": 30,
+     *     "socketTo": 3000,
+     *     "minConnection": 5
+     * }
      * </pre>
      * 
      * </blockquote>

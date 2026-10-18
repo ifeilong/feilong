@@ -331,12 +331,12 @@ public final class ParamUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-     {"a": [
-                 "1",
-                 "5"
-             ],
-             "b": ["2"]
-      }
+     * {"a": [
+     *         "1",
+     *         "5"
+     *     ],
+     *     "b": ["2"]
+     * }
      * </pre>
      * 
      * <hr>
@@ -348,12 +348,12 @@ public final class ParamUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-     {"a": [
-             "",
-             ""
-         ],
-      "b": ["2"]
-     }
+     * {"a": [
+     *         "",
+     *         ""
+     *     ],
+     *     "b": ["2"]
+     * }
      * </pre>
      * 
      * </blockquote>

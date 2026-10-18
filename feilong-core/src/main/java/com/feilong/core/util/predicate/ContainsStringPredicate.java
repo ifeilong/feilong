@@ -28,34 +28,34 @@ import com.feilong.lib.lang3.StringUtils;
  * </p>
  * 
  * <pre class="code">
-{@code          
-<bean class="com.feilong.context.converter.IfStringToBeanConverter">
-
-    <property name="predicate">
-        <bean class="com.feilong.core.util.predicate.ContainsStringPredicate" p:searchCharSequence=
-"TRADE_NOT_EXIST" />
-    </property>
-
-    <property name="trueStringToBeanConverter">
-        <bean class="com.feilong.netpay.alipay.query.AlipayTradeNotExistStringToBeanConverter" />
-    </property>
-
-    <property name="falseStringToBeanConverter">
-        <bean class="com.feilong.context.converter.XMLMapBuilderStringToBeanConverter">
-            <property name="beanClass" value="com.feilong.netpay.alipay.query.AlipaySingleQueryResultCommand" />
-
-            <property name="nameAndValueMapBuilder">
-                <bean class="com.feilong.context.converter.builder.XmlNodeNameAndValueMapBuilder" p:xpathExpression=
-"/alipay/response/trade/*" />
-            </property>
-
-            <property name="beanBuilder">
-                <bean class="com.feilong.context.converter.builder.AliasBeanBuilder" />
-            </property>
-        </bean>
-    </property>
-</bean>
-}
+ * {@code
+ * <bean class="com.feilong.context.converter.IfStringToBeanConverter">
+ * 
+ *     <property name="predicate">
+ *         <bean class="com.feilong.core.util.predicate.ContainsStringPredicate" p:searchCharSequence=
+ * "TRADE_NOT_EXIST" />
+ *     </property>
+ * 
+ *     <property name="trueStringToBeanConverter">
+ *         <bean class="com.feilong.netpay.alipay.query.AlipayTradeNotExistStringToBeanConverter" />
+ *     </property>
+ * 
+ *     <property name="falseStringToBeanConverter">
+ *         <bean class="com.feilong.context.converter.XMLMapBuilderStringToBeanConverter">
+ *             <property name="beanClass" value="com.feilong.netpay.alipay.query.AlipaySingleQueryResultCommand" />
+ * 
+ *             <property name="nameAndValueMapBuilder">
+ *                 <bean class="com.feilong.context.converter.builder.XmlNodeNameAndValueMapBuilder" p:xpathExpression=
+ * "/alipay/response/trade/*" />
+ *             </property>
+ * 
+ *             <property name="beanBuilder">
+ *                 <bean class="com.feilong.context.converter.builder.AliasBeanBuilder" />
+ *             </property>
+ *         </bean>
+ *     </property>
+ * </bean>
+ * }
  * </pre>
  * 
  * </blockquote>

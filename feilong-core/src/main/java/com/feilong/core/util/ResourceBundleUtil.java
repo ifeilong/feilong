@@ -653,13 +653,13 @@ public final class ResourceBundleUtil{
      * 
      * public class DangaMemCachedNoAliasConfig{
      * 
-    private String[] serverList;
-    
-    private Integer  initConnection;
-    
-    private Integer  minConnection;
-    
-    private Boolean  nagle;
+     *     private String[] serverList;
+     * 
+     *     private Integer  initConnection;
+     * 
+     *     private Integer  minConnection;
+     * 
+     *     private Boolean  nagle;
      * 
      *     <span style="color:green">//setter getter 略</span>
      * }
@@ -677,12 +677,12 @@ public final class ResourceBundleUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-      [
-    maxConnection=250
-    minConnection=5
-    nagle=false
-    serverList={172.20.3-1.23,11211,172.20.31.22,11211}
-    ]
+     * [
+     *     maxConnection=250
+     *     minConnection=5
+     *     nagle=false
+     *     serverList={172.20.3-1.23,11211,172.20.31.22,11211}
+     * ]
      * </pre>
      * 
      * <p>
@@ -783,13 +783,13 @@ public final class ResourceBundleUtil{
      * 
      * public class DangaMemCachedNoAliasConfig{
      * 
-    private String[] serverList;
-    
-    private Integer  initConnection;
-    
-    private Integer  minConnection;
-    
-    private Boolean  nagle;
+     *     private String[] serverList;
+     * 
+     *     private Integer  initConnection;
+     * 
+     *     private Integer  minConnection;
+     * 
+     *     private Boolean  nagle;
      * 
      *     <span style="color:green">//setter getter 略</span>
      * }
@@ -807,12 +807,12 @@ public final class ResourceBundleUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-      [
-    maxConnection=250
-    minConnection=5
-    nagle=false
-    serverList={172.20.3-1.23,11211,172.20.31.22,11211}
-    ]
+     * [
+     *     maxConnection=250
+     *     minConnection=5
+     *     nagle=false
+     *     serverList={172.20.3-1.23,11211,172.20.31.22,11211}
+     * ]
      * </pre>
      * 
      * <p>

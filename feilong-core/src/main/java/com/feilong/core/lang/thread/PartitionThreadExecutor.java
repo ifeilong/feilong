@@ -50,26 +50,26 @@ import java.util.Map;
  * <blockquote>
  * 
  * <pre>
-{@code
- <!-- 配置线程池 -->
-    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-         <!-- 线程池维护线程的最少数量 -->
-        <property name="corePoolSize" value="10" />
-         <!-- 线程池维护线程所允许的空闲时间 -->
-        <property name="keepAliveSeconds" value="30000" />
-         <!-- 线程池维护线程的最大数量 -->
-        <property name="maxPoolSize" value="1000" />
-         <!-- 线程池所使用的缓冲队列 -->
-        <property name="queueCapacity" value="200" />
-    </bean>
-    
-    <!-- partitionThreadExecutor -->
-
-    <bean id="partitionThreadExecutor" class="com.feilong.spring.scheduling.concurrent.AsyncTaskExecutorPartitionThreadExecutor">
-        <property name="asyncTaskExecutor" ref="taskExecutor"></property>
-    </bean>
-    
-    }
+ * {@code
+ *     <!-- 配置线程池 -->
+ *     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+ *         <!-- 线程池维护线程的最少数量 -->
+ *         <property name="corePoolSize" value="10" />
+ *         <!-- 线程池维护线程所允许的空闲时间 -->
+ *         <property name="keepAliveSeconds" value="30000" />
+ *         <!-- 线程池维护线程的最大数量 -->
+ *         <property name="maxPoolSize" value="1000" />
+ *         <!-- 线程池所使用的缓冲队列 -->
+ *         <property name="queueCapacity" value="200" />
+ *     </bean>
+ * 
+ *     <!-- partitionThreadExecutor -->
+ * 
+ *     <bean id="partitionThreadExecutor" class="com.feilong.spring.scheduling.concurrent.AsyncTaskExecutorPartitionThreadExecutor">
+ *         <property name="asyncTaskExecutor" ref="taskExecutor"></property>
+ *     </bean>
+ * 
+ *     }
  * </pre>
  * 
  * 然后 java 代码调用

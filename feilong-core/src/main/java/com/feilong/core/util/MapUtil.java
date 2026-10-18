@@ -537,7 +537,7 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    MapUtil.get(null, "name")) = null
+     * MapUtil.get(null, "name")) = null
      * 
      * </pre>
      * 
@@ -1376,13 +1376,13 @@ public final class MapUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-            "name":         [
-                "张飞",
-                "关羽"
-            ],
-            "age": ["30"]
-        }
+     * {
+     *     "name":         [
+     *         "张飞",
+     *         "关羽"
+     *     ],
+     *     "age": ["30"]
+     * }
      * 
      * </pre>
      * 
@@ -1590,12 +1590,12 @@ public final class MapUtil{
      * <pre class="code">
      * Map{@code <String, Integer>} map = new LinkedHashMap{@code <>}();
      * 
-        map.put("119072412", "解读");
-        map.put("76841752", "泛化");
-        map.put("87838803", "不相关");
-        map.put("119069161", "解读");
-        map.put("91920781", "不相关");
-        map.put("92440989", "泛化");
+     *     map.put("119072412", "解读");
+     *     map.put("76841752", "泛化");
+     *     map.put("87838803", "不相关");
+     *     map.put("119069161", "解读");
+     *     map.put("91920781", "不相关");
+     *     map.put("92440989", "泛化");
      * 
      * log.debug(JsonUtil.format(MapUtil.getSubMapExcludeValues(map, "不相关", "泛化")));
      * </pre>
@@ -2118,23 +2118,23 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * Map{@code <Long, User>} map = new LinkedHashMap{@code <>}();
-        map.put(1L, new User(100L));
-        map.put(2L, new User(200L));
-        map.put(5L, new User(500L));
-        map.put(4L, new User(400L));
-    
-        Map<Long, Long> extractSubMap = MapUtil.extractSubMap(map, User::getId);
+     *     map.put(1L, new User(100L));
+     *     map.put(2L, new User(200L));
+     *     map.put(5L, new User(500L));
+     *     map.put(4L, new User(400L));
+     * 
+     *     Map<Long, Long> extractSubMap = MapUtil.extractSubMap(map, User::getId);
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "1": 100,
-        "2": 200,
-        "5": 500,
-        "4": 400
-    }
+     * {
+     *     "1": 100,
+     *     "2": 200,
+     *     "5": 500,
+     *     "4": 400
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -2189,12 +2189,12 @@ public final class MapUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "1": 100,
-        "2": 200,
-        "5": 500,
-        "4": 400
-    }
+     * {
+     *     "1": 100,
+     *     "2": 200,
+     *     "5": 500,
+     *     "4": 400
+     * }
      * </pre>
      * 
      * </blockquote>
