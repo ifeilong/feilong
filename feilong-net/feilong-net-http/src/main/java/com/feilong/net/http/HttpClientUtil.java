@@ -32,6 +32,62 @@ import lombok.NoArgsConstructor;
 
 /**
  * 基于 HttpClient4 的工具类.
+ * 
+ * <h3>关于 httpclient 的 debug 日志:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * feilong 使用的 httpclient4 被 shade 到 <code>com.feilong.lib</code> 包下, 类名和 logger 名都带 <code>com.feilong.lib.</code> 前缀,
+ * 所以配置 <code>org.apache.http</code> <b>不会生效</b>; 打开下表中 logger 的 DEBUG 级别, 可以看到比默认 INFO 更详细的信息.
+ * </p>
+ * 
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">logger</th>
+ * <th align="left">内容</th>
+ * </tr>
+ * <tr>
+ * <td><code>com.feilong.lib.org.apache.http.impl.conn.Wire</code></td>
+ * <td>原始报文: 请求行/请求头/请求体/响应头/响应体的逐字节 dump</td>
+ * </tr>
+ * <tr>
+ * <td><code>com.feilong.lib.org.apache.http.impl.conn.LoggingManagedHttpClientConnection</code></td>
+ * <td>请求行/响应行, 响应头, 连接关闭</td>
+ * </tr>
+ * <tr>
+ * <td><code>com.feilong.lib.org.apache.http.impl.execchain</code></td>
+ * <td>执行链明细: 重试, 重定向, 认证</td>
+ * </tr>
+ * <tr>
+ * <td><code>com.feilong.lib.org.apache.http.impl.conn.PoolingHttpClientConnectionManager</code></td>
+ * <td>连接池的租借/归还, 连接泄漏检测</td>
+ * </tr>
+ * <tr>
+ * <td><code>com.feilong.lib.org.apache.http.conn.ssl</code></td>
+ * <td>TLS 握手, 主机名校验</td>
+ * </tr>
+ * </table>
+ * 
+ * <p>
+ * logback 里可以这么配置(只想看报文, 只开第一条即可):
+ * </p>
+ * 
+ * <pre class="code">
+ * &lt;logger name="com.feilong.lib.org.apache.http.impl.conn.Wire" level="DEBUG"/&gt;
+ * &lt;logger name="com.feilong.lib.org.apache.http" level="DEBUG"/&gt;
+ * </pre>
+ * 
+ * <p>
+ * <b>注意:</b> <code>Wire</code> 级别会把 <code>Authorization</code>, <code>Cookie</code>, 请求体等明文写进日志, 只在排查问题时临时开启.
+ * </p>
+ * </blockquote>
+ * 
+ * <h3>关于默认的日志:</h3>
+ * 
+ * <blockquote>
+ * 默认 INFO 级别已经会打印请求和响应摘要(见 {@link com.feilong.net.http.callback.AbstractResultCallback#buildHttpResponse}),
+ * 包括 uri, method, paramMap, headerMap, requestBody, statusCode, 响应头, 响应体(超过 1000 字截断) 和耗时.
+ * </blockquote>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.org.apache.http.client.methods.HttpUriRequest

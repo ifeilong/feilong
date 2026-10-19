@@ -32,6 +32,7 @@
 - [8. Installation](#8-installation)
 - [9. Build from source](#9-build-from-source)
 - [10. About the documentation language](#10-about-the-documentation-language)
+- [11. Logging & debugging (http)](#11-logging--debugging-http)
 - [License / feedback / community](#license--feedback--community)
 
 ## 1. Why feilong
@@ -354,6 +355,35 @@ Note: some modules contain tests that talk to external services (mail, FTP/SFTP,
 ## 10. About the documentation language
 
 Javadoc in this project is written in **Chinese**, with examples and explicit exception documentation on every method — that is the intended primary audience. This README is the English entry point; if you would like to contribute English translations or an English quick-start, pull requests are welcome.
+
+## 11. Logging & debugging (http)
+
+The httpclient4 bundled with feilong is forked and shaded, so both the package names and the **logger names** carry the `com.feilong.lib.` prefix — configuring `org.apache.http` has no effect.
+
+At the default INFO level every request already logs a summary (uri, method, paramMap, headerMap, requestBody, statusCode, response headers, the first 1000 chars of the response body, elapsed time) — see `AbstractResultCallback`. For more detail, set these loggers to DEBUG:
+
+logger | What you get
+:----  | :---------
+`com.feilong.lib.org.apache.http.impl.conn.Wire` | Raw wire dump: request line/headers/body and response headers/body, byte by byte
+`com.feilong.lib.org.apache.http.impl.conn.LoggingManagedHttpClientConnection` | Request/response status line, response headers, connection shutdown
+`com.feilong.lib.org.apache.http.impl.execchain` | Execution chain: retries, redirects, authentication
+`com.feilong.lib.org.apache.http.impl.conn.PoolingHttpClientConnectionManager` | Connection pool lease/release, connection leak detection
+`com.feilong.lib.org.apache.http.conn.ssl` | TLS handshake, hostname verification
+
+logback (keep only the first line if you only need the wire dump):
+
+```xml
+<logger name="com.feilong.lib.org.apache.http.impl.conn.Wire" level="DEBUG"/>
+<logger name="com.feilong.lib.org.apache.http" level="DEBUG"/>
+```
+
+log4j2:
+
+```xml
+<Logger name="com.feilong.lib.org.apache.http" level="debug"/>
+```
+
+> ⚠️ The `Wire` level writes `Authorization`, `Cookie` and request bodies to the log in plain text. Enable it only while troubleshooting, never permanently in production.
 
 ## License / feedback / community
 

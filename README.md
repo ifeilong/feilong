@@ -34,6 +34,7 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 - [八、Maven / Gradle / 非 Maven 配置](#八maven--gradle--非-maven-配置)
 - [九、自行 install](#九自行-install)
 - [十、子模块介绍](#十子模块介绍)
+- [十一、日志与调试（排查 http 问题）](#十一日志与调试排查-http-问题)
 - [常用组件/功能](#memo-常用组件功能)
 - [Star History](#star-history)
 - [说明](#memo-说明) · [常见问题](#memo-常见问题) · [提bug反馈或建议](#panda_face-提bug反馈或建议) · [即时交流](#cyclone-feilong-即时交流)
@@ -397,6 +398,35 @@ module | 介绍
 feilong | **发布到中央仓库的聚合包**（shade 成一体化 jar，包含上述所有模块）
 feilong-with-optional | **未发布到中央仓库**：仅列出"使用全部功能"所需的完整依赖，可作依赖清单参考
 feilong-lib | 从第三方库 fork 而来的源码 (commons-lang3, commons-io, commons-compress 等,请不要直接调用)
+
+## 十一、日志与调试（排查 http 问题）
+
+feilong 里的 httpclient4 是 fork 后 shade 过的，包名和 **logger 名**都带 `com.feilong.lib.` 前缀，所以按常规配 `org.apache.http` 不会生效。
+
+默认 INFO 级别就会打印每次请求的摘要（uri、method、paramMap、headerMap、requestBody、statusCode、响应头、响应体前 1000 字、耗时），见 `AbstractResultCallback`。需要更细的日志时，打开下面这些 logger 的 DEBUG：
+
+logger | 能看到什么
+:----  | :---------
+`com.feilong.lib.org.apache.http.impl.conn.Wire` | 原始报文：请求行/请求头/请求体/响应头/响应体的逐字节 dump
+`com.feilong.lib.org.apache.http.impl.conn.LoggingManagedHttpClientConnection` | 请求行/响应行、响应头、连接关闭
+`com.feilong.lib.org.apache.http.impl.execchain` | 执行链：重试、重定向、认证
+`com.feilong.lib.org.apache.http.impl.conn.PoolingHttpClientConnectionManager` | 连接池租借/归还、连接泄漏检测
+`com.feilong.lib.org.apache.http.conn.ssl` | TLS 握手、主机名校验
+
+logback（只想看报文就只开第一条）：
+
+```xml
+<logger name="com.feilong.lib.org.apache.http.impl.conn.Wire" level="DEBUG"/>
+<logger name="com.feilong.lib.org.apache.http" level="DEBUG"/>
+```
+
+log4j2：
+
+```xml
+<Logger name="com.feilong.lib.org.apache.http" level="debug"/>
+```
+
+> ⚠️ `Wire` 级别会把 `Authorization`、`Cookie`、请求体等明文写进日志，只在排查问题时临时开启，不要长期留在生产日志里。
 
 ## Star History
 
