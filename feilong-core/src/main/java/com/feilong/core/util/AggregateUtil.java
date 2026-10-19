@@ -1218,7 +1218,7 @@ public final class AggregateUtil{
             //取map,如果没有构造一个
             Map<Object, Integer> propertyNameGroupCountMap = defaultIfNull(
                             resultMap.get(propertyName),
-                            new LinkedHashMap<Object, Integer>());
+                            LinkedHashMap::new);
 
             Object value = convertValue(bean, propertyName, propertyNameValueConverterMap);
             MapUtil.putSumValue(propertyNameGroupCountMap, value, 1);

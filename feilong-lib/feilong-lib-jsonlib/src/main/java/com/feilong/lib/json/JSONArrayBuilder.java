@@ -54,7 +54,7 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     public static JSONArray build(Object object,JsonConfig jsonConfig){
-        JsonConfig useJsonConfig = defaultIfNull(jsonConfig, new JsonConfig());
+        JsonConfig useJsonConfig = defaultIfNull(jsonConfig, JsonConfig::new);
 
         if (object instanceof String){
             JSONTokener jsonTokener = new JSONTokener((String) object);

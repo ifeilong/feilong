@@ -1715,7 +1715,7 @@ public final class ConvertUtil{
         }
 
         //---------------------------------------------------------------
-        ToStringConfig useToStringConfig = defaultIfNull(toStringConfig, new ToStringConfig());
+        ToStringConfig useToStringConfig = defaultIfNull(toStringConfig, ToStringConfig::new);
         String connector = useToStringConfig.getConnector();
         boolean isJoinNullOrEmpty = useToStringConfig.getIsJoinNullOrEmpty();
         String prefix = useToStringConfig.getPrefix();

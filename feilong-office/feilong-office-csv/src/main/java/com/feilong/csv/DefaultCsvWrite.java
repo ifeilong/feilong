@@ -222,7 +222,7 @@ public class DefaultCsvWrite implements CsvWrite{
         //---------------------------------------------------------------
         CsvConfig useCsvConfig = defaultIfNull(csvConfig, DEFAULT_CSV_CONFIG);
 
-        List<Object[]> allLines = defaultIfNull(dataList, new ArrayList<Object[]>());
+        List<Object[]> allLines = defaultIfNull(dataList, ArrayList::new);
         if (isNotNullOrEmpty(columnTitles) && useCsvConfig.getIsPrintHeaderLine()){
             allLines.add(0, columnTitles);
         }

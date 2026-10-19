@@ -1439,7 +1439,7 @@ public final class MapUtil{
     public static <K, V> Map<K, List<V>> putMultiValue(Map<K, List<V>> map,K key,V value){
         Validate.notNull(map, "map can't be null!");
 
-        List<V> list = defaultIfNull(map.get(key), new ArrayList<V>());
+        List<V> list = defaultIfNull(map.get(key), ArrayList::new);
         list.add(value);
 
         map.put(key, list);

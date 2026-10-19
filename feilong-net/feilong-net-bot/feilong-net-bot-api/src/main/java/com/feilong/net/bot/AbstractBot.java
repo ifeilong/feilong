@@ -72,7 +72,7 @@ public abstract class AbstractBot implements Bot{
     @Override
     public boolean sendMessage(String content,MessageParams inputMessageParams){
         Validate.notNull(content, "content can't be null!");
-        MessageParams useMessageParams = defaultIfNull(inputMessageParams, new MessageParams());
+        MessageParams useMessageParams = defaultIfNull(inputMessageParams, MessageParams::new);
 
         String logPrefix = formatPattern(
                         "[{}] content:[{}],useMessageParams:[{}]",
