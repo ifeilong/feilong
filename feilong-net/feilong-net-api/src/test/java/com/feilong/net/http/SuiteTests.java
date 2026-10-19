@@ -21,7 +21,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                HttpRequestTest.class
+                HttpRequestTest.class, //
+                HttpRequestBuilderTest.class
         //                
 })
 public class SuiteTests{

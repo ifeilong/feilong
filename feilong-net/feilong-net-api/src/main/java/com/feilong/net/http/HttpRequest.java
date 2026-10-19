@@ -27,9 +27,25 @@ import com.feilong.net.UriProcessor;
 
 /**
  * http 请求信息.
+ * 
+ * <h3>示例:</h3>
+ * 
+ * <blockquote>
+ * 
+ * <pre class="code">
+ * 
+ * HttpRequest httpRequest = HttpRequest.builder()
+ * .uri("http://www.feilong.com")
+ * .httpMethodType(HttpMethodType.GET)
+ * .build();
+ * 
+ * </pre>
+ * 
+ * </blockquote>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.apache.http.HttpRequest"
+ * @see #builder()
  * @since 1.2.0
  */
 public class HttpRequest{
@@ -171,6 +187,240 @@ public class HttpRequest{
         this.uri = uri;
         this.paramMap = paramMap;
         this.httpMethodType = HttpMethodType.getByMethodValueIgnoreCase(httpMethodType);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 创建 {@link HttpRequest} 的 {@link Builder}, 支持链式构造 {@link HttpRequest}.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * HttpRequest httpRequest = HttpRequest.builder()
+     * .uri("http://www.feilong.com")
+     * .httpMethodType(HttpMethodType.GET)
+     * .build();
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @return the builder
+     * @see Builder
+     * @since 4.5.6
+     */
+    public static Builder builder(){
+        return new Builder();
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * {@link HttpRequest} 的构造器, 支持链式调用.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * HttpRequest httpRequest = HttpRequest.builder()
+     * .uri("http://www.feilong.com")
+     * .paramMap(toMap("name", "feilong"))
+     * .trimUri(false)
+     * .build();
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>没有设置的字段使用 builder 的默认值, 和 {@code new HttpRequest()} 一致: {@code httpMethodType} 是 {@link HttpMethodType#GET},
+     * {@code isTrimUri} 是 {@code true}, {@code logTraceContext} 是 empty</li>
+     * <li>{@link #build()} 每次都会创建新的 {@link HttpRequest} 对象, 而不是返回 builder 自身</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+     * @since 4.5.6
+     */
+    public static class Builder{
+
+        /** 请求的uri地址. */
+        private String               uri;
+
+        /** 请求method 类型,默认 {@link HttpMethodType#GET}. */
+        private HttpMethodType       httpMethodType  = GET;
+
+        //---------------------------------------------------------------
+
+        /** http 请求 key-value 参数map. */
+        private Map<String, String>  paramMap;
+
+        /** 请求头信息. */
+        private Map<String, String>  headerMap;
+
+        //---------------------------------------------------------------
+
+        /** 请求正文,比如 webservice 可以传递 xml/json数据体. */
+        private String               requestBody;
+
+        /** 二进制数据:请求体可以包含二进制数据，如文件、图像、音频等。 */
+        private RequestByteArrayBody requestByteArrayBody;
+
+        //---------------------------------------------------------------
+
+        /** 是否uri trim,默认 {@code true}. */
+        private boolean              isTrimUri       = true;
+
+        /** 日志追踪上下文,默认 empty. */
+        private String               logTraceContext = "";
+
+        //---------------------------------------------------------------
+
+        /**
+         * 私有构造器, 请通过 {@link HttpRequest#builder()} 创建.
+         */
+        private Builder(){
+            super();
+        }
+
+        /**
+         * 设置 请求的uri地址.
+         * 
+         * @param uri
+         *            the new 请求的uri地址
+         * @return the builder
+         * @since 4.5.6
+         */
+        public Builder uri(String uri){
+            this.uri = uri;
+            return this;
+        }
+
+        /**
+         * 设置 请求method 类型,默认 {@link HttpMethodType#GET}.
+         * 
+         * @param httpMethodType
+         *            the httpMethodType to set
+         * @return the builder
+         * @since 4.5.6
+         */
+        public Builder httpMethodType(HttpMethodType httpMethodType){
+            this.httpMethodType = httpMethodType;
+            return this;
+        }
+
+        /**
+         * 设置 http 请求 key-value 参数map.
+         * 
+         * @param paramMap
+         *            http 请求 key-value 参数map
+         * @return the builder
+         * @since 4.5.6
+         */
+        public Builder paramMap(Map<String, String> paramMap){
+            this.paramMap = paramMap;
+            return this;
+        }
+
+        /**
+         * 设置 请求头 信息.
+         * 
+         * @param headerMap
+         *            the headerMap to set
+         * @return the builder
+         * @since 4.5.6
+         */
+        public Builder headerMap(Map<String, String> headerMap){
+            this.headerMap = headerMap;
+            return this;
+        }
+
+        /**
+         * 设置 请求正文,比如 webservice 可以传递 xml/json数据体.
+         * 
+         * @param requestBody
+         *            the requestBody to set
+         * @return the builder
+         * @since 4.5.6
+         */
+        public Builder requestBody(String requestBody){
+            this.requestBody = requestBody;
+            return this;
+        }
+
+        /**
+         * 设置 二进制数据:请求体可以包含二进制数据，如文件、图像、音频等。
+         * 
+         * @param requestByteArrayBody
+         *            the requestByteArrayBody to set
+         * @return the builder
+         * @since 4.5.6
+         */
+        public Builder requestByteArrayBody(RequestByteArrayBody requestByteArrayBody){
+            this.requestByteArrayBody = requestByteArrayBody;
+            return this;
+        }
+
+        /**
+         * 设置 是否uri trim,默认 {@code true}.
+         * 
+         * @param isTrimUri
+         *            the isTrimUri to set
+         * @return the builder
+         * @since 4.5.6
+         */
+        public Builder trimUri(boolean isTrimUri){
+            this.isTrimUri = isTrimUri;
+            return this;
+        }
+
+        /**
+         * 设置 日志追踪上下文,默认 empty.
+         * 
+         * @param logTraceContext
+         *            the logTraceContext to set
+         * @return the builder
+         * @since 4.5.6
+         */
+        public Builder logTraceContext(String logTraceContext){
+            this.logTraceContext = logTraceContext;
+            return this;
+        }
+
+        /**
+         * 创建 {@link HttpRequest}.
+         * 
+         * <h3>说明:</h3>
+         * <blockquote>
+         * <ol>
+         * <li>每次调用都会创建新的 {@link HttpRequest} 对象</li>
+         * <li>没有设置的字段使用 builder 的默认值, 和 {@code new HttpRequest()} 一致</li>
+         * </ol>
+         * </blockquote>
+         * 
+         * @return the http request
+         * @since 4.5.6
+         */
+        public HttpRequest build(){
+            HttpRequest httpRequest = new HttpRequest();
+            httpRequest.setUri(uri);
+            httpRequest.setHttpMethodType(httpMethodType);
+            httpRequest.setParamMap(paramMap);
+            httpRequest.setHeaderMap(headerMap);
+            httpRequest.setRequestBody(requestBody);
+            httpRequest.setRequestByteArrayBody(requestByteArrayBody);
+            httpRequest.setIsTrimUri(isTrimUri);
+            httpRequest.setLogTraceContext(logTraceContext);
+            return httpRequest;
+        }
     }
 
     //---------------------------------------------------------------
