@@ -44,13 +44,21 @@ public class GetLastDateOfThisWeekTest{
     public void testGetLastDateOfThisWeek(){
         //周一, 往后推 5 天到周六
         assertEquals(
-                        toDate("2016-08-27 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
-                        getLastDateOfThisWeek(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
+                     toDate("2016-08-27 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                     getLastDateOfThisWeek(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
 
         //跨年
         assertEquals(
-                        toDate("2015-01-03 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
-                        getLastDateOfThisWeek(toDate("2014-12-31 05:00:00", COMMON_DATE_AND_TIME)));
+                     toDate("2015-01-03 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                     getLastDateOfThisWeek(toDate("2014-12-31 05:00:00", COMMON_DATE_AND_TIME)));
+    }
+
+    @Test
+    public void testGetLastDateOfThisWeek1(){
+        assertEquals(
+                     toDate("2026-10-24 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                     getLastDateOfThisWeek(toDate("2026-10-19 19:08:37", COMMON_DATE_AND_TIME)));
+
     }
 
     /**
@@ -59,8 +67,8 @@ public class GetLastDateOfThisWeekTest{
     @Test
     public void testGetLastDateOfThisWeekWhenInputIsSaturday(){
         assertEquals(
-                        toDate("2016-08-27 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
-                        getLastDateOfThisWeek(toDate("2016-08-27 00:00:00", COMMON_DATE_AND_TIME)));
+                     toDate("2016-08-27 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                     getLastDateOfThisWeek(toDate("2016-08-27 00:00:00", COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -69,8 +77,8 @@ public class GetLastDateOfThisWeekTest{
     @Test
     public void testGetLastDateOfThisWeekWhenInputIsSunday(){
         assertEquals(
-                        toDate("2016-08-27 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
-                        getLastDateOfThisWeek(toDate("2016-08-21 12:00:00", COMMON_DATE_AND_TIME)));
+                     toDate("2016-08-27 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                     getLastDateOfThisWeek(toDate("2016-08-21 12:00:00", COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -79,8 +87,8 @@ public class GetLastDateOfThisWeekTest{
     @Test
     public void testGetLastDateOfThisWeekCrossMonth(){
         assertEquals(
-                        toDate("2016-09-03 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
-                        getLastDateOfThisWeek(toDate("2016-09-01 08:30:00", COMMON_DATE_AND_TIME)));
+                     toDate("2016-09-03 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                     getLastDateOfThisWeek(toDate("2016-09-01 08:30:00", COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -89,8 +97,8 @@ public class GetLastDateOfThisWeekTest{
     @Test
     public void testGetLastDateOfThisWeekResetTime(){
         assertEquals(
-                        toDate("2016-08-27 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
-                        getLastDateOfThisWeek(toDate("2016-08-25 00:00:00", COMMON_DATE_AND_TIME)));
+                     toDate("2016-08-27 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                     getLastDateOfThisWeek(toDate("2016-08-25 00:00:00", COMMON_DATE_AND_TIME)));
     }
 
     //---------------------------------------------------------------
@@ -110,8 +118,8 @@ public class GetLastDateOfThisWeekTest{
             Locale.setDefault(Locale.GERMANY);
 
             assertEquals(
-                            toDate("2016-08-27 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
-                            getLastDateOfThisWeek(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
+                         toDate("2016-08-27 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                         getLastDateOfThisWeek(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
         }finally{
             Locale.setDefault(defaultLocale);
         }

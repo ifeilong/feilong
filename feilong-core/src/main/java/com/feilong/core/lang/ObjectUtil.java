@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
@@ -297,6 +298,74 @@ public final class ObjectUtil{
         return object != null ? object : defaultValue;
     }
 
+    /**
+     * 如果 <code>object</code> 是null,返回 <code>supplier</code> 提供的值;否则原样返回 <code>object</code>.
+     *
+     * <p>
+     * 和 {@link #defaultIfNull(Object, Object)} 的区别是: 后者需要显式传入一个<b>已经创建好</b>的默认值,<br>
+     * 当 <code>object</code> 不为null的时候, 这个默认值就白创建了(如果创建有开销或者副作用的话);<br>
+     * 而 <code>supplier</code> 只有在 <code>object</code> 是null的时候, 才会被调用.
+     * </p>
+     *
+     * <h3>对下面的代码重构:</h3>
+     *
+     * <blockquote>
+     *
+     * <pre class="code">
+     * <span style="color:green">//不管 object 是不是null, 都会执行 new PodcastFileContext()</span>
+     * PodcastFileContext podcastFileContext = defaultIfNull(assertContext.getPodcastFileContext(), new PodcastFileContext());
+     * </pre>
+     *
+     * <b>可以重构成:</b>
+     *
+     * <pre class="code">
+     * <span style="color:green">//只有 object 是null的时候, 才会真正 new</span>
+     * PodcastFileContext podcastFileContext = defaultIfNull(assertContext.getPodcastFileContext(), PodcastFileContext::new);
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * <h3>示例:</h3>
+     *
+     * <blockquote>
+     *
+     * <pre class="code">
+     * <span style="color:green">//supplier 会被调用</span>
+     * ObjectUtil.defaultIfNull(null, () -&gt; new User())   = User 的新实例
+     *
+     * <span style="color:green">//supplier 不会被调用</span>
+     * ObjectUtil.defaultIfNull(user, () -&gt; new User())   = user
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ul>
+     * <li>和 {@link #defaultNewIfNull(Object, Class)} 相比: 本方法不走反射, 也不需要目标类有无参构造方法</li>
+     * <li>如果第二个参数直接传 <code>null</code> 字面量(比如 <code>defaultIfNull(user, null)</code>), 会和
+     * {@link #defaultIfNull(Object, Object)} 产生调用歧义, 请显式转型, 比如 <code>defaultIfNull(user, (Supplier&lt;User&gt;) null)</code></li>
+     * </ul>
+     * </blockquote>
+     *
+     * @param <T>
+     *            the type of the object
+     * @param object
+     *            the {@code Object} to test, may be {@code null}
+     * @param supplier
+     *            默认值提供者, 不能是 {@code null}, 只在 <code>object</code> 是null的时候才会被调用
+     * @return 如果 <code>object</code> 是null,返回 {@link Supplier#get()} 的值,否则返回 <code>object</code><br>
+     *         如果 <code>supplier</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see #defaultIfNull(Object, Object)
+     * @see #defaultNewIfNull(Object, Class)
+     * @since 4.5.6
+     */
+    public static <T> T defaultIfNull(final T object,final Supplier<T> supplier){
+        Validate.notNull(supplier, "supplier can't be null!");
+
+        return null != object ? object : supplier.get();
+    }
+
     //---------------------------------------------------------------
 
     /**
@@ -492,6 +561,67 @@ public final class ObjectUtil{
      */
     public static <K, V> Map<K, V> defaultNewLinkedHashMapIfNull(final Map<K, V> map){
         return null != map ? map : newLinkedHashMap();
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 如果 <code>object</code> 是null,返回 <code>klass</code> 的<b>新实例</b>;否则原样返回 <code>object</code>.
+     *
+     * <p>
+     * 和 {@link #defaultIfNull(Object, Object)} 的区别是: 后者需要显式传入一个<b>已经创建好</b>的默认值,<br>
+     * 当 <code>object</code> 不为null的时候, 这个默认值就白创建了;<br>
+     * 本方法只有在 <code>object</code> 是null的时候, 才通过反射创建实例.
+     * </p>
+     *
+     * <h3>对下面的代码重构:</h3>
+     *
+     * <blockquote>
+     *
+     * <pre class="code">
+     * <span style="color:green">//不管 object 是不是null, 都会执行 new PodcastFileContext()</span>
+     * PodcastFileContext podcastFileContext = defaultIfNull(assertContext.getPodcastFileContext(), new PodcastFileContext());
+     * </pre>
+     *
+     * <b>可以重构成:</b>
+     *
+     * <pre class="code">
+     * <span style="color:green">//只有 object 是null的时候, 才会创建实例</span>
+     * PodcastFileContext podcastFileContext = defaultNewIfNull(assertContext.getPodcastFileContext(),
+     *                 PodcastFileContext.class);
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * <h3>示例:</h3>
+     *
+     * <blockquote>
+     *
+     * <pre class="code">
+     * ObjectUtil.defaultNewIfNull(null, User.class)   = User 的新实例
+     * ObjectUtil.defaultNewIfNull(user, User.class)   = user
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param object
+     *            需要判断的对象,可以是 {@code null}
+     * @param klass
+     *            需要创建的类, 不能是 {@code null}, 需要有无参构造方法
+     * @return 如果 <code>object</code> 是null,返回 <code>klass</code> 的新实例,否则返回 <code>object</code><br>
+     *         如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>klass</code> 没有无参构造方法,抛出 {@link com.feilong.core.lang.reflect.ReflectException}<br>
+     * @see #defaultIfNull(Object, Object)
+     * @see #defaultNewArrayListIfNull(List)
+     * @see com.feilong.core.lang.reflect.ConstructorUtil#newInstance(Class, Object...)
+     * @since 4.5.6
+     */
+    public static <T> T defaultNewIfNull(final T object,final Class<T> klass){
+        Validate.notNull(klass, "klass can't be null!");
+
+        return null != object ? object : ConstructorUtil.newInstance(klass);
     }
 
     //---------------------------------------------------------------

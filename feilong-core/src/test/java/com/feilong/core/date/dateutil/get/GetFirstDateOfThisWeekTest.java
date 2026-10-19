@@ -20,6 +20,7 @@ import static com.feilong.core.date.DateUtil.getFirstDateOfThisWeek;
 import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -36,20 +37,25 @@ import org.junit.Test;
  */
 public class GetFirstDateOfThisWeekTest{
 
-    /**
-     * Test get first date of this week.
-     */
+    @Test
+    public void testGetFirstDateOfThisWeek1(){
+        assertEquals(
+                     toDate("2026-10-18 00:00:00", COMMON_DATE_AND_TIME),
+                     getFirstDateOfThisWeek(toDate("2026-10-19 19:07:35", COMMON_DATE_AND_TIME)));
+
+    }
+
     @Test
     public void testGetFirstDateOfThisWeek(){
         //周一, 退回前一天的周日
         assertEquals(
-                        toDate("2016-08-21 00:00:00", COMMON_DATE_AND_TIME),
-                        getFirstDateOfThisWeek(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
+                     toDate("2016-08-21 00:00:00", COMMON_DATE_AND_TIME),
+                     getFirstDateOfThisWeek(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
 
         //跨年
         assertEquals(
-                        toDate("2013-12-29 00:00:00", COMMON_DATE_AND_TIME),
-                        getFirstDateOfThisWeek(toDate("2014-01-01 05:00:00", COMMON_DATE_AND_TIME)));
+                     toDate("2013-12-29 00:00:00", COMMON_DATE_AND_TIME),
+                     getFirstDateOfThisWeek(toDate("2014-01-01 05:00:00", COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -58,8 +64,8 @@ public class GetFirstDateOfThisWeekTest{
     @Test
     public void testGetFirstDateOfThisWeekWhenInputIsSunday(){
         assertEquals(
-                        toDate("2016-08-21 00:00:00", COMMON_DATE_AND_TIME),
-                        getFirstDateOfThisWeek(toDate("2016-08-21 23:59:59", COMMON_DATE_AND_TIME)));
+                     toDate("2016-08-21 00:00:00", COMMON_DATE_AND_TIME),
+                     getFirstDateOfThisWeek(toDate("2016-08-21 23:59:59", COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -68,8 +74,8 @@ public class GetFirstDateOfThisWeekTest{
     @Test
     public void testGetFirstDateOfThisWeekWhenInputIsSaturday(){
         assertEquals(
-                        toDate("2016-08-21 00:00:00", COMMON_DATE_AND_TIME),
-                        getFirstDateOfThisWeek(toDate("2016-08-27 12:00:00", COMMON_DATE_AND_TIME)));
+                     toDate("2016-08-21 00:00:00", COMMON_DATE_AND_TIME),
+                     getFirstDateOfThisWeek(toDate("2016-08-27 12:00:00", COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -78,8 +84,8 @@ public class GetFirstDateOfThisWeekTest{
     @Test
     public void testGetFirstDateOfThisWeekCrossMonth(){
         assertEquals(
-                        toDate("2016-08-28 00:00:00", COMMON_DATE_AND_TIME),
-                        getFirstDateOfThisWeek(toDate("2016-09-01 08:30:00", COMMON_DATE_AND_TIME)));
+                     toDate("2016-08-28 00:00:00", COMMON_DATE_AND_TIME),
+                     getFirstDateOfThisWeek(toDate("2016-09-01 08:30:00", COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -88,8 +94,8 @@ public class GetFirstDateOfThisWeekTest{
     @Test
     public void testGetFirstDateOfThisWeekResetTime(){
         assertEquals(
-                        toDate("2016-08-21 00:00:00", COMMON_DATE_AND_TIME),
-                        getFirstDateOfThisWeek(toDate("2016-08-25 23:59:59", COMMON_DATE_AND_TIME)));
+                     toDate("2016-08-21 00:00:00", COMMON_DATE_AND_TIME),
+                     getFirstDateOfThisWeek(toDate("2016-08-25 23:59:59", COMMON_DATE_AND_TIME)));
     }
 
     //---------------------------------------------------------------
@@ -109,8 +115,8 @@ public class GetFirstDateOfThisWeekTest{
             Locale.setDefault(Locale.GERMANY);
 
             assertEquals(
-                            toDate("2016-08-21 00:00:00", COMMON_DATE_AND_TIME),
-                            getFirstDateOfThisWeek(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
+                         toDate("2016-08-21 00:00:00", COMMON_DATE_AND_TIME),
+                         getFirstDateOfThisWeek(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
         }finally{
             Locale.setDefault(defaultLocale);
         }
