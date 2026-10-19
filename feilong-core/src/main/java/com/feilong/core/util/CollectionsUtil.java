@@ -4595,7 +4595,7 @@ public final class CollectionsUtil{
      * 具体实现参考 {@link GroupUtil#group(Iterable, String )} 的实现逻辑
      * 
      * @since 1.0.8
-     * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#group(Iterable, String )}
+     * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#groupBy(Iterable, Function)}
      */
     @SuppressWarnings("javadoc")
     @Deprecated
@@ -4609,7 +4609,7 @@ public final class CollectionsUtil{
      * 
      * @since 1.5.5
      * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用
-     *             {@link GroupUtil#group(Iterable, String, org.apache.commons.collections4.Predicate)}
+     *             {@link GroupUtil#groupBy(Iterable, Function, Predicate)}
      */
     @SuppressWarnings("javadoc")
     @Deprecated
@@ -4668,7 +4668,7 @@ public final class CollectionsUtil{
      * 具体实现参考 {@link GroupUtil#groupOne(Iterable, String)} 的实现逻辑
      * 
      * @since 1.0.8
-     * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#groupOne(Iterable, String)}
+     * @deprecated 从 4.5.2版本开始, 分组功能单独新建了{@link GroupUtil}, 建议使用 {@link GroupUtil#groupOne(Iterable, Function)}
      */
     @SuppressWarnings("javadoc")
     @Deprecated

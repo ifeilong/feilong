@@ -49,8 +49,9 @@ import lombok.extern.slf4j.Slf4j;
  *
  * <h3>核心方法概览</h3>
  * <ul>
- * <li>{@link #group(Iterable, String)} - 按属性名分组, 每组为 List</li>
- * <li>{@link #group(Iterable, String, org.apache.commons.collections4.Predicate)} - 按属性名分组, 支持过滤</li>
+ * <li>{@link #group(Iterable, String)} - 按属性名分组, 每组为 List (已过期, 见 {@link #groupBy(Iterable, Function)})</li>
+ * <li>{@link #group(Iterable, String, org.apache.commons.collections4.Predicate)} - 按属性名分组, 支持过滤 (已过期, 见
+ * {@link #groupBy(Iterable, Function, Predicate)})</li>
  * <li>{@link #group(Iterable, Transformer)} - 按 Transformer 分组, 每组为 List</li>
  * <li>{@link #group(Iterable, org.apache.commons.collections4.Predicate, Transformer)} - 按 Transformer 分组, 支持过滤</li>
  * <li>{@link #groupBy(Iterable, Function)} - 按 Function 分组, 每组为 List</li>
@@ -58,7 +59,7 @@ import lombok.extern.slf4j.Slf4j;
  * <li>{@link #groupByToSet(Iterable, Function, Predicate)} - 按 Function 分组, 每组为 Set (基于元素 equals 去重)</li>
  * <li>{@link #groupByToSet(Iterable, Function, Function, Predicate)} - 按 Function 分组, 每组内按指定 key 去重</li>
  * <li>{@link #groupOne(Iterable, Function)} - 按 Function 分组, 每组只保留第一个元素</li>
- * <li>{@link #groupOne(Iterable, String)} - 按属性名分组, 每组只保留第一个元素</li>
+ * <li>{@link #groupOne(Iterable, String)} - 按属性名分组, 每组只保留第一个元素 (已过期, 见 {@link #groupOne(Iterable, Function)})</li>
  * </ul>
  *
  * <h3>设计原则:</h3>
@@ -93,7 +94,7 @@ public class GroupUtil{
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}</li>
      *
      * <li>属性<code>propertyName</code>值相同的元素,组成集合 list</li>
-     * <li>如果value只需要单值的话,可以调用 {@link #groupOne(Iterable, String)}方法</li>
+     * <li>如果value只需要单值的话,可以调用 {@link #groupOne(Iterable, Function)}方法</li>
      * </ol>
      * </blockquote>
      *
@@ -148,7 +149,9 @@ public class GroupUtil{
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see #group(Iterable, String, org.apache.commons.collections4.Predicate)
      * @since 1.0.8
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 {@link #groupBy(Iterable, Function)} 代替
      */
+    @Deprecated
     public static <T, O> Map<T, List<O>> group(Iterable<O> beanIterable,String propertyName){
         return group(beanIterable, propertyName, null);
     }
@@ -250,9 +253,12 @@ public class GroupUtil{
      *         如果没有任何element match <code>includePredicate</code>,返回 empty {@link LinkedHashMap}<br>
      *         如果 <code>includePredicate</code> 是null,那么以所有的元素进行分组
      * @see PropertyUtil#getProperty(Object, String)
-     * @see #groupOne(Iterable, String)
+     * @see #groupOne(Iterable, Function)
      * @since 1.5.5
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 {@link #groupBy(Iterable, Function, Predicate)} 代替,
+     *             注意新方法的 <code>includePredicate</code> 是 {@link Predicate}, 不再是 commons-collections4 的 Predicate
      */
+    @Deprecated
     public static <T, O> Map<T, List<O>> group(
                     Iterable<O> beanIterable,
                     final String propertyName,
@@ -567,7 +573,7 @@ public class GroupUtil{
      *                 new User("刘备", 25),
      *                 new User("刘备", 30));
      *
-     * Map{@code <String, List<User>>} map = GroupUtil.groupBy(list, "name");
+     * Map{@code <String, List<User>>} map = GroupUtil.groupBy(list, User::getName);
      * log.debug(JsonUtil.format(map));
      * </pre>
      *
@@ -657,7 +663,7 @@ public class GroupUtil{
      *                 new User("刘备", 25),
      *                 new User("刘备", 30));
      *
-     * Map{@code <String, List<User>>} map = GroupUtil.groupBy(list, "name");
+     * Map{@code <String, List<User>>} map = GroupUtil.groupBy(list, User::getName);
      * log.debug(JsonUtil.format(map));
      * </pre>
      *
@@ -1048,7 +1054,7 @@ public class GroupUtil{
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}</li>
      *
      * <li>间接的可以做到基于某个属性值去重的效果</li>
-     * <li>如果value需要是集合的话,可以调用 {@link #group(Iterable, String)}方法</li>
+     * <li>如果value需要是集合的话,可以调用 {@link #groupBy(Iterable, Function)}方法</li>
      * </ol>
      * </blockquote>
      *
@@ -1092,7 +1098,7 @@ public class GroupUtil{
      *            键提取函数 (例如：User::getId 或 obj -> obj.getProperty());在Lambda版本中, 为了更好的类型安全和性能,应该使用Function<O, T>而不是反射
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>keyExtractor</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see #group(Iterable, String)
+     * @see #groupBy(Iterable, Function)
      * @since 4.5.0
      */
     public static <T, O> Map<T, O> groupOne(Iterable<O> beanIterable,Function<O, T> keyExtractor){
@@ -1125,7 +1131,7 @@ public class GroupUtil{
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}</li>
      *
      * <li>间接的可以做到基于某个属性值去重的效果</li>
-     * <li>如果value需要是集合的话,可以调用 {@link #group(Iterable, String)}方法</li>
+     * <li>如果value需要是集合的话,可以调用 {@link #groupBy(Iterable, Function)}方法</li>
      * </ol>
      * </blockquote>
      *
@@ -1171,9 +1177,11 @@ public class GroupUtil{
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see #group(Iterable, String)
+     * @see #groupBy(Iterable, Function)
      * @since 1.0.8
+     * @deprecated 从 4.5.6 版本开始, 属性名(反射)方式已不推荐, 请使用 {@link #groupOne(Iterable, Function)} 代替
      */
+    @Deprecated
     public static <T, O> Map<T, O> groupOne(Iterable<O> beanIterable,String propertyName){
         if (isNullOrEmpty(beanIterable)){
             return emptyMap();
