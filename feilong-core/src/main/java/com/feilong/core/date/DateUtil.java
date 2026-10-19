@@ -38,7 +38,6 @@ import static java.util.Calendar.JANUARY;
 import static java.util.Calendar.MINUTE;
 import static java.util.Calendar.MONDAY;
 import static java.util.Calendar.MONTH;
-import static java.util.Calendar.SATURDAY;
 import static java.util.Calendar.SECOND;
 import static java.util.Calendar.SUNDAY;
 import static java.util.Calendar.WEEK_OF_YEAR;
@@ -550,6 +549,7 @@ public final class DateUtil{
      * <blockquote>
      * <ol>
      * <li>按照外国制,<span style="color:red">周日为一个星期第一天,周六为最后一天</span></li>
+     * <li>使用日期算术计算,<b>不依赖</b> {@link Calendar#getFirstDayOfWeek()},不受 JVM 默认 {@link java.util.Locale} 影响</li>
      * <li>会自动跨月,跨年操作</li>
      * </ol>
      * </blockquote>
@@ -559,13 +559,19 @@ public final class DateUtil{
      * @return 指定日期所在周的第一天(周日)的 <code>00:00:00.000</code> 时间<br>
      *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
-     * @see Calendar#set(int, int)
+     * @see Calendar#add(int, int)
      * @see CalendarUtil#resetDayBegin(Calendar)
-     * @see Calendar#getTime()
+     * @see #getLastDateOfThisWeek(Date)
      */
     public static Date getFirstDateOfThisWeek(Date date){
         Calendar calendar = toCalendar(date);
-        calendar.set(DAY_OF_WEEK, SUNDAY);
+
+        //Calendar 里 SUNDAY=1, MONDAY=2, ..., SATURDAY=7
+        //周日本身就是1, 所以"距离本周日几天"直接减 SUNDAY(1) 就行(周日得0, 周六得6)
+        int dayOfWeek = calendar.get(DAY_OF_WEEK);
+        int daysFromSunday = dayOfWeek - SUNDAY;
+
+        calendar.add(DAY_OF_MONTH, -daysFromSunday);
         return CalendarUtil.toDate(resetDayBegin(calendar));
     }
 
@@ -587,6 +593,7 @@ public final class DateUtil{
      * <blockquote>
      * <ol>
      * <li>按照外国制,<span style="color:red">周日为一个星期第一天,周六为最后一天</span></li>
+     * <li>使用日期算术计算,<b>不依赖</b> {@link Calendar#getFirstDayOfWeek()},不受 JVM 默认 {@link java.util.Locale} 影响</li>
      * <li>会自动跨月,跨年操作</li>
      * </ol>
      * </blockquote>
@@ -596,14 +603,16 @@ public final class DateUtil{
      * @return 指定日期所在周的最后一天(周六)的 <code>23:59:59.999</code> 时间<br>
      *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
-     * @see Calendar#set(int, int)
+     * @see Calendar#add(int, int)
      * @see CalendarUtil#resetDayEnd(Calendar)
-     * @see Calendar#getTime()
+     * @see #getFirstDateOfThisWeek(Date)
      * @since 1.0.1
      */
     public static Date getLastDateOfThisWeek(Date date){
-        Calendar calendar = toCalendar(date);
-        calendar.set(DAY_OF_WEEK, SATURDAY);
+        //先定位到本周日, 再往后推 6 天, 就是本周六
+        Calendar calendar = toCalendar(getFirstDateOfThisWeek(date));
+
+        calendar.add(DAY_OF_MONTH, 6);
         return CalendarUtil.toDate(resetDayEnd(calendar));
     }
 
@@ -2419,8 +2428,8 @@ public final class DateUtil{
      * <blockquote>
      * <ol>
      * <li>按照外国制,<span style="color:red">周日为开始时间, 周六为结束时间</span></li>
-     * <li>内部调用 {@link #getFirstDateOfThisWeek(Date)} / {@link #getLastDateOfThisWeek(Date)}, 这两个方法基于
-     * {@link Calendar#set(int, int)} 设置 {@link Calendar#DAY_OF_WEEK}, 结果会受 {@link Calendar#getFirstDayOfWeek()} 影响</li>
+     * <li>内部调用 {@link #getFirstDateOfThisWeek(Date)} / {@link #getLastDateOfThisWeek(Date)}, 这两个方法使用日期算术, 不受
+     * {@link Calendar#getFirstDayOfWeek()} 影响</li>
      * </ol>
      * </blockquote>
      * 
