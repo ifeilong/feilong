@@ -15,7 +15,7 @@
  */
 package com.feilong.net.cxf;
 
-import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.endpoint.Client;
@@ -83,7 +83,7 @@ public final class ClientUtil{
      *      TLSClientParameters after overriding endpoint address</a>
      */
     private static TLSClientParameters wrap(TLSClientParameters tlsClientParameters){
-        TLSClientParameters tslClientParameters = defaultIfNullOrEmpty(tlsClientParameters, new TLSClientParameters());
+        TLSClientParameters tslClientParameters = defaultIfNull(tlsClientParameters, TLSClientParameters::new);
         tslClientParameters.setDisableCNCheck(true);
         return tslClientParameters;
     }
