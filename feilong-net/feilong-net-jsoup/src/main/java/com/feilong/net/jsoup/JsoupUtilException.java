@@ -20,6 +20,14 @@ import com.feilong.core.DefaultRuntimeException;
 /**
  * 使用 jsoup出现的异常.
  * 
+ * <p>
+ * 包括两类:
+ * </p>
+ * <ol>
+ * <li>请求过程发生的 {@link java.io.IOException} 包装(见 {@link JsoupUtil#getDocument(String, String)})</li>
+ * <li>classpath 中缺少 jsoup 依赖时的友好提示(见 {@link JsoupUtil}, issues/525)</li>
+ * </ol>
+ * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.8
  */
@@ -29,6 +37,17 @@ public final class JsoupUtilException extends DefaultRuntimeException{
     private static final long serialVersionUID = -1699987643831455524L;
 
     //---------------------------------------------------------------
+
+    /**
+     * Instantiates a new jsoup util exception.
+     * 
+     * @param message
+     *            the message
+     * @since 4.5.6
+     */
+    public JsoupUtilException(String message){
+        super(message);
+    }
 
     /**
      * Instantiates a new jsoup util exception.

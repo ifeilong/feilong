@@ -8,6 +8,7 @@
 ### Fixed
 
 - 修正 `feilong-office-zip` 解压时的路径穿越风险（zip slip）：`AbstractUnzipHandler#write` 现在会校验解压条目不会逃出 `outputDirectory`，否则抛出 `IllegalArgumentException`
+- `feilong-net-jsoup`：`JsoupUtil` 在 classpath 缺少 jsoup 时抛出 `JsoupUtilException` 并直接提示所需依赖（`org.jsoup:jsoup`），不再抛难以定位的 `NoClassDefFoundError: org/jsoup/Jsoup`（#525）
 
 ### Security（有意延后）
 
@@ -21,6 +22,8 @@
 ### Docs
 
 - 全项目 javadoc 审计与修正：机械类问题（`{@link "..."}`、`{@link StringUtils#EMPTY}`、`{@link <a href=...>}`）、示例中不存在的类/方法/常量、`@param`/`@return` 与签名不符、异常类型与实现不符、多余/缺失的 HTML 标签、指向 private 成员的断链、陈旧包名（`com.feilong.json.jsonlib.*`、`com.feilong.tools.*` 等）
+- `JsoupUtil` 的 javadoc 补充「依赖」说明（jsoup 是 `optional` 依赖不会传递、需自行声明 `org.jsoup:jsoup`、聚合包 POM 中只有 `slf4j-api`）、maven 依赖片段、四类用法示例，并修正 `parse` 中损坏的 HTML 示例
+- `README.md` / `README.en.md` 修正「第三方依赖不会缺」的错误描述：聚合包 `feilong` 发布出来的 POM 只有 `slf4j-api`，velocity、poi、javax.mail、jsch、jsoup、xstream、cxf 等需按需自行声明
 
 ## [4.5.6]
 

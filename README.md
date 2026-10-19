@@ -308,7 +308,7 @@ feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/artifact/c
 
 > 说明：
 > - 中央仓库**只发布聚合包 `feilong`**：`maven-shade-plugin` 把 `com.github.ifeilong:*` 各子模块的类打平到同一个 jar；子模块（`feilong-core`、`feilong-json`…）不作为独立坐标发布，无法单独引入。
-> - **第三方依赖不会缺**：shade 只打包 feilong 自己的模块，并使用 dependency-reduced POM + `promoteTransitiveDependencies`，第三方依赖（velocity、poi、javax.mail、jsoup、xstream、cxf 等）仍由 `feilong` 的 POM 正常解析。
+> - **第三方依赖需要自己声明**：shade 只打包 `com.github.ifeilong:*` 自己的模块；`velocity`、`poi`、`javax.mail`、`jsch`、`jsoup`、`xstream`、`cxf` 等第三方库在各子模块中都是 `optional` 依赖，不会传递，发布出来的 `feilong` POM 中只有 `slf4j-api` 一个依赖。**用到哪个功能就自己加哪个库**，例如使用 `com.feilong.net.jsoup.JsoupUtil` 需要额外声明 `org.jsoup:jsoup:1.15.4`（详见该类 javadoc），其余库的版本可参考本仓库根 `pom.xml` 中的 `version.*` 属性。
 > - 同时会附带 sources jar 与 javadoc jar。
 
 ### `Gradle 配置`

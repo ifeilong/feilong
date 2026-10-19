@@ -331,7 +331,7 @@ Published to Maven Central since 3.0.0: https://search.maven.org/artifact/com.gi
 
 > Notes:
 > - Maven Central **only hosts the aggregate `feilong` artifact**: `maven-shade-plugin` flattens the classes of every `com.github.ifeilong:*` module into one jar. Individual modules (`feilong-core`, `feilong-json`, …) are **not** released as separate coordinates.
-> - **Third-party dependencies are still resolved**: the shade step packages only feilong's own modules and keeps a dependency-reduced POM with `promoteTransitiveDependencies`, so velocity, poi, javax.mail, jsoup, xstream, cxf and friends are still pulled in through `feilong`'s POM.
+> - **Third-party dependencies must be declared by you**: the shade step packages only feilong's own modules; velocity, poi, javax.mail, jsch, jsoup, xstream, cxf and friends are `optional` in the sub-modules and are **not** transitive, so the published `feilong` POM contains only `slf4j-api`. **Add the library you actually use** — e.g. `com.feilong.net.jsoup.JsoupUtil` needs `org.jsoup:jsoup:1.15.4` (see that class's javadoc); versions of the other libraries can be found in the `version.*` properties of the root `pom.xml`.
 > - Sources and javadoc jars are published as well.
 
 **Gradle**
