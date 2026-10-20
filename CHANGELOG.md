@@ -5,6 +5,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- `ObjectUtil` 新增 `defaultZero(BigDecimal)` 与 `defaultZero(Long)`：null 或负数返回 `0`，正数原样返回（不改 scale）。大小判断用 `BigDecimal#compareTo`，避开 `new BigDecimal("0.00").equals(BigDecimal.ZERO)` 为 `false` 的坑（#896）
+
 ### Fixed
 
 - 修正 `feilong-office-zip` 解压时的路径穿越风险（zip slip）：`AbstractUnzipHandler#write` 现在会校验解压条目不会逃出 `outputDirectory`，否则抛出 `IllegalArgumentException`

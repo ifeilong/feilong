@@ -26,6 +26,7 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.emptySet;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -674,15 +675,25 @@ public final class ObjectUtil{
      * 如果 <code>i</code> 是null或者{@code <}0,返回默认值 <code>0</code>.
      * 
      * <pre>
-     * ObjectUtil.defaultZero(null)     = 0
-     * ObjectUtil.defaultZero(-1)       = 0
-     * ObjectUtil.defaultZero(0)        = 0
-     * ObjectUtil.defaultZero(8)        = 8
+     * ObjectUtil.defaultZero((Integer) null) = 0
+     * ObjectUtil.defaultZero(-1)             = 0
+     * ObjectUtil.defaultZero(0)              = 0
+     * ObjectUtil.defaultZero(8)              = 8
      * </pre>
+     *
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>本方法有多个重载,<code>ObjectUtil.defaultZero(null)</code> 这样的字面量调用会有歧义,请显式转型,比如
+     * <code>defaultZero((Integer) null)</code></li>
+     * </ol>
+     * </blockquote>
      *
      * @param i
      *            i
      * @return 如果 <code>i</code> 是null或者{@code <}0,返回 <code>0</code>,否则返回 <code>i</code>
+     * @see #defaultZero(Long)
+     * @see #defaultZero(BigDecimal)
      * @since 4.0.1
      */
     public static Integer defaultZero(Integer i){
@@ -693,6 +704,92 @@ public final class ObjectUtil{
             return 0;
         }
         return i;
+    }
+
+    /**
+     * 如果 <code>value</code> 是null或者{@code <}0,返回默认值 {@link BigDecimal#ZERO};否则原样返回 <code>value</code>.
+     *
+     * <h3>示例:</h3>
+     *
+     * <blockquote>
+     *
+     * <pre>
+     * ObjectUtil.defaultZero((BigDecimal) null)        = 0
+     * ObjectUtil.defaultZero(new BigDecimal("-1.00"))  = 0
+     * ObjectUtil.defaultZero(new BigDecimal("12.30"))  = 12.30
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>判断大小用的是 {@link BigDecimal#compareTo(BigDecimal)},而不是 {@link BigDecimal#equals(Object)}:
+     * <code>new BigDecimal("0.00").equals(BigDecimal.ZERO)</code> 是 <code>false</code>,而 <code>compareTo</code> 是0</li>
+     * <li>正数原样返回,不调用 {@link BigDecimal#setScale(int)}: <code>new BigDecimal("12.30")</code> 返回的 scale 还是2,金额口径由调用方决定</li>
+     * <li><code>new BigDecimal("-0.00")</code> 的 <code>compareTo(BigDecimal.ZERO)</code> 也是0,不算负数,同样原样返回(值仍然是0)</li>
+     * <li>如果只想兜null、负数保留,不要用本方法(null 和负数都会变成0),直接使用
+     * {@link #defaultIfNull(Object, Object)}: <code>defaultIfNull(value, BigDecimal.ZERO)</code></li>
+     * <li>本方法有多个重载,<code>ObjectUtil.defaultZero(null)</code> 这样的字面量调用会有歧义,请显式转型,比如
+     * <code>defaultZero((BigDecimal) null)</code></li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param value
+     *            the value, may be {@code null}
+     * @return 如果 <code>value</code> 是null或者{@code <}0,返回 {@link BigDecimal#ZERO},否则返回 <code>value</code>
+     * @see #defaultZero(Integer)
+     * @see #defaultZero(Long)
+     * @since 4.5.6
+     */
+    public static BigDecimal defaultZero(final BigDecimal value){
+        if (null == value){
+            return BigDecimal.ZERO;
+        }
+        if (value.compareTo(BigDecimal.ZERO) < 0){
+            return BigDecimal.ZERO;
+        }
+        return value;
+    }
+
+    /**
+     * 如果 <code>value</code> 是null或者{@code <}0,返回默认值 <code>0L</code>;否则原样返回 <code>value</code>.
+     *
+     * <h3>示例:</h3>
+     *
+     * <blockquote>
+     *
+     * <pre>
+     * ObjectUtil.defaultZero((Long) null) = 0
+     * ObjectUtil.defaultZero(-5L)         = 0
+     * ObjectUtil.defaultZero(8L)          = 8
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>本方法有多个重载,<code>ObjectUtil.defaultZero(null)</code> 这样的字面量调用会有歧义,请显式转型,比如
+     * <code>defaultZero((Long) null)</code></li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param value
+     *            the value, may be {@code null}
+     * @return 如果 <code>value</code> 是null或者{@code <}0,返回 <code>0L</code>,否则返回 <code>value</code>
+     * @see #defaultZero(Integer)
+     * @see #defaultZero(BigDecimal)
+     * @since 4.5.6
+     */
+    public static Long defaultZero(final Long value){
+        if (null == value){
+            return 0L;
+        }
+        if (value < 0){
+            return 0L;
+        }
+        return value;
     }
 
     /**

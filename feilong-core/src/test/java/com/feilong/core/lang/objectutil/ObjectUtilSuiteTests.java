@@ -51,6 +51,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 DefaultCountIfNullZeroOrGreaterThanParameterizedTest.class,
                 DefaultPageNoParameterizedTest.class,
                 DefaultZeroParameterizedTest.class,
+                DefaultZeroLongParameterizedTest.class,
+                DefaultZeroBigDecimalParameterizedTest.class,
 
                 EqualsAnyTest.class,
                 NewFromTest.class,
