@@ -30,7 +30,13 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * The Class SessionPropertiesBuilder.
+ * 根据 {@link SessionConfig} 构造 javax.mail 需要的 {@link Properties}.
+ * 
+ * <p>
+ * 目前只输出 SMTP 相关的几个 key: <code>mail.smtp.host</code>、<code>mail.smtp.port</code>、<code>mail.smtp.auth</code>,
+ * 以及 <code>mail.smtp.ssl.enable</code>、<code>mail.smtp.socketFactory.class</code>、<code>mail.smtp.starttls.enable</code>
+ * 这几个开关(后三个只对 {@link MailSendConnectionConfig} 生效).
+ * </p>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
@@ -39,7 +45,7 @@ import lombok.NoArgsConstructor;
 public class SessionPropertiesBuilder{
 
     /**
-     * Properties object. Used only if a new Session object is created.
+     * 根据 {@link SessionConfig} 构造 SMTP 相关的 javax.mail 属性.
      * 
      * <p>
      * It is expected that the client supplies values for the properties listed in Appendix A of the JavaMail spec <br>
@@ -50,6 +56,8 @@ public class SessionPropertiesBuilder{
      * @param sessionConfig
      *            the base config
      * @return the properties
+     * @throws IllegalArgumentException
+     *             如果 <code>sessionConfig</code> 的 <code>serverHost</code> 是null或者empty
      */
     public static Properties build(SessionConfig sessionConfig){
         String serverHost = sessionConfig.getServerHost();

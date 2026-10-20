@@ -41,8 +41,8 @@ public class SessionFactory{
      * 根据邮件会话属性和密码验证器构造邮件的{@link javax.mail.Session}.
      * 
      * @param sessionConfig
-     *            mailSenderInfo
-     * @return Session
+     *            the session config
+     * @return 根据 <code>sessionConfig</code> 构造的 {@link Session}, 本方法不会建立网络连接; 如果 <code>sessionConfig</code> 是null,抛出 {@link NullPointerException}; 如果它的 <code>serverHost</code> 是null或者empty,抛出 {@link IllegalArgumentException}
      * @see javax.mail.Session#getDefaultInstance(Properties, Authenticator)
      */
     public static Session createSession(SessionConfig sessionConfig){

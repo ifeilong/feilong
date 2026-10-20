@@ -26,6 +26,12 @@ import com.feilong.net.mail.util.MessageSendUtil;
 
 /**
  * 邮件发送器.
+ * 
+ * <p>
+ * 这是一个<b>有状态</b>的对象: 连接配置({@link MailSendConnectionConfig})在构造方法或者
+ * {@link #setMailSendConnectionConfig(MailSendConnectionConfig)} 里绑定, 绑定之后同一个实例可以反复调用
+ * {@link #send(MailSendRequest)} 发送多封邮件, 因此不要在发送过程中修改配置.
+ * </p>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see javax.mail.Message
@@ -38,17 +44,24 @@ import com.feilong.net.mail.util.MessageSendUtil;
 @lombok.extern.slf4j.Slf4j
 public final class DefaultMailSender implements MailSender{
 
+    /** 邮件发送连接配置. */
     private MailSendConnectionConfig mailSendConnectionConfig;
 
     //---------------------------------------------------------------
+
     /**
-     * 
+     * 构造一个还没有绑定连接配置的发送器 (Spring 的 setter 注入走的就是这个构造方法, 之后需要调用
+     * {@link #setMailSendConnectionConfig(MailSendConnectionConfig)}).
      */
     public DefaultMailSender(){
     }
 
     /**
+     * 构造一个绑定好连接配置的发送器.
+     *
      * @param mailSendConnectionConfig
+     *            the mail send connection config, 可以是null, 但此时调用 {@link #send(MailSendRequest)} 会抛出
+     *            {@link NullPointerException}
      */
     public DefaultMailSender(MailSendConnectionConfig mailSendConnectionConfig){
         this.mailSendConnectionConfig = mailSendConnectionConfig;
@@ -65,6 +78,7 @@ public final class DefaultMailSender implements MailSender{
     public void send(MailSendRequest mailSendRequest){
         Validate.notNull(mailSendRequest, "mailSenderConfig can't be null!");
 
+        Validate.notNull(mailSendConnectionConfig, "mailSendConnectionConfig can't be null!");
         Validate.notBlank(mailSendConnectionConfig.getUserName(), "mailSenderConfig.getUserName() can't be null!");
         Validate.notBlank(mailSendConnectionConfig.getPassword(), "mailSenderConfig.getPassword() can't be null!");
         Validate.notEmpty(mailSendRequest.getTos(), "mailSenderConfig.getTos() can't be null!");
@@ -88,6 +102,8 @@ public final class DefaultMailSender implements MailSender{
     //---------------------------------------------------------------
 
     /**
+     * 设置 邮件发送连接配置.
+     *
      * @param mailSendConnectionConfig
      *            the mailSendConnectionConfig to set
      */

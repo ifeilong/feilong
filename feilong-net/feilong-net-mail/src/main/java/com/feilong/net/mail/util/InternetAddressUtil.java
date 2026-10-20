@@ -36,7 +36,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * The Class InternetAddressUtil.
+ * 和邮件地址相关的工具类, 负责 <code>name&lt;xxx@xxx.com.cn&gt;</code> 这种格式的组装和解析.
  * 
  * <pre class="code">
  * name&lt;xxx@xxx.com.cn&gt;
@@ -57,7 +57,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class InternetAddressUtil{
 
-    /** The Constant CHARSET_PERSONAL. */
+    /** 个人名义(personal)编码时使用的字符集, 固定 UTF-8. */
     private static final String CHARSET_PERSONAL = UTF8;
 
     //---------------------------------------------------------------

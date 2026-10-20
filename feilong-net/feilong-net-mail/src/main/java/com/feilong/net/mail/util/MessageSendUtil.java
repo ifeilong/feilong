@@ -44,6 +44,8 @@ public class MessageSendUtil{
      *
      * @param message
      *            the message
+     * @throws MailException
+     *             邮件发送失败, 异常信息里带有 from、subject、allRecipients, 方便排查
      * @since 1.10.2
      */
     public static void send(Message message){

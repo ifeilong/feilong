@@ -42,7 +42,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * The Class MessageUtil.
+ * 和 {@link javax.mail.Message} 相关的工具类, 负责把 javax.mail 的对象转成 {@link MailInfo} 或者日志用的 map.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.9

@@ -37,7 +37,9 @@ public class AuthenticatorBuilder{
      *
      * @param sessionConfig
      *            the base config
-     * @return the authenticator
+     * @return 如果需要身份认证( <code>sessionConfig.getIsValidate()</code> 是true),返回 {@link Authenticator};否则返回
+     *         <code>null</code><br>
+     *         如果 <code>sessionConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * @see javax.mail.PasswordAuthentication#PasswordAuthentication(String, String)
      */
     public static Authenticator build(final SessionConfig sessionConfig){

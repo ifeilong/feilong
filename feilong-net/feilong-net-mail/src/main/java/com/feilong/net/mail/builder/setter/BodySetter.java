@@ -38,14 +38,20 @@ import lombok.NoArgsConstructor;
 public class BodySetter{
 
     /**
-     * setBody.
+     * 设置邮件的正文, 同时把附件挂到正文所在的 {@link MimeMultipart} 上.
+     * 
+     * <p>
+     * 如果 <code>mailSendRequest.getContent()</code> 是null, 会先兜底成空字符串
+     * {@link com.feilong.core.lang.StringUtil#EMPTY}, 避免下游 {@link BodyPart#setContent(Object, String)} 抛出异常.
+     * </p>
      *
      * @param message
      *            the message
      * @param mailSendRequest
-     *            the body
+     *            the mail sender config, 提供正文内容、正文MIME类型以及附件路径
      * @throws MessagingException
      *             the messaging exception
+     * @see com.feilong.net.mail.builder.setter.AttachmentSetter#setAttachment(MimeMultipart, String[])
      */
     public static void setBody(Message message,MailSendRequest mailSendRequest) throws MessagingException{
         //since 1.13.0

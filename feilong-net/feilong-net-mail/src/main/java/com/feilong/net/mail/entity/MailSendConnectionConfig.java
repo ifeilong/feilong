@@ -24,7 +24,7 @@ package com.feilong.net.mail.entity;
 public class MailSendConnectionConfig extends BaseConfig{
 
     /**
-     * The is tls enable.
+     * STARTTLS 开关.
      * 
      * <p>
      * If true, enables the use of the STARTTLS command (if supported by the server) to switch the connection to a TLS-protected connection
@@ -83,7 +83,7 @@ public class MailSendConnectionConfig extends BaseConfig{
     }
 
     /**
-     * The is tls enable.
+     * STARTTLS 开关.
      * 
      * <p>
      * If true, enables the use of the STARTTLS command (if supported by the server) to switch the connection to a TLS-protected connection
@@ -93,7 +93,7 @@ public class MailSendConnectionConfig extends BaseConfig{
      * Defaults to false.
      * </p>
      *
-     * @return the is tls enable
+     * @return 是否开启 STARTTLS
      * @since 1.13.2
      */
     public boolean getIsSmtpStarttlsEnable(){
@@ -101,7 +101,7 @@ public class MailSendConnectionConfig extends BaseConfig{
     }
 
     /**
-     * The is tls enable.
+     * STARTTLS 开关.
      * 
      * <p>
      * If true, enables the use of the STARTTLS command (if supported by the server) to switch the connection to a TLS-protected connection
@@ -112,7 +112,7 @@ public class MailSendConnectionConfig extends BaseConfig{
      * </p>
      *
      * @param isSmtpStarttlsEnable
-     *            the new is tls enable
+     *            是否开启 STARTTLS
      * @since 1.13.2
      */
     public void setIsSmtpStarttlsEnable(boolean isSmtpStarttlsEnable){
