@@ -495,29 +495,13 @@
 				</executions>
 			</plugin>
 
-			<!-- maven-source-plugin -->
-			<plugin>
-				<inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>${v.maven-source-plugin}</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-
-
-			</plugin>
+			<!--
+				这里不再声明 maven-source-plugin:
+				本模块的 sources jar 由上面 shade 的 createSourcesJar 合并所有依赖的 -sources.jar 产出(全量源码),
+				而 maven-source-plugin 只会打包本模块自己的 src/main/java (里面只有 FeiLongVersion 一个类),
+				两个插件抢同一个 sources classifier, 谁最后写谁赢, 于是 4.5.4 的 sources jar 是全量、4.5.5 变成一个类.
+				如果以后要恢复这个插件, 只能保留一个执行(jar-no-fork 和 attach-sources 同时存在会被 3.3.0+ 直接报错).
+			-->
 
 			<!-- maven-surefire-plugin -->
 			<plugin>
