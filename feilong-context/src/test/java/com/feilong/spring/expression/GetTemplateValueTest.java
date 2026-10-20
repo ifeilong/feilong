@@ -35,7 +35,7 @@ public class GetTemplateValueTest extends AbstractTest{
                         + "/Downloads/adidas-cn-productData-#{T(com.feilong.core.date.DateUtil).nowString('yyyyMMdd')}.zip";
         String templateValue = SpelUtil.getTemplateValue(expressionString);
         assertEquals(
-                     SystemUtil.USER_HOME + "/Downloads/adidas-cn-productData-20200528.zip".length(), //
+                     (SystemUtil.USER_HOME + "/Downloads/adidas-cn-productData-20200528.zip").length(), //
                      templateValue.length());
     }
 
