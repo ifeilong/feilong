@@ -17,15 +17,26 @@ package com.feilong.net.mail.util;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
+import javax.mail.Address;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
+/**
+ * {@link InternetAddressUtil} 的单元测试, 不依赖网络.
+ *
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ */
 @lombok.extern.slf4j.Slf4j
 public class InternetAddressUtilTest extends AbstractTest{
 
@@ -38,6 +49,57 @@ public class InternetAddressUtilTest extends AbstractTest{
 
         log.debug("\n{}", internetAddress.toUnicodeString());
         log.debug("\n{}", InternetAddress.toString(internetAddresses, 0));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test
+    public void testToAddressArray() throws AddressException{
+        Address[] addresses = InternetAddressUtil.toAddressArray(new String[] { "a@126.com", "b@126.com" });
+
+        assertEquals(2, addresses.length);
+        assertEquals("a@126.com", ((InternetAddress) addresses[0]).getAddress());
+        assertEquals("b@126.com", ((InternetAddress) addresses[1]).getAddress());
+    }
+
+    @Test
+    public void testToUnicodeStringList() throws UnsupportedEncodingException{
+        InternetAddress[] internetAddresses = toArray(
+                        new InternetAddress("longxia@feilong.cn", "夏龙", UTF8),
+                        new InternetAddress("zhen.yao@feilong.cn", "姚真", UTF8));
+
+        List<String> list = InternetAddressUtil.toUnicodeStringList(internetAddresses);
+
+        assertEquals(2, list.size());
+        assertTrue(list.get(0).contains("longxia@feilong.cn"));
+        assertTrue(list.get(0).contains("夏龙"));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test
+    public void testBuildFromAddress(){
+        Address address = InternetAddressUtil.buildFromAddress("飞龙", "from@126.com");
+
+        assertEquals("from@126.com", ((InternetAddress) address).getAddress());
+    }
+
+    /** personal 是 null 或者 empty 的时候, 只保留地址. */
+    @Test
+    public void testBuildFromAddressPersonalIsNullOrEmpty(){
+        Address address = InternetAddressUtil.buildFromAddress("", "from@126.com");
+
+        assertEquals("from@126.com", ((InternetAddress) address).getAddress());
+    }
+
+    @Test
+    public void testBuildFromAddressBlank(){
+        try{
+            InternetAddressUtil.buildFromAddress(null, "");
+            fail("should throw IllegalArgumentException");
+        }catch (IllegalArgumentException e){
+            assertEquals("fromAddress can't be blank!", e.getMessage());
+        }
     }
 
 }

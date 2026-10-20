@@ -39,7 +39,7 @@ mvn -Pstrict-javadoc -pl feilong-core javadoc:javadoc
 
 必须知道的几点：
 
-1. **Surefire 只跑 `**/SuiteTests`**。新增的测试类如果不挂进所在包的 `SuiteTests`（`@SuiteClasses`），等于没写。
+1. **Surefire 只跑 `**/SuiteTests`**。新增的测试类如果不挂进所在包的 `SuiteTests`（`@SuiteClasses`），等于没写。这个 include 同时是**白名单**：`temp` 包、邮件/FTP/公网 HTTP 这些需要外部服务的测试都不在里面，不要擅自换成默认的 `**/*Test`。
 2. 没有 `-Werror`、没有 `-Xlint`。deprecation 警告不致命，但不要靠它兜底。
 3. 默认 profile 的 javadoc 是 `-Xdoclint:none`；严格校验只在 `strict-javadoc` profile 里。
 4. 跑不了测试时（比如受限环境），**必须在回复里明确写"未编译/未运行"**，并给出本地命令。
@@ -137,6 +137,7 @@ mvn -Pstrict-javadoc -pl feilong-core javadoc:javadoc
 ## 6. 测试约定
 
 - JUnit 4 + Hamcrest；类名 `XxxTest`，**必须注册进所在包的 `SuiteTests`**。
+- **不要升级到 JUnit 5**，理由和重新评估的触发条件见 §8。
 - 测试类命名跟被测方法走：`RemoveDuplicatePropertyNamesTest`、`SplitByExistIdTest`。
 - 断言优先 `assertEquals` / `assertSame` / `assertNotSame`；行为约定（如 builder 返回自身）要显式断言。
 - 不写联网测试（除了 `temp` 包里手工跑的），CI 环境没有外网。
@@ -168,6 +169,7 @@ fix #891
 - 不要在补丁版本里做二进制不兼容的改动。
 - 不要往 core 加第三方运行时依赖。
 - 不要用 JDK8 之后的语法。
+- **不要把测试框架从 JUnit 4 升级到 JUnit 5**（#201 已关闭，别再重开）。Java 8 baseline 下 JUnit 5 的上限是 `junit-jupiter 5.14.4`（JUnit 6 起要 Java 17），而 134 个参数化测试类依赖独立仓库 `feilong-common-test` 里的 JUnit 4 基类（`@RunWith(Parameterized.class)`），搬家要跨两个仓库。只有下面任一条成立才重新评估：① baseline 提到 Java 17；② 出现具体测试痛点（并行跑、`@TempDir`、`@Nested`）；③ `feilong-common-test` 反正要重构。
 - 不要写测试类却不注册进 `SuiteTests`。
 - 不要在 javadoc 里写跨行的 `{@code` 或未转义的 HTML。
 - 不要把 `feilong-lib` 里的 `com.feilong.lib.*` 内部实现当公开 API 用。

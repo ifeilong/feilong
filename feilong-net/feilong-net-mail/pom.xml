@@ -10,8 +10,8 @@
 	<artifactId>feilong-net-mail</artifactId>
 
 	<properties>
-		<!--经常网络不通 -->
-		<maven-surefire-plugin.skip>true</maven-surefire-plugin.skip>
+		<!-- 本模块的 SuiteTests 只含不依赖网络的用例, 故不跳过 surefire; 需要真实邮箱的用例请手工在 IDE 里运行 -->
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
 	</properties>
 
 	<dependencies>
