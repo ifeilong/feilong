@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>feilong 版本演进总览（3.0.0 → 4.5.6）</title>
+<style>
+    :root{
+        --fg:#1f2328;
+        --fg-muted:#59636e;
+        --bg:#ffffff;
+        --bg-soft:#f6f8fa;
+        --border:#d1d9e0;
+        --accent:#0969da;
+        --accent-soft:#ddf4ff;
+        --warn:#9a6700;
+        --warn-bg:#fff8c5;
+        --code-bg:#eff2f5;
+    }
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+        margin:0;
+        background:var(--bg);
+        color:var(--fg);
+        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+        font-size:15px;
+        line-height:1.75;
+        -webkit-font-smoothing:antialiased;
+    }
+    .page{
+        max-width:1120px;
+        margin:0 auto;
+        padding:48px 28px 96px;
+    }
+    h1{
+        font-size:30px;
+        line-height:1.3;
+        margin:0 0 8px;
+        letter-spacing:-.3px;
+    }
+    .subtitle{
+        color:var(--fg-muted);
+        font-size:14px;
+        margin:0 0 28px;
+    }
+    h2{
+        font-size:22px;
+        margin:56px 0 18px;
+        padding-bottom:10px;
+        border-bottom:1px solid var(--border);
+        scroll-margin-top:16px;
+    }
+    h3{
+        font-size:17px;
+        margin:34px 0 12px;
+        scroll-margin-top:16px;
+    }
+    h3 .tag{
+        font-weight:400;
+        color:var(--fg-muted);
+        font-size:13px;
+        margin-left:8px;
+    }
+    p{margin:12px 0;}
+    ul,ol{margin:12px 0;padding-left:24px;}
+    li{margin:6px 0;}
+    li>ul,li>ol{margin:6px 0;}
+    code{
+        font-family:ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,"Liberation Mono",monospace;
+        font-size:.875em;
+        background:var(--code-bg);
+        padding:.14em .38em;
+        border-radius:5px;
+        white-space:nowrap;
+    }
+    a{color:var(--accent);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    strong{font-weight:600;}
+
+    /* 顶部说明块 */
+    .note{
+        background:var(--bg-soft);
+        border:1px solid var(--border);
+        border-left:4px solid var(--accent);
+        border-radius:8px;
+        padding:16px 20px;
+        margin:0 0 24px;
+        font-size:14px;
+    }
+    .note p{margin:6px 0;}
+    .note .label{
+        display:inline-block;
+        font-weight:600;
+        color:var(--accent);
+        margin-right:6px;
+    }
+    .warn{
+        background:var(--warn-bg);
+        border:1px solid #e7d48b;
+        border-left:4px solid var(--warn);
+        border-radius:8px;
+        padding:14px 20px;
+        margin:20px 0;
+        font-size:14px;
+        color:#4d3b00;
+    }
+    .warn b{color:var(--warn);}
+
+    /* 统计条 */
+    .stats{
+        display:flex;
+        flex-wrap:wrap;
+        gap:12px;
+        margin:24px 0 8px;
+    }
+    .stat{
+        flex:1 1 150px;
+        background:var(--bg-soft);
+        border:1px solid var(--border);
+        border-radius:8px;
+        padding:14px 16px;
+    }
+    .stat .num{
+        display:block;
+        font-size:24px;
+        font-weight:600;
+        line-height:1.2;
+        color:var(--accent);
+    }
+    .stat .txt{
+        font-size:13px;
+        color:var(--fg-muted);
+    }
+
+    /* 目录 */
+    .toc{
+        background:var(--bg-soft);
+        border:1px solid var(--border);
+        border-radius:8px;
+        padding:18px 22px;
+        margin:28px 0 8px;
+    }
+    .toc .toc-title{
+        font-weight:600;
+        margin:0 0 10px;
+        font-size:15px;
+    }
+    .toc ol{margin:0;padding-left:22px;}
+    .toc li{margin:4px 0;}
+    .toc .sub{
+        margin-top:6px;
+        font-size:13.5px;
+        color:var(--fg-muted);
+        line-height:2;
+    }
+    .toc .sub a{margin-right:12px;white-space:nowrap;}
+
+    /* 表格 */
+    .table-wrap{
+        overflow-x:auto;
+        margin:16px 0 24px;
+        border:1px solid var(--border);
+        border-radius:8px;
+    }
+    table{
+        border-collapse:collapse;
+        width:100%;
+        font-size:13.5px;
+        line-height:1.6;
+    }
+    caption{
+        caption-side:top;
+        text-align:left;
+        padding:10px 14px;
+        font-size:13px;
+        color:var(--fg-muted);
+        border-bottom:1px solid var(--border);
+        background:#fbfcfd;
+    }
+    th,td{
+        padding:9px 14px;
+        text-align:left;
+        vertical-align:top;
+        border-bottom:1px solid var(--border);
+    }
+    thead th{
+        background:var(--bg-soft);
+        font-weight:600;
+        white-space:nowrap;
+        border-bottom:2px solid var(--border);
+    }
+    tbody tr:nth-child(even){background:#fbfcfd;}
+    tbody tr:last-child td{border-bottom:none;}
+    td:first-child{white-space:nowrap;}
+    td.nowrap{white-space:nowrap;}
+    .v{font-variant-numeric:tabular-nums;font-weight:600;color:var(--fg);}
+
+    hr{
+        border:none;
+        border-top:1px solid var(--border);
+        margin:40px 0;
+    }
+    blockquote{
+        margin:16px 0;
+        padding:10px 18px;
+        border-left:4px solid var(--border);
+        background:var(--bg-soft);
+        color:var(--fg-muted);
+        border-radius:0 6px 6px 0;
+    }
+    blockquote p{margin:6px 0;}
+    .footer{
+        margin-top:56px;
+        padding-top:20px;
+        border-top:1px solid var(--border);
+        font-size:13px;
+        color:var(--fg-muted);
+    }
+    .top{
+        position:fixed;
+        right:22px;
+        bottom:22px;
+        background:var(--bg);
+        border:1px solid var(--border);
+        border-radius:50px;
+        padding:8px 14px;
+        font-size:13px;
+        color:var(--fg-muted);
+        box-shadow:0 2px 8px rgba(0,0,0,.08);
+    }
+    .top:hover{color:var(--accent);text-decoration:none;}
+    @media print{
+        .top{display:none;}
+        .table-wrap{overflow:visible;}
+        table{font-size:11px;}
+        h2{page-break-after:avoid;}
+        tr{page-break-inside:avoid;}
+    }
+    @media (max-width:720px){
+        .page{padding:28px 16px 64px;}
+        h1{font-size:24px;}
+        h2{font-size:19px;}
+    }
+</style>
+</head>
+<body>
+<a class="top" href="#top">↑ 顶部</a>
+<div class="page" id="top">
+
+<h1>feilong 版本演进总览（3.0.0 → 4.5.6）</h1>
+<p class="subtitle">基于 <code>doc/release-notes/</code> 下 52 份发布说明汇总</p>
+
+<div class="stats">
+    <div class="stat"><span class="num">52</span><span class="txt">个发布版本</span></div>
+    <div class="stat"><span class="num">3</span><span class="txt">条演进主线</span></div>
+    <div class="stat"><span class="num">10</span><span class="txt">个转折点版本</span></div>
+    <div class="stat"><span class="num">13</span><span class="txt">个类族演进史</span></div>
+</div>
+
+<div class="toc">
+    <p class="toc-title">目录</p>
+    <ol>
+        <li><a href="#sec1">三条主线</a></li>
+        <li><a href="#sec2">版本速查表（52 个版本）</a></li>
+        <li><a href="#sec3">十个转折点</a></li>
+        <li><a href="#sec4">按类的跨版本演进</a>
+            <div class="sub">
+                <a href="#c-object">ObjectUtil</a>
+                <a href="#c-coll">CollectionsUtil</a>
+                <a href="#c-group">GroupUtil</a>
+                <a href="#c-map">MapUtil</a>
+                <a href="#c-str">StringUtil</a>
+                <a href="#c-date">DateUtil</a>
+                <a href="#c-thread">ThreadUtil</a>
+                <a href="#c-convert">ConvertUtil</a>
+                <a href="#c-http">HttpClientUtil / HttpRequest</a>
+                <a href="#c-bot">机器人 &amp; Markdown</a>
+                <a href="#c-json">JsonUtil</a>
+                <a href="#c-servlet">RequestUtil / ResponseUtil</a>
+                <a href="#c-other">其它工具类</a>
+            </div>
+        </li>
+        <li><a href="#sec5">横切主题</a></li>
+        <li><a href="#sec6">几个容易记错的事实</a></li>
+    </ol>
+</div>
+
+<h2 id="sec1">一、三条主线</h2>
+
+<h3>1. 3.0.x —— 一次性的破坏性大重构</h3>
+<p>3.0.0 单版本 <strong>140 处变更</strong>，是整个历史里最大的一次：包名统一（<code>com.feilong.net.httpclient4</code> → <code>com.feilong.net.http</code>、<code>com.feilong.json.jsonlib</code> → <code>com.feilong.json</code>）、模块重排（<code>feilong-velocity</code> → <code>feilong-template</code>、多个 <code>feilong-xml-*</code> / <code>feilong-json-*</code> 子模块删除合并）、大量类直接删除（<code>DomParser</code>、<code>KeyBuilder</code>、<code>MoneyUtil</code>、<code>ColorUtil</code>、<code>ImageUtil</code>、<code>ProcessUtil</code>…）、<strong>升级到 JDK 8</strong>。</p>
+<p>随后的 3.0.2 – 3.0.10 是一条「把第三方库打散进项目 + 转成 optional」的收尾流水线：commons-codec / commons-net / commons-compress / commons-digester3 / ognl / slf4j-api / xstream 依次被「打进项目组」，同时补 source 与 javadoc 附件。</p>
+
+<h3>2. 3.1 – 3.5 —— 工具类「长肉」期</h3>
+<p>这是 feilong 的主力扩张阶段，几乎每个版本都在往核心工具类里加方法：<code>CollectionsUtil</code>、<code>ObjectUtil</code>、<code>MapUtil</code>、<code>StringUtil</code>、<code>DateUtil</code>、<code>ConvertUtil</code>、<code>ThreadUtil</code>、<code>HttpClientUtil</code>、<code>RequestUtil</code>。特点是<strong>小步高频</strong>（3.3.x 有 10 个补丁版本），每次 1–10 个方法，签名越来越长（<code>..., Class&lt;T&gt;</code>、<code>..., boolean</code> 这类显式参数）。</p>
+
+<h3>3. 4.0 – 4.5 —— 反射式 API 退场，Function 上位</h3>
+<p>4.0.0 出现第一个 <code>Function</code> 版本的重载（<code>CollectionsUtil.getPropertyValueList(Collection, Function)</code>），4.5.2 lambda 化大爆发，4.5.5 补上 <code>removeDuplicate(Collection, Function)</code>，<strong>4.5.6 一次性把 13 个属性名(反射)方法标记 <code>@Deprecated</code></strong>——至此「弱化反射式 API」成为公开的路线。</p>
+<p>同期另一半精力转向<strong>发布工程</strong>：模块聚合成一个 <code>feilong</code> jar、shade、gpg/nexus 发布、javadoc 审计、README 英文化、插件批量升级。</p>
+<p>4.4.0 还有一个小转向值得单独记：引入<strong>日志上下文体系</strong>（<code>CustomFixedContextLogCreator</code> + SPI），并把工具类的私有构造器、日志声明分别统一到 Lombok 的 <code>@NoArgsConstructor(access = PRIVATE)</code> 与 <code>@Slf4j</code>，属于「代码形态统一」的一步。</p>
+
+<h2 id="sec2">二、版本速查表</h2>
+<div class="table-wrap">
+<table>
+    <caption>50 个版本按发布时间升序；「变更数」为原文件明确写出的数字</caption>
+    <thead>
+        <tr><th>版本</th><th>变更数</th><th>一句话</th></tr>
+    </thead>
+    <tbody>
+        <tr><td class="v">3.0.0</td><td>140</td><td>破坏性大重构：包名/模块重排、JDK8、依赖打散 + 转 optional</td></tr>
+        <tr><td class="v">3.0.1</td><td>1</td><td><code>ExcelRequestFileCreator</code> 地址未配置时返回 null</td></tr>
+        <tr><td class="v">3.0.2</td><td>6</td><td>commons-codec/net 打散、spring 升 5、补 source+javadoc、<code>SpelUtil</code>/<code>WebSpringUtil</code></td></tr>
+        <tr><td class="v">3.0.3</td><td>9</td><td>compress/digester3/ognl/slf4j/xstream 打散、<code>UploadController</code></td></tr>
+        <tr><td class="v">3.0.4</td><td>11</td><td>json 精简（删 function 特性、<code>JsonBeanProcessor</code>）、新增 <code>Triple</code></td></tr>
+        <tr><td class="v">3.0.5</td><td>8</td><td><code>ThreadUtil.sleep(int)</code>、<code>JsonUtil.format</code> 改可变参数</td></tr>
+        <tr><td class="v">3.0.6</td><td>21</td><td><code>CollectionsUtil</code> 的 get/partition/size；<code>JsonUtil</code> 各 toXxx 入参 Object→String</td></tr>
+        <tr><td class="v">3.0.7</td><td>7</td><td>json 的 uri/url value 转换器；<code>ResponseUtil.write</code> 默认 utf-8</td></tr>
+        <tr><td class="v">3.0.8</td><td>9</td><td><code>CollectionsUtil.exist</code>；sftp 简化配置、默认超时 0→3 秒</td></tr>
+        <tr><td class="v">3.0.9</td><td>2</td><td>新增企业微信机器人 <code>WxworkBot</code></td></tr>
+        <tr><td class="v">3.0.10</td><td>3</td><td>json 属性过滤增强；http 工具类自动去 url 空格</td></tr>
+        <tr><td class="v">3.1.0</td><td>40</td><td>钉钉机器人；<code>ObjectUtil.equalsAny</code>；<code>ResponseUtil</code> 重构；大批依赖升级</td></tr>
+        <tr><td class="v">3.1.1</td><td>18</td><td>核心工具涌现：进度/日期/字符串/线程/集合；<code>JsonUtil.toString</code></td></tr>
+        <tr><td class="v">3.2.0</td><td>10</td><td><code>Validator</code> 类 <code>isAnyBlank</code>；<code>ServletContextUtil.EXCLUDE_KEYS</code> 配置化；log4j2 替代 log4j</td></tr>
+        <tr><td class="v">3.2.1</td><td>9</td><td><code>DateUtil.toDate</code> 默认 <code>yyyy-MM-dd</code>；<code>URLUtil.ifNoHttpOrHttpsProtocolPrependPre</code></td></tr>
+        <tr><td class="v">3.2.2</td><td>4</td><td>两个 Map 对比方法；<code>JsonUtil.toString</code> 重载；http 日志统一 tostring</td></tr>
+        <tr><td class="v">3.2.3</td><td>1</td><td><code>MapUtil.extractIntersectionKeyDifferentValueMap</code> 过滤不存在的 key</td></tr>
+        <tr><td class="v">3.3.0</td><td>—</td><td>httpclient 支持 retry；机器人 <code>isCatchException</code> / <code>isAsync</code></td></tr>
+        <tr><td class="v">3.3.1</td><td>—</td><td>Map/集合/日期方法；<code>ViewCommand</code>/<code>SubViewCommand</code> 移出到 spring 项目</td></tr>
+        <tr><td class="v">3.3.2</td><td>—</td><td><code>ConvertUtil</code> 显性默认值重载；<code>ObjectUtil.defaultPageNo</code>/<code>defaultIfNullOrLessThanOne</code></td></tr>
+        <tr><td class="v">3.3.3</td><td>—</td><td><code>Validator.isNullOrZero</code>；<code>RequestUtil.getParameterDefaultValue</code></td></tr>
+        <tr><td class="v">3.3.4</td><td>—</td><td><code>StringUtil.toMultiValueMap</code>/<code>toSingleValueMap</code>；<code>ConvertUtil.toLongList</code>；<code>JsonUtil</code> 容错返回 null</td></tr>
+        <tr><td class="v">3.3.5</td><td>—</td><td><code>UrlUtil.getUnionUrl</code>；<code>MapUtil.getSubSumValue</code>；<code>ObjectUtil.defaultEmpty*IfNull</code> 三兄弟</td></tr>
+        <tr><td class="v">3.3.6</td><td>—</td><td><code>removeAll</code> 支持第二参 null；<code>ObjectUtil.defaultNew*IfNull</code> 五兄弟</td></tr>
+        <tr><td class="v">3.3.7</td><td>—</td><td><code>StringUtil.tokenizeToArrayContains</code>；<code>MapUtil.get</code>/<code>getOrDefault</code></td></tr>
+        <tr><td class="v">3.3.8</td><td>—</td><td><code>Slf4jUtil.format</code> 废弃 → <code>StringUtil.formatPattern</code>；<code>StringUtil.clean</code>；<code>DingTalkBotBuilder</code></td></tr>
+        <tr><td class="v">3.3.9</td><td>—</td><td><code>DateUtil.isInTime</code> 区间语义修正 + <code>isNotInTime</code> 三兄弟；<code>TypeUtil</code> 泛型修复</td></tr>
+        <tr><td class="v">3.4.0</td><td>—</td><td>删 <code>feilong-lib-xstream</code>、xstream 转 optional（安全）；SHA 系列 <code>encode(byte[])</code>；<code>base64Util</code></td></tr>
+        <tr><td class="v">3.4.1</td><td>—</td><td>简易版 <code>SimpleHttpAndJsonResponseCommandBuilder</code></td></tr>
+        <tr><td class="v">3.5.0</td><td>41</td><td><code>StringUtil</code> 三个 tokenize 方法、<code>AggregateUtil</code> 值自动类型转换、<code>Validator.isAllNullOrEmpty</code>；slf4j 改为直接依赖（#515）</td></tr>
+        <tr><td class="v">3.5.1</td><td>—</td><td><code>formatDuration(Date)</code> 废弃；<code>CollectionsUtil.setIfCondition</code>；<code>HttpClientUtil</code> patch/get/post/put 带 header</td></tr>
+        <tr><td class="v">4.0.0</td><td>—</td><td><strong>反射→Function 起点</strong>：<code>getPropertyValueList(Collection, Function)</code>；httpclient 并入 feilong-lib</td></tr>
+        <tr><td class="v">4.0.1</td><td>—</td><td><code>ObjectUtil.defaultZero(Integer)</code>；<code>HttpClientUtil.getHttpResponse</code>；<code>HttpLogHelper</code></td></tr>
+        <tr><td class="v">4.0.2</td><td>—</td><td><code>LongToDateMorpher</code>（json 时间戳 long → Date）</td></tr>
+        <tr><td class="v">4.0.3</td><td>—</td><td><code>ThreadUtil.execute</code> 分片并发；<code>URLUtil.transform*</code>；<code>RequestByteArrayBody</code> 支持 mimeType</td></tr>
+        <tr><td class="v">4.0.4</td><td>—</td><td><code>LogHelper</code> 耗时/预估剩余时间；<code>JsonUtil.toString</code> 白名单输出 null</td></tr>
+        <tr><td class="v">4.0.5</td><td>—</td><td><code>FilenameUtil.isExtensionIgnoreCase</code></td></tr>
+        <tr><td class="v">4.0.6</td><td>—</td><td><code>ThreadUtil.executeUsePerElement</code>；<code>PartitionThreadConfig</code> 默认线程 100→20；<code>RequestLogHelper</code></td></tr>
+        <tr><td class="v">4.0.7</td><td>—</td><td><code>CollectionsUtil.splitDuplicate</code>（按属性把新数据/重复数据分开）</td></tr>
+        <tr><td class="v">4.0.8</td><td>—</td><td><code>HttpRequest.logTraceContext</code>；<code>Bot.sendMessage(MessageParams)</code> 支持 at 人；SHA <code>encodeUpperCase</code> 一批</td></tr>
+        <tr><td class="v">4.1.0</td><td>—</td><td><code>ConvertUtil.toStringList</code>；<code>LogAndBotCombination.debug/info/warn/error</code>；<code>HttpLogHelper.autoLog</code> 死循环修复</td></tr>
+        <tr><td class="v">4.1.1</td><td>—</td><td>FTP/SFTP 支持 <code>logTraceContext</code>；<code>AbstractFileTransfer</code> 资源关闭优化</td></tr>
+        <tr><td class="v">4.1.2</td><td>—</td><td><code>IOReaderUtil.readToList</code>；<code>StringToBeanConverter</code> 移入 feilong-core 并标 <code>@FunctionalInterface</code></td></tr>
+        <tr><td class="v">4.2.0</td><td>7</td><td><code>MapUtil.newLinkedHashMap(Iterable, V)</code>；<code>HttpClientUtil.getHttpFullInfo</code></td></tr>
+        <tr><td class="v">4.3.0</td><td>10</td><td><code>NumberUtil.isGatherThan</code> → <code>isGreaterThan</code> 改名；<code>Http*</code> 补 toString；<code>MarkdownStringCreator</code></td></tr>
+        <tr><td class="v">4.3.1</td><td>6</td><td><code>ObjectUtil.defaultTrueIfNull</code>/<code>defaultFalseIfNull</code>；<code>StringUtil</code> 三个解析方法；<code>JsonUtil.toString(excludes)</code></td></tr>
+        <tr><td class="v">4.4.0</td><td>12</td><td>日志上下文体系（<code>CustomFixedContextLogCreator</code> + SPI）、<code>RequestUtil</code> 带默认值/分页参数、<code>ServiceLoaderUtil</code>；工具类构造器与日志声明统一</td></tr>
+        <tr><td class="v">4.5.0</td><td>11</td><td>文档迁 gitbook；<code>CollectionsUtil.groupOne</code> lambda 化、<code>containsAny</code>；<code>LogContextExecutor</code> 改 catch throwable</td></tr>
+        <tr><td class="v">4.5.2</td><td>30</td><td>lambda 化大爆发（groupBy/select/find/getPropertyValueMap…）；MapUtil 四个新方法；<code>MarkdownHelper.createTable</code></td></tr>
+        <tr><td class="v">4.5.4</td><td>18</td><td><code>ScheduledExecutorServiceUtil</code>、<code>groupByToSet</code>、<code>getByIndex</code>、<code>SimpleRetryUtil</code>、<code>appendMarkdownLine</code></td></tr>
+        <tr><td class="v">4.5.5</td><td>11</td><td><code>limit</code>/<code>flatten</code>/<code>removeDuplicate(Function)</code>；<code>BatchProcessorUtil</code>；varargs 改造</td></tr>
+        <tr><td class="v">4.5.6</td><td>38</td><td><strong>13 个反射 API 一次性 <code>@Deprecated</code></strong>；<code>defaultZero(BigDecimal/Long)</code>、周相关方法、<code>splitByExistId</code>、<code>HttpRequest.builder()</code></td></tr>
+    </tbody>
+</table>
+</div>
+
+<h2 id="sec3">三、十个转折点</h2>
+<div class="table-wrap">
+<table>
+    <thead>
+        <tr><th>版本</th><th>为什么重要</th></tr>
+    </thead>
+    <tbody>
+        <tr><td class="v">3.0.0</td><td>一次性的架构重置：包名、模块、JDK 基线、依赖策略全在这里定下来；之后的版本都在这个骨架上长</td></tr>
+        <tr><td class="v">3.0.2 – 3.0.3</td><td>「把第三方库打散进项目」的执行期；同时补上 source/javadoc 附件（<code>#222</code>），这是中央仓库体验问题的起点</td></tr>
+        <tr><td class="v">3.1.0</td><td>单版本 40 处变更，机器人能力（钉钉）+ <code>ObjectUtil.equalsAny</code> + 一大批插件升级同时落地</td></tr>
+        <tr><td class="v">3.2.0</td><td>把 log4j 换成 log4j2；<code>ServletContextUtil.EXCLUDE_KEYS</code> 从硬编码改成配置文件</td></tr>
+        <tr><td class="v">3.4.0</td><td>安全驱动的删依赖：删 <code>feilong-lib-xstream</code>、xstream 转 optional（<code>#40</code>/<code>#320</code> XStream 漏洞）</td></tr>
+        <tr><td class="v">4.0.0</td><td>反射→Function 的起点；httpclient 并入 <code>feilong-lib</code>（包名变成 <code>com.feilong.lib.org.apache.http.*</code>，后续所有日志配置坑都源于此）</td></tr>
+        <tr><td class="v">4.0.3 / 4.0.6</td><td><code>ThreadUtil</code> 从「sleep 工具」升级成「分片并发执行框架」，并开始淘汰旧签名（4.0.6 一次标 4 个 deprecated）</td></tr>
+        <tr><td class="v">4.5.0</td><td>文档从 oschina 迁到 gitbook；<code>catch exception</code> → <code>catch throwable</code>（<code>LogContextExecutor</code>）</td></tr>
+        <tr><td class="v">4.5.2</td><td>lambda 化正面战场：<code>groupBy</code>/<code>select</code>/<code>find</code>/<code>getPropertyValueMap</code> 的 Function 版本集中落地；同时 6 条 <code>@deprecated</code> 计划以删除线标注（未落地）</td></tr>
+        <tr><td class="v">4.5.6</td><td>13 个属性名(反射)方法一次性 <code>@Deprecated</code>，宣告路线完成；同版本补齐 <code>defaultZero</code> 金额版、周边界、<code>splitByExistId</code>、<code>HttpRequest.builder()</code>、zip slip 修复、javadoc 全量审计</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h2 id="sec4">四、按类的跨版本演进</h2>
+
+<h3 id="c-object">4.1 <code>ObjectUtil</code> <span class="tag">default* 家族分五批长成（最典型的演进样本）</span></h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.0.0</td><td>新建 <code>defaultIfNull(T, T)</code>（#208）</td></tr>
+        <tr><td class="v">3.1.0</td><td><code>equalsAny</code>（#350）</td></tr>
+        <tr><td class="v">3.3.2</td><td><code>defaultIfNullOrLessThanOne</code>、<code>defaultPageNo(Integer)</code>（#433 #434）</td></tr>
+        <tr><td class="v">3.3.5</td><td><code>defaultEmptyListIfNull</code> / <code>defaultEmptyMapIfNull</code> / <code>defaultEmptySetIfNull</code>（#460–#462）</td></tr>
+        <tr><td class="v">3.3.6</td><td><code>defaultEmptyStringIfNull</code>、<code>defaultNewArrayListIfNull</code>、<code>defaultNewHashMapIfNull</code>、<code>defaultNewHashSetIfNull</code>、<code>defaultNewLinkedHashMapIfNull</code>（#468–#472）</td></tr>
+        <tr><td class="v">4.0.1</td><td><code>defaultZero(Integer)</code>（#610）</td></tr>
+        <tr><td class="v">4.3.0</td><td><code>defaultCountIfNullZeroOrGreaterThan</code>（#754）</td></tr>
+        <tr><td class="v">4.3.1</td><td><code>defaultTrueIfNull</code> / <code>defaultFalseIfNull</code>（#774 #775）</td></tr>
+        <tr><td class="v">4.5.4</td><td><code>defaultEmptyListIfNull</code> 改三元实现，行为不变（#840）</td></tr>
+        <tr><td class="v">4.5.6</td><td><code>defaultZero(BigDecimal)</code> / <code>defaultZero(Long)</code>（#896）；<code>defaultIfNull(T, Supplier)</code>（#890）；<code>defaultNewIfNull(T, Class)</code>（#628）</td></tr>
+    </tbody>
+</table>
+</div>
+<blockquote><p>规律：<code>default*</code> 的命名是<strong>逐步收敛</strong>出来的——先是 <code>defaultIfNull</code>，然后按「空集合 / 新建集合 / 零值 / 布尔 / 计数」分五批补齐，最后补金额与懒加载。</p></blockquote>
+
+<h3 id="c-coll">4.2 <code>CollectionsUtil</code> <span class="tag">全库改动最密集的类</span></h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.0.6</td><td><code>get(Iterable, int)</code>、<code>partition(List, int)</code>、<code>size(Object)</code>（#254 #261 #255）</td></tr>
+        <tr><td class="v">3.0.8</td><td><code>exist(Iterable, String, V)</code>（#292）</td></tr>
+        <tr><td class="v">3.1.0</td><td><code>removeDuplicate(Collection, String)</code> 注释改进（#328）</td></tr>
+        <tr><td class="v">3.1.1</td><td><code>newHashSet(Collection)</code>、<code>find(Iterable, Map)</code>（#373 #361）</td></tr>
+        <tr><td class="v">3.2.1</td><td><code>addIgnoreNullOrEmpty(Collection, T)</code> 支持动态数组（#402）</td></tr>
+        <tr><td class="v">3.3.1</td><td><code>ifCoditionAdd</code>、<code>getPropertyValueList(Iterable, String, Class)</code>、<code>getPropertyValueSet(Iterable, String, Class)</code>（#418 #420 #421）</td></tr>
+        <tr><td class="v">3.3.4</td><td><code>containsTrimAndIgnoreCase(Iterable, String)</code>（#442）</td></tr>
+        <tr><td class="v">3.3.6</td><td><code>removeAll(Collection, Collection)</code> 支持第二参为 null（#465）</td></tr>
+        <tr><td class="v">3.3.9</td><td><code>addIgnoreNullOrEmpty(Collection, List)</code>（#484）</td></tr>
+        <tr><td class="v">3.5.0</td><td>新增获取 List 最后一条数据的方法（#548）</td></tr>
+        <tr><td class="v">3.5.1</td><td><code>setIfCondition(List, int, T, boolean)</code>（#568）</td></tr>
+        <tr><td class="v">4.0.0</td><td><strong><code>getPropertyValueList(Collection, Function)</code></strong>（#597）← 反射→Function 的第一个</td></tr>
+        <tr><td class="v">4.0.1</td><td><code>contains(Iterable, String)</code>（#601）</td></tr>
+        <tr><td class="v">4.0.7</td><td><code>splitDuplicate(Collection, String...)</code> → <code>Pair</code>（#666）</td></tr>
+        <tr><td class="v">4.5.0</td><td><code>groupOne(..., String)</code> 升级到 lambda（#551）；<code>containsAny</code> 支持动态参数（#772）</td></tr>
+        <tr><td class="v">4.5.2</td><td><code>getPropertyValueSet(Iterable, String)</code>、<code>select(Iterable, String, Collection)</code> 支持 lambda（#812 #813）；新增 <code>select(Iterable, Function, Collection)</code>（#818）、<code>find(Iterable, Function, V)</code>（#801）</td></tr>
+        <tr><td class="v">4.5.4</td><td><code>selectRejected</code> 支持 Function（#838 #839）</td></tr>
+        <tr><td class="v">4.5.5</td><td><code>limit(List/Set, int)</code>（#854 #860）、<code>flattenToList</code>/<code>flattenToSet</code>（#857 #862）、<code>removeDuplicate(Collection, Function)</code>（#852）；<code>removeAll</code> 与 <code>addAllIgnoreNull</code> 改可变参数（#855 #856）</td></tr>
+        <tr><td class="v">4.5.6</td><td><code>splitByExistId(Collection, Function, Collection)</code> → <code>Pair</code>（#707）；<code>removeDuplicate</code>/<code>getPropertyValue*</code>/<code>find</code>/<code>select</code>/<code>selectRejected</code> 共 10 个反射版标 <code>@Deprecated</code>（#874–#883）；<code>removeDuplicate(Collection, String...)</code> 性能提升（#327）；<code>splitDuplicate</code> 文档修正（#873）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h3 id="c-group">4.3 <code>GroupUtil</code></h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">4.5.0</td><td><code>groupOne(..., String)</code> 升级到 lambda（#551，记在 CollectionsUtil 名下）</td></tr>
+        <tr><td class="v">4.5.2</td><td>新建 <code>groupBy(Iterable, Function)</code>（#832）、<code>groupBy(Iterable, Function, Predicate)</code>（#831）</td></tr>
+        <tr><td class="v">4.5.4</td><td><code>groupByToSet(...)</code> 两个重载（收集到 Set + 组内去重 + 过滤，#835 #845）；类级 javadoc 完善（#849）</td></tr>
+        <tr><td class="v">4.5.6</td><td><code>group(Iterable, String)</code>、<code>group(Iterable, String, Predicate)</code>、<code>groupOne(Iterable, String)</code> 全部 <code>@Deprecated</code>（#891–#893）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h3 id="c-map">4.4 <code>MapUtil</code></h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.2.3</td><td><code>extractIntersectionKeyDifferentValueMap</code> 过滤不存在的 key（#416）</td></tr>
+        <tr><td class="v">3.3.1</td><td><code>removeKeys(Map, Collection)</code>（#71）、<code>toArrayValueMap(Map, Class)</code>（#65）</td></tr>
+        <tr><td class="v">3.3.5</td><td><code>getSubSumValue(Map, Iterable, Class)</code>（#457）</td></tr>
+        <tr><td class="v">3.3.7</td><td><code>get(Map, K)</code>（#475）、<code>getOrDefault(Map, K, V)</code>（#476）</td></tr>
+        <tr><td class="v">3.5.0</td><td>新增 <code>computeIfAbsent</code>（#559）</td></tr>
+        <tr><td class="v">4.0.6</td><td><code>getDefaultEmptyStringIfNull(Map, K)</code>（#654）</td></tr>
+        <tr><td class="v">4.2.0</td><td><code>newLinkedHashMap(Iterable, V)</code>（#744）</td></tr>
+        <tr><td class="v">4.5.2</td><td><code>extractSubMap(Map, Function)</code>（#820）、<code>getCaseInsensitive</code>（#816）、<code>getSubMapExcludeValues</code>（#802）、<code>putAllFromList</code>（#819）</td></tr>
+        <tr><td class="v">4.5.4</td><td><strong><code>get(Map, int)</code> 因歧义 <code>@Deprecated</code></strong>，新增 <code>getByIndex(Map, int)</code>（#834 #837）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h3 id="c-str">4.5 <code>StringUtil</code></h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.0.0</td><td>新增 <code>SPACE</code> / <code>EMPTY</code> 常量（#207）</td></tr>
+        <tr><td class="v">3.1.1</td><td><code>trimAndEqualsIgnoreCase(String, String)</code>（#368）</td></tr>
+        <tr><td class="v">3.3.2</td><td><code>newString(byte[])</code>（#427）</td></tr>
+        <tr><td class="v">3.3.4</td><td><code>toMultiValueMap(String, Class, Class)</code>（#444）、<code>toSingleValueMap(...)</code>（#450）</td></tr>
+        <tr><td class="v">3.3.7</td><td><code>tokenizeToArrayContains</code> 两个重载（#474 #477）</td></tr>
+        <tr><td class="v">3.3.8</td><td><code>clean(CharSequence)</code>（#55）、<strong><code>formatPattern</code> 取代 <code>Slf4jUtil.format</code></strong>（#480 #481）</td></tr>
+        <tr><td class="v">3.5.0</td><td><code>tokenizeToStringArray(String)</code>（#560）、<code>tokenizeToList(String)</code>（#561）、<code>tokenizeToSet</code>（#558）</td></tr>
+        <tr><td class="v">4.0.8</td><td><code>NBSP</code> 常量（#701）</td></tr>
+        <tr><td class="v">4.1.2</td><td><code>toSingleValueMap</code> 支持定制 value 类（#738）</td></tr>
+        <tr><td class="v">4.3.1</td><td><code>toMultiValueMap(String)</code>（#777）、<code>toMultiValueMap(String, Class)</code>（#778）、<code>tokenizeToList(String, Class)</code>（#760）</td></tr>
+        <tr><td class="v">4.5.2</td><td><code>toMap(String, String, String, Class, StringToBeanConverter)</code>（#815）</td></tr>
+    </tbody>
+</table>
+</div>
+<blockquote><p>这条线上最能看出风格演变：3.3.4 的 <code>toMultiValueMap(String, Class&lt;T&gt;, Class&lt;V&gt;)</code> 参数越来越长，4.3.1 开始用单 <code>Class</code> 收窄。</p></blockquote>
+
+<h3 id="c-date">4.6 <code>DateUtil</code></h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.0.0</td><td><code>DateExtensionUtil</code> 代码并入（#106）</td></tr>
+        <tr><td class="v">3.1.1</td><td><code>getFirstDateOfToday</code>、两个日期间隔月数（#357 #374）</td></tr>
+        <tr><td class="v">3.2.1</td><td><code>toDate</code> 新增默认 <code>yyyy-MM-dd</code> 简化写法（#406）</td></tr>
+        <tr><td class="v">3.3.1</td><td><code>nowTime</code>（long，#419）</td></tr>
+        <tr><td class="v">3.3.4</td><td><code>getTime</code> 支持 null 返回 null（#447）</td></tr>
+        <tr><td class="v">3.3.9</td><td><code>isInTime(Date, Date, Date)</code> 区间语义修正（#492）；新增 <code>isNotInTime</code> 三个重载（#486 #490 #491）</td></tr>
+        <tr><td class="v">3.5.1</td><td><code>formatDuration(Date)</code> 标 <code>@Deprecated</code>（自身耗时长，#572 #573）</td></tr>
+        <tr><td class="v">4.0.0</td><td>代码里所有 <code>formatDuration(Date)</code> 调用改成毫秒（#586）</td></tr>
+        <tr><td class="v">4.4.0</td><td><code>formatElapsedTime(long)</code> 取代 <code>formatDurationUseBeginTimeMillis(long)</code>，旧方法标记 <code>@Deprecated</code>（#779 #783）</td></tr>
+        <tr><td class="v">4.5.6</td><td>新增 <code>getFirstDateOfThisWeekUseMonday(Date)</code>（#884）、<code>getLastDateOfThisWeekUseSunday(Date)</code>（#68）、<code>getWeekStartAndEndPairMondayFirst()/(Date)</code>（#885 #886）、<code>getWeekStartAndEndPairSundayFirst()/(Date)</code>（#887 #888）；<code>getFirstDateOfThisWeek</code>/<code>getLastDateOfThisWeek</code> 实现重构（#889）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h3 id="c-thread">4.7 <code>ThreadUtil</code> <span class="tag">从 sleep 到分片并发</span></h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.0.5</td><td><code>sleep(int)</code>（#251）</td></tr>
+        <tr><td class="v">3.1.1</td><td><code>sleepSeconds(int)</code>（#358）</td></tr>
+        <tr><td class="v">4.0.3</td><td><code>execute(List, Map, PartitionPerHandler)</code>（#624）、<code>execute(List, PartitionPerHandler)</code>（#636）；<code>PartitionEachSizeBuilder</code>/<code>PartitionPerHandler</code>/<code>PartitionRunnableBuilder</code> 标 <code>@FunctionalInterface</code>（#632–#634）</td></tr>
+        <tr><td class="v">4.0.6</td><td><code>executeUsePerElement</code> 三个重载（#649 #650 #651）；<code>DefaultPartitionPerHandler</code>（#641）、<code>PartitionPerElementHandler</code>（#652）；<code>PartitionThreadConfig</code> 默认线程 100→20（#643）；<strong>旧 <code>execute(List, int, ...)</code> 四个重载标 <code>@Deprecated</code></strong>（#645–#648）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h3 id="c-convert">4.8 <code>ConvertUtil</code></h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.3.2</td><td><code>toBoolean(Object, Boolean)</code>（#426）、<code>toBigDecimal(Object, BigDecimal)</code>（#425）、<code>toLong</code> 增加默认值参数（#424）</td></tr>
+        <tr><td class="v">3.3.4</td><td><code>toLongList(Object)</code> / <code>toIntegerList(Object)</code>（#445）</td></tr>
+        <tr><td class="v">4.1.0</td><td><code>toStringList(Object)</code>（#708）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h3 id="c-http">4.9 <code>HttpClientUtil</code> / <code>HttpRequest</code> / <code>ConnectionConfig</code></h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.0.0</td><td><code>getClientIp</code> 支持定制头（#99）</td></tr>
+        <tr><td class="v">3.1.0</td><td>post/put 支持 body 与 paramMap 并存（#310）</td></tr>
+        <tr><td class="v">3.1.1</td><td><code>get(String)</code> 单参重载（#372）</td></tr>
+        <tr><td class="v">3.3.0</td><td>httpclient 支持 retry，处理 <code>SocketTimeoutException</code> / <code>ConnectTimeoutException</code>（#371）</td></tr>
+        <tr><td class="v">3.5.1</td><td><code>patch(String, String)</code>、<code>patch(String, String, Map)</code>（#578 #579）、<code>get(String, Map, Map)</code>（#575）、<code>post(String, Map, Map)</code>（#577）、<code>put(String, Map, Map)</code>（#576）</td></tr>
+        <tr><td class="v">4.0.1</td><td><code>getHttpResponse(HttpRequest)</code>（#607）、<code>HttpRequest.requestByteArrayBody</code>（#596）、新建 <code>HttpLogHelper</code>（#609）</td></tr>
+        <tr><td class="v">4.0.8</td><td><code>HttpRequest.logTraceContext</code>（#688）；<code>HttpLogHelper.createHttpRequestLog</code> javadoc（#690）</td></tr>
+        <tr><td class="v">4.1.0</td><td><code>HttpLogHelper.autoLog(...)</code> 死循环修复（#706）</td></tr>
+        <tr><td class="v">4.2.0</td><td><code>getHttpFullInfo(HttpRequest, ConnectionConfig)</code>（#745）</td></tr>
+        <tr><td class="v">4.3.0</td><td><code>getHttpFullInfo</code> 支持自定义返回类型（#755）；<code>ConnectionConfig</code>/<code>HttpRequest</code>/<code>HttpResponse</code> 补 <code>toString</code>（#749 #750 #751）</td></tr>
+        <tr><td class="v">4.5.6</td><td><code>HttpRequest.builder()</code>（#588）；<code>HttpClientUtil</code> 补「httpclient debug 日志」说明（#894）</td></tr>
+    </tbody>
+</table>
+</div>
+<blockquote><p>注意 4.0.0 把 httpclient 并入 <code>feilong-lib</code>，包名变成 <code>com.feilong.lib.org.apache.http.*</code>——这就是后来「按 <code>org.apache.http</code> 配日志级别无效」的根源。</p></blockquote>
+
+<h3 id="c-bot">4.10 机器人 &amp; Markdown</h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.0.9</td><td>新增企业微信机器人 <code>WxworkBot</code>（#297）</td></tr>
+        <tr><td class="v">3.1.0</td><td>新增钉钉机器人（#319）；包名 <code>com.feilong.net.wxwork.bot</code> → <code>com.feilong.net.bot.wxwork</code>（#329，不兼容）</td></tr>
+        <tr><td class="v">3.3.0</td><td>机器人支持自动捕获异常 <code>isCatchException</code>（#417）、支持异步 <code>isAsync</code>（#365）</td></tr>
+        <tr><td class="v">3.3.6</td><td>新建 <code>LogAndBotCombination</code>（#464）</td></tr>
+        <tr><td class="v">3.3.8</td><td>新建 <code>DingTalkBotBuilder</code>（#478）</td></tr>
+        <tr><td class="v">4.0.0</td><td><code>AbstractBot.isCatchException</code> 废弃，改用 <code>isThrowException</code>（#592）；<code>LogAndBotCombination</code> 区分最后一个参数是不是 e（#591）</td></tr>
+        <tr><td class="v">4.0.8</td><td><code>Bot.sendMessage(String, MessageParams)</code> 支持 at 人（#667）；<code>DingTalkBot.sendMessage(String, String, String...)</code> 废弃（#683）</td></tr>
+        <tr><td class="v">4.1.0</td><td><code>LogAndBotCombination.debug/info/warn/error(CombinationConfig, String, Object...)</code> 四个（#709–#712）</td></tr>
+        <tr><td class="v">4.3.0</td><td><code>MarkdownStringCreator.createListString(String, Map)</code>（#752）</td></tr>
+        <tr><td class="v">4.5.2</td><td><code>MarkdownHelper.createTable(List, List, List&lt;Function&gt;)</code>（#817）、<code>MarkdownHelper.font(String, String)</code>（#814）</td></tr>
+        <tr><td class="v">4.5.4</td><td><code>MarkdownHelper.appendMarkdownLine(StringBuilder, CharSequence)</code> 与带换行数重载（#850 #851）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h3 id="c-json">4.11 <code>JsonUtil</code></h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.0.6</td><td><code>toList</code>/<code>toArray</code>/<code>toBean</code>/<code>toMap</code> 入参由 <code>Object</code> 改成 <code>String</code>（#268–#274）</td></tr>
+        <tr><td class="v">3.1.1</td><td><code>toString(Object)</code>（#367）</td></tr>
+        <tr><td class="v">3.2.2</td><td><code>toString(Object, JavaToJsonConfig)</code>（#413）、<code>toString(Object, boolean)</code>（#414）</td></tr>
+        <tr><td class="v">3.3.4</td><td><code>format</code> 出现异常返回 null（#449）、<code>toBean</code> 空串返回 null（#446）</td></tr>
+        <tr><td class="v">4.0.4</td><td><code>toString(Object, boolean, String...)</code> 支持 null 白名单（#638）</td></tr>
+        <tr><td class="v">4.3.1</td><td><code>toString(Object, String...)</code> 排除属性（#776）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h3 id="c-servlet">4.12 <code>RequestUtil</code> / <code>ResponseUtil</code>（servlet）</h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>变化</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.0.7</td><td><code>ResponseUtil.write(HttpServletResponse, Object)</code> 默认编码改 utf-8（#277）</td></tr>
+        <tr><td class="v">3.1.0</td><td><code>ResponseUtil.write</code> 用 try-with-resources（#308）；<code>writeText</code>/<code>writeJson</code> 空编码时用 utf-8（#352）；<code>RequestUtil.isNotWechatRequest</code>（#354）</td></tr>
+        <tr><td class="v">3.1.1</td><td><code>RequestLogBuilder.getHeaderMap()</code> 迁移到 <code>RequestUtil</code>（#356）；<code>RequestUtil.getRequestFullURL</code>（#363）</td></tr>
+        <tr><td class="v">3.3.2</td><td><code>RequestUtil.getRequestInfoFullMapForLog</code>（#432）</td></tr>
+        <tr><td class="v">3.3.3</td><td><code>RequestUtil.getParameterDefaultValue</code>（#439）</td></tr>
+        <tr><td class="v">3.3.9</td><td><code>RequestUtil.getHeaderIntegerValue</code>（#489）、<code>getHeaderLongValue</code>（#488）</td></tr>
+        <tr><td class="v">3.5.1</td><td><code>RequestUtil.getRequestBody</code> 异常返回空串（#581）、<code>isPostMethod</code>（#583）、<code>isGetMethod</code>（#580）</td></tr>
+        <tr><td class="v">4.0.6</td><td><code>RequestUtil.parseParamsToQueryString</code>（#656）；新建 <code>RequestLogHelper</code>（#655）</td></tr>
+        <tr><td class="v">4.0.7</td><td><code>RequestLogHelper</code> 的 paramString null 显示成 empty（#662）</td></tr>
+        <tr><td class="v">4.3.0</td><td><code>RequestLogHelper.autoRequestInfo(HttpServletRequest, String, Object...)</code>（#753）</td></tr>
+        <tr><td class="v">4.4.0</td><td><code>getAttribute(HttpServletRequest, String, T)</code>（#780）、<code>getAttribute(..., Class, T)</code>（#784）、<code>getParameterDefaultValue(..., Class, T)</code>（#785）、<code>getParameterPageNo</code>（#786）、<code>getParameterPageSize</code>（#787）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h3 id="c-other">4.13 其它值得单独记一笔的类</h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>类</th><th>演进</th></tr></thead>
+    <tbody>
+        <tr><td><code>Validator</code></td><td>3.0.0 新建（#209）→ 3.2.0 <code>isAnyBlank</code> 类（#60）→ 3.3.3 <code>isNullOrZero</code>（#435）→ 3.3.8 <code>isNotNullOrEmpty</code> 修 NBSP（<code>\u00A0</code>）校验（#56）→ 3.5.0 <code>isAllNullOrEmpty(Object...)</code>（#550）</td></tr>
+        <tr><td><code>URLUtil</code> / <code>URIUtil</code></td><td>3.2.1 <code>ifNoHttpOrHttpsProtocolPrependPre</code>（#387）→ 3.3.5 <code>getUnionUrl</code>（#458）→ 3.3.8 <code>decodeIfExceptionDefault</code> 两个（#404 #482）→ 4.0.3 <code>transformHttpToHttps</code>/<code>transformHttpsToHttp</code>/<code>transformProtocol</code>（#627 #630 #631）</td></tr>
+        <tr><td><code>IOReaderUtil</code></td><td>3.0.0 支持 location（classpath，#161）→ 4.0.1 <code>readToByteArray</code>（#608）→ 4.1.2 <code>readToList</code>（#739）</td></tr>
+        <tr><td>单向加密</td><td>3.4.0 补 SHA1/256/384/512/SM3 的 <code>encode(byte[])</code>（#507–#511）、新建 <code>base64Util</code>（#506）→ 4.0.8 全部补 <code>encodeUpperCase(String)</code>（#437 #687 #692 #694 #695 #697）</td></tr>
+        <tr><td><code>StringToBeanConverter</code></td><td>4.1.2 从 feilong-context 移到 feilong-core 并标 <code>@FunctionalInterface</code>（#740 #741）→ 4.5.5 继承 <code>java.util.function.Function</code>（#859）</td></tr>
+        <tr><td><code>BatchProcessorUtil</code></td><td>4.5.5 新建 <code>executePartitions</code>（#853，同步逐批）→ 4.5.6 <code>executePartitionsToMap</code>（#865）</td></tr>
+        <tr><td><code>SimpleRetryUtil</code></td><td>4.5.4 新建，明确「轻量级」定位，复杂策略建议 Spring Retry / Failsafe（#846）</td></tr>
+        <tr><td><code>ScheduledExecutorServiceUtil</code></td><td>4.5.4 新建 <code>startSingleThreadScheduledAtFixedRate</code>（#836）</td></tr>
+        <tr><td><code>ServiceLoaderUtil</code></td><td>4.4.0 新建，提供 <code>loadFirst(Class&lt;T&gt;)</code> 取第一个 SPI 实现（#790）</td></tr>
+        <tr><td>日志上下文体系</td><td>4.4.0 新增 <code>com.feilong.context.log.CustomFixedContextLogCreator</code> + SPI 注册方式，自动往日志里带操作人/ip/ua 等上下文（#789，标 <code>重要</code>）</td></tr>
+        <tr><td><code>AggregateUtil</code> / <code>NumberUtil</code></td><td>3.5.0 <code>avg</code>/<code>sum</code>/<code>groupSum</code> 的值支持自动类型转换（string 转数字，#554 #553 #549）；新增 <code>NumberUtil.getSubtractValueWithScale(Number, Number, int)</code>（#557）</td></tr>
+        <tr><td><code>FileUtil</code> / <code>IOWriteUtil</code></td><td>3.5.0 修 <code>FileUtil.formatSize(long)</code> 缺失 size 参数的校验（#527）与大文件（2.57G）日志报错（#528）</td></tr>
+        <tr><td><code>ResponseCommandBuilder</code> 家族</td><td>3.4.1 简易版 <code>SimpleHttpAndJsonResponseCommandBuilder</code>（#514）→ 4.1.0 泛型 <code>T extends ResponseCommand</code> 去掉（#703）、<code>createStringToBeanConverter</code> 加 <code>responseString</code> 参数（#704）→ 4.5.5 修 <code>responseCommandRootClass=String.class</code> 输出空的问题（#858）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h2 id="sec5">五、横切主题</h2>
+
+<h3>5.1 反射式 API → <code>Function</code>：完整时间线</h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>动作</th></tr></thead>
+    <tbody>
+        <tr><td class="v">4.0.0</td><td><code>CollectionsUtil.getPropertyValueList(Collection, Function)</code> 第一个 Function 版本（#597）</td></tr>
+        <tr><td class="v">4.5.0</td><td><code>CollectionsUtil.groupOne(..., String)</code> 升级到 lambda（#551）；<code>containsAny</code> 动态参数（#772）</td></tr>
+        <tr><td class="v">4.5.2</td><td><code>getPropertyValueSet</code>/<code>select</code> 支持 lambda（#812 #813）；<code>select(Iterable, Function, Collection)</code>（#818）、<code>find(Iterable, Function, V)</code>（#801）、<code>groupBy(Iterable, Function)</code> 系列（#831 #832）落地；同时 6 条 <code>@deprecated</code> 计划以删除线标注、当次未落地（#825–#830）</td></tr>
+        <tr><td class="v">4.5.4</td><td><code>selectRejected</code> 支持 Function（#838 #839）；<code>MapUtil.get(Map, int)</code> 歧义 <code>@Deprecated</code> → <code>getByIndex</code>（#834 #837）</td></tr>
+        <tr><td class="v">4.5.5</td><td><code>removeDuplicate(Collection, Function)</code>（#852）；<code>StringToBeanConverter</code> 继承 <code>Function</code>（#859）</td></tr>
+        <tr><td class="v">4.5.6</td><td>13 个属性名(反射)方法一次性 <code>@Deprecated</code>：<code>CollectionsUtil</code> 10 个（#874–#883）+ <code>GroupUtil</code> 3 个（#891–#893），<strong>方法保留不删</strong></td></tr>
+    </tbody>
+</table>
+</div>
+<blockquote><p>从 4.0.0 的第一个 Function 重载到 4.5.6 的批量弃用，跨了 <strong>4 个大版本、14 个发布</strong>。</p></blockquote>
+
+<h3>5.2 依赖策略</h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>阶段</th><th>做法</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.0.0</td><td>一次性删掉 20+ 第三方直接依赖（commons-io / commons-lang / commons-lang3 / commons-validator / xml-apis / commons-httpclient 3 …），改为打进 <code>feilong-lib</code></td></tr>
+        <tr><td class="v">3.0.2 – 3.0.3</td><td>commons-codec、commons-net、commons-compress、commons-digester3、ognl、slf4j-api、xstream 依次「打散进项目组」</td></tr>
+        <tr><td class="v">3.0.0 起</td><td>xstream、jsoup、httpclient、poi、javax.mail 等逐个转成 <code>optional</code>（#136 #137 #143 #140 #139 #141 #138 #98）</td></tr>
+        <tr><td class="v">3.4.0</td><td>删除 <code>feilong-lib-xstream</code>，xstream 彻底转可选（#498 #499），叠加安全动机（#40 #320 XStream 漏洞）</td></tr>
+        <tr><td class="v">3.5.0</td><td><strong>slf4j-api 从 shade 打进 jar 改成直接依赖</strong>（#515，标 <code>重要</code>）——用户工程的 slf4j 版本从此可自行决定</td></tr>
+        <tr><td class="v">4.0.0</td><td>httpclient 并入 <code>feilong-lib</code>（#594），包名 <code>com.feilong.lib.org.apache.http.*</code></td></tr>
+        <tr><td class="v">4.5.6</td><td>新增 <code>javax.annotation-api</code> 可选依赖，JDK 11+ 编译需要（#872）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h3>5.3 构建与发布工程</h3>
+<ul>
+    <li>3.0.0：加 <code>maven-gpg-plugin</code>（#122）、删 github 仓库改 nexus（#119）、优化 surefire（#35）。</li>
+    <li>3.0.2：<strong>修复「缺少 source 和 javadoc」</strong>（#222）——这是中央仓库附件问题的第一次出现。</li>
+    <li>3.0.5：新建 module 把不用的依赖挪走，让 parent pom 更纯粹（#256）。</li>
+    <li>4.5.0 之后：插件升级成为常规动作；4.5.2 出现<strong>回退</strong>（<code>maven-jar-plugin</code> 3.5.0 → 3.3.0，#810）。</li>
+    <li>4.5.6：<code>native2ascii-maven-plugin</code> 升到 2.1.1 修新版 m2e 报错（#867）。</li>
+    <li>贯穿全程：几乎每个版本末尾都是 <code>xxx-plugin 升级到 yyy</code> 的批量条目。</li>
+</ul>
+
+<h3>5.4 文档与测试</h3>
+<ul>
+    <li>3.0.2 补 source/javadoc；3.0.3 给 <code>CustomJavaIdentifierTransformer</code>/<code>UncapitalizeJavaIdentifierTransformer</code> 补单测。</li>
+    <li>3.0.0 / 4.5.4：两次把 <code>org.junit.Assert.assertThat</code> 迁到 <code>org.hamcrest.MatcherAssert.assertThat</code>（#142、#847）。</li>
+    <li>4.5.0：文档迁到 gitbook（替代 oschina 托管）。</li>
+    <li>4.5.6：<strong>全项目 javadoc 审计与修正</strong>（AI 扫描 + 人工核对，#868）、新增 <code>README.en.md</code>（#871）、<code>feilong-net-mail</code> 补不依赖网络的单测（#897）。</li>
+</ul>
+
+<h3>5.5 安全</h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>事项</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.4.0</td><td>XStream 安全框架问题（#40）、XStream 漏洞（#320）→ 删 <code>feilong-lib-xstream</code>、依赖转 optional</td></tr>
+        <tr><td class="v">3.5.0</td><td>Apache Commons FileUpload 拒绝服务漏洞（DoS），依赖升级到 1.5（#529）</td></tr>
+        <tr><td class="v">4.5.6</td><td><code>feilong-office-zip</code> 修复 zip slip 路径穿越（#869）</td></tr>
+    </tbody>
+</table>
+</div>
+
+<h3>5.6 日志与可观测性</h3>
+<div class="table-wrap">
+<table>
+    <thead><tr><th>版本</th><th>动作</th></tr></thead>
+    <tbody>
+        <tr><td class="v">3.5.0</td><td>slf4j-api 从「打进 shade jar」改成<strong>直接依赖</strong>（#515），日志门面交给用户工程决定</td></tr>
+        <tr><td class="v">4.0.1</td><td>新建 <code>HttpLogHelper</code>（#609）</td></tr>
+        <tr><td class="v">4.0.6</td><td>新建 <code>RequestLogHelper</code>，快速输出请求 url / 请求类型 / 请求参数（#655）</td></tr>
+        <tr><td class="v">4.0.8</td><td><code>HttpRequest.logTraceContext</code>：一次调用的所有日志都追加同一个 key，方便串链路（#688）</td></tr>
+        <tr><td class="v">4.1.1</td><td>FTP / SFTP 也支持 <code>logTraceContext</code>（#715 #716）</td></tr>
+        <tr><td class="v">4.3.0</td><td><code>RequestLogHelper.autoRequestInfo(HttpServletRequest, ...)</code> 解决 filter 里取不到 request 的问题（#753）</td></tr>
+        <tr><td class="v">4.4.0</td><td>日志上下文体系：<code>CustomFixedContextLogCreator</code> + SPI（#789）；<code>SpecialHttpRequestRetryHandler</code> 补 logTraceContext（#781）；日志声明统一 <code>@Slf4j</code>（#782）</td></tr>
+    </tbody>
+</table>
+</div>
+<blockquote><p>这条线从「给 HTTP 请求打 trace key」起步，到 4.4.0 变成「任意业务日志都能自动带出上下文」，是 feilong 少见的、横跨 4 个大版本的连续投入。</p></blockquote>
+
+<h2 id="sec6">六、几个容易记错的事实</h2>
+<ol>
+    <li><strong>里程碑编号 ≠ 版本号</strong>：<code>milestone/49</code> = 4.4.0、<code>milestone/53</code> = 4.5.4、<code>milestone/54</code> = <strong>4.5.5</strong>、<code>milestone/55</code> = 4.5.6。早期版本（3.x、4.0–4.3）的说明文件里没有记录 milestone。</li>
+    <li><strong>标题与实际实现不一致的先例</strong>：4.5.5 的 #855 标题写的是「改造成 <code>removeCollections</code>」，但代码里方法名仍是 <code>removeAll</code>，只是加了可变参数。</li>
+    <li><strong>删除线 ≠ 已发布</strong>：4.5.2 的说明里 6 条 <code>@deprecated</code> 计划是一条删除线状态，当次没有落地；对应的废弃动作直到 4.5.6 才集中做。</li>
+    <li><strong>文档量级差异极大</strong>：3.0.0（140 处）与 4.5.6（38 处）是两次大版本；中间的 3.2.3、3.0.1 只有 1 处变更。读历史时别按「版本数」判断工作量。</li>
+    <li><strong><code>formatDuration</code> 是个反面案例</strong>：3.5.1 因为「自身耗时长」被废弃（#572 #573），4.0.0 又把内部调用全部改成毫秒（#586）——一个 API 因为性能原因退场，代码里还得再清一轮。</li>
+</ol>
+
+</div>
+
+<script>
+/* 把正文里的 #208 这类 issue 引用自动转成指向 GitHub issue 的链接。
+   跳过已有的链接节点，以及 script / style 元素；code 元素里的引用也一并转换。 */
+(function(){
+    var BASE = 'https://github.com/ifeilong/feilong/issues/';
+    var SKIP = { A: 1, SCRIPT: 1, STYLE: 1 };
+    var RE   = /#(\d{1,4})\b/g;
+
+    function linkify(textNode){
+        var text = textNode.nodeValue;
+        if (text.indexOf('#') === -1){
+            return;
+        }
+        RE.lastIndex = 0;
+        if (!RE.test(text)){
+            return;
+        }
+        RE.lastIndex = 0;
+
+        var frag = document.createDocumentFragment(),
+            last = 0,
+            m;
+        while ((m = RE.exec(text)) !== null){
+            if (m.index > last){
+                frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+            }
+            var a = document.createElement('a');
+            a.href = BASE + m[1];
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.textContent = '#' + m[1];
+            frag.appendChild(a);
+            last = m.index + m[0].length;
+        }
+        if (last < text.length){
+            frag.appendChild(document.createTextNode(text.slice(last)));
+        }
+        textNode.parentNode.replaceChild(frag, textNode);
+    }
+
+    function walk(node){
+        var child = node.firstChild;
+        while (child){
+            var next = child.nextSibling;
+            if (child.nodeType === 3){
+                linkify(child);
+            }else if (child.nodeType === 1 && !SKIP[child.tagName]){
+                walk(child);
+            }
+            child = next;
+        }
+    }
+
+    function run(){
+        walk(document.body);
+    }
+
+    if (document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', run);
+    }else{
+        run();
+    }
+})();
+</script>
+</body>
+</html>
