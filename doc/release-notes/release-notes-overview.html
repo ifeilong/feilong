@@ -29,9 +29,9 @@
         -webkit-font-smoothing:antialiased;
     }
     .page{
-        max-width:1120px;
+        width:95%;
         margin:0 auto;
-        padding:48px 28px 96px;
+        padding:48px 24px 96px;
     }
     h1{
         font-size:30px;
@@ -232,13 +232,14 @@
     .top:hover{color:var(--accent);text-decoration:none;}
     @media print{
         .top{display:none;}
+        .page{width:100%;padding:0;}
         .table-wrap{overflow:visible;}
         table{font-size:11px;}
         h2{page-break-after:avoid;}
         tr{page-break-inside:avoid;}
     }
     @media (max-width:720px){
-        .page{padding:28px 16px 64px;}
+        .page{width:100%;padding:28px 16px 64px;}
         h1{font-size:24px;}
         h2{font-size:19px;}
     }
@@ -248,11 +249,12 @@
 <a class="top" href="#top">↑ 顶部</a>
 <div class="page" id="top">
 
-<h1>feilong 版本演进总览（3.0.0 → 4.5.6）</h1>
-<p class="subtitle">基于 <code>doc/release-notes/</code> 下 52 份发布说明汇总</p>
+<h1>feilong 版本演进总览（1.7.3 → 4.5.6）</h1>
+<p class="subtitle">基于 <code>doc/release-notes/</code> 下 52 份发布说明，加上老仓库 <code>ifeilong/feilong-core</code> 的 40 个 milestone 汇总</p>
 
 <div class="stats">
-    <div class="stat"><span class="num">52</span><span class="txt">个发布版本</span></div>
+    <div class="stat"><span class="num">40</span><span class="txt">个 feilong-core 版本</span></div>
+    <div class="stat"><span class="num">52</span><span class="txt">份 feilong 发布说明</span></div>
     <div class="stat"><span class="num">3</span><span class="txt">条演进主线</span></div>
     <div class="stat"><span class="num">10</span><span class="txt">个转折点版本</span></div>
     <div class="stat"><span class="num">13</span><span class="txt">个类族演进史</span></div>
@@ -261,11 +263,13 @@
 <div class="toc">
     <p class="toc-title">目录</p>
     <ol>
+        <li><a href="#sec0">前传：feilong-core 独立仓库（1.7.3 → 2.1.0）</a></li>
         <li><a href="#sec1">三条主线</a></li>
         <li><a href="#sec2">版本速查表（52 个版本）</a></li>
         <li><a href="#sec3">十个转折点</a></li>
         <li><a href="#sec4">按类的跨版本演进</a>
             <div class="sub">
+                <a href="#c-matrix">高频类 × 版本</a>
                 <a href="#c-object">ObjectUtil</a>
                 <a href="#c-coll">CollectionsUtil</a>
                 <a href="#c-group">GroupUtil</a>
@@ -285,6 +289,87 @@
         <li><a href="#sec6">几个容易记错的事实</a></li>
     </ol>
 </div>
+
+<h2 id="sec0">〇、前传：feilong-core 独立仓库（1.7.3 → 2.1.0）</h2>
+<p>3.0.0 之前，代码不在现在这个仓库里：核心工具在 <code>ifeilong/feilong-core</code>，周边还有 <code>feilong-platform</code>、<code>feilong-lib</code> 等兄弟仓库。feilong-core 的 milestone 从 <strong>1.7.3</strong> 开始才有记录（更早的 1.x 版本没有 milestone），到 <strong>2.1.0</strong> 结束，一共 <strong>40 个版本、729 个 issue</strong>，跨度 <strong>2016-07-01 → 2020-04-03</strong>。</p>
+<p>「关闭时间」取 milestone 的关闭日，可近似当发版日；「间隔」是距上一个版本的天数。版本号可点，直达对应的 milestone。发布说明在同一个仓库的 <a href="https://github.com/ifeilong/feilong-core/releases">GitHub Releases</a> 里，格式和 3.0.0 之后一模一样：<code>[Feature]</code> / <code>[Update]</code> / <code>[Remove]</code> / <code>[Fix Bug]</code> / <code>[Javadoc]</code>。</p>
+<div class="table-wrap">
+<table>
+    <caption><a href="https://github.com/ifeilong/feilong-core/milestones?state=closed">ifeilong/feilong-core · closed milestones</a>，按关闭时间升序；「issues」是该 milestone 关闭的 issue 数</caption>
+    <thead>
+        <tr><th>版本</th><th>关闭时间</th><th>issues</th><th>间隔</th></tr>
+    </thead>
+    <tbody>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/1">1.7.3</a></td><td>2016-07-01</td><td>17</td><td>—</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/2">1.8.0</a></td><td>2016-07-14</td><td>34</td><td>13</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/4">1.8.1</a></td><td>2016-07-18</td><td>19</td><td>4</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/5">1.8.2</a></td><td>2016-07-28</td><td>8</td><td>10</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/6">1.8.3</a></td><td>2016-08-03</td><td>11</td><td>6</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/7">1.8.4</a></td><td>2016-08-09</td><td>11</td><td>6</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/8">1.8.5</a></td><td>2016-08-16</td><td>77</td><td>7</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/9"><strong>1.8.6</strong></a></td><td>2016-08-24</td><td><strong>110</strong></td><td>8</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/10">1.8.7</a></td><td>2016-08-29</td><td>69</td><td>5</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/11">1.8.8</a></td><td>2016-09-07</td><td>29</td><td>9</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/12">1.9.0</a></td><td>2016-09-18</td><td>30</td><td>11</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/13">1.9.1</a></td><td>2016-09-19</td><td>2</td><td>1</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/14">1.9.2</a></td><td>2016-10-24</td><td>39</td><td>35</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/15">1.9.3</a></td><td>2016-10-28</td><td>3</td><td>4</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/16">1.9.4</a></td><td>2016-11-03</td><td>36</td><td>6</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/17">1.9.5</a></td><td>2016-11-17</td><td>11</td><td>14</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/18">1.9.6</a></td><td>2016-12-04</td><td>3</td><td>17</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/19">1.10.0</a></td><td>2016-12-26</td><td>35</td><td>22</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/20">1.10.1</a></td><td>2017-03-09</td><td>4</td><td>73</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/21">1.10.2</a></td><td>2017-05-02</td><td>13</td><td>54</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/22">1.10.3</a></td><td>2017-06-11</td><td>8</td><td>40</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/23">1.10.4</a></td><td>2017-07-16</td><td>17</td><td>35</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/24">1.10.5</a></td><td>2017-07-31</td><td>7</td><td>15</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/25">1.10.6</a></td><td>2017-12-14</td><td>20</td><td>136</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/26">1.10.7</a></td><td>2018-01-02</td><td>25</td><td>19</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/27">1.11.0</a></td><td>2018-04-11</td><td>16</td><td>99</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/28">1.11.1</a></td><td>2018-05-27</td><td>1</td><td>46</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/29">1.11.2</a></td><td>2018-06-07</td><td>5</td><td>11</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/30">1.11.5</a></td><td>2018-07-08</td><td>15</td><td>31</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/31">1.12.0</a></td><td>2018-07-13</td><td>7</td><td>5</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/32">1.12.1</a></td><td>2018-07-18</td><td>1</td><td>5</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/33">1.12.2</a></td><td>2018-07-26</td><td>2</td><td>8</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/34">1.12.5</a></td><td>2018-08-06</td><td>1</td><td>11</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/35">1.12.9</a></td><td>2018-11-23</td><td>2</td><td>109</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/36">1.13.2</a></td><td>2019-04-30</td><td>8</td><td>158</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/37">1.14.0</a></td><td>2019-07-13</td><td>8</td><td>74</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/38">1.14.3</a></td><td>2019-08-28</td><td>3</td><td>46</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/3"><strong>2.0.0</strong></a></td><td>2019-09-13</td><td>10</td><td>16</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/40">2.0.1</a></td><td>2019-10-17</td><td>1</td><td>34</td></tr>
+        <tr><td class="v"><a href="https://github.com/ifeilong/feilong-core/milestone/41">2.1.0</a></td><td>2020-04-03</td><td>11</td><td>169</td></tr>
+    </tbody>
+</table>
+</div>
+<p>按小版本线各挑一个代表版本，把发布说明摘一下（每份都是一整篇，这里只留最关键的几条）：</p>
+<div class="table-wrap">
+<table>
+    <caption>看点取自该线的代表版本：1.7.3 / 1.8.0 / 1.9.0 / 1.10.0 / 1.11.0 / 1.12.0 / 1.13.2 / 1.14.0 / 2.0.0 / 2.1.0；「版本」和「issues」是该线的合计</caption>
+    <thead>
+        <tr><th>线</th><th>版本</th><th>issues</th><th>看点</th></tr>
+    </thead>
+    <tbody>
+        <tr><td class="v">1.7.x</td><td>1</td><td>17</td><td><code>ConvertUtil</code> 补 <code>toProperties(Map)</code> 与 <code>toMap(ResourceBundle)</code><br>删 <code>PropertiesUtil</code>、<code>DateFormatUtil</code>、<code>HttpMethodType</code><br>日志级别从 <code>debug</code> 降到 <code>trace</code></td></tr>
+        <tr><td class="v">1.8.x</td><td>9</td><td>368</td><td>新建 <code>SortUtil</code>、<code>StatisticsUtil</code>、<code>BeanPredicate</code> / <code>BeanPredicateUtil</code><br><code>CollectionsUtil</code> 的 <code>sum</code> / <code>avg</code> / <code>groupCount</code> 整体搬进 <code>StatisticsUtil</code><br>删掉一批 <code>*ContainsPredicate</code> 旧类</td></tr>
+        <tr><td class="v">1.9.x</td><td>7</td><td>124</td><td>1.9.0 没有新功能，全是「收口」<br><code>BeanUtil.setProperty</code> / <code>getProperty</code> 转 private<br>删 <code>register(Converter)</code> 这类旧扩展点，修 <code>ParamUtil</code> 的 NPE</td></tr>
+        <tr><td class="v">1.10.x</td><td>8</td><td>129</td><td>参数类型 <code>Collection</code> → <code>Iterable</code><br>删 8 个带 <code>@Deprecated</code> 的 <code>RegexPattern</code> 常量<br><code>com.feilong.test</code> 包移出到 <code>feilong-commons-test</code>，并去掉 <code>commons-lang</code> 依赖</td></tr>
+        <tr><td class="v">1.11.x</td><td>4</td><td>37</td><td>新增 <code>ReturnResult</code> / <code>ReturnResultBuilder</code><br><strong>线程分片从这里开始</strong>：<code>PartitionThreadExecutor</code> + <code>ThreadUtil.execute(List, int, PartitionRunnableBuilder)</code><br><code>CollectionsUtil.removeAllNull</code>；<code>DatePattern</code> 大改名（<code>yyyyMMdd</code> → <code>BASIC_ISO_DATE</code> 等）</td></tr>
+        <tr><td class="v">1.12.x</td><td>5</td><td>13</td><td><code>CollectionsUtil.getPropertyValueList</code> 性能优化，5 万次循环比 1.11.5 快 <strong>20 倍</strong><br>同时给内部 list / set 预分配容量</td></tr>
+        <tr><td class="v">1.13.x</td><td>1</td><td>8</td><td><code>AggregateUtil.groupSum</code>、<code>MapUtil.putSumValue</code><br>补 <code>RegexStringPredicate</code> / <code>NotNullOrEmptyStringPredicate</code> / <code>StringToDateTransformer</code></td></tr>
+        <tr><td class="v">1.14.x</td><td>2</td><td>11</td><td><code>DateUtil.now()</code> / <code>nowString(pattern)</code><br><code>MapUtil.newHashMap</code> / <code>newLinkedHashMap</code> / <code>newTreeMap</code> / <code>newConcurrentHashMap</code> 四个拷 Map 的重载<br><code>ConvertUtil.toString</code> 支持数组与集合（默认逗号拼接）</td></tr>
+        <tr><td class="v">2.0.x</td><td>2</td><td>11</td><td>线程分片收尾：新增 <code>PartitionPerHandler</code>，把 <code>execute(list, size, PartitionRunnableBuilder)</code> 从 14 行压到 7 行<br>新建 <code>com.feilong.core.lang.thread</code> 包<br>一批改名（<code>excute</code> → <code>execute</code>、<code>actualExcute</code> → <code>actualExecute</code>），标不兼容</td></tr>
+        <tr><td class="v">2.1.x</td><td>1</td><td>11</td><td><code>DateUtil.nowTimestamp()</code>、<code>isInTime(String, String, pattern)</code>、<code>toString(String, oldPattern, newPattern)</code><br><code>RandomUtil.createRandomString(int)</code><br><code>CollectionsUtil.find(Iterable, Map)</code>、<code>removeDuplicate(Collection, String...)</code> 多属性去重</td></tr>
+    </tbody>
+</table>
+</div>
+<blockquote>
+    <p><strong>2016 年夏天是一次爆发</strong>：1.7.3 → 1.9.0 的 79 天里发了 11 个版本、关了 <strong>415 个 issue</strong>（平均一天 5.2 个，间隔最短只有 1 天）。其中 <strong>1.8.6 一个版本 110 个 issue</strong> —— 单版本条目数在整个 feilong 历史里排第二，仅次于 3.0.0 的 140。</p>
+    <p><strong>2017 年之后节奏断崖式下降</strong>：1.10.x 每个版本 4–35 个，从 1.11 起开始出现只关 1–2 个 issue 的版本（1.11.1、1.12.1、1.12.5），间隔也从几天拉长到 3–5 个月（1.10.6 隔了 136 天、2.1.0 隔了 169 天）。</p>
+    <p><strong>2.0.0 拖了 3 年</strong>：milestone 2016-07-11 就建了，2019-09-13 才关，只关了 10 个 issue。内容是把 1.11.0 起的线程分片 API 收口 —— 新增 <code>PartitionPerHandler</code> 简化调用、新建 <code>com.feilong.core.lang.thread</code> 包、一批 <code>excute</code> → <code>execute</code> 的不兼容改名。这条线从 1.11.0 一路活到 4.0.3 的 <code>ThreadUtil.execute(List, Map, PartitionPerHandler)</code>，是 1.x 时代留下的最长一条血脉。</p>
+    <p><strong>2.1.0（2020-04-03）是 feilong-core 的最后一个 milestone</strong>。再往后的历史就在本仓库：3.0.0 做的是多仓库合并、包名收敛、JDK8 基线，1.x 的 <code>com.feilong.core.*</code> 包名基本原样带了过来。</p>
+</blockquote>
 
 <h2 id="sec1">一、三条主线</h2>
 
@@ -386,6 +471,65 @@
 </div>
 
 <h2 id="sec4">四、按类的跨版本演进</h2>
+
+<h3 id="c-matrix">4.0 总览：高频类 × 版本</h3>
+<p>把出现频次最高的 7 个类摊成一张矩阵：<strong>行 = 版本，列 = 类</strong>，单元格是该版本里这个类发生了什么，<strong>一行一个变更，行尾是 issue 号</strong>。<code>·</code> 表示这个版本没动它。</p>
+<div class="table-wrap">
+<table>
+    <caption>频次：CollectionsUtil 19 个版本 · StringUtil 11 · HttpClientUtil 11 · ObjectUtil 10 · DateUtil 10 · MapUtil 9 · Validator 5</caption>
+    <thead>
+        <tr>
+            <th>版本</th>
+            <th><code>CollectionsUtil</code></th>
+            <th><code>ObjectUtil</code></th>
+            <th><code>StringUtil</code></th>
+            <th><code>DateUtil</code></th>
+            <th><code>MapUtil</code></th>
+            <th><code>Validator</code></th>
+            <th><code>HttpClientUtil</code></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td class="v">3.0.0</td><td>·</td><td><code>defaultIfNull(T, T)</code> #208</td><td><code>SPACE</code> / <code>EMPTY</code> 常量 #207</td><td><code>DateExtensionUtil</code> 并入 #106</td><td>·</td><td>新建 <code>Validator</code> #209</td><td><code>getClientIp</code> 支持定制头 #99</td></tr>
+        <tr><td class="v">3.0.6</td><td><code>get(Iterable, int)</code> #254<br><code>partition(List, int)</code> #261<br><code>size(Object)</code> #255</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">3.0.8</td><td><code>exist(Iterable, String, V)</code> #292</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">3.1.0</td><td><code>removeDuplicate(Collection, String)</code> 注释改进 #328</td><td><code>equalsAny</code> #350</td><td>·</td><td>·</td><td>·</td><td>·</td><td>post/put 支持 body 与 paramMap 并存 #310</td></tr>
+        <tr><td class="v">3.1.1</td><td><code>newHashSet(Collection)</code> #373<br><code>find(Iterable, Map)</code> #361</td><td>·</td><td><code>trimAndEqualsIgnoreCase</code> #368</td><td><code>getFirstDateOfToday</code> #357<br>两个日期间隔月数 #374</td><td>·</td><td>·</td><td><code>get(String)</code> 单参重载 #372</td></tr>
+        <tr><td class="v">3.2.0</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td><code>isAnyBlank</code> 类 #60</td><td>·</td></tr>
+        <tr><td class="v">3.2.1</td><td><code>addIgnoreNullOrEmpty</code> 支持动态数组 #402</td><td>·</td><td>·</td><td><code>toDate</code> 默认 <code>yyyy-MM-dd</code> #406</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">3.2.3</td><td>·</td><td>·</td><td>·</td><td>·</td><td><code>extractIntersectionKeyDifferentValueMap</code> 过滤不存在的 key #416</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">3.3.0</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td>支持 retry（<code>SocketTimeoutException</code> / <code>ConnectTimeoutException</code>）#371</td></tr>
+        <tr><td class="v">3.3.1</td><td><code>ifCoditionAdd</code> #418<br><code>getPropertyValueList(Iterable, String, Class)</code> #420<br><code>getPropertyValueSet(Iterable, String, Class)</code> #421</td><td>·</td><td>·</td><td><code>nowTime(long)</code> #419</td><td><code>removeKeys(Map, Collection)</code> #71<br><code>toArrayValueMap(Map, Class)</code> #65</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">3.3.2</td><td>·</td><td><code>defaultIfNullOrLessThanOne</code> #433<br><code>defaultPageNo(Integer)</code> #434</td><td><code>newString(byte[])</code> #427</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">3.3.3</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td><code>isNullOrZero</code> #435</td><td>·</td></tr>
+        <tr><td class="v">3.3.4</td><td><code>containsTrimAndIgnoreCase</code> #442</td><td>·</td><td><code>toMultiValueMap(String, Class, Class)</code> #444<br><code>toSingleValueMap(...)</code> #450</td><td><code>getTime</code> 支持 null #447</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">3.3.5</td><td>·</td><td><code>defaultEmptyListIfNull</code> #460<br><code>defaultEmptyMapIfNull</code> #461<br><code>defaultEmptySetIfNull</code> #462</td><td>·</td><td>·</td><td><code>getSubSumValue(Map, Iterable, Class)</code> #457</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">3.3.6</td><td><code>removeAll(Collection, Collection)</code> 支持第二参 null #465</td><td><code>defaultEmptyStringIfNull</code> #468<br><code>defaultNewArrayListIfNull</code> #469<br><code>defaultNewHashMapIfNull</code> #470<br><code>defaultNewHashSetIfNull</code> #471<br><code>defaultNewLinkedHashMapIfNull</code> #472</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">3.3.7</td><td>·</td><td>·</td><td><code>tokenizeToArrayContains</code> ×2 #474 #477</td><td>·</td><td><code>get(Map, K)</code> #475<br><code>getOrDefault(Map, K, V)</code> #476</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">3.3.8</td><td>·</td><td>·</td><td><code>clean(CharSequence)</code> #55<br><code>formatPattern</code> 取代 <code>Slf4jUtil.format</code> #480 #481</td><td>·</td><td>·</td><td><code>isNotNullOrEmpty</code> 修 NBSP（<code>\u00A0</code>）校验 #56</td><td>·</td></tr>
+        <tr><td class="v">3.3.9</td><td><code>addIgnoreNullOrEmpty(Collection, List)</code> #484</td><td>·</td><td>·</td><td><code>isInTime</code> 区间语义修正 #492<br><code>isNotInTime</code> 三个重载 #486 #490 #491</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">3.5.0</td><td>取 List 最后一条数据 #548</td><td>·</td><td><code>tokenizeToStringArray(String)</code> #560<br><code>tokenizeToList(String)</code> #561<br><code>tokenizeToSet</code> #558</td><td>·</td><td><code>computeIfAbsent</code> #559</td><td><code>isAllNullOrEmpty(Object...)</code> #550</td><td>·</td></tr>
+        <tr><td class="v">3.5.1</td><td><code>setIfCondition(List, int, T, boolean)</code> #568</td><td>·</td><td>·</td><td><code>formatDuration(Date)</code> 废弃 #572 #573<br><code>formatDurationUseBeginTimeMillis(long)</code> 新增 #572 #573</td><td>·</td><td>·</td><td><code>patch(String, String)</code> #578<br><code>patch(String, String, Map)</code> #579<br><code>get(String, Map, Map)</code> #575<br><code>post(String, Map, Map)</code> #577<br><code>put(String, Map, Map)</code> #576</td></tr>
+        <tr><td class="v">4.0.0</td><td><strong>反射→Function 起点</strong><br><code>getPropertyValueList(Collection, Function)</code> #597</td><td>·</td><td>·</td><td><code>formatDuration</code> 内部调用改毫秒 #586</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">4.0.1</td><td><code>contains(Iterable, String)</code> #601</td><td><code>defaultZero(Integer)</code> #610</td><td>·</td><td>·</td><td>·</td><td>·</td><td><code>getHttpResponse(HttpRequest)</code> #607<br><code>HttpRequest.requestByteArrayBody</code> #596<br>新建 <code>HttpLogHelper</code> #609</td></tr>
+        <tr><td class="v">4.0.6</td><td>·</td><td>·</td><td>·</td><td>·</td><td><code>getDefaultEmptyStringIfNull(Map, K)</code> #654</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">4.0.7</td><td><code>splitDuplicate(Collection, String...)</code> → <code>Pair</code> #666</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">4.0.8</td><td>·</td><td>·</td><td><code>NBSP</code> 常量 #701</td><td>·</td><td>·</td><td>·</td><td><code>HttpRequest.logTraceContext</code> #688<br><code>HttpLogHelper.createHttpRequestLog</code> javadoc #690</td></tr>
+        <tr><td class="v">4.1.0</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td><code>HttpLogHelper.autoLog</code> 死循环修复 #706</td></tr>
+        <tr><td class="v">4.1.2</td><td>·</td><td>·</td><td><code>toSingleValueMap</code> 支持定制 value 类 #738</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">4.2.0</td><td>·</td><td>·</td><td>·</td><td>·</td><td><code>newLinkedHashMap(Iterable, V)</code> #744</td><td>·</td><td><code>getHttpFullInfo(HttpRequest, ConnectionConfig)</code> #745</td></tr>
+        <tr><td class="v">4.3.0</td><td>·</td><td><code>defaultCountIfNullZeroOrGreaterThan</code> #754</td><td>·</td><td>·</td><td>·</td><td>·</td><td><code>getHttpFullInfo</code> 支持自定义返回类型 #755<br><code>ConnectionConfig</code> / <code>HttpRequest</code> / <code>HttpResponse</code> 补 <code>toString</code> #749 #750 #751</td></tr>
+        <tr><td class="v">4.3.1</td><td>·</td><td><code>defaultTrueIfNull</code> #774<br><code>defaultFalseIfNull</code> #775</td><td><code>toMultiValueMap(String)</code> #777<br><code>toMultiValueMap(String, Class)</code> #778<br><code>tokenizeToList(String, Class)</code> #760</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">4.4.0</td><td>·</td><td>·</td><td>·</td><td><code>formatElapsedTime(long)</code> 新增 #779<br><code>formatDurationUseBeginTimeMillis(long)</code> 标记 <code>@Deprecated</code> #783</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">4.5.0</td><td><code>groupOne</code> 升级到 lambda #551<br><code>containsAny</code> 支持动态参数 #772</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">4.5.2</td><td><code>getPropertyValueSet</code> 支持 lambda #812<br><code>select(Iterable, String, Collection)</code> 支持 lambda #813<br><code>select(Iterable, Function, Collection)</code> 新增 #818<br><code>find(Iterable, Function, V)</code> 新增 #801</td><td>·</td><td><code>toMap(..., StringToBeanConverter)</code> #815</td><td>·</td><td><code>extractSubMap(Map, Function)</code> #820<br><code>getCaseInsensitive</code> #816<br><code>getSubMapExcludeValues</code> #802<br><code>putAllFromList</code> #819</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">4.5.4</td><td><code>selectRejected</code> 支持 Function #838 #839</td><td><code>defaultEmptyListIfNull</code> 改三元实现 #840</td><td>·</td><td>·</td><td><code>get(Map, int)</code> 歧义废弃 #834<br>新增 <code>getByIndex(Map, int)</code> #837</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">4.5.5</td><td><code>limit(List/Set, int)</code> #854 #860<br><code>flattenToList</code> #857<br><code>flattenToSet</code> #862<br><code>removeDuplicate(Collection, Function)</code> #852<br><code>removeAll</code> 改可变参数 #855<br><code>addAllIgnoreNull</code> 改可变参数 #856</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+        <tr><td class="v">4.5.6</td><td><code>splitByExistId(Collection, Function, Collection)</code> → <code>Pair</code> #707<br>10 个反射版方法标 <code>@Deprecated</code> #874–#883<br><code>removeDuplicate(Collection, String...)</code> 性能提升 #327<br><code>splitDuplicate</code> 文档修正 #873</td><td><code>defaultZero(BigDecimal)</code> #896<br><code>defaultZero(Long)</code> #896<br><code>defaultIfNull(T, Supplier)</code> #890<br><code>defaultNewIfNull(T, Class)</code> #628</td><td>·</td><td><code>getFirstDateOfThisWeekUseMonday</code> #884<br><code>getLastDateOfThisWeekUseSunday</code> #68<br><code>getWeekStartAndEndPairMondayFirst</code> #885 #886<br><code>getWeekStartAndEndPairSundayFirst</code> #887 #888<br><code>getFirstDateOfThisWeek</code> / <code>getLastDateOfThisWeek</code> 实现重构 #889</td><td>·</td><td>·</td><td><code>HttpRequest.builder()</code> #588<br><code>HttpClientUtil</code> 补「httpclient debug 日志」说明 #894</td></tr>
+    </tbody>
+</table>
+</div>
+<blockquote><p>一眼能看出三件事：<strong>CollectionsUtil 几乎每个版本都在变</strong>（19/50 个已发布版本）；<strong>4.5.x 之后改动高度集中在 CollectionsUtil + ObjectUtil + DateUtil</strong>；而 <strong>Validator 的 5 次变更全部发生在 3.x</strong>（最后一次是 3.5.0 的 <code>isAllNullOrEmpty</code>），校验这块早在 3.5 就定型了。</p></blockquote>
 
 <h3 id="c-object">4.1 <code>ObjectUtil</code> <span class="tag">default* 家族分五批长成（最典型的演进样本）</span></h3>
 <div class="table-wrap">
@@ -498,7 +642,7 @@
         <tr><td class="v">3.3.1</td><td><code>nowTime</code>（long，#419）</td></tr>
         <tr><td class="v">3.3.4</td><td><code>getTime</code> 支持 null 返回 null（#447）</td></tr>
         <tr><td class="v">3.3.9</td><td><code>isInTime(Date, Date, Date)</code> 区间语义修正（#492）；新增 <code>isNotInTime</code> 三个重载（#486 #490 #491）</td></tr>
-        <tr><td class="v">3.5.1</td><td><code>formatDuration(Date)</code> 标 <code>@Deprecated</code>（自身耗时长，#572 #573）</td></tr>
+        <tr><td class="v">3.5.1</td><td><code>formatDuration(Date)</code> 标 <code>@Deprecated</code>（自身耗时长，#572 #573）；同时新建 <code>formatDurationUseBeginTimeMillis(long)</code> 改用毫秒入参</td></tr>
         <tr><td class="v">4.0.0</td><td>代码里所有 <code>formatDuration(Date)</code> 调用改成毫秒（#586）</td></tr>
         <tr><td class="v">4.4.0</td><td><code>formatElapsedTime(long)</code> 取代 <code>formatDurationUseBeginTimeMillis(long)</code>，旧方法标记 <code>@Deprecated</code>（#779 #783）</td></tr>
         <tr><td class="v">4.5.6</td><td>新增 <code>getFirstDateOfThisWeekUseMonday(Date)</code>（#884）、<code>getLastDateOfThisWeekUseSunday(Date)</code>（#68）、<code>getWeekStartAndEndPairMondayFirst()/(Date)</code>（#885 #886）、<code>getWeekStartAndEndPairSundayFirst()/(Date)</code>（#887 #888）；<code>getFirstDateOfThisWeek</code>/<code>getLastDateOfThisWeek</code> 实现重构（#889）</td></tr>
@@ -612,7 +756,6 @@
 <table>
     <thead><tr><th>类</th><th>演进</th></tr></thead>
     <tbody>
-        <tr><td><code>Validator</code></td><td>3.0.0 新建（#209）→ 3.2.0 <code>isAnyBlank</code> 类（#60）→ 3.3.3 <code>isNullOrZero</code>（#435）→ 3.3.8 <code>isNotNullOrEmpty</code> 修 NBSP（<code>\u00A0</code>）校验（#56）→ 3.5.0 <code>isAllNullOrEmpty(Object...)</code>（#550）</td></tr>
         <tr><td><code>URLUtil</code> / <code>URIUtil</code></td><td>3.2.1 <code>ifNoHttpOrHttpsProtocolPrependPre</code>（#387）→ 3.3.5 <code>getUnionUrl</code>（#458）→ 3.3.8 <code>decodeIfExceptionDefault</code> 两个（#404 #482）→ 4.0.3 <code>transformHttpToHttps</code>/<code>transformHttpsToHttp</code>/<code>transformProtocol</code>（#627 #630 #631）</td></tr>
         <tr><td><code>IOReaderUtil</code></td><td>3.0.0 支持 location（classpath，#161）→ 4.0.1 <code>readToByteArray</code>（#608）→ 4.1.2 <code>readToList</code>（#739）</td></tr>
         <tr><td>单向加密</td><td>3.4.0 补 SHA1/256/384/512/SM3 的 <code>encode(byte[])</code>（#507–#511）、新建 <code>base64Util</code>（#506）→ 4.0.8 全部补 <code>encodeUpperCase(String)</code>（#437 #687 #692 #694 #695 #697）</td></tr>
@@ -712,11 +855,9 @@
 
 <h2 id="sec6">六、几个容易记错的事实</h2>
 <ol>
-    <li><strong>里程碑编号 ≠ 版本号</strong>：<code>milestone/49</code> = 4.4.0、<code>milestone/53</code> = 4.5.4、<code>milestone/54</code> = <strong>4.5.5</strong>、<code>milestone/55</code> = 4.5.6。早期版本（3.x、4.0–4.3）的说明文件里没有记录 milestone。</li>
     <li><strong>标题与实际实现不一致的先例</strong>：4.5.5 的 #855 标题写的是「改造成 <code>removeCollections</code>」，但代码里方法名仍是 <code>removeAll</code>，只是加了可变参数。</li>
-    <li><strong>删除线 ≠ 已发布</strong>：4.5.2 的说明里 6 条 <code>@deprecated</code> 计划是一条删除线状态，当次没有落地；对应的废弃动作直到 4.5.6 才集中做。</li>
     <li><strong>文档量级差异极大</strong>：3.0.0（140 处）与 4.5.6（38 处）是两次大版本；中间的 3.2.3、3.0.1 只有 1 处变更。读历史时别按「版本数」判断工作量。</li>
-    <li><strong><code>formatDuration</code> 是个反面案例</strong>：3.5.1 因为「自身耗时长」被废弃（#572 #573），4.0.0 又把内部调用全部改成毫秒（#586）——一个 API 因为性能原因退场，代码里还得再清一轮。</li>
+    <li><strong><code>formatDuration</code> 换过两次名</strong>：3.5.1 废弃 <code>formatDuration(Date)</code>（自身耗时长，#572 #573）并新建 <code>formatDurationUseBeginTimeMillis(long)</code>；4.0.0 把内部调用点换成毫秒版（#586）；4.4.0 又因为名字太长，新建 <code>formatElapsedTime(long)</code> 并把长名字方法标 <code>@Deprecated</code>（#779 #783）。</li>
 </ol>
 
 </div>
