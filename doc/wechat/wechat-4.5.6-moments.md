@@ -18,13 +18,10 @@
 📅 「本周第一天」是周一还是周日，终于写进方法名了
 ✂️ splitByExistId：批量保存一次拆 update / insert
 
-⚠️ 升级注意：defaultIfNull(user, null) 现在有重载歧义，要显式转型。
-
-4.0.0 埋种子，4.5.2 铺开，4.5.6 收尾 —— 跨了 4 个大版本，方法一个没删 ✅
-
 https://github.com/ifeilong/feilong
 
----
+⚠️ 升级注意：defaultIfNull(user, null) 现在有重载歧义，要显式转型。
+
 
 ## 版本 B（极简，3 行）
 
@@ -37,6 +34,7 @@ https://github.com/ifeilong/feilong
 ---
 
 ## 版本 C（痛点开头，适合工作群 / 同事）
+
 
 写业务最烦的两句话：
 
