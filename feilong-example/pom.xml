@@ -38,7 +38,7 @@
 		<version.slf4j>1.7.36</version.slf4j>
 
 		<!-- https://logging.apache.org/log4j/2.x/release-notes.html -->
-		<version.log4j2>2.23.1</version.log4j2>
+		<version.log4j2>2.25.4</version.log4j2>
 		
 		<version.lombok>1.18.38</version.lombok>
 
